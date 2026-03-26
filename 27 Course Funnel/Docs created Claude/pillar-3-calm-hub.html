@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pillar 3 — Calm · SmithFit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: #e0dcd4;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand {
+            font-family: Georgia, serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #d4a94c;
+            text-transform: uppercase;
+        }
+
+        .badge {
+            background-color: #2a2a2a;
+            border: 1px solid #d4a94c;
+            color: #d4a94c;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(2rem, 6vw, 3rem);
+            color: #d4a94c;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #b8b3a8;
+            max-width: 60rem;
+            line-height: 1.8;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #3a3a3a;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            color: #b8b3a8;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+            position: relative;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .tab-button:hover {
+            color: #d4a94c;
+        }
+
+        .tab-button.active {
+            color: #d4a94c;
+            border-bottom-color: #d4a94c;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Buttons */
+        button {
+            background-color: #2a2a2a;
+            border: 1px solid #d4a94c;
+            color: #d4a94c;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #d4a94c;
+            color: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 169, 76, 0.2);
+        }
+
+        button.secondary {
+            background-color: transparent;
+            border: 1px solid #3a3a3a;
+            color: #b8b3a8;
+        }
+
+        button.secondary:hover {
+            border-color: #d4a94c;
+            color: #d4a94c;
+        }
+
+        /* ===== TAB 1: Nervous System Reset Timer ===== */
+        .timer-container {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .mode-toggle {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .timer-display {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .timer-time {
+            font-size: 4rem;
+            font-family: Georgia, serif;
+            color: #d4a94c;
+            font-weight: 700;
+            letter-spacing: -2px;
+        }
+
+        .timer-label {
+            font-size: 1rem;
+            color: #b8b3a8;
+            margin-top: 0.5rem;
+        }
+
+        .breathing-circle {
+            width: 150px;
+            height: 150px;
+            margin: 2rem auto;
+            border: 3px solid #d4a94c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(212, 169, 76, 0.05);
+            font-size: 1.2rem;
+            color: #d4a94c;
+            font-weight: 600;
+            animation: breathe 8s infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(0.8); opacity: 0.3; }
+            25% { transform: scale(1.2); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 1; }
+            75% { transform: scale(0.8); opacity: 0.3; }
+        }
+
+        .breathing-circle.active-breathing {
+            animation: breathe 8s infinite;
+        }
+
+        .step-info {
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            min-height: 120px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            color: #d4a94c;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .step-content {
+            color: #b8b3a8;
+            line-height: 1.7;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #1a1a1a;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #d4a94c;
+            transition: width 0.1s linear;
+            width: 0%;
+        }
+
+        /* ===== TAB 2: Caffeine Timing ===== */
+        .form-group {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #d4a94c;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .radio-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .radio-option input {
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
+
+        .radio-option label {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        input[type="time"],
+        input[type="number"],
+        select {
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            color: #e0dcd4;
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 0.95rem;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        input[type="time"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #d4a94c;
+            box-shadow: 0 0 0 2px rgba(212, 169, 76, 0.1);
+        }
+
+        .result-card {
+            background-color: #1a1a1a;
+            border: 2px solid #d4a94c;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .result-card-title {
+            font-family: Georgia, serif;
+            font-size: 1.3rem;
+            color: #d4a94c;
+            margin-bottom: 1rem;
+        }
+
+        .result-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .result-label {
+            color: #d4a94c;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            color: #e0dcd4;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* ===== TAB 3: Sleep Switch ===== */
+        .sleep-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .sleep-step-card {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .sleep-step-card:hover {
+            border-color: #d4a94c;
+            box-shadow: 0 8px 20px rgba(212, 169, 76, 0.1);
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .step-number {
+            font-family: Georgia, serif;
+            font-size: 1.2rem;
+            color: #d4a94c;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .step-heading {
+            font-size: 1.2rem;
+            color: #d4a94c;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .step-description {
+            color: #b8b3a8;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .checklist-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background-color: #1a1a1a;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            background-color: rgba(212, 169, 76, 0.05);
+        }
+
+        .checkbox-item input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .checkbox-item label {
+            flex: 1;
+            cursor: pointer;
+            margin: 0;
+            color: #b8b3a8;
+        }
+
+        .brain-dump-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .brain-dump-inputs textarea {
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            color: #e0dcd4;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 0.95rem;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .brain-dump-inputs textarea:focus {
+            outline: none;
+            border-color: #d4a94c;
+            box-shadow: 0 0 0 2px rgba(212, 169, 76, 0.1);
+        }
+
+        .exhausted-section {
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .exhausted-title {
+            color: #d4a94c;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exhausted-content {
+            color: #b8b3a8;
+            line-height: 1.7;
+            display: none;
+        }
+
+        .exhausted-content.open {
+            display: block;
+        }
+
+        /* ===== TAB 4: 7-Day Tracker ===== */
+        .tracker-wrapper {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 2rem;
+        }
+
+        .tracker-grid {
+            display: grid;
+            grid-template-columns: auto repeat(7, 1fr);
+            gap: 1rem;
+            padding: 1.5rem;
+            min-width: 100%;
+        }
+
+        .tracker-cell {
+            text-align: center;
+            padding: 0.75rem;
+        }
+
+        .day-header {
+            background-color: #1a1a1a;
+            padding: 1rem 0.5rem;
+            font-weight: 600;
+            color: #d4a94c;
+            font-size: 0.85rem;
+            border-radius: 4px;
+        }
+
+        .metric-label {
+            text-align: left;
+            padding: 1rem 0.5rem;
+            color: #d4a94c;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            min-width: 120px;
+        }
+
+        .tracker-checkbox {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+        }
+
+        .scale-buttons {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+        }
+
+        .scale-button {
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            font-size: 0.8rem;
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            color: #b8b3a8;
+        }
+
+        .scale-button.active {
+            background-color: #d4a94c;
+            color: #1a1a1a;
+            border-color: #d4a94c;
+        }
+
+        .stats-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .stat-label {
+            color: #d4a94c;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            color: #e0dcd4;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-detail {
+            color: #b8b3a8;
+            font-size: 0.9rem;
+        }
+
+        .motivation-box {
+            background-color: #1a1a1a;
+            border-left: 3px solid #d4a94c;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-radius: 4px;
+        }
+
+        .motivation-text {
+            color: #b8b3a8;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        /* ===== TAB 5: Morning Cocktail + If-Then ===== */
+        .recipe-card {
+            background-color: #2a2a2a;
+            border: 2px solid #d4a94c;
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        .recipe-title {
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            color: #d4a94c;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .recipe-tagline {
+            text-align: center;
+            color: #b8b3a8;
+            font-style: italic;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .recipe-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .recipe-section-title {
+            color: #d4a94c;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .recipe-item {
+            color: #b8b3a8;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .recipe-item::before {
+            content: "• ";
+            color: #d4a94c;
+            margin-right: 0.5rem;
+        }
+
+        .safety-note {
+            background-color: rgba(212, 169, 76, 0.08);
+            border-left: 3px solid #d4a94c;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            color: #b8b3a8;
+            font-size: 0.9rem;
+        }
+
+        .ifthen-section {
+            margin-top: 3rem;
+        }
+
+        .ifthen-section h2 {
+            font-family: Georgia, serif;
+            font-size: 1.8rem;
+            color: #d4a94c;
+            margin-bottom: 2rem;
+        }
+
+        .ifthen-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ifthen-card {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ifthen-card:hover {
+            border-color: #d4a94c;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(212, 169, 76, 0.1);
+        }
+
+        .ifthen-trigger {
+            color: #d4a94c;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ifthen-response {
+            color: #b8b3a8;
+            line-height: 1.7;
+            display: none;
+        }
+
+        .ifthen-response.open {
+            display: block;
+        }
+
+        .ifthen-arrow {
+            color: #d4a94c;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #3a3a3a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #868078;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 0.95rem;
+            }
+
+            .sleep-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .tracker-grid {
+                grid-template-columns: auto repeat(4, 1fr);
+            }
+
+            .timer-time {
+                font-size: 2.5rem;
+            }
+
+            .recipe-card {
+                padding: 1.5rem;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+                color: #333;
+            }
+
+            .tab-nav, .timer-controls, button, .tab-button {
+                display: none;
+            }
+
+            h1, .step-heading, .recipe-title, .ifthen-trigger {
+                color: #333;
+            }
+
+            .badge, .result-label, .stat-label {
+                color: #666;
+                border-color: #666;
+            }
+
+            .form-group, .timer-container, .sleep-step-card, .recipe-card {
+                background-color: white;
+                border-color: #ccc;
+            }
+
+            .progress-bar {
+                display: none;
+            }
+
+            .ifthen-response {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-top">
+                <div class="brand">Shift-Proof Metabolism Reset™</div>
+                <div class="badge">Pillar 3 — Calm</div>
+            </div>
+            <h1>Nervous System Reset</h1>
+            <p class="subtitle">When your nervous system feels safe, your body stops storing fat and starts releasing it. This pillar teaches you how to send daily safety signals so your metabolism can heal.</p>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-button active" onclick="switchTab(0)">Nervous System Reset Timer</button>
+            <button class="tab-button" onclick="switchTab(1)">Caffeine Timing Calculator</button>
+            <button class="tab-button" onclick="switchTab(2)">Sleep Switch Guide</button>
+            <button class="tab-button" onclick="switchTab(3)">7-Day Calm Tracker</button>
+            <button class="tab-button" onclick="switchTab(4)">Morning Cocktail + If-Then</button>
+        </div>
+
+        <!-- ===== TAB 1: NERVOUS SYSTEM RESET TIMER ===== -->
+        <div id="tab-0" class="tab-content active">
+            <div class="timer-container">
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+                    <button class="mode-button" onclick="setMode('full')" id="fullModeBtn" style="background-color: #d4a94c; color: #1a1a1a;">5-Minute Full Reset</button>
+                    <button class="mode-button secondary" onclick="setMode('sos')" id="sosModeBtn">2-Minute SOS</button>
+                </div>
+
+                <div class="timer-display">
+                    <div class="timer-time" id="timerDisplay">5:00</div>
+                    <div class="timer-label" id="timerLabel">Ready to begin</div>
+                </div>
+
+                <div id="modeSpecific"></div>
+
+                <div class="step-info">
+                    <div class="step-title" id="stepTitle">👇 Select a mode above to start</div>
+                    <div class="step-content" id="stepContent">Choose between a full 5-minute nervous system reset with 4 guided steps, or a quick 2-minute SOS for when you're in crisis mode.</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar" style="width: 0%;"></div>
+                </div>
+
+                <div class="timer-controls">
+                    <button onclick="startTimer()">▶ Start</button>
+                    <button class="secondary" onclick="pauseTimer()">⏸ Pause</button>
+                    <button class="secondary" onclick="resetTimer()">↻ Reset</button>
+                </div>
+
+                <div id="completion" style="display: none; text-align: center; margin-top: 2rem;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">✨</div>
+                    <div style="font-size: 1.2rem; color: #d4a94c; margin-bottom: 0.5rem;">Reset Complete</div>
+                    <div style="color: #b8b3a8;">You just sent your nervous system a powerful safety signal. Your body is listening.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TAB 2: CAFFEINE TIMING ===== -->
+        <div id="tab-1" class="tab-content">
+            <div class="form-group">
+                <label>What shift are you working?</label>
+                <div class="radio-options">
+                    <div class="radio-option">
+                        <input type="radio" name="shift" value="day" id="dayShift" checked onchange="updateCaffeine()">
+                        <label for="dayShift">Day Shift</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="shift" value="night" id="nightShift" onchange="updateCaffeine()">
+                        <label for="nightShift">Night Shift</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="shift" value="off" id="offDay" onchange="updateCaffeine()">
+                        <label for="offDay">Off Day</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="shiftStart">What time does your shift start?</label>
+                <input type="time" id="shiftStart" value="06:00" onchange="updateCaffeine()">
+            </div>
+
+            <div class="form-group">
+                <label for="sleepTime">What time do you plan to sleep?</label>
+                <input type="time" id="sleepTime" value="22:00" onchange="updateCaffeine()">
+            </div>
+
+            <div class="form-group">
+                <label>Current caffeine intake</label>
+                <div class="radio-options">
+                    <div class="radio-option">
+                        <input type="radio" name="caffeine" value="high" id="caffHigh" checked onchange="updateCaffeine()">
+                        <label for="caffHigh">4+ cups or energy drinks</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="caffeine" value="medium" id="caffMed" onchange="updateCaffeine()">
+                        <label for="caffMed">2-3 cups</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="caffeine" value="low" id="caffLow" onchange="updateCaffeine()">
+                        <label for="caffLow">1 cup</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="caffeine" value="minimal" id="caffMin" onchange="updateCaffeine()">
+                        <label for="caffMin">Minimal</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="caffResult"></div>
+        </div>
+
+        <!-- ===== TAB 3: SLEEP SWITCH ===== -->
+        <div id="tab-2" class="tab-content">
+            <p style="margin-bottom: 2rem; color: #b8b3a8; line-height: 1.8;">The 2-2-1 Sleep Switch is a 5-minute ritual to reset your nervous system and prepare for sleep. Complete all three steps in order, or just do Step 3 if you're too exhausted tonight.</p>
+
+            <div class="sleep-steps">
+                <!-- Step 1 -->
+                <div class="sleep-step-card">
+                    <div class="step-icon">🌙</div>
+                    <div class="step-number">Step 1</div>
+                    <div class="step-heading">Light Cue (2 minutes)</div>
+                    <div class="step-description">Dim all lights. Put your phone face-down. Signal to your brain that the day is done.</div>
+                    <div class="checklist-items">
+                        <div class="checkbox-item" onclick="toggleSleepCheckbox(this)">
+                            <input type="checkbox">
+                            <label>Dim overhead lights</label>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleSleepCheckbox(this)">
+                            <input type="checkbox">
+                            <label>Turn on only a lamp</label>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleSleepCheckbox(this)">
+                            <input type="checkbox">
+                            <label>Use blue-light glasses</label>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleSleepCheckbox(this)">
+                            <input type="checkbox">
+                            <label>Turn off all screens</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="sleep-step-card">
+                    <div class="step-icon">🧘</div>
+                    <div class="step-number">Step 2</div>
+                    <div class="step-heading">Body Cue (2 minutes)</div>
+                    <div class="step-description">Pick ONE that feels doable tonight. Your nervous system needs a physical signal.</div>
+                    <div class="checklist-items">
+                        <div class="checkbox-item" onclick="toggleSleepCheckbox(this)">
+                            <input type="checkbox">
+                            <label>Warm shower or face wash</label>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleSleepCheckbox(this)">
+                            <input type="checkbox">
+                            <label>Warm herbal drink (chamomile, decaf)</label>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleSleepCheckbox(this)">
+                            <input type="checkbox">
+                            <label>Legs up the wall</label>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleSleepCheckbox(this)">
+                            <input type="checkbox">
+                            <label>Gentle neck/shoulder rolls</label>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleSleepCheckbox(this)">
+                            <input type="checkbox">
+                            <label>Slow breathing (inhale 4, exhale 6)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="sleep-step-card">
+                    <div class="step-icon">🧠</div>
+                    <div class="step-number">Step 3</div>
+                    <div class="step-heading">Brain Cue (1 minute)</div>
+                    <div class="step-description">Your 60-second brain dump. Answer quickly, don't overthink.</div>
+                    <div class="brain-dump-inputs">
+                        <div style="color: #d4a94c; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;">What am I worried about?</div>
+                        <textarea id="brainDump1" placeholder="Type here..." onchange="saveBrainDump()"></textarea>
+
+                        <div style="color: #d4a94c; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1rem;">What can wait until tomorrow?</div>
+                        <textarea id="brainDump2" placeholder="Type here..." onchange="saveBrainDump()"></textarea>
+
+                        <div style="color: #d4a94c; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1rem;">One win from today:</div>
+                        <textarea id="brainDump3" placeholder="Type here..." onchange="saveBrainDump()"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <button onclick="completeSleepSwitch()">✓ Sleep Switch Complete</button>
+            </div>
+
+            <div id="sleepStreak" style="display: none; background-color: #1a1a1a; border: 1px solid #d4a94c; border-radius: 8px; padding: 2rem; margin-top: 2rem; text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">🌙</div>
+                <div style="color: #d4a94c; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;" id="streakCount">1 night in a row</div>
+                <div style="color: #b8b3a8;">Your nervous system is learning the routine. Keep going.</div>
+            </div>
+
+            <div class="exhausted-section">
+                <div class="exhausted-title" onclick="toggleExhausted()">💤 Too exhausted tonight? Click here</div>
+                <div class="exhausted-content" id="exhaustedContent">
+                    <p>Just do Step 3 — the 1-minute brain dump. That alone makes a difference. Your brain needs to know you've externalized your worries so it can rest. You don't have to be perfect. You just have to be consistent.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TAB 4: 7-DAY CALM TRACKER ===== -->
+        <div id="tab-3" class="tab-content">
+            <div class="tracker-wrapper">
+                <div class="tracker-grid" id="trackerGrid"></div>
+            </div>
+
+            <div id="trackerStats" class="stats-dashboard"></div>
+
+            <div id="motivationalMsg" class="motivation-box">
+                <div class="motivation-text" id="motivationText">Day 1: First reset done. You just sent your body a safety signal.</div>
+            </div>
+        </div>
+
+        <!-- ===== TAB 5: MORNING COCKTAIL + IF-THEN ===== -->
+        <div id="tab-4" class="tab-content">
+            <div class="recipe-card">
+                <div class="recipe-title">Morning Metabolic Reset Cocktail</div>
+                <div class="recipe-tagline">2 minutes. 4 ingredients. The first safety signal of your day.</div>
+
+                <div class="recipe-section">
+                    <div class="recipe-section-title">Base Recipe</div>
+                    <div class="recipe-item">8-12 oz water</div>
+                    <div class="recipe-item">½ tsp quality salt</div>
+                    <div class="recipe-item">½ fresh lemon (juice)</div>
+                </div>
+
+                <div class="recipe-section">
+                    <div class="recipe-section-title">Optional Additions</div>
+                    <div class="recipe-item">¼ tsp cream of tartar (potassium)</div>
+                    <div class="recipe-item">200mg magnesium glycinate</div>
+                </div>
+
+                <div class="recipe-section">
+                    <div class="recipe-section-title">3 Variations</div>
+                    <div class="recipe-item"><strong>Sparkling:</strong> Use sparkling water instead</div>
+                    <div class="recipe-item"><strong>Warm:</strong> Use warm water (soothing for night shift wake-ups)</div>
+                    <div class="recipe-item"><strong>Flavor-Infused:</strong> Add a splash of 100% cranberry juice or apple cider vinegar</div>
+                </div>
+
+                <div class="recipe-section">
+                    <div class="recipe-section-title">Timing</div>
+                    <div style="color: #b8b3a8; line-height: 1.6;">First thing after waking, BEFORE coffee. This starts your day with a hydration and electrolyte signal, not a stimulant signal.</div>
+                </div>
+
+                <div class="safety-note">
+                    If you have kidney issues or are on sodium-restricted medications, check with your healthcare provider before adding extra salt.
+                </div>
+            </div>
+
+            <div class="ifthen-section">
+                <h2>If This → Then That: Calm Adjustments</h2>
+                <p style="color: #b8b3a8; margin-bottom: 2rem;">Click any scenario to see the adjustment. These are your emergency protocols when life disrupts your calm routine.</p>
+
+                <div class="ifthen-grid">
+                    <div class="ifthen-card" onclick="toggleIfThen(this)">
+                        <div class="ifthen-trigger">😫 I woke up puffy and inflamed <span class="ifthen-arrow">→</span></div>
+                        <div class="ifthen-response">Cocktail + extra water + protein anchor. Skip the coffee until you've had 16oz water. Puffiness responds to hydration, not restriction.</div>
+                    </div>
+
+                    <div class="ifthen-card" onclick="toggleIfThen(this)">
+                        <div class="ifthen-trigger">😴 Can't fall asleep after night shift <span class="ifthen-arrow">→</span></div>
+                        <div class="ifthen-response">Full Sleep Switch (2-2-1). Dim lights immediately. No food within 30 min of sleep. If still awake after 20 min, get up and do the Brain Cue again.</div>
+                    </div>
+
+                    <div class="ifthen-card" onclick="toggleIfThen(this)">
+                        <div class="ifthen-trigger">😰 Wired/anxious before my shift <span class="ifthen-arrow">→</span></div>
+                        <div class="ifthen-response">2-Min SOS Reset in your car before walking in. Physiological sighs + grounding. "I am prepared. I can handle what comes."</div>
+                    </div>
+
+                    <div class="ifthen-card" onclick="toggleIfThen(this)">
+                        <div class="ifthen-trigger">🤕 Headache — probably dehydrated <span class="ifthen-arrow">→</span></div>
+                        <div class="ifthen-response">16oz water with electrolytes immediately. Cocktail if you haven't had it. Wait 20 min before taking anything else.</div>
+                    </div>
+
+                    <div class="ifthen-card" onclick="toggleIfThen(this)">
+                        <div class="ifthen-trigger">⏰ I missed my morning cocktail <span class="ifthen-arrow">→</span></div>
+                        <div class="ifthen-response">Have it whenever you remember. Better late than never. Even mid-shift with a water bottle + salt packet works.</div>
+                    </div>
+
+                    <div class="ifthen-card" onclick="toggleIfThen(this)">
+                        <div class="ifthen-trigger">☕ I drank coffee before my cocktail <span class="ifthen-arrow">→</span></div>
+                        <div class="ifthen-response">No guilt. Have the cocktail now. Tomorrow, set your ingredients out the night before so they're the first thing you see.</div>
+                    </div>
+
+                    <div class="ifthen-card" onclick="toggleIfThen(this)">
+                        <div class="ifthen-trigger">👨‍👩‍👧 Partner/kids disrupted my sleep <span class="ifthen-arrow">→</span></div>
+                        <div class="ifthen-response">This is a Yellow Day for calm. Do the 2-Min SOS. Lower expectations for the day. Protect your protein anchor and hydration.</div>
+                    </div>
+
+                    <div class="ifthen-card" onclick="toggleIfThen(this)">
+                        <div class="ifthen-trigger">🧠 Racing thoughts won't stop <span class="ifthen-arrow">→</span></div>
+                        <div class="ifthen-response">Brain dump exercise from Sleep Switch Step 3. Write everything down. Then do 3 rounds of physiological sighs. Your brain needs to externalize before it can rest.</div>
+                    </div>
+
+                    <div class="ifthen-card" onclick="toggleIfThen(this)">
+                        <div class="ifthen-trigger">🥤 Energy drink temptation <span class="ifthen-arrow">→</span></div>
+                        <div class="ifthen-response">Have a protein snack + water first. Wait 15 min. If you still want it, have it — but pair it with protein. No shame, just structure.</div>
+                    </div>
+
+                    <div class="ifthen-card" onclick="toggleIfThen(this)">
+                        <div class="ifthen-trigger">🔴 Period week — everything feels harder <span class="ifthen-arrow">→</span></div>
+                        <div class="ifthen-response">Increase magnesium to 400mg. Extra cocktail in the afternoon. Give yourself permission for Red Day pace. Hormones are real.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>For nurses over 35 · Pillar 3: Calm Edition</div>
+            <div>Created by IJ Smith, RN</div>
+        </div>
+    </div>
+
+    <script>
+        // ===== TAB SWITCHING =====
+        function switchTab(index) {
+            const contents = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-button');
+            contents.forEach(c => c.classList.remove('active'));
+            buttons.forEach(b => b.classList.remove('active'));
+            document.getElementById(`tab-${index}`).classList.add('active');
+            buttons[index].classList.add('active');
+
+            // Initialize tracker on tab 3
+            if (index === 3) {
+                initializeTracker();
+            }
+        }
+
+        // ===== TAB 1: NERVOUS SYSTEM TIMER =====
+        let timerInterval;
+        let timeRemaining = 300; // 5 minutes
+        let totalTime = 300;
+        let currentStep = 0;
+        let timerRunning = false;
+        let currentMode = 'full';
+
+        const fullModeSteps = [
+            { name: 'Box Breathing', duration: 120, icon: '🫁', description: 'Inhale 4s → Hold 4s → Exhale 4s → Hold 4s. Visual circle expands and contracts with your breathing.' },
+            { name: 'Progressive Muscle Release', duration: 60, icon: '💪', description: 'Squeeze → Hold 5s → Release. Cycle through shoulders, fists, and face.' },
+            { name: 'Cold Water Face Splash', duration: 30, icon: '💧', description: 'Splash cold water. Activates your dive reflex and instantly calms your nervous system.' },
+            { name: 'Gratitude Anchor', duration: 90, icon: '❤️', description: 'Name one thing that went well... one person who showed up... one thing your body did for you.' }
+        ];
+
+        const sosModeSteps = [
+            { name: 'Physiological Sigh × 3', duration: 30, icon: '🌬️', description: 'Double inhale through nose... long exhale through mouth. Repeat 3 times.' },
+            { name: '5-4-3-2-1 Grounding', duration: 60, icon: '🌍', description: '5 things you see... 4 things you touch... 3 things you hear... 2 things you smell... 1 thing you taste.' },
+            { name: '"I am safe" Mantra', duration: 30, icon: '✨', description: 'Repeat 3 times: "I am safe right now." Feel your body relax.' }
+        ];
+
+        function setMode(mode) {
+            currentMode = mode;
+            timerRunning = false;
+            currentStep = 0;
+
+            if (mode === 'full') {
+                timeRemaining = 300;
+                totalTime = 300;
+                document.getElementById('fullModeBtn').style.backgroundColor = '#d4a94c';
+                document.getElementById('fullModeBtn').style.color = '#1a1a1a';
+                document.getElementById('sosModeBtn').style.backgroundColor = 'transparent';
+                document.getElementById('sosModeBtn').style.color = '#d4a94c';
+            } else {
+                timeRemaining = 120;
+                totalTime = 120;
+                document.getElementById('sosModeBtn').style.backgroundColor = '#d4a94c';
+                document.getElementById('sosModeBtn').style.color = '#1a1a1a';
+                document.getElementById('fullModeBtn').style.backgroundColor = 'transparent';
+                document.getElementById('fullModeBtn').style.color = '#d4a94c';
+            }
+
+            resetTimer();
+            showCurrentStep();
+        }
+
+        function showCurrentStep() {
+            const steps = currentMode === 'full' ? fullModeSteps : sosModeSteps;
+            const step = steps[currentStep] || steps[0];
+            document.getElementById('stepTitle').textContent = `${step.icon} ${step.name}`;
+            document.getElementById('stepContent').textContent = step.description;
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function startTimer() {
+            if (timerRunning) return;
+            timerRunning = true;
+            document.getElementById('completion').style.display = 'none';
+
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('timerDisplay').textContent = formatTime(timeRemaining);
+                const progress = ((totalTime - timeRemaining) / totalTime) * 100;
+                document.getElementById('progressBar').style.width = progress + '%';
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    timerRunning = false;
+                    document.getElementById('completion').style.display = 'block';
+                    playCompletionSound();
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            timerRunning = false;
+            clearInterval(timerInterval);
+        }
+
+        function resetTimer() {
+            timerRunning = false;
+            clearInterval(timerInterval);
+            const mode = currentMode === 'full' ? 'full' : 'sos';
+            timeRemaining = mode === 'full' ? 300 : 120;
+            totalTime = timeRemaining;
+            currentStep = 0;
+            document.getElementById('timerDisplay').textContent = formatTime(timeRemaining);
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('completion').style.display = 'none';
+            showCurrentStep();
+        }
+
+        function playCompletionSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                oscillator.frequency.value = 528; // Love frequency
+                oscillator.type = 'sine';
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.5);
+            } catch (e) {
+                // Fallback: no sound
+            }
+        }
+
+        // ===== TAB 2: CAFFEINE TIMING =====
+        function updateCaffeine() {
+            const shiftRadio = document.querySelector('input[name="shift"]:checked');
+            if (!shiftRadio) return;
+            const shift = shiftRadio.value;
+            const shiftStartEl = document.getElementById('shiftStart');
+            const sleepTimeEl = document.getElementById('sleepTime');
+            const caffRadio = document.querySelector('input[name="caffeine"]:checked');
+            if (!shiftStartEl || !sleepTimeEl || !caffRadio) return;
+            const caffLevel = caffRadio.value;
+
+            // Parse times
+            const [shiftHour, shiftMin] = shiftStartEl.value.split(':').map(Number);
+            const [sleepHour, sleepMin] = sleepTimeEl.value.split(':').map(Number);
+
+            // Calculate cutoff (6-8 hours before sleep)
+            let cutoffHour = sleepHour - 7;
+            let cutoffMin = sleepMin;
+            if (cutoffHour < 0) cutoffHour += 24;
+
+            // Calculate first coffee time (90 min after waking)
+            let firstCoffeeHour = shiftHour + 1;
+            let firstCoffeeMin = shiftMin + 30;
+            if (firstCoffeeMin >= 60) {
+                firstCoffeeHour += 1;
+                firstCoffeeMin -= 60;
+            }
+
+            const timeStr = (h, m) => {
+                const ampm = h >= 12 ? 'PM' : 'AM';
+                const displayH = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+                return `${displayH}:${m.toString().padStart(2, '0')} ${ampm}`;
+            };
+
+            const cutoffStr = timeStr(cutoffHour, cutoffMin);
+            const firstCoffeeStr = timeStr(firstCoffeeHour, firstCoffeeMin);
+            const wakeTimeStr = timeStr(shiftHour, shiftMin);
+
+            const caffLevels = {
+                high: { level: 'Level 1', tip: 'Start here: Hydrate before your first caffeine' },
+                medium: { level: 'Level 2', tip: 'Delay your first coffee by 10 minutes after waking' },
+                low: { level: 'Level 3', tip: 'Gold Standard: Protein before caffeine' },
+                minimal: { level: 'Level 4', tip: 'Master Level: Cutoff timing is your main focus' }
+            };
+
+            const caffInfo = caffLevels[caffLevel];
+
+            const resultHTML = `
+                <div class="result-card">
+                    <div class="result-card-title">Your Personalized Caffeine Plan</div>
+                    <div class="result-item">
+                        <div class="result-label">Your Caffeine Window</div>
+                        <div class="result-value">${wakeTimeStr} to ${cutoffStr}</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Your Caffeine Ladder</div>
+                        <div class="result-value">${caffInfo.level}: ${caffInfo.tip}</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Today's Timing</div>
+                        <div class="result-value">
+                            • Metabolic cocktail FIRST at ${wakeTimeStr}<br>
+                            • First coffee OK after ${firstCoffeeStr} (or after protein anchor)<br>
+                            • CAFFEINE CUTOFF: No coffee after ${cutoffStr}<br>
+                            • After cutoff, switch to: water, herbal tea, or decaf
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Next Step</div>
+                        <div class="result-value">Set these times as phone reminders tonight. Tomorrow morning, wake up with a plan instead of default habits.</div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('caffResult').innerHTML = resultHTML;
+        }
+
+        // ===== TAB 3: SLEEP SWITCH =====
+        function toggleSleepCheckbox(element) {
+            if (!element) return;
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            if (checkbox) {
+                checkbox.checked = !checkbox.checked;
+            }
+        }
+
+        function toggleExhausted() {
+            const content = document.getElementById('exhaustedContent');
+            if (content) {
+                content.classList.toggle('open');
+            }
+        }
+
+        function saveBrainDump() {
+            const el1 = document.getElementById('brainDump1');
+            const el2 = document.getElementById('brainDump2');
+            const el3 = document.getElementById('brainDump3');
+            if (!el1 || !el2 || !el3) return;
+            const dump1 = el1.value;
+            const dump2 = el2.value;
+            const dump3 = el3.value;
+            localStorage.setItem('brainDump', JSON.stringify({ dump1, dump2, dump3 }));
+        }
+
+        function completeSleepSwitch() {
+            const today = new Date().toISOString().split('T')[0];
+            let completedDays;
+            try {
+                completedDays = JSON.parse(localStorage.getItem('sleepSwitchDays') || '[]');
+            } catch (e) {
+                completedDays = [];
+            }
+            if (!completedDays.includes(today)) {
+                completedDays.push(today);
+            }
+            localStorage.setItem('sleepSwitchDays', JSON.stringify(completedDays));
+
+            const sleepStreakEl = document.getElementById('sleepStreak');
+            if (sleepStreakEl) {
+                sleepStreakEl.style.display = 'block';
+                const streakCount = completedDays.length;
+                const streakCountEl = document.getElementById('streakCount');
+                if (streakCountEl) {
+                    streakCountEl.textContent = `${streakCount} ${streakCount === 1 ? 'night' : 'nights'} in a row`;
+                }
+            }
+        }
+
+        // Load brain dump on page load
+        window.addEventListener('load', () => {
+            let saved;
+            try {
+                saved = JSON.parse(localStorage.getItem('brainDump') || '{}');
+            } catch (e) {
+                saved = {};
+            }
+            const el1 = document.getElementById('brainDump1');
+            const el2 = document.getElementById('brainDump2');
+            const el3 = document.getElementById('brainDump3');
+            if (el1 && saved.dump1) el1.value = saved.dump1;
+            if (el2 && saved.dump2) el2.value = saved.dump2;
+            if (el3 && saved.dump3) el3.value = saved.dump3;
+        });
+
+        // ===== TAB 4: 7-DAY TRACKER =====
+        const trackerMetrics = [
+            { label: 'Morning Cocktail', id: 'cocktail' },
+            { label: 'Nervous System Reset', id: 'reset' },
+            { label: 'Caffeine within window', id: 'caffeine' },
+            { label: 'Sleep Switch completed', id: 'sleepSwitch' },
+            { label: 'Puffiness (1-5)', id: 'puffiness', type: 'scale' },
+            { label: 'Energy level (1-5)', id: 'energy', type: 'scale' },
+            { label: 'Sleep quality (1-5)', id: 'sleep', type: 'scale' }
+        ];
+
+        function initializeTracker() {
+            const grid = document.getElementById('trackerGrid');
+            grid.innerHTML = '';
+
+            // Header row
+            grid.appendChild(createCell('Metric', 'metric-label', true));
+            for (let day = 1; day <= 7; day++) {
+                grid.appendChild(createCell(`Day ${day}`, 'day-header', true));
+            }
+
+            // Data rows
+            trackerMetrics.forEach(metric => {
+                grid.appendChild(createCell(metric.label, 'metric-label', false));
+                for (let day = 1; day <= 7; day++) {
+                    const id = `${metric.id}-day${day}`;
+                    let cell;
+                    if (metric.type === 'scale') {
+                        cell = document.createElement('div');
+                        cell.className = 'tracker-cell';
+                        cell.innerHTML = '<div class="scale-buttons">';
+                        for (let i = 1; i <= 5; i++) {
+                            const btn = document.createElement('button');
+                            btn.className = 'scale-button';
+                            btn.textContent = i;
+                            btn.onclick = () => {
+                                document.querySelectorAll(`#${id} .scale-button`).forEach(b => b.classList.remove('active'));
+                                btn.classList.add('active');
+                                saveTrackerData();
+                            };
+                            btn.id = `${id}-${i}`;
+                            cell.querySelector('.scale-buttons').appendChild(btn);
+                        }
+                        cell.id = id;
+                        cell.innerHTML += '</div>';
+                    } else {
+                        cell = document.createElement('div');
+                        cell.className = 'tracker-cell';
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.className = 'tracker-checkbox';
+                        checkbox.id = id;
+                        checkbox.onchange = saveTrackerData;
+                        cell.appendChild(checkbox);
+                    }
+                    grid.appendChild(cell);
+                }
+            });
+
+            loadTrackerData();
+            updateTrackerStats();
+        }
+
+        function createCell(text, className, isHeader) {
+            const cell = document.createElement('div');
+            cell.className = className;
+            cell.textContent = text;
+            return cell;
+        }
+
+        function saveTrackerData() {
+            const data = {};
+            trackerMetrics.forEach(metric => {
+                data[metric.id] = {};
+                for (let day = 1; day <= 7; day++) {
+                    const id = `${metric.id}-day${day}`;
+                    if (metric.type === 'scale') {
+                        const activeBtn = document.querySelector(`#${id} .scale-button.active`);
+                        data[metric.id][day] = activeBtn ? parseInt(activeBtn.textContent) : 0;
+                    } else {
+                        data[metric.id][day] = document.getElementById(id).checked;
+                    }
+                }
+            });
+            localStorage.setItem('trackerData', JSON.stringify(data));
+            updateTrackerStats();
+        }
+
+        function loadTrackerData() {
+            let data;
+            try {
+                data = JSON.parse(localStorage.getItem('trackerData') || '{}');
+            } catch (e) {
+                data = {};
+            }
+            trackerMetrics.forEach(metric => {
+                if (data[metric.id]) {
+                    for (let day = 1; day <= 7; day++) {
+                        const id = `${metric.id}-day${day}`;
+                        if (metric.type === 'scale') {
+                            const value = data[metric.id][day];
+                            if (value) {
+                                const btn = document.querySelector(`#${id}-${value}`);
+                                if (btn) {
+                                    btn.classList.add('active');
+                                }
+                            }
+                        } else {
+                            const checkbox = document.getElementById(id);
+                            if (checkbox) {
+                                checkbox.checked = data[metric.id][day] || false;
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateTrackerStats() {
+            let data;
+            try {
+                data = JSON.parse(localStorage.getItem('trackerData') || '{}');
+            } catch (e) {
+                data = {};
+            }
+
+            // Calculate streaks
+            const calculateStreak = (metric) => {
+                if (!data[metric]) return 0;
+                let streak = 0;
+                for (let day = 7; day >= 1; day--) {
+                    if (data[metric][day]) streak++;
+                    else break;
+                }
+                return streak;
+            };
+
+            const cocktailStreak = calculateStreak('cocktail');
+            const resetStreak = calculateStreak('reset');
+
+            // Calculate averages
+            const getAverage = (metric, days = 7) => {
+                if (!data[metric]) return 0;
+                let sum = 0;
+                for (let day = 1; day <= days; day++) {
+                    sum += data[metric][day] || 0;
+                }
+                return Math.round(sum / days * 10) / 10;
+            };
+
+            const caffCompliance = data.caffeine ? (Object.values(data.caffeine).filter(v => v).length / 7 * 100) : 0;
+            const puffinessDay1 = data.puffiness?.[1] || 0;
+            const puffinessDay7 = data.puffiness?.[7] || 0;
+            const energyDay1 = data.energy?.[1] || 0;
+            const energyDay7 = data.energy?.[7] || 0;
+            const sleepAvg = getAverage('sleep');
+
+            const statsHTML = `
+                <div class="stat-card">
+                    <div class="stat-label">Morning Cocktail Streak</div>
+                    <div class="stat-value">${cocktailStreak}</div>
+                    <div class="stat-detail">Days in a row</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">NS Reset Streak</div>
+                    <div class="stat-value">${resetStreak}</div>
+                    <div class="stat-detail">Days in a row</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Caffeine Compliance</div>
+                    <div class="stat-value">${Math.round(caffCompliance)}%</div>
+                    <div class="stat-detail">Within your window</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Puffiness Change</div>
+                    <div class="stat-value">${puffinessDay1 > puffinessDay7 ? '↓' : '↑'} ${Math.abs(puffinessDay1 - puffinessDay7)}</div>
+                    <div class="stat-detail">Day 1 vs Day 7</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Energy Trend</div>
+                    <div class="stat-value">${energyDay7 > energyDay1 ? '↑' : '↓'}</div>
+                    <div class="stat-detail">Day 1: ${energyDay1}, Day 7: ${energyDay7}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Sleep Quality</div>
+                    <div class="stat-value">${sleepAvg}/5</div>
+                    <div class="stat-detail">Average across week</div>
+                </div>
+            `;
+
+            const statsEl = document.getElementById('trackerStats');
+            if (statsEl) {
+                statsEl.innerHTML = statsHTML;
+            }
+
+            // Update motivation message based on day
+            const completedDays = Object.values(data.cocktail || {}).filter(v => v).length;
+            const messages = {
+                1: 'Day 1: First reset done. You just sent your body a safety signal.',
+                3: 'Day 3: 3 days of calming signals. Your nervous system is starting to trust the pattern.',
+                5: 'Day 5: 5 days in. Check your puffiness — it\'s probably already changing.',
+                7: 'Day 7: Full week of calm. Your body has a new baseline.'
+            };
+
+            const msg = messages[completedDays] || messages[1];
+            const motivationEl = document.getElementById('motivationText');
+            if (motivationEl) {
+                motivationEl.textContent = msg;
+            }
+        }
+
+        // ===== TAB 5: IF-THEN =====
+        function toggleIfThen(card) {
+            const response = card.querySelector('.ifthen-response');
+            response.classList.toggle('open');
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            updateCaffeine();
+            setMode('full');
+        });
+    </script>
+</body>
+</html>

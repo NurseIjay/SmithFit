@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metabolism Stress-Type Quiz — SmithFit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: #e0dcd4;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Utility Classes */
+        .gold-text {
+            color: #d4a94c;
+        }
+
+        .blue-text {
+            color: #6ba5c4;
+        }
+
+        .green-text {
+            color: #7bc47a;
+        }
+
+        /* Header */
+        header {
+            background-color: #2a2a2a;
+            border-bottom: 1px solid #3a3a3a;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .brand-text {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            color: #d4a94c;
+            text-transform: uppercase;
+        }
+
+        .pillar-badge {
+            background-color: #d4a94c;
+            color: #1a1a1a;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 2.5rem;
+            color: #d4a94c;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: #b8b0a0;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .instruction-note {
+            color: #8a8278;
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        /* Quiz Container */
+        .quiz-container {
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .quiz-container.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Type Section */
+        .type-section {
+            background-color: #2a2a2a;
+            border-left: 4px solid;
+            border-radius: 0 4px 4px 0;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #3a3a3a;
+            border-left-width: 4px;
+        }
+
+        .type-section.type-a {
+            border-left-color: #d4a94c;
+        }
+
+        .type-section.type-b {
+            border-left-color: #6ba5c4;
+        }
+
+        .type-section.type-c {
+            border-left-color: #7bc47a;
+        }
+
+        .type-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .type-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #1a1a1a;
+        }
+
+        .type-badge.badge-a {
+            background-color: #d4a94c;
+        }
+
+        .type-badge.badge-b {
+            background-color: #6ba5c4;
+        }
+
+        .type-badge.badge-c {
+            background-color: #7bc47a;
+        }
+
+        .type-info h2 {
+            font-family: Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .type-pattern {
+            color: #a89878;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .type-count {
+            color: #a89878;
+            font-size: 0.9rem;
+        }
+
+        /* Checkbox List */
+        .checkbox-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #1a1a1a;
+            border-radius: 4px;
+            border: 1px solid #3a3a3a;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .checkbox-item:hover {
+            border-color: #5a5a5a;
+            background-color: #2a2a2a;
+        }
+
+        .checkbox-item.checked {
+            background-color: #2a2a2a;
+            border-color: #4a4a4a;
+        }
+
+        .checkbox-input {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            margin-top: 0.25rem;
+            cursor: pointer;
+            accent-color: #d4a94c;
+        }
+
+        .checkbox-label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Results Container */
+        .results-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1a1a1a;
+            z-index: 100;
+            overflow-y: auto;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+
+        .results-container.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .results-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .results-header {
+            background-color: #2a2a2a;
+            border-bottom: 1px solid #3a3a3a;
+            padding: 1.5rem 2rem;
+            margin: -2rem -2rem 3rem -2rem;
+            text-align: center;
+        }
+
+        .results-title {
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            color: #d4a94c;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        /* Score Breakdown */
+        .score-breakdown {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+        }
+
+        .score-breakdown-title {
+            font-size: 0.85rem;
+            color: #a89878;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .score-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .score-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .score-label {
+            min-width: 70px;
+            font-size: 0.9rem;
+        }
+
+        .score-bar {
+            flex: 1;
+            height: 8px;
+            background-color: #1a1a1a;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .score-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.6s ease;
+        }
+
+        .score-fill.fill-a {
+            background-color: #d4a94c;
+        }
+
+        .score-fill.fill-b {
+            background-color: #6ba5c4;
+        }
+
+        .score-fill.fill-c {
+            background-color: #7bc47a;
+        }
+
+        .score-value {
+            min-width: 40px;
+            text-align: right;
+            font-size: 0.9rem;
+            color: #a89878;
+        }
+
+        /* Result Card */
+        .result-card {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .result-badge {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            flex-shrink: 0;
+        }
+
+        .result-badge.type-a {
+            background-color: #d4a94c;
+        }
+
+        .result-badge.type-b {
+            background-color: #6ba5c4;
+        }
+
+        .result-badge.type-c {
+            background-color: #7bc47a;
+        }
+
+        .result-card-title {
+            font-family: Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+        }
+
+        /* Section Headings */
+        .result-section-heading {
+            font-family: Georgia, serif;
+            font-size: 1.1rem;
+            color: #d4a94c;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        /* Hybrid Message */
+        .hybrid-message {
+            background-color: #2a2a2a;
+            border: 1px solid #d4a94c;
+            border-left: 4px solid #d4a94c;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .hybrid-message p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* List Styles */
+        .result-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .result-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #e0dcd4;
+        }
+
+        .result-list li:before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #d4a94c;
+            font-weight: bold;
+        }
+
+        /* Focus Cues */
+        .focus-cues {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .focus-card {
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .focus-cue-number {
+            color: #d4a94c;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .callout.trap {
+            background-color: #3a1a1a;
+            border-left-color: #d4a94c;
+            color: #e0dcd4;
+        }
+
+        .callout.minimum {
+            background-color: #1a3a2a;
+            border-left-color: #7bc47a;
+            color: #e0dcd4;
+        }
+
+        .callout.proof {
+            background-color: #3a3a1a;
+            border-left-color: #d4a94c;
+            color: #e0dcd4;
+        }
+
+        /* Buttons */
+        button {
+            background-color: #d4a94c;
+            color: #1a1a1a;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        button:hover {
+            background-color: #e5ba5e;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-results {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .btn-results.hidden {
+            display: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 8px 20px rgba(212, 169, 76, 0.2);
+            }
+            50% {
+                box-shadow: 0 8px 25px rgba(212, 169, 76, 0.4);
+            }
+        }
+
+        .btn-retake {
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2a2a2a;
+            border-top: 1px solid #3a3a3a;
+            padding: 2rem;
+            margin-top: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #8a8278;
+        }
+
+        .footer-left {
+            flex: 1;
+        }
+
+        .footer-right {
+            text-align: right;
+            flex: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .type-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            main {
+                padding: 0 1rem 4rem;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer-right {
+                text-align: center;
+            }
+
+            .focus-cues {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-results {
+                bottom: 1rem;
+                width: calc(100% - 2rem);
+                max-width: 400px;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+                color: #000;
+            }
+
+            header, footer {
+                background-color: transparent;
+                border: none;
+                page-break-after: avoid;
+            }
+
+            .btn-results {
+                display: none;
+            }
+
+            .type-section {
+                page-break-inside: avoid;
+                border: 2px solid #999;
+                background-color: white;
+            }
+
+            .result-card {
+                page-break-inside: avoid;
+            }
+
+            .checkbox-input {
+                accent-color: #333;
+            }
+
+            .pillar-badge {
+                background-color: #999;
+            }
+
+            h1, .result-section-heading {
+                color: #000;
+            }
+
+            .callout {
+                border: 2px solid #999;
+                background-color: #f9f9f9;
+            }
+
+            button {
+                background-color: #ccc;
+                color: #000;
+                border: 2px solid #999;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand-text">Shift-Proof Metabolism Reset™</div>
+        <div class="pillar-badge">Pillar 1 — Diagnose</div>
+    </header>
+
+    <main>
+        <h1>Metabolism Stress-Type Quiz</h1>
+        <p class="subtitle">Check every statement that is currently true for you. Be honest — there are no wrong answers.</p>
+        <p class="instruction-note">This interactive version auto-scores your results and reveals your personalized type card.</p>
+
+        <div class="quiz-container" id="quizContainer">
+            <!-- TYPE A -->
+            <div class="type-section type-a">
+                <div class="type-header">
+                    <div class="type-info">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+                            <div class="type-badge badge-a">A</div>
+                            <h2>Under-Fueled & Stressed</h2>
+                        </div>
+                        <p class="type-pattern">Your body is getting repeated famine + stress signals</p>
+                    </div>
+                    <div class="type-count"><span id="countA">0</span>/5</div>
+                </div>
+                <div class="checkbox-list" id="typeA">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-a-check" data-type="a">
+                        <span class="checkbox-label">I often skip meals or miss breaks during shifts — sometimes I don't eat for 6+ hours</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-a-check" data-type="a">
+                        <span class="checkbox-label">Coffee or caffeine is usually my "first meal" of the day</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-a-check" data-type="a">
+                        <span class="checkbox-label">I feel exhausted and stuck even though I'm eating less than I used to</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-a-check" data-type="a">
+                        <span class="checkbox-label">My workouts feel draining rather than energizing — I often feel worse after exercise</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-a-check" data-type="a">
+                        <span class="checkbox-label">I experience constant fatigue, a puffy or tight waist, and cravings that hit hardest at night</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- TYPE B -->
+            <div class="type-section type-b">
+                <div class="type-header">
+                    <div class="type-info">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+                            <div class="type-badge badge-b">B</div>
+                            <h2>Sleep-Deprived & Overstimulated</h2>
+                        </div>
+                        <p class="type-pattern">Your nervous system is stuck in 'go mode' and can't downshift</p>
+                    </div>
+                    <div class="type-count"><span id="countB">0</span>/5</div>
+                </div>
+                <div class="checkbox-list" id="typeB">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-b-check" data-type="b">
+                        <span class="checkbox-label">I'm exhausted after a shift but can't fall asleep — I feel "wired but tired" at night</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-b-check" data-type="b">
+                        <span class="checkbox-label">My sleep is light, broken, or restless — I rarely wake up feeling truly rested</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-b-check" data-type="b">
+                        <span class="checkbox-label">I use caffeine late into my shift or evening to keep going</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-b-check" data-type="b">
+                        <span class="checkbox-label">I scroll on my phone to "shut my brain off" before bed — it's become a habit</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-b-check" data-type="b">
+                        <span class="checkbox-label">My cravings are worst at night or after shifts — especially for sweet or salty snacks</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- TYPE C -->
+            <div class="type-section type-c">
+                <div class="type-header">
+                    <div class="type-info">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+                            <div class="type-badge badge-c">C</div>
+                            <h2>Blood-Sugar Rollercoaster</h2>
+                        </div>
+                        <p class="type-pattern">Long gaps + unbalanced meals create crashes and craving spikes</p>
+                    </div>
+                    <div class="type-count"><span id="countC">0</span>/5</div>
+                </div>
+                <div class="checkbox-list" id="typeC">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-c-check" data-type="c">
+                        <span class="checkbox-label">I crash or get "hangry," shaky, or irritable when I go too long without eating</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-c-check" data-type="c">
+                        <span class="checkbox-label">I rely on quick snacks (crackers, chips, granola bars) to survive long shifts</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-c-check" data-type="c">
+                        <span class="checkbox-label">I do okay during the day but then "unravel" with cravings or overeating in the evening</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-c-check" data-type="c">
+                        <span class="checkbox-label">My energy is unpredictable — I have good hours and then sudden crashes with brain fog</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox-input type-c-check" data-type="c">
+                        <span class="checkbox-label">I often feel bloated, puffy, or inflamed — especially after meals that are mostly carbs</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="results-container" id="resultsContainer">
+            <div class="results-wrapper">
+                <div class="results-header">
+                    <h1 class="results-title">Your Result</h1>
+                </div>
+
+                <div id="resultsContent"></div>
+
+                <div class="button-container">
+                    <button class="btn-retake" onclick="retakeQuiz()">Retake Quiz</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn-results hidden" id="seeResultsBtn" onclick="showResults()">See My Results</button>
+
+    <footer>
+        <div class="footer-left">For nurses over 35 · Educational resource, not medical advice</div>
+        <div class="footer-right">Created by IJ Smith</div>
+    </footer>
+
+    <script>
+        // Quiz State
+        let quizState = {
+            typeA: 0,
+            typeB: 0,
+            typeC: 0
+        };
+
+        // Initialize
+        document.querySelectorAll('.checkbox-input').forEach(input => {
+            input.addEventListener('change', function() {
+                const parent = this.closest('.checkbox-item');
+                const typeKey = `type${this.dataset.type.toUpperCase()}`;
+                
+                if (this.checked) {
+                    parent.classList.add('checked');
+                    quizState[typeKey]++;
+                } else {
+                    parent.classList.remove('checked');
+                    quizState[typeKey]--;
+                }
+
+                updateCounts();
+                updateResultsButton();
+            });
+        });
+
+        function updateCounts() {
+            document.getElementById('countA').textContent = quizState.typeA;
+            document.getElementById('countB').textContent = quizState.typeB;
+            document.getElementById('countC').textContent = quizState.typeC;
+        }
+
+        function updateResultsButton() {
+            const btn = document.getElementById('seeResultsBtn');
+            const hasAnswers = quizState.typeA > 0 || quizState.typeB > 0 || quizState.typeC > 0;
+            
+            if (hasAnswers) {
+                btn.classList.remove('hidden');
+            } else {
+                btn.classList.add('hidden');
+            }
+        }
+
+        function getDominantType() {
+            const scores = [
+                { type: 'A', score: quizState.typeA },
+                { type: 'B', score: quizState.typeB },
+                { type: 'C', score: quizState.typeC }
+            ];
+
+            scores.sort((a, b) => b.score - a.score);
+
+            if (scores[0].score === 0) {
+                return { types: ['mixed'], scores: { A: 0, B: 0, C: 0 } };
+            }
+
+            if (scores[0].score === scores[1].score && scores[0].score > 0) {
+                return { types: [scores[0].type, scores[1].type], scores: { A: quizState.typeA, B: quizState.typeB, C: quizState.typeC } };
+            }
+
+            return { types: [scores[0].type], scores: { A: quizState.typeA, B: quizState.typeB, C: quizState.typeC } };
+        }
+
+        function getResultContent(type, scores) {
+            const resultData = {
+                A: {
+                    name: 'Under-Fueled & Stressed',
+                    pattern: 'Your body is getting repeated famine + stress signals',
+                    likelyIf: [
+                        'You skip meals or miss breaks often',
+                        'Coffee feels like breakfast most days',
+                        'You\'re exhausted and stuck despite eating less',
+                        'Workouts feel draining, not energizing'
+                    ],
+                    happening: 'When you repeatedly under-eat and run on stress hormones, your body interprets this as a famine signal. It responds by slowing metabolism, increasing cortisol, spiking cravings (especially at night), and holding water around the midsection. Cutting more food makes this worse, not better.',
+                    focusCues: [
+                        'Protein-first at your first fuel opportunity (within 1–2 hrs of waking)',
+                        'Keep a missed-break rescue option in your bag at all times',
+                        '10-min strength OR 5-min backup movement (no punishment cardio)',
+                        'Hydration + minerals before caffeine each morning'
+                    ],
+                    trap: 'Cutting harder when you\'re already under-fueled. More restriction = more stress signal = more holding on.',
+                    minimum: 'Protein shake + fruit + 2-minute breathing reset. That\'s it. That counts.',
+                    proof: 'Night cravings quieter · Less waist tightness/bloat · Fewer mid-shift crashes'
+                },
+                B: {
+                    name: 'Sleep-Deprived & Overstimulated',
+                    pattern: 'Your nervous system is stuck in "go mode" and can\'t downshift',
+                    likelyIf: [
+                        'You\'re tired but wired at night — can\'t wind down',
+                        'You scroll to "shut your brain off" before bed',
+                        'Cravings are worst at night or after shifts',
+                        'Sleep is light, broken, or never feels restorative'
+                    ],
+                    happening: 'When your nervous system stays in "go mode," your body can\'t enter the recovery state where fat-burning, hunger regulation, and cellular repair happen. Poor sleep elevates ghrelin (hunger hormone) and suppresses leptin (fullness hormone) — making cravings feel louder and willpower feel lower. This isn\'t a discipline problem.',
+                    focusCues: [
+                        'Metabolic Reset Cocktail before caffeine each morning',
+                        '5-minute Nervous System Reset ritual daily (before bed or after shift)',
+                        'Set a caffeine cutoff that fits your schedule (6–8 hrs before sleep)',
+                        'Protein + carb "landing snack" within 30–60 min of getting home'
+                    ],
+                    trap: 'Late-night screens + caffeine too late. Both keep your nervous system in "on" mode when it needs to downshift.',
+                    minimum: '2-min SOS breathing reset + protein snack at first opportunity + phone away 10 min before bed.',
+                    proof: 'Falling asleep faster · Fewer late-night cravings · Waking up less groggy'
+                },
+                C: {
+                    name: 'Blood-Sugar Rollercoaster',
+                    pattern: 'Long gaps + unbalanced meals create crashes and craving spikes',
+                    likelyIf: [
+                        'You crash or get hangry when you go too long without food',
+                        'You rely on quick carb snacks to survive shifts',
+                        'You unravel with cravings or overeating in the evening',
+                        'Energy is unpredictable — good hours then sudden crashes'
+                    ],
+                    happening: 'Long gaps between meals followed by quick-carb snacks create a blood sugar spike-and-crash cycle. Each crash triggers a cortisol response (your body\'s stress alarm), which drives cravings, promotes fat storage around the midsection, and causes inflammation and water retention. The fix isn\'t eating less — it\'s eating smarter and more consistently.',
+                    focusCues: [
+                        'Close extreme gaps — mini-fuel counts (protein bar, shake, yogurt)',
+                        'Pair carbs with protein/fiber at every meal and snack',
+                        'Protein-first at your first real meal (within 1–2 hrs of waking)',
+                        'Hydration + minerals before caffeine to blunt the cortisol spike'
+                    ],
+                    trap: 'Quick-carb snacks with no protein. Crackers, granola bars, and fruit alone spike blood sugar and accelerate the crash cycle.',
+                    minimum: 'Protein bar + electrolyte water = stabilization. That\'s your floor. It counts.',
+                    proof: 'Fewer energy crashes · Less irritability mid-shift · Cravings less intense at night'
+                }
+            };
+
+            const data = resultData[type];
+            const badgeClass = `type-${type.toLowerCase()}`;
+            const fillClass = `fill-${type.toLowerCase()}`;
+
+            let html = `
+                <div class="score-breakdown">
+                    <div class="score-breakdown-title">Your Scores</div>
+                    <div class="score-row">
+                        <div class="score-label">Type A</div>
+                        <div class="score-bar">
+                            <div class="score-fill fill-a" style="width: ${(scores.A / 5) * 100}%"></div>
+                        </div>
+                        <div class="score-value">${scores.A}/5</div>
+                    </div>
+                    <div class="score-row">
+                        <div class="score-label">Type B</div>
+                        <div class="score-bar">
+                            <div class="score-fill fill-b" style="width: ${(scores.B / 5) * 100}%"></div>
+                        </div>
+                        <div class="score-value">${scores.B}/5</div>
+                    </div>
+                    <div class="score-row">
+                        <div class="score-label">Type C</div>
+                        <div class="score-bar">
+                            <div class="score-fill fill-c" style="width: ${(scores.C / 5) * 100}%"></div>
+                        </div>
+                        <div class="score-value">${scores.C}/5</div>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-card-header">
+                        <div class="result-badge ${badgeClass}">${type}</div>
+                        <div>
+                            <h2 class="result-card-title">${data.name}</h2>
+                            <p style="color: #a89878; margin-top: 0.5rem; font-style: italic;">${data.pattern}</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="result-section-heading">You're Likely This Type If:</h3>
+                        <ul class="result-list">
+                            ${data.likelyIf.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="result-section-heading">What's Happening In Your Body:</h3>
+                        <p>${data.happening}</p>
+                    </div>
+
+                    <div>
+                        <h3 class="result-section-heading">Your Top 2 Focus Cues (Choose 2):</h3>
+                        <div class="focus-cues">
+                            ${data.focusCues.map((cue, idx) => `
+                                <div class="focus-card">
+                                    <span class="focus-cue-number">#${idx + 1}</span>
+                                    ${cue}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="callout trap">
+                        <div class="callout-title">#1 Trap to Stop</div>
+                        <p>${data.trap}</p>
+                    </div>
+
+                    <div class="callout minimum">
+                        <div class="callout-title">Chaos-Day Minimum</div>
+                        <p>${data.minimum}</p>
+                    </div>
+
+                    <div class="callout proof">
+                        <div class="callout-title">Proof by Day 2–3</div>
+                        <p>${data.proof}</p>
+                    </div>
+                </div>
+            `;
+
+            return html;
+        }
+
+        function getHybridContent(types, scores) {
+            const typeNames = {
+                'A': 'Under-Fueled & Stressed',
+                'B': 'Sleep-Deprived & Overstimulated',
+                'C': 'Blood-Sugar Rollercoaster'
+            };
+
+            let html = `
+                <div class="hybrid-message">
+                    <p><strong>You're a Hybrid!</strong></p>
+                    <p>You have strong elements of both <strong>Type ${types[0]}</strong> and <strong>Type ${types[1]}</strong>. Below are both of your type cards — read them as a pair and look for overlapping patterns.</p>
+                </div>
+
+                <div class="score-breakdown">
+                    <div class="score-breakdown-title">Your Scores</div>
+                    <div class="score-row">
+                        <div class="score-label">Type A</div>
+                        <div class="score-bar">
+                            <div class="score-fill fill-a" style="width: ${(scores.A / 5) * 100}%"></div>
+                        </div>
+                        <div class="score-value">${scores.A}/5</div>
+                    </div>
+                    <div class="score-row">
+                        <div class="score-label">Type B</div>
+                        <div class="score-bar">
+                            <div class="score-fill fill-b" style="width: ${(scores.B / 5) * 100}%"></div>
+                        </div>
+                        <div class="score-value">${scores.B}/5</div>
+                    </div>
+                    <div class="score-row">
+                        <div class="score-label">Type C</div>
+                        <div class="score-bar">
+                            <div class="score-fill fill-c" style="width: ${(scores.C / 5) * 100}%"></div>
+                        </div>
+                        <div class="score-value">${scores.C}/5</div>
+                    </div>
+                </div>
+            `;
+
+            types.forEach(type => {
+                html += getResultContent(type, scores);
+            });
+
+            return html;
+        }
+
+        function getMixedContent(scores) {
+            let html = `
+                <div class="hybrid-message">
+                    <p><strong>You may be experiencing a mix of all three patterns.</strong></p>
+                    <p>Start with the type below that resonates most — you'll address all patterns through the full reset.</p>
+                </div>
+
+                <div class="score-breakdown">
+                    <div class="score-breakdown-title">Your Scores</div>
+                    <div class="score-row">
+                        <div class="score-label">Type A</div>
+                        <div class="score-bar">
+                            <div class="score-fill fill-a" style="width: ${(scores.A / 5) * 100}%"></div>
+                        </div>
+                        <div class="score-value">${scores.A}/5</div>
+                    </div>
+                    <div class="score-row">
+                        <div class="score-label">Type B</div>
+                        <div class="score-bar">
+                            <div class="score-fill fill-b" style="width: ${(scores.B / 5) * 100}%"></div>
+                        </div>
+                        <div class="score-value">${scores.B}/5</div>
+                    </div>
+                    <div class="score-row">
+                        <div class="score-label">Type C</div>
+                        <div class="score-bar">
+                            <div class="score-fill fill-c" style="width: ${(scores.C / 5) * 100}%"></div>
+                        </div>
+                        <div class="score-value">${scores.C}/5</div>
+                    </div>
+                </div>
+
+                ${getResultContent('A', scores)}
+                ${getResultContent('B', scores)}
+                ${getResultContent('C', scores)}
+            `;
+
+            return html;
+        }
+
+        function showResults() {
+            const result = getDominantType();
+            const resultsContent = document.getElementById('resultsContent');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const quizContainer = document.getElementById('quizContainer');
+
+            if (result.types[0] === 'mixed') {
+                resultsContent.innerHTML = getMixedContent(result.scores);
+            } else if (result.types.length > 1) {
+                resultsContent.innerHTML = getHybridContent(result.types, result.scores);
+            } else {
+                resultsContent.innerHTML = getResultContent(result.types[0], result.scores);
+            }
+
+            quizContainer.classList.add('hidden');
+            resultsContainer.classList.add('visible');
+            window.scrollTo(0, 0);
+        }
+
+        function retakeQuiz() {
+            quizState = {
+                typeA: 0,
+                typeB: 0,
+                typeC: 0
+            };
+
+            document.querySelectorAll('.checkbox-input').forEach(input => {
+                input.checked = false;
+            });
+
+            document.querySelectorAll('.checkbox-item').forEach(item => {
+                item.classList.remove('checked');
+            });
+
+            updateCounts();
+            updateResultsButton();
+
+            const quizContainer = document.getElementById('quizContainer');
+            const resultsContainer = document.getElementById('resultsContainer');
+
+            quizContainer.classList.remove('hidden');
+            resultsContainer.classList.remove('visible');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>

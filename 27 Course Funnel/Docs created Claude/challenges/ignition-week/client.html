@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-Minute Ignition Week | SmithFit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-brown: #2D1F1A;
+            --cream: #FAF8F5;
+            --gold: #D4A94C;
+            --taupe: #8A7A6A;
+            --charcoal: #4A3728;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+            background-color: var(--dark-brown);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: Georgia, serif;
+            color: var(--dark-brown);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(135deg, var(--cream) 0%, rgba(250, 248, 245, 0.95) 100%);
+            border-radius: 16px;
+            margin-bottom: 50px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -100px;
+            width: 400px;
+            height: 300px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,100 Q100,50 200,100 T400,100 L400,0 L0,0 Z" fill="%23D4A94C" opacity="0.15"/><path d="M0,120 Q100,70 200,120 T400,120 L400,0 L0,0 Z" fill="%23D4A94C" opacity="0.1"/></svg>') repeat-x;
+            opacity: 0.6;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -100px;
+            width: 400px;
+            height: 300px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,100 Q100,150 200,100 T400,100 L400,200 L0,200 Z" fill="%23D4A94C" opacity="0.15"/><path d="M0,80 Q100,130 200,80 T400,80 L400,200 L0,200 Z" fill="%23D4A94C" opacity="0.1"/></svg>') repeat-x;
+            opacity: 0.6;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: var(--dark-brown);
+            letter-spacing: -1px;
+        }
+
+        .hero-category {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-dates {
+            font-size: 1.1em;
+            color: var(--taupe);
+            font-style: italic;
+            margin-top: 15px;
+        }
+
+        /* WHY THIS MATTERS */
+        .why-matters {
+            background-color: var(--cream);
+            border-left: 4px solid var(--gold);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .why-matters h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: var(--dark-brown);
+        }
+
+        .why-matters p {
+            font-size: 1.05em;
+            line-height: 1.8;
+            color: var(--charcoal);
+            margin-bottom: 10px;
+        }
+
+        /* COMPLETION THRESHOLD */
+        .completion-threshold {
+            background-color: var(--dark-brown);
+            color: var(--cream);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            text-align: center;
+            border: 2px solid var(--gold);
+        }
+
+        .completion-threshold h3 {
+            color: var(--gold);
+            font-size: 1.3em;
+            margin-bottom: 12px;
+        }
+
+        .completion-threshold p {
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        .threshold-emphasis {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* HOW TO PARTICIPATE */
+        .how-to {
+            background-color: var(--cream);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 50px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .how-to h3 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: var(--dark-brown);
+        }
+
+        .how-to p {
+            font-size: 1.05em;
+            color: var(--charcoal);
+            line-height: 1.8;
+        }
+
+        .how-to-emphasis {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* DIVIDER */
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            margin: 50px 0;
+            opacity: 0.6;
+        }
+
+        /* DAYS SECTION */
+        .days-section h2 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--cream);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .day-card {
+            background-color: var(--cream);
+            border-left: 5px solid var(--gold);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .day-card:hover {
+            box-shadow: 0 4px 15px rgba(212, 169, 76, 0.2);
+            border-left-color: var(--gold);
+        }
+
+        .day-card.is-today {
+            background: linear-gradient(135deg, var(--cream) 0%, rgba(212, 169, 76, 0.08) 100%);
+            border-left: 5px solid var(--gold);
+            box-shadow: 0 0 20px rgba(212, 169, 76, 0.3), inset 0 0 30px rgba(212, 169, 76, 0.05);
+        }
+
+        .day-card.is-today .day-label {
+            background-color: var(--gold);
+            color: var(--white);
+            box-shadow: 0 2px 8px rgba(212, 169, 76, 0.4);
+        }
+
+        .day-label {
+            display: inline-block;
+            background-color: var(--taupe);
+            color: var(--white);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .day-title {
+            font-size: 1.6em;
+            color: var(--dark-brown);
+            margin-bottom: 15px;
+        }
+
+        .day-subtitle {
+            font-size: 0.95em;
+            color: var(--taupe);
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .day-instruction {
+            background-color: rgba(212, 169, 76, 0.08);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            border-left: 3px solid var(--gold);
+            font-size: 1.05em;
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+
+        .tiers {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        @media (min-width: 768px) {
+            .tiers {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .tier {
+            background-color: white;
+            border: 1px solid rgba(212, 169, 76, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .tier:hover {
+            border-color: var(--gold);
+            box-shadow: 0 2px 10px rgba(212, 169, 76, 0.15);
+        }
+
+        .tier-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: Georgia, serif;
+        }
+
+        .tier-description {
+            font-size: 0.9em;
+            color: var(--taupe);
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .tier-content {
+            font-size: 0.95em;
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+
+        .post-prompt {
+            background-color: rgba(212, 169, 76, 0.06);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            border-left: 3px solid var(--gold);
+            font-size: 0.95em;
+            color: var(--dark-brown);
+            font-style: italic;
+        }
+
+        /* CLOSING SECTION */
+        .closing {
+            background-color: var(--cream);
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid var(--gold);
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .closing h2 {
+            font-size: 1.8em;
+            color: var(--dark-brown);
+            margin-bottom: 20px;
+        }
+
+        .closing blockquote {
+            font-size: 1.3em;
+            color: var(--charcoal);
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 20px;
+            font-family: Georgia, serif;
+        }
+
+        .closing-author {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        /* PROGRESS TRACKER */
+        .progress-section {
+            background-color: var(--dark-brown);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border: 2px solid var(--gold);
+        }
+
+        .progress-section h3 {
+            color: var(--gold);
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .progress-tracker {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .day-circle {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--taupe);
+            background-color: transparent;
+            color: var(--cream);
+        }
+
+        .day-circle:hover {
+            border-color: var(--gold);
+            transform: scale(1.1);
+        }
+
+        .day-circle.completed {
+            background-color: var(--gold);
+            border-color: var(--gold);
+            color: var(--white);
+        }
+
+        .day-circle.today {
+            background-color: var(--gold);
+            border-color: var(--white);
+            color: var(--white);
+            box-shadow: 0 0 15px rgba(212, 169, 76, 0.5);
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .day-title {
+                font-size: 1.3em;
+            }
+
+            .day-card {
+                padding: 20px;
+            }
+
+            .closing blockquote {
+                font-size: 1.1em;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+
+        /* SMOOTH SCROLL */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* UTILITY CLASSES */
+        .gold-text {
+            color: var(--gold);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HERO SECTION -->
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-category">Movement Challenge</div>
+                <h1>5-Minute Ignition Week</h1>
+                <p class="hero-dates">Monday, March 23 – Sunday, March 29, 2026</p>
+            </div>
+        </div>
+
+        <!-- WHY THIS MATTERS -->
+        <div class="why-matters">
+            <h3>Why This Matters</h3>
+            <p>You don't need another 60-minute program. You need <span class="threshold-emphasis">proof that you can still move your body</span> even when life gets messy.</p>
+            <p>This week, we're lighting a match. Small. Consistent. Powerful. By Sunday, you're going to feel the shift.</p>
+        </div>
+
+        <!-- COMPLETION THRESHOLD -->
+        <div class="completion-threshold">
+            <h3>Show Up 5 of 7 Days</h3>
+            <p>That's it. <span class="threshold-emphasis">5 posts in the community = challenge complete</span>. You did the thing. You're stronger than the bad weeks.</p>
+        </div>
+
+        <!-- HOW TO PARTICIPATE -->
+        <div class="how-to">
+            <h3>How to Participate</h3>
+            <p>Each day, you're going to move your body. Then you're going to post about it in the community. <span class="how-to-emphasis">That post is your win.</span> You showed up. That's everything.</p>
+            <p style="margin-top: 15px;">Pick your tier (Foundation, Build, or Momentum). Do it. Post it. Move on with your day. You've already won.</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- PROGRESS TRACKER -->
+        <div class="progress-section">
+            <h3>Your Week at a Glance</h3>
+            <div class="progress-tracker" id="progressTracker">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- DAYS SECTION -->
+        <div class="days-section">
+            <h2>The 7 Days</h2>
+            <div id="daysContainer">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- CLOSING SECTION -->
+        <div class="closing">
+            <h2>You've Got This</h2>
+            <blockquote>"You don't need to be perfect. You need to be present. Show up for yourself this week, and I promise you'll feel the difference."</blockquote>
+            <p class="closing-author">— IJ Smith, RN</p>
+        </div>
+    </div>
+
+    <script>
+        // Challenge data
+        const challengeData = {
+            startDate: new Date(2026, 2, 23), // March 23, 2026
+            days: [
+                {
+                    number: 1,
+                    dayOfWeek: "Monday",
+                    title: "Light the Match",
+                    subtitle: "Morning movement to start the week",
+                    instruction: "Your job is simple: move your body first thing. Whether it's a 5-minute walk or a 20-minute power session, you're sending a signal. You're here. You're moving.",
+                    tiers: {
+                        foundation: {
+                            name: "Foundation",
+                            description: "I can barely move today",
+                            content: "5-minute walk around your block or house"
+                        },
+                        build: {
+                            name: "Build",
+                            description: "I've got some energy",
+                            content: "10-minute brisk walk + 10 bodyweight squats"
+                        },
+                        momentum: {
+                            name: "Momentum",
+                            description: "Let's get it",
+                            content: "20-minute power walk or jog + 20 squats + 10 push-ups"
+                        }
+                    },
+                    postPrompt: "Selfie or photo from your walk/movement. Caption: \"Match = lit 🔥\""
+                },
+                {
+                    number: 2,
+                    dayOfWeek: "Tuesday",
+                    title: "Strength Signal",
+                    subtitle: "Send your body a strength cue",
+                    instruction: "Strength isn't about showing off. It's about reminding your nervous system that you're capable. That you're safe. That you can handle things.",
+                    tiers: {
+                        foundation: {
+                            name: "Foundation",
+                            description: "Keeping it light",
+                            content: "5 wall push-ups + 5 chair squats (that's it!)"
+                        },
+                        build: {
+                            name: "Build",
+                            description: "Building momentum",
+                            content: "10 push-ups + 15 squats + 10 lunges"
+                        },
+                        momentum: {
+                            name: "Momentum",
+                            description: "Bring the strength",
+                            content: "3 rounds: 15 push-ups, 20 squats, 15 lunges, 10 glute bridges"
+                        }
+                    },
+                    postPrompt: "Quick video or photo of your favorite move. Caption: \"Signal sent 💪\""
+                },
+                {
+                    number: 3,
+                    dayOfWeek: "Wednesday",
+                    title: "Midweek Mobility",
+                    subtitle: "Your body earned some love today",
+                    instruction: "Halfway through. Your body is asking for some TLC. Not because you're broken, but because you're strong enough to listen to what you need.",
+                    tiers: {
+                        foundation: {
+                            name: "Foundation",
+                            description: "Gentle reset",
+                            content: "5-minute gentle stretch (neck, shoulders, hips — YouTube is fine)"
+                        },
+                        build: {
+                            name: "Build",
+                            description: "Full release",
+                            content: "10-minute yoga flow or full-body stretch routine"
+                        },
+                        momentum: {
+                            name: "Momentum",
+                            description: "Deep dive",
+                            content: "20-minute deep mobility session (foam rolling + dynamic stretching)"
+                        }
+                    },
+                    postPrompt: "Photo of your stretch spot or a \"ahhhh that felt good\" reaction. Caption: \"Midweek reset ✨\""
+                },
+                {
+                    number: 4,
+                    dayOfWeek: "Thursday",
+                    title: "The Comeback Walk",
+                    subtitle: "Walking is underrated. Let's change that.",
+                    instruction: "Walking isn't lazy. Walking is medicine. Walking is a superpower when you're busy, tired, or just done with complicated workouts.",
+                    tiers: {
+                        foundation: {
+                            name: "Foundation",
+                            description: "One foot in front",
+                            content: "5-minute walk (inside or outside, doesn't matter)"
+                        },
+                        build: {
+                            name: "Build",
+                            description: "Purposeful pace",
+                            content: "15-minute walk at a pace that makes you breathe a little harder"
+                        },
+                        momentum: {
+                            name: "Momentum",
+                            description: "Own the distance",
+                            content: "30-minute walk with incline OR add 50 walking lunges throughout"
+                        }
+                    },
+                    postPrompt: "Photo from your walk or your step count. Caption: \"Comebacks start with one step 👟\""
+                },
+                {
+                    number: 5,
+                    dayOfWeek: "Friday",
+                    title: "Friday Fire",
+                    subtitle: "End the work week with some power",
+                    instruction: "You made it to Friday. Your nervous system survived another week. Now it's time to celebrate that with movement that feels GOOD.",
+                    tiers: {
+                        foundation: {
+                            name: "Foundation",
+                            description: "Joyful movement",
+                            content: "5-minute dance party in your kitchen (yes, really — pick a song, move your body)"
+                        },
+                        build: {
+                            name: "Build",
+                            description: "Circuit energy",
+                            content: "15-minute at-home circuit (squats, push-ups, plank, repeat 3x)"
+                        },
+                        momentum: {
+                            name: "Momentum",
+                            description: "Full power",
+                            content: "25-minute full-body workout (add weights if you've got them)"
+                        }
+                    },
+                    postPrompt: "Video of your dance party OR post-workout selfie. Caption: \"Friday FIRE 🔥\""
+                },
+                {
+                    number: 6,
+                    dayOfWeek: "Saturday",
+                    title: "Move With Joy",
+                    subtitle: "Pick something fun. Not a workout. Just MOVE.",
+                    instruction: "This is the day you remember that movement doesn't have to feel like punishment. It can feel like freedom.",
+                    tiers: {
+                        foundation: {
+                            name: "Foundation",
+                            description: "Light + joyful",
+                            content: "5 minutes of anything that isn't sitting (play with your kids, walk the dog, dance)"
+                        },
+                        build: {
+                            name: "Build",
+                            description: "Activity time",
+                            content: "20 minutes of something fun (bike ride, hike, swim, basketball, yard work)"
+                        },
+                        momentum: {
+                            name: "Momentum",
+                            description: "Full adventure",
+                            content: "30+ minutes of an activity you love that gets your heart rate up"
+                        }
+                    },
+                    postPrompt: "Photo or video of what you chose. Caption: \"Joy movement 🎉\""
+                },
+                {
+                    number: 7,
+                    dayOfWeek: "Sunday",
+                    title: "Celebrate & Reflect",
+                    subtitle: "You showed up this week. OWN that.",
+                    instruction: "This isn't a rest day. This is your victory lap. You moved your body every day this week. You posted. You showed up. That deserves recognition.",
+                    tiers: {
+                        foundation: {
+                            name: "Foundation",
+                            description: "Gentle + grateful",
+                            content: "5-minute slow walk or gentle stretch + write down 1 win from this week"
+                        },
+                        build: {
+                            name: "Build",
+                            description: "Reflective movement",
+                            content: "10-minute walk + write down 3 wins from this week"
+                        },
+                        momentum: {
+                            name: "Momentum",
+                            description: "Full reflection",
+                            content: "20-minute recovery walk or yoga + write down 3 wins + share what you'll carry into next week"
+                        }
+                    },
+                    postPrompt: "Your wins from this week. Caption: \"Look at what I did 👑\""
+                }
+            ]
+        };
+
+        // Utility functions
+        function getDaysSinceStart() {
+            try {
+                const now = new Date();
+                const startDate = new Date(challengeData.startDate);
+                // Reset time to midnight for accurate day counting
+                now.setHours(0, 0, 0, 0);
+                startDate.setHours(0, 0, 0, 0);
+                const diffTime = now - startDate;
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                return diffDays;
+            } catch (e) {
+                console.error("Error calculating days since start:", e);
+                return 0;
+            }
+        }
+
+        function isToday(dayNumber) {
+            try {
+                const daysSinceStart = getDaysSinceStart();
+                return daysSinceStart === dayNumber - 1 && daysSinceStart >= 0 && daysSinceStart < 7;
+            } catch (e) {
+                console.error("Error checking if today:", e);
+                return false;
+            }
+        }
+
+        function isCompleted(dayNumber) {
+            try {
+                const daysSinceStart = getDaysSinceStart();
+                return dayNumber - 1 < daysSinceStart && daysSinceStart < 7;
+            } catch (e) {
+                console.error("Error checking if completed:", e);
+                return false;
+            }
+        }
+
+        function createDayCard(day) {
+            try {
+                const isCurrentDay = isToday(day.number);
+                const isCompletedDay = isCompleted(day.number);
+
+                const cardHTML = `
+                    <div class="day-card ${isCurrentDay ? 'is-today' : ''}" id="day-${day.number}">
+                        <div class="day-label">${isCompletedDay ? '✓ Completed' : (isCurrentDay ? '🔥 Today' : `Day ${day.number}`)}</div>
+                        <h3 class="day-title">${day.title}</h3>
+                        <p class="day-subtitle">${day.subtitle}</p>
+                        <div class="day-instruction">${day.instruction}</div>
+
+                        <div class="tiers">
+                            <div class="tier">
+                                <div class="tier-name">${day.tiers.foundation.name}</div>
+                                <div class="tier-description">${day.tiers.foundation.description}</div>
+                                <div class="tier-content">${day.tiers.foundation.content}</div>
+                            </div>
+                            <div class="tier">
+                                <div class="tier-name">${day.tiers.build.name}</div>
+                                <div class="tier-description">${day.tiers.build.description}</div>
+                                <div class="tier-content">${day.tiers.build.content}</div>
+                            </div>
+                            <div class="tier">
+                                <div class="tier-name">${day.tiers.momentum.name}</div>
+                                <div class="tier-description">${day.tiers.momentum.description}</div>
+                                <div class="tier-content">${day.tiers.momentum.content}</div>
+                            </div>
+                        </div>
+
+                        <div class="post-prompt"><strong>Post this:</strong> ${day.postPrompt}</div>
+                    </div>
+                `;
+
+                return cardHTML;
+            } catch (e) {
+                console.error("Error creating day card:", e);
+                return "";
+            }
+        }
+
+        function createProgressTracker() {
+            try {
+                let html = '';
+                for (let i = 1; i <= 7; i++) {
+                    const isCurrentDay = isToday(i);
+                    const isCompletedDay = isCompleted(i);
+                    const classList = isCurrentDay ? 'today' : (isCompletedDay ? 'completed' : '');
+
+                    html += `<div class="day-circle ${classList}" title="Day ${i}">${i}</div>`;
+                }
+                return html;
+            } catch (e) {
+                console.error("Error creating progress tracker:", e);
+                return '';
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // Populate days container
+                const daysContainer = document.getElementById('daysContainer');
+                if (daysContainer) {
+                    let daysHTML = '';
+                    challengeData.days.forEach(day => {
+                        daysHTML += createDayCard(day);
+                    });
+                    daysContainer.innerHTML = daysHTML;
+
+                    // Scroll to today's card if applicable
+                    const daysSinceStart = getDaysSinceStart();
+                    if (daysSinceStart >= 0 && daysSinceStart < 7) {
+                        const todayCard = document.getElementById(`day-${daysSinceStart + 1}`);
+                        if (todayCard) {
+                            setTimeout(() => {
+                                todayCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }, 100);
+                        }
+                    }
+                }
+
+                // Populate progress tracker
+                const progressTracker = document.getElementById('progressTracker');
+                if (progressTracker) {
+                    progressTracker.innerHTML = createProgressTracker();
+                }
+            } catch (e) {
+                console.error("Error initializing page:", e);
+            }
+        });
+
+        // Store user progress (localStorage)
+        function markDayComplete(dayNumber) {
+            try {
+                let completed = [];
+                const stored = localStorage.getItem('ignition-week-completed');
+                if (stored) {
+                    completed = JSON.parse(stored);
+                }
+                if (!completed.includes(dayNumber)) {
+                    completed.push(dayNumber);
+                    localStorage.setItem('ignition-week-completed', JSON.stringify(completed));
+                }
+            } catch (e) {
+                console.error("Error marking day complete:", e);
+            }
+        }
+
+        function getCompletedDays() {
+            try {
+                const stored = localStorage.getItem('ignition-week-completed');
+                return stored ? JSON.parse(stored) : [];
+            } catch (e) {
+                console.error("Error getting completed days:", e);
+                return [];
+            }
+        }
+    </script>
+</body>
+</html>

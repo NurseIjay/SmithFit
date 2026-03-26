@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7-Day Proof Tracker · SmithFit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            background-color: #1a1a1a;
+            color: #e0dcd4;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .header-left {
+            flex: 1;
+        }
+
+        .header-badge {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: #d4a94c;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            font-family: Georgia, serif;
+            color: #d4a94c;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #b8b3a8;
+            line-height: 1.7;
+            max-width: 600px;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .header-right {
+            text-align: right;
+            padding-top: 4px;
+        }
+
+        .brand-name {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #d4a94c;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        /* Setup Section */
+        .setup-section {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 32px;
+            margin-bottom: 40px;
+            display: none;
+        }
+
+        .setup-section.visible {
+            display: block;
+        }
+
+        .setup-section h2 {
+            font-size: 24px;
+            font-family: Georgia, serif;
+            color: #d4a94c;
+            margin-bottom: 24px;
+        }
+
+        .setup-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: 640px) {
+            .setup-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-field label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #d4a94c;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-field input {
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            color: #e0dcd4;
+            padding: 12px 16px;
+            font-size: 14px;
+            font-family: system-ui, -apple-system, sans-serif;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .form-field input:focus {
+            outline: none;
+            border-color: #d4a94c;
+            box-shadow: 0 0 0 2px rgba(212, 169, 76, 0.1);
+        }
+
+        .form-field input::placeholder {
+            color: #666;
+        }
+
+        .setup-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        /* How to Use Callout */
+        .how-to-use {
+            background-color: rgba(212, 169, 76, 0.08);
+            border-left: 3px solid #d4a94c;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 32px;
+            margin-bottom: 32px;
+        }
+
+        .how-to-use h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #d4a94c;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .how-to-use p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #b8b3a8;
+        }
+
+        /* Buttons */
+        button {
+            background-color: #d4a94c;
+            color: #1a1a1a;
+            border: none;
+            padding: 12px 28px;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button:hover {
+            background-color: #e8b961;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(212, 169, 76, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button.secondary {
+            background-color: transparent;
+            border: 1px solid #d4a94c;
+            color: #d4a94c;
+        }
+
+        button.secondary:hover {
+            background-color: rgba(212, 169, 76, 0.1);
+        }
+
+        button.danger {
+            background-color: #5a5a5a;
+            color: #e0dcd4;
+        }
+
+        button.danger:hover {
+            background-color: #6a6a6a;
+        }
+
+        /* Tracker Section */
+        .tracker-section {
+            display: none;
+        }
+
+        .tracker-section.visible {
+            display: block;
+        }
+
+        .tracker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .tracker-header h2 {
+            font-size: 28px;
+            font-family: Georgia, serif;
+            color: #d4a94c;
+        }
+
+        .tracker-controls {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* Tracker Table */
+        .tracker-table {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .tracker-row {
+            display: grid;
+            grid-template-columns: 100px 1fr 1fr 100px 100px 80px 1fr;
+            gap: 16px;
+            padding: 20px;
+            border-bottom: 1px solid #3a3a3a;
+            align-items: center;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tracker-row:last-child {
+            border-bottom: none;
+        }
+
+        .tracker-row.has-win {
+            border-left-color: #d4a94c;
+            background-color: rgba(212, 169, 76, 0.04);
+        }
+
+        @media (max-width: 1200px) {
+            .tracker-row {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .tracker-row-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .tracker-row-label {
+                font-size: 12px;
+                font-weight: 600;
+                color: #d4a94c;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                min-width: 120px;
+            }
+        }
+
+        .day-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #d4a94c;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .day-date {
+            font-size: 11px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        /* Checkboxes */
+        .checkbox-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checkbox-label {
+            font-size: 12px;
+            color: #b8b3a8;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            display: block;
+        }
+
+        .checkbox-input {
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            appearance: none;
+            background-color: #1a1a1a;
+            border: 2px solid #3a3a3a;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .checkbox-input:hover {
+            border-color: #d4a94c;
+        }
+
+        .checkbox-input:checked {
+            background-color: #d4a94c;
+            border-color: #d4a94c;
+        }
+
+        .checkbox-input:checked::after {
+            content: "✓";
+            color: #1a1a1a;
+            font-size: 24px;
+            font-weight: 700;
+            position: absolute;
+        }
+
+        /* Number Selectors */
+        .number-selector {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .number-button {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            font-size: 12px;
+            font-weight: 600;
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            color: #b8b3a8;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 36px;
+        }
+
+        .number-button:hover {
+            border-color: #d4a94c;
+            color: #d4a94c;
+        }
+
+        .number-button.selected {
+            background-color: #d4a94c;
+            border-color: #d4a94c;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        /* Toggle Buttons */
+        .toggle-group {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+        }
+
+        .toggle-button {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            font-size: 14px;
+            font-weight: 700;
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            color: #b8b3a8;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toggle-button:hover {
+            border-color: #d4a94c;
+            color: #d4a94c;
+        }
+
+        .toggle-button.selected {
+            background-color: #d4a94c;
+            border-color: #d4a94c;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        /* Note Input */
+        .note-input {
+            width: 100%;
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            color: #e0dcd4;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-family: system-ui, -apple-system, sans-serif;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .note-input:focus {
+            outline: none;
+            border-color: #d4a94c;
+            box-shadow: 0 0 0 2px rgba(212, 169, 76, 0.1);
+        }
+
+        .note-input::placeholder {
+            color: #555;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            margin-bottom: 40px;
+        }
+
+        .progress-section h3 {
+            font-size: 18px;
+            font-family: Georgia, serif;
+            color: #d4a94c;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Streak Counter */
+        .streak-counter {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 24px;
+            display: none;
+        }
+
+        .streak-counter.visible {
+            display: block;
+            animation: slideIn 0.4s ease;
+        }
+
+        .streak-counter.active-streak {
+            border-color: #d4a94c;
+            background-color: rgba(212, 169, 76, 0.08);
+            box-shadow: 0 0 20px rgba(212, 169, 76, 0.15);
+        }
+
+        .streak-number {
+            font-size: 64px;
+            font-weight: 700;
+            color: #d4a94c;
+            font-family: Georgia, serif;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .streak-label {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #b8b3a8;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .stat-card.visible {
+            display: block;
+            animation: slideIn 0.4s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #d4a94c;
+            background-color: rgba(212, 169, 76, 0.04);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #d4a94c;
+            margin-bottom: 12px;
+        }
+
+        .stat-value {
+            font-size: 48px;
+            font-weight: 700;
+            color: #e0dcd4;
+            font-family: Georgia, serif;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .stat-detail {
+            font-size: 13px;
+            color: #b8b3a8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .trend-icon {
+            font-size: 18px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #1a1a1a;
+            border-radius: 4px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #7bc47a;
+            border-radius: 4px;
+            transition: width 0.4s ease;
+        }
+
+        /* Comparison Section */
+        .comparison-section {
+            display: none;
+            margin-bottom: 40px;
+        }
+
+        .comparison-section.visible {
+            display: block;
+            animation: slideIn 0.4s ease;
+        }
+
+        .comparison-section h3 {
+            font-size: 18px;
+            font-family: Georgia, serif;
+            color: #d4a94c;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 640px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .comparison-card {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .comparison-card h4 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #d4a94c;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .comparison-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #3a3a3a;
+            font-size: 13px;
+        }
+
+        .comparison-item:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-label {
+            color: #b8b3a8;
+            font-weight: 600;
+        }
+
+        .comparison-value {
+            color: #e0dcd4;
+            font-weight: 700;
+        }
+
+        .comparison-improved {
+            color: #7bc47a;
+            font-weight: 700;
+        }
+
+        /* Motivational Messages */
+        .motivational-message {
+            background-color: rgba(123, 196, 122, 0.1);
+            border-left: 3px solid #7bc47a;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #b8b3a8;
+            animation: slideIn 0.4s ease;
+            display: none;
+        }
+
+        .motivational-message.visible {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px 0;
+            border-top: 1px solid #3a3a3a;
+            margin-top: 60px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        @media (max-width: 640px) {
+            footer {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.visible {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 32px;
+            max-width: 400px;
+            width: 90%;
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-content h3 {
+            font-size: 20px;
+            font-family: Georgia, serif;
+            color: #d4a94c;
+            margin-bottom: 16px;
+        }
+
+        .modal-content p {
+            color: #b8b3a8;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .modal-actions button {
+            min-width: 120px;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: #fff;
+                color: #000;
+            }
+
+            .tracker-controls, .setup-section {
+                display: none !important;
+            }
+
+            .tracker-section {
+                display: block !important;
+            }
+
+            header {
+                border-bottom: 2px solid #000;
+            }
+
+            .tracker-table {
+                background-color: #fff;
+                border: 1px solid #000;
+            }
+
+            .tracker-row {
+                border-bottom: 1px solid #ddd;
+                border-left: none;
+                background-color: #fff;
+            }
+
+            button {
+                display: none;
+            }
+
+            .progress-section, footer {
+                display: none;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .header-right {
+                text-align: left;
+            }
+
+            .setup-group {
+                grid-template-columns: 1fr;
+            }
+
+            .tracker-row {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-left">
+                <div class="header-badge">Pillar 1 — Diagnose</div>
+                <h1>7-Day Proof Tracker</h1>
+                <p class="subtitle">This tracker is your evidence engine. You're not tracking perfection — you're building proof that your body responds to the right signals.</p>
+            </div>
+            <div class="header-right">
+                <div class="brand-name">SmithFit</div>
+            </div>
+        </header>
+
+        <!-- Setup Section -->
+        <div class="setup-section visible" id="setupSection">
+            <h2>My Focus Cues</h2>
+            <div class="setup-group">
+                <div class="form-field">
+                    <label for="cueName1">My Focus Cue #1</label>
+                    <input type="text" id="cueName1" placeholder="e.g., Protein within 1-2 hrs of waking" maxlength="60">
+                </div>
+                <div class="form-field">
+                    <label for="cueName2">My Focus Cue #2</label>
+                    <input type="text" id="cueName2" placeholder="e.g., 5-min wind-down before sleep" maxlength="60">
+                </div>
+            </div>
+            <div class="how-to-use">
+                <h3>How to Use This Tracker</h3>
+                <p>Each evening (or after your shift), take 60 seconds to fill in the row for that day. Rate energy and cravings on a scale of 1–10 (1 = terrible, 10 = great). For Waist/Bloat, select L (Loose), N (Normal), or T (Tight). Check the box if you hit each focus cue. Any day with at least one checkmark is a win.</p>
+            </div>
+            <div class="setup-actions">
+                <button onclick="startTracking()">Start Tracking</button>
+            </div>
+        </div>
+
+        <!-- Tracker Section -->
+        <div class="tracker-section" id="trackerSection">
+            <div class="tracker-header">
+                <h2>Your 7-Day Reset</h2>
+                <div class="tracker-controls">
+                    <button class="secondary" onclick="printResults()">Print My Results</button>
+                    <button class="secondary" onclick="resetTracker()">Reset Tracker</button>
+                </div>
+            </div>
+
+            <!-- Motivational Messages -->
+            <div id="motivationalMessage" class="motivational-message"></div>
+
+            <!-- Tracker Table -->
+            <div class="tracker-table">
+                <div id="trackerRows"></div>
+            </div>
+
+            <!-- Progress Section -->
+            <div class="progress-section">
+                <h3>Your Progress</h3>
+
+                <!-- Streak Counter -->
+                <div class="streak-counter" id="streakCounter">
+                    <div class="streak-number" id="streakNumber">0</div>
+                    <div class="streak-label">Day Streak</div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card" id="focusCueCard">
+                        <div class="stat-label">Focus Cue Hits</div>
+                        <div class="stat-value" id="focusCueValue">0</div>
+                        <div class="stat-detail">
+                            <span id="focusCuePercent">0%</span>
+                            <span>of possible</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="focusCueBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" id="energyCard">
+                        <div class="stat-label">Energy Trend</div>
+                        <div class="stat-value" id="energyArrow">—</div>
+                        <div class="stat-detail">
+                            <span id="energyTrendText">No data yet</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" id="cravingCard">
+                        <div class="stat-label">Craving Trend</div>
+                        <div class="stat-value" id="cravingArrow">—</div>
+                        <div class="stat-detail">
+                            <span id="cravingTrendText">No data yet</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison Section -->
+                <div class="comparison-section" id="comparisonSection">
+                    <h3>Day 1 vs Day 7 Comparison</h3>
+                    <div class="comparison-grid">
+                        <div class="comparison-card">
+                            <h4>Day 1</h4>
+                            <div class="comparison-item">
+                                <span class="comparison-label">Energy</span>
+                                <span class="comparison-value" id="day1Energy">—</span>
+                            </div>
+                            <div class="comparison-item">
+                                <span class="comparison-label">Cravings</span>
+                                <span class="comparison-value" id="day1Cravings">—</span>
+                            </div>
+                            <div class="comparison-item">
+                                <span class="comparison-label">Waist/Bloat</span>
+                                <span class="comparison-value" id="day1Bloat">—</span>
+                            </div>
+                        </div>
+
+                        <div class="comparison-card">
+                            <h4>Day 7</h4>
+                            <div class="comparison-item">
+                                <span class="comparison-label">Energy</span>
+                                <span class="comparison-value" id="day7Energy">—</span>
+                            </div>
+                            <div class="comparison-item">
+                                <span class="comparison-label">Cravings</span>
+                                <span class="comparison-value" id="day7Cravings">—</span>
+                            </div>
+                            <div class="comparison-item">
+                                <span class="comparison-label">Waist/Bloat</span>
+                                <span class="comparison-value" id="day7Bloat">—</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Confirmation -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <h3>Reset Tracker?</h3>
+            <p>This will clear all your data and start fresh. You can't undo this action.</p>
+            <div class="modal-actions">
+                <button class="secondary" onclick="closeModal()">Cancel</button>
+                <button class="danger" onclick="confirmReset()">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <span>For nurses over 35 · Educational resource, not medical advice</span>
+        <span>Created by IJ Smith</span>
+    </footer>
+
+    <script>
+        // State Management
+        let trackerState = {
+            started: false,
+            cueName1: '',
+            cueName2: '',
+            startDate: null,
+            days: Array(7).fill(null).map(() => ({
+                cue1: false,
+                cue2: false,
+                energy: null,
+                cravings: null,
+                bloat: null,
+                note: ''
+            }))
+        };
+
+        // Initialize tracker
+        function startTracking() {
+            const cue1 = document.getElementById('cueName1').value.trim();
+            const cue2 = document.getElementById('cueName2').value.trim();
+
+            if (!cue1 || !cue2) {
+                alert('Please fill in both focus cues to continue.');
+                return;
+            }
+
+            trackerState.cueName1 = cue1;
+            trackerState.cueName2 = cue2;
+            trackerState.startDate = new Date();
+            trackerState.started = true;
+
+            document.getElementById('setupSection').classList.remove('visible');
+            document.getElementById('trackerSection').classList.add('visible');
+
+            renderTracker();
+            updateProgress();
+        }
+
+        // Render tracker rows
+        function renderTracker() {
+            const container = document.getElementById('trackerRows');
+            container.innerHTML = '';
+
+            trackerState.days.forEach((day, index) => {
+                const dayNum = index + 1;
+                const dayDate = getDateForDay(dayNum);
+                const row = document.createElement('div');
+                row.className = 'tracker-row';
+                if (day.cue1 || day.cue2) {
+                    row.classList.add('has-win');
+                }
+
+                row.innerHTML = `
+                    <div class="tracker-row-item">
+                        <div>
+                            <div class="day-label" onclick="setStartDate(${dayNum})">Day ${dayNum}</div>
+                            ${dayDate ? `<div class="day-date">${dayDate}</div>` : ''}
+                        </div>
+                    </div>
+
+                    <div class="tracker-row-item">
+                        ${window.innerWidth <= 1200 ? '<div class="tracker-row-label">Focus Cue #1</div>' : ''}
+                        <div class="checkbox-cell">
+                            <label>
+                                <div class="checkbox-label">${trackerState.cueName1}</div>
+                                <input type="checkbox" class="checkbox-input" ${day.cue1 ? 'checked' : ''} onchange="updateDay(${index}, 'cue1', this.checked)">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="tracker-row-item">
+                        ${window.innerWidth <= 1200 ? '<div class="tracker-row-label">Focus Cue #2</div>' : ''}
+                        <div class="checkbox-cell">
+                            <label>
+                                <div class="checkbox-label">${trackerState.cueName2}</div>
+                                <input type="checkbox" class="checkbox-input" ${day.cue2 ? 'checked' : ''} onchange="updateDay(${index}, 'cue2', this.checked)">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="tracker-row-item">
+                        ${window.innerWidth <= 1200 ? '<div class="tracker-row-label">Energy</div>' : ''}
+                        <div>
+                            <div class="checkbox-label">Energy</div>
+                            <div class="number-selector">
+                                ${Array.from({length: 10}, (_, i) => i + 1).map(num => `
+                                    <button class="number-button ${day.energy === num ? 'selected' : ''}" onclick="updateDay(${index}, 'energy', ${num})">${num}</button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tracker-row-item">
+                        ${window.innerWidth <= 1200 ? '<div class="tracker-row-label">Cravings</div>' : ''}
+                        <div>
+                            <div class="checkbox-label">Cravings</div>
+                            <div class="number-selector">
+                                ${Array.from({length: 10}, (_, i) => i + 1).map(num => `
+                                    <button class="number-button ${day.cravings === num ? 'selected' : ''}" onclick="updateDay(${index}, 'cravings', ${num})">${num}</button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tracker-row-item">
+                        ${window.innerWidth <= 1200 ? '<div class="tracker-row-label">Waist/Bloat</div>' : ''}
+                        <div>
+                            <div class="checkbox-label">Waist/Bloat</div>
+                            <div class="toggle-group">
+                                <button class="toggle-button ${day.bloat === 'L' ? 'selected' : ''}" onclick="updateDay(${index}, 'bloat', 'L')">L</button>
+                                <button class="toggle-button ${day.bloat === 'N' ? 'selected' : ''}" onclick="updateDay(${index}, 'bloat', 'N')">N</button>
+                                <button class="toggle-button ${day.bloat === 'T' ? 'selected' : ''}" onclick="updateDay(${index}, 'bloat', 'T')">T</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tracker-row-item">
+                        ${window.innerWidth <= 1200 ? '<div class="tracker-row-label">Note</div>' : ''}
+                        <input type="text" class="note-input" placeholder="How did today feel?" value="${day.note}" maxlength="100" onchange="updateDay(${index}, 'note', this.value)">
+                    </div>
+                `;
+
+                container.appendChild(row);
+            });
+        }
+
+        // Update day data
+        function updateDay(dayIndex, field, value) {
+            trackerState.days[dayIndex][field] = value;
+            renderTracker();
+            updateProgress();
+            checkMotivationalTriggers();
+        }
+
+        // Get formatted date for a day
+        function getDateForDay(dayNum) {
+            if (!trackerState.startDate) return null;
+            const date = new Date(trackerState.startDate);
+            date.setDate(date.getDate() + dayNum - 1);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+
+        // Set start date
+        function setStartDate(dayNum) {
+            const today = new Date();
+            const targetDate = new Date(today);
+            targetDate.setDate(targetDate.getDate() - (dayNum - 1));
+            trackerState.startDate = targetDate;
+            renderTracker();
+        }
+
+        // Update progress display
+        function updateProgress() {
+            updateStreakCounter();
+            updateStatCards();
+            updateComparisonCards();
+        }
+
+        // Update streak counter
+        function updateStreakCounter() {
+            let streak = 0;
+            for (let i = 0; i < trackerState.days.length; i++) {
+                const day = trackerState.days[i];
+                if (day.cue1 || day.cue2) {
+                    streak++;
+                } else if (streak > 0) {
+                    break;
+                }
+            }
+
+            const counter = document.getElementById('streakCounter');
+            document.getElementById('streakNumber').textContent = streak;
+
+            if (streak > 0) {
+                counter.classList.add('visible');
+                if (streak >= 3) {
+                    counter.classList.add('active-streak');
+                } else {
+                    counter.classList.remove('active-streak');
+                }
+            } else {
+                counter.classList.remove('visible');
+            }
+        }
+
+        // Update stat cards
+        function updateStatCards() {
+            // Focus Cue Hits
+            const totalChecks = trackerState.days.reduce((sum, day) => {
+                return sum + (day.cue1 ? 1 : 0) + (day.cue2 ? 1 : 0);
+            }, 0);
+            const totalPossible = trackerState.days.length * 2;
+            const cuePercent = Math.round((totalChecks / totalPossible) * 100);
+
+            document.getElementById('focusCueValue').textContent = totalChecks;
+            document.getElementById('focusCuePercent').textContent = cuePercent + '%';
+            document.getElementById('focusCueBar').style.width = cuePercent + '%';
+            document.getElementById('focusCueCard').classList.add('visible');
+
+            // Energy Trend
+            const energyValues = trackerState.days.filter(d => d.energy !== null).map(d => d.energy);
+            if (energyValues.length >= 2) {
+                const firstThree = energyValues.slice(0, Math.min(3, energyValues.length));
+                const lastThree = energyValues.slice(Math.max(0, energyValues.length - 3));
+
+                const firstAvg = firstThree.reduce((a, b) => a + b, 0) / firstThree.length;
+                const lastAvg = lastThree.reduce((a, b) => a + b, 0) / lastThree.length;
+
+                let trendText = '';
+                let arrow = '';
+                if (lastAvg > firstAvg + 0.5) {
+                    arrow = '↑';
+                    trendText = 'Improving';
+                } else if (lastAvg < firstAvg - 0.5) {
+                    arrow = '↓';
+                    trendText = 'Declining';
+                } else {
+                    arrow = '→';
+                    trendText = 'Stable';
+                }
+
+                document.getElementById('energyArrow').textContent = arrow;
+                document.getElementById('energyTrendText').textContent = trendText;
+                document.getElementById('energyCard').classList.add('visible');
+            }
+
+            // Craving Trend
+            const cravingValues = trackerState.days.filter(d => d.cravings !== null).map(d => d.cravings);
+            if (cravingValues.length >= 2) {
+                const firstThree = cravingValues.slice(0, Math.min(3, cravingValues.length));
+                const lastThree = cravingValues.slice(Math.max(0, cravingValues.length - 3));
+
+                const firstAvg = firstThree.reduce((a, b) => a + b, 0) / firstThree.length;
+                const lastAvg = lastThree.reduce((a, b) => a + b, 0) / lastThree.length;
+
+                let trendText = '';
+                let arrow = '';
+                // Lower cravings is better, so down is good
+                if (lastAvg < firstAvg - 0.5) {
+                    arrow = '↓';
+                    trendText = 'Improving';
+                } else if (lastAvg > firstAvg + 0.5) {
+                    arrow = '↑';
+                    trendText = 'Increasing';
+                } else {
+                    arrow = '→';
+                    trendText = 'Stable';
+                }
+
+                document.getElementById('cravingArrow').textContent = arrow;
+                document.getElementById('cravingTrendText').textContent = trendText;
+                document.getElementById('cravingCard').classList.add('visible');
+            }
+        }
+
+        // Update comparison cards
+        function updateComparisonCards() {
+            const day1 = trackerState.days[0];
+            const day7 = trackerState.days[6];
+
+            const bloatMap = { 'L': 'Loose', 'N': 'Normal', 'T': 'Tight' };
+
+            document.getElementById('day1Energy').textContent = day1.energy || '—';
+            document.getElementById('day1Cravings').textContent = day1.cravings || '—';
+            document.getElementById('day1Bloat').textContent = day1.bloat ? bloatMap[day1.bloat] : '—';
+
+            document.getElementById('day7Energy').textContent = day7.energy || '—';
+            document.getElementById('day7Cravings').textContent = day7.cravings || '—';
+            document.getElementById('day7Bloat').textContent = day7.bloat ? bloatMap[day7.bloat] : '—';
+
+            if ((day1.energy !== null || day1.cravings !== null || day1.bloat) &&
+                (day7.energy !== null || day7.cravings !== null || day7.bloat)) {
+                document.getElementById('comparisonSection').classList.add('visible');
+
+                // Add improvement highlights
+                if (day1.energy && day7.energy && day7.energy > day1.energy) {
+                    document.getElementById('day7Energy').classList.add('comparison-improved');
+                }
+                if (day1.cravings && day7.cravings && day7.cravings < day1.cravings) {
+                    document.getElementById('day7Cravings').classList.add('comparison-improved');
+                }
+            }
+        }
+
+        // Motivational triggers
+        function checkMotivationalTriggers() {
+            const message = document.getElementById('motivationalMessage');
+            const day1Done = trackerState.days[0].energy !== null || trackerState.days[0].cravings !== null || trackerState.days[0].bloat;
+            const day3Streak = trackerState.days[0].cue1 && trackerState.days[1].cue1 && trackerState.days[2].cue1;
+            const day7Done = trackerState.days[6].energy !== null || trackerState.days[6].cravings !== null || trackerState.days[6].bloat;
+
+            let text = '';
+
+            if (!day1Done) {
+                message.classList.remove('visible');
+            } else if (day7Done) {
+                text = "7 days. You didn't overhaul your life — you proved your body responds. This is just the beginning.";
+                message.innerHTML = text;
+                message.classList.add('visible');
+            } else if (day3Streak) {
+                text = "Three days in a row. Your body is starting to listen. Watch for the proof — quieter cravings, less bloat, steadier energy.";
+                message.innerHTML = text;
+                message.classList.add('visible');
+            } else if (day1Done) {
+                text = "Day 1 done. You just sent your body the first safety signal. Show up tomorrow — that's all.";
+                message.innerHTML = text;
+                message.classList.add('visible');
+            }
+        }
+
+        // Reset tracker
+        function resetTracker() {
+            document.getElementById('confirmModal').classList.add('visible');
+        }
+
+        function confirmReset() {
+            trackerState = {
+                started: false,
+                cueName1: '',
+                cueName2: '',
+                startDate: null,
+                days: Array(7).fill(null).map(() => ({
+                    cue1: false,
+                    cue2: false,
+                    energy: null,
+                    cravings: null,
+                    bloat: null,
+                    note: ''
+                }))
+            };
+
+            closeModal();
+            document.getElementById('setupSection').classList.add('visible');
+            document.getElementById('trackerSection').classList.remove('visible');
+            document.getElementById('cueName1').value = '';
+            document.getElementById('cueName2').value = '';
+        }
+
+        // Modal controls
+        function closeModal() {
+            document.getElementById('confirmModal').classList.remove('visible');
+        }
+
+        // Print results
+        function printResults() {
+            window.print();
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (trackerState.started) {
+                renderTracker();
+            }
+        });
+
+        // Close modal on outside click
+        document.getElementById('confirmModal').addEventListener('click', (e) => {
+            if (e.target.id === 'confirmModal') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

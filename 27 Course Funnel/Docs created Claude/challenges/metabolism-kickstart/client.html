@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7-Day Metabolism Kickstart | SmithFit</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --dark-brown: #2D1F1A;
+            --cream: #FAF8F5;
+            --gold: #D4A94C;
+            --taupe: #8A7A6A;
+            --charcoal: #4A3728;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+            background-color: var(--dark-brown);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: Georgia, serif;
+            color: var(--dark-brown);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(135deg, var(--cream) 0%, rgba(250,248,245,0.95) 100%);
+            border-radius: 16px;
+            margin-bottom: 50px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px; left: -100px;
+            width: 400px; height: 300px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,100 Q100,50 200,100 T400,100 L400,0 L0,0 Z" fill="%23D4A94C" opacity="0.15"/><path d="M0,120 Q100,70 200,120 T400,120 L400,0 L0,0 Z" fill="%23D4A94C" opacity="0.1"/></svg>') repeat-x;
+            opacity: 0.6;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px; right: -100px;
+            width: 400px; height: 300px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,100 Q100,150 200,100 T400,100 L400,200 L0,200 Z" fill="%23D4A94C" opacity="0.15"/><path d="M0,80 Q100,130 200,80 T400,80 L400,200 L0,200 Z" fill="%23D4A94C" opacity="0.1"/></svg>') repeat-x;
+            opacity: 0.6;
+        }
+
+        .hero-content { position: relative; z-index: 2; }
+
+        .hero-category {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: var(--dark-brown);
+            letter-spacing: -1px;
+        }
+
+        .hero-dates {
+            font-size: 1.1em;
+            color: var(--taupe);
+            font-style: italic;
+            margin-top: 15px;
+        }
+
+        /* WHY THIS MATTERS */
+        .why-matters {
+            background-color: var(--cream);
+            border-left: 4px solid var(--gold);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .why-matters h3 { font-size: 1.5em; margin-bottom: 15px; color: var(--dark-brown); }
+        .why-matters p { font-size: 1.05em; line-height: 1.8; color: var(--charcoal); margin-bottom: 10px; }
+
+        /* COMPLETION THRESHOLD */
+        .completion-threshold {
+            background-color: var(--dark-brown);
+            color: var(--cream);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            text-align: center;
+            border: 2px solid var(--gold);
+        }
+
+        .completion-threshold h3 { color: var(--gold); font-size: 1.3em; margin-bottom: 12px; }
+        .completion-threshold p { font-size: 1.1em; line-height: 1.7; }
+        .threshold-emphasis { color: var(--gold); font-weight: 600; }
+
+        /* HOW TO PARTICIPATE */
+        .how-to {
+            background-color: var(--cream);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 50px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .how-to h3 { font-size: 1.3em; margin-bottom: 15px; color: var(--dark-brown); }
+        .how-to p { font-size: 1.05em; color: var(--charcoal); line-height: 1.8; }
+        .how-to-emphasis { color: var(--gold); font-weight: 600; }
+
+        /* DIVIDER */
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            margin: 50px 0;
+            opacity: 0.6;
+        }
+
+        /* PROGRESS TRACKER */
+        .progress-section {
+            background-color: var(--dark-brown);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border: 2px solid var(--gold);
+        }
+
+        .progress-section h3 { color: var(--gold); font-size: 1.3em; margin-bottom: 20px; text-align: center; }
+
+        .progress-tracker {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .day-circle {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--taupe);
+            background-color: transparent;
+            color: var(--cream);
+        }
+
+        .day-circle:hover { border-color: var(--gold); transform: scale(1.1); }
+        .day-circle.completed { background-color: var(--gold); border-color: var(--gold); color: var(--white); }
+        .day-circle.today { background-color: var(--gold); border-color: var(--white); color: var(--white); box-shadow: 0 0 15px rgba(212,169,76,0.5); }
+
+        /* DAYS SECTION */
+        .days-section h2 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--cream);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .day-card {
+            background-color: var(--cream);
+            border-left: 5px solid var(--gold);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .day-card:hover { box-shadow: 0 4px 15px rgba(212,169,76,0.2); }
+
+        .day-card.is-today {
+            background: linear-gradient(135deg, var(--cream) 0%, rgba(212,169,76,0.08) 100%);
+            box-shadow: 0 0 20px rgba(212,169,76,0.3), inset 0 0 30px rgba(212,169,76,0.05);
+        }
+
+        .day-card.is-today .day-label {
+            background-color: var(--gold);
+            color: var(--white);
+            box-shadow: 0 2px 8px rgba(212,169,76,0.4);
+        }
+
+        .day-label {
+            display: inline-block;
+            background-color: var(--taupe);
+            color: var(--white);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .day-title { font-size: 1.6em; color: var(--dark-brown); margin-bottom: 8px; }
+        .day-subtitle { font-size: 0.95em; color: var(--taupe); font-style: italic; margin-bottom: 20px; }
+
+        .day-instruction {
+            background-color: rgba(212,169,76,0.08);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            border-left: 3px solid var(--gold);
+            font-size: 1.05em;
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+
+        .tiers {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        @media (min-width: 768px) { .tiers { grid-template-columns: 1fr 1fr 1fr; } }
+
+        .tier {
+            background-color: white;
+            border: 1px solid rgba(212,169,76,0.2);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .tier:hover { border-color: var(--gold); box-shadow: 0 2px 10px rgba(212,169,76,0.15); }
+
+        .tier-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: Georgia, serif;
+        }
+
+        .tier-description { font-size: 0.9em; color: var(--taupe); font-style: italic; margin-bottom: 12px; }
+        .tier-content { font-size: 0.95em; color: var(--charcoal); line-height: 1.7; }
+
+        .post-prompt {
+            background-color: rgba(212,169,76,0.06);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            border-left: 3px solid var(--gold);
+            font-size: 0.95em;
+            color: var(--dark-brown);
+            font-style: italic;
+        }
+
+        /* CLOSING */
+        .closing {
+            background-color: var(--cream);
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid var(--gold);
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .closing h2 { font-size: 1.8em; color: var(--dark-brown); margin-bottom: 20px; }
+
+        .closing blockquote {
+            font-size: 1.3em;
+            color: var(--charcoal);
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 20px;
+            font-family: Georgia, serif;
+        }
+
+        .closing-author { color: var(--gold); font-weight: 600; font-size: 1.1em; }
+
+        .gold-text { color: var(--gold); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2em; }
+            .day-title { font-size: 1.3em; }
+            .day-card { padding: 20px; }
+            .closing blockquote { font-size: 1.1em; }
+            .container { padding: 15px; }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-category">Metabolism Challenge &mdash; Hybrid</div>
+                <h1>7-Day Metabolism Kickstart</h1>
+                <p class="hero-dates">Monday, March 23 &ndash; Sunday, March 29, 2026</p>
+            </div>
+        </div>
+
+        <div class="why-matters">
+            <h3>Why This Matters</h3>
+            <p>You didn't gain this weight because you're lazy. You gained it because you've been running on stress hormones for years. <span class="gold-text">This week, we fix the input — not with more willpower, but with seven tiny actions that tell your body it's finally safe.</span></p>
+            <p>87% of SmithFit members feel a real difference by Day 3. This week, you're going to prove that number includes you.</p>
+        </div>
+
+        <div class="completion-threshold">
+            <h3>Show Up 5 of 7 Days</h3>
+            <p>Post in the SmithFit FAM community <span class="threshold-emphasis">5 out of 7 days</span> and you've completed the challenge. That's it. You don't have to be perfect — you just have to be present.</p>
+        </div>
+
+        <div class="how-to">
+            <h3>How to Participate</h3>
+            <p>Each day has one task — something you can do in under 10 minutes, even on a 12-hour shift day. <span class="how-to-emphasis">Do the task. Post your check-in in SmithFit FAM using that day's prompt. That post = your win for the day.</span></p>
+            <p style="margin-top: 15px;">Pick your tier based on how you feel that day — Foundation, Build, or Momentum. You can switch tiers every single day. Honor where you are. Show up anyway.</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="progress-section">
+            <h3>Your Week at a Glance</h3>
+            <div class="progress-tracker" id="progressTracker"></div>
+        </div>
+
+        <div class="days-section">
+            <h2>The 7 Days</h2>
+            <div id="daysContainer"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="closing">
+            <h2>Your Body Isn't Broken. It's Been Waiting for This.</h2>
+            <blockquote>"Seven days. Seven wins. You're not trying to transform this week — you're proving to yourself that you still can. That's the whole point. See you in the community."</blockquote>
+            <p class="closing-author">&mdash; IJ Smith, RN</p>
+        </div>
+
+    </div>
+
+    <script>
+        var challengeData = {
+            startDate: new Date(2026, 2, 23),
+            storageKey: 'smithfit-metabolism-kickstart',
+            days: [
+                {
+                    number: 1,
+                    dayOfWeek: "Monday",
+                    title: "Wake Up Your Metabolism",
+                    subtitle: "The first signal — 2 minutes, maximum impact",
+                    instruction: "Before you scroll, eat, or do anything else — make the Metabolic Cocktail. This isn't just a drink. It's a signal to your cortisol system that today is different. You're not running on fumes anymore. You're running on intention.",
+                    tiers: {
+                        foundation: {
+                            name: "Foundation",
+                            description: "Running on fumes today",
+                            content: "Make the Metabolic Cocktail (recipe in your welcome email). Drink it. Done. That's your whole Day 1. Seriously."
+                        },
+                        build: {
+                            name: "Build",
+                            description: "I've got some energy",
+                            content: "Make the Metabolic Cocktail + do 3 minutes of box breathing (4 counts in, 4 hold, 4 out, 4 hold). Repeat 5 rounds while the cocktail settles."
+                        },
+                        momentum: {
+                            name: "Momentum",
+                            description: "Let's get it",
+                            content: "Metabolic Cocktail + 5 rounds box breathing + write your #1 goal for this week in the notes app. Read it out loud once. You just created an anchor."
+                        }
+                    },
+                    postPrompt: "Post in SmithFit FAM: \"Day 1 done. I made the cocktail. [Rate your energy right now 1-10 — be honest.] Starting where I'm starting. Let's go. 🍋\""
+                },
+                {
+                    number: 2,
+                    dayOfWeek: "Tuesday",
+                    title: "Send the Signal",
+                    subtitle: "15 minutes or less — your first cortisol-conscious workout",
+                    instruction: "Your body hasn't forgotten how to be strong. It's just been buried under cortisol for a while. Today you're not working out to burn calories — you're sending a hormonal signal that you're safe, capable, and in control. That signal changes everything.",
+                    tiers: {
+                        foundation: {
+                            name: "Foundation",
+                            description: "Running on fumes today",
+                            content: "5-minute walk — outside if possible, around the unit or parking lot counts. No shoes required if you're home. Just move."
+                        },
+                        build: {
+                            name: "Build",
+                            description: "I've got some energy",
+                            content: "Open the SmithFit app and complete one 15-minute cortisol-conscious workout. Pick any one that fits your day."
+                        },
+                        momentum: {
+                            name: "Momentum",
+                            description: "Let's get it",
+                            content: "Full 15-minute workout in the SmithFit app + 5-minute post-workout walk. Cool down on purpose — this closes the cortisol loop."
+                        }
+                    },
+                    postPrompt: "Post in SmithFit FAM: \"Day 2. Signal sent. [What did you do? Walk, workout, something else?] Nervous system said thank you. 💪\""
+                },
+                {
+                    number: 3,
+                    dayOfWeek: "Wednesday",
+                    title: "Shift-Proof One Meal",
+                    subtitle: "Not the whole day — just one meal done right",
+                    instruction: "This is the day most people expect us to say 'follow the perfect plan.' We're not doing that. Today's task is one meal from your Work Day or Chaos Day template. Pick the one that matches your shift today. One meal. That's the whole assignment.",
+                    tiers: {
+                        foundation: {
+                            name: "Foundation",
+                            description: "Running on fumes today",
+                            content: "Eat one meal that has a protein source + a vegetable. Doesn't have to be from the plan. Just those two elements. Your metabolism will notice."
+                        },
+                        build: {
+                            name: "Build",
+                            description: "I've got some energy",
+                            content: "Follow the Work Day meal template for one meal from your SmithFit app. Prep it in advance if you have a shift — 10 minutes the night before counts."
+                        },
+                        momentum: {
+                            name: "Momentum",
+                            description: "Let's get it",
+                            content: "Follow the Work Day plan for all your shift meals today. Log it in FitMetrics. Screenshot your log and save it — this becomes your proof of concept."
+                        }
+                    },
+                    postPrompt: "Post in SmithFit FAM: \"Day 3. One meal done the SmithFit way. [Share what you ate — doesn't have to be perfect.] Feeling [energy update]. This is what shift-proof actually looks like. 🍽️\""
+                },
+                {
+                    number: 4,
+                    dayOfWeek: "Thursday",
+                    title: "Drop Your First Win",
+                    subtitle: "Post in the Wins Board — any win counts",
+                    instruction: "You've made it to Day 4. That's already a win. But today's assignment is to name something specific — a shift in energy, a craving that didn't hit as hard, sleep that felt different, a moment you didn't blow it when you would have before. These are the wins that actually mean the metabolism is waking up. Name it.",
+                    tiers: {
+                        foundation: {
+                            name: "Foundation",
+                            description: "Running on fumes today",
+                            content: "Post in the Wins Board: 'I made it to Day 4.' That's it. That's the whole win. You showed up. That counts."
+                        },
+                        build: {
+                            name: "Build",
+                            description: "I've got some energy",
+                            content: "Post one specific win in the Wins Board. Energy shift, sleep quality, one craving you didn't act on, a moment you made a better choice. One real win."
+                        },
+                        momentum: {
+                            name: "Momentum",
+                            description: "Let's get it",
+                            content: "Post your win in the Wins Board + go cheer on someone else's win while you're in there. A reaction, a reply, a 'I feel this.' Community wins are personal wins."
+                        }
+                    },
+                    postPrompt: "Post in the Wins Board (not just FAM — this one goes in Wins Board): \"Day 4. My win this week: [fill in the blank — be specific]. 🏆\""
+                },
+                {
+                    number: 5,
+                    dayOfWeek: "Friday",
+                    title: "Cortisol Reset",
+                    subtitle: "The protocol your nervous system has been waiting for",
+                    instruction: "You made it to Friday. Whether you crushed every day or limped through half of them — your nervous system is still carrying your whole week. Box breathing is how you physically lower cortisol in under five minutes. This isn't woo-woo. It's used in surgical suites, emergency rooms, and elite military units. Do it today.",
+                    tiers: {
+                        foundation: {
+                            name: "Foundation",
+                            description: "Running on fumes today",
+                            content: "3 rounds of box breathing. In for 4, hold for 4, out for 4, hold for 4. Do it in your car, in the bathroom, at the nurses' station. Anywhere."
+                        },
+                        build: {
+                            name: "Build",
+                            description: "I've got some energy",
+                            content: "5 rounds of box breathing + the Metabolic Cocktail. Stack them — do the breathing while you drink. You just hit two cortisol reset tools at once."
+                        },
+                        momentum: {
+                            name: "Momentum",
+                            description: "Let's get it",
+                            content: "Full morning cortisol reset: Metabolic Cocktail + 5 rounds box breathing + 10-minute walk before eating anything. This is the full protocol. It works."
+                        }
+                    },
+                    postPrompt: "Post in SmithFit FAM: \"Day 5. Box breathing done. [Honest: how do you feel after?] My nervous system was NOT ready. 😮‍💨\""
+                },
+                {
+                    number: 6,
+                    dayOfWeek: "Saturday",
+                    title: "Let the AI Work",
+                    subtitle: "Your first FitMetrics check-in — 5 minutes, zero judgment",
+                    instruction: "FitMetrics AI isn't here to grade you. It's tracking patterns in your check-ins that you can't see yourself — sleep quality, energy trends, what days your cortisol spikes. But it only works if you check in. Today, you start the data. Even if this week wasn't perfect, an honest check-in is more valuable than a perfect one.",
+                    tiers: {
+                        foundation: {
+                            name: "Foundation",
+                            description: "Running on fumes today",
+                            content: "Open FitMetrics and complete the AI check-in. Answer honestly. 5 minutes. That's it — you just gave the system a baseline."
+                        },
+                        build: {
+                            name: "Build",
+                            description: "I've got some energy",
+                            content: "Complete your FitMetrics check-in + review what your meal plan looks like for next week's shift schedule. Flag the hardest day and Chaos-Day plan it."
+                        },
+                        momentum: {
+                            name: "Momentum",
+                            description: "Let's get it",
+                            content: "FitMetrics check-in + scan your next meal with MealLens + prep one thing for tomorrow. A protein shake ingredient, a Chaos Day snack bag, anything. Future-you will notice."
+                        }
+                    },
+                    postPrompt: "Post in SmithFit FAM: \"Day 6. First FitMetrics check-in complete. [What's one thing the AI flagged or asked that surprised you?] The data doesn't lie. 📊\""
+                },
+                {
+                    number: 7,
+                    dayOfWeek: "Sunday",
+                    title: "Show Up to the Call",
+                    subtitle: "The last — and most important — task of the week",
+                    instruction: "The cocktail, the workouts, the meals — those are all solo wins. But the call is where this becomes real. You get to hear IJ address YOUR exact situation. You're going to hear other nurses going through what you're going through. And you're going to realize you're not alone in this. That's the thing that actually makes people stay.",
+                    tiers: {
+                        foundation: {
+                            name: "Foundation",
+                            description: "Running on fumes today",
+                            content: "Watch the call replay if you can't make it live. Even the replay counts. Link is in SmithFit FAM after the call. You still absorb it. You still show up."
+                        },
+                        build: {
+                            name: "Build",
+                            description: "I've got some energy",
+                            content: "Attend the community call live. You don't have to talk. Camera off is fine. Just be in the room. That's it."
+                        },
+                        momentum: {
+                            name: "Momentum",
+                            description: "Let's get it",
+                            content: "Attend live + post one takeaway from the call in SmithFit FAM after. What landed? What are you implementing? Your post might be exactly what someone else needed to hear."
+                        }
+                    },
+                    postPrompt: "Post in SmithFit FAM: \"Day 7. Week 1 done. [What's the biggest thing that shifted for you this week?] Week 2 starts now. 🔥\""
+                }
+            ]
+        };
+
+        function getDaysSinceStart() {
+            try {
+                var now = new Date();
+                var start = new Date(challengeData.startDate);
+                start.setHours(0, 0, 0, 0);
+                now.setHours(0, 0, 0, 0);
+                return Math.floor((now - start) / (1000 * 60 * 60 * 24));
+            } catch(e) { return -1; }
+        }
+
+        function isToday(dayNumber) {
+            try { return getDaysSinceStart() === dayNumber - 1; } catch(e) { return false; }
+        }
+
+        function isCompleted(dayNumber) {
+            try {
+                var completed = JSON.parse(localStorage.getItem(challengeData.storageKey) || '[]');
+                return completed.indexOf(dayNumber) !== -1;
+            } catch(e) { return false; }
+        }
+
+        function toggleComplete(dayNumber) {
+            try {
+                var completed = JSON.parse(localStorage.getItem(challengeData.storageKey) || '[]');
+                var idx = completed.indexOf(dayNumber);
+                if (idx === -1) { completed.push(dayNumber); } else { completed.splice(idx, 1); }
+                localStorage.setItem(challengeData.storageKey, JSON.stringify(completed));
+                renderAll();
+            } catch(e) {}
+        }
+
+        function createDayCard(day) {
+            var today = isToday(day.number);
+            var done = isCompleted(day.number);
+            var todayClass = today ? ' is-today' : '';
+            return '<div class="day-card' + todayClass + '" id="day-' + day.number + '">' +
+                '<span class="day-label">Day ' + day.number + ' &mdash; ' + day.dayOfWeek + '</span>' +
+                (today ? '<span style="display:inline-block;margin-left:10px;background:#D4A94C;color:#fff;padding:4px 12px;border-radius:20px;font-size:0.75em;font-weight:600;vertical-align:middle;">TODAY</span>' : '') +
+                '<h3 class="day-title">' + day.title + '</h3>' +
+                '<p class="day-subtitle">' + day.subtitle + '</p>' +
+                '<div class="day-instruction">' + day.instruction + '</div>' +
+                '<div class="tiers">' +
+                    '<div class="tier"><div class="tier-name">' + day.tiers.foundation.name + '</div><div class="tier-description">' + day.tiers.foundation.description + '</div><div class="tier-content">' + day.tiers.foundation.content + '</div></div>' +
+                    '<div class="tier"><div class="tier-name">' + day.tiers.build.name + '</div><div class="tier-description">' + day.tiers.build.description + '</div><div class="tier-content">' + day.tiers.build.content + '</div></div>' +
+                    '<div class="tier"><div class="tier-name">' + day.tiers.momentum.name + '</div><div class="tier-description">' + day.tiers.momentum.description + '</div><div class="tier-content">' + day.tiers.momentum.content + '</div></div>' +
+                '</div>' +
+                '<div class="post-prompt">📣 ' + day.postPrompt + '</div>' +
+                '<button onclick="toggleComplete(' + day.number + ')" style="margin-top:16px;background:' + (done ? '#D4A94C' : 'transparent') + ';color:' + (done ? '#fff' : '#D4A94C') + ';border:2px solid #D4A94C;padding:8px 20px;border-radius:20px;font-size:0.9em;font-weight:600;cursor:pointer;">' +
+                    (done ? '✓ Day Complete' : 'Mark Day Complete') +
+                '</button>' +
+            '</div>';
+        }
+
+        function createProgressTracker() {
+            var html = '';
+            for (var i = 0; i < 7; i++) {
+                var dayNum = i + 1;
+                var done = isCompleted(dayNum);
+                var today = isToday(dayNum);
+                var cls = done ? 'completed' : (today ? 'today' : '');
+                html += '<div class="day-circle ' + cls + '" onclick="toggleComplete(' + dayNum + ')" title="Day ' + dayNum + '">' + dayNum + '</div>';
+            }
+            return html;
+        }
+
+        function renderAll() {
+            var container = document.getElementById('daysContainer');
+            var tracker = document.getElementById('progressTracker');
+            if (container) {
+                container.innerHTML = '';
+                challengeData.days.forEach(function(day) {
+                    container.innerHTML += createDayCard(day);
+                });
+            }
+            if (tracker) { tracker.innerHTML = createProgressTracker(); }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderAll();
+            setTimeout(function() {
+                var daysSince = getDaysSinceStart();
+                if (daysSince >= 0 && daysSince < 7) {
+                    var todayCard = document.getElementById('day-' + (daysSince + 1));
+                    if (todayCard) { todayCard.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>

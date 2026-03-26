@@ -1,0 +1,73 @@
+{
+  "welcome_message": "Sarah M. — it's not your fault. Small shift-friendly wins matter.",
+  "starter_plan": [
+    {
+      "day": 1,
+      "focus": "shift-friendly habit",
+      "meals": [
+        "simple protein + whole food option"
+      ],
+      "movement": "5 minute walk/stair break"
+    },
+    {
+      "day": 2,
+      "focus": "shift-friendly habit",
+      "meals": [
+        "simple protein + whole food option"
+      ],
+      "movement": "5 minute walk/stair break"
+    },
+    {
+      "day": 3,
+      "focus": "shift-friendly habit",
+      "meals": [
+        "simple protein + whole food option"
+      ],
+      "movement": "5 minute walk/stair break"
+    },
+    {
+      "day": 4,
+      "focus": "shift-friendly habit",
+      "meals": [
+        "simple protein + whole food option"
+      ],
+      "movement": "5 minute walk/stair break"
+    },
+    {
+      "day": 5,
+      "focus": "shift-friendly habit",
+      "meals": [
+        "simple protein + whole food option"
+      ],
+      "movement": "5 minute walk/stair break"
+    },
+    {
+      "day": 6,
+      "focus": "shift-friendly habit",
+      "meals": [
+        "simple protein + whole food option"
+      ],
+      "movement": "5 minute walk/stair break"
+    },
+    {
+      "day": 7,
+      "focus": "shift-friendly habit",
+      "meals": [
+        "simple protein + whole food option"
+      ],
+      "movement": "5 minute walk/stair break"
+    }
+  ],
+  "flags": [
+    "dairy intolerance"
+  ],
+  "next_steps": [
+    "Assign coach",
+    "Send welcome email",
+    "Schedule 15-min call"
+  ],
+  "cowork_task": {
+    "title": "Onboard Sarah M.",
+    "description": "- [ ] Verify intake\n- [ ] Assign coach\n- [ ] Send onboarding message"
+  }
+}

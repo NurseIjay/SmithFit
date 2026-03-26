@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmithFit Pillar 1: Diagnose Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #1a1a1a;
+            --gold: #d4a94c;
+            --light-gray: #f5f5f5;
+            --medium-gray: #333;
+            --border-gray: #444;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        header h1 {
+            font-family: Georgia, serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .pillar-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark-bg);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-gray);
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab-btn:hover {
+            color: var(--gold);
+        }
+
+        .tab-btn.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress {
+            background: var(--medium-gray);
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .quiz-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), #ffd700);
+            transition: width 0.3s ease;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--medium-gray);
+            border-left: 4px solid var(--gold);
+            border-radius: 4px;
+        }
+
+        .question h3 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .question-number {
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .answer-option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin: 10px 0;
+            background: var(--dark-bg);
+            border: 2px solid var(--border-gray);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .answer-option:hover {
+            border-color: var(--gold);
+            background: rgba(212, 169, 76, 0.05);
+        }
+
+        .answer-option input[type="radio"] {
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: var(--gold);
+        }
+
+        .answer-option label {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .quiz-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--dark-bg);
+        }
+
+        .btn-primary:hover {
+            background: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:disabled {
+            background: var(--border-gray);
+            color: var(--text-secondary);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: var(--medium-gray);
+            color: var(--text-primary);
+            border: 1px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 169, 76, 0.1);
+        }
+
+        /* Results Card */
+        .results-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, var(--medium-gray), #2a2a2a);
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .type-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark-bg);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .result-card h2 {
+            font-family: Georgia, serif;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        .result-card p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        .result-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-gray);
+        }
+
+        .result-section h3 {
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .result-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .result-list li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .result-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        .callout {
+            margin: 15px 0;
+            padding: 12px;
+            border-left: 4px solid var(--gold);
+            background: rgba(212, 169, 76, 0.1);
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        /* Cycle Styles */
+        .cycle-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .cycle-svg-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--medium-gray);
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 500px;
+        }
+
+        .cycle-svg {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+        }
+
+        .cycle-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .step-details {
+            background: var(--medium-gray);
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 300px;
+        }
+
+        .step-details h3 {
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .step-details p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        .step-quote {
+            font-style: italic;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-gray);
+            color: var(--text-secondary);
+        }
+
+        /* Break the Cycle Cards */
+        .break-cycle-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid var(--gold);
+        }
+
+        .break-cycle-section h3 {
+            text-align: center;
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .intervention-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .intervention-card {
+            background: var(--medium-gray);
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .intervention-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+        }
+
+        .intervention-card h4 {
+            color: var(--gold);
+            margin: 10px 0;
+        }
+
+        .intervention-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Tracker Styles */
+        .tracker-setup {
+            background: var(--medium-gray);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+
+        .setup-input-group {
+            margin: 15px 0;
+        }
+
+        .setup-input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .setup-input-group input {
+            width: 100%;
+            padding: 10px;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .setup-input-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212, 169, 76, 0.2);
+        }
+
+        .tracker-grid {
+            background: var(--medium-gray);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+
+        .grid-header {
+            display: grid;
+            grid-template-columns: 80px repeat(5, 1fr) 150px;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--gold);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-gray);
+        }
+
+        .grid-row {
+            display: grid;
+            grid-template-columns: 80px repeat(5, 1fr) 150px;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+            padding: 10px;
+            background: var(--dark-bg);
+            border-radius: 4px;
+        }
+
+        .grid-day {
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .grid-cell {
+            text-align: center;
+        }
+
+        .grid-checkbox {
+            accent-color: var(--gold);
+            cursor: pointer;
+        }
+
+        .grid-input {
+            width: 100%;
+            padding: 6px;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 3px;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .grid-toggle {
+            display: flex;
+            gap: 5px;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 6px;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-gray);
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-btn.active {
+            background: var(--gold);
+            color: var(--dark-bg);
+            border-color: var(--gold);
+        }
+
+        /* Stats Cards */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--medium-gray);
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .stat-card h4 {
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin: 10px 0;
+        }
+
+        .stat-trend {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .streak-counter {
+            background: linear-gradient(135deg, var(--gold), #ffd700);
+            color: var(--dark-bg);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .streak-number {
+            font-size: 3rem;
+            margin: 10px 0;
+        }
+
+        .comparison-section {
+            background: var(--medium-gray);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .comparison-section h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .comparison-item {
+            background: var(--dark-bg);
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .comparison-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+
+        .comparison-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--gold);
+        }
+
+        .motivational-message {
+            background: linear-gradient(135deg, rgba(212, 169, 76, 0.2), rgba(46, 204, 113, 0.1));
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .motivational-message h4 {
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        /* Diagnose Guide Styles */
+        .diagnose-guide-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .scenario-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .scenario-card {
+            background: var(--medium-gray);
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(212, 169, 76, 0.2);
+        }
+
+        .scenario-card h4 {
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .scenario-number {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark-bg);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .scenario-trigger {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .scenario-content {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-gray);
+        }
+
+        .scenario-content.active {
+            display: block;
+        }
+
+        .scenario-content h5 {
+            color: var(--gold);
+            margin: 12px 0 8px 0;
+            font-size: 0.95rem;
+        }
+
+        .scenario-content p,
+        .scenario-content ul {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .scenario-content ul {
+            margin-left: 20px;
+        }
+
+        .scenario-content li {
+            margin: 5px 0;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .tab-nav {
+                gap: 5px;
+            }
+
+            .tab-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            .cycle-container {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-header,
+            .grid-row {
+                grid-template-columns: 60px repeat(3, 1fr) 100px;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .intervention-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            .tab-nav,
+            .quiz-buttons,
+            .cycle-controls,
+            .tracker-setup {
+                display: none;
+            }
+
+            .tab-content {
+                display: block;
+                page-break-inside: avoid;
+            }
+
+            .result-card,
+            .stat-card,
+            .scenario-card {
+                break-inside: avoid;
+                border-color: #333;
+            }
+
+            header {
+                border-color: #333;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SmithFit Pillar 1: Diagnose</h1>
+            <p>Understand your metabolic stress type and reset your rhythm</p>
+            <div class="pillar-badge">Pillar 1: Diagnose</div>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" data-tab="quiz">Metabolism Quiz</button>
+            <button class="tab-btn" data-tab="cycle">Stress Cycle</button>
+            <button class="tab-btn" data-tab="tracker">7-Day Tracker</button>
+            <button class="tab-btn" data-tab="diagnose">If-This-Then-That</button>
+        </div>
+
+        <!-- TAB 1: QUIZ -->
+        <div id="quiz" class="tab-content active">
+            <div class="quiz-container">
+                <div id="quiz-form">
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-bar" id="progressBar"></div>
+                    </div>
+
+                    <div id="quizContent"></div>
+
+                    <div class="quiz-buttons">
+                        <button class="btn btn-secondary" id="prevBtn" style="display:none;">← Previous</button>
+                        <button class="btn btn-primary" id="nextBtn">Next →</button>
+                    </div>
+                </div>
+
+                <div id="quiz-results" style="display:none;">
+                    <div class="results-container" id="resultsContent"></div>
+                    <div class="quiz-buttons">
+                        <button class="btn btn-primary" onclick="retakeQuiz()">Retake Quiz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: CYCLE -->
+        <div id="cycle" class="tab-content">
+            <div class="cycle-container">
+                <div>
+                    <div class="cycle-controls">
+                        <button class="btn btn-secondary" id="playBtn">Play</button>
+                        <button class="btn btn-secondary" id="pauseBtn" style="display:none;">Pause</button>
+                        <button class="btn btn-secondary" id="resetBtn">Reset</button>
+                    </div>
+                    <div class="cycle-svg-wrapper">
+                        <svg class="cycle-svg" viewBox="0 0 600 600">
+                            <!-- Circle background -->
+                            <circle cx="300" cy="300" r="280" fill="none" stroke="#333" stroke-width="2"/>
+
+                            <!-- Steps positioned around circle -->
+                            <g id="step1" class="cycle-step" data-step="1">
+                                <circle cx="300" cy="50" r="35" fill="#333" stroke="#d4a94c" stroke-width="2" class="step-node"/>
+                                <text x="300" y="55" text-anchor="middle" fill="#d4a94c" font-size="12" font-weight="bold">1</text>
+                            </g>
+
+                            <g id="step2" class="cycle-step" data-step="2">
+                                <circle cx="485" cy="110" r="35" fill="#333" stroke="#d4a94c" stroke-width="2" class="step-node"/>
+                                <text x="485" y="115" text-anchor="middle" fill="#d4a94c" font-size="12" font-weight="bold">2</text>
+                            </g>
+
+                            <g id="step3" class="cycle-step" data-step="3">
+                                <circle cx="542" cy="270" r="35" fill="#333" stroke="#d4a94c" stroke-width="2" class="step-node"/>
+                                <text x="542" y="275" text-anchor="middle" fill="#d4a94c" font-size="12" font-weight="bold">3</text>
+                            </g>
+
+                            <g id="step4" class="cycle-step" data-step="4">
+                                <circle cx="485" cy="490" r="35" fill="#333" stroke="#d4a94c" stroke-width="2" class="step-node"/>
+                                <text x="485" y="495" text-anchor="middle" fill="#d4a94c" font-size="12" font-weight="bold">4</text>
+                            </g>
+
+                            <g id="step5" class="cycle-step" data-step="5">
+                                <circle cx="300" cy="550" r="35" fill="#333" stroke="#d4a94c" stroke-width="2" class="step-node"/>
+                                <text x="300" y="555" text-anchor="middle" fill="#d4a94c" font-size="12" font-weight="bold">5</text>
+                            </g>
+
+                            <g id="step6" class="cycle-step" data-step="6">
+                                <circle cx="115" cy="490" r="35" fill="#333" stroke="#d4a94c" stroke-width="2" class="step-node"/>
+                                <text x="115" y="495" text-anchor="middle" fill="#d4a94c" font-size="12" font-weight="bold">6</text>
+                            </g>
+
+                            <g id="step7" class="cycle-step" data-step="7">
+                                <circle cx="58" cy="270" r="35" fill="#333" stroke="#d4a94c" stroke-width="2" class="step-node"/>
+                                <text x="58" y="275" text-anchor="middle" fill="#d4a94c" font-size="12" font-weight="bold">7</text>
+                            </g>
+
+                            <!-- Arrow connecting steps -->
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                    <polygon points="0 0, 10 3, 0 6" fill="#d4a94c"/>
+                                </marker>
+                            </defs>
+                            <path d="M 300 85 Q 450 100 450 145" stroke="#d4a94c" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
+                            <path d="M 465 160 Q 510 180 515 235" stroke="#d4a94c" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
+                            <path d="M 490 305 Q 520 400 465 455" stroke="#d4a94c" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
+                            <path d="M 435 515 Q 350 560 335 555" stroke="#d4a94c" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
+                            <path d="M 265 540 Q 150 520 145 455" stroke="#d4a94c" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
+                            <path d="M 85 415 Q 50 350 80 295" stroke="#d4a94c" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
+                            <path d="M 100 220 Q 150 120 270 75" stroke="#d4a94c" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
+
+                            <text x="300" y="310" text-anchor="middle" fill="#999" font-size="14" font-weight="bold">The Metabolic Stress Cycle</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="step-details">
+                    <div id="stepDetails"></div>
+
+                    <div class="break-cycle-section">
+                        <h3>Break the Cycle</h3>
+                        <div class="intervention-cards">
+                            <div class="intervention-card">
+                                <div class="intervention-emoji">🍽️</div>
+                                <h4>Fuel Signals</h4>
+                                <p>Eat on a schedule. Your body needs rhythm, not perfection. Small, consistent meals reset cortisol.</p>
+                            </div>
+                            <div class="intervention-card">
+                                <div class="intervention-emoji">😴</div>
+                                <h4>Recovery Signals</h4>
+                                <p>Sleep and downtime tell your nervous system the threat is over. Priority: dark, cool, quiet.</p>
+                            </div>
+                            <div class="intervention-card">
+                                <div class="intervention-emoji">⚡</div>
+                                <h4>Rhythm Signals</h4>
+                                <p>Morning light, movement cues, evening wind-down. Your body thrives on predictable signals.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: TRACKER -->
+        <div id="tracker" class="tab-content">
+            <div class="tracker-setup" id="setupSection">
+                <h3 style="color: #d4a94c; margin-bottom: 20px;">Set Up Your 7-Day Proof</h3>
+                <div class="setup-input-group">
+                    <label for="cueName1">Focus Cue #1 (e.g., "Ate 3 meals on schedule")</label>
+                    <input type="text" id="cueName1" placeholder="Your first focus behavior">
+                </div>
+                <div class="setup-input-group">
+                    <label for="cueName2">Focus Cue #2 (e.g., "Slept 6+ hours")</label>
+                    <input type="text" id="cueName2" placeholder="Your second focus behavior">
+                </div>
+                <button class="btn btn-primary" onclick="startTracking()">Start Tracking</button>
+            </div>
+
+            <div id="trackerContent" style="display:none;">
+                <div class="streak-counter">
+                    <div>🔥 Day Streak</div>
+                    <div class="streak-number" id="streakNumber">0</div>
+                    <div id="streakText">Complete both focus cues to keep your streak alive</div>
+                </div>
+
+                <div class="tracker-grid">
+                    <div class="grid-header">
+                        <div>Day</div>
+                        <div id="header1"></div>
+                        <div id="header2"></div>
+                        <div>Energy</div>
+                        <div>Cravings</div>
+                        <div>Notes</div>
+                    </div>
+                    <div id="trackerGrid"></div>
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <h4>Focus Cue Hits</h4>
+                        <div class="stat-value" id="focusHitPercent">0%</div>
+                        <p id="focusHitDetail"></p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Energy Trend</h4>
+                        <div style="font-size: 2rem; margin: 10px 0;"><span class="stat-trend" id="energyTrendIcon">→</span><span id="energyTrendText">Tracking...</span></div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Craving Trend</h4>
+                        <div style="font-size: 2rem; margin: 10px 0;"><span class="stat-trend" id="cravingTrendIcon">→</span><span id="cravingTrendText">Tracking...</span></div>
+                    </div>
+                </div>
+
+                <div class="comparison-section">
+                    <h3>Day 1 vs Day 7</h3>
+                    <div class="comparison-grid">
+                        <div>
+                            <div class="comparison-label">Day 1 Energy</div>
+                            <div class="comparison-value" id="day1Energy">—</div>
+                        </div>
+                        <div>
+                            <div class="comparison-label">Day 7 Energy</div>
+                            <div class="comparison-value" id="day7Energy">—</div>
+                        </div>
+                        <div>
+                            <div class="comparison-label">Day 1 Cravings</div>
+                            <div class="comparison-value" id="day1Cravings">—</div>
+                        </div>
+                        <div>
+                            <div class="comparison-label">Day 7 Cravings</div>
+                            <div class="comparison-value" id="day7Cravings">—</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="motivationalMessages"></div>
+
+                <div class="quiz-buttons">
+                    <button class="btn btn-secondary" onclick="resetTracker()">Reset Tracker</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: DIAGNOSE GUIDE -->
+        <div id="diagnose" class="tab-content">
+            <div class="diagnose-guide-container">
+                <h2 style="color: #d4a94c; margin-bottom: 10px; font-family: Georgia, serif;">If-This-Then-That Diagnose Guide</h2>
+                <p style="color: #ccc; margin-bottom: 30px;">Click any scenario to reveal what it signals about your metabolism and what to do about it.</p>
+
+                <div class="scenario-cards" id="scenarioCards"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // STATE MANAGEMENT & INITIALIZATION
+        // ============================================
+        let currentTab = 'quiz';
+        let currentQuizQuestion = 0;
+        let quizState = { typeA: 0, typeB: 0, typeC: 0 };
+        let cycleAutoPlayInterval = null;
+        let currentCycleStep = 1;
+        let trackerState = {
+            started: false,
+            cueName1: '',
+            cueName2: '',
+            startDate: null,
+            days: []
+        };
+
+        // Scenario data for If-This-Then-That guide
+        const scenarios = [
+            {
+                id: 1,
+                trigger: "You smashed a 12-hour shift and immediately grabbed junk food instead of the meal you prepped.",
+                diagnosis: "<strong>Signal:</strong> Post-shift cortisol spike + under-fueling = blood sugar crash triggers emergency cravings.",
+                action: "<strong>Then do this:</strong> Eat a protein + starch combo within 30 min of clocking out (chicken + rice, eggs + toast). Your nervous system needs a win after the shift—food is part of recovery, not laziness.",
+                prevention: "<strong>Proof:</strong> Track if you eat within 30 min vs. eat 2+ hours later. The timing (not willpower) fixes the craving loop."
+            },
+            {
+                id: 2,
+                trigger: "You slept 4 hours last night and today you're fixated on sugar/carbs by 3pm.",
+                diagnosis: "<strong>Signal:</strong> Sleep deprivation = cortisol + ghrelin (hunger hormone) both spike. Your body is screaming for quick energy.",
+                action: "<strong>Then do this:</strong> Have a snack with fat + salt at 2:30pm (nuts, cheese, olives) BEFORE the craving hits. This stabilizes blood sugar preemptively.",
+                prevention: "<strong>Proof:</strong> Sleep tracker + craving log. When you see sleep dip, cravings follow 8–10 hours later. Predictable = controllable."
+            },
+            {
+                id: 3,
+                trigger: "You skipped breakfast and lunch, then ate a huge dinner and can't sleep.",
+                diagnosis: "<strong>Signal:</strong> Intermittent under-fueling → metabolic stress → big dinner spike disrupts circadian rhythm + sleep quality.",
+                action: "<strong>Then do this:</strong> For the next 3 days, eat a small breakfast (even 200 cal) + lunch. Dinner can stay the same size. Your cortisol will reset and sleep will improve.",
+                prevention: "<strong>Proof:</strong> Sleep quality improves Day 2–3 when you spread meals across the day. No diet change—just timing."
+            },
+            {
+                id: 4,
+                trigger: "You worked out hard on 5 hours of sleep + an empty stomach.",
+                diagnosis: "<strong>Signal:</strong> Exercise on a stressed, under-fueled body = cortisol spike, not fat loss. You're adding stress, not relief.",
+                action: "<strong>Then do this:</strong> Eat a small snack 30 min before the workout (banana, toast, apple + almond butter). Sleep more. Dial back intensity to 70% effort.",
+                prevention: "<strong>Proof:</strong> Compare workouts on low fuel vs. fed. You'll feel calmer, recover faster, and actually lose fat (not just exhaust yourself) when fueled."
+            },
+            {
+                id: 5,
+                trigger: "Every time you check your weight, it hasn't moved—so you cut calories harder.",
+                diagnosis: "<strong>Signal:</strong> Scale stalling = likely metabolic adaptation from under-fueling + stress. Cutting more deepens the hole.",
+                action: "<strong>Then do this:</strong> INCREASE calories by 100–200/day for 5–7 days. Let cortisol reset. Then gently reduce. The scale often drops after the reset.",
+                prevention: "<strong>Proof:</strong> Track energy + sleep + strength for 7 days. If those improve with more food, the scale will follow. Fat loss is downstream of stress management."
+            },
+            {
+                id: 6,
+                trigger: "You're bloated and retaining water despite 'being good' all week.",
+                diagnosis: "<strong>Signal:</strong> Bloating + water retention = inflammation from underfueling + high cortisol + possible sodium balance issue.",
+                action: "<strong>Then do this:</strong> Eat normally (don't restrict), drink 3L+ water, add a pinch of salt to meals, sleep 8 hours. Re-measure in 3 days.",
+                prevention: "<strong>Proof:</strong> Water retention (not fat) fluctuates 3–5 lbs daily. When cortisol is managed, inflammation drops and bloat resolves in 2–3 days."
+            },
+            {
+                id: 7,
+                trigger: "You feel tired ALL day, even after sleeping. Your workouts are sluggish.",
+                diagnosis: "<strong>Signal:</strong> Chronic fatigue + low performance = low energy availability. Your body thinks it's in danger (under-fueled state).",
+                action: "<strong>Then do this:</strong> Eat your normal amount PLUS 300–400 extra calories (carbs/fat mix) daily for 10 days. Notice energy shift.",
+                prevention: "<strong>Proof:</strong> Energy log for 7 days. If it improves with more food (not less), you've found the bottleneck. Restriction made it worse."
+            },
+            {
+                id: 8,
+                trigger: "You've been 'clean eating' for 3 weeks and feel worse—mood is low, motivation is gone.",
+                diagnosis: "<strong>Signal:</strong> Restriction + perfectionism = chronic cortisol elevation. Your brain is running on fumes.",
+                action: "<strong>Then do this:</strong> Add back 200–300 'normal' calories (a treat, a snack you've been avoiding) daily for 1 week. Mood usually lifts.",
+                prevention: "<strong>Proof:</strong> Mood + motivation tracking. Restriction doesn't fail you; your body is just protecting itself from perceived starvation."
+            },
+            {
+                id: 9,
+                trigger: "You did cardio every day this week on minimal food. You feel deflated and your body is aching.",
+                diagnosis: "<strong>Signal:</strong> Excessive exercise + under-fueling = overtraining. High cortisol, low recovery, muscle breakdown signaling.",
+                action: "<strong>Then do this:</strong> Rest 2 days. Eat at maintenance (don't calorie restrict). Do 1 gentle walk or yoga. Sleep 8+ hours.",
+                prevention: "<strong>Proof:</strong> Soreness + fatigue improve within 48–72 hours when you REST + FUEL. Overtraining is a metabolic stress signal."
+            },
+            {
+                id: 10,
+                trigger: "You're cycling between 'perfect' and 'all-in' binge eating. You can't find a middle ground.",
+                diagnosis: "<strong>Signal:</strong> Restriction mindset + chronic low-energy availability. Your brain is rewarding 'breaks' from scarcity with overconsumption.",
+                action: "<strong>Then do this:</strong> Stop restricting. Eat 3 meals + 2 snacks daily, including foods you crave. No foods are off-limits. Stability returns in 1–2 weeks.",
+                prevention: "<strong>Proof:</strong> Binge behavior drops significantly once restriction stops. Food loses its power when it's no longer scarce. Consistency beats perfection."
+            }
+        ];
+
+        // Quiz questions data
+        const quizQuestions = [
+            {
+                number: 1,
+                text: "When do you feel most tired during a 24-hour period?",
+                answers: [
+                    { text: "Mid-afternoon and after evening shifts (around 3-5pm or post-11pm)", type: "A" },
+                    { text: "Late night and through the morning (can't sleep before 1am, wake exhausted)", type: "B" },
+                    { text: "Right after meals, then suddenly wired 2 hours later", type: "C" }
+                ]
+            },
+            {
+                number: 2,
+                text: "How do you typically eat on a 12-hour shift?",
+                answers: [
+                    { text: "Miss breakfast or lunch, play catch-up at dinner", type: "A" },
+                    { text: "Grab coffee and snacks, skip full meals (hard to sit down)", type: "B" },
+                    { text: "Eat inconsistently—big snack, then nothing, then huge meal", type: "C" }
+                ]
+            },
+            {
+                number: 3,
+                text: "How would you describe your hunger cues?",
+                answers: [
+                    { text: "I forget to eat; notice I'm starving only when shaky or irritable", type: "A" },
+                    { text: "Inconsistent—sometimes ravenous, sometimes not hungry at all", type: "B" },
+                    { text: "I'm hungry 90 min after every meal; cravings spike mid-afternoon", type: "C" }
+                ]
+            },
+            {
+                number: 4,
+                text: "How do you feel after a high-intensity workout?",
+                answers: [
+                    { text: "Wired but also shaky; harder to sleep that night", type: "A" },
+                    { text: "Anxious or jittery (not the good kind); cortisol feels higher", type: "B" },
+                    { text: "Energized briefly, then crash 3-4 hours later", type: "C" }
+                ]
+            },
+            {
+                number: 5,
+                text: "Your mood after a missed meal is usually:",
+                answers: [
+                    { text: "Irritable, foggy, hard to focus", type: "A" },
+                    { text: "Anxious, a bit jittery, feel unsafe", type: "B" },
+                    { text: "Okay initially, then suddenly emotional or sad", type: "C" }
+                ]
+            },
+            {
+                number: 6,
+                text: "How do you sleep on nights after your shift?",
+                answers: [
+                    { text: "Fall asleep fine but wake up at 3-4am, can't get back to sleep", type: "A" },
+                    { text: "Struggle to fall asleep; mind is racing", type: "B" },
+                    { text: "Sleep fine, but wake up groggy or with weird dreams", type: "C" }
+                ]
+            },
+            {
+                number: 7,
+                text: "When you see food you love, what's your first impulse?",
+                answers: [
+                    { text: "Eat it now while you can (don't know when you'll eat again)", type: "A" },
+                    { text: "Negotiate with yourself (can I eat this? Am I 'allowed'?)", type: "B" },
+                    { text: "Want it badly, but feel guilty even before eating", type: "C" }
+                ]
+            },
+            {
+                number: 8,
+                text: "What does bloating feel like for you?",
+                answers: [
+                    { text: "After large meals, especially if I've under-eaten most of the day", type: "A" },
+                    { text: "Constant—feels like I'm always puffed up no matter what I eat", type: "B" },
+                    { text: "Predictable 2-3 hours after carbs or sugar", type: "C" }
+                ]
+            },
+            {
+                number: 9,
+                text: "If you had to describe your metabolism, I'd say:",
+                answers: [
+                    { text: "Stubborn—weight sticks around my belly no matter what", type: "A" },
+                    { text: "Broken—nothing seems to work like it used to", type: "B" },
+                    { text: "Reactive—it responds dramatically to food and exercise", type: "C" }
+                ]
+            },
+            {
+                number: 10,
+                text: "Your biggest challenge with consistency is:",
+                answers: [
+                    { text: "All-or-nothing eating (perfect then chaotic)", type: "A" },
+                    { text: "Can't relax around food; always 'on' or 'off'", type: "B" },
+                    { text: "Cravings derail me mid-week despite good intentions", type: "C" }
+                ]
+            },
+            {
+                number: 11,
+                text: "When you skip a workout, you feel:",
+                answers: [
+                    { text: "Guilty and anxious (like you're falling behind)", type: "A" },
+                    { text: "Relieved but also restless", type: "B" },
+                    { text: "A bit frustrated, but recovers quickly", type: "C" }
+                ]
+            },
+            {
+                number: 12,
+                text: "Your night shift recovery looks like:",
+                answers: [
+                    { text: "Sleep whenever you can, meals whenever possible", type: "A" },
+                    { text: "Struggle to sleep even when it's dark; mind won't shut off", type: "B" },
+                    { text: "Sleep okay, but energy stays low until the evening", type: "C" }
+                ]
+            },
+            {
+                number: 13,
+                text: "When you look in the mirror, the first thing you notice is:",
+                answers: [
+                    { text: "Belly fat that won't budge; it's worse after eating", type: "A" },
+                    { text: "Overall puffiness and water retention", type: "B" },
+                    { text: "How 'soft' or bloated you feel depending on what you ate", type: "C" }
+                ]
+            },
+            {
+                number: 14,
+                text: "Your best day health-wise usually happens when:",
+                answers: [
+                    { text: "You've eaten on a schedule, even small meals", type: "A" },
+                    { text: "You had a good night's sleep and feel calm", type: "B" },
+                    { text: "You've eaten balanced meals with protein and carbs", type: "C" }
+                ]
+            },
+            {
+                number: 15,
+                text: "If someone asked you to sum up your struggle in one sentence, you'd say:",
+                answers: [
+                    { text: "I'm under-fueled and stuck in fight-or-flight mode", type: "A" },
+                    { text: "My nervous system won't calm down; I'm always amped", type: "B" },
+                    { text: "My blood sugar is a rollercoaster and cravings own me", type: "C" }
+                ]
+            }
+        ];
+
+        // Cycle step details
+        const cycleSteps = [
+            {
+                number: 1,
+                title: "Long Shifts + Poor Sleep",
+                body: "Your 12-hour shift + rotating schedule = circadian rhythm disruption. Add a short night, and cortisol (stress hormone) stays elevated.",
+                specific: "Night shift workers often run on 4–6 hours of fragmented sleep. Your body never truly recovers.",
+                quote: "It's not laziness. It's your body stuck in fight-or-flight."
+            },
+            {
+                number: 2,
+                title: "Cortisol ↑ Blood Sugar Swings",
+                body: "High cortisol tells your body to release stored sugar for energy. Your blood sugar spikes erratically, then crashes.",
+                specific: "This is why you feel jittery mid-afternoon or ravenous at 8pm despite eating breakfast.",
+                quote: "Your hormones are the puppet master; your willpower is just a hand puppet."
+            },
+            {
+                number: 3,
+                title: "Under-Fueling (Skipped Meals)",
+                body: "Busy shift = forget to eat or choose liquid calories. Your body enters a low-energy state, deepening metabolic stress.",
+                specific: "Shift workers average 200–400 fewer calories on work days. Your body sees this as scarcity.",
+                quote: "Restriction makes the cycle worse, not better."
+            },
+            {
+                number: 4,
+                title: "Cravings + Late-Night Snacking",
+                body: "Your dysregulated blood sugar + high cortisol = intense cravings for sugar, salt, fat. You eat when you're not even hungry.",
+                specific: "Post-shift, many nurses report 'mindless eating' or unable to stop once they start.",
+                quote: "It's not lack of willpower. It's a biological signal gone haywire."
+            },
+            {
+                number: 5,
+                title: "Inflammation + Fluid Retention",
+                body: "The stress + underfueling + erratic eating = inflammation response. Your body retains water, and you feel bloated.",
+                specific: "Many report 3–5 lb fluctuations daily due to inflammation and water retention, not fat loss.",
+                quote: "The scale lies. Inflammation hides the fat loss happening underneath."
+            },
+            {
+                number: 6,
+                title: "Scale Stuck (No Progress)",
+                body: "Weeks of effort, but the scale won't budge. Frustration sets in. You feel broken.",
+                specific: "At this point, many nurses start cutting calories harder or increase cardio—which makes Step 7 worse.",
+                quote: "The scale is the last thing to change. Hormones have to reset first."
+            },
+            {
+                number: 7,
+                title: "Cut Harder + More Cardio (Trap)",
+                body: "In desperation, you cut calories more and add intense cardio. This spikes cortisol further. The cycle repeats.",
+                specific: "This is the trap: the 'solution' makes the problem worse. You're more stressed, more tired, and still stuck.",
+                quote: "The effort trap is where metabolic stress turns into burnout."
+            }
+        ];
+
+        // ============================================
+        // TAB SWITCHING
+        // ============================================
+        function initializeTabButtons() {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const tabName = e.target.getAttribute('data-tab');
+                    switchTab(tabName);
+                });
+            });
+        }
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked button
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+
+            currentTab = tabName;
+
+            // Initialize content if needed
+            if (tabName === 'quiz' && document.getElementById('quizContent').innerHTML === '') {
+                initializeQuiz();
+            }
+            if (tabName === 'cycle' && document.getElementById('stepDetails').innerHTML === '') {
+                initializeCycle();
+            }
+            if (tabName === 'tracker' && document.getElementById('scenarioCards').innerHTML === '') {
+                initializeScenarios();
+            }
+            if (tabName === 'diagnose' && document.getElementById('scenarioCards').innerHTML === '') {
+                initializeScenarios();
+            }
+        }
+
+        // ============================================
+        // QUIZ FUNCTIONALITY
+        // ============================================
+        function initializeQuiz() {
+            const quizResults = getFromLocalStorage('smithfit_quiz_results');
+            if (quizResults && quizResults.completed) {
+                currentQuizQuestion = 0;
+                showQuizResults(quizResults);
+            } else {
+                currentQuizQuestion = 0;
+                renderQuizQuestion();
+            }
+            initializeQuizButtons();
+        }
+
+        function renderQuizQuestion() {
+            const question = quizQuestions[currentQuizQuestion];
+            const progress = ((currentQuizQuestion + 1) / quizQuestions.length) * 100;
+
+            document.getElementById('progressBar').style.width = progress + '%';
+
+            let html = `
+                <div class="question">
+                    <div class="question-number">Question ${question.number} of ${quizQuestions.length}</div>
+                    <h3>${question.text}</h3>
+            `;
+
+            question.answers.forEach((answer, idx) => {
+                html += `
+                    <label class="answer-option">
+                        <input type="radio" name="answer" value="${answer.type}" onchange="recordQuizAnswer('${answer.type}')">
+                        <span>${answer.text}</span>
+                    </label>
+                `;
+            });
+
+            html += '</div>';
+
+            document.getElementById('quizContent').innerHTML = html;
+            document.getElementById('prevBtn').style.display = currentQuizQuestion > 0 ? 'block' : 'none';
+            document.getElementById('nextBtn').textContent = currentQuizQuestion === quizQuestions.length - 1 ? 'See Results' : 'Next →';
+        }
+
+        function recordQuizAnswer(type) {
+            quizState[`type${type}`]++;
+        }
+
+        function initializeQuizButtons() {
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    const selected = document.querySelector('input[name="answer"]:checked');
+                    if (!selected) {
+                        alert('Please select an answer before continuing.');
+                        return;
+                    }
+
+                    if (currentQuizQuestion < quizQuestions.length - 1) {
+                        currentQuizQuestion++;
+                        renderQuizQuestion();
+                    } else {
+                        completeQuiz();
+                    }
+                });
+            }
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    if (currentQuizQuestion > 0) {
+                        currentQuizQuestion--;
+                        renderQuizQuestion();
+                    }
+                });
+            }
+        }
+
+        function completeQuiz() {
+            const results = {
+                completed: true,
+                timestamp: new Date().toISOString(),
+                scores: { ...quizState }
+            };
+            saveToLocalStorage('smithfit_quiz_results', results);
+            showQuizResults(results);
+        }
+
+        function showQuizResults(results) {
+            document.getElementById('quizContent').innerHTML = '';
+            document.getElementById('quizContent').parentElement.style.display = 'none';
+
+            const scores = results.scores;
+            const dominantType = getDominantType(scores);
+            const allEqual = scores.typeA === scores.typeB && scores.typeB === scores.typeC;
+
+            let html = '';
+            if (allEqual || (scores.typeA === scores.typeB && dominantType === 'A') || (scores.typeA === scores.typeC && dominantType === 'A') || (scores.typeB === scores.typeC && dominantType === 'B')) {
+                // Hybrid types
+                const topTypes = Object.entries(scores)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 2)
+                    .map(([key]) => key.replace('type', ''));
+
+                html += `<div class="result-card">
+                    <div class="type-badge">Hybrid: Type ${topTypes.join('+')} </div>
+                    <h2>You're a Complex Metabolic Picture</h2>
+                    <p>You're showing traits of both <strong>Type ${topTypes[0]}</strong> and <strong>Type ${topTypes[1]}</strong>. This is common in shift workers with multiple stressors.</p>
+                    ${getHybridContent(topTypes, scores)}
+                </div>`;
+            } else {
+                html = `<div class="result-card">${getResultContent(dominantType, scores)}</div>`;
+            }
+
+            document.getElementById('resultsContent').innerHTML = html;
+            document.getElementById('quiz-results').style.display = 'block';
+        }
+
+        function getDominantType(scores) {
+            return Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b).replace('type', '');
+        }
+
+        function getResultContent(type, scores) {
+            const contents = {
+                A: {
+                    badge: 'Type A: Under-Fueled & Stressed',
+                    title: "You're Running on Fumes",
+                    pattern: 'Your cortisol is elevated because you skip meals and your body never enters a true rest state. The "I\'ll eat later" pattern deepens metabolic stress.',
+                    likelyIf: ['Miss breakfast or lunch regularly', 'Forget to eat until you\'re shaky', 'Feel irritable when hungry', 'Bloat or cramp after eating (post-starvation)', 'Can\'t lose belly fat despite effort'],
+                    happening: 'Your body sees under-fueling as a threat. It holds onto fat, raises cortisol, and makes you crave quick energy (sugar). Eating on a schedule is your reset.',
+                    focus: ['Eat 3 meals + 2 snacks daily, even small ones', 'Prioritize protein at every meal', 'Eat within 30 min of waking', 'Have a plan for shift days—no skipping meals'],
+                    trap: 'Cutting calories more will worsen this. Your body needs consistent fuel.',
+                    minimum: 'Minimum win: Eat breakfast tomorrow. Track for 3 days. Watch energy and cravings shift.',
+                    proof: 'In 72 hours of regular eating, most Type A people report better energy, fewer cravings, and less bloat.'
+                },
+                B: {
+                    badge: 'Type B: Sleep-Deprived & Overstimulated',
+                    title: 'Your Nervous System Is in Overdrive',
+                    pattern: 'You\'re wired, anxious, or can\'t switch off. Sleep is fragmented or you can\'t fall asleep. Coffee is a band-aid. Your parasympathetic nervous system (rest mode) is offline.',
+                    likelyIf: ['Struggle to fall asleep or sleep deeply', 'Feel jittery or anxious most days', 'Rely on caffeine to function', 'Bloat even when eating "clean"', 'Feel better on days off but worse on work days'],
+                    happening: 'Chronic overstimulation = high cortisol + adrenaline. Your body can\'t digest well (bloat), can\'t sleep well, and can\'t relax around food.',
+                    focus: ['Prioritize dark, cool, quiet sleep (8+ hours)', 'Limit caffeine after noon', 'Create a wind-down ritual: stretch, breathe, dim lights', 'Eat foods that calm (magnesium-rich: leafy greens, nuts, seeds)'],
+                    trap: 'More exercise or cutting food will amp you up more.',
+                    minimum: 'Minimum win: No caffeine after 12pm for 3 days. Notice how sleep shifts.',
+                    proof: 'Type B people usually see anxiety drop and bloat reduce within 5–7 days of better sleep + removed caffeine.'
+                },
+                C: {
+                    badge: 'Type C: Blood-Sugar Rollercoaster',
+                    title: 'Your Blood Sugar Is Out of Control',
+                    pattern: 'You get hungry soon after meals. Cravings spike mid-afternoon. You feel energized then crashed. Energy spikes and dips throughout the day.',
+                    likelyIf: ['Hungry 90 min after meals', 'Crave sugar or carbs mid-afternoon', 'Feel wired then crashed', 'Bloat 2–3 hours after eating', 'Struggle with portion control around carbs'],
+                    happening: 'Your meals (or snacks) are unbalanced—likely carbs without enough protein or fat. This causes blood sugar to spike, then crash. Cravings follow.',
+                    focus: ['Build every meal: protein + healthy fat + carb + fiber', 'Eat meals 4–5 hours apart (not grazing)', 'Include protein at snacks (nuts, cheese, eggs)', 'Choose complex carbs + fiber (not refined)'],
+                    trap: 'Cutting carbs entirely will backfire. You need balance, not elimination.',
+                    minimum: 'Minimum win: Eat protein + fat with your next carb meal. Track cravings 2 hours later. You\'ll notice a shift.',
+                    proof: 'Type C people usually stabilize within 48–72 hours of balanced macros.'
+                }
+            };
+
+            const c = contents[type] || contents.A;
+            return `
+                <div class="type-badge">${c.badge}</div>
+                <h2>${c.title}</h2>
+                <p>${c.pattern}</p>
+
+                <div class="result-section">
+                    <h3>You Likely Experience:</h3>
+                    <ul class="result-list">
+                        ${c.likelyIf.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="result-section">
+                    <h3>What's Actually Happening:</h3>
+                    <p>${c.happening}</p>
+                </div>
+
+                <div class="result-section">
+                    <h3>Your Focus Cues (Next 7 Days):</h3>
+                    <ul class="result-list">
+                        ${c.focus.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="callout">
+                    <strong>⚠️ The Trap:</strong> ${c.trap}
+                </div>
+
+                <div class="callout">
+                    <strong>✓ Minimum Win:</strong> ${c.minimum}
+                </div>
+
+                <div class="callout">
+                    <strong>📊 Your Proof:</strong> ${c.proof}
+                </div>
+            `;
+        }
+
+        function getHybridContent(types, scores) {
+            const typeDescriptions = {
+                A: 'Under-fueling stress',
+                B: 'Sleep deprivation & overstimulation',
+                C: 'Blood sugar dysregulation'
+            };
+
+            let html = '<div class="result-section"><h3>What This Means:</h3><ul class="result-list">';
+            types.forEach(type => {
+                html += `<li>Type ${type}: ${typeDescriptions[type]}</li>`;
+            });
+            html += '</ul></div>';
+
+            html += '<div class="result-section"><h3>Your Path Forward:</h3><ul class="result-list">';
+            html += '<li>Start with Type ' + types[0] + ' focus cues (highest score)</li>';
+            html += '<li>Add Type ' + types[1] + ' focus cues after 3 days</li>';
+            html += '<li>Track both for 7 days to see which improves energy + cravings most</li>';
+            html += '<li>Double down on the one with the biggest shift</li>';
+            html += '</ul></div>';
+
+            return html;
+        }
+
+        function retakeQuiz() {
+            currentQuizQuestion = 0;
+            quizState = { typeA: 0, typeB: 0, typeC: 0 };
+            localStorage.removeItem('smithfit_quiz_results');
+            document.getElementById('quizContent').innerHTML = '';
+            document.getElementById('quizContent').parentElement.style.display = 'block';
+            document.getElementById('quiz-results').style.display = 'none';
+            initializeQuiz();
+        }
+
+        // ============================================
+        // CYCLE FUNCTIONALITY
+        // ============================================
+        function initializeCycle() {
+            renderCycleSteps();
+            selectStep(1);
+            initializeCycleButtons();
+        }
+
+        function renderCycleSteps() {
+            cycleSteps.forEach(step => {
+                document.getElementById(`step${step.number}`).addEventListener('click', () => selectStep(step.number));
+            });
+        }
+
+        function selectStep(stepNumber) {
+            currentCycleStep = stepNumber;
+            document.querySelectorAll('.cycle-step').forEach(el => el.classList.remove('active'));
+            document.getElementById(`step${stepNumber}`).classList.add('active');
+
+            const step = cycleSteps[stepNumber - 1];
+            const html = `
+                <h3>${step.number}. ${step.title}</h3>
+                <p>${step.body}</p>
+                <p><strong>For shift workers:</strong> ${step.specific}</p>
+                <div class="step-quote">"${step.quote}"</div>
+            `;
+
+            document.getElementById('stepDetails').innerHTML = html;
+        }
+
+        function initializeCycleButtons() {
+            const playBtn = document.getElementById('playBtn');
+            const pauseBtn = document.getElementById('pauseBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            
+            if (playBtn) playBtn.addEventListener('click', startAutoPlay);
+            if (pauseBtn) pauseBtn.addEventListener('click', stopAutoPlay);
+            if (resetBtn) resetBtn.addEventListener('click', resetCycle);
+        }
+
+        function startAutoPlay() {
+            document.getElementById('playBtn').style.display = 'none';
+            document.getElementById('pauseBtn').style.display = 'inline-block';
+
+            cycleAutoPlayInterval = setInterval(() => {
+                currentCycleStep = currentCycleStep === 7 ? 1 : currentCycleStep + 1;
+                selectStep(currentCycleStep);
+            }, 2000);
+        }
+
+        function stopAutoPlay() {
+            clearInterval(cycleAutoPlayInterval);
+            document.getElementById('playBtn').style.display = 'inline-block';
+            document.getElementById('pauseBtn').style.display = 'none';
+        }
+
+        function resetCycle() {
+            stopAutoPlay();
+            currentCycleStep = 1;
+            selectStep(1);
+        }
+
+        // ============================================
+        // TRACKER FUNCTIONALITY
+        // ============================================
+        function startTracking() {
+            const name1 = document.getElementById('cueName1').value.trim();
+            const name2 = document.getElementById('cueName2').value.trim();
+
+            if (!name1 || !name2) {
+                alert('Please enter both focus cues to start tracking.');
+                return;
+            }
+
+            trackerState.started = true;
+            trackerState.cueName1 = name1;
+            trackerState.cueName2 = name2;
+            trackerState.startDate = new Date().toISOString().split('T')[0];
+            trackerState.days = Array(7).fill(null).map(() => ({
+                cue1: false,
+                cue2: false,
+                energy: 5,
+                cravings: 5,
+                bloat: 'N',
+                note: ''
+            }));
+
+            saveToLocalStorage('smithfit_tracker', trackerState);
+            document.getElementById('setupSection').style.display = 'none';
+            document.getElementById('trackerContent').style.display = 'block';
+            renderTracker();
+        }
+
+        function renderTracker() {
+            document.getElementById('header1').textContent = trackerState.cueName1;
+            document.getElementById('header2').textContent = trackerState.cueName2;
+
+            let gridHtml = '';
+            trackerState.days.forEach((day, idx) => {
+                gridHtml += `
+                    <div class="grid-row">
+                        <div class="grid-day">Day ${idx + 1}</div>
+                        <div class="grid-cell"><input type="checkbox" class="grid-checkbox" ${day.cue1 ? 'checked' : ''} onchange="updateDay(${idx}, 'cue1', this.checked)"></div>
+                        <div class="grid-cell"><input type="checkbox" class="grid-checkbox" ${day.cue2 ? 'checked' : ''} onchange="updateDay(${idx}, 'cue2', this.checked)"></div>
+                        <div class="grid-cell"><input type="number" class="grid-input" min="1" max="10" value="${day.energy}" onchange="updateDay(${idx}, 'energy', this.value)"></div>
+                        <div class="grid-cell"><input type="number" class="grid-input" min="1" max="10" value="${day.cravings}" onchange="updateDay(${idx}, 'cravings', this.value)"></div>
+                        <div class="grid-cell"><input type="text" class="grid-input" value="${day.note}" placeholder="Note" onchange="updateDay(${idx}, 'note', this.value)"></div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('trackerGrid').innerHTML = gridHtml;
+            updateProgress();
+        }
+
+        function updateDay(dayIdx, field, value) {
+            if (field === 'cue1' || field === 'cue2') {
+                trackerState.days[dayIdx][field] = value;
+            } else if (field === 'energy' || field === 'cravings') {
+                trackerState.days[dayIdx][field] = parseInt(value);
+            } else if (field === 'note') {
+                trackerState.days[dayIdx][field] = value;
+            }
+            saveToLocalStorage('smithfit_tracker', trackerState);
+            updateProgress();
+        }
+
+        function updateProgress() {
+            updateStreakCounter();
+            updateStatCards();
+            updateComparisonCards();
+            checkMotivationalTriggers();
+        }
+
+        function updateStreakCounter() {
+            let streak = 0;
+            for (let i = 0; i < trackerState.days.length; i++) {
+                if (trackerState.days[i].cue1 && trackerState.days[i].cue2) {
+                    streak++;
+                } else if (streak > 0) {
+                    break;
+                }
+            }
+            document.getElementById('streakNumber').textContent = streak;
+            document.getElementById('streakText').textContent = streak > 0 ? `🔥 ${streak} day${streak > 1 ? 's' : ''} strong!` : 'Complete both focus cues to keep your streak alive';
+        }
+
+        function updateStatCards() {
+            let totalDays = 0, hitDays = 0;
+            let energyValues = [];
+            let cravingValues = [];
+
+            trackerState.days.forEach((day, idx) => {
+                if (day.cue1 || day.cue2 || day.energy > 0) {
+                    totalDays++;
+                    energyValues.push(day.energy);
+                    cravingValues.push(day.cravings);
+                }
+                if (day.cue1 && day.cue2) hitDays++;
+            });
+
+            const hitPercent = totalDays > 0 ? Math.round((hitDays / totalDays) * 100) : 0;
+            document.getElementById('focusHitPercent').textContent = hitPercent + '%';
+            document.getElementById('focusHitDetail').textContent = `${hitDays} of ${totalDays} days with both cues`;
+
+            if (energyValues.length > 1) {
+                const energyStart = energyValues[0];
+                const energyEnd = energyValues[energyValues.length - 1];
+                const energyTrend = energyEnd > energyStart ? '↑' : energyEnd < energyStart ? '↓' : '→';
+                const energyDiff = Math.abs(energyEnd - energyStart);
+                document.getElementById('energyTrendIcon').textContent = energyTrend;
+                document.getElementById('energyTrendText').textContent = energyTrend === '↑' ? `+${energyDiff} (Better!)` : energyTrend === '↓' ? `-${energyDiff}` : 'Stable';
+            }
+
+            if (cravingValues.length > 1) {
+                const cravingStart = cravingValues[0];
+                const cravingEnd = cravingValues[cravingValues.length - 1];
+                const cravingTrend = cravingEnd < cravingStart ? '↓' : cravingEnd > cravingStart ? '↑' : '→';
+                const cravingDiff = Math.abs(cravingEnd - cravingStart);
+                document.getElementById('cravingTrendIcon').textContent = cravingTrend;
+                document.getElementById('cravingTrendText').textContent = cravingTrend === '↓' ? `-${cravingDiff} (Better!)` : cravingTrend === '↑' ? `+${cravingDiff}` : 'Stable';
+            }
+        }
+
+        function updateComparisonCards() {
+            const day1Energy = trackerState.days[0].energy;
+            const day7Energy = trackerState.days[6].energy;
+            const day1Cravings = trackerState.days[0].cravings;
+            const day7Cravings = trackerState.days[6].cravings;
+
+            document.getElementById('day1Energy').textContent = day1Energy + '/10';
+            document.getElementById('day7Energy').textContent = day7Energy + '/10';
+            document.getElementById('day1Cravings').textContent = day1Cravings + '/10';
+            document.getElementById('day7Cravings').textContent = day7Cravings + '/10';
+        }
+
+        function checkMotivationalTriggers() {
+            const messages = [];
+            const daysDone = trackerState.days.filter(d => d.cue1 || d.cue2 || d.energy > 0).length;
+            const day1Done = trackerState.days[0].cue1 && trackerState.days[0].cue2;
+            const day3Streak = trackerState.days.slice(0, 3).every(d => d.cue1 && d.cue2);
+            const day7Done = trackerState.days.every(d => d.cue1 && d.cue2);
+
+            if (day1Done) {
+                messages.push({
+                    title: '🎯 Day 1 Complete!',
+                    text: 'You\'ve shown up for yourself. This is how change starts.'
+                });
+            }
+
+            if (day3Streak) {
+                messages.push({
+                    title: '🔥 3-Day Streak!',
+                    text: 'Your body is already responding. Keep going—this is where the proof shows.'
+                });
+            }
+
+            if (day7Done) {
+                messages.push({
+                    title: '⭐ You Did It! 7 Days Complete',
+                    text: 'This is your proof. You\'re not broken. You\'ve just been stuck in stress-mode. You know what to do now.'
+                });
+            }
+
+            const html = messages.map(msg => `
+                <div class="motivational-message">
+                    <h4>${msg.title}</h4>
+                    <p>${msg.text}</p>
+                </div>
+            `).join('');
+
+            document.getElementById('motivationalMessages').innerHTML = html;
+        }
+
+        function resetTracker() {
+            if (confirm('Are you sure you want to reset the tracker? This cannot be undone.')) {
+                localStorage.removeItem('smithfit_tracker');
+                trackerState = {
+                    started: false,
+                    cueName1: '',
+                    cueName2: '',
+                    startDate: null,
+                    days: []
+                };
+                document.getElementById('setupSection').style.display = 'block';
+                document.getElementById('trackerContent').style.display = 'none';
+                document.getElementById('cueName1').value = '';
+                document.getElementById('cueName2').value = '';
+            }
+        }
+
+        // ============================================
+        // SCENARIO/DIAGNOSE FUNCTIONALITY
+        // ============================================
+        function initializeScenarios() {
+            let html = '';
+            scenarios.forEach(scenario => {
+                html += `
+                    <div class="scenario-card" onclick="toggleScenario(${scenario.id})">
+                        <div class="scenario-number">${scenario.id}</div>
+                        <h4>Scenario ${scenario.id}</h4>
+                        <div class="scenario-trigger"><strong>If:</strong> ${scenario.trigger}</div>
+                        <div class="scenario-content" id="scenario-${scenario.id}">
+                            <h5>The Diagnosis:</h5>
+                            <p>${scenario.diagnosis}</p>
+                            <h5>Then Do This:</h5>
+                            <p>${scenario.action}</p>
+                            <h5>Your Proof:</h5>
+                            <p>${scenario.prevention}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('scenarioCards').innerHTML = html;
+        }
+
+        function toggleScenario(id) {
+            const content = document.getElementById(`scenario-${id}`);
+            content.classList.toggle('active');
+        }
+
+        // ============================================
+        // LOCAL STORAGE HELPERS
+        // ============================================
+        function saveToLocalStorage(key, data) {
+            localStorage.setItem(key, JSON.stringify(data));
+        }
+
+        function getFromLocalStorage(key) {
+            const data = localStorage.getItem(key);
+            return data ? JSON.parse(data) : null;
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        window.addEventListener('load', () => {
+            initializeTabButtons();
+            
+            const savedTracker = getFromLocalStorage('smithfit_tracker');
+            if (savedTracker && savedTracker.started) {
+                trackerState = savedTracker;
+                document.getElementById('setupSection').style.display = 'none';
+                document.getElementById('trackerContent').style.display = 'block';
+                renderTracker();
+            }
+
+            initializeScenarios();
+        });
+    </script>
+</body>
+</html>

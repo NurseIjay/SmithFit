@@ -1,0 +1,776 @@
+<!--
+  SmithFit — 5-Minute Ignition Week (GHL Custom Code Block)
+  Copy EVERYTHING below and paste into a GHL funnel/website page Custom Code element.
+  No external dependencies. Fully self-contained.
+-->
+<div id="smithfit-challenge">
+<style>
+  /* ============ ROOT CONTAINER ============ */
+  #smithfit-challenge {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background-color: #FAF8F5;
+    color: #2D1F1A;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  #smithfit-challenge * { box-sizing: border-box; }
+  #smithfit-challenge h1,
+  #smithfit-challenge h2,
+  #smithfit-challenge h3,
+  #smithfit-challenge h4 {
+    font-family: Georgia, "Times New Roman", serif;
+    color: #2D1F1A;
+    margin: 0 0 12px 0;
+  }
+  #smithfit-challenge p { margin: 0 0 12px 0; }
+
+  /* ============ HERO ============ */
+  #smithfit-challenge .sf-hero {
+    position: relative;
+    text-align: center;
+    padding: 60px 24px 50px;
+    background: linear-gradient(135deg, #FAF8F5 0%, #f5f0ea 100%);
+    overflow: hidden;
+  }
+  #smithfit-challenge .sf-hero::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: -60px;
+    width: 500px;
+    height: 250px;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,120 Q125,60 250,120 T500,120 L500,0 L0,0 Z' fill='%23D4A94C' opacity='0.12'/%3E%3Cpath d='M0,140 Q125,80 250,140 T500,140 L500,0 L0,0 Z' fill='%23D4A94C' opacity='0.08'/%3E%3C/svg%3E") no-repeat;
+    background-size: cover;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  #smithfit-challenge .sf-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    right: -60px;
+    width: 500px;
+    height: 250px;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,120 Q125,180 250,120 T500,120 L500,250 L0,250 Z' fill='%23D4A94C' opacity='0.12'/%3E%3Cpath d='M0,100 Q125,160 250,100 T500,100 L500,250 L0,250 Z' fill='%23D4A94C' opacity='0.08'/%3E%3C/svg%3E") no-repeat;
+    background-size: cover;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  #smithfit-challenge .sf-hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  #smithfit-challenge .sf-badge {
+    display: inline-block;
+    background: #D4A94C;
+    color: #fff;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+  }
+  #smithfit-challenge .sf-hero h1 {
+    font-size: 2.8em;
+    letter-spacing: -1px;
+    margin-bottom: 14px;
+    color: #2D1F1A;
+  }
+  #smithfit-challenge .sf-hero-tagline {
+    font-size: 1.15em;
+    font-style: italic;
+    color: #4A3728;
+    margin-bottom: 10px;
+    line-height: 1.7;
+  }
+  #smithfit-challenge .sf-hero-dates {
+    font-size: 1em;
+    color: #8A7A6A;
+  }
+
+  /* ============ SECTION CONTAINER ============ */
+  #smithfit-challenge .sf-section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ============ WHY THIS MATTERS ============ */
+  #smithfit-challenge .sf-why {
+    background: #FAF8F5;
+    border-left: 5px solid #D4A94C;
+    padding: 28px 30px;
+    margin: 40px auto;
+    max-width: 860px;
+    border-radius: 0 8px 8px 0;
+  }
+  #smithfit-challenge .sf-why h2 {
+    font-size: 1.5em;
+    margin-bottom: 14px;
+  }
+  #smithfit-challenge .sf-why p {
+    font-size: 1.05em;
+    line-height: 1.8;
+    color: #4A3728;
+  }
+
+  /* ============ COMPLETION THRESHOLD ============ */
+  #smithfit-challenge .sf-threshold {
+    background: linear-gradient(135deg, #f5efe8 0%, #ece3d5 100%);
+    border: 2px solid #D4A94C;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    margin: 36px auto;
+    max-width: 860px;
+  }
+  #smithfit-challenge .sf-threshold h3 {
+    color: #4A3728;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+  }
+  #smithfit-challenge .sf-threshold p {
+    color: #4A3728;
+    font-size: 1.05em;
+    line-height: 1.7;
+  }
+  #smithfit-challenge .sf-gold { color: #b8922e; font-weight: 700; }
+
+  /* ============ HOW TO PARTICIPATE ============ */
+  #smithfit-challenge .sf-how {
+    background: #FAF8F5;
+    border-left: 5px solid #D4A94C;
+    padding: 28px 30px;
+    margin: 36px auto;
+    max-width: 860px;
+    border-radius: 0 8px 8px 0;
+  }
+  #smithfit-challenge .sf-how h2 { font-size: 1.4em; margin-bottom: 14px; }
+  #smithfit-challenge .sf-how p {
+    font-size: 1.05em;
+    line-height: 1.8;
+    color: #4A3728;
+  }
+
+  /* ============ DIVIDER ============ */
+  #smithfit-challenge .sf-divider {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #D4A94C, transparent);
+    margin: 44px auto;
+    max-width: 860px;
+    opacity: 0.5;
+  }
+
+  /* ============ PROGRESS TRACKER ============ */
+  #smithfit-challenge .sf-progress {
+    background: linear-gradient(135deg, #f5efe8 0%, #ece3d5 100%);
+    border: 2px solid #D4A94C;
+    padding: 36px 24px;
+    text-align: center;
+    margin: 0 auto 44px;
+    max-width: 860px;
+    border-radius: 10px;
+  }
+  #smithfit-challenge .sf-progress-title {
+    color: #4A3728;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  #smithfit-challenge .sf-progress-count {
+    color: #2D1F1A;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 22px;
+  }
+  #smithfit-challenge .sf-circles {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  #smithfit-challenge .sf-circle {
+    width: 56px;
+    height: 56px;
+    border: 3px solid #D4A94C;
+    border-radius: 50%;
+    background: #fff;
+    color: #2D1F1A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    line-height: 1;
+  }
+  #smithfit-challenge .sf-circle:hover {
+    transform: scale(1.1);
+    background: #f5efe8;
+  }
+  #smithfit-challenge .sf-circle-day {
+    font-size: 10px;
+    font-weight: 400;
+    color: #8A7A6A;
+    margin-top: 2px;
+  }
+
+  /* ============ DAYS HEADING ============ */
+  #smithfit-challenge .sf-days-heading {
+    font-size: 2em;
+    text-align: center;
+    margin: 0 auto 36px;
+    max-width: 860px;
+    color: #2D1F1A;
+  }
+
+  /* ============ DAY CARD ============ */
+  #smithfit-challenge .sf-day-card {
+    background: #fff;
+    border-left: 5px solid #D4A94C;
+    border-radius: 8px;
+    padding: 28px 28px 24px;
+    margin: 0 auto 28px;
+    max-width: 860px;
+    box-shadow: 0 2px 10px rgba(45,31,26,0.07);
+    transition: opacity 0.3s ease;
+  }
+  #smithfit-challenge .sf-day-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  #smithfit-challenge .sf-day-num {
+    background: #2D1F1A;
+    color: #D4A94C;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  #smithfit-challenge .sf-day-title {
+    font-size: 1.35em;
+    margin-bottom: 2px;
+    color: #2D1F1A;
+  }
+  #smithfit-challenge .sf-day-subtitle {
+    font-size: 0.92em;
+    color: #8A7A6A;
+    font-style: italic;
+    margin: 0;
+  }
+  #smithfit-challenge .sf-day-instruction {
+    font-size: 1em;
+    line-height: 1.75;
+    color: #4A3728;
+    margin-bottom: 20px;
+    padding: 0 0 0 62px;
+  }
+
+  /* ============ TIER GRID ============ */
+  #smithfit-challenge .sf-tiers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 0;
+  }
+  #smithfit-challenge .sf-tier {
+    border: 1px solid #e8e0d8;
+    border-radius: 8px;
+    padding: 16px;
+    background: #FAF8F5;
+  }
+  #smithfit-challenge .sf-tier-name {
+    font-family: Georgia, serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid;
+  }
+  #smithfit-challenge .sf-tier-foundation .sf-tier-name {
+    color: #5B8C5A;
+    border-color: #5B8C5A;
+  }
+  #smithfit-challenge .sf-tier-build .sf-tier-name {
+    color: #D4A94C;
+    border-color: #D4A94C;
+  }
+  #smithfit-challenge .sf-tier-momentum .sf-tier-name {
+    color: #A0522D;
+    border-color: #A0522D;
+  }
+  #smithfit-challenge .sf-tier-desc {
+    font-size: 12px;
+    color: #8A7A6A;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+  #smithfit-challenge .sf-tier-action {
+    font-size: 14px;
+    color: #2D1F1A;
+    line-height: 1.5;
+  }
+
+  /* ============ DELIVERABLE BOX ============ */
+  #smithfit-challenge .sf-post {
+    background: linear-gradient(135deg, #f5efe8 0%, #ece3d5 100%);
+    border: 2px solid #D4A94C;
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-top: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  #smithfit-challenge .sf-post-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  #smithfit-challenge .sf-post-label {
+    font-family: Georgia, serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #4A3728;
+    margin-bottom: 5px;
+  }
+  #smithfit-challenge .sf-post-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #4A3728;
+  }
+  #smithfit-challenge .sf-post-hashtags {
+    font-size: 13px;
+    font-weight: 700;
+    color: #D4A94C;
+    margin-top: 8px;
+  }
+
+  /* ============ CLOSING ============ */
+  #smithfit-challenge .sf-closing {
+    text-align: center;
+    padding: 44px 24px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  #smithfit-challenge .sf-closing h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+  #smithfit-challenge .sf-closing blockquote {
+    font-family: Georgia, serif;
+    font-size: 1.2em;
+    font-style: italic;
+    line-height: 1.8;
+    color: #4A3728;
+    border: none;
+    margin: 0 0 14px 0;
+    padding: 0;
+  }
+  #smithfit-challenge .sf-closing-author {
+    font-size: 0.95em;
+    color: #8A7A6A;
+    font-weight: 600;
+  }
+
+  /* ============ FOOTER ============ */
+  #smithfit-challenge .sf-footer {
+    background: linear-gradient(135deg, #f5efe8 0%, #ece3d5 100%);
+    color: #8A7A6A;
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    margin-top: 30px;
+    border-top: 2px solid #D4A94C;
+  }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 768px) {
+    #smithfit-challenge .sf-hero h1 { font-size: 2em; }
+    #smithfit-challenge .sf-tiers { grid-template-columns: 1fr; }
+    #smithfit-challenge .sf-day-instruction { padding-left: 0; }
+    #smithfit-challenge .sf-day-header { flex-direction: row; }
+    #smithfit-challenge .sf-circle { width: 44px; height: 44px; font-size: 14px; }
+  }
+</style>
+
+<!-- ==================== HERO ==================== -->
+<div class="sf-hero">
+  <div class="sf-hero-inner">
+    <div class="sf-badge">Movement Challenge</div>
+    <h1>5-Minute Ignition Week</h1>
+    <p class="sf-hero-tagline">"You don't need another 60-minute program. You need proof that you can still move your body — even when life gets messy."</p>
+    <p class="sf-hero-dates">Monday, March 23 &ndash; Sunday, March 29, 2026</p>
+  </div>
+</div>
+
+<!-- ==================== WHY THIS MATTERS ==================== -->
+<div class="sf-why">
+  <h2>Why This Matters</h2>
+  <p>I've been where you are — running on 3 hours of sleep after a 12-hour shift, wondering if you even have the energy to take care of yourself. Here's what I know after years of coaching nurses, shift workers, and busy women: the hardest part isn't the workout. It's believing you deserve to show up for yourself.</p>
+  <p>This week, we're lighting a match. Small. Consistent. Powerful. By Sunday, you're going to feel the shift.</p>
+</div>
+
+<!-- ==================== COMPLETION THRESHOLD ==================== -->
+<div class="sf-threshold">
+  <h3>Show Up 5 of 7 Days</h3>
+  <p>That's it. <span class="sf-gold">5 posts in the community = challenge complete.</span> You did the thing. You're stronger than the bad weeks.</p>
+</div>
+
+<!-- ==================== HOW TO PARTICIPATE ==================== -->
+<div class="sf-how">
+  <h2>How to Participate</h2>
+  <p>Each day, pick the tier that matches your energy. Foundation is for your hardest days — and there's zero shame in staying there all week. Build is for when you've got a little more in the tank. Momentum is for the days you're feeling unstoppable.</p>
+  <p>Do the movement. Take the photo or video. Post it in the community with what tier you chose. That post is your proof — and your win.</p>
+</div>
+
+<div class="sf-divider"></div>
+
+<!-- ==================== PROGRESS TRACKER ==================== -->
+<div class="sf-progress">
+  <div class="sf-progress-title">Your Week at a Glance</div>
+  <div class="sf-progress-count" id="sf-completed-count">0 of 7 completed</div>
+  <div class="sf-circles">
+    <div class="sf-circle" id="sf-circle-1">M<span class="sf-circle-day">D1</span></div>
+    <div class="sf-circle" id="sf-circle-2">T<span class="sf-circle-day">D2</span></div>
+    <div class="sf-circle" id="sf-circle-3">W<span class="sf-circle-day">D3</span></div>
+    <div class="sf-circle" id="sf-circle-4">T<span class="sf-circle-day">D4</span></div>
+    <div class="sf-circle" id="sf-circle-5">F<span class="sf-circle-day">D5</span></div>
+    <div class="sf-circle" id="sf-circle-6">S<span class="sf-circle-day">D6</span></div>
+    <div class="sf-circle" id="sf-circle-7">S<span class="sf-circle-day">D7</span></div>
+  </div>
+</div>
+
+<!-- ==================== THE 7 DAYS ==================== -->
+<h2 class="sf-days-heading">The 7 Days</h2>
+
+<!-- ===== DAY 1 ===== -->
+<div class="sf-day-card" id="sf-day-1">
+  <div class="sf-day-header">
+    <div class="sf-day-num">1</div>
+    <div>
+      <h3 class="sf-day-title">Light the Match</h3>
+      <p class="sf-day-subtitle">Monday — Morning movement to start the week</p>
+    </div>
+  </div>
+  <div class="sf-day-instruction">Your job is simple: move your body first thing. Whether it's a 5-minute walk or a 20-minute power session, you're sending a signal. You're here. You're moving.</div>
+  <div class="sf-tiers">
+    <div class="sf-tier sf-tier-foundation">
+      <div class="sf-tier-name">Foundation</div>
+      <div class="sf-tier-desc">I can barely move today</div>
+      <div class="sf-tier-action">5-minute walk around your block or house</div>
+    </div>
+    <div class="sf-tier sf-tier-build">
+      <div class="sf-tier-name">Build</div>
+      <div class="sf-tier-desc">I've got some energy</div>
+      <div class="sf-tier-action">10-minute brisk walk + 10 bodyweight squats</div>
+    </div>
+    <div class="sf-tier sf-tier-momentum">
+      <div class="sf-tier-name">Momentum</div>
+      <div class="sf-tier-desc">Let's get it</div>
+      <div class="sf-tier-action">20-minute power walk or jog + 20 squats + 10 push-ups</div>
+    </div>
+  </div>
+  <div class="sf-post">
+    <div class="sf-post-icon">&#128247;</div>
+    <div>
+      <div class="sf-post-label">Post to Complete</div>
+      <div class="sf-post-text">Snap a selfie or photo from your movement — before, during, or after. Drop it in the community with your tier and how it felt.</div>
+      <div class="sf-post-hashtags">#SmithFit #5MinIgnition #LightTheMatch #Day1</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DAY 2 ===== -->
+<div class="sf-day-card" id="sf-day-2">
+  <div class="sf-day-header">
+    <div class="sf-day-num">2</div>
+    <div>
+      <h3 class="sf-day-title">The 5-Minute Promise</h3>
+      <p class="sf-day-subtitle">Tuesday — Just 5 minutes. That's the deal.</p>
+    </div>
+  </div>
+  <div class="sf-day-instruction">You made a promise to yourself. Today it's just 5 minutes. Set a timer, move, done. If you keep going after the timer? Bonus. But the 5 minutes is the win.</div>
+  <div class="sf-tiers">
+    <div class="sf-tier sf-tier-foundation">
+      <div class="sf-tier-name">Foundation</div>
+      <div class="sf-tier-desc">I can barely move today</div>
+      <div class="sf-tier-action">5-minute gentle stretch — neck, shoulders, hips, ankles</div>
+    </div>
+    <div class="sf-tier sf-tier-build">
+      <div class="sf-tier-name">Build</div>
+      <div class="sf-tier-desc">I've got some energy</div>
+      <div class="sf-tier-action">5-minute bodyweight circuit: 10 squats, 10 lunges, 10 arm circles, repeat</div>
+    </div>
+    <div class="sf-tier sf-tier-momentum">
+      <div class="sf-tier-name">Momentum</div>
+      <div class="sf-tier-desc">Let's get it</div>
+      <div class="sf-tier-action">5 minutes of burpees, mountain climbers, or jump squats — go hard</div>
+    </div>
+  </div>
+  <div class="sf-post">
+    <div class="sf-post-icon">&#9201;</div>
+    <div>
+      <div class="sf-post-label">Post to Complete</div>
+      <div class="sf-post-text">Screenshot your timer or snap a photo of where you moved. Tell us: did you stop at 5 minutes or keep going?</div>
+      <div class="sf-post-hashtags">#SmithFit #5MinIgnition #5MinutePromise #Day2</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DAY 3 ===== -->
+<div class="sf-day-card" id="sf-day-3">
+  <div class="sf-day-header">
+    <div class="sf-day-num">3</div>
+    <div>
+      <h3 class="sf-day-title">Move Different</h3>
+      <p class="sf-day-subtitle">Wednesday — Break the routine, try something new</p>
+    </div>
+  </div>
+  <div class="sf-day-instruction">Today we're switching it up. Your body adapts fast, so let's surprise it. Dance in your kitchen. Try a yoga flow. Walk a different route. The point is: move in a way that feels NEW.</div>
+  <div class="sf-tiers">
+    <div class="sf-tier sf-tier-foundation">
+      <div class="sf-tier-name">Foundation</div>
+      <div class="sf-tier-desc">I can barely move today</div>
+      <div class="sf-tier-action">5-minute dance break — put on your favorite song and MOVE</div>
+    </div>
+    <div class="sf-tier sf-tier-build">
+      <div class="sf-tier-name">Build</div>
+      <div class="sf-tier-desc">I've got some energy</div>
+      <div class="sf-tier-action">10-minute yoga or mobility flow (YouTube is your friend)</div>
+    </div>
+    <div class="sf-tier sf-tier-momentum">
+      <div class="sf-tier-name">Momentum</div>
+      <div class="sf-tier-desc">Let's get it</div>
+      <div class="sf-tier-action">Try a brand new workout style — boxing, Pilates, HIIT, whatever you've never done</div>
+    </div>
+  </div>
+  <div class="sf-post">
+    <div class="sf-post-icon">&#127911;</div>
+    <div>
+      <div class="sf-post-label">Post to Complete</div>
+      <div class="sf-post-text">Photo or video of your "something new." Tell the community what you tried and whether you'd do it again!</div>
+      <div class="sf-post-hashtags">#SmithFit #5MinIgnition #MoveDifferent #Day3</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DAY 4 ===== -->
+<div class="sf-day-card" id="sf-day-4">
+  <div class="sf-day-header">
+    <div class="sf-day-num">4</div>
+    <div>
+      <h3 class="sf-day-title">Recovery is Strength</h3>
+      <p class="sf-day-subtitle">Thursday — Rest is not quitting. Rest is strategy.</p>
+    </div>
+  </div>
+  <div class="sf-day-instruction">If you've been going hard, today is your permission slip to slow down. Recovery IS the workout. Your muscles grow when you rest. Your mind resets when you breathe. This is not a day off — it's a day ON for your recovery.</div>
+  <div class="sf-tiers">
+    <div class="sf-tier sf-tier-foundation">
+      <div class="sf-tier-name">Foundation</div>
+      <div class="sf-tier-desc">I can barely move today</div>
+      <div class="sf-tier-action">5-minute deep breathing: inhale 4 counts, hold 4, exhale 6</div>
+    </div>
+    <div class="sf-tier sf-tier-build">
+      <div class="sf-tier-name">Build</div>
+      <div class="sf-tier-desc">I've got some energy</div>
+      <div class="sf-tier-action">10-minute foam rolling or gentle stretching session</div>
+    </div>
+    <div class="sf-tier sf-tier-momentum">
+      <div class="sf-tier-name">Momentum</div>
+      <div class="sf-tier-desc">Let's get it</div>
+      <div class="sf-tier-action">20-minute active recovery walk + full-body stretch</div>
+    </div>
+  </div>
+  <div class="sf-post">
+    <div class="sf-post-icon">&#128156;</div>
+    <div>
+      <div class="sf-post-label">Post to Complete</div>
+      <div class="sf-post-text">Photo of your recovery spot — couch, mat, porch, wherever you recharged. Tell us one thing your body thanked you for today.</div>
+      <div class="sf-post-hashtags">#SmithFit #5MinIgnition #RecoveryIsStrength #Day4</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DAY 5 ===== -->
+<div class="sf-day-card" id="sf-day-5">
+  <div class="sf-day-header">
+    <div class="sf-day-num">5</div>
+    <div>
+      <h3 class="sf-day-title">Bring a Friend</h3>
+      <p class="sf-day-subtitle">Friday — Movement is better together</p>
+    </div>
+  </div>
+  <div class="sf-day-instruction">Tag someone. Text someone. Grab your kid, your partner, your coworker on break. Movement is contagious — and it's more fun when you share it.</div>
+  <div class="sf-tiers">
+    <div class="sf-tier sf-tier-foundation">
+      <div class="sf-tier-name">Foundation</div>
+      <div class="sf-tier-desc">I can barely move today</div>
+      <div class="sf-tier-action">5-minute walk with someone — or call someone while you walk</div>
+    </div>
+    <div class="sf-tier sf-tier-build">
+      <div class="sf-tier-name">Build</div>
+      <div class="sf-tier-desc">I've got some energy</div>
+      <div class="sf-tier-action">10-minute partner workout or group walk</div>
+    </div>
+    <div class="sf-tier sf-tier-momentum">
+      <div class="sf-tier-name">Momentum</div>
+      <div class="sf-tier-desc">Let's get it</div>
+      <div class="sf-tier-action">Full workout with a friend — push each other</div>
+    </div>
+  </div>
+  <div class="sf-post">
+    <div class="sf-post-icon">&#129309;</div>
+    <div>
+      <div class="sf-post-label">Post to Complete</div>
+      <div class="sf-post-text">Photo with your movement buddy — or a screenshot of your call. Tag them if they're in the community!</div>
+      <div class="sf-post-hashtags">#SmithFit #5MinIgnition #BringAFriend #Day5</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DAY 6 ===== -->
+<div class="sf-day-card" id="sf-day-6">
+  <div class="sf-day-header">
+    <div class="sf-day-num">6</div>
+    <div>
+      <h3 class="sf-day-title">Your Favorite Move</h3>
+      <p class="sf-day-subtitle">Saturday — Do what you LOVE</p>
+    </div>
+  </div>
+  <div class="sf-day-instruction">Forget what you "should" do. Today is about what makes YOUR body feel alive. Hike? Dance? Swim? Lift? Play with your kids? Whatever lights you up — that's the workout.</div>
+  <div class="sf-tiers">
+    <div class="sf-tier sf-tier-foundation">
+      <div class="sf-tier-name">Foundation</div>
+      <div class="sf-tier-desc">I can barely move today</div>
+      <div class="sf-tier-action">5 minutes of your favorite movement — anything counts</div>
+    </div>
+    <div class="sf-tier sf-tier-build">
+      <div class="sf-tier-name">Build</div>
+      <div class="sf-tier-desc">I've got some energy</div>
+      <div class="sf-tier-action">15 minutes of something you genuinely enjoy</div>
+    </div>
+    <div class="sf-tier sf-tier-momentum">
+      <div class="sf-tier-name">Momentum</div>
+      <div class="sf-tier-desc">Let's get it</div>
+      <div class="sf-tier-action">Go all-in on your favorite activity — make it an EVENT</div>
+    </div>
+  </div>
+  <div class="sf-post">
+    <div class="sf-post-icon">&#128293;</div>
+    <div>
+      <div class="sf-post-label">Post to Complete</div>
+      <div class="sf-post-text">Photo or video of your favorite movement. Tell us WHY this one lights you up.</div>
+      <div class="sf-post-hashtags">#SmithFit #5MinIgnition #FavoriteMove #Day6</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DAY 7 ===== -->
+<div class="sf-day-card" id="sf-day-7">
+  <div class="sf-day-header">
+    <div class="sf-day-num">7</div>
+    <div>
+      <h3 class="sf-day-title">Celebrate the Fire</h3>
+      <p class="sf-day-subtitle">Sunday — You did the thing.</p>
+    </div>
+  </div>
+  <div class="sf-day-instruction">Look at you. You showed up this week. Not perfectly — maybe not every day. But you moved. You proved something to yourself. Today, celebrate that.</div>
+  <div class="sf-tiers">
+    <div class="sf-tier sf-tier-foundation">
+      <div class="sf-tier-name">Foundation</div>
+      <div class="sf-tier-desc">I can barely move today</div>
+      <div class="sf-tier-action">5-minute gratitude walk — reflect on what you accomplished</div>
+    </div>
+    <div class="sf-tier sf-tier-build">
+      <div class="sf-tier-name">Build</div>
+      <div class="sf-tier-desc">I've got some energy</div>
+      <div class="sf-tier-action">10-minute feel-good movement + post your wins in the community</div>
+    </div>
+    <div class="sf-tier sf-tier-momentum">
+      <div class="sf-tier-name">Momentum</div>
+      <div class="sf-tier-desc">Let's get it</div>
+      <div class="sf-tier-action">Full workout + share your transformation story from this week</div>
+    </div>
+  </div>
+  <div class="sf-post">
+    <div class="sf-post-icon">&#127942;</div>
+    <div>
+      <div class="sf-post-label">Post to Complete</div>
+      <div class="sf-post-text">Share your biggest win from the week. Photo, selfie, or just words — tell us what changed for you.</div>
+      <div class="sf-post-hashtags">#SmithFit #5MinIgnition #CelebrateTheFire #Day7</div>
+    </div>
+  </div>
+</div>
+
+<div class="sf-divider"></div>
+
+<!-- ==================== CLOSING ==================== -->
+<div class="sf-closing">
+  <h2>You've Got This</h2>
+  <blockquote>"You don't need to be perfect. You need to be present. Show up for yourself this week, and I promise you'll feel the difference."</blockquote>
+  <p class="sf-closing-author">&mdash; IJ Smith, RN</p>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<div class="sf-footer">SmithFit &bull; 5-Minute Ignition Week &bull; Movement &bull; Community &bull; Growth</div>
+
+<!-- ==================== OPTIONAL JS (interactivity only) ==================== -->
+<script>
+(function() {
+  var KEY = 'smithfit-ignition-week';
+  function get() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { return {}; } }
+  function save(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch(e) {} }
+  function toggle(n) { var d = get(); d[n] = !d[n]; save(d); update(); }
+  function update() {
+    var d = get(), count = 0;
+    for (var i = 1; i <= 7; i++) {
+      var c = document.getElementById('sf-circle-' + i);
+      var card = document.getElementById('sf-day-' + i);
+      if (d[i]) {
+        count++;
+        if (c) { c.style.backgroundColor = '#D4A94C'; c.style.color = '#fff'; }
+        if (card) { card.style.opacity = '0.65'; }
+      } else {
+        if (c) { c.style.backgroundColor = '#fff'; c.style.color = '#2D1F1A'; }
+        if (card) { card.style.opacity = '1'; }
+      }
+    }
+    var el = document.getElementById('sf-completed-count');
+    if (el) el.textContent = count + ' of 7 completed';
+  }
+  function init() {
+    for (var i = 1; i <= 7; i++) {
+      (function(n) {
+        var c = document.getElementById('sf-circle-' + n);
+        if (c) c.addEventListener('click', function() { toggle(n); });
+      })(i);
+    }
+    update();
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
+})();
+</script>
+</div>

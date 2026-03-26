@@ -1,0 +1,121 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2868
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # SmithFit Workflows \'97 Need to Be Built in GHL\
+\
+These workflows need to be created manually in:\
+Automation > Workflows > Create Workflow\
+\
+All email templates already exist \'97 just select them by name.\
+All tags already exist \'97 just type the name.\
+\
+---\
+\
+## WORKFLOW 1: Membership Day 1 Onboarding\
+Folder: 2. Fulfilment Automations\
+Status: NEEDS TO BE BUILT\
+\
+Trigger: Tag Added \uc0\u8594  membership-active\
+\
+Steps:\
+1. Send Email: MEM-01 (immediate)\
+2. Wait: 2 days\
+3. Send Email: MEM-02\
+4. Wait: 5 days\
+5. Send Email: MEM-03\
+6. Wait: 7 days\
+7. Send Email: MEM-04\
+8. Wait: 16 days\
+9. Send Email: MEM-05\
+10. Wait: 15 days\
+11. Send Email: MEM-06\
+12. Add Tag: fomo-track-a-active\
+\
+---\
+\
+## WORKFLOW 2: Bundle Onboarding\
+Folder: 2. Fulfilment Automations\
+Status: NEEDS TO BE BUILT\
+\
+Trigger: Tag Added \uc0\u8594  bundle-active\
+\
+Steps:\
+1. Send Email: BNDL-01 (immediate)\
+2. Add Tag: new-bundle\
+3. Wait: 1 day\
+4. Send Email: BNDL-02\
+5. Wait: 6 days\
+6. Send Email: BNDL-03\
+7. Wait: 21 days\
+8. Send Email: BNDL-04\
+9. Add Tag: coach-review\
+\
+---\
+\
+## WORKFLOW 3: FOMO Track A (Monthly \uc0\u8594  Bundle)\
+Folder: 3. Tracking Engagement\
+Status: NEEDS TO BE BUILT\
+\
+Trigger: Tag Added \uc0\u8594  fomo-track-a-active\
+Filter: Contact must NOT have tag: bundle-active\
+\
+Steps:\
+1. Send Email: FOMO-A1 (immediate)\
+2. Wait: 15 days\
+3. Send Email: FOMO-A2\
+4. Wait: 15 days\
+5. Send Email: FOMO-A3\
+6. Wait: 15 days\
+7. Send Email: FOMO-A4\
+8. Remove Tag: fomo-track-a-active\
+9. Add Tag: fomo-track-a-complete\
+\
+---\
+\
+## WORKFLOW 4: FOMO Track B (6-Month \uc0\u8594  12-Month)\
+Folder: 3. Tracking Engagement\
+Status: NEEDS TO BE BUILT\
+\
+Trigger: Tag Added \uc0\u8594  6-month-bundle\
+Filter: Contact must NOT have tag: 12-month-bundle\
+\
+Steps:\
+1. Wait: 45 days\
+2. Send Email: FOMO-B1\
+3. Wait: 30 days\
+4. Send Email: FOMO-B2\
+5. Wait: 25 days\
+6. Send Email: FOMO-B3\
+7. Wait: 40 days\
+8. Send Email: FOMO-B4\
+9. Remove Tag: fomo-track-b-active\
+10. Add Tag: fomo-track-b-complete\
+\
+---\
+\
+## WORKFLOW 5: FOMO Track C (Free Trial \uc0\u8594  Paid)\
+Folder: 3. Tracking Engagement\
+Status: NEEDS TO BE BUILT\
+\
+Trigger: Tag Added \uc0\u8594  free-trial-active\
+\
+Steps:\
+1. Send Email: FOMO-C1 (immediate)\
+2. Wait: 3 days\
+3. Send Email: FOMO-C2\
+4. Wait: 4 days\
+5. Send Email: FOMO-C3\
+6. Wait: 3 days\
+7. Send Email: FOMO-C4\
+8. Wait: 2 days\
+9. Send Email: FOMO-C5\
+10. Wait: 1 day\
+11. Send Email: FOMO-C6\
+12. Wait: 1 day\
+13. IF/ELSE: Has tag trial-converted?\
+    \uc0\u8594  YES: End workflow\
+    \uc0\u8594  NO: Send Email FOMO-C7 \u8594  Remove Tag free-trial-active \u8594  Add Tag trial-cancelled}

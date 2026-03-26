@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pillar 2: Stabilize — SmithFit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background-color: #1a1a1a;
+            color: #e0dcd4;
+            line-height: 1.6;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background-color: #2a2a2a;
+            border-bottom: 1px solid #3a3a3a;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-left {
+            flex: 1;
+        }
+
+        .brand-text {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            color: #d4a94c;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 1.8rem;
+            color: #d4a94c;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        .pillar-badge {
+            background-color: #d4a94c;
+            color: #1a1a1a;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid #3a3a3a;
+            margin-bottom: 3rem;
+            overflow-x: auto;
+            background-color: #2a2a2a;
+            padding: 0 2rem;
+            margin: 0 -2rem 3rem -2rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .tab-button {
+            padding: 1.25rem 1.5rem;
+            background: none;
+            border: none;
+            color: #b8b3a8;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .tab-button:hover {
+            color: #d4a94c;
+        }
+
+        .tab-button.active {
+            color: #d4a94c;
+            border-bottom-color: #d4a94c;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scenario Selection */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .scenario-button {
+            background-color: #2a2a2a;
+            border: 2px solid #3a3a3a;
+            color: #e0dcd4;
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.4;
+        }
+
+        .scenario-button:hover {
+            border-color: #d4a94c;
+            color: #d4a94c;
+        }
+
+        .scenario-button.active {
+            background-color: #d4a94c;
+            color: #1a1a1a;
+            border-color: #d4a94c;
+            font-weight: 700;
+        }
+
+        /* Meal Cards */
+        .meal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .meal-card {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .meal-card:hover {
+            border-color: #d4a94c;
+            background-color: rgba(212, 169, 76, 0.04);
+        }
+
+        .meal-name {
+            font-family: Georgia, serif;
+            font-size: 1.2rem;
+            color: #d4a94c;
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+        }
+
+        .meal-ingredient {
+            font-size: 0.9rem;
+            color: #b8b3a8;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        .meal-ingredient:before {
+            content: "·";
+            margin-left: -0.75rem;
+            margin-right: 0.5rem;
+            color: #d4a94c;
+            font-weight: bold;
+        }
+
+        .meal-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+            padding-top: 1rem;
+            border-top: 1px solid #3a3a3a;
+            font-size: 0.85rem;
+        }
+
+        .meta-item {
+            color: #8a8278;
+        }
+
+        .meta-label {
+            color: #d4a94c;
+            font-weight: 600;
+        }
+
+        .meal-protein {
+            display: inline-block;
+            background-color: rgba(212, 169, 76, 0.2);
+            color: #d4a94c;
+            padding: 0.5rem 0.75rem;
+            border-radius: 3px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .meal-why {
+            background-color: #1a1a1a;
+            border-left: 3px solid #d4a94c;
+            padding: 0.75rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #b8b3a8;
+            font-style: italic;
+        }
+
+        /* Plate Breakdown */
+        .plate-breakdown {
+            display: flex;
+            height: 20px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1rem;
+            border: 1px solid #3a3a3a;
+        }
+
+        .plate-protein {
+            flex: 0 0 50%;
+            background-color: #d4a94c;
+            position: relative;
+        }
+
+        .plate-protein:after {
+            content: "50%";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .plate-veg {
+            flex: 0 0 25%;
+            background-color: #7bc47a;
+            position: relative;
+        }
+
+        .plate-veg:after {
+            content: "25%";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .plate-carb {
+            flex: 0 0 25%;
+            background-color: #c9a876;
+            position: relative;
+        }
+
+        .plate-carb:after {
+            content: "25%";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        /* Scenario Cards (Tab 3) */
+        .scenario-card {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-card:hover {
+            border-color: #d4a94c;
+            background-color: rgba(212, 169, 76, 0.04);
+        }
+
+        .scenario-card.expanded {
+            border-color: #d4a94c;
+            background-color: rgba(212, 169, 76, 0.04);
+        }
+
+        .scenario-title {
+            font-family: Georgia, serif;
+            font-size: 1.2rem;
+            color: #d4a94c;
+            font-weight: 400;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .scenario-toggle {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .scenario-card.expanded .scenario-toggle {
+            transform: rotate(180deg);
+        }
+
+        .scenario-content {
+            display: none;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #3a3a3a;
+        }
+
+        .scenario-card.expanded .scenario-content {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .scenario-then {
+            color: #b8b3a8;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .scenario-then strong {
+            color: #d4a94c;
+        }
+
+        .scenario-options {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .scenario-options li {
+            padding: 0.5rem 0 0.5rem 1.5rem;
+            position: relative;
+            color: #b8b3a8;
+        }
+
+        .scenario-options li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #d4a94c;
+            font-weight: bold;
+        }
+
+        .scenario-why {
+            background-color: #1a1a1a;
+            border-left: 3px solid #d4a94c;
+            padding: 1rem;
+            color: #b8b3a8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .scenario-why strong {
+            color: #d4a94c;
+        }
+
+        /* Plate Formula (Tab 4) */
+        .plate-visual-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .plate-circle {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .plate-half {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #1a1a1a;
+            font-size: 1.1rem;
+        }
+
+        .plate-protein-half {
+            width: 250px;
+            height: 125px;
+            background-color: #d4a94c;
+            border-radius: 250px 250px 0 0;
+            top: 0;
+        }
+
+        .plate-veg-quarter {
+            width: 125px;
+            height: 125px;
+            background-color: #7bc47a;
+            bottom: 0;
+            left: 0;
+            border-radius: 0 0 0 250px;
+        }
+
+        .plate-carb-quarter {
+            width: 125px;
+            height: 125px;
+            background-color: #c9a876;
+            bottom: 0;
+            right: 0;
+            border-radius: 0 0 250px 0;
+        }
+
+        .plate-label {
+            position: absolute;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .plate-protein-label {
+            top: 40px;
+            color: #1a1a1a;
+        }
+
+        .plate-veg-label {
+            bottom: 30px;
+            left: 20px;
+            color: #1a1a1a;
+        }
+
+        .plate-carb-label {
+            bottom: 30px;
+            right: 20px;
+            color: #1a1a1a;
+        }
+
+        /* Expandable Sections */
+        .expandable-section {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .expandable-header {
+            padding: 1.5rem;
+            background-color: #2a2a2a;
+            border-bottom: 1px solid #3a3a3a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .expandable-header:hover {
+            background-color: rgba(212, 169, 76, 0.04);
+        }
+
+        .expandable-title {
+            font-family: Georgia, serif;
+            font-size: 1.1rem;
+            color: #d4a94c;
+            font-weight: 400;
+        }
+
+        .expand-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .expandable-section.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .expandable-section.expanded .expandable-content {
+            max-height: 1000px;
+        }
+
+        .expandable-content-inner {
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .option-item {
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            padding: 0.75rem;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            color: #b8b3a8;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .option-item:hover {
+            border-color: #d4a94c;
+            color: #d4a94c;
+        }
+
+        /* Hand Portion Guide */
+        .hand-guide {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hand-guide-title {
+            font-family: Georgia, serif;
+            font-size: 1.1rem;
+            color: #d4a94c;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .hand-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .hand-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .hand-icon {
+            font-size: 2rem;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .hand-description {
+            flex: 1;
+        }
+
+        .hand-description strong {
+            color: #d4a94c;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .hand-description span {
+            color: #b8b3a8;
+            font-size: 0.9rem;
+        }
+
+        /* Daily Target */
+        .daily-target {
+            background-color: rgba(212, 169, 76, 0.08);
+            border-left: 3px solid #d4a94c;
+            padding: 1.5rem;
+            border-radius: 0 4px 4px 0;
+            margin-top: 2rem;
+        }
+
+        .daily-target h3 {
+            color: #d4a94c;
+            margin-bottom: 0.75rem;
+            font-family: Georgia, serif;
+            font-weight: 400;
+            font-size: 1.1rem;
+        }
+
+        .daily-target p {
+            color: #b8b3a8;
+            line-height: 1.7;
+        }
+
+        /* Callout */
+        .callout {
+            background-color: #1a1a1a;
+            border-left: 3px solid #d4a94c;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 3px 3px 0;
+            color: #b8b3a8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2a2a2a;
+            border-top: 1px solid #3a3a3a;
+            padding: 2rem;
+            margin-top: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #8a8278;
+        }
+
+        .footer-left {
+            flex: 1;
+        }
+
+        .footer-right {
+            text-align: right;
+            flex: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 1.4rem;
+            }
+
+            .tab-navigation {
+                margin: 0 -1rem 2rem -1rem;
+                padding: 0 1rem;
+            }
+
+            main {
+                padding: 0 1rem;
+            }
+
+            .meal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .scenario-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .plate-circle {
+                width: 200px;
+                height: 200px;
+            }
+
+            .plate-label {
+                font-size: 0.75rem;
+            }
+
+            .expandable-content-inner {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer-right {
+                text-align: center;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+                color: #000;
+            }
+
+            header, footer, .tab-navigation, .scenario-button, .expandable-header {
+                display: none;
+            }
+
+            .tab-content {
+                display: block !important;
+            }
+
+            .meal-card {
+                background-color: white;
+                border: 2px solid #000;
+                page-break-inside: avoid;
+            }
+
+            .scenario-card {
+                page-break-inside: avoid;
+                border: 1px solid #000;
+            }
+
+            .plate-circle {
+                margin: 1rem auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div class="brand-text">Shift-Proof Metabolism Reset™</div>
+            <h1>Pillar 2: Stabilize</h1>
+        </div>
+        <div class="pillar-badge">Pillar 2 — Stabilize</div>
+    </header>
+
+    <main>
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-button active" onclick="switchTab(0)">Meal Builder</button>
+            <button class="tab-button" onclick="switchTab(1)">7-Day Tracker</button>
+            <button class="tab-button" onclick="switchTab(2)">If-This-Then-That</button>
+            <button class="tab-button" onclick="switchTab(3)">3×3 Plate Formula</button>
+        </div>
+
+        <!-- TAB 1: Shift-Proof Meal Builder -->
+        <div class="tab-content active" id="tab0">
+            <h2 style="font-family: Georgia, serif; font-size: 1.6rem; color: #d4a94c; margin-bottom: 1.5rem; font-weight: 400;">Shift-Proof Meal Builder</h2>
+            <p style="color: #b8b3a8; margin-bottom: 2rem;">Select your scenario below. For each one, you'll get 3–4 protein-first meal options using the 3×3 formula. Pick what fits your life.</p>
+
+            <div class="scenario-grid" id="scenarioButtons"></div>
+
+            <div id="mealDisplay"></div>
+        </div>
+
+        <!-- TAB 2: 7-Day Protein Tracker -->
+        <div class="tab-content" id="tab1">
+            <h2 style="font-family: Georgia, serif; font-size: 1.6rem; color: #d4a94c; margin-bottom: 1.5rem; font-weight: 400;">7-Day Protein Tracker</h2>
+            <p style="color: #b8b3a8; margin-bottom: 2rem;">Track your habits daily. By Day 3, you'll see proof your body is responding.</p>
+
+            <div id="trackerSetup" style="background-color: #2a2a2a; border: 1px solid #3a3a3a; border-radius: 4px; padding: 2rem; margin-bottom: 2rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                    <div>
+                        <label style="display: block; color: #d4a94c; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase;">Day 1 Energy (1-5)</label>
+                        <div class="number-selector" id="day1EnergySelector"></div>
+                    </div>
+                    <div>
+                        <label style="display: block; color: #d4a94c; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase;">Day 1 Cravings (1-5)</label>
+                        <div class="number-selector" id="day1CravingsSelector"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="trackerTable" style="background-color: #2a2a2a; border: 1px solid #3a3a3a; border-radius: 4px; overflow: hidden; margin-bottom: 2rem;"></div>
+
+            <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                <button onclick="resetProteinTracker()" style="background-color: #d4a94c; color: #1a1a1a; border: none; padding: 1rem 2rem; border-radius: 4px; font-size: 1rem; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em;">Reset Tracker</button>
+            </div>
+
+            <div id="trackerStats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;"></div>
+        </div>
+
+        <!-- TAB 3: If-This-Then-That -->
+        <div class="tab-content" id="tab2">
+            <h2 style="font-family: Georgia, serif; font-size: 1.6rem; color: #d4a94c; margin-bottom: 1.5rem; font-weight: 400;">If-This-Then-That Nutrition Guide</h2>
+            <p style="color: #b8b3a8; margin-bottom: 2rem;">Click any scenario. Each one shows exactly what to do and why it works.</p>
+
+            <div id="scenariosList"></div>
+        </div>
+
+        <!-- TAB 4: 3×3 Plate Formula -->
+        <div class="tab-content" id="tab3">
+            <h2 style="font-family: Georgia, serif; font-size: 1.6rem; color: #d4a94c; margin-bottom: 1.5rem; font-weight: 400;">Build-Your-Plate Formula</h2>
+
+            <div class="plate-visual-container">
+                <div class="plate-circle">
+                    <div class="plate-protein-half">
+                        <div class="plate-label plate-protein-label">50% Protein</div>
+                    </div>
+                    <div class="plate-veg-quarter">
+                        <div class="plate-label plate-veg-label">25% Veg</div>
+                    </div>
+                    <div class="plate-carb-quarter">
+                        <div class="plate-label plate-carb-label">25% Carb</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-family: Georgia, serif; font-size: 1.2rem; color: #d4a94c; margin-bottom: 1rem; font-weight: 400; margin-top: 2rem;">Protein Options</h3>
+            <div class="expandable-section expanded">
+                <div class="expandable-content">
+                    <div class="expandable-content-inner">
+                        <div class="option-item">Chicken</div>
+                        <div class="option-item">Fish</div>
+                        <div class="option-item">Eggs</div>
+                        <div class="option-item">Greek Yogurt</div>
+                        <div class="option-item">Turkey</div>
+                        <div class="option-item">Protein Shake</div>
+                        <div class="option-item">Tuna</div>
+                        <div class="option-item">Cottage Cheese</div>
+                        <div class="option-item">Lean Beef</div>
+                        <div class="option-item">Tofu</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-family: Georgia, serif; font-size: 1.2rem; color: #d4a94c; margin-bottom: 1rem; font-weight: 400; margin-top: 1.5rem;">Vegetable Options</h3>
+            <div class="expandable-section expanded">
+                <div class="expandable-content">
+                    <div class="expandable-content-inner">
+                        <div class="option-item">Broccoli</div>
+                        <div class="option-item">Spinach</div>
+                        <div class="option-item">Peppers</div>
+                        <div class="option-item">Green Beans</div>
+                        <div class="option-item">Salad</div>
+                        <div class="option-item">Carrots</div>
+                        <div class="option-item">Zucchini</div>
+                        <div class="option-item">Asparagus</div>
+                        <div class="option-item">Mixed Greens</div>
+                        <div class="option-item">Brussels Sprouts</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-family: Georgia, serif; font-size: 1.2rem; color: #d4a94c; margin-bottom: 1rem; font-weight: 400; margin-top: 1.5rem;">Smart Carb Options</h3>
+            <div class="expandable-section expanded">
+                <div class="expandable-content">
+                    <div class="expandable-content-inner">
+                        <div class="option-item">Rice</div>
+                        <div class="option-item">Sweet Potato</div>
+                        <div class="option-item">Oats</div>
+                        <div class="option-item">Whole Wheat Bread</div>
+                        <div class="option-item">Quinoa</div>
+                        <div class="option-item">Fruit</div>
+                        <div class="option-item">Whole Wheat Pasta</div>
+                        <div class="option-item">Beans</div>
+                        <div class="option-item">Potatoes</div>
+                        <div class="option-item">Barley</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hand-guide" style="margin-top: 2rem;">
+                <div class="hand-guide-title">Hand Portion Guide</div>
+                <div class="hand-item">
+                    <div class="hand-icon">🖐️</div>
+                    <div class="hand-description">
+                        <strong>Palm = 1 Protein Serving</strong>
+                        <span>Aim for 1–2 palms per meal (roughly 25–35g)</span>
+                    </div>
+                </div>
+                <div class="hand-item">
+                    <div class="hand-icon">✊</div>
+                    <div class="hand-description">
+                        <strong>Fist = 1 Veggie Serving</strong>
+                        <span>Aim for 1–2 fists per meal</span>
+                    </div>
+                </div>
+                <div class="hand-item">
+                    <div class="hand-icon">🤚</div>
+                    <div class="hand-description">
+                        <strong>Cupped Hand = 1 Carb Serving</strong>
+                        <span>Aim for 1 cupped hand per meal</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="daily-target">
+                <h3>Daily Protein Target</h3>
+                <p>Aim for <strong>3–5 palm-sized protein servings per day</strong> (roughly 25–35g per meal). This is your metabolic anchor. It stabilizes blood sugar, quiets cravings, and signals safety to your body.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-left">For nurses over 35 · Educational resource, not medical advice</div>
+        <div class="footer-right">Created by IJ Smith</div>
+    </footer>
+
+    <script>
+        // Meal Data
+        const mealsData = {
+            'Start of Day — Before Shift': [
+                {
+                    name: 'Greek Yogurt Power Bowl',
+                    ingredients: ['Greek yogurt', 'berries', 'granola', 'handful almonds'],
+                    prep: '3 min',
+                    protein: '~30g',
+                    why: 'Protein-first start stabilizes blood sugar for 4+ hours.',
+                    color: '#d4a94c'
+                },
+                {
+                    name: 'Egg Scramble Wrap',
+                    ingredients: ['3 eggs', 'spinach', 'cheese', 'whole wheat wrap'],
+                    prep: '8 min',
+                    protein: '~28g',
+                    why: 'Hot protein with fiber keeps you full through first rounds.',
+                    color: '#d4a94c'
+                },
+                {
+                    name: 'Protein Shake + Toast',
+                    ingredients: ['Protein shake (30g)', 'whole wheat toast with PB'],
+                    prep: '3 min',
+                    protein: '~35g',
+                    why: 'Fastest anchor — blend and go.',
+                    color: '#d4a94c'
+                }
+            ],
+            'Start of Day — Night Shift Waking': [
+                {
+                    name: 'Overnight Oats + Protein',
+                    ingredients: ['Oats', 'protein powder', 'banana', 'PB'],
+                    prep: '0 min (prepped)',
+                    protein: '~30g',
+                    why: 'Ready the second you wake — no decisions needed.',
+                    color: '#d4a94c'
+                },
+                {
+                    name: 'Turkey Roll-Ups + Fruit',
+                    ingredients: ['Deli turkey', 'cheese', 'apple'],
+                    prep: '2 min',
+                    protein: '~25g',
+                    why: 'Light enough for a just-woke stomach.',
+                    color: '#d4a94c'
+                }
+            ],
+            'Mid-Shift Break': [
+                {
+                    name: 'Meal-Prepped Container',
+                    ingredients: ['Chicken', 'rice', 'steamed broccoli'],
+                    prep: '0 min',
+                    protein: '~35g',
+                    why: 'The gold standard — meal prep once, eat all week.',
+                    color: '#d4a94c'
+                },
+                {
+                    name: 'Cafeteria Hack',
+                    ingredients: ['Grilled protein', 'side salad', 'roll'],
+                    prep: '5 min',
+                    protein: '~30g',
+                    why: 'Build your 3×3 plate from whatever\'s available.',
+                    color: '#d4a94c'
+                },
+                {
+                    name: 'Tuna + Crackers + Fruit',
+                    ingredients: ['Tuna packet', 'whole grain crackers', 'banana'],
+                    prep: '2 min',
+                    protein: '~25g',
+                    why: 'Shelf-stable, fits in your locker.',
+                    color: '#d4a94c'
+                }
+            ],
+            'Night Shift — Bag-Ready': [
+                {
+                    name: 'Hard-Boiled Eggs + Trail Mix',
+                    ingredients: ['3 eggs', 'trail mix with nuts'],
+                    prep: '0 min (prepped)',
+                    protein: '~22g',
+                    why: 'Pack Sunday, grab all week.',
+                    color: '#d4a94c'
+                },
+                {
+                    name: 'Protein Bar + Apple + String Cheese',
+                    ingredients: ['Protein bar (20g+)', 'apple', 'cheese stick'],
+                    prep: '0 min',
+                    protein: '~28g',
+                    why: 'Zero prep, maximum convenience.',
+                    color: '#d4a94c'
+                }
+            ],
+            'No Break — Rescue Fuel': [
+                {
+                    name: 'Protein Shake (Premixed)',
+                    ingredients: ['Premixed protein shake'],
+                    prep: '0 min',
+                    protein: '~30g',
+                    why: '30 seconds between patients. That\'s all you need.',
+                    color: '#d4a94c'
+                },
+                {
+                    name: 'Protein Bar + Electrolyte Water',
+                    ingredients: ['Protein bar', 'electrolytes'],
+                    prep: '0 min',
+                    protein: '~20g',
+                    why: 'Better than the vending machine. Always.',
+                    color: '#d4a94c'
+                },
+                {
+                    name: 'Greek Yogurt Cup',
+                    ingredients: ['Single-serve Greek yogurt'],
+                    prep: '0 min',
+                    protein: '~15g',
+                    why: 'Buy at the gift shop or cafeteria. Better than nothing.',
+                    color: '#d4a94c'
+                }
+            ],
+            'Post-Shift Landing Snack': [
+                {
+                    name: 'Greek Yogurt + Granola',
+                    ingredients: ['Yogurt', 'granola', 'berries'],
+                    prep: '2 min',
+                    protein: '~20g',
+                    why: 'Lands your blood sugar before the post-shift crash hits.',
+                    color: '#d4a94c'
+                },
+                {
+                    name: 'Protein Shake + Banana',
+                    ingredients: ['Quick shake', 'banana'],
+                    prep: '2 min',
+                    protein: '~30g',
+                    why: 'Fast fuel that prevents the "I\'ll just order pizza" moment.',
+                    color: '#d4a94c'
+                },
+                {
+                    name: 'Eggs + Toast',
+                    ingredients: ['2 eggs', 'whole wheat toast'],
+                    prep: '5 min',
+                    protein: '~18g',
+                    why: 'Simple, warm, satisfying.',
+                    color: '#d4a94c'
+                }
+            ],
+            'Off Day — Full Meal': [
+                {
+                    name: 'Big Protein Salad',
+                    ingredients: ['Chicken/salmon', 'greens', 'quinoa', 'avocado', 'dressing'],
+                    prep: '10 min',
+                    protein: '~35g',
+                    why: 'Off days = time for real meals. Use it.',
+                    color: '#d4a94c'
+                },
+                {
+                    name: 'Stir-Fry Bowl',
+                    ingredients: ['Ground turkey', 'veggies', 'rice', 'soy sauce'],
+                    prep: '15 min',
+                    protein: '~30g',
+                    why: 'Batch cook this — it becomes 3 shift-day lunches.',
+                    color: '#d4a94c'
+                },
+                {
+                    name: 'Burger + Veggies',
+                    ingredients: ['Lean beef patty', 'sweet potato', 'side salad'],
+                    prep: '12 min',
+                    protein: '~35g',
+                    why: 'Yes, burgers count. Protein first.',
+                    color: '#d4a94c'
+                }
+            ]
+        };
+
+        // Initialize Meal Builder
+        function initMealBuilder() {
+            const scenarioContainer = document.getElementById('scenarioButtons');
+            if (!scenarioContainer) return;
+            Object.keys(mealsData).forEach((scenario, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'scenario-button' + (index === 0 ? ' active' : '');
+                btn.textContent = scenario;
+                btn.onclick = () => selectScenario(scenario);
+                scenarioContainer.appendChild(btn);
+            });
+            selectScenario(Object.keys(mealsData)[0]);
+        }
+
+        function selectScenario(scenario) {
+            // Update buttons
+            document.querySelectorAll('.scenario-button').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === scenario) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Display meals
+            const meals = mealsData[scenario];
+            const display = document.getElementById('mealDisplay');
+            if (!display) return;
+            let html = '<div class="meal-grid">';
+
+            meals.forEach(meal => {
+                html += `
+                    <div class="meal-card">
+                        <div class="meal-name">${meal.name}</div>
+                        ${meal.ingredients.map(ing => `<div class="meal-ingredient">${ing}</div>`).join('')}
+                        <div class="meal-meta">
+                            <div class="meta-item"><span class="meta-label">Prep:</span> ${meal.prep}</div>
+                            <div class="meal-protein">${meal.protein} Protein</div>
+                        </div>
+                        <div class="meal-why">"${meal.why}"</div>
+                        <div class="plate-breakdown">
+                            <div class="plate-protein" style="flex: 0 0 50%;"></div>
+                            <div class="plate-veg" style="flex: 0 0 25%;"></div>
+                            <div class="plate-carb" style="flex: 0 0 25%;"></div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+            display.innerHTML = html;
+        }
+
+        // Initialize Protein Tracker
+        function initProteinTracker() {
+            // Create Day 1 selectors
+            const day1Energy = document.getElementById('day1EnergySelector');
+            const day1Cravings = document.getElementById('day1CravingsSelector');
+            if (!day1Energy || !day1Cravings) return;
+
+            for (let i = 1; i <= 5; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'number-button';
+                btn.textContent = i;
+                btn.onclick = () => setTrackerValue('day1Energy', i);
+                day1Energy.appendChild(btn);
+
+                const btn2 = document.createElement('button');
+                btn2.className = 'number-button';
+                btn2.textContent = i;
+                btn2.onclick = () => setTrackerValue('day1Cravings', i);
+                day1Cravings.appendChild(btn2);
+            }
+
+            renderProteinTracker();
+        }
+
+        function setTrackerValue(field, value) {
+            if (!window.trackerData) window.trackerData = {};
+            window.trackerData[field] = value;
+
+            // Update button states
+            const buttons = document.querySelectorAll(field === 'day1Energy' ? '#day1EnergySelector .number-button' : '#day1CravingsSelector .number-button');
+            buttons.forEach((btn, idx) => {
+                btn.classList.toggle('selected', idx + 1 === value);
+            });
+
+            renderProteinTracker();
+        }
+
+        function renderProteinTracker() {
+            if (!window.trackerData) window.trackerData = {};
+
+            const table = document.getElementById('trackerTable');
+            if (!table) return;
+            let html = '';
+
+            for (let day = 1; day <= 7; day++) {
+                html += `
+                    <div class="tracker-row" style="padding: 1.5rem; display: grid; grid-template-columns: 80px 1fr 100px 100px 100px; gap: 1rem; border-bottom: 1px solid #3a3a3a; align-items: center;">
+                        <div style="color: #d4a94c; font-weight: 700;">Day ${day}</div>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox" id="anchor${day}" onchange="updateTrackerDay(${day}, 'anchor', this.checked)" style="width: 20px; height: 20px; cursor: pointer;">
+                                <span style="font-size: 0.9rem; color: #b8b3a8;">Protein Anchor</span>
+                            </label>
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 0.75rem; color: #d4a94c; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase;">Energy</label>
+                            <select id="energy${day}" onchange="updateTrackerDay(${day}, 'energy', this.value)" style="width: 100%; background-color: #1a1a1a; border: 1px solid #3a3a3a; color: #e0dcd4; padding: 0.5rem; border-radius: 3px;">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 0.75rem; color: #d4a94c; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase;">Cravings</label>
+                            <select id="cravings${day}" onchange="updateTrackerDay(${day}, 'cravings', this.value)" style="width: 100%; background-color: #1a1a1a; border: 1px solid #3a3a3a; color: #e0dcd4; padding: 0.5rem; border-radius: 3px;">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 0.75rem; color: #d4a94c; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase;">Bloat</label>
+                            <select id="bloat${day}" onchange="updateTrackerDay(${day}, 'bloat', this.value)" style="width: 100%; background-color: #1a1a1a; border: 1px solid #3a3a3a; color: #e0dcd4; padding: 0.5rem; border-radius: 3px;">
+                                <option value="">—</option>
+                                <option value="L">Loose</option>
+                                <option value="N">Normal</option>
+                                <option value="T">Tight</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+            }
+
+            table.innerHTML = html;
+            updateTrackerStats();
+        }
+
+        function updateTrackerDay(day, field, value) {
+            if (!window.trackerData) window.trackerData = {};
+            if (!window.trackerData[`day${day}`]) window.trackerData[`day${day}`] = {};
+            window.trackerData[`day${day}`][field] = value;
+            updateTrackerStats();
+        }
+
+        function updateTrackerStats() {
+            if (!window.trackerData) window.trackerData = {};
+
+            let anchors = 0;
+            let energyValues = [];
+            let cravingValues = [];
+
+            for (let day = 1; day <= 7; day++) {
+                const dayData = window.trackerData[`day${day}`] || {};
+                if (dayData.anchor) anchors++;
+                if (dayData.energy) energyValues.push(parseInt(dayData.energy));
+                if (dayData.cravings) cravingValues.push(parseInt(dayData.cravings));
+            }
+
+            const statsDiv = document.getElementById('trackerStats');
+            if (!statsDiv) return;
+            let statsHtml = '';
+
+            // Streak
+            let streak = 0;
+            for (let day = 1; day <= 7; day++) {
+                const dayData = window.trackerData[`day${day}`] || {};
+                if (dayData.anchor) {
+                    streak++;
+                } else if (streak > 0) {
+                    break;
+                }
+            }
+
+            statsHtml += `
+                <div style="background-color: #2a2a2a; border: 1px solid #3a3a3a; border-radius: 4px; padding: 1.5rem; text-align: center;">
+                    <div style="color: #d4a94c; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">Current Streak</div>
+                    <div style="color: #e0dcd4; font-size: 2.5rem; font-family: Georgia, serif; font-weight: 700;">${streak}</div>
+                    <div style="color: #b8b3a8; font-size: 0.9rem;">days with anchor</div>
+                </div>
+            `;
+
+            // Anchor Hit Rate
+            const anchorPercent = Math.round((anchors / 7) * 100);
+            statsHtml += `
+                <div style="background-color: #2a2a2a; border: 1px solid #3a3a3a; border-radius: 4px; padding: 1.5rem; text-align: center;">
+                    <div style="color: #d4a94c; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">Protein Anchor Hit Rate</div>
+                    <div style="color: #e0dcd4; font-size: 2.5rem; font-family: Georgia, serif; font-weight: 700;">${anchorPercent}%</div>
+                    <div style="color: #b8b3a8; font-size: 0.9rem;">${anchors} of 7 days</div>
+                </div>
+            `;
+
+            // Energy Trend
+            if (energyValues.length >= 2) {
+                const avgFirst = energyValues.slice(0, Math.min(2, energyValues.length)).reduce((a, b) => a + b) / Math.min(2, energyValues.length);
+                const avgLast = energyValues.slice(-2).reduce((a, b) => a + b) / Math.min(2, energyValues.length);
+                const trend = avgLast > avgFirst + 0.5 ? '↑ Improving' : avgLast < avgFirst - 0.5 ? '↓ Declining' : '→ Stable';
+
+                statsHtml += `
+                    <div style="background-color: #2a2a2a; border: 1px solid #3a3a3a; border-radius: 4px; padding: 1.5rem; text-align: center;">
+                        <div style="color: #d4a94c; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">Energy Trend</div>
+                        <div style="color: #e0dcd4; font-size: 2rem;">${trend}</div>
+                    </div>
+                `;
+            }
+
+            // Cravings Trend
+            if (cravingValues.length >= 2) {
+                const avgFirst = cravingValues.slice(0, Math.min(2, cravingValues.length)).reduce((a, b) => a + b) / Math.min(2, cravingValues.length);
+                const avgLast = cravingValues.slice(-2).reduce((a, b) => a + b) / Math.min(2, cravingValues.length);
+                const trend = avgLast < avgFirst - 0.5 ? '↓ Quieter' : avgLast > avgFirst + 0.5 ? '↑ Stronger' : '→ Stable';
+
+                statsHtml += `
+                    <div style="background-color: #2a2a2a; border: 1px solid #3a3a3a; border-radius: 4px; padding: 1.5rem; text-align: center;">
+                        <div style="color: #d4a94c; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">Cravings Trend</div>
+                        <div style="color: #e0dcd4; font-size: 2rem;">${trend}</div>
+                    </div>
+                `;
+            }
+
+            statsDiv.innerHTML = statsHtml;
+        }
+
+        function resetProteinTracker() {
+            if (confirm('Clear all tracker data?')) {
+                window.trackerData = {};
+                document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+                document.querySelectorAll('select').forEach(sel => sel.value = '');
+                updateTrackerStats();
+            }
+        }
+
+        // Initialize If-This-Then-That Scenarios
+        const scenarios = [
+            {
+                situation: 'I missed breakfast',
+                then: 'Protein-first at first opportunity.',
+                options: ['Protein shake + fruit', 'Yogurt + granola', 'Eggs + fruit'],
+                why: 'Your body is in a brief energy deficit. Protein first stabilizes what\'s coming next and prevents the "catch-up eating" later.'
+            },
+            {
+                situation: 'I missed breaks — couldn\'t eat for hours',
+                then: 'Mini-fuel at first chance.',
+                options: ['Protein snack + water', 'Protein bar + electrolytes'],
+                why: 'Long gaps trigger cortisol spikes. Even a small anchor signal helps prevent the crash-and-crave cycle.'
+            },
+            {
+                situation: 'I\'m craving sweets mid-shift',
+                then: 'Protein + fiber first, then reassess in 15 minutes.',
+                options: ['Turkey/cheese + fruit', 'Protein bar + apple', 'Nuts + water'],
+                why: 'Cravings are a blood sugar dip talking. Protein + fiber stabilizes it. The craving usually quiets on its own.'
+            },
+            {
+                situation: 'I overate at dinner',
+                then: 'No punishment, restore rhythm.',
+                options: ['5–10 min walk', 'Normal protein anchor tomorrow', 'Extra water today'],
+                why: 'One meal doesn\'t erase the work. Your body doesn\'t remember yesterday — it responds to today\'s signals.'
+            },
+            {
+                situation: 'I have no time to cook',
+                then: 'No-cook protein options.',
+                options: ['Deli meat roll-ups', 'Protein shake', 'Greek yogurt', 'Tuna packets', 'String cheese'],
+                why: 'Perfect protein doesn\'t have to be hot or fancy. It just has to be there.'
+            },
+            {
+                situation: 'Low appetite after night shift',
+                then: 'Small protein option — don\'t force a full meal.',
+                options: ['Protein shake', 'Yogurt', 'Handful of nuts', 'Cheese + crackers'],
+                why: 'After 12 hours of go-mode, appetite signals are off. Small protein is enough to send the safety signal.'
+            },
+            {
+                situation: 'Hospital cafeteria is the only option',
+                then: 'Build your 3×3 plate from what\'s available.',
+                options: ['Pick a protein', 'Add a vegetable', 'Grab a roll', 'Hydrate'],
+                why: 'You don\'t need the perfect meal. You need structure. The 3×3 works with whatever\'s there.'
+            },
+            {
+                situation: 'I only have vending machine access',
+                then: 'Best vending choices, ranked.',
+                options: ['Nuts (best)', 'Protein bar', 'Cheese crackers', 'Trail mix', 'Pair with water'],
+                why: 'Vending isn\'t ideal, but it\'s infinitely better than skipping. Protein + hydration beats nothing.'
+            },
+            {
+                situation: 'Family dinner pressure (not my food choices)',
+                then: 'Eat a protein anchor before dinner, then build your 3×3 from what\'s served.',
+                options: ['Pre-dinner protein snack', 'At dinner: 3×3 plate from what\'s available', 'No guilt'],
+                why: 'You protect your signal first. Then you navigate the rest without the guilt of "breaking."'
+            },
+            {
+                situation: 'Period week — cravings are intense',
+                then: 'Increase protein portions slightly, add magnesium, honor cravings with small portions AFTER protein anchor.',
+                options: ['Increase protein 20%', 'Add magnesium (spinach, nuts, seeds)', 'Satisfy craving after protein anchor'],
+                why: 'This is hormonal, not weakness. Higher progesterone + lower serotonin = legitimate cravings. Protein first still rules.'
+            }
+        ];
+
+        function initIfThenThat() {
+            const container = document.getElementById('scenariosList');
+            if (!container) return;
+            let html = '';
+
+            scenarios.forEach((scenario, idx) => {
+                html += `
+                    <div class="scenario-card" onclick="toggleScenario(this)">
+                        <div class="scenario-title">
+                            ${scenario.situation}
+                            <div class="scenario-toggle">⬇</div>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then"><strong>Then:</strong> ${scenario.then}</div>
+                            <ul class="scenario-options">
+                                ${scenario.options.map(opt => `<li>${opt}</li>`).join('')}
+                            </ul>
+                            <div class="scenario-why"><strong>Why this works:</strong> ${scenario.why}</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function toggleScenario(element) {
+            element.classList.toggle('expanded');
+        }
+
+        // Tab Switching
+        function switchTab(index) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            const tabElement = document.getElementById(`tab${index}`);
+            if (tabElement) {
+                tabElement.classList.add('active');
+            }
+            const tabButtons = document.querySelectorAll('.tab-button');
+            if (tabButtons[index]) {
+                tabButtons[index].classList.add('active');
+            }
+        }
+
+        // Expandable sections in Tab 4
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.expandable-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    this.closest('.expandable-section').classList.toggle('expanded');
+                });
+            });
+
+            // Initialize all tabs
+            initMealBuilder();
+            initProteinTracker();
+            initIfThenThat();
+        });
+    </script>
+</body>
+</html>

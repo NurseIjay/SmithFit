@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metabolic Stress Cycle — SmithFit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: #e0dcd4;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        /* Header Section */
+        .header {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand {
+            font-family: Georgia, serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #d4a94c;
+            text-transform: uppercase;
+        }
+
+        .badge {
+            background-color: #2a2a2a;
+            border: 1px solid #d4a94c;
+            color: #d4a94c;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(2rem, 6vw, 3rem);
+            color: #d4a94c;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #b8b3a8;
+            max-width: 60rem;
+            line-height: 1.8;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Cycle Diagram Section */
+        .cycle-section {
+            margin-bottom: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cycle-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            aspect-ratio: 1;
+            margin-bottom: 3rem;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 30px rgba(212, 169, 76, 0.1));
+        }
+
+        /* Step Nodes */
+        .step-node {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .step-node:hover circle {
+            r: 28;
+            filter: drop-shadow(0 0 12px rgba(212, 169, 76, 0.6));
+        }
+
+        .step-node circle {
+            fill: #2a2a2a;
+            stroke: #3a3a3a;
+            stroke-width: 2;
+            transition: all 0.3s ease;
+        }
+
+        .step-node.active circle {
+            fill: #d4a94c;
+            stroke: #d4a94c;
+            filter: drop-shadow(0 0 20px rgba(212, 169, 76, 0.8));
+            r: 28;
+        }
+
+        .step-node text {
+            font-size: 13px;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            fill: #e0dcd4;
+            font-weight: 500;
+            pointer-events: none;
+            max-width: 80px;
+        }
+
+        .step-node.active text {
+            fill: #1a1a1a;
+            font-weight: 600;
+        }
+
+        /* Animation Path */
+        .animation-circle {
+            animation: rotatePath 8s linear infinite;
+            transform-origin: 300px 300px;
+        }
+
+        @keyframes rotatePath {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .glow-dot {
+            animation: glowAlong 8s linear infinite;
+        }
+
+        @keyframes glowAlong {
+            0% { offset-distance: 0%; }
+            100% { offset-distance: 100%; }
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background-color: #2a2a2a;
+            border: 1px solid #d4a94c;
+            color: #d4a94c;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #d4a94c;
+            color: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 169, 76, 0.2);
+        }
+
+        button.active {
+            background-color: #d4a94c;
+            color: #1a1a1a;
+        }
+
+        /* Step Details */
+        .step-details {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 2rem;
+            min-height: 300px;
+            transition: all 0.4s ease;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .step-details.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            min-height: 0;
+            padding: 0;
+            border: none;
+        }
+
+        .step-title {
+            font-family: Georgia, serif;
+            font-size: 1.5rem;
+            color: #d4a94c;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .step-icon {
+            font-size: 1.8rem;
+            display: inline-block;
+        }
+
+        .detail-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: #d4a94c;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .detail-content {
+            color: #b8b3a8;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .detail-quote {
+            font-style: italic;
+            color: #d4a94c;
+            border-left: 3px solid #d4a94c;
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Break The Cycle Section */
+        .intervention-section {
+            margin-top: 4rem;
+            padding: 3rem 2rem;
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+        }
+
+        .intervention-title {
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            color: #d4a94c;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .intervention-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .intervention-card {
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .intervention-card:hover {
+            border-color: #d4a94c;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(212, 169, 76, 0.1);
+        }
+
+        .intervention-arrow {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .intervention-label {
+            font-weight: 600;
+            color: #d4a94c;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .intervention-text {
+            color: #b8b3a8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .fuel-signals { --accent: #d4a94c; }
+        .recovery-signals { --accent: #6ba5c4; }
+        .rhythm-signals { --accent: #7bc47a; }
+
+        .intervention-label {
+            color: var(--accent);
+        }
+
+        .intervention-summary {
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            border-left: 4px solid #d4a94c;
+            padding: 2rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+            line-height: 1.8;
+        }
+
+        .intervention-summary strong {
+            color: #d4a94c;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #3a3a3a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #868078;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .header-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 0.95rem;
+            }
+
+            .cycle-wrapper {
+                max-width: 100%;
+            }
+
+            .intervention-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-details {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+                color: #333;
+            }
+
+            .header {
+                border-bottom: 2px solid #ccc;
+            }
+
+            h1, .step-title, .intervention-title {
+                color: #333;
+            }
+
+            .badge, .detail-label, .intervention-label {
+                color: #666;
+                border-color: #666;
+            }
+
+            .step-details, .intervention-section, .intervention-card {
+                background-color: white;
+                border-color: #ccc;
+            }
+
+            .step-node circle {
+                stroke: #333;
+            }
+
+            button {
+                display: none;
+            }
+
+            svg {
+                filter: none;
+            }
+        }
+
+        /* Animation for cycle glow */
+        @keyframes pulseGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 8px rgba(212, 169, 76, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(212, 169, 76, 0.8));
+            }
+        }
+
+        .step-node.active {
+            animation: pulseGlow 0.8s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-top">
+                <div class="brand">Shift-Proof Metabolism Reset™</div>
+                <div class="badge">Pillar 1 — Diagnose</div>
+            </div>
+            <h1>The Nurse Metabolic Stress Cycle</h1>
+            <p class="subtitle">This is not a willpower problem. It's a physiological loop — and understanding it is the first step to breaking it.</p>
+        </div>
+
+        <!-- Cycle Section -->
+        <div class="cycle-section">
+            <div class="cycle-wrapper">
+                <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Circular path for animation -->
+                    <defs>
+                        <style>
+                            .path-line {
+                                fill: none;
+                                stroke: rgba(212, 169, 76, 0.15);
+                                stroke-width: 2;
+                            }
+                            .center-label {
+                                font-family: Georgia, serif;
+                                font-size: 16px;
+                                text-anchor: middle;
+                                dominant-baseline: middle;
+                                fill: #d4a94c;
+                                font-weight: 600;
+                                letter-spacing: 0.5px;
+                            }
+                        </style>
+                    </defs>
+
+                    <!-- Circular guide lines -->
+                    <circle cx="300" cy="300" r="200" class="path-line"/>
+                    <circle cx="300" cy="300" r="180" class="path-line"/>
+
+                    <!-- Center label -->
+                    <text x="300" y="290" class="center-label">THE LOOP</text>
+                    <text x="300" y="310" style="font-family: system-ui; font-size: 12px; text-anchor: middle; fill: #868078;">Restarts infinitely</text>
+
+                    <!-- Step 1: Long Shifts + Poor Sleep -->
+                    <g class="step-node" data-step="1">
+                        <circle cx="300" cy="100" r="24"/>
+                        <text x="300" y="100" font-size="14">1</text>
+                    </g>
+                    <text x="300" y="65" style="font-size: 11px; text-anchor: middle; fill: #d4a94c; font-weight: 600;">Long Shifts +</text>
+                    <text x="300" y="80" style="font-size: 11px; text-anchor: middle; fill: #d4a94c; font-weight: 600;">Poor Sleep</text>
+
+                    <!-- Step 2: High Cortisol + Blood Sugar -->
+                    <g class="step-node" data-step="2">
+                        <circle cx="442" cy="153" r="24"/>
+                        <text x="442" y="153" font-size="14">2</text>
+                    </g>
+                    <text x="485" y="148" style="font-size: 11px; text-anchor: start; fill: #d4a94c; font-weight: 600;">Cortisol ↑</text>
+                    <text x="485" y="162" style="font-size: 11px; text-anchor: start; fill: #d4a94c; font-weight: 600;">Blood Sugar Swings</text>
+
+                    <!-- Step 3: Under-Fueling -->
+                    <g class="step-node" data-step="3">
+                        <circle cx="470" cy="300" r="24"/>
+                        <text x="470" y="300" font-size="14">3</text>
+                    </g>
+                    <text x="510" y="290" style="font-size: 11px; text-anchor: start; fill: #d4a94c; font-weight: 600;">Under-Fueling /</text>
+                    <text x="510" y="304" style="font-size: 11px; text-anchor: start; fill: #d4a94c; font-weight: 600;">Skipping Meals</text>
+
+                    <!-- Step 4: Cravings + Late-Night Snacking -->
+                    <g class="step-node" data-step="4">
+                        <circle cx="442" cy="447" r="24"/>
+                        <text x="442" y="447" font-size="14">4</text>
+                    </g>
+                    <text x="485" y="437" style="font-size: 11px; text-anchor: start; fill: #d4a94c; font-weight: 600;">Cravings +</text>
+                    <text x="485" y="451" style="font-size: 11px; text-anchor: start; fill: #d4a94c; font-weight: 600;">Late-Night Snacking</text>
+
+                    <!-- Step 5: Inflammation + Water Retention -->
+                    <g class="step-node" data-step="5">
+                        <circle cx="300" cy="500" r="24"/>
+                        <text x="300" y="500" font-size="14">5</text>
+                    </g>
+                    <text x="300" y="530" style="font-size: 11px; text-anchor: middle; fill: #d4a94c; font-weight: 600;">Inflammation +</text>
+                    <text x="300" y="544" style="font-size: 11px; text-anchor: middle; fill: #d4a94c; font-weight: 600;">Water Retention</text>
+
+                    <!-- Step 6: Scale Doesn't Move -->
+                    <g class="step-node" data-step="6">
+                        <circle cx="158" cy="447" r="24"/>
+                        <text x="158" y="447" font-size="14">6</text>
+                    </g>
+                    <text x="90" y="437" style="font-size: 11px; text-anchor: end; fill: #d4a94c; font-weight: 600;">Scale</text>
+                    <text x="90" y="451" style="font-size: 11px; text-anchor: end; fill: #d4a94c; font-weight: 600;">Doesn't Move</text>
+
+                    <!-- Step 7: Cut Harder + Add Cardio -->
+                    <g class="step-node" data-step="7">
+                        <circle cx="158" cy="300" r="24"/>
+                        <text x="158" y="300" font-size="14">7</text>
+                    </g>
+                    <text x="90" y="290" style="font-size: 11px; text-anchor: end; fill: #d4a94c; font-weight: 600;">Cut Harder +</text>
+                    <text x="90" y="304" style="font-size: 11px; text-anchor: end; fill: #d4a94c; font-weight: 600;">Add Cardio</text>
+
+                    <!-- Connecting arrows -->
+                    <path d="M 318 114 L 425 142" class="path-line" stroke-dasharray="5,5"/>
+                    <polygon points="435,145 426,150 422,138" fill="rgba(212, 169, 76, 0.15)"/>
+
+                    <path d="M 455 176 L 465 280" class="path-line" stroke-dasharray="5,5"/>
+                    <polygon points="467,290 460,282 474,278" fill="rgba(212, 169, 76, 0.15)"/>
+
+                    <path d="M 442 324 L 432 423" class="path-line" stroke-dasharray="5,5"/>
+                    <polygon points="430,433 424,424 443,423" fill="rgba(212, 169, 76, 0.15)"/>
+
+                    <path d="M 318 486 L 175 461" class="path-line" stroke-dasharray="5,5"/>
+                    <polygon points="165,459 172,449 180,465" fill="rgba(212, 169, 76, 0.15)"/>
+
+                    <path d="M 145 424 L 145 324" class="path-line" stroke-dasharray="5,5"/>
+                    <polygon points="143,314 153,323 138,329" fill="rgba(212, 169, 76, 0.15)"/>
+
+                    <path d="M 158 276 L 175 176" class="path-line" stroke-dasharray="5,5"/>
+                    <polygon points="180,166 183,176 170,175" fill="rgba(212, 169, 76, 0.15)"/>
+
+                    <path d="M 182 153 L 282 114" class="path-line" stroke-dasharray="5,5"/>
+                    <polygon points="292,110 288,120 277,113" fill="rgba(212, 169, 76, 0.15)"/>
+                </svg>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button id="playBtn" class="active">▶ Play</button>
+                <button id="pauseBtn">⏸ Pause</button>
+                <button id="resetBtn">↻ Reset</button>
+            </div>
+
+            <!-- Step Details -->
+            <div class="step-details" id="stepDetails">
+                <div class="step-title">
+                    <span class="step-icon">👇</span>
+                    Click any step to learn more
+                </div>
+                <p style="color: #868078; margin-top: 1rem;">The cycle rotates automatically. Each step reinforces the others — a loop that feels impossible to break from the inside.</p>
+            </div>
+        </div>
+
+        <!-- Break The Cycle Section -->
+        <div class="intervention-section">
+            <h2 class="intervention-title">Break the Cycle</h2>
+
+            <div class="intervention-grid">
+                <div class="intervention-card fuel-signals">
+                    <div class="intervention-arrow">🍽️</div>
+                    <div class="intervention-label">
+                        <span style="color: var(--accent);">→</span> Fuel Signals
+                    </div>
+                    <div class="intervention-text">
+                        Consistent, shift-proof meal timing breaks the under-fueling pattern. Your body stops thinking it's in famine mode, metabolism stabilizes, and cravings disappear by Day 3.
+                    </div>
+                </div>
+
+                <div class="intervention-card recovery-signals">
+                    <div class="intervention-arrow">😴</div>
+                    <div class="intervention-label">
+                        <span style="color: var(--accent);">→</span> Recovery Signals
+                    </div>
+                    <div class="intervention-text">
+                        Sleep optimization and cortisol regulation reset your circadian rhythm, even on night shifts. When your nervous system feels safe, your body stops storing and starts releasing.
+                    </div>
+                </div>
+
+                <div class="intervention-card rhythm-signals">
+                    <div class="intervention-arrow">⚡</div>
+                    <div class="intervention-label">
+                        <span style="color: var(--accent);">→</span> Rhythm Signals
+                    </div>
+                    <div class="intervention-text">
+                        Metabolic cocktail protocol eliminates blood sugar spikes and crashes. No more 2pm crashes or midnight cravings — just steady energy and rational decisions around food.
+                    </div>
+                </div>
+            </div>
+
+            <div class="intervention-summary">
+                This reset interrupts the loop at <strong>Steps 2–4</strong>. Instead of fighting your body with restriction and punishment, you send it new signals: <strong>"I'm safe. I'm supported. I'm predictable."</strong> And when your body trusts those signals? Everything shifts. The scale moves. Energy stabilizes. Your scrubs fit again.
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>For nurses over 35 · Educational resource, not medical advice</div>
+            <div>Created by IJ Smith, RN</div>
+        </div>
+    </div>
+
+    <script>
+        // Step data
+        const steps = [
+            {
+                number: 1,
+                title: "Long Shifts + Poor Sleep",
+                icon: "🌙",
+                body: "12-hour shifts, rotating schedules, and disrupted circadian rhythm flood your body with cortisol. Your body can't tell the difference between 'I'm caring for critical patients' and 'I'm being chased by a bear.' It just knows: we're not safe.",
+                specific: "Night shift nurses experience 2-3x more circadian disruption than the general population. Your body clock literally doesn't know when to burn and when to store.",
+                quote: "I'm so tired but I can't fall asleep. What's wrong with me?"
+            },
+            {
+                number: 2,
+                title: "High Cortisol + Blood Sugar Swings",
+                icon: "📈",
+                body: "Chronic cortisol elevation causes blood sugar instability — even if you're eating 'right.' Your body releases glucose for energy it doesn't need, then crashes, creating a spike-and-crash roller coaster all day.",
+                specific: "The combination of shift stress, irregular meals, and caffeine dependency creates a perfect storm for cortisol-driven metabolic dysfunction.",
+                quote: "I eat healthy but my body acts like I don't."
+            },
+            {
+                number: 3,
+                title: "Under-Fueling / Skipping Meals",
+                icon: "🍽️",
+                body: "When you skip meals (often because you literally can't take a break), your body reads this as famine. It downregulates metabolism to conserve energy and increases hunger hormones for when you finally do eat.",
+                specific: "You can't just 'eat on schedule' when you're running codes or have back-to-back patients. Missing meals isn't laziness — it's the reality of your job.",
+                quote: "I barely ate today and I'm still not losing weight."
+            },
+            {
+                number: 4,
+                title: "Cravings + Late-Night Snacking",
+                icon: "🍪",
+                body: "After a day of under-fueling and stress, your body demands quick energy. Ghrelin (hunger hormone) spikes while leptin (fullness hormone) drops. You don't need willpower — you need regulation.",
+                specific: "Post-shift cravings hit different. You're exhausted, wired, and your body is screaming for carbs because that's the fastest fuel source it knows.",
+                quote: "I was so good all week and then I blew it on night shifts."
+            },
+            {
+                number: 5,
+                title: "Inflammation + Water Retention + Belly Storage",
+                icon: "💧",
+                body: "The combination of cortisol, blood sugar swings, and inconsistent fueling triggers systemic inflammation. Your body holds water, stores fat around the midsection (cortisol's favorite spot), and you feel puffy and bloated.",
+                specific: "This is why your scrubs fit different on different days. It's not fat gain overnight — it's inflammation and water retention from your body being in protect mode.",
+                quote: "I don't even recognize my body anymore."
+            },
+            {
+                number: 6,
+                title: "Scale Doesn't Move",
+                icon: "⚖️",
+                body: "Despite eating less and trying harder, the scale is stuck. Your metabolic rate has slowed to match your reduced intake. Your body is doing exactly what it's designed to do: survive on less.",
+                specific: "You're used to working harder to get results. But your metabolism doesn't reward effort — it rewards safety signals.",
+                quote: "Nothing works for me. My body is just broken."
+            },
+            {
+                number: 7,
+                title: "You Cut Harder + Add Cardio",
+                icon: "🏃",
+                body: "The natural response is to restrict more and exercise harder. But this amplifies every stress signal — more cortisol, more famine response, more metabolic slowdown. The harder you push, the harder your body holds on.",
+                specific: "Stacking a 45-minute HIIT workout on top of a 12-hour shift and 5 hours of sleep isn't exercise — it's another stress signal telling your body it's not safe.",
+                quote: "I'll just try harder this time."
+            }
+        ];
+
+        let currentStep = null;
+        let isPlaying = true;
+        let autoPlayInterval = null;
+        let stepIndex = 0;
+
+        const stepDetailsDiv = document.getElementById('stepDetails');
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        // Initialize step nodes
+        const stepNodes = document.querySelectorAll('.step-node');
+        stepNodes.forEach((node, idx) => {
+            node.addEventListener('click', () => selectStep(idx + 1));
+        });
+
+        function selectStep(stepNumber) {
+            // Remove active class from all nodes
+            stepNodes.forEach(node => node.classList.remove('active'));
+
+            // Add active class to selected node
+            const selectedNode = document.querySelector(`[data-step="${stepNumber}"]`);
+            if (selectedNode) {
+                selectedNode.classList.add('active');
+            }
+
+            // Update details
+            const step = steps[stepNumber - 1];
+            currentStep = stepNumber;
+
+            stepDetailsDiv.classList.remove('hidden');
+            stepDetailsDiv.innerHTML = `
+                <div class="step-title">
+                    <span class="step-icon">${step.icon}</span>
+                    Step ${step.number}: ${step.title}
+                </div>
+
+                <div class="detail-section">
+                    <span class="detail-label">What's Happening in Your Body</span>
+                    <div class="detail-content">${step.body}</div>
+                </div>
+
+                <div class="detail-section">
+                    <span class="detail-label">Why This Happens for Shift Workers</span>
+                    <div class="detail-content">${step.specific}</div>
+                </div>
+
+                <div class="detail-section">
+                    <span class="detail-label">The Thought You Have</span>
+                    <div class="detail-quote">"${step.quote}"</div>
+                </div>
+            `;
+        }
+
+        function startAutoPlay() {
+            if (autoPlayInterval) clearInterval(autoPlayInterval);
+
+            isPlaying = true;
+            playBtn.classList.add('active');
+            pauseBtn.classList.remove('active');
+            stepIndex = 0;
+
+            autoPlayInterval = setInterval(() => {
+                selectStep(stepIndex + 1);
+                stepIndex = (stepIndex + 1) % steps.length;
+            }, 2000);
+        }
+
+        function stopAutoPlay() {
+            isPlaying = false;
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+            }
+            pauseBtn.classList.add('active');
+            playBtn.classList.remove('active');
+        }
+
+        function resetCycle() {
+            stopAutoPlay();
+            stepNodes.forEach(node => node.classList.remove('active'));
+            currentStep = null;
+            stepDetailsDiv.classList.add('hidden');
+            stepDetailsDiv.innerHTML = `
+                <div class="step-title">
+                    <span class="step-icon">👇</span>
+                    Click any step to learn more
+                </div>
+                <p style="color: #868078; margin-top: 1rem;">The cycle rotates automatically. Each step reinforces the others — a loop that feels impossible to break from the inside.</p>
+            `;
+            stepIndex = 0;
+            startAutoPlay();
+        }
+
+        // Button listeners
+        playBtn.addEventListener('click', startAutoPlay);
+        pauseBtn.addEventListener('click', stopAutoPlay);
+        resetBtn.addEventListener('click', resetCycle);
+
+        // Start autoplay on load
+        window.addEventListener('load', startAutoPlay);
+    </script>
+</body>
+</html>

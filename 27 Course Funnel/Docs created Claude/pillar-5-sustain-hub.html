@@ -1,0 +1,2513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pillar 5: Sustain · SmithFit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+            background-color: #1a1a1a;
+            color: #e0dcd4;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .header-badge {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: #d4a94c;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            font-family: Georgia, serif;
+            color: #d4a94c;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #b8b3a8;
+            line-height: 1.7;
+            max-width: 600px;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #3a3a3a;
+            flex-wrap: wrap;
+            padding-bottom: 20px;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: #b8b3a8;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -20px;
+            padding-bottom: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            color: #d4a94c;
+        }
+
+        .tab-btn.active {
+            color: #d4a94c;
+            border-bottom-color: #d4a94c;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #e0dcd4;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            color: #e0dcd4;
+            border-radius: 6px;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #d4a94c;
+            box-shadow: 0 0 0 3px rgba(212, 169, 76, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* Button Styles */
+        button {
+            padding: 12px 32px;
+            background-color: #d4a94c;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e5b85c;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background-color: #3a3a3a;
+            color: #d4a94c;
+        }
+
+        .btn-secondary:hover {
+            background-color: #4a4a4a;
+        }
+
+        /* Step Indicator */
+        .step-indicator {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 32px;
+            justify-content: center;
+        }
+
+        .step {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #3a3a3a;
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            background-color: #d4a94c;
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        .step.completed {
+            background-color: #d4a94c;
+        }
+
+        /* Card */
+        .card {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .card h2 {
+            font-family: Georgia, serif;
+            font-size: 28px;
+            color: #d4a94c;
+            margin-bottom: 16px;
+        }
+
+        .card h3 {
+            font-family: Georgia, serif;
+            font-size: 20px;
+            color: #d4a94c;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #d4a94c;
+            font-weight: bold;
+        }
+
+        /* Plan Cards (Day Colors) */
+        .plan-card {
+            background-color: #2a2a2a;
+            border: 2px solid #d4a94c;
+            border-radius: 8px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+
+        .plan-card.green { border-top: 4px solid #4ade80; }
+        .plan-card.yellow { border-top: 4px solid #facc15; }
+        .plan-card.red { border-top: 4px solid #ef4444; }
+
+        .plan-emoji {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .plan-title {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            color: #d4a94c;
+            margin-bottom: 16px;
+        }
+
+        .plan-description {
+            font-size: 15px;
+            color: #b8b3a8;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        /* Color Dots */
+        .color-history {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .color-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #3a3a3a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .color-dot.green { background-color: #4ade80; }
+        .color-dot.yellow { background-color: #facc15; }
+        .color-dot.red { background-color: #ef4444; }
+        .color-dot:hover { transform: scale(1.2); }
+
+        /* Checkboxes */
+        .checkbox-group {
+            margin-bottom: 24px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            border-color: #d4a94c;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #d4a94c;
+        }
+
+        input[type="radio"] {
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #d4a94c;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .radio-item label {
+            margin: 0;
+            margin-left: 8px;
+            text-transform: none;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        /* Sliders */
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #3a3a3a;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #d4a94c;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #d4a94c;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .slider-label {
+            min-width: 80px;
+            font-size: 13px;
+            color: #b8b3a8;
+        }
+
+        .slider-value {
+            min-width: 30px;
+            text-align: right;
+            font-weight: 600;
+            color: #d4a94c;
+        }
+
+        /* Stats Dashboard */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-box {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #d4a94c;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #b8b3a8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Summary Cards */
+        .summary-card {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border: 2px solid #d4a94c;
+            border-radius: 8px;
+            padding: 40px;
+            margin: 32px 0;
+            text-align: center;
+        }
+
+        .summary-title {
+            font-family: Georgia, serif;
+            font-size: 36px;
+            color: #d4a94c;
+            margin-bottom: 24px;
+        }
+
+        .summary-section {
+            margin-bottom: 32px;
+            text-align: left;
+        }
+
+        .summary-heading {
+            font-family: Georgia, serif;
+            font-size: 20px;
+            color: #d4a94c;
+            margin-bottom: 12px;
+        }
+
+        /* Scenario Library */
+        .scenario-card {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .scenario-header {
+            background-color: #1a1a1a;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-header:hover {
+            background-color: #2a2a2a;
+        }
+
+        .scenario-title {
+            font-weight: 600;
+            color: #d4a94c;
+            flex: 1;
+        }
+
+        .scenario-toggle {
+            color: #d4a94c;
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .scenario-card.open .scenario-toggle {
+            transform: rotate(180deg);
+        }
+
+        .scenario-content {
+            display: none;
+            padding: 24px;
+            background-color: #2a2a2a;
+            border-top: 1px solid #3a3a3a;
+        }
+
+        .scenario-card.open .scenario-content {
+            display: block;
+        }
+
+        .scenario-then {
+            background-color: #1a1a1a;
+            border-left: 4px solid #d4a94c;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+        }
+
+        .scenario-then-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #d4a94c;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .scenario-then-action {
+            font-weight: 600;
+            color: #d4a94c;
+        }
+
+        .scenario-bullets {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 16px;
+        }
+
+        .scenario-bullets li {
+            padding: 8px 0 8px 20px;
+            position: relative;
+        }
+
+        .scenario-bullets li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #d4a94c;
+            font-weight: bold;
+        }
+
+        .scenario-why {
+            font-style: italic;
+            color: #b8b3a8;
+            padding: 16px;
+            background-color: #1a1a1a;
+            border-radius: 4px;
+        }
+
+        /* Progress Indicator */
+        .progress-bar {
+            height: 4px;
+            background-color: #3a3a3a;
+            border-radius: 2px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #d4a94c;
+            transition: width 0.3s ease;
+        }
+
+        /* Category Label */
+        .category-label {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #d4a94c;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #d4a94c;
+        }
+
+        /* Callout Box */
+        .callout {
+            background-color: #2a2a2a;
+            border-left: 4px solid #d4a94c;
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .callout strong {
+            color: #d4a94c;
+        }
+
+        /* Print Styles */
+        @media print {
+            body { padding: 0; }
+            .tab-nav, button, .tab-btn { display: none !important; }
+            .tab-content { display: block !important; page-break-after: always; }
+            .container { max-width: 100%; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            .tab-nav { gap: 8px; }
+            .tab-btn { padding: 10px 16px; font-size: 13px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .plan-card { padding: 20px; }
+        }
+
+        .visibility-toggle {
+            display: none;
+        }
+
+        .visibility-toggle.visible {
+            display: block;
+        }
+
+        .day-type-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .day-type-btn {
+            padding: 10px 20px;
+            background-color: #3a3a3a;
+            color: #b8b3a8;
+            border: 2px solid #3a3a3a;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .day-type-btn.active {
+            background-color: #d4a94c;
+            color: #1a1a1a;
+            border-color: #d4a94c;
+        }
+
+        .day-type-btn:hover {
+            border-color: #d4a94c;
+            color: #d4a94c;
+        }
+
+        .momentum-rules {
+            background-color: #2a2a2a;
+            border-left: 4px solid #d4a94c;
+            padding: 24px;
+            margin-bottom: 32px;
+            border-radius: 4px;
+        }
+
+        .momentum-rules h2 {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            color: #d4a94c;
+            margin-bottom: 12px;
+        }
+
+        .momentum-rules p {
+            font-size: 16px;
+            color: #b8b3a8;
+            line-height: 1.8;
+        }
+
+        .day-card {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .day-number {
+            font-family: Georgia, serif;
+            font-size: 20px;
+            color: #d4a94c;
+            font-weight: 600;
+        }
+
+        .day-type-display {
+            font-size: 13px;
+            color: #b8b3a8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .checkmark-section {
+            margin-bottom: 20px;
+        }
+
+        .checkmark-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #e0dcd4;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .reflection-section {
+            background-color: #1f1f1f;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 28px;
+            margin-top: 32px;
+        }
+
+        .reflection-section h3 {
+            font-family: Georgia, serif;
+            font-size: 22px;
+            color: #d4a94c;
+            margin-bottom: 20px;
+        }
+
+        .recommendation-box {
+            background-color: #2a2a2a;
+            border: 2px solid #d4a94c;
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .recommendation-box h4 {
+            font-family: Georgia, serif;
+            font-size: 18px;
+            color: #d4a94c;
+            margin-bottom: 12px;
+        }
+
+        .recommendation-box p {
+            color: #b8b3a8;
+            line-height: 1.8;
+        }
+
+        .report-card-section {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border: 2px solid #d4a94c;
+            border-radius: 8px;
+            padding: 40px;
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .report-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .report-metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            text-align: left;
+            color: #b8b3a8;
+        }
+
+        .metric-change {
+            font-weight: 600;
+            color: #d4a94c;
+        }
+
+        .metric-change.up {
+            color: #4ade80;
+        }
+
+        .metric-change.down {
+            color: #4ade80;
+        }
+
+        .paths-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 28px;
+        }
+
+        .path-option {
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .path-option h4 {
+            font-family: Georgia, serif;
+            font-size: 16px;
+            color: #d4a94c;
+            margin-bottom: 12px;
+        }
+
+        .path-option p {
+            font-size: 13px;
+            color: #b8b3a8;
+            line-height: 1.7;
+        }
+
+        .cta-link {
+            color: #d4a94c;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div>
+                <div class="header-badge">Module 5</div>
+                <h1>Sustain</h1>
+                <p class="subtitle">Build your personalized roadmap for the next phase. Turn reset into routine.</p>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-btn active" data-tab="1">Sustain Map Builder</button>
+            <button class="tab-btn" data-tab="2">Pivot Ladder</button>
+            <button class="tab-btn" data-tab="3">14-Day Momentum</button>
+            <button class="tab-btn" data-tab="4">7-Day Check-In</button>
+            <button class="tab-btn" data-tab="5">If-This-Then-That</button>
+        </div>
+
+        <!-- TAB 1: SUSTAIN MAP BUILDER -->
+        <div id="tab-1" class="tab-content active">
+            <div class="card">
+                <h2>Your Sustain Map Builder</h2>
+                <p style="color: #b8b3a8; margin-bottom: 32px;">Complete each step to generate your personalized daily plan.</p>
+
+                <div class="step-indicator">
+                    <div class="step active"></div>
+                    <div class="step"></div>
+                    <div class="step"></div>
+                    <div class="step"></div>
+                </div>
+
+                <!-- STEP 1 -->
+                <div id="step1" class="visibility-toggle visible">
+                    <h3>Step 1: Choose Your Defaults</h3>
+                    <p style="color: #b8b3a8; margin-bottom: 24px;">These are your go-to moves when you don't have time to think.</p>
+
+                    <div class="form-group">
+                        <label for="protein-anchor">My Protein Anchor Default:</label>
+                        <select id="protein-anchor">
+                            <option value="">Select an option</option>
+                            <option value="Greek yogurt + fruit">Greek yogurt + fruit</option>
+                            <option value="Protein shake + banana">Protein shake + banana</option>
+                            <option value="Eggs + toast">Eggs + toast</option>
+                            <option value="Overnight oats + protein">Overnight oats + protein</option>
+                            <option value="Turkey roll-ups">Turkey roll-ups</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                        <div id="protein-custom" class="form-group visibility-toggle" style="margin-top: 12px;">
+                            <input type="text" id="protein-custom-input" placeholder="Enter your custom protein anchor">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hydration-default">My Hydration Default:</label>
+                        <select id="hydration-default">
+                            <option value="">Select an option</option>
+                            <option value="Morning cocktail (water + salt + lemon)">Morning cocktail (water + salt + lemon)</option>
+                            <option value="Electrolyte water">Electrolyte water</option>
+                            <option value="Plain water with lemon">Plain water with lemon</option>
+                            <option value="Warm water with salt">Warm water with salt</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                        <div id="hydration-custom" class="form-group visibility-toggle" style="margin-top: 12px;">
+                            <input type="text" id="hydration-custom-input" placeholder="Enter your custom hydration default">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reset-default">My Reset Default:</label>
+                        <select id="reset-default">
+                            <option value="">Select an option</option>
+                            <option value="Full 5-min NS Reset">Full 5-min NS Reset</option>
+                            <option value="2-min SOS">2-min SOS</option>
+                            <option value="Box breathing only">Box breathing only</option>
+                            <option value="Sleep Switch before bed">Sleep Switch before bed</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                        <div id="reset-custom" class="form-group visibility-toggle" style="margin-top: 12px;">
+                            <input type="text" id="reset-custom-input" placeholder="Enter your custom reset default">
+                        </div>
+                    </div>
+
+                    <button onclick="buildMapStep(2)">Continue to Step 2</button>
+                </div>
+
+                <!-- STEP 2 -->
+                <div id="step2" class="visibility-toggle" style="display: none;">
+                    <h3>Step 2: Choose Your 2 Meals (3×3 Formula)</h3>
+                    <p style="color: #b8b3a8; margin-bottom: 24px;">Protein + Starch + Vegetable. Keep it simple.</p>
+
+                    <div class="form-group">
+                        <label for="meal1">Meal 1 (3×3 Formula):</label>
+                        <input type="text" id="meal1" placeholder="e.g., Chicken + rice + broccoli">
+                        <div class="hint">Protein + Starch + Vegetable</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="meal2">Meal 2 (3×3 Formula):</label>
+                        <input type="text" id="meal2" placeholder="e.g., Salmon + sweet potato + salad">
+                        <div class="hint">Protein + Starch + Vegetable</div>
+                    </div>
+
+                    <button onclick="buildMapStep(3)">Continue to Step 3</button>
+                    <button class="btn-secondary" onclick="buildMapStep(1)" style="margin-left: 12px;">Back</button>
+                </div>
+
+                <!-- STEP 3 -->
+                <div id="step3" class="visibility-toggle" style="display: none;">
+                    <h3>Step 3: Choose Your Backup</h3>
+                    <p style="color: #b8b3a8; margin-bottom: 24px;">When you miss breaks or the day falls apart.</p>
+
+                    <div class="form-group">
+                        <label for="backup-option">Missed-Break Backup:</label>
+                        <select id="backup-option">
+                            <option value="">Select an option</option>
+                            <option value="Protein shake (premixed)">Protein shake (premixed)</option>
+                            <option value="Protein bar + water">Protein bar + water</option>
+                            <option value="Greek yogurt + granola">Greek yogurt + granola</option>
+                            <option value="Tuna packet + crackers">Tuna packet + crackers</option>
+                            <option value="String cheese + apple">String cheese + apple</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                        <div id="backup-custom" class="form-group visibility-toggle" style="margin-top: 12px;">
+                            <input type="text" id="backup-custom-input" placeholder="Enter your custom backup">
+                        </div>
+                    </div>
+
+                    <button onclick="buildMapStep(4)">Continue to Step 4</button>
+                    <button class="btn-secondary" onclick="buildMapStep(2)" style="margin-left: 12px;">Back</button>
+                </div>
+
+                <!-- STEP 4 -->
+                <div id="step4" class="visibility-toggle" style="display: none;">
+                    <h3>Step 4: Write Your If-This-Then-That</h3>
+                    <p style="color: #b8b3a8; margin-bottom: 24px;">Create your trigger responses. What happens when life happens?</p>
+
+                    <div class="form-group">
+                        <label for="ifttt1">If I miss breaks →</label>
+                        <input type="text" id="ifttt1" placeholder="Then I will...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ifttt2">If I sleep under 5 hours →</label>
+                        <input type="text" id="ifttt2" placeholder="Then I will...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ifttt3">If cravings hit after shift →</label>
+                        <input type="text" id="ifttt3" placeholder="Then I will...">
+                    </div>
+
+                    <button onclick="generateSustainMap()">Generate My Sustain Map</button>
+                    <button class="btn-secondary" onclick="buildMapStep(3)" style="margin-left: 12px;">Back</button>
+                </div>
+
+                <!-- SUSTAIN MAP OUTPUT -->
+                <div id="sustain-map-output" class="visibility-toggle" style="display: none; margin-top: 40px;">
+                    <div class="summary-card">
+                        <div class="summary-title">YOUR SUSTAIN MAP</div>
+
+                        <div class="summary-section">
+                            <div class="summary-heading">Your Daily Non-Negotiables</div>
+                            <div style="background-color: #1a1a1a; padding: 20px; border-radius: 6px; margin-bottom: 20px;">
+                                <p style="margin-bottom: 12px;"><span style="color: #d4a94c; font-weight: 600;">Protein Anchor:</span> <span id="map-protein"></span></p>
+                                <p style="margin-bottom: 12px;"><span style="color: #d4a94c; font-weight: 600;">Hydration:</span> <span id="map-hydration"></span></p>
+                                <p><span style="color: #d4a94c; font-weight: 600;">Reset:</span> <span id="map-reset"></span></p>
+                            </div>
+                        </div>
+
+                        <div class="summary-section">
+                            <div class="summary-heading">Your Structured Meals</div>
+                            <div style="background-color: #1a1a1a; padding: 20px; border-radius: 6px; margin-bottom: 20px;">
+                                <p style="margin-bottom: 12px;"><span style="color: #d4a94c; font-weight: 600;">Meal 1:</span> <span id="map-meal1"></span></p>
+                                <p style="margin-bottom: 12px;"><span style="color: #d4a94c; font-weight: 600;">Meal 2:</span> <span id="map-meal2"></span></p>
+                                <p><span style="color: #d4a94c; font-weight: 600;">Emergency Backup:</span> <span id="map-backup"></span></p>
+                            </div>
+                        </div>
+
+                        <div class="summary-section">
+                            <div class="summary-heading">Your If-This-Then-That Rules</div>
+                            <div style="background-color: #1a1a1a; padding: 20px; border-radius: 6px;">
+                                <p style="margin-bottom: 12px;"><span style="color: #d4a94c; font-weight: 600;">If I miss breaks:</span> <span id="map-ifttt1"></span></p>
+                                <p style="margin-bottom: 12px;"><span style="color: #d4a94c; font-weight: 600;">If I sleep under 5 hours:</span> <span id="map-ifttt2"></span></p>
+                                <p><span style="color: #d4a94c; font-weight: 600;">If cravings hit:</span> <span id="map-ifttt3"></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 32px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                        <button onclick="printSustainMap()">Print My Sustain Map</button>
+                        <button class="btn-secondary" onclick="resetSustainMap()">Start Over</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: PIVOT LADDER -->
+        <div id="tab-2" class="tab-content">
+            <div class="card">
+                <h2>Pivot Ladder: Daily Check-In</h2>
+                <p style="color: #b8b3a8; margin-bottom: 32px; font-style: italic;">You're never "off." You're just green, yellow, or red.</p>
+
+                <div id="pivot-assessment">
+                    <div class="form-group">
+                        <label>How did you sleep last night?</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="sleep1" name="sleep" value="8">
+                                <label for="sleep1">Great (7+ hours)</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="sleep2" name="sleep" value="5">
+                                <label for="sleep2">OK (5-7 hours)</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="sleep3" name="sleep" value="2">
+                                <label for="sleep3">Poor (under 5 hours)</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="sleep4" name="sleep" value="0">
+                                <label for="sleep4">Didn't sleep (night shift)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>What's your energy level right now?</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="energy1" name="energy" value="8">
+                                <label for="energy1">Good</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="energy2" name="energy" value="5">
+                                <label for="energy2">Moderate</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="energy3" name="energy" value="2">
+                                <label for="energy3">Low</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="energy4" name="energy" value="0">
+                                <label for="energy4">Running on fumes</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>What's your schedule like today?</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="schedule1" name="schedule" value="8">
+                                <label for="schedule1">Normal day</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="schedule2" name="schedule" value="5">
+                                <label for="schedule2">Busy but manageable</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="schedule3" name="schedule" value="0">
+                                <label for="schedule3">Chaos — everything's falling apart</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="calculateDayColor()">Calculate My Day Color</button>
+                </div>
+
+                <div id="pivot-results" class="visibility-toggle" style="display: none; margin-top: 40px;">
+                    <div id="day-color-result"></div>
+                    
+                    <div style="margin-top: 32px;">
+                        <label style="margin-bottom: 16px; display: block;">Log Today's Color:</label>
+                        <button class="btn-secondary" onclick="logDayColor('green')" style="background-color: #4ade80; color: #1a1a1a;">Log as Green Day</button>
+                        <button class="btn-secondary" onclick="logDayColor('yellow')" style="background-color: #facc15; color: #1a1a1a; margin-left: 12px;">Log as Yellow Day</button>
+                        <button class="btn-secondary" onclick="logDayColor('red')" style="background-color: #ef4444; color: #fff; margin-left: 12px;">Log as Red Day</button>
+                    </div>
+
+                    <div style="margin-top: 32px;">
+                        <h3 style="margin-bottom: 16px;">Your Weekly Color History</h3>
+                        <div class="color-history" id="color-history"></div>
+                    </div>
+
+                    <button class="btn-secondary" onclick="resetPivotLadder()" style="margin-top: 24px;">New Assessment</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: 14-DAY MOMENTUM -->
+        <div id="tab-3" class="tab-content">
+            <div class="card">
+                <div class="momentum-rules">
+                    <h2>The 2-Checkmark Rule</h2>
+                    <p>Any day with 2 checkmarks is a win.</p>
+                </div>
+
+                <!-- SETUP SECTION -->
+                <div id="momentum-setup" class="visibility-toggle visible">
+                    <h3>First Time? Set Your Non-Negotiables</h3>
+                    <p style="color: #b8b3a8; margin-bottom: 24px;">These are your bare minimum on each day type.</p>
+
+                    <div style="background-color: #1a1a1a; padding: 24px; border-radius: 6px; margin-bottom: 32px;">
+                        <h4 style="color: #d4a94c; margin-bottom: 16px;">Work Day Non-Negotiables</h4>
+                        <div class="form-group">
+                            <label for="work-nn1">Non-Negotiable #1:</label>
+                            <input type="text" id="work-nn1" placeholder="e.g., Protein anchor">
+                        </div>
+                        <div class="form-group">
+                            <label for="work-nn2">Non-Negotiable #2:</label>
+                            <input type="text" id="work-nn2" placeholder="e.g., Morning cocktail">
+                        </div>
+                    </div>
+
+                    <div style="background-color: #1a1a1a; padding: 24px; border-radius: 6px; margin-bottom: 32px;">
+                        <h4 style="color: #d4a94c; margin-bottom: 16px;">Off Day Non-Negotiables</h4>
+                        <div class="form-group">
+                            <label for="off-nn1">Non-Negotiable #1:</label>
+                            <input type="text" id="off-nn1" placeholder="e.g., Workout">
+                        </div>
+                        <div class="form-group">
+                            <label for="off-nn2">Non-Negotiable #2:</label>
+                            <input type="text" id="off-nn2" placeholder="e.g., Meal prep">
+                        </div>
+                    </div>
+
+                    <div style="background-color: #1a1a1a; padding: 24px; border-radius: 6px;">
+                        <h4 style="color: #d4a94c; margin-bottom: 16px;">Chaos Day Non-Negotiables</h4>
+                        <div class="form-group">
+                            <label for="chaos-nn1">Non-Negotiable #1:</label>
+                            <input type="text" id="chaos-nn1" value="Protein anchor" placeholder="Protein anchor">
+                        </div>
+                        <div class="form-group">
+                            <label for="chaos-nn2">Non-Negotiable #2:</label>
+                            <input type="text" id="chaos-nn2" value="Hydration minimum" placeholder="Hydration minimum">
+                        </div>
+                    </div>
+
+                    <button onclick="saveMomentumSetup()" style="margin-top: 24px;">Save & Track My Days</button>
+                </div>
+
+                <!-- TRACKING SECTION -->
+                <div id="momentum-tracking" class="visibility-toggle" style="display: none;">
+                    <div id="momentum-days"></div>
+
+                    <div class="stats-grid" style="margin-top: 40px; margin-bottom: 40px;">
+                        <div class="stat-box">
+                            <div class="stat-number" id="total-checkmarks">0</div>
+                            <div class="stat-label">Total Checkmarks / 14</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" id="momentum-score">0</div>
+                            <div class="stat-label">Momentum Score</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" id="day-streak">0</div>
+                            <div class="stat-label">Current Streak</div>
+                        </div>
+                    </div>
+
+                    <div id="momentum-reflection" class="visibility-toggle" style="display: none;">
+                        <div class="reflection-section">
+                            <h3>Week 2 Reflection</h3>
+                            <p style="color: #b8b3a8; margin-bottom: 24px;">You've completed 14 days. What's changed?</p>
+
+                            <div class="form-group">
+                                <label for="reflection1">Biggest change I noticed:</label>
+                                <textarea id="reflection1" placeholder="Energy? Clothes fit? Fewer cravings? Sleep?"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="reflection2">What I want to add in Week 3:</label>
+                                <textarea id="reflection2" placeholder="Workouts? Meal prep? A new habit?"></textarea>
+                            </div>
+
+                            <button onclick="generateMomentumRecommendation()">Get My Recommendation</button>
+                        </div>
+                    </div>
+
+                    <div id="momentum-recommendation" class="visibility-toggle" style="display: none;">
+                        <div class="recommendation-box" id="recommendation-content"></div>
+                        <button class="btn-secondary" onclick="resetMomentumTracker()" style="margin-top: 24px;">Start a New Week</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: 7-DAY CHECK-IN -->
+        <div id="tab-4" class="tab-content">
+            <div class="card">
+                <h2>7-Day Check-In Assessment</h2>
+                <p style="color: #b8b3a8; margin-bottom: 32px;">How much has changed since Day 1?</p>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="checkin-progress" style="width: 0%;"></div>
+                </div>
+
+                <!-- SECTION A: FELT WINS -->
+                <div id="checkin-section-a">
+                    <h3>Section A: Felt Wins</h3>
+                    <p style="color: #b8b3a8; margin-bottom: 24px;">Rate each from 1-10. Day 1 vs. Day 7.</p>
+
+                    <div class="form-group">
+                        <label>Energy Level</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <div class="slider-label" style="margin-bottom: 8px;">Day 1</div>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="energy-day1" min="1" max="10" value="5" onchange="updateCheckinProgress()">
+                                    <span class="slider-value" id="energy-day1-val">5</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="slider-label" style="margin-bottom: 8px;">Day 7</div>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="energy-day7" min="1" max="10" value="5" onchange="updateCheckinProgress()">
+                                    <span class="slider-value" id="energy-day7-val">5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Cravings Intensity (1=Most / 10=None)</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <div class="slider-label" style="margin-bottom: 8px;">Day 1</div>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="cravings-day1" min="1" max="10" value="5" onchange="updateCheckinProgress()">
+                                    <span class="slider-value" id="cravings-day1-val">5</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="slider-label" style="margin-bottom: 8px;">Day 7</div>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="cravings-day7" min="1" max="10" value="5" onchange="updateCheckinProgress()">
+                                    <span class="slider-value" id="cravings-day7-val">5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sleep Quality</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <div class="slider-label" style="margin-bottom: 8px;">Day 1</div>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="sleep-day1" min="1" max="10" value="5" onchange="updateCheckinProgress()">
+                                    <span class="slider-value" id="sleep-day1-val">5</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="slider-label" style="margin-bottom: 8px;">Day 7</div>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="sleep-day7" min="1" max="10" value="5" onchange="updateCheckinProgress()">
+                                    <span class="slider-value" id="sleep-day7-val">5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Stress Level (1=Most / 10=None)</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <div class="slider-label" style="margin-bottom: 8px;">Day 1</div>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="stress-day1" min="1" max="10" value="5" onchange="updateCheckinProgress()">
+                                    <span class="slider-value" id="stress-day1-val">5</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="slider-label" style="margin-bottom: 8px;">Day 7</div>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="stress-day7" min="1" max="10" value="5" onchange="updateCheckinProgress()">
+                                    <span class="slider-value" id="stress-day7-val">5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="moveToCheckinSection('b')" style="margin-top: 24px;">Continue to Section B</button>
+                </div>
+
+                <!-- SECTION B: BODY RESPONSE -->
+                <div id="checkin-section-b" class="visibility-toggle" style="display: none;">
+                    <h3>Section B: Body Response</h3>
+                    <p style="color: #b8b3a8; margin-bottom: 24px;">What did you notice?</p>
+
+                    <div class="form-group">
+                        <label>Waist / Bloat:</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="waist1" name="waist" value="Tighter">
+                                <label for="waist1">Tighter</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="waist2" name="waist" value="Same">
+                                <label for="waist2">Same</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="waist3" name="waist" value="Looser">
+                                <label for="waist3">Looser</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mid-Shift Crash:</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="crash1" name="crash" value="More">
+                                <label for="crash1">More</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="crash2" name="crash" value="Same">
+                                <label for="crash2">Same</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="crash3" name="crash" value="Less">
+                                <label for="crash3">Less</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Appetite Stability:</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="appetite1" name="appetite" value="Worse">
+                                <label for="appetite1">Worse</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="appetite2" name="appetite" value="Same">
+                                <label for="appetite2">Same</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="appetite3" name="appetite" value="Better">
+                                <label for="appetite3">Better</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Digestion Quality:</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="digestion1" name="digestion" value="Worse">
+                                <label for="digestion1">Worse</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="digestion2" name="digestion" value="Same">
+                                <label for="digestion2">Same</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="digestion3" name="digestion" value="Better">
+                                <label for="digestion3">Better</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="moveToCheckinSection('c')" style="margin-top: 24px;">Continue to Section C</button>
+                    <button class="btn-secondary" onclick="moveToCheckinSection('a')" style="margin-left: 12px;">Back</button>
+                </div>
+
+                <!-- SECTION C: BEHAVIORAL WINS -->
+                <div id="checkin-section-c" class="visibility-toggle" style="display: none;">
+                    <h3>Section C: Behavioral Wins</h3>
+                    <p style="color: #b8b3a8; margin-bottom: 24px;">What did you do 3+ days?</p>
+
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="behavior1" value="Protein anchor">
+                            <label for="behavior1" style="margin: 0; cursor: pointer;">Protein anchor</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="behavior2" value="Cocktail before caffeine">
+                            <label for="behavior2" style="margin: 0; cursor: pointer;">Cocktail before caffeine</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="behavior3" value="5-minute reset ritual">
+                            <label for="behavior3" style="margin: 0; cursor: pointer;">5-minute reset ritual</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="behavior4" value="3×3 meal structure">
+                            <label for="behavior4" style="margin: 0; cursor: pointer;">3×3 meal structure</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="behavior5" value="Pivoted instead of restarting">
+                            <label for="behavior5" style="margin: 0; cursor: pointer;">Pivoted instead of restarting</label>
+                        </div>
+                    </div>
+
+                    <button onclick="moveToCheckinSection('d')" style="margin-top: 24px;">Continue to Section D</button>
+                    <button class="btn-secondary" onclick="moveToCheckinSection('b')" style="margin-left: 12px;">Back</button>
+                </div>
+
+                <!-- SECTION D: EASIEST -->
+                <div id="checkin-section-d" class="visibility-toggle" style="display: none;">
+                    <h3>Section D: What Felt Easiest?</h3>
+
+                    <div class="form-group">
+                        <label for="easiest">The habit that surprised me by being doable was:</label>
+                        <textarea id="easiest" placeholder="What was the easiest part of this week?"></textarea>
+                    </div>
+
+                    <div class="callout">
+                        <strong>💡 This is your anchor for the next phase.</strong> Build on what already works.
+                    </div>
+
+                    <button onclick="moveToCheckinSection('e')" style="margin-top: 24px;">Continue to Section E</button>
+                    <button class="btn-secondary" onclick="moveToCheckinSection('c')" style="margin-left: 12px;">Back</button>
+                </div>
+
+                <!-- SECTION E: SUPPORT -->
+                <div id="checkin-section-e" class="visibility-toggle" style="display: none;">
+                    <h3>Section E: What Support Would Help?</h3>
+
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="support1" value="Structure">
+                            <label for="support1" style="margin: 0; cursor: pointer;">Structure</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="support2" value="Personalization">
+                            <label for="support2" style="margin: 0; cursor: pointer;">Personalization</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="support3" value="Accountability">
+                            <label for="support3" style="margin: 0; cursor: pointer;">Accountability</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="support4" value="Troubleshooting">
+                            <label for="support4" style="margin: 0; cursor: pointer;">Troubleshooting</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="support5" value="All of the above">
+                            <label for="support5" style="margin: 0; cursor: pointer;">All of the above</label>
+                        </div>
+                    </div>
+
+                    <button onclick="generateCheckinReport()" style="margin-top: 24px;">Generate My Report Card</button>
+                    <button class="btn-secondary" onclick="moveToCheckinSection('d')" style="margin-left: 12px;">Back</button>
+                </div>
+
+                <!-- REPORT CARD -->
+                <div id="checkin-report" class="visibility-toggle" style="display: none; margin-top: 40px;">
+                    <div class="report-card-section">
+                        <h2 style="margin-bottom: 32px;">YOUR RESET REPORT CARD</h2>
+
+                        <div style="text-align: left; margin-bottom: 32px;">
+                            <h4 style="color: #d4a94c; margin-bottom: 20px;">Your Metric Changes</h4>
+                            <div id="report-metrics"></div>
+                        </div>
+
+                        <div style="text-align: left; margin-bottom: 32px;">
+                            <h4 style="color: #d4a94c; margin-bottom: 12px;">Behavioral Wins</h4>
+                            <p id="report-behaviors" style="color: #b8b3a8;"></p>
+                        </div>
+
+                        <div style="text-align: left; margin-bottom: 32px;">
+                            <h4 style="color: #d4a94c; margin-bottom: 12px;">Your Easiest Anchor</h4>
+                            <p id="report-anchor" style="color: #b8b3a8; font-style: italic;"></p>
+                        </div>
+
+                        <div id="report-message" style="background-color: #1a1a1a; padding: 20px; border-radius: 6px; margin-bottom: 32px; border-left: 4px solid #d4a94c;">
+                            <p id="report-message-text" style="color: #b8b3a8; line-height: 1.8;"></p>
+                        </div>
+
+                        <div class="paths-section">
+                            <div class="path-option">
+                                <h4>Continue Solo</h4>
+                                <p>Use your anchors, follow the roadmap, reassess weekly.</p>
+                            </div>
+                            <div class="path-option">
+                                <h4>Continue Supported</h4>
+                                <p>Get personalized plans with accountability and adjustments.</p>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 32px;">
+                            <p style="color: #b8b3a8; margin-bottom: 16px;">Ready for personalized support?</p>
+                            <a href="#" class="cta-link" style="display: inline-block;">Learn More About Coaching →</a>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 32px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                        <button onclick="printCheckinReport()">Print My Report Card</button>
+                        <button class="btn-secondary" onclick="resetCheckinAssessment()">Start Over</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: IF-THIS-THEN-THAT LIBRARY -->
+        <div id="tab-5" class="tab-content">
+            <div class="card">
+                <h2>If-This-Then-That Scenario Library</h2>
+                <p style="color: #b8b3a8; margin-bottom: 32px;">15 real situations. Real responses. Bookmark the ones you need.</p>
+
+                <!-- NUTRITION SCENARIOS -->
+                <div style="margin-bottom: 40px;">
+                    <div class="category-label">Nutrition Scenarios</div>
+
+                    <div class="scenario-card" data-scenario="1">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">I missed breakfast</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">Protein-first at first opportunity</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>Protein shake + fruit, or eggs + toast, or Greek yogurt + granola</li>
+                                <li>Eat this within the hour of waking</li>
+                                <li>Don't try to "catch up" with larger meals — just reset the anchor</li>
+                                <li>Tomorrow, set a phone alarm for breakfast</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> Breakfast is your metabolic ignition. Missed or skipped = your body stays in conservation mode all day. Hitting protein early, even if "late," restarts the signal.</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="2">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">I missed breaks — couldn't eat</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">Mini-fuel + hydration at first chance</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>Protein shake, bar, or Greek yogurt the moment you can</li>
+                                <li>Drink a full bottle of water + electrolytes or salt</li>
+                                <li>Don't panic. One skipped break isn't a reset failure</li>
+                                <li>Your next structured meal is your comeback</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> Missed breaks = missed cortisol resets. You can't control your schedule, but you can control the first refuel. Protein + hydration tells your body you're not in emergency mode.</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="3">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">Cravings hit mid-shift</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">Protein + fiber + 2-min breathing</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>String cheese + apple, or protein bar + water, or handful of almonds + fruit</li>
+                                <li>Do a 2-minute box breathing or SOS reset</li>
+                                <li>The craving usually passes in 10 minutes</li>
+                                <li>Bonus: You just protected your momentum without willpower</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> Mid-shift cravings are cortisol spikes, not hunger. Protein + fiber + breathing = regulated nervous system = the craving dissolves.</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="4">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">I overate at dinner</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">No punishment. Walk + normal anchor tomorrow.</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>Do NOT restrict calories or skip meals tomorrow</li>
+                                <li>Do NOT do a "punishment" workout</li>
+                                <li>Take a 10–15 min walk after dinner if you can (digestion + breathing)</li>
+                                <li>Tomorrow: Protein anchor + normal meals. That's it.</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> One meal doesn't derail your metabolism. Restriction and shame do. Your body is resilient. Consistency matters more than perfection.</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="5">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">I didn't drink enough water</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">"2 bottle rule" from now until bed</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>Drink 2 full bottles of water for every cup of coffee</li>
+                                <li>Add salt to one bottle (electrolytes matter)</li>
+                                <li>This rehydrates and resets your craving signals</li>
+                                <li>You'll likely sleep better and feel less hungry tomorrow</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> Dehydration feels like hunger. It's the #1 reason nurses reach for snacks at 2 AM. Fix hydration, fix cravings.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLEEP & RECOVERY SCENARIOS -->
+                <div style="margin-bottom: 40px;">
+                    <div class="category-label">Sleep & Recovery Scenarios</div>
+
+                    <div class="scenario-card" data-scenario="6">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">I slept less than 5 hours</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">Yellow day: anchors only, no HIIT, 10-min walk or 5-min reset</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>Your cortisol is already high. Don't add intensity.</li>
+                                <li>Protein anchor + hydration + 2 structured meals</li>
+                                <li>One easy workout (10-min walk or yoga), or skip it</li>
+                                <li>Do 2 resets today: one in the morning, one before bed</li>
+                                <li>Prioritize sleep tomorrow — it's your #1 tool</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> Poor sleep = poor nervous system regulation = your body is in fight-or-flight. HIIT will just amp you up. Anchor + easy movement = safe reset.</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="7">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">I'm wired after my shift</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">2-min car reset + lights down + phone face-down</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>Do the 2-minute car reset before leaving work if possible</li>
+                                <li>Dim the lights when you get home (lower cortisol)</li>
+                                <li>Put your phone face-down for 30 mins</li>
+                                <li>Eat a light protein meal (not heavy carbs — you need to downshift, not fuel up)</li>
+                                <li>Cool shower + gentle stretching 2 hours before bed</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> Your nervous system is flooded from the shift. You need to downshift, not sleep. Resets + darkness + no screens = your body gets the "shift over" signal.</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="8">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">My shift flipped (days ↔ nights)</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">Anchor meal after waking, set caffeine boundary, 5-min reset before sleep</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>Whatever time you wake (day or night), eat protein first</li>
+                                <li>Caffeine ONLY in the first 4 hours after waking</li>
+                                <li>Eat your largest meal in the middle of your "day" (whenever that is)</li>
+                                <li>Do a 5-min reset 2 hours before your sleep window</li>
+                                <li>Give yourself 3-4 days to fully adjust. You're not failing — you're adapting.</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> Flip days mess with your circadian rhythm. The anchor meal resets your internal clock. Caffeine timing prevents wakefulness when you want to sleep.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MOVEMENT & CONSISTENCY SCENARIOS -->
+                <div style="margin-bottom: 40px;">
+                    <div class="category-label">Movement & Consistency Scenarios</div>
+
+                    <div class="scenario-card" data-scenario="9">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">I missed my workout</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">Do the 10-min version tomorrow (1 circuit or 10-min walk). Never miss twice.</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>Missing one workout = life happens. It's fine.</li>
+                                <li>Missing two in a row = habit break. That's the pattern you want to avoid.</li>
+                                <li>Tomorrow, do ANY movement (1 circuit, 10-min walk, yoga) to restart the streak</li>
+                                <li>You're building consistency, not perfection</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> Habits thrive on consistency, not intensity. A 10-minute easy walk beats missing back-to-back days. The goal is the signal, not the sweat.</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="10">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">I feel puffy or inflamed</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">Stabilize, don't restrict. Protein + hydration + walk.</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>Do NOT cut calories or restrict food</li>
+                                <li>DO eat MORE protein (helps reduce inflammation)</li>
+                                <li>DO drink more water + electrolytes (counterintuitive but it helps)</li>
+                                <li>DO take a 15–20 min walk (gentle movement reduces inflammation)</li>
+                                <li>This usually passes in 24–48 hours. You're not gaining fat.</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> Puffiness is usually inflammation, not fat gain. Restriction makes it worse. Stabilization (protein + water + movement) is what actually works.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MINDSET & MOTIVATION SCENARIOS -->
+                <div style="margin-bottom: 40px;">
+                    <div class="category-label">Mindset & Motivation Scenarios</div>
+
+                    <div class="scenario-card" data-scenario="11">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">I feel like starting over</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">Don't. Pick your day color (Green/Yellow/Red). Do the minimum. Tomorrow is a new check-in.</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>"Starting over" is perfectionism. You haven't failed — you just had a chaotic day.</li>
+                                <li>Check your day color: Are you green, yellow, or red today?</li>
+                                <li>Do only what that color requires. That's your win.</li>
+                                <li>Tomorrow you reassess. There's no "restart." Just the next day.</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> The "restart" mindset keeps you stuck in the all-or-nothing cycle. Reality is fluid. Progress is messy. Keep moving.</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="12">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">I had a terrible week</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">Restart with Chaos Day template tomorrow. Just 2 checkmarks. Build from there.</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>Don't spiral. Bad weeks happen. That's normal.</li>
+                                <li>Pick the two easiest non-negotiables (e.g., protein anchor + hydration)</li>
+                                <li>Do ONLY those two things for 3 days</li>
+                                <li>Then reassess. You'll likely move to yellow day</li>
+                                <li>Momentum rebuilds in small steps, not giant leaps</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> Low expectations reset your nervous system and rebuild trust in yourself. You're not broken — you just needed to simplify.</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="13">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">I'm not seeing scale changes</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">Check your non-scale wins: energy, cravings, sleep, bloat, clothes fit. The scale lags behind stability changes.</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>Your body is changing before the scale moves (this is real)</li>
+                                <li>Ask: Do my clothes fit better? Am I less bloated? Do I have more energy?</li>
+                                <li>Those changes = your metabolism is working</li>
+                                <li>Scale changes follow in 3–6 weeks, not 3–6 days</li>
+                                <li>If you're seeing non-scale wins, you're on track. Keep going.</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> The scale doesn't measure metabolic repair. Stability, energy, and body composition changes come before weight loss. You're progressing even if the scale is quiet.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LIFE DISRUPTIONS SCENARIOS -->
+                <div style="margin-bottom: 40px;">
+                    <div class="category-label">Life Disruptions Scenarios</div>
+
+                    <div class="scenario-card" data-scenario="14">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">Holiday / vacation / travel</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">Protein anchor is your only non-negotiable. Everything else is optional. Enjoy your time.</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>One meal a day with a solid protein anchor keeps your body in regulation mode</li>
+                                <li>Skip the guilt. Vacations are for living, not for control</li>
+                                <li>Resets, workouts, structured meals? Optional. Do them if it feels good.</li>
+                                <li>You're not "messing up." You're just pausing</li>
+                                <li>When you get home, anchor + normal routine for 2–3 days to recalibrate</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> Your metabolism doesn't reset on vacation. One anchor meal a day keeps your nervous system regulated while you enjoy freedom. True sustainability means enjoying life without obsessing.</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="15">
+                        <div class="scenario-header" onclick="toggleScenario(this)">
+                            <span class="scenario-title">Sick / family emergency</span>
+                            <span class="scenario-toggle">▼</span>
+                        </div>
+                        <div class="scenario-content">
+                            <div class="scenario-then">
+                                <div class="scenario-then-label">Then:</div>
+                                <div class="scenario-then-action">Full pause is OK. When you're ready, start with one Red Day. Then Yellow. Then Green. No restart required.</div>
+                            </div>
+                            <ul class="scenario-bullets">
+                                <li>You don't have to "stay on track" during a crisis. Life happens.</li>
+                                <li>When you're ready to re-engage (2 days, 2 weeks, whatever), pick one Red Day</li>
+                                <li>Red day = just one anchor (protein or reset). That's it.</li>
+                                <li>When that feels easy, move to yellow (anchors + one easy walk)</li>
+                                <li>From there, back to green. No guilt, no "starting over."</li>
+                            </ul>
+                            <div class="scenario-why"><strong>Why:</strong> Real life includes sickness, grief, and emergencies. Your body is resilient. Restarting isn't about punishment — it's about gradual recalibration. You're still moving forward.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== TAB NAVIGATION ==========
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabNum = btn.dataset.tab;
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.getElementById(`tab-${tabNum}`).classList.add('active');
+                btn.classList.add('active');
+                localStorage.setItem('activeTab', tabNum);
+            });
+        });
+
+        // Restore active tab
+        const activeTab = localStorage.getItem('activeTab') || '1';
+        const activeTabElement = document.querySelector(`[data-tab="${activeTab}"]`);
+        if (activeTabElement) {
+            activeTabElement.click();
+        }
+
+        // ========== TAB 1: SUSTAIN MAP BUILDER ==========
+        function buildMapStep(step) {
+            document.getElementById('sustain-map-output').classList.remove('visible');
+            document.getElementById('sustain-map-output').style.display = 'none';
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`step${i}`).classList.remove('visible');
+                document.getElementById(`step${i}`).style.display = 'none';
+            }
+            document.getElementById(`step${step}`).classList.add('visible');
+            document.getElementById(`step${step}`).style.display = 'block';
+            
+            // Update step indicator
+            document.querySelectorAll('.step-indicator .step').forEach((s, i) => {
+                if (i < step - 1) s.classList.add('completed');
+                if (i === step - 1) s.classList.add('active');
+                if (i > step - 1) s.classList.remove('completed', 'active');
+            });
+        }
+
+        // Handle custom inputs
+        document.getElementById('protein-anchor').addEventListener('change', function() {
+            const customDiv = document.getElementById('protein-custom');
+            if (this.value === 'custom') {
+                customDiv.classList.add('visible');
+                customDiv.style.display = 'block';
+            } else {
+                customDiv.classList.remove('visible');
+                customDiv.style.display = 'none';
+            }
+        });
+
+        document.getElementById('hydration-default').addEventListener('change', function() {
+            const customDiv = document.getElementById('hydration-custom');
+            if (this.value === 'custom') {
+                customDiv.classList.add('visible');
+                customDiv.style.display = 'block';
+            } else {
+                customDiv.classList.remove('visible');
+                customDiv.style.display = 'none';
+            }
+        });
+
+        document.getElementById('reset-default').addEventListener('change', function() {
+            const customDiv = document.getElementById('reset-custom');
+            if (this.value === 'custom') {
+                customDiv.classList.add('visible');
+                customDiv.style.display = 'block';
+            } else {
+                customDiv.classList.remove('visible');
+                customDiv.style.display = 'none';
+            }
+        });
+
+        document.getElementById('backup-option').addEventListener('change', function() {
+            const customDiv = document.getElementById('backup-custom');
+            if (this.value === 'custom') {
+                customDiv.classList.add('visible');
+                customDiv.style.display = 'block';
+            } else {
+                customDiv.classList.remove('visible');
+                customDiv.style.display = 'none';
+            }
+        });
+
+        function generateSustainMap() {
+            const protein = document.getElementById('protein-anchor').value === 'custom' 
+                ? document.getElementById('protein-custom-input').value 
+                : document.getElementById('protein-anchor').value;
+            
+            const hydration = document.getElementById('hydration-default').value === 'custom'
+                ? document.getElementById('hydration-custom-input').value
+                : document.getElementById('hydration-default').value;
+            
+            const reset = document.getElementById('reset-default').value === 'custom'
+                ? document.getElementById('reset-custom-input').value
+                : document.getElementById('reset-default').value;
+            
+            const backup = document.getElementById('backup-option').value === 'custom'
+                ? document.getElementById('backup-custom-input').value
+                : document.getElementById('backup-option').value;
+
+            const meal1 = document.getElementById('meal1').value || '(not set)';
+            const meal2 = document.getElementById('meal2').value || '(not set)';
+            const ifttt1 = document.getElementById('ifttt1').value || '(not set)';
+            const ifttt2 = document.getElementById('ifttt2').value || '(not set)';
+            const ifttt3 = document.getElementById('ifttt3').value || '(not set)';
+
+            document.getElementById('map-protein').textContent = protein;
+            document.getElementById('map-hydration').textContent = hydration;
+            document.getElementById('map-reset').textContent = reset;
+            document.getElementById('map-meal1').textContent = meal1;
+            document.getElementById('map-meal2').textContent = meal2;
+            document.getElementById('map-backup').textContent = backup;
+            document.getElementById('map-ifttt1').textContent = ifttt1;
+            document.getElementById('map-ifttt2').textContent = ifttt2;
+            document.getElementById('map-ifttt3').textContent = ifttt3;
+
+            // Save to localStorage
+            localStorage.setItem('sustainMap', JSON.stringify({
+                protein, hydration, reset, meal1, meal2, backup, ifttt1, ifttt2, ifttt3
+            }));
+
+            // Show output
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`step${i}`).style.display = 'none';
+            }
+            document.getElementById('sustain-map-output').classList.add('visible');
+            document.getElementById('sustain-map-output').style.display = 'block';
+        }
+
+        function printSustainMap() {
+            window.print();
+        }
+
+        function resetSustainMap() {
+            document.getElementById('protein-anchor').value = '';
+            document.getElementById('meal1').value = '';
+            document.getElementById('meal2').value = '';
+            document.getElementById('backup-option').value = '';
+            document.getElementById('ifttt1').value = '';
+            document.getElementById('ifttt2').value = '';
+            document.getElementById('ifttt3').value = '';
+            buildMapStep(1);
+            localStorage.removeItem('sustainMap');
+        }
+
+        // ========== TAB 2: PIVOT LADDER ==========
+        function calculateDayColor() {
+            const sleep = parseInt(document.querySelector('input[name="sleep"]:checked')?.value || 0);
+            const energy = parseInt(document.querySelector('input[name="energy"]:checked')?.value || 0);
+            const schedule = parseInt(document.querySelector('input[name="schedule"]:checked')?.value || 0);
+
+            const total = sleep + energy + schedule;
+            let color, emoji, title, actions;
+
+            if (total >= 16) {
+                color = 'green';
+                emoji = '🟢';
+                title = 'GREEN DAY — Full Plan';
+                actions = `
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>Morning cocktail → Protein anchor → 2 structured meals + 1 backup ready</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>Full workout (your level)</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>5-min NS Reset</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>Sleep Switch before bed</li>
+                    </ul>
+                    <p style="margin-top: 16px; font-style: italic; color: #b8b3a8;">This is your momentum day. Stack all the wins.</p>
+                `;
+            } else if (total >= 10) {
+                color = 'yellow';
+                emoji = '🟡';
+                title = 'YELLOW DAY — Anchors Only';
+                actions = `
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>Morning cocktail → Protein anchor meals only</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>10-min walk OR 5-min backup (no full workout)</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>2-min SOS Reset</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>Sleep Switch before bed</li>
+                    </ul>
+                    <p style="margin-top: 16px; font-style: italic; color: #b8b3a8;">Simplified but still moving forward. This is not a failure day.</p>
+                `;
+            } else {
+                color = 'red';
+                emoji = '🔴';
+                title = 'RED DAY — Rescue Plan';
+                actions = `
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>Pick ONE: Protein anchor OR Hydration OR 2-min reset</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>That's it. ONE thing = a win today.</li>
+                    </ul>
+                    <p style="margin-top: 16px; font-style: italic; color: #b8b3a8;">Chaos days happen. You protected your momentum with one anchor. That's enough.</p>
+                    <p style="margin-top: 12px; font-style: italic; color: #b8b3a8;">Tomorrow, check in again. You'll likely be yellow or green.</p>
+                `;
+            }
+
+            document.getElementById('pivot-results').innerHTML = `
+                <div class="plan-card ${color}">
+                    <div class="plan-emoji">${emoji}</div>
+                    <div class="plan-title">${title}</div>
+                    <div class="plan-description">${actions}</div>
+                </div>
+                <div style="margin-top: 32px;">
+                    <label style="margin-bottom: 16px; display: block;">Log Today's Color:</label>
+                    <button class="btn-secondary" onclick="logDayColor('green')" style="background-color: #4ade80; color: #1a1a1a;">Log as Green Day</button>
+                    <button class="btn-secondary" onclick="logDayColor('yellow')" style="background-color: #facc15; color: #1a1a1a; margin-left: 12px;">Log as Yellow Day</button>
+                    <button class="btn-secondary" onclick="logDayColor('red')" style="background-color: #ef4444; color: #fff; margin-left: 12px;">Log as Red Day</button>
+                </div>
+                <div style="margin-top: 32px;">
+                    <h3 style="margin-bottom: 16px;">Your Weekly Color History</h3>
+                    <div class="color-history" id="color-history"></div>
+                </div>
+                <button class="btn-secondary" onclick="resetPivotLadder()" style="margin-top: 24px;">New Assessment</button>
+            `;
+
+            document.getElementById('pivot-assessment').style.display = 'none';
+            document.getElementById('pivot-results').classList.add('visible');
+            document.getElementById('pivot-results').style.display = 'block';
+
+            updateColorHistory();
+        }
+
+        function logDayColor(color) {
+            try {
+                let history = JSON.parse(localStorage.getItem('colorHistory') || '[]');
+                history.push(color);
+                if (history.length > 7) history.shift();
+                localStorage.setItem('colorHistory', JSON.stringify(history));
+                updateColorHistory();
+            } catch (e) {
+                console.error('Error parsing colorHistory:', e);
+                localStorage.removeItem('colorHistory');
+            }
+        }
+
+        function updateColorHistory() {
+            try {
+                const history = JSON.parse(localStorage.getItem('colorHistory') || '[]');
+                const historyDiv = document.getElementById('color-history');
+                if (historyDiv) {
+                    historyDiv.innerHTML = history.map(color => {
+                        let bgColor = '#3a3a3a';
+                        if (color === 'green') bgColor = '#4ade80';
+                        if (color === 'yellow') bgColor = '#facc15';
+                        if (color === 'red') bgColor = '#ef4444';
+                        return `<div class="color-dot" style="background-color: ${bgColor};" title="${color}"></div>`;
+                    }).join('');
+                }
+            } catch (e) {
+                console.error('Error parsing colorHistory:', e);
+                localStorage.removeItem('colorHistory');
+            }
+        }
+
+        function resetPivotLadder() {
+            document.getElementById('pivot-assessment').style.display = 'block';
+            document.getElementById('pivot-results').style.display = 'none';
+            document.getElementById('pivot-results').classList.remove('visible');
+            document.querySelectorAll('input[name="sleep"], input[name="energy"], input[name="schedule"]').forEach(r => r.checked = false);
+        }
+
+        // Initialize color history on load
+        updateColorHistory();
+
+        // ========== TAB 3: 14-DAY MOMENTUM ==========
+        function saveMomentumSetup() {
+            const setup = {
+                workNN1: document.getElementById('work-nn1').value,
+                workNN2: document.getElementById('work-nn2').value,
+                offNN1: document.getElementById('off-nn1').value,
+                offNN2: document.getElementById('off-nn2').value,
+                chaosNN1: document.getElementById('chaos-nn1').value,
+                chaosNN2: document.getElementById('chaos-nn2').value
+            };
+            localStorage.setItem('momentumSetup', JSON.stringify(setup));
+            displayMomentumDays();
+        }
+
+        function displayMomentumDays() {
+            try {
+                const setup = JSON.parse(localStorage.getItem('momentumSetup') || '{}');
+                const tracking = JSON.parse(localStorage.getItem('momentumTracking') || '{}');
+
+            document.getElementById('momentum-setup').style.display = 'none';
+            document.getElementById('momentum-tracking').classList.add('visible');
+            document.getElementById('momentum-tracking').style.display = 'block';
+
+            let daysHTML = '';
+            for (let day = 8; day <= 14; day++) {
+                const dayKey = `day${day}`;
+                const dayData = tracking[dayKey] || { type: 'Work', check1: false, check2: false, check3: false, win: '' };
+
+                let nn1 = '';
+                let nn2 = '';
+                if (dayData.type === 'Work') {
+                    nn1 = setup.workNN1 || '';
+                    nn2 = setup.workNN2 || '';
+                } else if (dayData.type === 'Off') {
+                    nn1 = setup.offNN1 || '';
+                    nn2 = setup.offNN2 || '';
+                } else {
+                    nn1 = setup.chaosNN1 || 'Protein anchor';
+                    nn2 = setup.chaosNN2 || 'Hydration minimum';
+                }
+
+                daysHTML += `
+                    <div class="day-card">
+                        <div class="day-header">
+                            <span class="day-number">Day ${day}</span>
+                            <div class="day-type-buttons" style="margin: 0;">
+                                <button class="day-type-btn ${dayData.type === 'Work' ? 'active' : ''}" onclick="setDayType(${day}, 'Work', '${setup.workNN1}', '${setup.workNN2}')">Work</button>
+                                <button class="day-type-btn ${dayData.type === 'Off' ? 'active' : ''}" onclick="setDayType(${day}, 'Off', '${setup.offNN1}', '${setup.offNN2}')">Off</button>
+                                <button class="day-type-btn ${dayData.type === 'Chaos' ? 'active' : ''}" onclick="setDayType(${day}, 'Chaos', '${setup.chaosNN1}', '${setup.chaosNN2}')">Chaos</button>
+                            </div>
+                        </div>
+                        <div class="checkmark-section">
+                            <label class="checkmark-label">Checkmark 1: ${nn1}</label>
+                            <input type="checkbox" id="check1-${day}" ${dayData.check1 ? 'checked' : ''} onchange="saveDayData(${day})">
+                        </div>
+                        <div class="checkmark-section">
+                            <label class="checkmark-label">Checkmark 2: ${nn2}</label>
+                            <input type="checkbox" id="check2-${day}" ${dayData.check2 ? 'checked' : ''} onchange="saveDayData(${day})">
+                        </div>
+                        <div class="checkmark-section">
+                            <label class="checkmark-label">Bonus Checkmark (optional)</label>
+                            <input type="checkbox" id="check3-${day}" ${dayData.check3 ? 'checked' : ''} onchange="saveDayData(${day})">
+                        </div>
+                        <div class="form-group">
+                            <label for="win-${day}">Win of the Day:</label>
+                            <input type="text" id="win-${day}" value="${dayData.win}" placeholder="Energy? Cravings? Sleep? Mood?" onchange="saveDayData(${day})">
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('momentum-days').innerHTML = daysHTML;
+            updateMomentumStats();
+
+            // Check if all days are filled
+            let allFilled = true;
+            for (let day = 8; day <= 14; day++) {
+                if (!tracking[`day${day}`]) {
+                    allFilled = false;
+                    break;
+                }
+            }
+
+            if (allFilled) {
+                document.getElementById('momentum-reflection').classList.add('visible');
+                document.getElementById('momentum-reflection').style.display = 'block';
+            }
+            } catch (e) {
+                console.error('Error loading momentum setup:', e);
+                localStorage.removeItem('momentumSetup');
+                localStorage.removeItem('momentumTracking');
+            }
+        }
+
+        function setDayType(day, type, nn1, nn2) {
+            try {
+                const tracking = JSON.parse(localStorage.getItem('momentumTracking') || '{}');
+                if (!tracking[`day${day}`]) tracking[`day${day}`] = {};
+                tracking[`day${day}`].type = type;
+                localStorage.setItem('momentumTracking', JSON.stringify(tracking));
+                displayMomentumDays();
+            } catch (e) {
+                console.error('Error setting day type:', e);
+                localStorage.removeItem('momentumTracking');
+            }
+        }
+
+        function saveDayData(day) {
+            try {
+                const tracking = JSON.parse(localStorage.getItem('momentumTracking') || '{}');
+                if (!tracking[`day${day}`]) tracking[`day${day}`] = {};
+
+                tracking[`day${day}`].check1 = document.getElementById(`check1-${day}`)?.checked || false;
+                tracking[`day${day}`].check2 = document.getElementById(`check2-${day}`)?.checked || false;
+                tracking[`day${day}`].check3 = document.getElementById(`check3-${day}`)?.checked || false;
+                tracking[`day${day}`].win = document.getElementById(`win-${day}`)?.value || '';
+
+                localStorage.setItem('momentumTracking', JSON.stringify(tracking));
+                updateMomentumStats();
+            } catch (e) {
+                console.error('Error saving day data:', e);
+                localStorage.removeItem('momentumTracking');
+            }
+        }
+
+        function updateMomentumStats() {
+            try {
+                const tracking = JSON.parse(localStorage.getItem('momentumTracking') || '{}');
+                let totalChecks = 0;
+                let streak = 0;
+                let lastWasWin = true;
+
+                for (let day = 8; day <= 14; day++) {
+                    const dayData = tracking[`day${day}`] || {};
+                    const checks = (dayData.check1 ? 1 : 0) + (dayData.check2 ? 1 : 0) + (dayData.check3 ? 1 : 0);
+                    if (checks >= 2) totalChecks++;
+                    if (checks >= 2 && lastWasWin) streak++;
+                    else if (checks < 2) lastWasWin = false;
+                }
+
+                const scoreText = totalChecks >= 10 ? 'Strong' : totalChecks >= 7 ? 'Building' : 'Needs attention';
+
+                const totalCheckmarksEl = document.getElementById('total-checkmarks');
+                const momentumScoreEl = document.getElementById('momentum-score');
+                const dayStreakEl = document.getElementById('day-streak');
+                
+                if (totalCheckmarksEl) totalCheckmarksEl.textContent = totalChecks;
+                if (momentumScoreEl) momentumScoreEl.textContent = scoreText;
+                if (dayStreakEl) dayStreakEl.textContent = streak;
+            } catch (e) {
+                console.error('Error updating momentum stats:', e);
+            }
+        }
+
+        function generateMomentumRecommendation() {
+            try {
+                const tracking = JSON.parse(localStorage.getItem('momentumTracking') || '{}');
+                let totalChecks = 0;
+
+                for (let day = 8; day <= 14; day++) {
+                    const dayData = tracking[`day${day}`] || {};
+                    const checks = (dayData.check1 ? 1 : 0) + (dayData.check2 ? 1 : 0) + (dayData.check3 ? 1 : 0);
+                    if (checks >= 2) totalChecks++;
+                }
+
+                const reflection1El = document.getElementById('reflection1');
+                const reflection2El = document.getElementById('reflection2');
+                const reflection1 = reflection1El ? reflection1El.value : '';
+                const reflection2 = reflection2El ? reflection2El.value : '';
+
+                let recommendation = '';
+                if (totalChecks >= 12) {
+                    recommendation = `<h4>You're ready to add a 3rd non-negotiable!</h4><p>You've built solid consistency. Now's the time to layer in the next habit. What feels natural next?</p>`;
+                } else if (totalChecks >= 10) {
+                    recommendation = `<h4>Strong momentum. Keep your 2 non-negotiables solid.</h4><p>Don't add more yet. Perfect is consistency, not addition. You're right on track.</p>`;
+                } else if (totalChecks >= 7) {
+                    recommendation = `<h4>Building. Simplify if needed — consistency over ambition.</h4><p>You're making progress. If 2 checkmarks feel hard, pick your 1 favorite non-negotiable for Week 3. Simpler can be better.</p>`;
+                } else {
+                    recommendation = `<h4>Restart with Chaos Day template. Pick easier non-negotiables.</h4><p>You're not failing. You're learning what works for your life. Week 3: Just pick 1 habit you actually enjoy. Build from there.</p>`;
+                }
+
+                const recContentEl = document.getElementById('recommendation-content');
+                const reflectionEl = document.getElementById('momentum-reflection');
+                const recEl = document.getElementById('momentum-recommendation');
+                if (recContentEl) recContentEl.innerHTML = recommendation;
+                if (reflectionEl) reflectionEl.style.display = 'none';
+                if (recEl) { recEl.classList.add('visible'); recEl.style.display = 'block'; }
+            } catch (e) {
+                console.error('Error generating momentum recommendation:', e);
+            }
+        }
+
+        function resetMomentumTracker() {
+            try {
+                localStorage.removeItem('momentumSetup');
+                localStorage.removeItem('momentumTracking');
+                const momentumTrackingEl = document.getElementById('momentum-tracking');
+                const momentumSetupEl = document.getElementById('momentum-setup');
+                if (momentumTrackingEl) momentumTrackingEl.style.display = 'none';
+                if (momentumSetupEl) momentumSetupEl.style.display = 'block';
+                document.querySelectorAll('#momentum-setup input').forEach(input => input.value = '');
+                const chaosNN1El = document.getElementById('chaos-nn1');
+                const chaosNN2El = document.getElementById('chaos-nn2');
+                if (chaosNN1El) chaosNN1El.value = 'Protein anchor';
+                if (chaosNN2El) chaosNN2El.value = 'Hydration minimum';
+            } catch (e) {
+                console.error('Error resetting momentum tracker:', e);
+            }
+        }
+
+        // ========== TAB 4: 7-DAY CHECK-IN ==========
+        function updateCheckinProgress() {
+            document.querySelectorAll('input[type="range"]').forEach(range => {
+                const id = range.id;
+                const val = range.value;
+                const valSpan = document.getElementById(`${id}-val`);
+                if (valSpan) valSpan.textContent = val;
+            });
+        }
+
+        function moveToCheckinSection(section) {
+            const sections = ['a', 'b', 'c', 'd', 'e'];
+            sections.forEach(s => {
+                const el = document.getElementById(`checkin-section-${s}`);
+                if (el) { el.style.display = 'none'; el.classList.remove('visible'); }
+            });
+            const activeEl = document.getElementById(`checkin-section-${section}`);
+            if (activeEl) { activeEl.style.display = 'block'; activeEl.classList.add('visible'); }
+
+            // Update progress
+            const progress = (sections.indexOf(section) + 1) / sections.length * 100;
+            const progressEl = document.getElementById('checkin-progress');
+            if (progressEl) progressEl.style.width = progress + '%';
+        }
+
+        function generateCheckinReport() {
+            try {
+                const energyChange = parseInt(document.getElementById('energy-day7').value) - parseInt(document.getElementById('energy-day1').value);
+                const cravingsChange = parseInt(document.getElementById('cravings-day1').value) - parseInt(document.getElementById('cravings-day7').value);
+                const sleepChange = parseInt(document.getElementById('sleep-day7').value) - parseInt(document.getElementById('sleep-day1').value);
+                const stressChange = parseInt(document.getElementById('stress-day1').value) - parseInt(document.getElementById('stress-day7').value);
+
+                const waist = document.querySelector('input[name="waist"]:checked')?.value || '';
+                const crash = document.querySelector('input[name="crash"]:checked')?.value || '';
+                const appetite = document.querySelector('input[name="appetite"]:checked')?.value || '';
+                const digestion = document.querySelector('input[name="digestion"]:checked')?.value || '';
+
+                const behaviors = [];
+                ['behavior1', 'behavior2', 'behavior3', 'behavior4', 'behavior5'].forEach(id => {
+                    const elem = document.getElementById(id);
+                    if (elem && elem.checked) {
+                        behaviors.push(elem.value);
+                    }
+                });
+
+                const easiestElem = document.getElementById('easiest');
+                const easiest = (easiestElem && easiestElem.value) || 'Your personal anchor';
+                const support = [];
+                ['support1', 'support2', 'support3', 'support4', 'support5'].forEach(id => {
+                    const elem = document.getElementById(id);
+                    if (elem && elem.checked) {
+                        support.push(elem.value);
+                    }
+                });
+
+                let metricsHTML = `
+                    <div class="report-metric">
+                        <span class="metric-label">Energy</span>
+                        <span class="metric-change up">${energyChange > 0 ? '+' : ''}${energyChange}</span>
+                    </div>
+                    <div class="report-metric">
+                        <span class="metric-label">Cravings</span>
+                        <span class="metric-change down">${cravingsChange > 0 ? '-' : '+'}${cravingsChange}</span>
+                    </div>
+                    <div class="report-metric">
+                        <span class="metric-label">Sleep Quality</span>
+                        <span class="metric-change up">${sleepChange > 0 ? '+' : ''}${sleepChange}</span>
+                    </div>
+                    <div class="report-metric">
+                        <span class="metric-label">Stress Level</span>
+                        <span class="metric-change down">${stressChange > 0 ? '-' : '+'}${stressChange}</span>
+                    </div>
+                    <div class="report-metric">
+                        <span class="metric-label">Waist / Bloat</span>
+                        <span class="metric-change">${waist}</span>
+                    </div>
+                    <div class="report-metric">
+                        <span class="metric-label">Mid-Shift Crash</span>
+                        <span class="metric-change">${crash}</span>
+                    </div>
+                    <div class="report-metric">
+                        <span class="metric-label">Appetite Stability</span>
+                        <span class="metric-change">${appetite}</span>
+                    </div>
+                    <div class="report-metric">
+                        <span class="metric-label">Digestion</span>
+                        <span class="metric-change">${digestion}</span>
+                    </div>
+                `;
+
+                const behaviorText = behaviors.length > 0 ? behaviors.join(', ') : 'New habits in progress';
+                const supportText = support.length > 0 ? support.join(', ') : 'Solo mode';
+
+                let messageText = '';
+                if (energyChange + sleepChange + stressChange > 5) {
+                    messageText = `You're not the same person you were 7 days ago. Your body is healing. This is real. Keep moving.`;
+                } else if (energyChange + sleepChange + stressChange > 0) {
+                    messageText = `Progress is subtle. These internal shifts matter more than you think. You're on the right track.`;
+                } else {
+                    messageText = `Your body is adapting. Real changes are happening under the surface. Give yourself grace and keep going.`;
+                }
+
+                const reportMetricsEl = document.getElementById('report-metrics');
+                const reportBehaviorsEl = document.getElementById('report-behaviors');
+                const reportAnchorEl = document.getElementById('report-anchor');
+                const reportMessageEl = document.getElementById('report-message-text');
+                
+                if (reportMetricsEl) reportMetricsEl.innerHTML = metricsHTML;
+                if (reportBehaviorsEl) reportBehaviorsEl.textContent = behaviorText;
+                if (reportAnchorEl) reportAnchorEl.textContent = `"${easiest}"`;
+                if (reportMessageEl) reportMessageEl.textContent = messageText;
+
+                const checkinReportEl = document.getElementById('checkin-report');
+                if (checkinReportEl) {
+                    checkinReportEl.classList.add('visible');
+                    checkinReportEl.style.display = 'block';
+                }
+                moveToCheckinSection('a');
+
+                // Save to localStorage
+                localStorage.setItem('checkinReport', JSON.stringify({
+                    energyChange, cravingsChange, sleepChange, stressChange, waist, crash, appetite, digestion, behaviors, easiest, support
+                }));
+            } catch (e) {
+                console.error('Error generating check-in report:', e);
+            }
+        }
+
+        function printCheckinReport() {
+            window.print();
+        }
+
+        function resetCheckinAssessment() {
+            document.querySelectorAll('input[type="range"]').forEach(r => r.value = 5);
+            document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+            document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
+            document.querySelectorAll('textarea').forEach(t => t.value = '');
+            document.getElementById('checkin-report').style.display = 'none';
+            moveToCheckinSection('a');
+        }
+
+        // ========== TAB 5: SCENARIO LIBRARY ==========
+        function toggleScenario(header) {
+            const card = header.parentElement;
+            card.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

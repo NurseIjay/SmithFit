@@ -1,0 +1,10 @@
+{
+  "client_name": "Sarah M.",
+  "date_range": "2026-03-08 to 2026-03-14",
+  "checkins": [
+    {"date": "2026-03-08", "notes": "Added protein snack, energy better", "adherence_percent": 80},
+    {"date": "2026-03-11", "notes": "Missed snack during overtime shift", "adherence_percent": 50},
+    {"date": "2026-03-14", "notes": "Slept 6.5 hrs on off-day", "adherence_percent": 70}
+  ],
+  "metrics": {"weight_lbs": 158.8, "sleep_hours_avg": 6.2, "energy_rating": 6}
+}

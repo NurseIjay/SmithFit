@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Top 10 Macro-Friendly Cottage Cheese Recipes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0f0e0c;
+    --card: #1a1814;
+    --card2: #201e1a;
+    --accent: #e8c97e;
+    --accent2: #d4a843;
+    --text: #f0ece3;
+    --muted: #8a8378;
+    --sweet: #c97e8a;
+    --savory: #7ec9b0;
+    --simple: #7e9dc9;
+    --border: rgba(232,201,126,0.15);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 0 0 80px;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 64px 24px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(232,201,126,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 520px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+
+  /* FILTER PILLS */
+  .filters {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 24px 40px;
+  }
+  .pill {
+    padding: 8px 20px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .pill:hover { border-color: var(--accent); color: var(--accent); }
+  .pill.active { background: var(--accent); color: #0f0e0c; border-color: var(--accent); }
+  .pill[data-filter="sweet"].active { background: var(--sweet); border-color: var(--sweet); }
+  .pill[data-filter="savory"].active { background: var(--savory); border-color: var(--savory); }
+  .pill[data-filter="simple"].active { background: var(--simple); border-color: var(--simple); }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    padding: 0 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    position: relative;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .card.hidden { display: none; }
+  .card[data-type="sweet"]:hover { border-color: rgba(201,126,138,0.4); }
+  .card[data-type="savory"]:hover { border-color: rgba(126,201,176,0.4); }
+  .card[data-type="simple"]:hover { border-color: rgba(126,157,201,0.4); }
+
+  .card-banner {
+    height: 8px;
+  }
+  .card[data-type="sweet"] .card-banner { background: linear-gradient(90deg, var(--sweet), #e8a0b0); }
+  .card[data-type="savory"] .card-banner { background: linear-gradient(90deg, var(--savory), #a0e8d0); }
+  .card[data-type="simple"] .card-banner { background: linear-gradient(90deg, var(--simple), #a0c0e8); }
+
+  .card-inner { padding: 22px 24px 24px; }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .rank {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--border);
+    line-height: 1;
+    min-width: 36px;
+  }
+  .type-badge {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+  .card[data-type="sweet"] .type-badge { background: rgba(201,126,138,0.15); color: var(--sweet); }
+  .card[data-type="savory"] .type-badge { background: rgba(126,201,176,0.15); color: var(--savory); }
+  .card[data-type="simple"] .type-badge { background: rgba(126,157,201,0.15); color: var(--simple); }
+
+  .card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+  .card .desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+
+  /* MACROS */
+  .macros {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .macro-box {
+    background: var(--card2);
+    border-radius: 10px;
+    padding: 10px 8px;
+    text-align: center;
+  }
+  .macro-val {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    color: var(--accent);
+    display: block;
+  }
+  .macro-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* EXPAND CONTENT */
+  .expand-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--accent);
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s;
+  }
+  .expand-toggle:hover { opacity: 0.75; }
+  .expand-toggle svg { transition: transform 0.3s; }
+  .expand-toggle.open svg { transform: rotate(180deg); }
+
+  .expand-content {
+    display: none;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .expand-content.open { display: block; }
+
+  .section-title {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .ingredients {
+    list-style: none;
+    margin-bottom: 16px;
+  }
+  .ingredients li {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ingredients li::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+  .instructions {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .pro-tip {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: rgba(232,201,126,0.06);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    font-size: 12px;
+    color: var(--accent);
+    line-height: 1.6;
+  }
+  .pro-tip strong { display: block; margin-bottom: 4px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; }
+
+  /* Animate in */
+  .card {
+    animation: fadeUp 0.4s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">High Protein · Low Calorie · Macro-Optimized</div>
+  <h1>Top 10 <span>Cottage Cheese</span><br/>Recipes</h1>
+  <p>Macro-friendly recipes built around cottage cheese — your highest-protein, lowest-effort ingredient for body recomposition.</p>
+</div>
+
+<div class="filters">
+  <button class="pill active" data-filter="all">All Recipes</button>
+  <button class="pill" data-filter="sweet">🍓 Sweet</button>
+  <button class="pill" data-filter="savory">🥚 Savory</button>
+  <button class="pill" data-filter="simple">⚡ Simple</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const recipes = [
+  {
+    rank: 1,
+    type: "sweet",
+    name: "Protein Cheesecake Bowl",
+    desc: "Tastes like dessert. Hits like a protein shake. Only 5 ingredients and zero baking required.",
+    macros: { cal: 280, protein: 38, carbs: 18, fat: 5 },
+    ingredients: ["1 cup low-fat cottage cheese (2%)", "1 scoop vanilla protein powder", "1 tbsp lemon juice", "1 tsp stevia or monk fruit", "¼ cup berries (topping)"],
+    instructions: "Blend cottage cheese, protein powder, lemon juice, and sweetener until silky smooth. Pour into a bowl, top with berries, and refrigerate 10 min for a thicker texture. Eat cold.",
+    tip: "Use a high-speed blender for the creamiest texture — it completely eliminates the curds."
+  },
+  {
+    rank: 2,
+    type: "savory",
+    name: "Egg White & Cottage Cheese Scramble",
+    desc: "The highest-protein breakfast you can make in under 5 minutes. Insane protein-to-calorie ratio.",
+    macros: { cal: 240, protein: 42, carbs: 5, fat: 4 },
+    ingredients: ["½ cup low-fat cottage cheese", "4 large egg whites", "1 whole egg", "Salt, pepper, garlic powder", "Handful baby spinach"],
+    instructions: "Whisk egg whites and whole egg together. Pour into a non-stick pan over medium heat. When eggs start to set, fold in cottage cheese and spinach. Stir gently until cooked through. Season and serve.",
+    tip: "Adding cottage cheese AFTER eggs start cooking keeps it creamy instead of watery."
+  },
+  {
+    rank: 3,
+    type: "simple",
+    name: "3-Ingredient Protein Pancakes",
+    desc: "Three ingredients. No flour. No oil. Fluffy, high-protein pancakes in under 10 minutes.",
+    macros: { cal: 260, protein: 34, carbs: 20, fat: 5 },
+    ingredients: ["½ cup cottage cheese", "2 eggs", "½ cup oats (blended to flour)", "Cinnamon to taste (optional)"],
+    instructions: "Blend all ingredients until smooth. Heat a non-stick pan over medium-low heat. Pour ¼ cup batter per pancake. Cook 2–3 min per side until golden. Top with berries or sugar-free syrup.",
+    tip: "Low and slow is key — too high heat will burn outside before inside cooks."
+  },
+  {
+    rank: 4,
+    type: "savory",
+    name: "Cottage Cheese Tuna Bowl",
+    desc: "Zero cooking. Maximum protein. Surprisingly filling and creamy without any mayo.",
+    macros: { cal: 250, protein: 46, carbs: 6, fat: 3 },
+    ingredients: ["½ cup low-fat cottage cheese", "1 can albacore tuna (drained)", "1 tsp Dijon mustard", "Celery, red onion (chopped)", "Salt, pepper, dill"],
+    instructions: "Mix cottage cheese and mustard until smooth. Fold in drained tuna, celery, and red onion. Season with salt, pepper, and dill. Eat in a wrap, on rice cakes, or straight from the bowl.",
+    tip: "This keeps well for 3 days in the fridge — meal prep 3 servings at once."
+  },
+  {
+    rank: 5,
+    type: "sweet",
+    name: "Chocolate Peanut Butter Mousse",
+    desc: "Rich, thick, chocolatey. You'll think you're cheating. You're not.",
+    macros: { cal: 310, protein: 35, carbs: 16, fat: 9 },
+    ingredients: ["1 cup low-fat cottage cheese", "2 tbsp cocoa powder (unsweetened)", "1 tbsp PB2 or natural peanut butter", "1 tsp stevia", "Pinch of sea salt"],
+    instructions: "Blend all ingredients in a high-speed blender until completely smooth and mousse-like. Chill 15–20 minutes for best texture. Top with dark chocolate chips if macros allow.",
+    tip: "PB2 (powdered peanut butter) keeps fat low while delivering full peanut butter flavor."
+  },
+  {
+    rank: 6,
+    type: "savory",
+    name: "High-Protein Cottage Cheese Flatbread",
+    desc: "2-ingredient flatbread that's crispy, sturdy, and protein-packed. Perfect for shift-friendly meal prep.",
+    macros: { cal: 210, protein: 28, carbs: 10, fat: 5 },
+    ingredients: ["1 cup low-fat cottage cheese", "2 eggs", "Garlic powder, Italian seasoning, salt"],
+    instructions: "Preheat oven to 375°F. Blend cottage cheese and eggs until smooth. Spread thin on a parchment-lined baking sheet. Sprinkle seasoning on top. Bake 25–30 min until golden and firm. Slice and top with whatever you want.",
+    tip: "Spread it THIN — under ¼ inch — for crispy edges that won't get soggy under toppings."
+  },
+  {
+    rank: 7,
+    type: "simple",
+    name: "Cottage Cheese & Berry Power Bowl",
+    desc: "No blending. No cooking. Highest simplicity score on the list. Pack it the night before.",
+    macros: { cal: 220, protein: 28, carbs: 22, fat: 4 },
+    ingredients: ["1 cup low-fat cottage cheese (2%)", "½ cup mixed berries (fresh or frozen/thawed)", "1 tbsp chia seeds", "Drizzle of honey (optional)"],
+    instructions: "Scoop cottage cheese into a bowl or container. Top with berries and chia seeds. Drizzle honey if needed. Eat immediately or refrigerate overnight — chia seeds will thicken it nicely.",
+    tip: "Frozen berries thawed overnight release juice that naturally sweetens the cottage cheese."
+  },
+  {
+    rank: 8,
+    type: "savory",
+    name: "Stuffed Bell Peppers with Cottage Cheese & Turkey",
+    desc: "A complete meal in one prep. High protein, high volume, low calorie. Meal preps perfectly.",
+    macros: { cal: 320, protein: 44, carbs: 18, fat: 6 },
+    ingredients: ["2 bell peppers (halved)", "4 oz lean ground turkey (cooked)", "½ cup cottage cheese", "¼ cup salsa", "Taco seasoning, cumin"],
+    instructions: "Preheat oven to 375°F. Mix cooked turkey, cottage cheese, salsa, and seasonings. Stuff into halved bell peppers. Bake 20–25 min until peppers are tender and filling is set. Top with jalapeños or hot sauce.",
+    tip: "Cottage cheese replaces sour cream AND cheese here — you get creaminess without the fat hit."
+  },
+  {
+    rank: 9,
+    type: "sweet",
+    name: "High-Protein Banana Soft Serve",
+    desc: "Two ingredients. Frozen banana + cottage cheese = the most satisfying macro-friendly dessert.",
+    macros: { cal: 230, protein: 22, carbs: 32, fat: 2 },
+    ingredients: ["1 frozen banana (sliced)", "½ cup low-fat cottage cheese", "Vanilla extract (optional)", "Cinnamon to taste"],
+    instructions: "Blend frozen banana and cottage cheese together until it reaches soft-serve consistency. Add vanilla and cinnamon. Eat immediately for soft serve texture or freeze 30 min for firmer ice cream.",
+    tip: "Freeze bananas when they're extra ripe — more natural sweetness, no added sugar needed."
+  },
+  {
+    rank: 10,
+    type: "simple",
+    name: "Cottage Cheese Rice Cakes Stack",
+    desc: "The world's easiest high-protein snack. Zero prep. Infinite combinations. Perfect for nurses on the go.",
+    macros: { cal: 180, protein: 22, carbs: 16, fat: 3 },
+    ingredients: ["2 brown rice cakes", "½ cup low-fat cottage cheese", "Everything bagel seasoning", "Cucumber or tomato slices", "Optional: smoked salmon or turkey"],
+    instructions: "Spread cottage cheese generously on rice cakes. Top with cucumber or tomato. Sprinkle with everything bagel seasoning. Add smoked salmon or deli turkey for extra protein. Eat immediately.",
+    tip: "Pack cottage cheese in a small container and assemble on the unit — stays crispy, no soggy cakes."
+  }
+];
+
+const grid = document.getElementById('grid');
+
+function renderCards(filter) {
+  grid.innerHTML = '';
+  recipes
+    .filter(r => filter === 'all' || r.type === filter)
+    .forEach((r, i) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.setAttribute('data-type', r.type);
+      card.style.animationDelay = `${i * 0.06}s`;
+
+      card.innerHTML = `
+        <div class="card-banner"></div>
+        <div class="card-inner">
+          <div class="card-meta">
+            <span class="rank">${String(r.rank).padStart(2,'0')}</span>
+            <span class="type-badge">${r.type === 'sweet' ? '🍓 Sweet' : r.type === 'savory' ? '🥚 Savory' : '⚡ Simple'}</span>
+          </div>
+          <h2>${r.name}</h2>
+          <p class="desc">${r.desc}</p>
+          <div class="macros">
+            <div class="macro-box"><span class="macro-val">${r.macros.cal}</span><span class="macro-label">Calories</span></div>
+            <div class="macro-box"><span class="macro-val">${r.macros.protein}g</span><span class="macro-label">Protein</span></div>
+            <div class="macro-box"><span class="macro-val">${r.macros.carbs}g</span><span class="macro-label">Carbs</span></div>
+            <div class="macro-box"><span class="macro-val">${r.macros.fat}g</span><span class="macro-label">Fat</span></div>
+          </div>
+          <button class="expand-toggle" onclick="toggleExpand(this, event)">
+            View Recipe
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="expand-content">
+            <div class="section-title">Ingredients</div>
+            <ul class="ingredients">${r.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
+            <div class="section-title">Instructions</div>
+            <p class="instructions">${r.instructions}</p>
+            <div class="pro-tip"><strong>💡 Pro Tip</strong>${r.tip}</div>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+}
+
+function toggleExpand(btn, e) {
+  e.stopPropagation();
+  const content = btn.nextElementSibling;
+  content.classList.toggle('open');
+  btn.classList.toggle('open');
+  btn.childNodes[0].textContent = content.classList.contains('open') ? 'Hide Recipe ' : 'View Recipe ';
+}
+
+document.querySelectorAll('.pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    renderCards(pill.dataset.filter);
+  });
+});
+
+renderCards('all');
+</script>
+</body>
+</html>

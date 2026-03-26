@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pillar 4: Strengthen — SmithFit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #1a1a1a;
+            --gold-accent: #d4a94c;
+            --gold-hover: #e8c565;
+            --text-light: #f5f5f5;
+            --text-muted: #b0b0b0;
+            --card-bg: #2a2a2a;
+            --border-subtle: #3a3a3a;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 2px solid var(--gold-accent);
+            padding: 2rem 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            color: var(--gold-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem 2rem;
+        }
+
+        .tabs-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            background-color: var(--card-bg);
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .tab-button {
+            padding: 0.75rem 1rem;
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-subtle);
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            color: var(--gold-accent);
+            border-color: var(--gold-accent);
+        }
+
+        .tab-button.active {
+            background-color: var(--gold-accent);
+            color: var(--dark-bg);
+            border-color: var(--gold-accent);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--gold-accent);
+            box-shadow: 0 4px 12px rgba(212, 169, 76, 0.15);
+        }
+
+        h2 {
+            font-family: Georgia, serif;
+            font-size: 1.8rem;
+            color: var(--gold-accent);
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-family: Georgia, serif;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-question {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .quiz-question:last-child {
+            border-bottom: none;
+        }
+
+        .quiz-question label {
+            display: block;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background-color: var(--dark-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quiz-question label:hover {
+            border-color: var(--gold-accent);
+            background-color: rgba(212, 169, 76, 0.05);
+        }
+
+        .quiz-question input[type="radio"] {
+            margin-right: 0.75rem;
+            cursor: pointer;
+        }
+
+        .quiz-result {
+            background-color: rgba(212, 169, 76, 0.1);
+            border-left: 4px solid var(--gold-accent);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-top: 1.5rem;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--gold-accent);
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--gold-hover);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .workout-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .workout-card {
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .workout-card.selected {
+            border-color: var(--gold-accent);
+            box-shadow: 0 4px 12px rgba(212, 169, 76, 0.2);
+        }
+
+        .workout-card h4 {
+            font-family: Georgia, serif;
+            font-size: 1.3rem;
+            color: var(--gold-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .workout-card .meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .exercise-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .exercise-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.95rem;
+        }
+
+        .exercise-list li:last-child {
+            border-bottom: none;
+        }
+
+        .timer-display {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .timer-number {
+            font-family: Georgia, serif;
+            font-size: 4rem;
+            color: var(--gold-accent);
+            font-weight: bold;
+            line-height: 1;
+            margin: 1rem 0;
+        }
+
+        .timer-label {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .tracker-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        select {
+            padding: 0.75rem;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border-subtle);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--gold-accent);
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--gold-accent);
+            cursor: pointer;
+            border: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-box {
+            background-color: rgba(212, 169, 76, 0.1);
+            border: 1px solid var(--gold-accent);
+            border-radius: 4px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            color: var(--gold-accent);
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .tracker-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .tracker-table th,
+        .tracker-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .tracker-table th {
+            background-color: rgba(212, 169, 76, 0.1);
+            color: var(--gold-accent);
+            font-weight: 600;
+        }
+
+        .roadmap {
+            margin: 2rem 0;
+        }
+
+        .roadmap-phase {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: rgba(212, 169, 76, 0.05);
+            border-left: 4px solid var(--gold-accent);
+            border-radius: 4px;
+        }
+
+        .roadmap-phase h4 {
+            color: var(--gold-accent);
+            margin-bottom: 0.5rem;
+            font-family: Georgia, serif;
+        }
+
+        .scenario-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .scenario-card {
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .scenario-card:hover {
+            border-color: var(--gold-accent);
+            box-shadow: 0 4px 12px rgba(212, 169, 76, 0.15);
+        }
+
+        .scenario-card.expanded {
+            border-color: var(--gold-accent);
+            grid-column: 1 / -1;
+        }
+
+        .scenario-if {
+            font-family: Georgia, serif;
+            color: var(--gold-accent);
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+        }
+
+        .scenario-then {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .scenario-card.expanded .scenario-then {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .tabs-nav {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .timer-number {
+                font-size: 3rem;
+            }
+
+            .workout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .scenario-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            body {
+                background-color: white;
+                color: black;
+            }
+
+            .card {
+                page-break-inside: avoid;
+                border: 1px solid #ccc;
+                background-color: white;
+            }
+
+            .tab-button,
+            .tabs-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pillar 4: Strengthen</h1>
+        <p>Build a shift-proof physiology with smart, sustainable movement</p>
+    </header>
+
+    <div class="container">
+        <div class="tabs-nav">
+            <button class="tab-button active" data-tab="movement-level">Movement Level Finder</button>
+            <button class="tab-button" data-tab="workout-programs">Workout Programs</button>
+            <button class="tab-button" data-tab="backup-workouts">Too-Tired 5-Min</button>
+            <button class="tab-button" data-tab="movement-tracker">Movement Tracker</button>
+            <button class="tab-button" data-tab="scenarios">If-This-Then-That</button>
+        </div>
+
+        <!-- TAB 1: Movement Level Finder -->
+        <div id="movement-level" class="tab-content active">
+            <div class="card">
+                <h2>Find Your Movement Level</h2>
+                <p>Answer these 5 quick questions to discover the perfect workout program for your life right now.</p>
+                
+                <form id="quiz-form">
+                    <div class="quiz-question">
+                        <h3>1. How many nights a month do you work 12+ hour shifts?</h3>
+                        <label><input type="radio" name="q1" value="1"> 0–6 nights (mostly day shifts or few shifts)</label>
+                        <label><input type="radio" name="q1" value="2"> 7–14 nights (some shift variability)</label>
+                        <label><input type="radio" name="q1" value="3"> 15–20 nights (heavy shift work)</label>
+                        <label><input type="radio" name="q1" value="4"> 20+ nights (constant night/rotating shifts)</label>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h3>2. On a scale, how often do you feel too tired to exercise after work?</h3>
+                        <label><input type="radio" name="q2" value="1"> Rarely — I have energy most days</label>
+                        <label><input type="radio" name="q2" value="2"> Sometimes — 2–3 days a week feel tough</label>
+                        <label><input type="radio" name="q2" value="3"> Often — Most nights I'm wiped</label>
+                        <label><input type="radio" name="q2" value="4"> Always — Exhausted no matter what</label>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h3>3. How consistent are you with exercise when you try?</h3>
+                        <label><input type="radio" name="q3" value="4"> Very consistent — I show up 90%+ of the time</label>
+                        <label><input type="radio" name="q3" value="3"> Mostly consistent — I stick to 70–80% of planned workouts</label>
+                        <label><input type="radio" name="q3" value="2"> Inconsistent — I miss 50% of what I plan</label>
+                        <label><input type="radio" name="q3" value="1"> Very inconsistent — Life gets in the way too much</label>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h3>4. What's your current fitness baseline?</h3>
+                        <label><input type="radio" name="q4" value="1"> Sedentary — Haven't worked out in 6+ months</label>
+                        <label><input type="radio" name="q4" value="2"> Lightly active — Some cardio or stretching, 1–2x/week</label>
+                        <label><input type="radio" name="q4" value="3"> Moderately active — 3–4 workouts per week</label>
+                        <label><input type="radio" name="q4" value="4"> Very active — 5+ structured workouts per week</label>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h3>5. How much time can you realistically give to movement per week?</h3>
+                        <label><input type="radio" name="q5" value="1"> Under 30 minutes — Micro-workouts only</label>
+                        <label><input type="radio" name="q5" value="2"> 30–60 minutes — 2 brief sessions per week</label>
+                        <label><input type="radio" name="q5" value="3"> 60–90 minutes — 3 sessions, 20–30 min each</label>
+                        <label><input type="radio" name="q5" value="4"> 90+ minutes — 3+ longer sessions, 30+ min each</label>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" onclick="scoreQuiz()">See My Level</button>
+                        <button type="button" onclick="resetQuiz()">Start Over</button>
+                    </div>
+                </form>
+
+                <div id="quiz-result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- TAB 2: Workout Programs -->
+        <div id="workout-programs" class="tab-content">
+            <div class="card">
+                <h2>Choose Your Workout Level</h2>
+                <p>Three evidence-based programs, designed for shift workers. Pick the one that fits your life.</p>
+                
+                <div class="workout-grid" id="workout-grid"></div>
+            </div>
+        </div>
+
+        <!-- TAB 3: Too-Tired 5-Min Backup -->
+        <div id="backup-workouts" class="tab-content">
+            <div class="card">
+                <h2>Too-Tired 5-Minute Backup</h2>
+                <p>For when you have zero energy. Five 60-second bursts that send a signal without depleting you further.</p>
+                
+                <div class="timer-display">
+                    <div class="timer-label">Current Exercise</div>
+                    <div id="exercise-name" style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--gold-accent);">Get Ready</div>
+                    <div class="timer-number" id="timer">60</div>
+                    <div class="timer-label" id="timer-sub">seconds</div>
+                </div>
+
+                <div class="timer-controls">
+                    <button onclick="startTimer()">Start</button>
+                    <button onclick="pauseTimer()">Pause</button>
+                    <button onclick="resetTimer()">Reset</button>
+                </div>
+
+                <div class="card" style="background-color: rgba(212, 169, 76, 0.05); margin-top: 1.5rem;">
+                    <h3>The 5-Minute Sequence</h3>
+                    <ol style="margin-left: 1.5rem; color: var(--text-muted);">
+                        <li><strong>60 sec: Slow squats</strong> — 8–10 full-depth squats, 5 sec per rep. Activates quads, glutes, stabilizers. No impact.</li>
+                        <li><strong>60 sec: Wall push-ups</strong> — 12–15 controlled reps. Chest, shoulders, triceps. Adjustable intensity.</li>
+                        <li><strong>60 sec: Standing marches</strong> — High knees, steady pace. Elevate heart rate gently. Core engagement.</li>
+                        <li><strong>60 sec: Glute bridges (floor or chair)</strong> — 10–12 reps, 2 sec hold at top. Activate posterior chain.</li>
+                        <li><strong>60 sec: Cool-down breathing</strong> — Box breathing: 4 in, 4 hold, 4 out, 4 hold. Parasympathetic activation.</li>
+                    </ol>
+                </div>
+
+                <div class="card" style="background-color: rgba(212, 169, 76, 0.05); margin-top: 1rem;">
+                    <h3>Why This Works on Tired Days</h3>
+                    <ul style="margin-left: 1.5rem; color: var(--text-muted); list-style: disc;">
+                        <li><strong>No prep:</strong> No equipment. Anywhere. Anytime.</li>
+                        <li><strong>Low impact:</strong> Protects nervous system, respects exhaustion.</li>
+                        <li><strong>Strength signal:</strong> Engages all major muscle groups in 5 minutes.</li>
+                        <li><strong>Parasympathetic finish:</strong> Breathing brings you back down, not up.</li>
+                        <li><strong>Momentum builder:</strong> Proves you can move, even on hard days.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: Movement Tracker -->
+        <div id="movement-tracker" class="tab-content">
+            <div class="card">
+                <h2>Your 7-Day Movement Tracker</h2>
+                <p>Log what you did, how you felt, and watch patterns emerge.</p>
+                
+                <div class="tracker-controls">
+                    <div class="form-group">
+                        <label>Movement Level</label>
+                        <select id="tracker-level">
+                            <option value="Foundation">Foundation</option>
+                            <option value="Build">Build</option>
+                            <option value="Momentum">Momentum</option>
+                            <option value="Backup">Too-Tired 5-Min</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="tracker-date">
+                    </div>
+                    <div class="form-group">
+                        <label>Duration (min)</label>
+                        <input type="number" id="tracker-duration" min="0" max="120">
+                    </div>
+                    <div class="form-group">
+                        <label>Energy Before</label>
+                        <select id="tracker-energy-before">
+                            <option value="1">1 — Exhausted</option>
+                            <option value="2">2 — Low</option>
+                            <option value="3">3 — Moderate</option>
+                            <option value="4">4 — Good</option>
+                            <option value="5">5 — Excellent</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Energy After</label>
+                        <select id="tracker-energy-after">
+                            <option value="1">1 — Exhausted</option>
+                            <option value="2">2 — Low</option>
+                            <option value="3">3 — Moderate</option>
+                            <option value="4">4 — Good</option>
+                            <option value="5">5 — Excellent</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label>Notes (optional)</label>
+                    <input type="text" id="tracker-notes" placeholder="How did you feel? Any observations?">
+                </div>
+
+                <button onclick="logMovement()">Log Movement</button>
+
+                <div style="margin-top: 2rem; border-top: 1px solid var(--border-subtle); padding-top: 2rem;">
+                    <h3>This Week's Stats</h3>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-value" id="stat-sessions">0</div>
+                            <div class="stat-label">Sessions</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="stat-minutes">0</div>
+                            <div class="stat-label">Total Minutes</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="stat-avg-energy">–</div>
+                            <div class="stat-label">Avg Energy Lift</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Your 7-Day Log</h3>
+                <table class="tracker-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Duration</th>
+                            <th>Energy Before → After</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tracker-tbody">
+                        <tr>
+                            <td colspan="5" style="text-align: center; color: var(--text-muted);">No logs yet. Start tracking to see patterns.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="roadmap">
+                    <h3>Your 4-Phase Progress Roadmap</h3>
+                    
+                    <div class="roadmap-phase">
+                        <h4>Phase 1: Consistency (Days 1–14)</h4>
+                        <p>Goal: Show up 5 days, any level. Prove to yourself movement is possible, even on hard days.</p>
+                        <p><strong>Win:</strong> Logged 5 sessions. Your nervous system recognizes "this is safe."</p>
+                    </div>
+
+                    <div class="roadmap-phase">
+                        <h4>Phase 2: Intensity Awareness (Days 15–30)</h4>
+                        <p>Goal: Notice how your body responds. Are you choosing the right level? How does energy before/after compare?</p>
+                        <p><strong>Win:</strong> You see patterns (e.g., morning workouts = higher energy after than evening ones). Adjust accordingly.</p>
+                    </div>
+
+                    <div class="roadmap-phase">
+                        <h4>Phase 3: Sustainable Rhythm (Days 31–60)</h4>
+                        <p>Goal: Find your "non-negotiable" minimum. Even if it's just 1×/week, consistency beats perfection.</p>
+                        <p><strong>Win:</strong> You have a real movement identity. "I'm someone who moves" even on shift work.</p>
+                    </div>
+
+                    <div class="roadmap-phase">
+                        <h4>Phase 4: Progressive Adaptation (Days 61+)</h4>
+                        <p>Goal: Slowly add complexity or volume without disrupting life. Your foundation is solid.</p>
+                        <p><strong>Win:</strong> Body composition shifts. Clothes fit. Metabolism stabilized. Confidence rebuilt.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: If-This-Then-That Scenarios -->
+        <div id="scenarios" class="tab-content">
+            <div class="card">
+                <h2>If-This-Then-That Decision Cards</h2>
+                <p>When life disrupts your plan, here's what to do. Click any card to see the solution.</p>
+                
+                <div class="scenario-cards" id="scenario-cards"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initTabs();
+            setTrackerDate();
+            populateWorkouts();
+            populateScenarios();
+            loadTrackerData();
+            updateTrackerStats();
+        });
+
+        // Tab Navigation
+        function initTabs() {
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
+            });
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+
+            const tabEl = document.getElementById(tabId);
+            const btnEl = document.querySelector(`[data-tab="${tabId}"]`);
+            if (tabEl) tabEl.classList.add('active');
+            if (btnEl) btnEl.classList.add('active');
+        }
+
+        // QUIZ SCORING
+        function scoreQuiz() {
+            let total = 0;
+            let answers = [];
+            for (let i = 1; i <= 5; i++) {
+                const val = document.querySelector(`input[name="q${i}"]:checked`)?.value;
+                if (!val) {
+                    alert('Please answer all 5 questions.');
+                    return;
+                }
+                total += parseInt(val);
+                answers.push(parseInt(val));
+            }
+
+            let level, description, recommendations;
+
+            if (total <= 7) {
+                level = 'Foundation';
+                description = 'You\'re starting fresh, and that\'s perfect. Your body needs consistency over intensity.';
+                recommendations = `
+                    <strong>Your Program:</strong> Foundation (20 min, 2x/week)<br>
+                    • Low fatigue risk — builds habit without burnout<br>
+                    • Twice weekly hits the "minimum viable dose" for shift workers<br>
+                    • Progresses gently as you gain momentum<br><br>
+                    <strong>Your Superpower:</strong> You have room to grow. Every session is a win because you're building from the ground up.
+                `;
+            } else if (total <= 14) {
+                level = 'Build';
+                description = 'You\'ve got some baseline fitness and readiness. Time to add structure and intensity.';
+                recommendations = `
+                    <strong>Your Program:</strong> Build (25 min, 3x/week)<br>
+                    • Moderate demand — enough to signal change, sustainable on shift work<br>
+                    • Three sessions a week accelerates adaptation<br>
+                    • Pairs resistance and conditioning for metabolic efficiency<br><br>
+                    <strong>Your Superpower:</strong> You're in the sweet spot for real body composition change. Consistency here pays off fast.
+                `;
+            } else {
+                level = 'Momentum';
+                description = 'You\'re already moving well. Let\'s amplify what you\'re doing and go deeper.';
+                recommendations = `
+                    <strong>Your Program:</strong> Momentum (30 min, 3x/week)<br>
+                    • Higher volume — for bodies ready to adapt<br>
+                    • Three sessions a week with more intensity compounds results<br>
+                    • Advanced exercise variations and density progression<br><br>
+                    <strong>Your Superpower:</strong> You're primed for transformation. This is where real change happens.
+                `;
+            }
+
+            const resultDiv = document.getElementById('quiz-result');
+            if (!resultDiv) return;
+            resultDiv.innerHTML = `
+                <div class="quiz-result">
+                    <h3 style="color: var(--gold-accent); margin-bottom: 1rem;">Your Movement Level: <strong>${level}</strong></h3>
+                    <p style="margin-bottom: 1rem;">${description}</p>
+                    ${recommendations}
+                    <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+                        <strong>Next Step:</strong> Go to the Workout Programs tab to see your personalized routine.
+                    </p>
+                </div>
+            `;
+            resultDiv.style.display = 'block';
+            localStorage.setItem('smithfit_quiz_level', level);
+        }
+
+        function resetQuiz() {
+            const form = document.getElementById('quiz-form');
+            const result = document.getElementById('quiz-result');
+            if (form) form.reset();
+            if (result) result.style.display = 'none';
+        }
+
+        // WORKOUT PROGRAMS
+        const workoutData = {
+            Foundation: {
+                duration: '20 min',
+                frequency: '2x per week',
+                meta: 'Perfect to start',
+                exercises: [
+                    { name: 'Goblet Squats', sets: '3', reps: '8–10', rest: '60s', tip: 'Full depth, controlled descent. Activates glutes and quads.' },
+                    { name: 'Incline Push-ups', sets: '3', reps: '8–12', rest: '60s', tip: 'Hands on elevated surface. Builds upper body strength safely.' },
+                    { name: 'Reverse Lunges', sets: '2', reps: '6 each leg', rest: '45s', tip: 'Step back, lower hips. Unilateral work = core stability.' },
+                    { name: 'Bent-Over Rows (light)', sets: '3', reps: '10–12', rest: '60s', tip: 'Engage back, not arms. Posterior chain activation.' },
+                    { name: 'Glute Bridges', sets: '2', reps: '12', rest: '45s', tip: '2 sec squeeze at top. Wakes up sleeping glutes.' },
+                    { name: 'Dead Bug', sets: '2', reps: '6 each side', rest: '30s', tip: 'Slow, controlled. Core endurance without spinal stress.' }
+                ]
+            },
+            Build: {
+                duration: '25 min',
+                frequency: '3x per week',
+                meta: 'Strength + conditioning',
+                exercises: [
+                    { name: 'Dumbbell Goblet Squats', sets: '4', reps: '10–12', rest: '60s', tip: 'Hold weight at chest. Density work for metabolic effect.' },
+                    { name: 'Dumbbell Bench Press (floor)', sets: '4', reps: '8–10', rest: '75s', tip: 'Controlled eccentric. Strength stimulus without bench.' },
+                    { name: 'Bulgarian Split Squats', sets: '3', reps: '8 each leg', rest: '60s', tip: 'Rear foot elevated. Unilateral strength + balance.' },
+                    { name: 'Dumbbell Rows', sets: '4', reps: '10', rest: '60s', tip: 'Strict form. Offset load = core stabilization.' },
+                    { name: 'Trap Bar / Hex Bar Deadlifts (light)', sets: '3', reps: '6–8', rest: '90s', tip: 'Upright posture. Total-body power.' },
+                    { name: 'Plank Variations', sets: '3', reps: '30–45s', rest: '45s', tip: 'Side planks, anti-rotation holds. Anti-fatigue training.' }
+                ]
+            },
+            Momentum: {
+                duration: '30 min',
+                frequency: '3x per week',
+                meta: 'Advanced strength',
+                exercises: [
+                    { name: 'Barbell Back Squats', sets: '4', reps: '6–8', rest: '90s', tip: 'Progressive overload. Metabolic powerhouse.' },
+                    { name: 'Barbell Bench Press', sets: '4', reps: '6–8', rest: '90s', tip: 'Upper body strength foundation. Density progression.' },
+                    { name: 'Weighted Walking Lunges', sets: '3', reps: '8 each leg', rest: '75s', tip: 'Dumbbells at sides. Single-leg stability under load.' },
+                    { name: 'Barbell Rows', sets: '4', reps: '6–8', rest: '90s', tip: 'Heavy pulls for back thickness and metabolic demand.' },
+                    { name: 'Barbell Deadlifts', sets: '3', reps: '5–6', rest: '2 min', tip: 'Compound lift. Maximum metabolic impact per rep.' },
+                    { name: 'Sled Push / Prowler', sets: '3', reps: '30m', rest: '90s', tip: 'Conditioning tool. Builds posterior chain endurance.' }
+                ]
+            }
+        };
+
+        function populateWorkouts() {
+            const grid = document.getElementById('workout-grid');
+            if (!grid) return;
+            Object.keys(workoutData).forEach(level => {
+                const data = workoutData[level];
+                const card = document.createElement('div');
+                card.className = 'workout-card';
+                card.innerHTML = `
+                    <h4>${level}</h4>
+                    <div class="meta">${data.duration} | ${data.frequency}<br>${data.meta}</div>
+                    <ul class="exercise-list">
+                        ${data.exercises.map(ex => `
+                            <li>
+                                <strong>${ex.name}</strong><br>
+                                <span style="color: var(--text-muted); font-size: 0.85rem;">${ex.sets} | ${ex.reps} | Rest ${ex.rest}</span><br>
+                                <span style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem; display: block;">💡 ${ex.tip}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // TIMER
+        let timerInterval = null;
+        let timeRemaining = 60;
+        let currentExercise = 0;
+        const backupExercises = [
+            'Slow Squats',
+            'Wall Push-ups',
+            'Standing Marches',
+            'Glute Bridges',
+            'Cool-Down Breathing'
+        ];
+
+        function startTimer() {
+            if (timerInterval) return;
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('timer').textContent = timeRemaining;
+                if (timeRemaining <= 0) {
+                    currentExercise++;
+                    if (currentExercise >= backupExercises.length) {
+                        clearInterval(timerInterval);
+                        document.getElementById('exercise-name').textContent = 'Workout Complete!';
+                        document.getElementById('timer').textContent = '✓';
+                        timerInterval = null;
+                    } else {
+                        timeRemaining = 60;
+                        document.getElementById('exercise-name').textContent = backupExercises[currentExercise];
+                    }
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            timeRemaining = 60;
+            currentExercise = 0;
+            document.getElementById('timer').textContent = '60';
+            document.getElementById('exercise-name').textContent = 'Get Ready';
+        }
+
+        // TRACKER
+        function setTrackerDate() {
+            const today = new Date().toISOString().split('T')[0];
+            const dateEl = document.getElementById('tracker-date');
+            if (dateEl) dateEl.value = today;
+        }
+
+        function logMovement() {
+            const data = {
+                date: document.getElementById('tracker-date').value,
+                level: document.getElementById('tracker-level').value,
+                duration: document.getElementById('tracker-duration').value,
+                energyBefore: document.getElementById('tracker-energy-before').value,
+                energyAfter: document.getElementById('tracker-energy-after').value,
+                notes: document.getElementById('tracker-notes').value
+            };
+
+            if (!data.date || !data.duration) {
+                alert('Please fill in date and duration.');
+                return;
+            }
+
+            let logs;
+            try { logs = JSON.parse(localStorage.getItem('smithfit_tracker') || '[]'); } catch(e) { logs = []; }
+            logs.push(data);
+            localStorage.setItem('smithfit_tracker', JSON.stringify(logs));
+
+            loadTrackerData();
+            updateTrackerStats();
+            document.getElementById('tracker-notes').value = '';
+        }
+
+        function loadTrackerData() {
+            let logs;
+            try { logs = JSON.parse(localStorage.getItem('smithfit_tracker') || '[]'); } catch(e) { logs = []; }
+            const tbody = document.getElementById('tracker-tbody');
+            if (!tbody) return;
+
+            if (logs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No logs yet. Start tracking to see patterns.</td></tr>';
+                return;
+            }
+
+            const sortedLogs = logs.sort((a, b) => new Date(b.date) - new Date(a.date));
+            tbody.innerHTML = sortedLogs.map(log => `
+                <tr>
+                    <td>${log.date}</td>
+                    <td>${log.level}</td>
+                    <td>${log.duration} min</td>
+                    <td>${log.energyBefore} → ${log.energyAfter}</td>
+                    <td>${log.notes || '–'}</td>
+                </tr>
+            `).join('');
+        }
+
+        function updateTrackerStats() {
+            let logs;
+            try { logs = JSON.parse(localStorage.getItem('smithfit_tracker') || '[]'); } catch(e) { logs = []; }
+            const sevenDaysAgo = new Date();
+            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+            const weekLogs = logs.filter(log => new Date(log.date) >= sevenDaysAgo);
+            const sessions = weekLogs.length;
+            const totalMinutes = weekLogs.reduce((sum, log) => sum + parseInt(log.duration || 0), 0);
+            const avgEnergyBefore = weekLogs.length > 0 ? (weekLogs.reduce((sum, log) => sum + parseInt(log.energyBefore), 0) / weekLogs.length).toFixed(1) : '–';
+            const avgEnergyAfter = weekLogs.length > 0 ? (weekLogs.reduce((sum, log) => sum + parseInt(log.energyAfter), 0) / weekLogs.length).toFixed(1) : '–';
+            const energyLift = avgEnergyBefore !== '–' && avgEnergyAfter !== '–' ? (avgEnergyAfter - avgEnergyBefore).toFixed(1) : '–';
+
+            const statSessions = document.getElementById('stat-sessions');
+            const statMinutes = document.getElementById('stat-minutes');
+            const statEnergy = document.getElementById('stat-avg-energy');
+            if (statSessions) statSessions.textContent = sessions;
+            if (statMinutes) statMinutes.textContent = totalMinutes;
+            if (statEnergy) statEnergy.textContent = energyLift !== '–' ? (energyLift > 0 ? '+' : '') + energyLift : '–';
+        }
+
+        // SCENARIOS
+        const scenarios = [
+            {
+                if: 'You just got home from a 12-hour night shift.',
+                then: 'Don\'t force a workout. Instead: 10 min box breathing, 5 min walk, 2 cups water, sleep. Your nervous system needs parasympathetic activation, not more demand. Tomorrow, do the 5-min backup workout if you feel up to it. Sleep > workout on this day.'
+            },
+            {
+                if: 'You planned 3 workouts this week, but work chaos has you at 1.',
+                then: 'That 1 workout is a win. Don\'t spiral into "all or nothing." One workout kept your metabolism engaged and proved consistency is possible even on chaotic weeks. Next week, aim for 2. Progress over perfection.'
+            },
+            {
+                if: 'You\'re sore (DOMS) and questioning if you should push through.',
+                then: 'Soreness ≠ injury. Light movement helps (walk, 5-min backup, foam roll). If it\'s localized and sharp, rest that area. If it\'s muscle soreness, move gently. Your next heavy day is still 48 hours away—don\'t skip rest.'
+            },
+            {
+                if: 'Your energy before the workout was 1–2, but you moved anyway.',
+                then: 'You\'re a warrior. Log it, celebrate it, and check your energy after. This data point teaches your body that movement doesn\'t require perfect conditions—it teaches resilience. These are your most powerful sessions.'
+            },
+            {
+                if: 'You missed a scheduled workout. Now you\'re thinking about skipping the next one too.',
+                then: 'Stop. One miss is life. Two misses is a habit. Return to the very next scheduled slot—even if it\'s just 5 minutes. Momentum dies fast on missed sessions. Showing up is 80% of results.'
+            },
+            {
+                if: 'You\'re peri-menopausal/menopausal and wondering why it\'s harder to recover.',
+                then: 'Hormonal shifts increase cortisol sensitivity, which slows recovery. Your fix: Add 1 extra rest day per week, bump protein intake, prioritize sleep over volume, and choose Build instead of Momentum. Your program changes, not your capability.'
+            },
+            {
+                if: 'You crushed a workout and feel amazing. Now you want to add more sessions.',
+                then: 'Awesome—but slow down. One great session doesn\'t mean your recovery capacity jumped overnight. Stick to your program for 2–4 more weeks, then reassess. Sustainable progress beats sprint-and-crash cycles.'
+            },
+            {
+                if: 'Your sleep has been 5 hours for three nights. Your workout window just opened.',
+                then: 'Do the 5-min backup only. Your nervous system is depleted; heavy training digs the hole deeper. On 5-hour nights, prioritize sleep over workout debt. When sleep returns, your training will return with it.'
+            },
+            {
+                if: 'You binged food after work and now feel shame. You\'re thinking: "Might as well skip the workout."',
+                then: 'Don\'t. Movement isn\'t punishment; it\'s regulation. One meal or binge doesn\'t require a 2-hour compensation workout. Stick to your program. Food + movement are separate systems. Reset both independently, not punitively.'
+            },
+            {
+                if: 'It\'s Day 21 of tracking, and you see no visible change yet.',
+                then: 'Day 21 is too early for mirror changes, but check your tracker: Are you stronger? Does your energy lift exist? Are you showing up consistently? These are the real wins. Body composition changes show at Day 45–60 if consistent. Trust the system.'
+            }
+        ];
+
+        function populateScenarios() {
+            const container = document.getElementById('scenario-cards');
+            if (!container) return;
+            scenarios.forEach((scenario, idx) => {
+                const card = document.createElement('div');
+                card.className = 'scenario-card';
+                card.innerHTML = `
+                    <div class="scenario-if">IF: ${scenario.if}</div>
+                    <div class="scenario-then">${scenario.then}</div>
+                `;
+                card.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
