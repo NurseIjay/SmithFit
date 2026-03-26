@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pillar 5: Sustain · SmithFit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,9 +13,9 @@
         }
 
         html, body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
-            background-color: #1a1a1a;
-            color: #e0dcd4;
+            font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+            background-color: #faf7f2;
+            color: #2c2416;
             line-height: 1.6;
             min-height: 100vh;
             padding: 20px;
@@ -29,14 +30,14 @@
         header {
             margin-bottom: 40px;
             padding-bottom: 24px;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
         }
 
         .header-badge {
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 1.5px;
-            color: #d4a94c;
+            color: #c9a54e;
             text-transform: uppercase;
             margin-bottom: 12px;
         }
@@ -44,15 +45,15 @@
         h1 {
             font-size: 48px;
             font-weight: 700;
-            font-family: Georgia, serif;
-            color: #d4a94c;
+            font-family: 'Playfair Display', Georgia, serif;
+            color: #c9a54e;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
 
         .subtitle {
             font-size: 16px;
-            color: #b8b3a8;
+            color: #6b5d4d;
             line-height: 1.7;
             max-width: 600px;
         }
@@ -62,7 +63,7 @@
             display: flex;
             gap: 12px;
             margin-bottom: 40px;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
             flex-wrap: wrap;
             padding-bottom: 20px;
         }
@@ -71,7 +72,7 @@
             padding: 12px 24px;
             background: transparent;
             border: none;
-            color: #b8b3a8;
+            color: #6b5d4d;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -82,12 +83,12 @@
         }
 
         .tab-btn:hover {
-            color: #d4a94c;
+            color: #c9a54e;
         }
 
         .tab-btn.active {
-            color: #d4a94c;
-            border-bottom-color: #d4a94c;
+            color: #c9a54e;
+            border-bottom-color: #c9a54e;
         }
 
         /* Tab Content */
@@ -114,7 +115,7 @@
             display: block;
             font-size: 14px;
             font-weight: 600;
-            color: #e0dcd4;
+            color: #2c2416;
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -127,11 +128,11 @@
         textarea {
             width: 100%;
             padding: 12px 16px;
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
-            color: #e0dcd4;
+            background-color: #faf7f2;
+            border: 1px solid #e8e0d4;
+            color: #2c2416;
             border-radius: 6px;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
             font-size: 14px;
             transition: border-color 0.3s ease;
         }
@@ -140,8 +141,8 @@
         select:focus,
         textarea:focus {
             outline: none;
-            border-color: #d4a94c;
-            box-shadow: 0 0 0 3px rgba(212, 169, 76, 0.1);
+            border-color: #c9a54e;
+            box-shadow: 0 0 0 3px rgba(201, 165, 78, 0.15);
         }
 
         textarea {
@@ -151,7 +152,7 @@
 
         .hint {
             font-size: 12px;
-            color: #888;
+            color: #9a8d7d;
             margin-top: 4px;
             font-style: italic;
         }
@@ -159,8 +160,8 @@
         /* Button Styles */
         button {
             padding: 12px 32px;
-            background-color: #d4a94c;
-            color: #1a1a1a;
+            background-color: #c9a54e;
+            color: #ffffff;
             border: none;
             border-radius: 6px;
             font-weight: 600;
@@ -171,7 +172,7 @@
         }
 
         button:hover {
-            background-color: #e5b85c;
+            background-color: #a8873a;
             transform: translateY(-2px);
         }
 
@@ -180,12 +181,12 @@
         }
 
         .btn-secondary {
-            background-color: #3a3a3a;
-            color: #d4a94c;
+            background-color: #f5f0e8;
+            color: #c9a54e;
         }
 
         .btn-secondary:hover {
-            background-color: #4a4a4a;
+            background-color: #d4ccbe;
         }
 
         /* Step Indicator */
@@ -200,40 +201,41 @@
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background-color: #3a3a3a;
+            background-color: #e8e0d4;
             transition: all 0.3s ease;
         }
 
         .step.active {
-            background-color: #d4a94c;
+            background-color: #c9a54e;
             width: 30px;
             border-radius: 5px;
         }
 
         .step.completed {
-            background-color: #d4a94c;
+            background-color: #c9a54e;
         }
 
         /* Card */
         .card {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 8px;
             padding: 32px;
             margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .card h2 {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 28px;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 16px;
         }
 
         .card h3 {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 20px;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-top: 24px;
             margin-bottom: 16px;
         }
@@ -253,14 +255,14 @@
             content: "→";
             position: absolute;
             left: 0;
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: bold;
         }
 
         /* Plan Cards (Day Colors) */
         .plan-card {
-            background-color: #2a2a2a;
-            border: 2px solid #d4a94c;
+            background-color: #ffffff;
+            border: 2px solid #c9a54e;
             border-radius: 8px;
             padding: 32px;
             margin: 24px 0;
@@ -276,15 +278,15 @@
         }
 
         .plan-title {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 24px;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 16px;
         }
 
         .plan-description {
             font-size: 15px;
-            color: #b8b3a8;
+            color: #6b5d4d;
             margin-bottom: 24px;
             font-style: italic;
         }
@@ -301,7 +303,7 @@
             width: 24px;
             height: 24px;
             border-radius: 50%;
-            background-color: #3a3a3a;
+            background-color: #e8e0d4;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -320,8 +322,8 @@
             display: flex;
             align-items: center;
             padding: 12px;
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 6px;
             margin-bottom: 12px;
             cursor: pointer;
@@ -329,7 +331,7 @@
         }
 
         .checkbox-item:hover {
-            border-color: #d4a94c;
+            border-color: #c9a54e;
         }
 
         input[type="checkbox"] {
@@ -337,13 +339,13 @@
             height: 18px;
             margin-right: 12px;
             cursor: pointer;
-            accent-color: #d4a94c;
+            accent-color: #c9a54e;
         }
 
         input[type="radio"] {
             margin-right: 12px;
             cursor: pointer;
-            accent-color: #d4a94c;
+            accent-color: #c9a54e;
         }
 
         .radio-group {
@@ -372,9 +374,10 @@
             width: 100%;
             height: 6px;
             border-radius: 3px;
-            background: #3a3a3a;
+            background: #e8e0d4;
             outline: none;
             -webkit-appearance: none;
+            border: none;
         }
 
         input[type="range"]::-webkit-slider-thumb {
@@ -383,7 +386,7 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #d4a94c;
+            background: #c9a54e;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -392,7 +395,7 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #d4a94c;
+            background: #c9a54e;
             cursor: pointer;
             border: none;
             transition: all 0.3s ease;
@@ -408,14 +411,14 @@
         .slider-label {
             min-width: 80px;
             font-size: 13px;
-            color: #b8b3a8;
+            color: #6b5d4d;
         }
 
         .slider-value {
             min-width: 30px;
             text-align: right;
             font-weight: 600;
-            color: #d4a94c;
+            color: #c9a54e;
         }
 
         /* Stats Dashboard */
@@ -427,8 +430,8 @@
         }
 
         .stat-box {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 6px;
             padding: 20px;
             text-align: center;
@@ -437,31 +440,32 @@
         .stat-number {
             font-size: 32px;
             font-weight: 700;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 8px;
         }
 
         .stat-label {
             font-size: 13px;
-            color: #b8b3a8;
+            color: #6b5d4d;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         /* Summary Cards */
         .summary-card {
-            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
-            border: 2px solid #d4a94c;
+            background: linear-gradient(135deg, #ffffff 0%, #faf7f2 100%);
+            border: 2px solid #c9a54e;
             border-radius: 8px;
             padding: 40px;
             margin: 32px 0;
             text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .summary-title {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 36px;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 24px;
         }
 
@@ -471,23 +475,23 @@
         }
 
         .summary-heading {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 20px;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 12px;
         }
 
         /* Scenario Library */
         .scenario-card {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 8px;
             margin-bottom: 16px;
             overflow: hidden;
         }
 
         .scenario-header {
-            background-color: #1a1a1a;
+            background-color: #f5f0e8;
             padding: 20px;
             cursor: pointer;
             display: flex;
@@ -497,17 +501,17 @@
         }
 
         .scenario-header:hover {
-            background-color: #2a2a2a;
+            background-color: #ffffff;
         }
 
         .scenario-title {
             font-weight: 600;
-            color: #d4a94c;
+            color: #c9a54e;
             flex: 1;
         }
 
         .scenario-toggle {
-            color: #d4a94c;
+            color: #c9a54e;
             font-size: 18px;
             transition: transform 0.3s ease;
         }
@@ -519,8 +523,8 @@
         .scenario-content {
             display: none;
             padding: 24px;
-            background-color: #2a2a2a;
-            border-top: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border-top: 1px solid #e8e0d4;
         }
 
         .scenario-card.open .scenario-content {
@@ -528,8 +532,8 @@
         }
 
         .scenario-then {
-            background-color: #1a1a1a;
-            border-left: 4px solid #d4a94c;
+            background-color: #f5f0e8;
+            border-left: 4px solid #c9a54e;
             padding: 16px;
             margin-bottom: 16px;
             border-radius: 4px;
@@ -538,7 +542,7 @@
         .scenario-then-label {
             font-size: 12px;
             font-weight: 600;
-            color: #d4a94c;
+            color: #c9a54e;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 8px;
@@ -546,7 +550,7 @@
 
         .scenario-then-action {
             font-weight: 600;
-            color: #d4a94c;
+            color: #c9a54e;
         }
 
         .scenario-bullets {
@@ -564,22 +568,22 @@
             content: "•";
             position: absolute;
             left: 0;
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: bold;
         }
 
         .scenario-why {
             font-style: italic;
-            color: #b8b3a8;
+            color: #6b5d4d;
             padding: 16px;
-            background-color: #1a1a1a;
+            background-color: #f5f0e8;
             border-radius: 4px;
         }
 
         /* Progress Indicator */
         .progress-bar {
             height: 4px;
-            background-color: #3a3a3a;
+            background-color: #e8e0d4;
             border-radius: 2px;
             margin-bottom: 24px;
             overflow: hidden;
@@ -587,7 +591,7 @@
 
         .progress-fill {
             height: 100%;
-            background-color: #d4a94c;
+            background-color: #c9a54e;
             transition: width 0.3s ease;
         }
 
@@ -597,24 +601,24 @@
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 1px;
-            color: #d4a94c;
+            color: #c9a54e;
             text-transform: uppercase;
             margin-bottom: 24px;
             padding-bottom: 12px;
-            border-bottom: 2px solid #d4a94c;
+            border-bottom: 2px solid #c9a54e;
         }
 
         /* Callout Box */
         .callout {
-            background-color: #2a2a2a;
-            border-left: 4px solid #d4a94c;
+            background-color: #ffffff;
+            border-left: 4px solid #c9a54e;
             padding: 20px;
             margin: 24px 0;
             border-radius: 4px;
         }
 
         .callout strong {
-            color: #d4a94c;
+            color: #c9a54e;
         }
 
         /* Print Styles */
@@ -651,9 +655,9 @@
 
         .day-type-btn {
             padding: 10px 20px;
-            background-color: #3a3a3a;
-            color: #b8b3a8;
-            border: 2px solid #3a3a3a;
+            background-color: #e8e0d4;
+            color: #6b5d4d;
+            border: 2px solid #e8e0d4;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
@@ -661,40 +665,40 @@
         }
 
         .day-type-btn.active {
-            background-color: #d4a94c;
-            color: #1a1a1a;
-            border-color: #d4a94c;
+            background-color: #c9a54e;
+            color: #ffffff;
+            border-color: #c9a54e;
         }
 
         .day-type-btn:hover {
-            border-color: #d4a94c;
-            color: #d4a94c;
+            border-color: #c9a54e;
+            color: #c9a54e;
         }
 
         .momentum-rules {
-            background-color: #2a2a2a;
-            border-left: 4px solid #d4a94c;
+            background-color: #ffffff;
+            border-left: 4px solid #c9a54e;
             padding: 24px;
             margin-bottom: 32px;
             border-radius: 4px;
         }
 
         .momentum-rules h2 {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 24px;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 12px;
         }
 
         .momentum-rules p {
             font-size: 16px;
-            color: #b8b3a8;
+            color: #6b5d4d;
             line-height: 1.8;
         }
 
         .day-card {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 8px;
             padding: 24px;
             margin-bottom: 16px;
@@ -706,19 +710,19 @@
             align-items: center;
             margin-bottom: 20px;
             padding-bottom: 16px;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
         }
 
         .day-number {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 20px;
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 600;
         }
 
         .day-type-display {
             font-size: 13px;
-            color: #b8b3a8;
+            color: #6b5d4d;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -731,30 +735,30 @@
             display: block;
             font-size: 13px;
             font-weight: 600;
-            color: #e0dcd4;
+            color: #2c2416;
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .reflection-section {
-            background-color: #1f1f1f;
-            border: 1px solid #3a3a3a;
+            background-color: #f5f0e8;
+            border: 1px solid #e8e0d4;
             border-radius: 8px;
             padding: 28px;
             margin-top: 32px;
         }
 
         .reflection-section h3 {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 22px;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 20px;
         }
 
         .recommendation-box {
-            background-color: #2a2a2a;
-            border: 2px solid #d4a94c;
+            background-color: #ffffff;
+            border: 2px solid #c9a54e;
             border-radius: 8px;
             padding: 24px;
             margin-top: 24px;
@@ -762,24 +766,25 @@
         }
 
         .recommendation-box h4 {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 18px;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 12px;
         }
 
         .recommendation-box p {
-            color: #b8b3a8;
+            color: #6b5d4d;
             line-height: 1.8;
         }
 
         .report-card-section {
-            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
-            border: 2px solid #d4a94c;
+            background: linear-gradient(135deg, #ffffff 0%, #faf7f2 100%);
+            border: 2px solid #c9a54e;
             border-radius: 8px;
             padding: 40px;
             margin-top: 32px;
             text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .report-metric {
@@ -787,7 +792,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 0;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
         }
 
         .report-metric:last-child {
@@ -796,12 +801,12 @@
 
         .metric-label {
             text-align: left;
-            color: #b8b3a8;
+            color: #6b5d4d;
         }
 
         .metric-change {
             font-weight: 600;
-            color: #d4a94c;
+            color: #c9a54e;
         }
 
         .metric-change.up {
@@ -820,27 +825,28 @@
         }
 
         .path-option {
-            background-color: #1a1a1a;
-            border: 1px solid #3a3a3a;
+            background-color: #f5f0e8;
+            border: 1px solid #e8e0d4;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             border-radius: 8px;
             padding: 20px;
         }
 
         .path-option h4 {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 16px;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 12px;
         }
 
         .path-option p {
             font-size: 13px;
-            color: #b8b3a8;
+            color: #6b5d4d;
             line-height: 1.7;
         }
 
         .cta-link {
-            color: #d4a94c;
+            color: #c9a54e;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
@@ -875,7 +881,7 @@
         <div id="tab-1" class="tab-content active">
             <div class="card">
                 <h2>Your Sustain Map Builder</h2>
-                <p style="color: #b8b3a8; margin-bottom: 32px;">Complete each step to generate your personalized daily plan.</p>
+                <p style="color: #6b5d4d; margin-bottom: 32px;">Complete each step to generate your personalized daily plan.</p>
 
                 <div class="step-indicator">
                     <div class="step active"></div>
@@ -887,7 +893,7 @@
                 <!-- STEP 1 -->
                 <div id="step1" class="visibility-toggle visible">
                     <h3>Step 1: Choose Your Defaults</h3>
-                    <p style="color: #b8b3a8; margin-bottom: 24px;">These are your go-to moves when you don't have time to think.</p>
+                    <p style="color: #6b5d4d; margin-bottom: 24px;">These are your go-to moves when you don't have time to think.</p>
 
                     <div class="form-group">
                         <label for="protein-anchor">My Protein Anchor Default:</label>
@@ -941,7 +947,7 @@
                 <!-- STEP 2 -->
                 <div id="step2" class="visibility-toggle" style="display: none;">
                     <h3>Step 2: Choose Your 2 Meals (3×3 Formula)</h3>
-                    <p style="color: #b8b3a8; margin-bottom: 24px;">Protein + Starch + Vegetable. Keep it simple.</p>
+                    <p style="color: #6b5d4d; margin-bottom: 24px;">Protein + Starch + Vegetable. Keep it simple.</p>
 
                     <div class="form-group">
                         <label for="meal1">Meal 1 (3×3 Formula):</label>
@@ -962,7 +968,7 @@
                 <!-- STEP 3 -->
                 <div id="step3" class="visibility-toggle" style="display: none;">
                     <h3>Step 3: Choose Your Backup</h3>
-                    <p style="color: #b8b3a8; margin-bottom: 24px;">When you miss breaks or the day falls apart.</p>
+                    <p style="color: #6b5d4d; margin-bottom: 24px;">When you miss breaks or the day falls apart.</p>
 
                     <div class="form-group">
                         <label for="backup-option">Missed-Break Backup:</label>
@@ -987,7 +993,7 @@
                 <!-- STEP 4 -->
                 <div id="step4" class="visibility-toggle" style="display: none;">
                     <h3>Step 4: Write Your If-This-Then-That</h3>
-                    <p style="color: #b8b3a8; margin-bottom: 24px;">Create your trigger responses. What happens when life happens?</p>
+                    <p style="color: #6b5d4d; margin-bottom: 24px;">Create your trigger responses. What happens when life happens?</p>
 
                     <div class="form-group">
                         <label for="ifttt1">If I miss breaks →</label>
@@ -1015,28 +1021,28 @@
 
                         <div class="summary-section">
                             <div class="summary-heading">Your Daily Non-Negotiables</div>
-                            <div style="background-color: #1a1a1a; padding: 20px; border-radius: 6px; margin-bottom: 20px;">
-                                <p style="margin-bottom: 12px;"><span style="color: #d4a94c; font-weight: 600;">Protein Anchor:</span> <span id="map-protein"></span></p>
-                                <p style="margin-bottom: 12px;"><span style="color: #d4a94c; font-weight: 600;">Hydration:</span> <span id="map-hydration"></span></p>
-                                <p><span style="color: #d4a94c; font-weight: 600;">Reset:</span> <span id="map-reset"></span></p>
+                            <div style="background-color: #f5f0e8; padding: 20px; border-radius: 6px; margin-bottom: 20px;">
+                                <p style="margin-bottom: 12px;"><span style="color: #c9a54e; font-weight: 600;">Protein Anchor:</span> <span id="map-protein"></span></p>
+                                <p style="margin-bottom: 12px;"><span style="color: #c9a54e; font-weight: 600;">Hydration:</span> <span id="map-hydration"></span></p>
+                                <p><span style="color: #c9a54e; font-weight: 600;">Reset:</span> <span id="map-reset"></span></p>
                             </div>
                         </div>
 
                         <div class="summary-section">
                             <div class="summary-heading">Your Structured Meals</div>
-                            <div style="background-color: #1a1a1a; padding: 20px; border-radius: 6px; margin-bottom: 20px;">
-                                <p style="margin-bottom: 12px;"><span style="color: #d4a94c; font-weight: 600;">Meal 1:</span> <span id="map-meal1"></span></p>
-                                <p style="margin-bottom: 12px;"><span style="color: #d4a94c; font-weight: 600;">Meal 2:</span> <span id="map-meal2"></span></p>
-                                <p><span style="color: #d4a94c; font-weight: 600;">Emergency Backup:</span> <span id="map-backup"></span></p>
+                            <div style="background-color: #f5f0e8; padding: 20px; border-radius: 6px; margin-bottom: 20px;">
+                                <p style="margin-bottom: 12px;"><span style="color: #c9a54e; font-weight: 600;">Meal 1:</span> <span id="map-meal1"></span></p>
+                                <p style="margin-bottom: 12px;"><span style="color: #c9a54e; font-weight: 600;">Meal 2:</span> <span id="map-meal2"></span></p>
+                                <p><span style="color: #c9a54e; font-weight: 600;">Emergency Backup:</span> <span id="map-backup"></span></p>
                             </div>
                         </div>
 
                         <div class="summary-section">
                             <div class="summary-heading">Your If-This-Then-That Rules</div>
-                            <div style="background-color: #1a1a1a; padding: 20px; border-radius: 6px;">
-                                <p style="margin-bottom: 12px;"><span style="color: #d4a94c; font-weight: 600;">If I miss breaks:</span> <span id="map-ifttt1"></span></p>
-                                <p style="margin-bottom: 12px;"><span style="color: #d4a94c; font-weight: 600;">If I sleep under 5 hours:</span> <span id="map-ifttt2"></span></p>
-                                <p><span style="color: #d4a94c; font-weight: 600;">If cravings hit:</span> <span id="map-ifttt3"></span></p>
+                            <div style="background-color: #f5f0e8; padding: 20px; border-radius: 6px;">
+                                <p style="margin-bottom: 12px;"><span style="color: #c9a54e; font-weight: 600;">If I miss breaks:</span> <span id="map-ifttt1"></span></p>
+                                <p style="margin-bottom: 12px;"><span style="color: #c9a54e; font-weight: 600;">If I sleep under 5 hours:</span> <span id="map-ifttt2"></span></p>
+                                <p><span style="color: #c9a54e; font-weight: 600;">If cravings hit:</span> <span id="map-ifttt3"></span></p>
                             </div>
                         </div>
                     </div>
@@ -1053,7 +1059,7 @@
         <div id="tab-2" class="tab-content">
             <div class="card">
                 <h2>Pivot Ladder: Daily Check-In</h2>
-                <p style="color: #b8b3a8; margin-bottom: 32px; font-style: italic;">You're never "off." You're just green, yellow, or red.</p>
+                <p style="color: #6b5d4d; margin-bottom: 32px; font-style: italic;">You're never "off." You're just green, yellow, or red.</p>
 
                 <div id="pivot-assessment">
                     <div class="form-group">
@@ -1126,8 +1132,8 @@
                     
                     <div style="margin-top: 32px;">
                         <label style="margin-bottom: 16px; display: block;">Log Today's Color:</label>
-                        <button class="btn-secondary" onclick="logDayColor('green')" style="background-color: #4ade80; color: #1a1a1a;">Log as Green Day</button>
-                        <button class="btn-secondary" onclick="logDayColor('yellow')" style="background-color: #facc15; color: #1a1a1a; margin-left: 12px;">Log as Yellow Day</button>
+                        <button class="btn-secondary" onclick="logDayColor('green')" style="background-color: #4ade80; color: #ffffff;">Log as Green Day</button>
+                        <button class="btn-secondary" onclick="logDayColor('yellow')" style="background-color: #facc15; color: #ffffff; margin-left: 12px;">Log as Yellow Day</button>
                         <button class="btn-secondary" onclick="logDayColor('red')" style="background-color: #ef4444; color: #fff; margin-left: 12px;">Log as Red Day</button>
                     </div>
 
@@ -1152,10 +1158,10 @@
                 <!-- SETUP SECTION -->
                 <div id="momentum-setup" class="visibility-toggle visible">
                     <h3>First Time? Set Your Non-Negotiables</h3>
-                    <p style="color: #b8b3a8; margin-bottom: 24px;">These are your bare minimum on each day type.</p>
+                    <p style="color: #6b5d4d; margin-bottom: 24px;">These are your bare minimum on each day type.</p>
 
-                    <div style="background-color: #1a1a1a; padding: 24px; border-radius: 6px; margin-bottom: 32px;">
-                        <h4 style="color: #d4a94c; margin-bottom: 16px;">Work Day Non-Negotiables</h4>
+                    <div style="background-color: #f5f0e8; padding: 24px; border-radius: 6px; margin-bottom: 32px;">
+                        <h4 style="color: #c9a54e; margin-bottom: 16px;">Work Day Non-Negotiables</h4>
                         <div class="form-group">
                             <label for="work-nn1">Non-Negotiable #1:</label>
                             <input type="text" id="work-nn1" placeholder="e.g., Protein anchor">
@@ -1166,8 +1172,8 @@
                         </div>
                     </div>
 
-                    <div style="background-color: #1a1a1a; padding: 24px; border-radius: 6px; margin-bottom: 32px;">
-                        <h4 style="color: #d4a94c; margin-bottom: 16px;">Off Day Non-Negotiables</h4>
+                    <div style="background-color: #f5f0e8; padding: 24px; border-radius: 6px; margin-bottom: 32px;">
+                        <h4 style="color: #c9a54e; margin-bottom: 16px;">Off Day Non-Negotiables</h4>
                         <div class="form-group">
                             <label for="off-nn1">Non-Negotiable #1:</label>
                             <input type="text" id="off-nn1" placeholder="e.g., Workout">
@@ -1178,8 +1184,8 @@
                         </div>
                     </div>
 
-                    <div style="background-color: #1a1a1a; padding: 24px; border-radius: 6px;">
-                        <h4 style="color: #d4a94c; margin-bottom: 16px;">Chaos Day Non-Negotiables</h4>
+                    <div style="background-color: #f5f0e8; padding: 24px; border-radius: 6px;">
+                        <h4 style="color: #c9a54e; margin-bottom: 16px;">Chaos Day Non-Negotiables</h4>
                         <div class="form-group">
                             <label for="chaos-nn1">Non-Negotiable #1:</label>
                             <input type="text" id="chaos-nn1" value="Protein anchor" placeholder="Protein anchor">
@@ -1215,7 +1221,7 @@
                     <div id="momentum-reflection" class="visibility-toggle" style="display: none;">
                         <div class="reflection-section">
                             <h3>Week 2 Reflection</h3>
-                            <p style="color: #b8b3a8; margin-bottom: 24px;">You've completed 14 days. What's changed?</p>
+                            <p style="color: #6b5d4d; margin-bottom: 24px;">You've completed 14 days. What's changed?</p>
 
                             <div class="form-group">
                                 <label for="reflection1">Biggest change I noticed:</label>
@@ -1243,7 +1249,7 @@
         <div id="tab-4" class="tab-content">
             <div class="card">
                 <h2>7-Day Check-In Assessment</h2>
-                <p style="color: #b8b3a8; margin-bottom: 32px;">How much has changed since Day 1?</p>
+                <p style="color: #6b5d4d; margin-bottom: 32px;">How much has changed since Day 1?</p>
 
                 <div class="progress-bar">
                     <div class="progress-fill" id="checkin-progress" style="width: 0%;"></div>
@@ -1252,7 +1258,7 @@
                 <!-- SECTION A: FELT WINS -->
                 <div id="checkin-section-a">
                     <h3>Section A: Felt Wins</h3>
-                    <p style="color: #b8b3a8; margin-bottom: 24px;">Rate each from 1-10. Day 1 vs. Day 7.</p>
+                    <p style="color: #6b5d4d; margin-bottom: 24px;">Rate each from 1-10. Day 1 vs. Day 7.</p>
 
                     <div class="form-group">
                         <label>Energy Level</label>
@@ -1340,7 +1346,7 @@
                 <!-- SECTION B: BODY RESPONSE -->
                 <div id="checkin-section-b" class="visibility-toggle" style="display: none;">
                     <h3>Section B: Body Response</h3>
-                    <p style="color: #b8b3a8; margin-bottom: 24px;">What did you notice?</p>
+                    <p style="color: #6b5d4d; margin-bottom: 24px;">What did you notice?</p>
 
                     <div class="form-group">
                         <label>Waist / Bloat:</label>
@@ -1421,7 +1427,7 @@
                 <!-- SECTION C: BEHAVIORAL WINS -->
                 <div id="checkin-section-c" class="visibility-toggle" style="display: none;">
                     <h3>Section C: Behavioral Wins</h3>
-                    <p style="color: #b8b3a8; margin-bottom: 24px;">What did you do 3+ days?</p>
+                    <p style="color: #6b5d4d; margin-bottom: 24px;">What did you do 3+ days?</p>
 
                     <div class="checkbox-group">
                         <div class="checkbox-item">
@@ -1504,22 +1510,22 @@
                         <h2 style="margin-bottom: 32px;">YOUR RESET REPORT CARD</h2>
 
                         <div style="text-align: left; margin-bottom: 32px;">
-                            <h4 style="color: #d4a94c; margin-bottom: 20px;">Your Metric Changes</h4>
+                            <h4 style="color: #c9a54e; margin-bottom: 20px;">Your Metric Changes</h4>
                             <div id="report-metrics"></div>
                         </div>
 
                         <div style="text-align: left; margin-bottom: 32px;">
-                            <h4 style="color: #d4a94c; margin-bottom: 12px;">Behavioral Wins</h4>
-                            <p id="report-behaviors" style="color: #b8b3a8;"></p>
+                            <h4 style="color: #c9a54e; margin-bottom: 12px;">Behavioral Wins</h4>
+                            <p id="report-behaviors" style="color: #6b5d4d;"></p>
                         </div>
 
                         <div style="text-align: left; margin-bottom: 32px;">
-                            <h4 style="color: #d4a94c; margin-bottom: 12px;">Your Easiest Anchor</h4>
-                            <p id="report-anchor" style="color: #b8b3a8; font-style: italic;"></p>
+                            <h4 style="color: #c9a54e; margin-bottom: 12px;">Your Easiest Anchor</h4>
+                            <p id="report-anchor" style="color: #6b5d4d; font-style: italic;"></p>
                         </div>
 
-                        <div id="report-message" style="background-color: #1a1a1a; padding: 20px; border-radius: 6px; margin-bottom: 32px; border-left: 4px solid #d4a94c;">
-                            <p id="report-message-text" style="color: #b8b3a8; line-height: 1.8;"></p>
+                        <div id="report-message" style="background-color: #f5f0e8; padding: 20px; border-radius: 6px; margin-bottom: 32px; border-left: 4px solid #c9a54e;">
+                            <p id="report-message-text" style="color: #6b5d4d; line-height: 1.8;"></p>
                         </div>
 
                         <div class="paths-section">
@@ -1534,7 +1540,7 @@
                         </div>
 
                         <div style="text-align: center; margin-top: 32px;">
-                            <p style="color: #b8b3a8; margin-bottom: 16px;">Ready for personalized support?</p>
+                            <p style="color: #6b5d4d; margin-bottom: 16px;">Ready for personalized support?</p>
                             <a href="#" class="cta-link" style="display: inline-block;">Learn More About Coaching →</a>
                         </div>
                     </div>
@@ -1551,7 +1557,7 @@
         <div id="tab-5" class="tab-content">
             <div class="card">
                 <h2>If-This-Then-That Scenario Library</h2>
-                <p style="color: #b8b3a8; margin-bottom: 32px;">15 real situations. Real responses. Bookmark the ones you need.</p>
+                <p style="color: #6b5d4d; margin-bottom: 32px;">15 real situations. Real responses. Bookmark the ones you need.</p>
 
                 <!-- NUTRITION SCENARIOS -->
                 <div style="margin-bottom: 40px;">
@@ -2050,12 +2056,12 @@
                 title = 'GREEN DAY — Full Plan';
                 actions = `
                     <ul style="list-style: none; padding-left: 0;">
-                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>Morning cocktail → Protein anchor → 2 structured meals + 1 backup ready</li>
-                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>Full workout (your level)</li>
-                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>5-min NS Reset</li>
-                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>Sleep Switch before bed</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #c9a54e;">→</span>Morning cocktail → Protein anchor → 2 structured meals + 1 backup ready</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #c9a54e;">→</span>Full workout (your level)</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #c9a54e;">→</span>5-min NS Reset</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #c9a54e;">→</span>Sleep Switch before bed</li>
                     </ul>
-                    <p style="margin-top: 16px; font-style: italic; color: #b8b3a8;">This is your momentum day. Stack all the wins.</p>
+                    <p style="margin-top: 16px; font-style: italic; color: #6b5d4d;">This is your momentum day. Stack all the wins.</p>
                 `;
             } else if (total >= 10) {
                 color = 'yellow';
@@ -2063,12 +2069,12 @@
                 title = 'YELLOW DAY — Anchors Only';
                 actions = `
                     <ul style="list-style: none; padding-left: 0;">
-                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>Morning cocktail → Protein anchor meals only</li>
-                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>10-min walk OR 5-min backup (no full workout)</li>
-                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>2-min SOS Reset</li>
-                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>Sleep Switch before bed</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #c9a54e;">→</span>Morning cocktail → Protein anchor meals only</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #c9a54e;">→</span>10-min walk OR 5-min backup (no full workout)</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #c9a54e;">→</span>2-min SOS Reset</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #c9a54e;">→</span>Sleep Switch before bed</li>
                     </ul>
-                    <p style="margin-top: 16px; font-style: italic; color: #b8b3a8;">Simplified but still moving forward. This is not a failure day.</p>
+                    <p style="margin-top: 16px; font-style: italic; color: #6b5d4d;">Simplified but still moving forward. This is not a failure day.</p>
                 `;
             } else {
                 color = 'red';
@@ -2076,11 +2082,11 @@
                 title = 'RED DAY — Rescue Plan';
                 actions = `
                     <ul style="list-style: none; padding-left: 0;">
-                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>Pick ONE: Protein anchor OR Hydration OR 2-min reset</li>
-                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #d4a94c;">→</span>That's it. ONE thing = a win today.</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #c9a54e;">→</span>Pick ONE: Protein anchor OR Hydration OR 2-min reset</li>
+                        <li style="padding: 8px 0; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #c9a54e;">→</span>That's it. ONE thing = a win today.</li>
                     </ul>
-                    <p style="margin-top: 16px; font-style: italic; color: #b8b3a8;">Chaos days happen. You protected your momentum with one anchor. That's enough.</p>
-                    <p style="margin-top: 12px; font-style: italic; color: #b8b3a8;">Tomorrow, check in again. You'll likely be yellow or green.</p>
+                    <p style="margin-top: 16px; font-style: italic; color: #6b5d4d;">Chaos days happen. You protected your momentum with one anchor. That's enough.</p>
+                    <p style="margin-top: 12px; font-style: italic; color: #6b5d4d;">Tomorrow, check in again. You'll likely be yellow or green.</p>
                 `;
             }
 
@@ -2092,8 +2098,8 @@
                 </div>
                 <div style="margin-top: 32px;">
                     <label style="margin-bottom: 16px; display: block;">Log Today's Color:</label>
-                    <button class="btn-secondary" onclick="logDayColor('green')" style="background-color: #4ade80; color: #1a1a1a;">Log as Green Day</button>
-                    <button class="btn-secondary" onclick="logDayColor('yellow')" style="background-color: #facc15; color: #1a1a1a; margin-left: 12px;">Log as Yellow Day</button>
+                    <button class="btn-secondary" onclick="logDayColor('green')" style="background-color: #4ade80; color: #ffffff;">Log as Green Day</button>
+                    <button class="btn-secondary" onclick="logDayColor('yellow')" style="background-color: #facc15; color: #ffffff; margin-left: 12px;">Log as Yellow Day</button>
                     <button class="btn-secondary" onclick="logDayColor('red')" style="background-color: #ef4444; color: #fff; margin-left: 12px;">Log as Red Day</button>
                 </div>
                 <div style="margin-top: 32px;">
@@ -2129,7 +2135,7 @@
                 const historyDiv = document.getElementById('color-history');
                 if (historyDiv) {
                     historyDiv.innerHTML = history.map(color => {
-                        let bgColor = '#3a3a3a';
+                        let bgColor = '#e8e0d4';
                         if (color === 'green') bgColor = '#4ade80';
                         if (color === 'yellow') bgColor = '#facc15';
                         if (color === 'red') bgColor = '#ef4444';

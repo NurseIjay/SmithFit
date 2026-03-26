@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmithFit Pillar 1: Diagnose Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,20 +13,24 @@
         }
 
         :root {
-            --dark-bg: #1a1a1a;
-            --gold: #d4a94c;
-            --light-gray: #f5f5f5;
-            --medium-gray: #333;
-            --border-gray: #444;
-            --text-primary: #ffffff;
-            --text-secondary: #cccccc;
-            --success: #2ecc71;
-            --warning: #f39c12;
-            --danger: #e74c3c;
+            --dark-bg: #faf7f2;
+            --gold: #c9a54e;
+            --gold-hover: #a8873a;
+            --gold-light: rgba(201,165,78,0.08);
+            --light-gray: #f5f0e8;
+            --medium-gray: #ffffff;
+            --border-gray: #e8e0d4;
+            --text-primary: #2c2416;
+            --text-secondary: #6b5d4d;
+            --text-muted: #9a8d7d;
+            --success: #5a8a5a;
+            --warning: #c9a54e;
+            --danger: #b85c5c;
+            --card-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         body {
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
             background: var(--dark-bg);
             color: var(--text-primary);
             line-height: 1.6;
@@ -45,7 +50,7 @@
         }
 
         header h1 {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 2.5rem;
             margin-bottom: 10px;
             color: var(--gold);
@@ -59,7 +64,7 @@
         .pillar-badge {
             display: inline-block;
             background: var(--gold);
-            color: var(--dark-bg);
+            color: #ffffff;
             padding: 8px 16px;
             border-radius: 4px;
             font-weight: bold;
@@ -86,6 +91,7 @@
             border-bottom: 3px solid transparent;
             transition: all 0.3s ease;
             font-weight: 500;
+            font-family: 'DM Sans', system-ui, sans-serif;
         }
 
         .tab-btn:hover {
@@ -123,7 +129,7 @@
         }
 
         .quiz-progress {
-            background: var(--medium-gray);
+            background: #f5f0e8;
             height: 8px;
             border-radius: 4px;
             margin-bottom: 30px;
@@ -132,7 +138,7 @@
 
         .quiz-progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, var(--gold), #ffd700);
+            background: linear-gradient(90deg, var(--gold), var(--gold-hover));
             transition: width 0.3s ease;
         }
 
@@ -142,12 +148,14 @@
             background: var(--medium-gray);
             border-left: 4px solid var(--gold);
             border-radius: 4px;
+            box-shadow: var(--card-shadow);
         }
 
         .question h3 {
             margin-bottom: 15px;
             font-size: 1.1rem;
             color: var(--text-primary);
+            font-family: 'Playfair Display', Georgia, serif;
         }
 
         .question-number {
@@ -170,7 +178,7 @@
 
         .answer-option:hover {
             border-color: var(--gold);
-            background: rgba(212, 169, 76, 0.05);
+            background: var(--gold-light);
         }
 
         .answer-option input[type="radio"] {
@@ -199,21 +207,22 @@
             font-size: 1rem;
             font-weight: 600;
             transition: all 0.3s ease;
+            font-family: 'DM Sans', system-ui, sans-serif;
         }
 
         .btn-primary {
             background: var(--gold);
-            color: var(--dark-bg);
+            color: #ffffff;
         }
 
         .btn-primary:hover {
-            background: #ffd700;
+            background: var(--gold-hover);
             transform: translateY(-2px);
         }
 
         .btn-primary:disabled {
             background: var(--border-gray);
-            color: var(--text-secondary);
+            color: var(--text-muted);
             cursor: not-allowed;
             transform: none;
         }
@@ -225,7 +234,7 @@
         }
 
         .btn-secondary:hover {
-            background: rgba(212, 169, 76, 0.1);
+            background: var(--gold-light);
         }
 
         /* Results Card */
@@ -235,17 +244,18 @@
         }
 
         .result-card {
-            background: linear-gradient(135deg, var(--medium-gray), #2a2a2a);
+            background: linear-gradient(135deg, #ffffff, #f5f0e8);
             border: 2px solid var(--gold);
             border-radius: 8px;
             padding: 30px;
             margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
         }
 
         .type-badge {
             display: inline-block;
             background: var(--gold);
-            color: var(--dark-bg);
+            color: #ffffff;
             padding: 8px 16px;
             border-radius: 4px;
             font-weight: bold;
@@ -253,7 +263,7 @@
         }
 
         .result-card h2 {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.8rem;
             margin-bottom: 10px;
             color: var(--gold);
@@ -274,6 +284,7 @@
             color: var(--gold);
             margin-bottom: 10px;
             font-size: 1.1rem;
+            font-family: 'Playfair Display', Georgia, serif;
         }
 
         .result-list {
@@ -288,7 +299,7 @@
         }
 
         .result-list li:before {
-            content: "→";
+            content: "\2192";
             position: absolute;
             left: 0;
             color: var(--gold);
@@ -298,7 +309,7 @@
             margin: 15px 0;
             padding: 12px;
             border-left: 4px solid var(--gold);
-            background: rgba(212, 169, 76, 0.1);
+            background: var(--gold-light);
             border-radius: 4px;
             font-style: italic;
         }
@@ -319,6 +330,7 @@
             border-radius: 8px;
             padding: 20px;
             min-height: 500px;
+            box-shadow: var(--card-shadow);
         }
 
         .cycle-svg {
@@ -339,12 +351,14 @@
             border-radius: 8px;
             padding: 20px;
             min-height: 300px;
+            box-shadow: var(--card-shadow);
         }
 
         .step-details h3 {
             color: var(--gold);
             font-size: 1.3rem;
             margin-bottom: 15px;
+            font-family: 'Playfair Display', Georgia, serif;
         }
 
         .step-details p {
@@ -372,6 +386,7 @@
             color: var(--gold);
             margin-bottom: 20px;
             font-size: 1.3rem;
+            font-family: 'Playfair Display', Georgia, serif;
         }
 
         .intervention-cards {
@@ -381,7 +396,7 @@
         }
 
         .intervention-card {
-            background: var(--medium-gray);
+            background: #f5f0e8;
             border: 2px solid var(--border-gray);
             border-radius: 8px;
             padding: 20px;
@@ -393,11 +408,13 @@
         .intervention-card:hover {
             border-color: var(--gold);
             transform: translateY(-4px);
+            box-shadow: var(--card-shadow);
         }
 
         .intervention-card h4 {
             color: var(--gold);
             margin: 10px 0;
+            font-family: 'Playfair Display', Georgia, serif;
         }
 
         .intervention-emoji {
@@ -412,6 +429,7 @@
             padding: 20px;
             margin-bottom: 30px;
             max-width: 800px;
+            box-shadow: var(--card-shadow);
         }
 
         .setup-input-group {
@@ -433,12 +451,13 @@
             border-radius: 4px;
             color: var(--text-primary);
             font-size: 1rem;
+            font-family: 'DM Sans', system-ui, sans-serif;
         }
 
         .setup-input-group input:focus {
             outline: none;
             border-color: var(--gold);
-            box-shadow: 0 0 0 2px rgba(212, 169, 76, 0.2);
+            box-shadow: 0 0 0 2px rgba(201, 165, 78, 0.2);
         }
 
         .tracker-grid {
@@ -447,6 +466,7 @@
             padding: 20px;
             margin-bottom: 30px;
             overflow-x: auto;
+            box-shadow: var(--card-shadow);
         }
 
         .grid-header {
@@ -493,6 +513,7 @@
             border-radius: 3px;
             color: var(--text-primary);
             text-align: center;
+            font-family: 'DM Sans', system-ui, sans-serif;
         }
 
         .grid-toggle {
@@ -514,7 +535,7 @@
 
         .toggle-btn.active {
             background: var(--gold);
-            color: var(--dark-bg);
+            color: #ffffff;
             border-color: var(--gold);
         }
 
@@ -531,11 +552,13 @@
             border: 2px solid var(--border-gray);
             border-radius: 8px;
             padding: 20px;
+            box-shadow: var(--card-shadow);
         }
 
         .stat-card h4 {
             color: var(--gold);
             margin-bottom: 10px;
+            font-family: 'Playfair Display', Georgia, serif;
         }
 
         .stat-value {
@@ -551,8 +574,8 @@
         }
 
         .streak-counter {
-            background: linear-gradient(135deg, var(--gold), #ffd700);
-            color: var(--dark-bg);
+            background: linear-gradient(135deg, var(--gold), var(--gold-hover));
+            color: #ffffff;
             padding: 20px;
             border-radius: 8px;
             text-align: center;
@@ -570,12 +593,14 @@
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
         }
 
         .comparison-section h3 {
             color: var(--gold);
             margin-bottom: 20px;
             font-size: 1.2rem;
+            font-family: 'Playfair Display', Georgia, serif;
         }
 
         .comparison-grid {
@@ -604,7 +629,7 @@
         }
 
         .motivational-message {
-            background: linear-gradient(135deg, rgba(212, 169, 76, 0.2), rgba(46, 204, 113, 0.1));
+            background: linear-gradient(135deg, rgba(201, 165, 78, 0.1), rgba(90, 138, 90, 0.08));
             border: 2px solid var(--gold);
             border-radius: 8px;
             padding: 20px;
@@ -615,6 +640,7 @@
         .motivational-message h4 {
             color: var(--gold);
             margin-bottom: 10px;
+            font-family: 'Playfair Display', Georgia, serif;
         }
 
         /* Diagnose Guide Styles */
@@ -636,24 +662,26 @@
             padding: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: var(--card-shadow);
         }
 
         .scenario-card:hover {
             border-color: var(--gold);
             transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(212, 169, 76, 0.2);
+            box-shadow: 0 10px 30px rgba(201, 165, 78, 0.15);
         }
 
         .scenario-card h4 {
             color: var(--gold);
             margin-bottom: 10px;
             font-size: 1.1rem;
+            font-family: 'Playfair Display', Georgia, serif;
         }
 
         .scenario-number {
             display: inline-block;
             background: var(--gold);
-            color: var(--dark-bg);
+            color: #ffffff;
             width: 30px;
             height: 30px;
             border-radius: 50%;
@@ -817,59 +845,59 @@
                     <div class="cycle-svg-wrapper">
                         <svg class="cycle-svg" viewBox="0 0 600 600">
                             <!-- Circle background -->
-                            <circle cx="300" cy="300" r="280" fill="none" stroke="#333" stroke-width="2"/>
+                            <circle cx="300" cy="300" r="280" fill="none" stroke="#e8e0d4" stroke-width="2"/>
 
                             <!-- Steps positioned around circle -->
                             <g id="step1" class="cycle-step" data-step="1">
-                                <circle cx="300" cy="50" r="35" fill="#333" stroke="#d4a94c" stroke-width="2" class="step-node"/>
-                                <text x="300" y="55" text-anchor="middle" fill="#d4a94c" font-size="12" font-weight="bold">1</text>
+                                <circle cx="300" cy="50" r="35" fill="#ffffff" stroke="#c9a54e" stroke-width="2" class="step-node"/>
+                                <text x="300" y="55" text-anchor="middle" fill="#c9a54e" font-size="12" font-weight="bold">1</text>
                             </g>
 
                             <g id="step2" class="cycle-step" data-step="2">
-                                <circle cx="485" cy="110" r="35" fill="#333" stroke="#d4a94c" stroke-width="2" class="step-node"/>
-                                <text x="485" y="115" text-anchor="middle" fill="#d4a94c" font-size="12" font-weight="bold">2</text>
+                                <circle cx="485" cy="110" r="35" fill="#ffffff" stroke="#c9a54e" stroke-width="2" class="step-node"/>
+                                <text x="485" y="115" text-anchor="middle" fill="#c9a54e" font-size="12" font-weight="bold">2</text>
                             </g>
 
                             <g id="step3" class="cycle-step" data-step="3">
-                                <circle cx="542" cy="270" r="35" fill="#333" stroke="#d4a94c" stroke-width="2" class="step-node"/>
-                                <text x="542" y="275" text-anchor="middle" fill="#d4a94c" font-size="12" font-weight="bold">3</text>
+                                <circle cx="542" cy="270" r="35" fill="#ffffff" stroke="#c9a54e" stroke-width="2" class="step-node"/>
+                                <text x="542" y="275" text-anchor="middle" fill="#c9a54e" font-size="12" font-weight="bold">3</text>
                             </g>
 
                             <g id="step4" class="cycle-step" data-step="4">
-                                <circle cx="485" cy="490" r="35" fill="#333" stroke="#d4a94c" stroke-width="2" class="step-node"/>
-                                <text x="485" y="495" text-anchor="middle" fill="#d4a94c" font-size="12" font-weight="bold">4</text>
+                                <circle cx="485" cy="490" r="35" fill="#ffffff" stroke="#c9a54e" stroke-width="2" class="step-node"/>
+                                <text x="485" y="495" text-anchor="middle" fill="#c9a54e" font-size="12" font-weight="bold">4</text>
                             </g>
 
                             <g id="step5" class="cycle-step" data-step="5">
-                                <circle cx="300" cy="550" r="35" fill="#333" stroke="#d4a94c" stroke-width="2" class="step-node"/>
-                                <text x="300" y="555" text-anchor="middle" fill="#d4a94c" font-size="12" font-weight="bold">5</text>
+                                <circle cx="300" cy="550" r="35" fill="#ffffff" stroke="#c9a54e" stroke-width="2" class="step-node"/>
+                                <text x="300" y="555" text-anchor="middle" fill="#c9a54e" font-size="12" font-weight="bold">5</text>
                             </g>
 
                             <g id="step6" class="cycle-step" data-step="6">
-                                <circle cx="115" cy="490" r="35" fill="#333" stroke="#d4a94c" stroke-width="2" class="step-node"/>
-                                <text x="115" y="495" text-anchor="middle" fill="#d4a94c" font-size="12" font-weight="bold">6</text>
+                                <circle cx="115" cy="490" r="35" fill="#ffffff" stroke="#c9a54e" stroke-width="2" class="step-node"/>
+                                <text x="115" y="495" text-anchor="middle" fill="#c9a54e" font-size="12" font-weight="bold">6</text>
                             </g>
 
                             <g id="step7" class="cycle-step" data-step="7">
-                                <circle cx="58" cy="270" r="35" fill="#333" stroke="#d4a94c" stroke-width="2" class="step-node"/>
-                                <text x="58" y="275" text-anchor="middle" fill="#d4a94c" font-size="12" font-weight="bold">7</text>
+                                <circle cx="58" cy="270" r="35" fill="#ffffff" stroke="#c9a54e" stroke-width="2" class="step-node"/>
+                                <text x="58" y="275" text-anchor="middle" fill="#c9a54e" font-size="12" font-weight="bold">7</text>
                             </g>
 
                             <!-- Arrow connecting steps -->
                             <defs>
                                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                    <polygon points="0 0, 10 3, 0 6" fill="#d4a94c"/>
+                                    <polygon points="0 0, 10 3, 0 6" fill="#c9a54e"/>
                                 </marker>
                             </defs>
-                            <path d="M 300 85 Q 450 100 450 145" stroke="#d4a94c" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
-                            <path d="M 465 160 Q 510 180 515 235" stroke="#d4a94c" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
-                            <path d="M 490 305 Q 520 400 465 455" stroke="#d4a94c" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
-                            <path d="M 435 515 Q 350 560 335 555" stroke="#d4a94c" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
-                            <path d="M 265 540 Q 150 520 145 455" stroke="#d4a94c" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
-                            <path d="M 85 415 Q 50 350 80 295" stroke="#d4a94c" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
-                            <path d="M 100 220 Q 150 120 270 75" stroke="#d4a94c" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
+                            <path d="M 300 85 Q 450 100 450 145" stroke="#c9a54e" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
+                            <path d="M 465 160 Q 510 180 515 235" stroke="#c9a54e" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
+                            <path d="M 490 305 Q 520 400 465 455" stroke="#c9a54e" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
+                            <path d="M 435 515 Q 350 560 335 555" stroke="#c9a54e" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
+                            <path d="M 265 540 Q 150 520 145 455" stroke="#c9a54e" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
+                            <path d="M 85 415 Q 50 350 80 295" stroke="#c9a54e" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
+                            <path d="M 100 220 Q 150 120 270 75" stroke="#c9a54e" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5"/>
 
-                            <text x="300" y="310" text-anchor="middle" fill="#999" font-size="14" font-weight="bold">The Metabolic Stress Cycle</text>
+                            <text x="300" y="310" text-anchor="middle" fill="#9a8d7d" font-size="14" font-weight="bold">The Metabolic Stress Cycle</text>
                         </svg>
                     </div>
                 </div>
@@ -904,7 +932,7 @@
         <!-- TAB 3: TRACKER -->
         <div id="tracker" class="tab-content">
             <div class="tracker-setup" id="setupSection">
-                <h3 style="color: #d4a94c; margin-bottom: 20px;">Set Up Your 7-Day Proof</h3>
+                <h3 style="color: #c9a54e; margin-bottom: 20px; font-family: 'Playfair Display', Georgia, serif;">Set Up Your 7-Day Proof</h3>
                 <div class="setup-input-group">
                     <label for="cueName1">Focus Cue #1 (e.g., "Ate 3 meals on schedule")</label>
                     <input type="text" id="cueName1" placeholder="Your first focus behavior">
@@ -956,19 +984,19 @@
                     <div class="comparison-grid">
                         <div>
                             <div class="comparison-label">Day 1 Energy</div>
-                            <div class="comparison-value" id="day1Energy">—</div>
+                            <div class="comparison-value" id="day1Energy">&mdash;</div>
                         </div>
                         <div>
                             <div class="comparison-label">Day 7 Energy</div>
-                            <div class="comparison-value" id="day7Energy">—</div>
+                            <div class="comparison-value" id="day7Energy">&mdash;</div>
                         </div>
                         <div>
                             <div class="comparison-label">Day 1 Cravings</div>
-                            <div class="comparison-value" id="day1Cravings">—</div>
+                            <div class="comparison-value" id="day1Cravings">&mdash;</div>
                         </div>
                         <div>
                             <div class="comparison-label">Day 7 Cravings</div>
-                            <div class="comparison-value" id="day7Cravings">—</div>
+                            <div class="comparison-value" id="day7Cravings">&mdash;</div>
                         </div>
                     </div>
                 </div>
@@ -984,8 +1012,8 @@
         <!-- TAB 4: DIAGNOSE GUIDE -->
         <div id="diagnose" class="tab-content">
             <div class="diagnose-guide-container">
-                <h2 style="color: #d4a94c; margin-bottom: 10px; font-family: Georgia, serif;">If-This-Then-That Diagnose Guide</h2>
-                <p style="color: #ccc; margin-bottom: 30px;">Click any scenario to reveal what it signals about your metabolism and what to do about it.</p>
+                <h2 style="color: #c9a54e; margin-bottom: 10px; font-family: 'Playfair Display', Georgia, serif;">If-This-Then-That Diagnose Guide</h2>
+                <p style="color: #6b5d4d; margin-bottom: 30px;">Click any scenario to reveal what it signals about your metabolism and what to do about it.</p>
 
                 <div class="scenario-cards" id="scenarioCards"></div>
             </div>
@@ -1371,7 +1399,7 @@
         function initializeQuizButtons() {
             const nextBtn = document.getElementById('nextBtn');
             const prevBtn = document.getElementById('prevBtn');
-            
+
             if (nextBtn) {
                 nextBtn.addEventListener('click', () => {
                     const selected = document.querySelector('input[name="answer"]:checked');
@@ -1388,7 +1416,7 @@
                     }
                 });
             }
-            
+
             if (prevBtn) {
                 prevBtn.addEventListener('click', () => {
                     if (currentQuizQuestion > 0) {
@@ -1587,7 +1615,7 @@
             const playBtn = document.getElementById('playBtn');
             const pauseBtn = document.getElementById('pauseBtn');
             const resetBtn = document.getElementById('resetBtn');
-            
+
             if (playBtn) playBtn.addEventListener('click', startAutoPlay);
             if (pauseBtn) pauseBtn.addEventListener('click', stopAutoPlay);
             if (resetBtn) resetBtn.addEventListener('click', resetCycle);
@@ -1852,7 +1880,7 @@
         // ============================================
         window.addEventListener('load', () => {
             initializeTabButtons();
-            
+
             const savedTracker = getFromLocalStorage('smithfit_tracker');
             if (savedTracker && savedTracker.started) {
                 trackerState = savedTracker;

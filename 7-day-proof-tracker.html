@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>7-Day Proof Tracker · SmithFit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,9 +13,9 @@
         }
 
         html, body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-            background-color: #1a1a1a;
-            color: #e0dcd4;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            background-color: #faf7f2;
+            color: #2c2416;
             line-height: 1.6;
             min-height: 100vh;
             padding: 20px;
@@ -32,7 +33,7 @@
             align-items: flex-start;
             margin-bottom: 40px;
             padding-bottom: 24px;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
         }
 
         .header-left {
@@ -43,27 +44,27 @@
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 1.5px;
-            color: #d4a94c;
+            color: #c9a54e;
             text-transform: uppercase;
             margin-bottom: 12px;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
         }
 
         h1 {
             font-size: 48px;
             font-weight: 700;
-            font-family: Georgia, serif;
-            color: #d4a94c;
+            font-family: 'Playfair Display', Georgia, serif;
+            color: #c9a54e;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
 
         .subtitle {
             font-size: 16px;
-            color: #b8b3a8;
+            color: #6b5d4d;
             line-height: 1.7;
             max-width: 600px;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
         }
 
         .header-right {
@@ -76,18 +77,19 @@
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #d4a94c;
-            font-family: system-ui, -apple-system, sans-serif;
+            color: #c9a54e;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
         }
 
         /* Setup Section */
         .setup-section {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 8px;
             padding: 32px;
             margin-bottom: 40px;
             display: none;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .setup-section.visible {
@@ -96,8 +98,8 @@
 
         .setup-section h2 {
             font-size: 24px;
-            font-family: Georgia, serif;
-            color: #d4a94c;
+            font-family: 'Playfair Display', Georgia, serif;
+            color: #c9a54e;
             margin-bottom: 24px;
         }
 
@@ -122,31 +124,31 @@
         .form-field label {
             font-size: 14px;
             font-weight: 600;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .form-field input {
-            background-color: #1a1a1a;
-            border: 1px solid #3a3a3a;
-            color: #e0dcd4;
+            background-color: #faf7f2;
+            border: 1px solid #e8e0d4;
+            color: #2c2416;
             padding: 12px 16px;
             font-size: 14px;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
             border-radius: 6px;
             transition: all 0.2s ease;
         }
 
         .form-field input:focus {
             outline: none;
-            border-color: #d4a94c;
-            box-shadow: 0 0 0 2px rgba(212, 169, 76, 0.1);
+            border-color: #c9a54e;
+            box-shadow: 0 0 0 2px rgba(201, 165, 78, 0.1);
         }
 
         .form-field input::placeholder {
-            color: #666;
+            color: #9a8d7d;
         }
 
         .setup-actions {
@@ -157,8 +159,8 @@
 
         /* How to Use Callout */
         .how-to-use {
-            background-color: rgba(212, 169, 76, 0.08);
-            border-left: 3px solid #d4a94c;
+            background-color: rgba(201, 165, 78, 0.08);
+            border-left: 3px solid #c9a54e;
             padding: 20px;
             border-radius: 6px;
             margin-top: 32px;
@@ -168,22 +170,23 @@
         .how-to-use h3 {
             font-size: 14px;
             font-weight: 700;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            font-family: 'DM Sans', sans-serif;
         }
 
         .how-to-use p {
             font-size: 14px;
             line-height: 1.7;
-            color: #b8b3a8;
+            color: #6b5d4d;
         }
 
         /* Buttons */
         button {
-            background-color: #d4a94c;
-            color: #1a1a1a;
+            background-color: #c9a54e;
+            color: #ffffff;
             border: none;
             padding: 12px 28px;
             font-size: 14px;
@@ -193,7 +196,7 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
             min-height: 44px;
             display: flex;
             align-items: center;
@@ -201,9 +204,9 @@
         }
 
         button:hover {
-            background-color: #e8b961;
+            background-color: #a8873a;
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(212, 169, 76, 0.2);
+            box-shadow: 0 4px 12px rgba(201, 165, 78, 0.2);
         }
 
         button:active {
@@ -212,21 +215,21 @@
 
         button.secondary {
             background-color: transparent;
-            border: 1px solid #d4a94c;
-            color: #d4a94c;
+            border: 1px solid #c9a54e;
+            color: #c9a54e;
         }
 
         button.secondary:hover {
-            background-color: rgba(212, 169, 76, 0.1);
+            background-color: rgba(201, 165, 78, 0.08);
         }
 
         button.danger {
-            background-color: #5a5a5a;
-            color: #e0dcd4;
+            background-color: #b85c5c;
+            color: #ffffff;
         }
 
         button.danger:hover {
-            background-color: #6a6a6a;
+            background-color: #a04e4e;
         }
 
         /* Tracker Section */
@@ -244,13 +247,13 @@
             align-items: center;
             margin-bottom: 32px;
             padding-bottom: 20px;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
         }
 
         .tracker-header h2 {
             font-size: 28px;
-            font-family: Georgia, serif;
-            color: #d4a94c;
+            font-family: 'Playfair Display', Georgia, serif;
+            color: #c9a54e;
         }
 
         .tracker-controls {
@@ -260,11 +263,12 @@
 
         /* Tracker Table */
         .tracker-table {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 8px;
             overflow: hidden;
             margin-bottom: 40px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .tracker-row {
@@ -272,7 +276,7 @@
             grid-template-columns: 100px 1fr 1fr 100px 100px 80px 1fr;
             gap: 16px;
             padding: 20px;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
             align-items: center;
             border-left: 3px solid transparent;
             transition: all 0.3s ease;
@@ -283,8 +287,8 @@
         }
 
         .tracker-row.has-win {
-            border-left-color: #d4a94c;
-            background-color: rgba(212, 169, 76, 0.04);
+            border-left-color: #c9a54e;
+            background-color: rgba(201, 165, 78, 0.04);
         }
 
         @media (max-width: 1200px) {
@@ -302,7 +306,7 @@
             .tracker-row-label {
                 font-size: 12px;
                 font-weight: 600;
-                color: #d4a94c;
+                color: #c9a54e;
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
                 min-width: 120px;
@@ -312,7 +316,7 @@
         .day-label {
             font-size: 14px;
             font-weight: 700;
-            color: #d4a94c;
+            color: #c9a54e;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             cursor: pointer;
@@ -321,7 +325,7 @@
 
         .day-date {
             font-size: 11px;
-            color: #888;
+            color: #9a8d7d;
             margin-top: 2px;
         }
 
@@ -334,7 +338,7 @@
 
         .checkbox-label {
             font-size: 12px;
-            color: #b8b3a8;
+            color: #6b5d4d;
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -347,8 +351,8 @@
             height: 44px;
             cursor: pointer;
             appearance: none;
-            background-color: #1a1a1a;
-            border: 2px solid #3a3a3a;
+            background-color: #faf7f2;
+            border: 2px solid #e8e0d4;
             border-radius: 6px;
             display: flex;
             align-items: center;
@@ -358,17 +362,17 @@
         }
 
         .checkbox-input:hover {
-            border-color: #d4a94c;
+            border-color: #c9a54e;
         }
 
         .checkbox-input:checked {
-            background-color: #d4a94c;
-            border-color: #d4a94c;
+            background-color: #c9a54e;
+            border-color: #c9a54e;
         }
 
         .checkbox-input:checked::after {
             content: "✓";
-            color: #1a1a1a;
+            color: #ffffff;
             font-size: 24px;
             font-weight: 700;
             position: absolute;
@@ -388,9 +392,9 @@
             padding: 0;
             font-size: 12px;
             font-weight: 600;
-            background-color: #1a1a1a;
-            border: 1px solid #3a3a3a;
-            color: #b8b3a8;
+            background-color: #faf7f2;
+            border: 1px solid #e8e0d4;
+            color: #6b5d4d;
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -401,14 +405,14 @@
         }
 
         .number-button:hover {
-            border-color: #d4a94c;
-            color: #d4a94c;
+            border-color: #c9a54e;
+            color: #c9a54e;
         }
 
         .number-button.selected {
-            background-color: #d4a94c;
-            border-color: #d4a94c;
-            color: #1a1a1a;
+            background-color: #c9a54e;
+            border-color: #c9a54e;
+            color: #ffffff;
             font-weight: 700;
         }
 
@@ -425,9 +429,9 @@
             padding: 0;
             font-size: 14px;
             font-weight: 700;
-            background-color: #1a1a1a;
-            border: 1px solid #3a3a3a;
-            color: #b8b3a8;
+            background-color: #faf7f2;
+            border: 1px solid #e8e0d4;
+            color: #6b5d4d;
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -437,38 +441,38 @@
         }
 
         .toggle-button:hover {
-            border-color: #d4a94c;
-            color: #d4a94c;
+            border-color: #c9a54e;
+            color: #c9a54e;
         }
 
         .toggle-button.selected {
-            background-color: #d4a94c;
-            border-color: #d4a94c;
-            color: #1a1a1a;
+            background-color: #c9a54e;
+            border-color: #c9a54e;
+            color: #ffffff;
             font-weight: 700;
         }
 
         /* Note Input */
         .note-input {
             width: 100%;
-            background-color: #1a1a1a;
-            border: 1px solid #3a3a3a;
-            color: #e0dcd4;
+            background-color: #faf7f2;
+            border: 1px solid #e8e0d4;
+            color: #2c2416;
             padding: 8px 12px;
             font-size: 12px;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
             border-radius: 4px;
             transition: all 0.2s ease;
         }
 
         .note-input:focus {
             outline: none;
-            border-color: #d4a94c;
-            box-shadow: 0 0 0 2px rgba(212, 169, 76, 0.1);
+            border-color: #c9a54e;
+            box-shadow: 0 0 0 2px rgba(201, 165, 78, 0.1);
         }
 
         .note-input::placeholder {
-            color: #555;
+            color: #9a8d7d;
         }
 
         /* Progress Section */
@@ -478,8 +482,8 @@
 
         .progress-section h3 {
             font-size: 18px;
-            font-family: Georgia, serif;
-            color: #d4a94c;
+            font-family: 'Playfair Display', Georgia, serif;
+            color: #c9a54e;
             margin-bottom: 24px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -487,13 +491,14 @@
 
         /* Streak Counter */
         .streak-counter {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 8px;
             padding: 32px;
             text-align: center;
             margin-bottom: 24px;
             display: none;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .streak-counter.visible {
@@ -502,16 +507,16 @@
         }
 
         .streak-counter.active-streak {
-            border-color: #d4a94c;
-            background-color: rgba(212, 169, 76, 0.08);
-            box-shadow: 0 0 20px rgba(212, 169, 76, 0.15);
+            border-color: #c9a54e;
+            background-color: rgba(201, 165, 78, 0.08);
+            box-shadow: 0 0 20px rgba(201, 165, 78, 0.12);
         }
 
         .streak-number {
             font-size: 64px;
             font-weight: 700;
-            color: #d4a94c;
-            font-family: Georgia, serif;
+            color: #c9a54e;
+            font-family: 'Playfair Display', Georgia, serif;
             line-height: 1;
             margin-bottom: 8px;
         }
@@ -521,7 +526,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #b8b3a8;
+            color: #6b5d4d;
         }
 
         /* Stats Cards */
@@ -533,13 +538,14 @@
         }
 
         .stat-card {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 8px;
             padding: 24px;
             text-align: center;
             transition: all 0.3s ease;
             display: none;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .stat-card.visible {
@@ -548,8 +554,8 @@
         }
 
         .stat-card:hover {
-            border-color: #d4a94c;
-            background-color: rgba(212, 169, 76, 0.04);
+            border-color: #c9a54e;
+            background-color: rgba(201, 165, 78, 0.04);
         }
 
         .stat-label {
@@ -557,22 +563,22 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 12px;
         }
 
         .stat-value {
             font-size: 48px;
             font-weight: 700;
-            color: #e0dcd4;
-            font-family: Georgia, serif;
+            color: #2c2416;
+            font-family: 'Playfair Display', Georgia, serif;
             margin-bottom: 8px;
             line-height: 1;
         }
 
         .stat-detail {
             font-size: 13px;
-            color: #b8b3a8;
+            color: #6b5d4d;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -586,7 +592,7 @@
         .progress-bar {
             width: 100%;
             height: 8px;
-            background-color: #1a1a1a;
+            background-color: #f5f0e8;
             border-radius: 4px;
             margin-top: 12px;
             overflow: hidden;
@@ -594,7 +600,7 @@
 
         .progress-fill {
             height: 100%;
-            background-color: #7bc47a;
+            background-color: #5a8a5a;
             border-radius: 4px;
             transition: width 0.4s ease;
         }
@@ -612,8 +618,8 @@
 
         .comparison-section h3 {
             font-size: 18px;
-            font-family: Georgia, serif;
-            color: #d4a94c;
+            font-family: 'Playfair Display', Georgia, serif;
+            color: #c9a54e;
             margin-bottom: 24px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -632,10 +638,11 @@
         }
 
         .comparison-card {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 8px;
             padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .comparison-card h4 {
@@ -643,9 +650,10 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 20px;
             text-align: center;
+            font-family: 'DM Sans', sans-serif;
         }
 
         .comparison-item {
@@ -653,7 +661,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 0;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
             font-size: 13px;
         }
 
@@ -662,30 +670,30 @@
         }
 
         .comparison-label {
-            color: #b8b3a8;
+            color: #6b5d4d;
             font-weight: 600;
         }
 
         .comparison-value {
-            color: #e0dcd4;
+            color: #2c2416;
             font-weight: 700;
         }
 
         .comparison-improved {
-            color: #7bc47a;
+            color: #5a8a5a;
             font-weight: 700;
         }
 
         /* Motivational Messages */
         .motivational-message {
-            background-color: rgba(123, 196, 122, 0.1);
-            border-left: 3px solid #7bc47a;
+            background-color: rgba(90, 138, 90, 0.08);
+            border-left: 3px solid #5a8a5a;
             padding: 20px;
             border-radius: 6px;
             margin-bottom: 24px;
             font-size: 15px;
             line-height: 1.7;
-            color: #b8b3a8;
+            color: #6b5d4d;
             animation: slideIn 0.4s ease;
             display: none;
         }
@@ -700,10 +708,10 @@
             justify-content: space-between;
             align-items: center;
             padding: 32px 0;
-            border-top: 1px solid #3a3a3a;
+            border-top: 1px solid #e8e0d4;
             margin-top: 60px;
             font-size: 12px;
-            color: #666;
+            color: #9a8d7d;
         }
 
         @media (max-width: 640px) {
@@ -734,7 +742,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.4);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -745,24 +753,25 @@
         }
 
         .modal-content {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 8px;
             padding: 32px;
             max-width: 400px;
             width: 90%;
             animation: slideIn 0.3s ease;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .modal-content h3 {
             font-size: 20px;
-            font-family: Georgia, serif;
-            color: #d4a94c;
+            font-family: 'Playfair Display', Georgia, serif;
+            color: #c9a54e;
             margin-bottom: 16px;
         }
 
         .modal-content p {
-            color: #b8b3a8;
+            color: #6b5d4d;
             margin-bottom: 24px;
             line-height: 1.6;
         }

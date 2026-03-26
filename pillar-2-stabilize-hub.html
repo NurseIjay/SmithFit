@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pillar 2: Stabilize — SmithFit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,9 +15,9 @@
         html, body {
             width: 100%;
             height: 100%;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background-color: #1a1a1a;
-            color: #e0dcd4;
+            font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background-color: #faf7f2;
+            color: #2c2416;
             line-height: 1.6;
         }
 
@@ -26,8 +27,8 @@
 
         /* Header */
         header {
-            background-color: #2a2a2a;
-            border-bottom: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e8e0d4;
             padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -35,6 +36,7 @@
             position: sticky;
             top: 0;
             z-index: 50;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .header-left {
@@ -45,22 +47,30 @@
             font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 0.15em;
-            color: #d4a94c;
+            color: #c9a54e;
             text-transform: uppercase;
             margin-bottom: 0.5rem;
         }
 
         h1 {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.8rem;
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 400;
             letter-spacing: -0.02em;
         }
 
+        h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
         .pillar-badge {
-            background-color: #d4a94c;
-            color: #1a1a1a;
+            background-color: #c9a54e;
+            color: #ffffff;
             padding: 0.5rem 1rem;
             border-radius: 4px;
             font-size: 0.75rem;
@@ -79,10 +89,10 @@
         .tab-navigation {
             display: flex;
             gap: 0;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
             margin-bottom: 3rem;
             overflow-x: auto;
-            background-color: #2a2a2a;
+            background-color: #ffffff;
             padding: 0 2rem;
             margin: 0 -2rem 3rem -2rem;
             padding-left: 2rem;
@@ -93,23 +103,23 @@
             padding: 1.25rem 1.5rem;
             background: none;
             border: none;
-            color: #b8b3a8;
+            color: #9a8d7d;
             font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             border-bottom: 3px solid transparent;
             transition: all 0.3s ease;
             white-space: nowrap;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
         }
 
         .tab-button:hover {
-            color: #d4a94c;
+            color: #c9a54e;
         }
 
         .tab-button.active {
-            color: #d4a94c;
-            border-bottom-color: #d4a94c;
+            color: #c9a54e;
+            border-bottom-color: #c9a54e;
         }
 
         /* Tab Content */
@@ -136,9 +146,9 @@
         }
 
         .scenario-button {
-            background-color: #2a2a2a;
-            border: 2px solid #3a3a3a;
-            color: #e0dcd4;
+            background-color: #ffffff;
+            border: 2px solid #e8e0d4;
+            color: #2c2416;
             padding: 1rem;
             border-radius: 4px;
             font-size: 0.95rem;
@@ -146,19 +156,20 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
             line-height: 1.4;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .scenario-button:hover {
-            border-color: #d4a94c;
-            color: #d4a94c;
+            border-color: #c9a54e;
+            color: #c9a54e;
         }
 
         .scenario-button.active {
-            background-color: #d4a94c;
-            color: #1a1a1a;
-            border-color: #d4a94c;
+            background-color: #c9a54e;
+            color: #ffffff;
+            border-color: #c9a54e;
             font-weight: 700;
         }
 
@@ -171,38 +182,39 @@
         }
 
         .meal-card {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 4px;
             padding: 1.5rem;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .meal-card:hover {
-            border-color: #d4a94c;
-            background-color: rgba(212, 169, 76, 0.04);
+            border-color: #c9a54e;
+            background-color: rgba(201, 165, 78, 0.04);
         }
 
         .meal-name {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.2rem;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 0.75rem;
             font-weight: 400;
         }
 
         .meal-ingredient {
             font-size: 0.9rem;
-            color: #b8b3a8;
+            color: #6b5d4d;
             margin-bottom: 0.5rem;
             padding-left: 1rem;
         }
 
         .meal-ingredient:before {
-            content: "·";
+            content: "\00B7";
             margin-left: -0.75rem;
             margin-right: 0.5rem;
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: bold;
         }
 
@@ -212,23 +224,23 @@
             flex-wrap: wrap;
             margin: 1rem 0;
             padding-top: 1rem;
-            border-top: 1px solid #3a3a3a;
+            border-top: 1px solid #e8e0d4;
             font-size: 0.85rem;
         }
 
         .meta-item {
-            color: #8a8278;
+            color: #9a8d7d;
         }
 
         .meta-label {
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 600;
         }
 
         .meal-protein {
             display: inline-block;
-            background-color: rgba(212, 169, 76, 0.2);
-            color: #d4a94c;
+            background-color: rgba(201, 165, 78, 0.12);
+            color: #a8873a;
             padding: 0.5rem 0.75rem;
             border-radius: 3px;
             font-weight: 600;
@@ -236,12 +248,12 @@
         }
 
         .meal-why {
-            background-color: #1a1a1a;
-            border-left: 3px solid #d4a94c;
+            background-color: #f5f0e8;
+            border-left: 3px solid #c9a54e;
             padding: 0.75rem;
             margin: 1rem 0;
             font-size: 0.9rem;
-            color: #b8b3a8;
+            color: #6b5d4d;
             font-style: italic;
         }
 
@@ -252,12 +264,12 @@
             border-radius: 3px;
             overflow: hidden;
             margin-top: 1rem;
-            border: 1px solid #3a3a3a;
+            border: 1px solid #e8e0d4;
         }
 
         .plate-protein {
             flex: 0 0 50%;
-            background-color: #d4a94c;
+            background-color: #c9a54e;
             position: relative;
         }
 
@@ -269,12 +281,12 @@
             transform: translate(-50%, -50%);
             font-size: 0.65rem;
             font-weight: 700;
-            color: #1a1a1a;
+            color: #ffffff;
         }
 
         .plate-veg {
             flex: 0 0 25%;
-            background-color: #7bc47a;
+            background-color: #5a8a5a;
             position: relative;
         }
 
@@ -286,7 +298,7 @@
             transform: translate(-50%, -50%);
             font-size: 0.65rem;
             font-weight: 700;
-            color: #1a1a1a;
+            color: #ffffff;
         }
 
         .plate-carb {
@@ -303,34 +315,35 @@
             transform: translate(-50%, -50%);
             font-size: 0.65rem;
             font-weight: 700;
-            color: #1a1a1a;
+            color: #ffffff;
         }
 
         /* Scenario Cards (Tab 3) */
         .scenario-card {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 4px;
             padding: 2rem;
             margin-bottom: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .scenario-card:hover {
-            border-color: #d4a94c;
-            background-color: rgba(212, 169, 76, 0.04);
+            border-color: #c9a54e;
+            background-color: rgba(201, 165, 78, 0.04);
         }
 
         .scenario-card.expanded {
-            border-color: #d4a94c;
-            background-color: rgba(212, 169, 76, 0.04);
+            border-color: #c9a54e;
+            background-color: rgba(201, 165, 78, 0.04);
         }
 
         .scenario-title {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.2rem;
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 400;
             display: flex;
             justify-content: space-between;
@@ -351,7 +364,7 @@
             display: none;
             margin-top: 1.5rem;
             padding-top: 1.5rem;
-            border-top: 1px solid #3a3a3a;
+            border-top: 1px solid #e8e0d4;
         }
 
         .scenario-card.expanded .scenario-content {
@@ -365,13 +378,13 @@
         }
 
         .scenario-then {
-            color: #b8b3a8;
+            color: #6b5d4d;
             margin-bottom: 1rem;
             line-height: 1.7;
         }
 
         .scenario-then strong {
-            color: #d4a94c;
+            color: #c9a54e;
         }
 
         .scenario-options {
@@ -382,28 +395,28 @@
         .scenario-options li {
             padding: 0.5rem 0 0.5rem 1.5rem;
             position: relative;
-            color: #b8b3a8;
+            color: #6b5d4d;
         }
 
         .scenario-options li:before {
-            content: "→";
+            content: "\2192";
             position: absolute;
             left: 0;
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: bold;
         }
 
         .scenario-why {
-            background-color: #1a1a1a;
-            border-left: 3px solid #d4a94c;
+            background-color: #f5f0e8;
+            border-left: 3px solid #c9a54e;
             padding: 1rem;
-            color: #b8b3a8;
+            color: #6b5d4d;
             font-size: 0.95rem;
             line-height: 1.6;
         }
 
         .scenario-why strong {
-            color: #d4a94c;
+            color: #c9a54e;
         }
 
         /* Plate Formula (Tab 4) */
@@ -421,7 +434,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         }
 
         .plate-half {
@@ -430,14 +443,14 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            color: #1a1a1a;
+            color: #ffffff;
             font-size: 1.1rem;
         }
 
         .plate-protein-half {
             width: 250px;
             height: 125px;
-            background-color: #d4a94c;
+            background-color: #c9a54e;
             border-radius: 250px 250px 0 0;
             top: 0;
         }
@@ -445,7 +458,7 @@
         .plate-veg-quarter {
             width: 125px;
             height: 125px;
-            background-color: #7bc47a;
+            background-color: #5a8a5a;
             bottom: 0;
             left: 0;
             border-radius: 0 0 0 250px;
@@ -470,34 +483,35 @@
 
         .plate-protein-label {
             top: 40px;
-            color: #1a1a1a;
+            color: #ffffff;
         }
 
         .plate-veg-label {
             bottom: 30px;
             left: 20px;
-            color: #1a1a1a;
+            color: #ffffff;
         }
 
         .plate-carb-label {
             bottom: 30px;
             right: 20px;
-            color: #1a1a1a;
+            color: #ffffff;
         }
 
         /* Expandable Sections */
         .expandable-section {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 4px;
             margin-bottom: 1.5rem;
             overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .expandable-header {
             padding: 1.5rem;
-            background-color: #2a2a2a;
-            border-bottom: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e8e0d4;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -506,13 +520,13 @@
         }
 
         .expandable-header:hover {
-            background-color: rgba(212, 169, 76, 0.04);
+            background-color: rgba(201, 165, 78, 0.04);
         }
 
         .expandable-title {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.1rem;
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 400;
         }
 
@@ -543,34 +557,35 @@
         }
 
         .option-item {
-            background-color: #1a1a1a;
-            border: 1px solid #3a3a3a;
+            background-color: #f5f0e8;
+            border: 1px solid #e8e0d4;
             padding: 0.75rem;
             border-radius: 3px;
             font-size: 0.9rem;
-            color: #b8b3a8;
+            color: #6b5d4d;
             text-align: center;
             transition: all 0.3s ease;
         }
 
         .option-item:hover {
-            border-color: #d4a94c;
-            color: #d4a94c;
+            border-color: #c9a54e;
+            color: #c9a54e;
         }
 
         /* Hand Portion Guide */
         .hand-guide {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 4px;
             padding: 1.5rem;
             margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .hand-guide-title {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.1rem;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 1rem;
             font-weight: 400;
         }
@@ -581,7 +596,7 @@
             gap: 1rem;
             margin-bottom: 1rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
         }
 
         .hand-item:last-child {
@@ -601,59 +616,107 @@
         }
 
         .hand-description strong {
-            color: #d4a94c;
+            color: #c9a54e;
             display: block;
             margin-bottom: 0.25rem;
         }
 
         .hand-description span {
-            color: #b8b3a8;
+            color: #6b5d4d;
             font-size: 0.9rem;
         }
 
         /* Daily Target */
         .daily-target {
-            background-color: rgba(212, 169, 76, 0.08);
-            border-left: 3px solid #d4a94c;
+            background-color: rgba(201, 165, 78, 0.08);
+            border-left: 3px solid #c9a54e;
             padding: 1.5rem;
             border-radius: 0 4px 4px 0;
             margin-top: 2rem;
         }
 
         .daily-target h3 {
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 0.75rem;
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-weight: 400;
             font-size: 1.1rem;
         }
 
         .daily-target p {
-            color: #b8b3a8;
+            color: #6b5d4d;
             line-height: 1.7;
         }
 
         /* Callout */
         .callout {
-            background-color: #1a1a1a;
-            border-left: 3px solid #d4a94c;
+            background-color: #f5f0e8;
+            border-left: 3px solid #c9a54e;
             padding: 1rem;
             margin: 1.5rem 0;
             border-radius: 0 3px 3px 0;
-            color: #b8b3a8;
+            color: #6b5d4d;
+        }
+
+        /* Number Selector */
+        .number-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .number-button {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #e8e0d4;
+            background-color: #ffffff;
+            color: #2c2416;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'DM Sans', system-ui, sans-serif;
+        }
+
+        .number-button:hover {
+            border-color: #c9a54e;
+            color: #c9a54e;
+        }
+
+        .number-button.selected {
+            background-color: #c9a54e;
+            border-color: #c9a54e;
+            color: #ffffff;
+        }
+
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .comparison-card {
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
+            border-radius: 4px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         /* Footer */
         footer {
-            background-color: #2a2a2a;
-            border-top: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border-top: 1px solid #e8e0d4;
             padding: 2rem;
             margin-top: 4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 0.85rem;
-            color: #8a8278;
+            color: #9a8d7d;
         }
 
         .footer-left {
@@ -774,8 +837,8 @@
 
         <!-- TAB 1: Shift-Proof Meal Builder -->
         <div class="tab-content active" id="tab0">
-            <h2 style="font-family: Georgia, serif; font-size: 1.6rem; color: #d4a94c; margin-bottom: 1.5rem; font-weight: 400;">Shift-Proof Meal Builder</h2>
-            <p style="color: #b8b3a8; margin-bottom: 2rem;">Select your scenario below. For each one, you'll get 3–4 protein-first meal options using the 3×3 formula. Pick what fits your life.</p>
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; color: #c9a54e; margin-bottom: 1.5rem; font-weight: 400;">Shift-Proof Meal Builder</h2>
+            <p style="color: #6b5d4d; margin-bottom: 2rem;">Select your scenario below. For each one, you'll get 3–4 protein-first meal options using the 3×3 formula. Pick what fits your life.</p>
 
             <div class="scenario-grid" id="scenarioButtons"></div>
 
@@ -784,26 +847,26 @@
 
         <!-- TAB 2: 7-Day Protein Tracker -->
         <div class="tab-content" id="tab1">
-            <h2 style="font-family: Georgia, serif; font-size: 1.6rem; color: #d4a94c; margin-bottom: 1.5rem; font-weight: 400;">7-Day Protein Tracker</h2>
-            <p style="color: #b8b3a8; margin-bottom: 2rem;">Track your habits daily. By Day 3, you'll see proof your body is responding.</p>
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; color: #c9a54e; margin-bottom: 1.5rem; font-weight: 400;">7-Day Protein Tracker</h2>
+            <p style="color: #6b5d4d; margin-bottom: 2rem;">Track your habits daily. By Day 3, you'll see proof your body is responding.</p>
 
-            <div id="trackerSetup" style="background-color: #2a2a2a; border: 1px solid #3a3a3a; border-radius: 4px; padding: 2rem; margin-bottom: 2rem;">
+            <div id="trackerSetup" style="background-color: #ffffff; border: 1px solid #e8e0d4; border-radius: 4px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
                     <div>
-                        <label style="display: block; color: #d4a94c; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase;">Day 1 Energy (1-5)</label>
+                        <label style="display: block; color: #c9a54e; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase;">Day 1 Energy (1-5)</label>
                         <div class="number-selector" id="day1EnergySelector"></div>
                     </div>
                     <div>
-                        <label style="display: block; color: #d4a94c; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase;">Day 1 Cravings (1-5)</label>
+                        <label style="display: block; color: #c9a54e; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase;">Day 1 Cravings (1-5)</label>
                         <div class="number-selector" id="day1CravingsSelector"></div>
                     </div>
                 </div>
             </div>
 
-            <div id="trackerTable" style="background-color: #2a2a2a; border: 1px solid #3a3a3a; border-radius: 4px; overflow: hidden; margin-bottom: 2rem;"></div>
+            <div id="trackerTable" style="background-color: #ffffff; border: 1px solid #e8e0d4; border-radius: 4px; overflow: hidden; margin-bottom: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06);"></div>
 
             <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
-                <button onclick="resetProteinTracker()" style="background-color: #d4a94c; color: #1a1a1a; border: none; padding: 1rem 2rem; border-radius: 4px; font-size: 1rem; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em;">Reset Tracker</button>
+                <button onclick="resetProteinTracker()" style="background-color: #c9a54e; color: #ffffff; border: none; padding: 1rem 2rem; border-radius: 4px; font-size: 1rem; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'DM Sans', system-ui, sans-serif;">Reset Tracker</button>
             </div>
 
             <div id="trackerStats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;"></div>
@@ -811,15 +874,15 @@
 
         <!-- TAB 3: If-This-Then-That -->
         <div class="tab-content" id="tab2">
-            <h2 style="font-family: Georgia, serif; font-size: 1.6rem; color: #d4a94c; margin-bottom: 1.5rem; font-weight: 400;">If-This-Then-That Nutrition Guide</h2>
-            <p style="color: #b8b3a8; margin-bottom: 2rem;">Click any scenario. Each one shows exactly what to do and why it works.</p>
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; color: #c9a54e; margin-bottom: 1.5rem; font-weight: 400;">If-This-Then-That Nutrition Guide</h2>
+            <p style="color: #6b5d4d; margin-bottom: 2rem;">Click any scenario. Each one shows exactly what to do and why it works.</p>
 
             <div id="scenariosList"></div>
         </div>
 
         <!-- TAB 4: 3×3 Plate Formula -->
         <div class="tab-content" id="tab3">
-            <h2 style="font-family: Georgia, serif; font-size: 1.6rem; color: #d4a94c; margin-bottom: 1.5rem; font-weight: 400;">Build-Your-Plate Formula</h2>
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; color: #c9a54e; margin-bottom: 1.5rem; font-weight: 400;">Build-Your-Plate Formula</h2>
 
             <div class="plate-visual-container">
                 <div class="plate-circle">
@@ -835,7 +898,7 @@
                 </div>
             </div>
 
-            <h3 style="font-family: Georgia, serif; font-size: 1.2rem; color: #d4a94c; margin-bottom: 1rem; font-weight: 400; margin-top: 2rem;">Protein Options</h3>
+            <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.2rem; color: #c9a54e; margin-bottom: 1rem; font-weight: 400; margin-top: 2rem;">Protein Options</h3>
             <div class="expandable-section expanded">
                 <div class="expandable-content">
                     <div class="expandable-content-inner">
@@ -853,7 +916,7 @@
                 </div>
             </div>
 
-            <h3 style="font-family: Georgia, serif; font-size: 1.2rem; color: #d4a94c; margin-bottom: 1rem; font-weight: 400; margin-top: 1.5rem;">Vegetable Options</h3>
+            <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.2rem; color: #c9a54e; margin-bottom: 1rem; font-weight: 400; margin-top: 1.5rem;">Vegetable Options</h3>
             <div class="expandable-section expanded">
                 <div class="expandable-content">
                     <div class="expandable-content-inner">
@@ -871,7 +934,7 @@
                 </div>
             </div>
 
-            <h3 style="font-family: Georgia, serif; font-size: 1.2rem; color: #d4a94c; margin-bottom: 1rem; font-weight: 400; margin-top: 1.5rem;">Smart Carb Options</h3>
+            <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.2rem; color: #c9a54e; margin-bottom: 1rem; font-weight: 400; margin-top: 1.5rem;">Smart Carb Options</h3>
             <div class="expandable-section expanded">
                 <div class="expandable-content">
                     <div class="expandable-content-inner">
@@ -936,7 +999,7 @@
                     prep: '3 min',
                     protein: '~30g',
                     why: 'Protein-first start stabilizes blood sugar for 4+ hours.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 },
                 {
                     name: 'Egg Scramble Wrap',
@@ -944,7 +1007,7 @@
                     prep: '8 min',
                     protein: '~28g',
                     why: 'Hot protein with fiber keeps you full through first rounds.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 },
                 {
                     name: 'Protein Shake + Toast',
@@ -952,7 +1015,7 @@
                     prep: '3 min',
                     protein: '~35g',
                     why: 'Fastest anchor — blend and go.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 }
             ],
             'Start of Day — Night Shift Waking': [
@@ -962,7 +1025,7 @@
                     prep: '0 min (prepped)',
                     protein: '~30g',
                     why: 'Ready the second you wake — no decisions needed.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 },
                 {
                     name: 'Turkey Roll-Ups + Fruit',
@@ -970,7 +1033,7 @@
                     prep: '2 min',
                     protein: '~25g',
                     why: 'Light enough for a just-woke stomach.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 }
             ],
             'Mid-Shift Break': [
@@ -980,7 +1043,7 @@
                     prep: '0 min',
                     protein: '~35g',
                     why: 'The gold standard — meal prep once, eat all week.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 },
                 {
                     name: 'Cafeteria Hack',
@@ -988,7 +1051,7 @@
                     prep: '5 min',
                     protein: '~30g',
                     why: 'Build your 3×3 plate from whatever\'s available.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 },
                 {
                     name: 'Tuna + Crackers + Fruit',
@@ -996,7 +1059,7 @@
                     prep: '2 min',
                     protein: '~25g',
                     why: 'Shelf-stable, fits in your locker.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 }
             ],
             'Night Shift — Bag-Ready': [
@@ -1006,7 +1069,7 @@
                     prep: '0 min (prepped)',
                     protein: '~22g',
                     why: 'Pack Sunday, grab all week.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 },
                 {
                     name: 'Protein Bar + Apple + String Cheese',
@@ -1014,7 +1077,7 @@
                     prep: '0 min',
                     protein: '~28g',
                     why: 'Zero prep, maximum convenience.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 }
             ],
             'No Break — Rescue Fuel': [
@@ -1024,7 +1087,7 @@
                     prep: '0 min',
                     protein: '~30g',
                     why: '30 seconds between patients. That\'s all you need.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 },
                 {
                     name: 'Protein Bar + Electrolyte Water',
@@ -1032,7 +1095,7 @@
                     prep: '0 min',
                     protein: '~20g',
                     why: 'Better than the vending machine. Always.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 },
                 {
                     name: 'Greek Yogurt Cup',
@@ -1040,7 +1103,7 @@
                     prep: '0 min',
                     protein: '~15g',
                     why: 'Buy at the gift shop or cafeteria. Better than nothing.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 }
             ],
             'Post-Shift Landing Snack': [
@@ -1050,7 +1113,7 @@
                     prep: '2 min',
                     protein: '~20g',
                     why: 'Lands your blood sugar before the post-shift crash hits.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 },
                 {
                     name: 'Protein Shake + Banana',
@@ -1058,7 +1121,7 @@
                     prep: '2 min',
                     protein: '~30g',
                     why: 'Fast fuel that prevents the "I\'ll just order pizza" moment.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 },
                 {
                     name: 'Eggs + Toast',
@@ -1066,7 +1129,7 @@
                     prep: '5 min',
                     protein: '~18g',
                     why: 'Simple, warm, satisfying.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 }
             ],
             'Off Day — Full Meal': [
@@ -1076,7 +1139,7 @@
                     prep: '10 min',
                     protein: '~35g',
                     why: 'Off days = time for real meals. Use it.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 },
                 {
                     name: 'Stir-Fry Bowl',
@@ -1084,7 +1147,7 @@
                     prep: '15 min',
                     protein: '~30g',
                     why: 'Batch cook this — it becomes 3 shift-day lunches.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 },
                 {
                     name: 'Burger + Veggies',
@@ -1092,7 +1155,7 @@
                     prep: '12 min',
                     protein: '~35g',
                     why: 'Yes, burgers count. Protein first.',
-                    color: '#d4a94c'
+                    color: '#c9a54e'
                 }
             ]
         };
@@ -1195,17 +1258,17 @@
 
             for (let day = 1; day <= 7; day++) {
                 html += `
-                    <div class="tracker-row" style="padding: 1.5rem; display: grid; grid-template-columns: 80px 1fr 100px 100px 100px; gap: 1rem; border-bottom: 1px solid #3a3a3a; align-items: center;">
-                        <div style="color: #d4a94c; font-weight: 700;">Day ${day}</div>
+                    <div class="tracker-row" style="padding: 1.5rem; display: grid; grid-template-columns: 80px 1fr 100px 100px 100px; gap: 1rem; border-bottom: 1px solid #e8e0d4; align-items: center;">
+                        <div style="color: #c9a54e; font-weight: 700;">Day ${day}</div>
                         <div style="display: flex; gap: 1rem; align-items: center;">
                             <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                                <input type="checkbox" id="anchor${day}" onchange="updateTrackerDay(${day}, 'anchor', this.checked)" style="width: 20px; height: 20px; cursor: pointer;">
-                                <span style="font-size: 0.9rem; color: #b8b3a8;">Protein Anchor</span>
+                                <input type="checkbox" id="anchor${day}" onchange="updateTrackerDay(${day}, 'anchor', this.checked)" style="width: 20px; height: 20px; cursor: pointer; accent-color: #c9a54e;">
+                                <span style="font-size: 0.9rem; color: #6b5d4d;">Protein Anchor</span>
                             </label>
                         </div>
                         <div>
-                            <label style="display: block; font-size: 0.75rem; color: #d4a94c; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase;">Energy</label>
-                            <select id="energy${day}" onchange="updateTrackerDay(${day}, 'energy', this.value)" style="width: 100%; background-color: #1a1a1a; border: 1px solid #3a3a3a; color: #e0dcd4; padding: 0.5rem; border-radius: 3px;">
+                            <label style="display: block; font-size: 0.75rem; color: #c9a54e; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase;">Energy</label>
+                            <select id="energy${day}" onchange="updateTrackerDay(${day}, 'energy', this.value)" style="width: 100%; background-color: #faf7f2; border: 1px solid #e8e0d4; color: #2c2416; padding: 0.5rem; border-radius: 3px; font-family: 'DM Sans', system-ui, sans-serif;">
                                 <option value="">—</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -1215,8 +1278,8 @@
                             </select>
                         </div>
                         <div>
-                            <label style="display: block; font-size: 0.75rem; color: #d4a94c; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase;">Cravings</label>
-                            <select id="cravings${day}" onchange="updateTrackerDay(${day}, 'cravings', this.value)" style="width: 100%; background-color: #1a1a1a; border: 1px solid #3a3a3a; color: #e0dcd4; padding: 0.5rem; border-radius: 3px;">
+                            <label style="display: block; font-size: 0.75rem; color: #c9a54e; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase;">Cravings</label>
+                            <select id="cravings${day}" onchange="updateTrackerDay(${day}, 'cravings', this.value)" style="width: 100%; background-color: #faf7f2; border: 1px solid #e8e0d4; color: #2c2416; padding: 0.5rem; border-radius: 3px; font-family: 'DM Sans', system-ui, sans-serif;">
                                 <option value="">—</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -1226,8 +1289,8 @@
                             </select>
                         </div>
                         <div>
-                            <label style="display: block; font-size: 0.75rem; color: #d4a94c; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase;">Bloat</label>
-                            <select id="bloat${day}" onchange="updateTrackerDay(${day}, 'bloat', this.value)" style="width: 100%; background-color: #1a1a1a; border: 1px solid #3a3a3a; color: #e0dcd4; padding: 0.5rem; border-radius: 3px;">
+                            <label style="display: block; font-size: 0.75rem; color: #c9a54e; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase;">Bloat</label>
+                            <select id="bloat${day}" onchange="updateTrackerDay(${day}, 'bloat', this.value)" style="width: 100%; background-color: #faf7f2; border: 1px solid #e8e0d4; color: #2c2416; padding: 0.5rem; border-radius: 3px; font-family: 'DM Sans', system-ui, sans-serif;">
                                 <option value="">—</option>
                                 <option value="L">Loose</option>
                                 <option value="N">Normal</option>
@@ -1279,20 +1342,20 @@
             }
 
             statsHtml += `
-                <div style="background-color: #2a2a2a; border: 1px solid #3a3a3a; border-radius: 4px; padding: 1.5rem; text-align: center;">
-                    <div style="color: #d4a94c; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">Current Streak</div>
-                    <div style="color: #e0dcd4; font-size: 2.5rem; font-family: Georgia, serif; font-weight: 700;">${streak}</div>
-                    <div style="color: #b8b3a8; font-size: 0.9rem;">days with anchor</div>
+                <div style="background-color: #ffffff; border: 1px solid #e8e0d4; border-radius: 4px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+                    <div style="color: #c9a54e; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">Current Streak</div>
+                    <div style="color: #2c2416; font-size: 2.5rem; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">${streak}</div>
+                    <div style="color: #6b5d4d; font-size: 0.9rem;">days with anchor</div>
                 </div>
             `;
 
             // Anchor Hit Rate
             const anchorPercent = Math.round((anchors / 7) * 100);
             statsHtml += `
-                <div style="background-color: #2a2a2a; border: 1px solid #3a3a3a; border-radius: 4px; padding: 1.5rem; text-align: center;">
-                    <div style="color: #d4a94c; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">Protein Anchor Hit Rate</div>
-                    <div style="color: #e0dcd4; font-size: 2.5rem; font-family: Georgia, serif; font-weight: 700;">${anchorPercent}%</div>
-                    <div style="color: #b8b3a8; font-size: 0.9rem;">${anchors} of 7 days</div>
+                <div style="background-color: #ffffff; border: 1px solid #e8e0d4; border-radius: 4px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+                    <div style="color: #c9a54e; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">Protein Anchor Hit Rate</div>
+                    <div style="color: #2c2416; font-size: 2.5rem; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">${anchorPercent}%</div>
+                    <div style="color: #6b5d4d; font-size: 0.9rem;">${anchors} of 7 days</div>
                 </div>
             `;
 
@@ -1303,9 +1366,9 @@
                 const trend = avgLast > avgFirst + 0.5 ? '↑ Improving' : avgLast < avgFirst - 0.5 ? '↓ Declining' : '→ Stable';
 
                 statsHtml += `
-                    <div style="background-color: #2a2a2a; border: 1px solid #3a3a3a; border-radius: 4px; padding: 1.5rem; text-align: center;">
-                        <div style="color: #d4a94c; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">Energy Trend</div>
-                        <div style="color: #e0dcd4; font-size: 2rem;">${trend}</div>
+                    <div style="background-color: #ffffff; border: 1px solid #e8e0d4; border-radius: 4px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+                        <div style="color: #c9a54e; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">Energy Trend</div>
+                        <div style="color: #2c2416; font-size: 2rem;">${trend}</div>
                     </div>
                 `;
             }
@@ -1317,9 +1380,9 @@
                 const trend = avgLast < avgFirst - 0.5 ? '↓ Quieter' : avgLast > avgFirst + 0.5 ? '↑ Stronger' : '→ Stable';
 
                 statsHtml += `
-                    <div style="background-color: #2a2a2a; border: 1px solid #3a3a3a; border-radius: 4px; padding: 1.5rem; text-align: center;">
-                        <div style="color: #d4a94c; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">Cravings Trend</div>
-                        <div style="color: #e0dcd4; font-size: 2rem;">${trend}</div>
+                    <div style="background-color: #ffffff; border: 1px solid #e8e0d4; border-radius: 4px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+                        <div style="color: #c9a54e; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">Cravings Trend</div>
+                        <div style="color: #2c2416; font-size: 2rem;">${trend}</div>
                     </div>
                 `;
             }

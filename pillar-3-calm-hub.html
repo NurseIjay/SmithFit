@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pillar 3 — Calm · SmithFit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,9 +13,9 @@
         }
 
         body {
-            background-color: #1a1a1a;
-            color: #e0dcd4;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #faf7f2;
+            color: #2c2416;
+            font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
             padding: 2rem 1rem;
         }
@@ -28,7 +29,7 @@
         .header {
             margin-bottom: 3rem;
             padding-bottom: 2rem;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
         }
 
         .header-top {
@@ -41,18 +42,18 @@
         }
 
         .brand {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 2px;
-            color: #d4a94c;
+            color: #c9a54e;
             text-transform: uppercase;
         }
 
         .badge {
-            background-color: #2a2a2a;
-            border: 1px solid #d4a94c;
-            color: #d4a94c;
+            background-color: rgba(201, 165, 78, 0.08);
+            border: 1px solid #c9a54e;
+            color: #c9a54e;
             padding: 0.4rem 0.8rem;
             border-radius: 4px;
             font-size: 0.7rem;
@@ -62,16 +63,16 @@
         }
 
         h1 {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: clamp(2rem, 6vw, 3rem);
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 0.5rem;
             letter-spacing: -1px;
         }
 
         .subtitle {
             font-size: 1rem;
-            color: #b8b3a8;
+            color: #6b5d4d;
             max-width: 60rem;
             line-height: 1.8;
         }
@@ -81,7 +82,7 @@
             display: flex;
             gap: 1rem;
             margin-bottom: 3rem;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
             overflow-x: auto;
             padding-bottom: 1rem;
         }
@@ -89,7 +90,7 @@
         .tab-button {
             background: none;
             border: none;
-            color: #b8b3a8;
+            color: #6b5d4d;
             padding: 0.75rem 1.5rem;
             font-size: 0.95rem;
             font-weight: 600;
@@ -98,16 +99,16 @@
             transition: all 0.3s ease;
             border-bottom: 2px solid transparent;
             position: relative;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
         }
 
         .tab-button:hover {
-            color: #d4a94c;
+            color: #c9a54e;
         }
 
         .tab-button.active {
-            color: #d4a94c;
-            border-bottom-color: #d4a94c;
+            color: #c9a54e;
+            border-bottom-color: #c9a54e;
         }
 
         /* Tab Content */
@@ -127,13 +128,13 @@
 
         /* Buttons */
         button {
-            background-color: #2a2a2a;
-            border: 1px solid #d4a94c;
-            color: #d4a94c;
+            background-color: #c9a54e;
+            border: 1px solid #c9a54e;
+            color: #ffffff;
             padding: 0.7rem 1.5rem;
             border-radius: 4px;
             cursor: pointer;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
             font-size: 0.9rem;
             font-weight: 600;
             letter-spacing: 0.5px;
@@ -141,27 +142,28 @@
         }
 
         button:hover {
-            background-color: #d4a94c;
-            color: #1a1a1a;
+            background-color: #a8873a;
+            color: #ffffff;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(212, 169, 76, 0.2);
+            box-shadow: 0 8px 20px rgba(201, 165, 78, 0.2);
         }
 
         button.secondary {
             background-color: transparent;
-            border: 1px solid #3a3a3a;
-            color: #b8b3a8;
+            border: 1px solid #e8e0d4;
+            color: #6b5d4d;
         }
 
         button.secondary:hover {
-            border-color: #d4a94c;
-            color: #d4a94c;
+            border-color: #c9a54e;
+            color: #c9a54e;
         }
 
         /* ===== TAB 1: Nervous System Reset Timer ===== */
         .timer-container {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             border-radius: 8px;
             padding: 2rem;
             margin-bottom: 2rem;
@@ -181,15 +183,15 @@
 
         .timer-time {
             font-size: 4rem;
-            font-family: Georgia, serif;
-            color: #d4a94c;
+            font-family: 'Playfair Display', Georgia, serif;
+            color: #c9a54e;
             font-weight: 700;
             letter-spacing: -2px;
         }
 
         .timer-label {
             font-size: 1rem;
-            color: #b8b3a8;
+            color: #6b5d4d;
             margin-top: 0.5rem;
         }
 
@@ -197,14 +199,14 @@
             width: 150px;
             height: 150px;
             margin: 2rem auto;
-            border: 3px solid #d4a94c;
+            border: 3px solid #c9a54e;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: rgba(212, 169, 76, 0.05);
+            background-color: rgba(201, 165, 78, 0.08);
             font-size: 1.2rem;
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 600;
             animation: breathe 8s infinite;
         }
@@ -221,8 +223,8 @@
         }
 
         .step-info {
-            background-color: #1a1a1a;
-            border: 1px solid #3a3a3a;
+            background-color: #f5f0e8;
+            border: 1px solid #e8e0d4;
             border-radius: 6px;
             padding: 1.5rem;
             margin: 1rem 0;
@@ -231,7 +233,7 @@
 
         .step-title {
             font-size: 1.3rem;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
@@ -239,7 +241,7 @@
         }
 
         .step-content {
-            color: #b8b3a8;
+            color: #6b5d4d;
             line-height: 1.7;
         }
 
@@ -254,7 +256,7 @@
         .progress-bar {
             width: 100%;
             height: 8px;
-            background-color: #1a1a1a;
+            background-color: #e8e0d4;
             border-radius: 4px;
             overflow: hidden;
             margin: 1rem 0;
@@ -262,15 +264,16 @@
 
         .progress-fill {
             height: 100%;
-            background-color: #d4a94c;
+            background-color: #c9a54e;
             transition: width 0.1s linear;
             width: 0%;
         }
 
         /* ===== TAB 2: Caffeine Timing ===== */
         .form-group {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             border-radius: 8px;
             padding: 2rem;
             margin-bottom: 2rem;
@@ -278,7 +281,7 @@
 
         .form-group label {
             display: block;
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 600;
             margin-bottom: 1rem;
             text-transform: uppercase;
@@ -313,12 +316,12 @@
         input[type="time"],
         input[type="number"],
         select {
-            background-color: #1a1a1a;
-            border: 1px solid #3a3a3a;
-            color: #e0dcd4;
+            background-color: #faf7f2;
+            border: 1px solid #e8e0d4;
+            color: #2c2416;
             padding: 0.75rem;
             border-radius: 4px;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
             font-size: 0.95rem;
             width: 100%;
             margin-bottom: 1rem;
@@ -327,29 +330,29 @@
         input[type="time"]:focus,
         select:focus {
             outline: none;
-            border-color: #d4a94c;
-            box-shadow: 0 0 0 2px rgba(212, 169, 76, 0.1);
+            border-color: #c9a54e;
+            box-shadow: 0 0 0 2px rgba(201, 165, 78, 0.15);
         }
 
         .result-card {
-            background-color: #1a1a1a;
-            border: 2px solid #d4a94c;
+            background-color: #f5f0e8;
+            border: 2px solid #c9a54e;
             border-radius: 8px;
             padding: 2rem;
             margin-top: 2rem;
         }
 
         .result-card-title {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.3rem;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 1rem;
         }
 
         .result-item {
             margin-bottom: 1.5rem;
             padding-bottom: 1.5rem;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
         }
 
         .result-item:last-child {
@@ -359,7 +362,7 @@
         }
 
         .result-label {
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 600;
             font-size: 0.9rem;
             text-transform: uppercase;
@@ -368,7 +371,7 @@
         }
 
         .result-value {
-            color: #e0dcd4;
+            color: #2c2416;
             font-size: 1.1rem;
             line-height: 1.6;
         }
@@ -382,16 +385,17 @@
         }
 
         .sleep-step-card {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             border-radius: 8px;
             padding: 2rem;
             transition: all 0.3s ease;
         }
 
         .sleep-step-card:hover {
-            border-color: #d4a94c;
-            box-shadow: 0 8px 20px rgba(212, 169, 76, 0.1);
+            border-color: #c9a54e;
+            box-shadow: 0 8px 20px rgba(201, 165, 78, 0.12);
         }
 
         .step-icon {
@@ -401,22 +405,22 @@
         }
 
         .step-number {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.2rem;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 0.5rem;
             font-weight: 600;
         }
 
         .step-heading {
             font-size: 1.2rem;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 1rem;
             font-weight: 600;
         }
 
         .step-description {
-            color: #b8b3a8;
+            color: #6b5d4d;
             margin-bottom: 1.5rem;
             line-height: 1.7;
         }
@@ -432,14 +436,14 @@
             align-items: flex-start;
             gap: 0.75rem;
             padding: 0.75rem;
-            background-color: #1a1a1a;
+            background-color: #faf7f2;
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .checkbox-item:hover {
-            background-color: rgba(212, 169, 76, 0.05);
+            background-color: rgba(201, 165, 78, 0.08);
         }
 
         .checkbox-item input {
@@ -454,7 +458,7 @@
             flex: 1;
             cursor: pointer;
             margin: 0;
-            color: #b8b3a8;
+            color: #6b5d4d;
         }
 
         .brain-dump-inputs {
@@ -464,12 +468,12 @@
         }
 
         .brain-dump-inputs textarea {
-            background-color: #1a1a1a;
-            border: 1px solid #3a3a3a;
-            color: #e0dcd4;
+            background-color: #faf7f2;
+            border: 1px solid #e8e0d4;
+            color: #2c2416;
             padding: 1rem;
             border-radius: 4px;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
             font-size: 0.95rem;
             resize: vertical;
             min-height: 80px;
@@ -477,20 +481,20 @@
 
         .brain-dump-inputs textarea:focus {
             outline: none;
-            border-color: #d4a94c;
-            box-shadow: 0 0 0 2px rgba(212, 169, 76, 0.1);
+            border-color: #c9a54e;
+            box-shadow: 0 0 0 2px rgba(201, 165, 78, 0.15);
         }
 
         .exhausted-section {
-            background-color: #1a1a1a;
-            border: 1px solid #3a3a3a;
+            background-color: #f5f0e8;
+            border: 1px solid #e8e0d4;
             border-radius: 8px;
             padding: 1.5rem;
             margin-top: 1.5rem;
         }
 
         .exhausted-title {
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 600;
             margin-bottom: 0.75rem;
             cursor: pointer;
@@ -500,7 +504,7 @@
         }
 
         .exhausted-content {
-            color: #b8b3a8;
+            color: #6b5d4d;
             line-height: 1.7;
             display: none;
         }
@@ -511,8 +515,9 @@
 
         /* ===== TAB 4: 7-Day Tracker ===== */
         .tracker-wrapper {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             border-radius: 8px;
             overflow-x: auto;
             margin-bottom: 2rem;
@@ -532,10 +537,10 @@
         }
 
         .day-header {
-            background-color: #1a1a1a;
+            background-color: #f5f0e8;
             padding: 1rem 0.5rem;
             font-weight: 600;
-            color: #d4a94c;
+            color: #c9a54e;
             font-size: 0.85rem;
             border-radius: 4px;
         }
@@ -543,7 +548,7 @@
         .metric-label {
             text-align: left;
             padding: 1rem 0.5rem;
-            color: #d4a94c;
+            color: #c9a54e;
             font-size: 0.85rem;
             font-weight: 600;
             white-space: nowrap;
@@ -567,15 +572,15 @@
             height: 28px;
             padding: 0;
             font-size: 0.8rem;
-            background-color: #1a1a1a;
-            border: 1px solid #3a3a3a;
-            color: #b8b3a8;
+            background-color: #faf7f2;
+            border: 1px solid #e8e0d4;
+            color: #6b5d4d;
         }
 
         .scale-button.active {
-            background-color: #d4a94c;
-            color: #1a1a1a;
-            border-color: #d4a94c;
+            background-color: #c9a54e;
+            color: #ffffff;
+            border-color: #c9a54e;
         }
 
         .stats-dashboard {
@@ -586,14 +591,15 @@
         }
 
         .stat-card {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             border-radius: 8px;
             padding: 1.5rem;
         }
 
         .stat-label {
-            color: #d4a94c;
+            color: #c9a54e;
             font-size: 0.85rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -603,34 +609,35 @@
 
         .stat-value {
             font-size: 2rem;
-            color: #e0dcd4;
+            color: #2c2416;
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
         .stat-detail {
-            color: #b8b3a8;
+            color: #9a8d7d;
             font-size: 0.9rem;
         }
 
         .motivation-box {
-            background-color: #1a1a1a;
-            border-left: 3px solid #d4a94c;
+            background-color: #f5f0e8;
+            border-left: 3px solid #c9a54e;
             padding: 1.5rem;
             margin-top: 2rem;
             border-radius: 4px;
         }
 
         .motivation-text {
-            color: #b8b3a8;
+            color: #6b5d4d;
             line-height: 1.8;
             font-style: italic;
         }
 
         /* ===== TAB 5: Morning Cocktail + If-Then ===== */
         .recipe-card {
-            background-color: #2a2a2a;
-            border: 2px solid #d4a94c;
+            background-color: #ffffff;
+            border: 2px solid #c9a54e;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             border-radius: 8px;
             padding: 2.5rem;
             margin-bottom: 3rem;
@@ -638,16 +645,16 @@
         }
 
         .recipe-title {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 2rem;
-            color: #d4a94c;
+            color: #c9a54e;
             text-align: center;
             margin-bottom: 0.5rem;
         }
 
         .recipe-tagline {
             text-align: center;
-            color: #b8b3a8;
+            color: #6b5d4d;
             font-style: italic;
             margin-bottom: 2rem;
             font-size: 1rem;
@@ -658,7 +665,7 @@
         }
 
         .recipe-section-title {
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 600;
             text-transform: uppercase;
             font-size: 0.85rem;
@@ -667,24 +674,24 @@
         }
 
         .recipe-item {
-            color: #b8b3a8;
+            color: #6b5d4d;
             margin-bottom: 0.5rem;
             line-height: 1.6;
         }
 
         .recipe-item::before {
-            content: "• ";
-            color: #d4a94c;
+            content: "\2022 ";
+            color: #c9a54e;
             margin-right: 0.5rem;
         }
 
         .safety-note {
-            background-color: rgba(212, 169, 76, 0.08);
-            border-left: 3px solid #d4a94c;
+            background-color: rgba(201, 165, 78, 0.08);
+            border-left: 3px solid #c9a54e;
             padding: 1rem;
             border-radius: 4px;
             margin-top: 1rem;
-            color: #b8b3a8;
+            color: #6b5d4d;
             font-size: 0.9rem;
         }
 
@@ -693,9 +700,9 @@
         }
 
         .ifthen-section h2 {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.8rem;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 2rem;
         }
 
@@ -706,8 +713,9 @@
         }
 
         .ifthen-card {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             border-radius: 8px;
             padding: 1.5rem;
             cursor: pointer;
@@ -715,13 +723,13 @@
         }
 
         .ifthen-card:hover {
-            border-color: #d4a94c;
+            border-color: #c9a54e;
             transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(212, 169, 76, 0.1);
+            box-shadow: 0 8px 20px rgba(201, 165, 78, 0.12);
         }
 
         .ifthen-trigger {
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 600;
             margin-bottom: 0.75rem;
             display: flex;
@@ -730,7 +738,7 @@
         }
 
         .ifthen-response {
-            color: #b8b3a8;
+            color: #6b5d4d;
             line-height: 1.7;
             display: none;
         }
@@ -740,7 +748,7 @@
         }
 
         .ifthen-arrow {
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 700;
         }
 
@@ -748,14 +756,14 @@
         .footer {
             margin-top: 4rem;
             padding-top: 2rem;
-            border-top: 1px solid #3a3a3a;
+            border-top: 1px solid #e8e0d4;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 1rem;
             font-size: 0.85rem;
-            color: #868078;
+            color: #9a8d7d;
         }
 
         /* Responsive */
@@ -798,7 +806,7 @@
         @media print {
             body {
                 background-color: white;
-                color: #333;
+                color: #2c2416;
             }
 
             .tab-nav, .timer-controls, button, .tab-button {
@@ -806,17 +814,17 @@
             }
 
             h1, .step-heading, .recipe-title, .ifthen-trigger {
-                color: #333;
+                color: #2c2416;
             }
 
             .badge, .result-label, .stat-label {
-                color: #666;
-                border-color: #666;
+                color: #6b5d4d;
+                border-color: #6b5d4d;
             }
 
             .form-group, .timer-container, .sleep-step-card, .recipe-card {
                 background-color: white;
-                border-color: #ccc;
+                border-color: #e8e0d4;
             }
 
             .progress-bar {
@@ -854,7 +862,7 @@
         <div id="tab-0" class="tab-content active">
             <div class="timer-container">
                 <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
-                    <button class="mode-button" onclick="setMode('full')" id="fullModeBtn" style="background-color: #d4a94c; color: #1a1a1a;">5-Minute Full Reset</button>
+                    <button class="mode-button" onclick="setMode('full')" id="fullModeBtn" style="background-color: #c9a54e; color: #ffffff;">5-Minute Full Reset</button>
                     <button class="mode-button secondary" onclick="setMode('sos')" id="sosModeBtn">2-Minute SOS</button>
                 </div>
 
@@ -882,8 +890,8 @@
 
                 <div id="completion" style="display: none; text-align: center; margin-top: 2rem;">
                     <div style="font-size: 2rem; margin-bottom: 1rem;">✨</div>
-                    <div style="font-size: 1.2rem; color: #d4a94c; margin-bottom: 0.5rem;">Reset Complete</div>
-                    <div style="color: #b8b3a8;">You just sent your nervous system a powerful safety signal. Your body is listening.</div>
+                    <div style="font-size: 1.2rem; color: #c9a54e; margin-bottom: 0.5rem;">Reset Complete</div>
+                    <div style="color: #6b5d4d;">You just sent your nervous system a powerful safety signal. Your body is listening.</div>
                 </div>
             </div>
         </div>
@@ -945,7 +953,7 @@
 
         <!-- ===== TAB 3: SLEEP SWITCH ===== -->
         <div id="tab-2" class="tab-content">
-            <p style="margin-bottom: 2rem; color: #b8b3a8; line-height: 1.8;">The 2-2-1 Sleep Switch is a 5-minute ritual to reset your nervous system and prepare for sleep. Complete all three steps in order, or just do Step 3 if you're too exhausted tonight.</p>
+            <p style="margin-bottom: 2rem; color: #6b5d4d; line-height: 1.8;">The 2-2-1 Sleep Switch is a 5-minute ritual to reset your nervous system and prepare for sleep. Complete all three steps in order, or just do Step 3 if you're too exhausted tonight.</p>
 
             <div class="sleep-steps">
                 <!-- Step 1 -->
@@ -1011,13 +1019,13 @@
                     <div class="step-heading">Brain Cue (1 minute)</div>
                     <div class="step-description">Your 60-second brain dump. Answer quickly, don't overthink.</div>
                     <div class="brain-dump-inputs">
-                        <div style="color: #d4a94c; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;">What am I worried about?</div>
+                        <div style="color: #c9a54e; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;">What am I worried about?</div>
                         <textarea id="brainDump1" placeholder="Type here..." onchange="saveBrainDump()"></textarea>
 
-                        <div style="color: #d4a94c; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1rem;">What can wait until tomorrow?</div>
+                        <div style="color: #c9a54e; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1rem;">What can wait until tomorrow?</div>
                         <textarea id="brainDump2" placeholder="Type here..." onchange="saveBrainDump()"></textarea>
 
-                        <div style="color: #d4a94c; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1rem;">One win from today:</div>
+                        <div style="color: #c9a54e; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1rem;">One win from today:</div>
                         <textarea id="brainDump3" placeholder="Type here..." onchange="saveBrainDump()"></textarea>
                     </div>
                 </div>
@@ -1027,10 +1035,10 @@
                 <button onclick="completeSleepSwitch()">✓ Sleep Switch Complete</button>
             </div>
 
-            <div id="sleepStreak" style="display: none; background-color: #1a1a1a; border: 1px solid #d4a94c; border-radius: 8px; padding: 2rem; margin-top: 2rem; text-align: center;">
+            <div id="sleepStreak" style="display: none; background-color: #f5f0e8; border: 1px solid #c9a54e; border-radius: 8px; padding: 2rem; margin-top: 2rem; text-align: center;">
                 <div style="font-size: 2rem; margin-bottom: 1rem;">🌙</div>
-                <div style="color: #d4a94c; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;" id="streakCount">1 night in a row</div>
-                <div style="color: #b8b3a8;">Your nervous system is learning the routine. Keep going.</div>
+                <div style="color: #c9a54e; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;" id="streakCount">1 night in a row</div>
+                <div style="color: #6b5d4d;">Your nervous system is learning the routine. Keep going.</div>
             </div>
 
             <div class="exhausted-section">
@@ -1082,7 +1090,7 @@
 
                 <div class="recipe-section">
                     <div class="recipe-section-title">Timing</div>
-                    <div style="color: #b8b3a8; line-height: 1.6;">First thing after waking, BEFORE coffee. This starts your day with a hydration and electrolyte signal, not a stimulant signal.</div>
+                    <div style="color: #6b5d4d; line-height: 1.6;">First thing after waking, BEFORE coffee. This starts your day with a hydration and electrolyte signal, not a stimulant signal.</div>
                 </div>
 
                 <div class="safety-note">
@@ -1092,7 +1100,7 @@
 
             <div class="ifthen-section">
                 <h2>If This → Then That: Calm Adjustments</h2>
-                <p style="color: #b8b3a8; margin-bottom: 2rem;">Click any scenario to see the adjustment. These are your emergency protocols when life disrupts your calm routine.</p>
+                <p style="color: #6b5d4d; margin-bottom: 2rem;">Click any scenario to see the adjustment. These are your emergency protocols when life disrupts your calm routine.</p>
 
                 <div class="ifthen-grid">
                     <div class="ifthen-card" onclick="toggleIfThen(this)">
@@ -1200,17 +1208,17 @@
             if (mode === 'full') {
                 timeRemaining = 300;
                 totalTime = 300;
-                document.getElementById('fullModeBtn').style.backgroundColor = '#d4a94c';
-                document.getElementById('fullModeBtn').style.color = '#1a1a1a';
+                document.getElementById('fullModeBtn').style.backgroundColor = '#c9a54e';
+                document.getElementById('fullModeBtn').style.color = '#ffffff';
                 document.getElementById('sosModeBtn').style.backgroundColor = 'transparent';
-                document.getElementById('sosModeBtn').style.color = '#d4a94c';
+                document.getElementById('sosModeBtn').style.color = '#c9a54e';
             } else {
                 timeRemaining = 120;
                 totalTime = 120;
-                document.getElementById('sosModeBtn').style.backgroundColor = '#d4a94c';
-                document.getElementById('sosModeBtn').style.color = '#1a1a1a';
+                document.getElementById('sosModeBtn').style.backgroundColor = '#c9a54e';
+                document.getElementById('sosModeBtn').style.color = '#ffffff';
                 document.getElementById('fullModeBtn').style.backgroundColor = 'transparent';
-                document.getElementById('fullModeBtn').style.color = '#d4a94c';
+                document.getElementById('fullModeBtn').style.color = '#c9a54e';
             }
 
             resetTimer();

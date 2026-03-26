@@ -4,62 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmithFit — Shareable Links</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #faf7f2;
+            color: #2c2416;
             min-height: 100vh;
             padding: 40px 20px;
         }
         .container { max-width: 700px; margin: 0 auto; }
         h1 {
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 2rem;
             margin-bottom: 8px;
-            background: linear-gradient(135deg, #00c9a7, #00b4d8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #c9a54e;
         }
-        .subtitle { color: #888; margin-bottom: 40px; font-size: 0.95rem; }
+        .subtitle { color: #9a8d7d; margin-bottom: 40px; font-size: 0.95rem; }
         .section { margin-bottom: 36px; }
         .section-title {
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #00c9a7;
+            color: #c9a54e;
             margin-bottom: 16px;
             padding-bottom: 8px;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid #e8e0d4;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
         }
         a {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 14px 18px;
-            background: #151515;
-            border: 1px solid #222;
+            background: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 10px;
-            color: #e0e0e0;
+            color: #2c2416;
             text-decoration: none;
             margin-bottom: 10px;
             transition: all 0.2s;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            font-family: 'DM Sans', sans-serif;
         }
-        a:hover { border-color: #00c9a7; background: #1a1a1a; }
-        .arrow { color: #00c9a7; font-size: 1.2rem; }
+        a:hover { border-color: #c9a54e; background: #f5f0e8; }
+        .arrow { color: #c9a54e; font-size: 1.2rem; }
         .copy-btn {
             background: none;
-            border: 1px solid #333;
-            color: #888;
+            border: 1px solid #e8e0d4;
+            color: #9a8d7d;
             padding: 4px 10px;
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.75rem;
             margin-left: 10px;
             transition: all 0.2s;
+            font-family: 'DM Sans', sans-serif;
         }
-        .copy-btn:hover { border-color: #00c9a7; color: #00c9a7; }
-        .copy-btn.copied { border-color: #00c9a7; color: #00c9a7; }
+        .copy-btn:hover { border-color: #c9a54e; color: #c9a54e; }
+        .copy-btn.copied { border-color: #c9a54e; color: #c9a54e; }
         .link-row { display: flex; align-items: center; gap: 8px; }
     </style>
 </head>

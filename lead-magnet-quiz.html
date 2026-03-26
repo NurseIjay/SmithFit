@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What's Keeping You Stuck? — SmithFit Metabolism Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,16 +18,16 @@
         }
 
         body {
-            background-color: #1a1a1a;
-            color: #e0dcd4;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background-color: #faf7f2;
+            color: #2c2416;
+            font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
         /* Utility Classes */
         .gold-text {
-            color: #d4a94c;
+            color: #c9a54e;
         }
 
         .blue-text {
@@ -34,31 +35,32 @@
         }
 
         .green-text {
-            color: #7bc47a;
+            color: #5a8a5a;
         }
 
         /* Header */
         header {
-            background-color: #2a2a2a;
-            border-bottom: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e8e0d4;
             padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .brand-text {
             font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 0.15em;
-            color: #d4a94c;
+            color: #c9a54e;
             text-transform: uppercase;
         }
 
         .pillar-badge {
-            background-color: #d4a94c;
-            color: #1a1a1a;
+            background-color: #c9a54e;
+            color: #ffffff;
             padding: 0.5rem 1rem;
             border-radius: 4px;
             font-size: 0.75rem;
@@ -74,23 +76,31 @@
         }
 
         h1 {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 2.5rem;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 1rem;
             font-weight: 400;
             letter-spacing: -0.02em;
         }
 
+        h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
         .subtitle {
-            color: #b8b0a0;
+            color: #6b5d4d;
             font-size: 1.1rem;
             margin-bottom: 2rem;
             line-height: 1.7;
         }
 
         .instruction-note {
-            color: #8a8278;
+            color: #9a8d7d;
             font-size: 0.9rem;
             margin-bottom: 3rem;
             font-style: italic;
@@ -98,13 +108,14 @@
 
         /* Intro Screen */
         .intro-container {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 4px;
             padding: 3rem 2rem;
             text-align: center;
             margin: 3rem auto;
             max-width: 600px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .intro-container.hidden {
@@ -112,41 +123,42 @@
         }
 
         .intro-headline {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 2rem;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 1rem;
             font-weight: 400;
         }
 
         .intro-subheadline {
             font-size: 1.1rem;
-            color: #b8b0a0;
+            color: #6b5d4d;
             margin-bottom: 2rem;
             line-height: 1.8;
         }
 
         .intro-avatar-callout {
-            background-color: #1a1a1a;
-            border-left: 4px solid #d4a94c;
+            background-color: #f5f0e8;
+            border-left: 4px solid #c9a54e;
             padding: 1.5rem;
             margin: 2rem 0;
             border-radius: 0 4px 4px 0;
             text-align: left;
             font-size: 0.95rem;
             line-height: 1.6;
+            color: #2c2416;
         }
 
         .intro-trust-line {
-            color: #a89878;
+            color: #9a8d7d;
             font-size: 0.9rem;
             margin-top: 2rem;
             font-style: italic;
         }
 
         .btn-start-quiz {
-            background-color: #d4a94c;
-            color: #1a1a1a;
+            background-color: #c9a54e;
+            color: #ffffff;
             border: none;
             padding: 1rem 2.5rem;
             border-radius: 4px;
@@ -158,10 +170,11 @@
             letter-spacing: 0.1em;
             margin-top: 2rem;
             display: inline-block;
+            font-family: 'DM Sans', system-ui, sans-serif;
         }
 
         .btn-start-quiz:hover {
-            background-color: #e5ba5e;
+            background-color: #a8873a;
             transform: translateY(-2px);
         }
 
@@ -181,32 +194,33 @@
 
         /* Progress Bar */
         .progress-bar-container {
-            background-color: #2a2a2a;
-            border-bottom: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e8e0d4;
             padding: 1.5rem 2rem;
             margin-bottom: 2rem;
             display: flex;
             align-items: center;
             gap: 1rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .progress-bar {
             flex: 1;
             height: 6px;
-            background-color: #1a1a1a;
+            background-color: #f5f0e8;
             border-radius: 3px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background-color: #d4a94c;
+            background-color: #c9a54e;
             border-radius: 3px;
             transition: width 0.3s ease;
         }
 
         .progress-label {
-            color: #a89878;
+            color: #9a8d7d;
             font-size: 0.85rem;
             font-weight: 600;
             white-space: nowrap;
@@ -214,17 +228,18 @@
 
         /* Type Section */
         .type-section {
-            background-color: #2a2a2a;
+            background-color: #ffffff;
             border-left: 4px solid;
             border-radius: 0 4px 4px 0;
             padding: 2rem;
             margin-bottom: 2rem;
-            border: 1px solid #3a3a3a;
+            border: 1px solid #e8e0d4;
             border-left-width: 4px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .type-section.type-a {
-            border-left-color: #d4a94c;
+            border-left-color: #c9a54e;
         }
 
         .type-section.type-b {
@@ -232,7 +247,7 @@
         }
 
         .type-section.type-c {
-            border-left-color: #7bc47a;
+            border-left-color: #5a8a5a;
         }
 
         .type-header {
@@ -241,7 +256,7 @@
             align-items: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
         }
 
         .type-badge {
@@ -253,11 +268,11 @@
             border-radius: 50%;
             font-weight: 700;
             font-size: 1.2rem;
-            color: #1a1a1a;
+            color: #ffffff;
         }
 
         .type-badge.badge-a {
-            background-color: #d4a94c;
+            background-color: #c9a54e;
         }
 
         .type-badge.badge-b {
@@ -265,24 +280,25 @@
         }
 
         .type-badge.badge-c {
-            background-color: #7bc47a;
+            background-color: #5a8a5a;
         }
 
         .type-info h2 {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.4rem;
             font-weight: 400;
             margin-bottom: 0.5rem;
+            color: #2c2416;
         }
 
         .type-pattern {
-            color: #a89878;
+            color: #9a8d7d;
             font-size: 0.9rem;
             font-style: italic;
         }
 
         .type-count {
-            color: #a89878;
+            color: #9a8d7d;
             font-size: 0.9rem;
         }
 
@@ -298,21 +314,21 @@
             align-items: flex-start;
             gap: 1rem;
             padding: 1rem;
-            background-color: #1a1a1a;
+            background-color: #faf7f2;
             border-radius: 4px;
-            border: 1px solid #3a3a3a;
+            border: 1px solid #e8e0d4;
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .checkbox-item:hover {
-            border-color: #5a5a5a;
-            background-color: #2a2a2a;
+            border-color: #c9a54e;
+            background-color: rgba(201,165,78,0.08);
         }
 
         .checkbox-item.checked {
-            background-color: #2a2a2a;
-            border-color: #4a4a4a;
+            background-color: rgba(201,165,78,0.08);
+            border-color: #c9a54e;
         }
 
         .checkbox-input {
@@ -321,7 +337,7 @@
             min-width: 20px;
             margin-top: 0.25rem;
             cursor: pointer;
-            accent-color: #d4a94c;
+            accent-color: #c9a54e;
         }
 
         .checkbox-label {
@@ -329,6 +345,7 @@
             flex: 1;
             font-size: 0.95rem;
             line-height: 1.5;
+            color: #2c2416;
         }
 
         /* Email Gate */
@@ -338,7 +355,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(26, 26, 26, 0.95);
+            background-color: rgba(44, 36, 22, 0.85);
             z-index: 200;
             display: flex;
             align-items: center;
@@ -355,25 +372,26 @@
         }
 
         .email-gate-box {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 4px;
             padding: 3rem 2rem;
             max-width: 450px;
             width: 90%;
             text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .email-gate-box h2 {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.8rem;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 1rem;
             font-weight: 400;
         }
 
         .email-gate-box p {
-            color: #b8b0a0;
+            color: #6b5d4d;
             margin-bottom: 2rem;
             font-size: 0.95rem;
             line-height: 1.6;
@@ -388,27 +406,27 @@
 
         .email-form-group input {
             padding: 0.75rem 1rem;
-            background-color: #1a1a1a;
-            border: 1px solid #3a3a3a;
+            background-color: #faf7f2;
+            border: 1px solid #e8e0d4;
             border-radius: 4px;
-            color: #e0dcd4;
+            color: #2c2416;
             font-size: 1rem;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             transition: border-color 0.3s ease;
         }
 
         .email-form-group input:focus {
             outline: none;
-            border-color: #d4a94c;
+            border-color: #c9a54e;
         }
 
         .email-form-group input::placeholder {
-            color: #8a8278;
+            color: #9a8d7d;
         }
 
         .btn-get-results {
-            background-color: #d4a94c;
-            color: #1a1a1a;
+            background-color: #c9a54e;
+            color: #ffffff;
             border: none;
             padding: 0.75rem 2rem;
             border-radius: 4px;
@@ -419,14 +437,15 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
             width: 100%;
+            font-family: 'DM Sans', system-ui, sans-serif;
         }
 
         .btn-get-results:hover {
-            background-color: #e5ba5e;
+            background-color: #a8873a;
         }
 
         .btn-get-results:disabled {
-            background-color: #8a8278;
+            background-color: #9a8d7d;
             cursor: not-allowed;
         }
 
@@ -437,7 +456,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #1a1a1a;
+            background-color: #faf7f2;
             z-index: 100;
             overflow-y: auto;
             opacity: 0;
@@ -457,38 +476,40 @@
         }
 
         .results-header {
-            background-color: #2a2a2a;
-            border-bottom: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e8e0d4;
             padding: 1.5rem 2rem;
             margin: -2rem -2rem 3rem -2rem;
             text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .results-title {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 2rem;
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 400;
             margin-bottom: 0.5rem;
         }
 
         .results-greeting {
-            color: #b8b0a0;
+            color: #6b5d4d;
             font-size: 0.95rem;
         }
 
         /* Score Breakdown */
         .score-breakdown {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             padding: 1.5rem;
             margin-bottom: 2rem;
             border-radius: 4px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .score-breakdown-title {
             font-size: 0.85rem;
-            color: #a89878;
+            color: #9a8d7d;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             margin-bottom: 1rem;
@@ -509,12 +530,13 @@
         .score-label {
             min-width: 70px;
             font-size: 0.9rem;
+            color: #2c2416;
         }
 
         .score-bar {
             flex: 1;
             height: 8px;
-            background-color: #1a1a1a;
+            background-color: #f5f0e8;
             border-radius: 4px;
             overflow: hidden;
         }
@@ -526,7 +548,7 @@
         }
 
         .score-fill.fill-a {
-            background-color: #d4a94c;
+            background-color: #c9a54e;
         }
 
         .score-fill.fill-b {
@@ -534,23 +556,24 @@
         }
 
         .score-fill.fill-c {
-            background-color: #7bc47a;
+            background-color: #5a8a5a;
         }
 
         .score-value {
             min-width: 40px;
             text-align: right;
             font-size: 0.9rem;
-            color: #a89878;
+            color: #9a8d7d;
         }
 
         /* Result Card */
         .result-card {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 4px;
             padding: 2rem;
             margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .result-card-header {
@@ -559,7 +582,7 @@
             gap: 1.5rem;
             margin-bottom: 2rem;
             padding-bottom: 1.5rem;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid #e8e0d4;
         }
 
         .result-badge {
@@ -571,12 +594,12 @@
             justify-content: center;
             font-size: 1.8rem;
             font-weight: 700;
-            color: #1a1a1a;
+            color: #ffffff;
             flex-shrink: 0;
         }
 
         .result-badge.type-a {
-            background-color: #d4a94c;
+            background-color: #c9a54e;
         }
 
         .result-badge.type-b {
@@ -584,20 +607,21 @@
         }
 
         .result-badge.type-c {
-            background-color: #7bc47a;
+            background-color: #5a8a5a;
         }
 
         .result-card-title {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.6rem;
             font-weight: 400;
+            color: #2c2416;
         }
 
         /* Section Headings */
         .result-section-heading {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.1rem;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-top: 1.5rem;
             margin-bottom: 1rem;
             font-weight: 400;
@@ -605,16 +629,16 @@
 
         /* Priority Action */
         .priority-action {
-            background-color: #1a3a2a;
-            border: 1px solid #7bc47a;
-            border-left: 4px solid #7bc47a;
+            background-color: rgba(90,138,90,0.08);
+            border: 1px solid #5a8a5a;
+            border-left: 4px solid #5a8a5a;
             padding: 1.5rem;
             margin: 2rem 0;
             border-radius: 0 4px 4px 0;
         }
 
         .priority-action-title {
-            color: #7bc47a;
+            color: #5a8a5a;
             font-weight: 700;
             margin-bottom: 0.5rem;
             font-size: 0.95rem;
@@ -624,8 +648,8 @@
 
         /* Comparison Box */
         .comparison-box {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #f5f0e8;
+            border: 1px solid #e8e0d4;
             padding: 1.5rem;
             margin: 2rem 0;
             border-radius: 4px;
@@ -648,7 +672,7 @@
 
         .comparison-label {
             font-size: 0.75rem;
-            color: #a89878;
+            color: #9a8d7d;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             margin-bottom: 0.5rem;
@@ -661,21 +685,22 @@
         }
 
         .comparison-col:first-child .comparison-text {
-            color: #a89878;
+            color: #9a8d7d;
         }
 
         .comparison-col:last-child .comparison-text {
-            color: #7bc47a;
+            color: #5a8a5a;
         }
 
         /* Hybrid Message */
         .hybrid-message {
-            background-color: #2a2a2a;
-            border: 1px solid #d4a94c;
-            border-left: 4px solid #d4a94c;
+            background-color: rgba(201,165,78,0.08);
+            border: 1px solid #c9a54e;
+            border-left: 4px solid #c9a54e;
             padding: 1.5rem;
             margin-bottom: 2rem;
             border-radius: 0 4px 4px 0;
+            color: #2c2416;
         }
 
         .hybrid-message p {
@@ -693,14 +718,14 @@
             padding: 0.5rem 0;
             padding-left: 1.5rem;
             position: relative;
-            color: #e0dcd4;
+            color: #2c2416;
         }
 
         .result-list li:before {
-            content: "·";
+            content: "\00b7";
             position: absolute;
             left: 0;
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: bold;
         }
 
@@ -713,16 +738,17 @@
         }
 
         .focus-card {
-            background-color: #1a1a1a;
-            border: 1px solid #3a3a3a;
+            background-color: #f5f0e8;
+            border: 1px solid #e8e0d4;
             padding: 1rem;
             border-radius: 4px;
             font-size: 0.9rem;
             line-height: 1.5;
+            color: #2c2416;
         }
 
         .focus-cue-number {
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 700;
             display: block;
             margin-bottom: 0.5rem;
@@ -745,44 +771,57 @@
         }
 
         .callout.trap {
-            background-color: #3a1a1a;
-            border-left-color: #d4a94c;
-            color: #e0dcd4;
+            background-color: rgba(184,92,92,0.08);
+            border-left-color: #b85c5c;
+            color: #2c2416;
+        }
+
+        .callout.trap .callout-title {
+            color: #b85c5c;
         }
 
         .callout.minimum {
-            background-color: #1a3a2a;
-            border-left-color: #7bc47a;
-            color: #e0dcd4;
+            background-color: rgba(90,138,90,0.08);
+            border-left-color: #5a8a5a;
+            color: #2c2416;
+        }
+
+        .callout.minimum .callout-title {
+            color: #5a8a5a;
         }
 
         .callout.proof {
-            background-color: #3a3a1a;
-            border-left-color: #d4a94c;
-            color: #e0dcd4;
+            background-color: rgba(201,165,78,0.08);
+            border-left-color: #c9a54e;
+            color: #2c2416;
+        }
+
+        .callout.proof .callout-title {
+            color: #c9a54e;
         }
 
         /* CTA Section */
         .cta-section {
-            background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border: 1px solid #e8e0d4;
             border-radius: 4px;
             padding: 2.5rem 2rem;
             margin: 3rem 0 2rem;
             text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .cta-headline {
-            font-family: Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.4rem;
-            color: #d4a94c;
+            color: #c9a54e;
             margin-bottom: 1rem;
             font-weight: 400;
         }
 
         .value-stack {
-            background-color: #1a1a1a;
-            border: 1px solid #3a3a3a;
+            background-color: #f5f0e8;
+            border: 1px solid #e8e0d4;
             padding: 1.5rem;
             margin: 2rem 0;
             border-radius: 4px;
@@ -793,16 +832,16 @@
             padding: 0.5rem 0;
             padding-left: 1.5rem;
             position: relative;
-            color: #e0dcd4;
+            color: #2c2416;
             font-size: 0.9rem;
             line-height: 1.6;
         }
 
         .value-stack-item:before {
-            content: "✓";
+            content: "\2713";
             position: absolute;
             left: 0;
-            color: #7bc47a;
+            color: #5a8a5a;
             font-weight: bold;
         }
 
@@ -812,27 +851,27 @@
             gap: 1rem;
             margin: 2rem 0;
             font-size: 0.85rem;
-            color: #a89878;
+            color: #6b5d4d;
             text-align: center;
         }
 
         .trust-signal {
             padding: 1rem;
-            background-color: #1a1a1a;
+            background-color: #f5f0e8;
             border-radius: 4px;
-            border: 1px solid #3a3a3a;
+            border: 1px solid #e8e0d4;
         }
 
         .trust-signal-number {
-            color: #d4a94c;
+            color: #c9a54e;
             font-weight: 700;
             display: block;
             margin-bottom: 0.3rem;
         }
 
         .btn-cta {
-            background-color: #d4a94c;
-            color: #1a1a1a;
+            background-color: #c9a54e;
+            color: #ffffff;
             border: none;
             padding: 1.25rem 3rem;
             border-radius: 4px;
@@ -844,10 +883,12 @@
             letter-spacing: 0.1em;
             margin-top: 1.5rem;
             display: inline-block;
+            text-decoration: none;
+            font-family: 'DM Sans', system-ui, sans-serif;
         }
 
         .btn-cta:hover {
-            background-color: #e5ba5e;
+            background-color: #a8873a;
             transform: translateY(-2px);
         }
 
@@ -855,12 +896,12 @@
         .share-section {
             margin-top: 3rem;
             padding-top: 2rem;
-            border-top: 1px solid #3a3a3a;
+            border-top: 1px solid #e8e0d4;
             text-align: center;
         }
 
         .share-label {
-            color: #a89878;
+            color: #9a8d7d;
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -876,9 +917,9 @@
         }
 
         .btn-share {
-            background-color: #3a3a3a;
-            color: #e0dcd4;
-            border: none;
+            background-color: #f5f0e8;
+            color: #2c2416;
+            border: 1px solid #e8e0d4;
             padding: 0.5rem 1rem;
             border-radius: 4px;
             font-size: 0.85rem;
@@ -887,15 +928,18 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            font-family: 'DM Sans', system-ui, sans-serif;
         }
 
         .btn-share:hover {
-            background-color: #4a4a4a;
+            background-color: #e8e0d4;
+            border-color: #c9a54e;
         }
 
         /* Buttons */
         button {
             transition: all 0.3s ease;
+            font-family: 'DM Sans', system-ui, sans-serif;
         }
 
         button:active {
@@ -913,12 +957,20 @@
         .btn-retake {
             margin: 0 auto;
             display: block;
-            background-color: #3a3a3a;
-            color: #e0dcd4;
+            background-color: #f5f0e8;
+            color: #2c2416;
+            border: 1px solid #e8e0d4;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         .btn-retake:hover {
-            background-color: #4a4a4a;
+            background-color: #e8e0d4;
             transform: translateY(-2px);
         }
 
@@ -928,8 +980,22 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 50;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(201, 165, 78, 0.3);
             animation: pulse 2s infinite;
+            background-color: #c9a54e;
+            color: #ffffff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-results:hover {
+            background-color: #a8873a;
         }
 
         .btn-results.hidden {
@@ -938,24 +1004,25 @@
 
         @keyframes pulse {
             0%, 100% {
-                box-shadow: 0 8px 20px rgba(212, 169, 76, 0.2);
+                box-shadow: 0 8px 20px rgba(201, 165, 78, 0.2);
             }
             50% {
-                box-shadow: 0 8px 25px rgba(212, 169, 76, 0.4);
+                box-shadow: 0 8px 25px rgba(201, 165, 78, 0.4);
             }
         }
 
         /* Footer */
         footer {
-            background-color: #2a2a2a;
-            border-top: 1px solid #3a3a3a;
+            background-color: #ffffff;
+            border-top: 1px solid #e8e0d4;
             padding: 2rem;
             margin-top: 4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 0.85rem;
-            color: #8a8278;
+            color: #9a8d7d;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.03);
         }
 
         .footer-left {
@@ -1058,6 +1125,7 @@
                 background-color: transparent;
                 border: none;
                 page-break-after: avoid;
+                box-shadow: none;
             }
 
             .btn-results, .intro-container, .email-gate-container {
@@ -1068,10 +1136,12 @@
                 page-break-inside: avoid;
                 border: 2px solid #999;
                 background-color: white;
+                box-shadow: none;
             }
 
             .result-card {
                 page-break-inside: avoid;
+                box-shadow: none;
             }
 
             .checkbox-input {
@@ -1271,7 +1341,7 @@
 
                 <div class="cta-section">
                     <h2 class="cta-headline">Ready to Actually Fix This?</h2>
-                    <p style="color: #b8b0a0; margin: 1rem 0;">Your full personalized system is inside the 7-Day Shift-Proof Metabolism Reset.</p>
+                    <p style="color: #6b5d4d; margin: 1rem 0;">Your full personalized system is inside the 7-Day Shift-Proof Metabolism Reset.</p>
                     <div class="value-stack">
                         <div class="value-stack-item">Step-by-step implementation for your specific type</div>
                         <div class="value-stack-item">Shift-proof meal templates (work days + off days)</div>
@@ -1301,7 +1371,7 @@
                     </div>
 
                     <a href="YOUR_PURCHASE_LINK_URL" class="btn-cta">Start Your Reset → $27</a>
-                    <p style="color: #8a8278; font-size: 0.85rem; margin-top: 1rem;">One-time payment. Access for life. Built by IJ Smith, RN.</p>
+                    <p style="color: #9a8d7d; font-size: 0.85rem; margin-top: 1rem;">One-time payment. Access for life. Built by IJ Smith, RN.</p>
                 </div>
 
                 <div class="button-container">
@@ -1351,7 +1421,7 @@
                 input.addEventListener('change', function() {
                     const parent = this.closest('.checkbox-item');
                     const typeKey = `type${this.dataset.type.toUpperCase()}`;
-                    
+
                     if (this.checked) {
                         parent.classList.add('checked');
                         quizState[typeKey]++;
@@ -1393,7 +1463,7 @@
             const btn = document.getElementById('seeResultsBtn');
             if (!btn) return;
             const allAnswered = quizState.totalAnswered === 15;
-            
+
             if (allAnswered) {
                 btn.classList.remove('hidden');
                 btn.textContent = 'See My Results';
@@ -1555,7 +1625,7 @@
                         <div class="result-badge ${badgeClass}">${type}</div>
                         <div>
                             <h2 class="result-card-title">${data.name}</h2>
-                            <p style="color: #a89878; margin-top: 0.5rem; font-style: italic;">${data.pattern}</p>
+                            <p style="color: #9a8d7d; margin-top: 0.5rem; font-style: italic;">${data.pattern}</p>
                         </div>
                     </div>
 
@@ -1797,7 +1867,7 @@
             updateCounts();
             updatePurchaseLink();
         });
-        
+
         // Also run on DOMContentLoaded for faster execution
         document.addEventListener('DOMContentLoaded', () => {
             updatePurchaseLink();
