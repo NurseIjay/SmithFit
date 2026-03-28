@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmithFit Social Proof - GHL Ready (55 Cards, No Duplicates)</title>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700;900&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F5F0E8;--bg2:#EDE6D6;--bg3:#E4DAC8;--card:#FAF6EE;--text:#1A1518;--muted:#6A5F50;--muted2:#8A7A68;--gold:#C9A84C;--gold-l:#E2C97E;--glow:rgba(201,168,76,.18);--line:rgba(201,168,76,.32);--fh:'League Spartan',sans-serif;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+.nav{position:sticky;top:0;z-index:100;background:rgba(245,240,232,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px 18px}
+.logo{font-family:var(--fh);font-size:13px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.sec{padding:44px 16px 68px;max-width:480px;margin:0 auto}
+.ey{font-family:var(--fh);font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.ttl{font-family:var(--fh);font-size:clamp(26px,7vw,38px);font-weight:900;line-height:1.02;margin-bottom:10px}
+.ttl span{color:var(--gold)}
+.sub{font-size:14px;font-weight:300;color:var(--muted);line-height:1.65;margin-bottom:32px}
+.grid{columns:2;column-gap:10px}
+.card{break-inside:avoid;margin-bottom:10px;background:var(--card);border:1px solid rgba(201,168,76,.18);border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--line);transform:translateY(-2px)}
+.card.hidden{display:none}
+.card img{width:100%;display:block;height:auto}
+.foot{padding:8px 10px 9px;display:flex;align-items:center;justify-content:space-between;gap:6px;border-top:1px solid rgba(201,168,76,.14)}
+.nm{font-family:var(--fh);font-size:10px;font-weight:700;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.tg{font-family:var(--fh);font-size:8px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--gold);color:#FAF6EE;padding:2px 7px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.lmw{margin-top:18px;text-align:center}
+.lmbtn{display:inline-flex;align-items:center;gap:9px;font-family:var(--fh);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text);background:var(--card);border:1.5px solid var(--gold);padding:12px 22px;border-radius:40px;cursor:pointer;animation:lmP 2.8s ease-in-out infinite;position:relative}
+.lmbtn::before{content:'';position:absolute;inset:-4px;border-radius:44px;border:1.5px solid var(--gold);opacity:0;animation:lmR 2.8s ease-in-out infinite}
+@keyframes lmP{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.35)}50%{box-shadow:0 0 0 8px rgba(201,168,76,0)}}
+@keyframes lmR{0%{opacity:.5;transform:scale(1)}100%{opacity:0;transform:scale(1.12)}}
+.lmbtn.open{animation:none;background:var(--gold);color:#1A1518}
+.arr{transition:transform .25s;display:inline-block}
+.lmbtn.open .arr{transform:rotate(180deg)}
+.lmtxt{display:flex;flex-direction:column;align-items:flex-start;gap:1px}
+.lmtop{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.lmbot{font-size:9px;font-weight:400;color:var(--muted);text-transform:none}
+.lmcount{margin-top:8px;font-size:11px;color:var(--muted2)}
+.cta{margin-top:40px;background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--line);border-radius:16px;padding:28px 20px 24px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,var(--glow),transparent 68%);pointer-events:none}
+.cta-ey{font-family:var(--fh);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:7px;position:relative}
+.cta-ttl{font-family:var(--fh);font-size:clamp(19px,5vw,24px);font-weight:900;line-height:1.15;color:var(--text);margin-bottom:18px;position:relative}
+.cta-ttl span{color:var(--gold)}
+.yes{display:inline-flex;align-items:center;gap:5px;font-family:var(--fh);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line);padding:4px 12px;border-radius:20px;margin-bottom:12px;background:var(--glow);position:relative}
+.btn{display:inline-block;background:var(--gold);color:#1A1518;font-family:var(--fh);font-size:13px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;padding:15px 30px;border-radius:40px;text-decoration:none;position:relative;animation:ctaP 2.4s ease-in-out infinite}
+.btn::after{content:'';position:absolute;inset:-5px;border-radius:45px;background:var(--gold);opacity:0;animation:ctaR 2.4s ease-in-out infinite;z-index:-1}
+@keyframes ctaP{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(201,168,76,.55)}50%{transform:scale(1.03);box-shadow:0 0 0 12px rgba(201,168,76,0)}}
+@keyframes ctaR{0%{opacity:.45;transform:scale(1)}100%{opacity:0;transform:scale(1.22)}}
+.btn:hover{animation:none;transform:scale(1.04);background:var(--gold-l);transition:all .2s}</style>
+</head>
+<body>
+<div class="nav"><span class="logo">SmithFit</span></div>
+<div class="sec">
+  <div class="ey">Real Women. Real Results.</div>
+  <h2 class="ttl">Stories That<br><span>Sound Like Yours.</span></h2>
+  <p class="sub">Real wins from real women. No filters. No fluff. Just proof.</p>
+  <div class="grid">
+<div class="card" id="c0">
+  <img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69ac9c677bdf38904dd5f672.jpg" alt="SmithFit Member" loading="lazy">
+  <div class="foot"><span class="nm">SmithFit Member</span><span class="tg">Metabolism Woke Up</span></div>
+</div>
+<div class="card" id="c1">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_22_eating_more.jpg" alt="SmithFit Member" loading="lazy">
+  <div class="foot"><span class="nm">SmithFit Member</span><span class="tg">Eating More, Shrinking</span></div>
+</div>
+<div class="card" id="c2">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_29_seena_freedom.jpg" alt="Seena Choksmi" loading="lazy">
+  <div class="foot"><span class="nm">Seena Choksmi</span><span class="tg">Food Freedom</span></div>
+</div>
+<div class="card" id="c3">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/rach-8lbs-down.jpg" alt="Rachael Fry" loading="lazy">
+  <div class="foot"><span class="nm">Rachael Fry</span><span class="tg">-8 lbs in 2 Weeks</span></div>
+</div>
+<div class="card" id="c4">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_26_regina_week1.jpg" alt="Regina Sanchez" loading="lazy">
+  <div class="foot"><span class="nm">Regina Sanchez</span><span class="tg">Week 1 Win</span></div>
+</div>
+<div class="card" id="c5">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_32_marisela.jpg" alt="Marisela Hernandez" loading="lazy">
+  <div class="foot"><span class="nm">Marisela Hernandez</span><span class="tg">2.5 Yrs Then This</span></div>
+</div>
+<div class="card hidden" id="c6">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_36_3x_to_xl.jpg" alt="SmithFit Member" loading="lazy">
+  <div class="foot"><span class="nm">SmithFit Member</span><span class="tg">3X to XL</span></div>
+</div>
+<div class="card hidden" id="c7">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_34_bloat_gone.jpg" alt="SmithFit Member" loading="lazy">
+  <div class="foot"><span class="nm">SmithFit Member</span><span class="tg">Bloat Gone</span></div>
+</div>
+<div class="card hidden" id="c8">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_35_almost_quit.jpg" alt="SmithFit Member" loading="lazy">
+  <div class="foot"><span class="nm">SmithFit Member</span><span class="tg">Almost Quit Now Thriving</span></div>
+</div>
+<div class="card hidden" id="c9">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_10_sarah_hiding.jpg" alt="Sarah Reiter" loading="lazy">
+  <div class="foot"><span class="nm">Sarah Reiter</span><span class="tg">No More Hiding in Photos</span></div>
+</div>
+<div class="card hidden" id="c10">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_23_sarah_knows.jpg" alt="Sarah Reiter" loading="lazy">
+  <div class="foot"><span class="nm">Sarah Reiter</span><span class="tg">This Time Is Different</span></div>
+</div>
+<div class="card hidden" id="c11">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_41_brain_fog.jpg" alt="SmithFit Member" loading="lazy">
+  <div class="foot"><span class="nm">SmithFit Member</span><span class="tg">Brain Fog Cleared</span></div>
+</div>
+<div class="card hidden" id="c12">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_42_never_alone.jpg" alt="SmithFit Member" loading="lazy">
+  <div class="foot"><span class="nm">SmithFit Member</span><span class="tg">Finally Unstuck</span></div>
+</div>
+<div class="card hidden" id="c13">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_39_diana_grandbaby.jpg" alt="Diana Courtney" loading="lazy">
+  <div class="foot"><span class="nm">Diana Courtney</span><span class="tg">10 lbs + Grandbaby</span></div>
+</div>
+<div class="card hidden" id="c14">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/heathyer-60lb-pt.jpg" alt="Heather Wirt" loading="lazy">
+  <div class="foot"><span class="nm">Heather Wirt</span><span class="tg">Strength On Shift</span></div>
+</div>
+<div class="card hidden" id="c15">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_08_lo_dress.jpg" alt="Lo Stern" loading="lazy">
+  <div class="foot"><span class="nm">Lo Stern</span><span class="tg">Dream Dress Fits</span></div>
+</div>
+<div class="card hidden" id="c16">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_13_shan_8lbs.jpg" alt="Shan Edney" loading="lazy">
+  <div class="foot"><span class="nm">Shan Edney</span><span class="tg">8 lbs This Month</span></div>
+</div>
+<div class="card hidden" id="c17">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_05_jamie.jpg" alt="Jamie Dunn" loading="lazy">
+  <div class="foot"><span class="nm">Jamie Dunn</span><span class="tg">10 lbs Sleeping Energy</span></div>
+</div>
+<div class="card hidden" id="c18">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/eliz-fam-keep.jpg" alt="Elizabeth Strong" loading="lazy">
+  <div class="foot"><span class="nm">Elizabeth Strong</span><span class="tg">Fighting for Her Family</span></div>
+</div>
+<div class="card hidden" id="c19">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/eliz-s-sleep.jpg" alt="Elizabeth Strong" loading="lazy">
+  <div class="foot"><span class="nm">Elizabeth Strong</span><span class="tg">Finally Sleeping Again</span></div>
+</div>
+<div class="card hidden" id="c20">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_16_regina_cravings.jpg" alt="Regina Sanchez" loading="lazy">
+  <div class="foot"><span class="nm">Regina Sanchez</span><span class="tg">Cravings Just Stopped</span></div>
+</div>
+<div class="card hidden" id="c21">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_24_unstuck.jpg" alt="SmithFit Member" loading="lazy">
+  <div class="foot"><span class="nm">SmithFit Member</span><span class="tg">Finally Feels Unstuck</span></div>
+</div>
+<div class="card hidden" id="c22">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_07_mella_scrubs.jpg" alt="Mella San Juan" loading="lazy">
+  <div class="foot"><span class="nm">Mella San Juan</span><span class="tg">Pre-Pregnancy Scrubs Loose</span></div>
+</div>
+<div class="card hidden" id="c23">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_01_lo_stern.jpg" alt="Lo Stern" loading="lazy">
+  <div class="foot"><span class="nm">Lo Stern</span><span class="tg">XL Pants Won't Stay Up</span></div>
+</div>
+<div class="card hidden" id="c24">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/blaire-ring.jpg" alt="Blaire Cammans" loading="lazy">
+  <div class="foot"><span class="nm">Blaire Cammans</span><span class="tg">Wedding Ring Slides Off</span></div>
+</div>
+<div class="card hidden" id="c25">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_12_elizabeth_2weeks.jpg" alt="Sarah Reiter" loading="lazy">
+  <div class="foot"><span class="nm">Sarah Reiter</span><span class="tg">Scrubs Fit, Family Reset</span></div>
+</div>
+<div class="card hidden" id="c26">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/adrienne-keep.jpg" alt="Adrienne Kimak" loading="lazy">
+  <div class="foot"><span class="nm">Adrienne Kimak</span><span class="tg">Finally Put Herself First</span></div>
+</div>
+<div class="card hidden" id="c27">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_02_sarah_leggings.jpg" alt="Sarah Reiter" loading="lazy">
+  <div class="foot"><span class="nm">Sarah Reiter</span><span class="tg">Bought Leggings, Kept Going</span></div>
+</div>
+<div class="card hidden" id="c28">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_18_no_pain.jpg" alt="SmithFit Member" loading="lazy">
+  <div class="foot"><span class="nm">SmithFit Member</span><span class="tg">Walking Without Pain</span></div>
+</div>
+<div class="card hidden" id="c29">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_17_size_14_to_12.jpg" alt="SmithFit Member" loading="lazy">
+  <div class="foot"><span class="nm">SmithFit Member</span><span class="tg">Size 14 to 12</span></div>
+</div>
+<div class="card hidden" id="c30">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/sabrina-rest.jpg" alt="Sabrina Walia" loading="lazy">
+  <div class="foot"><span class="nm">Sabrina Walia</span><span class="tg">Stopped Fighting Her Body</span></div>
+</div>
+<div class="card hidden" id="c31">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/sabrina-energy-drink.jpg" alt="Sabrina Walia" loading="lazy">
+  <div class="foot"><span class="nm">Sabrina Walia</span><span class="tg">Broke Energy Drink Habit</span></div>
+</div>
+<div class="card hidden" id="c32">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/diana.jpg" alt="Diana Courtney" loading="lazy">
+  <div class="foot"><span class="nm">Diana Courtney</span><span class="tg">Stopped Letting Scale Define Her</span></div>
+</div>
+<div class="card hidden" id="c33">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_11_day_one.jpg" alt="SmithFit Member" loading="lazy">
+  <div class="foot"><span class="nm">SmithFit Member</span><span class="tg">Day One Energy</span></div>
+</div>
+<div class="card hidden" id="c34">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_31_nadi.jpg" alt="Nadi Rodriguez" loading="lazy">
+  <div class="foot"><span class="nm">Nadi Rodriguez</span><span class="tg">Eating More More Energy</span></div>
+</div>
+<div class="card hidden" id="c35">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/5-inches-donwn.jpg" alt="SmithFit Client" loading="lazy">
+  <div class="foot"><span class="nm">SmithFit Client</span><span class="tg">5 Inches Off Waist</span></div>
+</div>
+<div class="card hidden" id="c36">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/octavia-keep.jpg" alt="Octavia Roberts" loading="lazy">
+  <div class="foot"><span class="nm">Octavia Roberts</span><span class="tg">Fits Her Schedule</span></div>
+</div>
+<div class="card hidden" id="c37">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/april-walk.jpg" alt="April Ching" loading="lazy">
+  <div class="foot"><span class="nm">April Ching</span><span class="tg">Desk Job to Walking</span></div>
+</div>
+<div class="card hidden" id="c38">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/ashlee-food-freedom.jpg" alt="Ashlee Avelar" loading="lazy">
+  <div class="foot"><span class="nm">Ashlee Avelar</span><span class="tg">Food Freedom</span></div>
+</div>
+<div class="card hidden" id="c39">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/babra-fixed-sleep.jpg" alt="Babra Mumia" loading="lazy">
+  <div class="foot"><span class="nm">Babra Mumia</span><span class="tg">7 Hours Sleep on Heavy Week</span></div>
+</div>
+<div class="card hidden" id="c40">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_15_support.jpg" alt="SmithFit Member" loading="lazy">
+  <div class="foot"><span class="nm">SmithFit Member</span><span class="tg">Support Kept Her Going</span></div>
+</div>
+<div class="card hidden" id="c41">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_21_thank_you.jpg" alt="SmithFit Member" loading="lazy">
+  <div class="foot"><span class="nm">SmithFit Member</span><span class="tg">From Bottom of My Heart</span></div>
+</div>
+<div class="card hidden" id="c42">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_25_margaret.jpg" alt="Margaret Lescano" loading="lazy">
+  <div class="foot"><span class="nm">Margaret Lescano</span><span class="tg">After Health Scares Chose Self</span></div>
+</div>
+<div class="card hidden" id="c43">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_27_jamie_5k.jpg" alt="Jamie Niblack" loading="lazy">
+  <div class="foot"><span class="nm">Jamie Niblack</span><span class="tg">Surviving to 5K</span></div>
+</div>
+<div class="card hidden" id="c44">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_33_taneasha_run.jpg" alt="Taneasha Evans" loading="lazy">
+  <div class="foot"><span class="nm">Taneasha Evans</span><span class="tg">Found Love for Running</span></div>
+</div>
+<div class="card hidden" id="c45">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_38_habits_broken.jpg" alt="Sarah + Britney" loading="lazy">
+  <div class="foot"><span class="nm">Sarah + Britney</span><span class="tg">Old Habits Broken Day 5</span></div>
+</div>
+<div class="card hidden" id="c46">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_40_ashlee_mindset.jpg" alt="Ashlee Avelar" loading="lazy">
+  <div class="foot"><span class="nm">Ashlee Avelar</span><span class="tg">Slipped Once Didnt Quit</span></div>
+</div>
+<div class="card hidden" id="c47">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/card_44_shaynee_veggies.jpg" alt="Shaynee Downey" loading="lazy">
+  <div class="foot"><span class="nm">Shaynee Downey</span><span class="tg">Chose Veggies Over Binge</span></div>
+</div>
+<div class="card hidden" id="c48">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/chelsey-easy-meal.jpg" alt="Chelsey Davault" loading="lazy">
+  <div class="foot"><span class="nm">Chelsey Davault</span><span class="tg">Conquered the 12-Hr Shift</span></div>
+</div>
+<div class="card hidden" id="c49">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/jessica-cocktail_nrg.jpg" alt="Jessica Esteves" loading="lazy">
+  <div class="foot"><span class="nm">Jessica Esteves</span><span class="tg">Morning Cocktail Energy</span></div>
+</div>
+<div class="card hidden" id="c50">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/liz-leg.jpg" alt="Elizabeth Coparanis" loading="lazy">
+  <div class="foot"><span class="nm">Elizabeth Coparanis</span><span class="tg">Saw Her Own Strong Legs</span></div>
+</div>
+<div class="card hidden" id="c51">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/marquita-2lbs-donw.jpg" alt="Marquita Johnson" loading="lazy">
+  <div class="foot"><span class="nm">Marquita Johnson</span><span class="tg">2 lbs Week One</span></div>
+</div>
+<div class="card hidden" id="c52">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/melissa-keep.jpg" alt="Melissa J" loading="lazy">
+  <div class="foot"><span class="nm">Melissa J</span><span class="tg">Son Following Her Lead</span></div>
+</div>
+<div class="card hidden" id="c53">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/tammie-steps.jpg" alt="Tammie Bridegroom" loading="lazy">
+  <div class="foot"><span class="nm">Tammie Bridegroom</span><span class="tg">Started with a Single Step</span></div>
+</div>
+<div class="card hidden" id="c54">
+  <img src="https://nurseijay.github.io/SmithFit/SALES%20PAGES-Optimization/proof-images/regina-epiphany.jpg" alt="Regina Sanchez" loading="lazy">
+  <div class="foot"><span class="nm">Regina Sanchez</span><span class="tg">Stopped Chasing Perfection</span></div>
+</div>
+  </div>
+  <div class="lmw">
+    <button class="lmbtn" id="lmbtn" onclick="tog()">
+      <div class="lmtxt">
+        <span class="lmtop" id="ltop">See All Stories</span>
+        <span class="lmbot" id="lbot">More lives changed - tap to see them all</span>
+      </div>
+      <span class="arr" id="larr">&#8595;</span>
+    </button>
+    <div class="lmcount" id="lcnt">Showing 6 of 55 stories</div>
+  </div>
+  <div class="cta">
+    <div class="cta-ey">Your story starts here</div>
+    <div class="cta-ttl">Ready to feel like<br><span>yourself again?</span></div>
+    <div class="yes">&#10022; Yes, I'm ready</div><br>
+    <a href="#" class="btn">I Want to Start My Reset &#8594;</a>
+  </div>
+</div>
+<script>var exp=false,tot=55;
+function tog(){
+  exp=!exp;
+  for(var i=6;i<tot;i++){var el=document.getElementById('c'+i);if(el){el.className=exp?'card':'card hidden';}}
+  var b=document.getElementById('lmbtn');
+  b.className=exp?'lmbtn open':'lmbtn';
+  document.getElementById('ltop').textContent=exp?'Show Less':'See All Stories';
+  document.getElementById('lbot').textContent=exp?'Collapse stories':'More lives changed - tap to see them all';
+  document.getElementById('larr').innerHTML=exp?'&#8593;':'&#8595;';
+  document.getElementById('lcnt').textContent=exp?'Showing all '+tot+' stories':'Showing 6 of '+tot+' stories';
+}</script>
+</body>
+</html>
