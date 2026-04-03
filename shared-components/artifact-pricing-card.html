@@ -1,0 +1,516 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #d4b86a;
+    --gold-dark: #a88a3a;
+    --cream: #faf6ef;
+    --text-dark: #1a1a1a;
+    --text-body: #3d3d3d;
+    --text-muted: #6b6b6b;
+    --green: #2d6a4f;
+    --green-light: #d4edda;
+    --white: #ffffff;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+  }
+
+  .sf-price-section {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  .sf-price-label {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .sf-price-title {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+  }
+
+  .sf-price-subtitle {
+    text-align: center;
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+  }
+
+  .sf-price-card {
+    background: var(--white);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.08), 0 0 0 2px var(--gold);
+    position: relative;
+  }
+
+  .sf-price-badge {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: white;
+    text-align: center;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .sf-price-area {
+    padding: 36px 32px 28px;
+    text-align: center;
+    background: linear-gradient(180deg, #fefcf7 0%, var(--white) 100%);
+  }
+
+  .sf-price-amount-label {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .sf-price-display {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 12px;
+  }
+
+  .sf-price-old {
+    font-size: 24px;
+    color: #bbb;
+    text-decoration: line-through;
+    font-weight: 500;
+  }
+
+  .sf-price-arrow {
+    font-size: 24px;
+    color: var(--gold);
+  }
+
+  .sf-price-new {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1;
+  }
+
+  .sf-price-new span {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+  }
+
+  .sf-price-context {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .sf-price-context strong {
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  .sf-price-lock {
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    -webkit-align-items: center;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-light);
+    color: var(--green);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-top: 8px;
+  }
+
+  .sf-price-lock svg {
+    width: 14px;
+    height: 14px;
+    fill: var(--green);
+  }
+
+  .sf-price-features {
+    padding: 0 32px 24px;
+  }
+
+  .sf-price-feature-item {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0ebe2;
+  }
+
+  .sf-price-feature-item:last-child {
+    border-bottom: none;
+  }
+
+  .sf-price-check {
+    width: 22px;
+    height: 22px;
+    background: var(--green-light);
+    border-radius: 50%;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .sf-price-check svg {
+    width: 12px;
+    height: 12px;
+    fill: var(--green);
+  }
+
+  .sf-price-feature-text {
+    font-size: 15px;
+    color: var(--text-body);
+    line-height: 1.4;
+  }
+
+  .sf-price-feature-text strong {
+    color: var(--text-dark);
+  }
+
+  .sf-price-cta-area {
+    padding: 24px 32px 32px;
+    background: #fefcf7;
+    border-top: 1px solid #f0ebe2;
+  }
+
+  .sf-price-countdown-wrapper {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .sf-price-countdown-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .sf-price-countdown {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .sf-price-countdown-unit {
+    background: var(--text-dark);
+    color: white;
+    border-radius: 8px;
+    padding: 8px 12px;
+    min-width: 54px;
+    text-align: center;
+  }
+
+  .sf-price-countdown-unit .sf-price-num {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sf-price-countdown-unit .sf-price-unit-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 2px;
+  }
+
+  .sf-price-cta-button {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 18px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 16px rgba(201, 168, 76, 0.3);
+    letter-spacing: 0.3px;
+  }
+
+  .sf-price-cta-button:hover {
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(201, 168, 76, 0.4);
+  }
+
+  .sf-price-cta-subtext {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 12px;
+  }
+
+  .sf-price-trust-row {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    gap: 24px;
+    margin-top: 20px;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .sf-price-trust-item {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .sf-price-trust-item svg {
+    width: 16px;
+    height: 16px;
+    fill: var(--text-muted);
+  }
+
+  .sf-price-guarantee-banner {
+    margin-top: 24px;
+    background: linear-gradient(135deg, #f8f5ee, #f2ece0);
+    border: 1px solid #e0d8c8;
+    border-radius: 12px;
+    padding: 20px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .sf-price-guarantee-shield {
+    width: 48px;
+    height: 48px;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+  }
+
+  .sf-price-guarantee-shield svg {
+    width: 48px;
+    height: 48px;
+    fill: var(--gold);
+  }
+
+  .sf-price-guarantee-text {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.5;
+  }
+
+  .sf-price-guarantee-text strong {
+    color: var(--text-dark);
+  }
+
+  .sf-price-decline-link {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .sf-price-decline-link a {
+    font-size: 13px;
+    color: #999;
+    text-decoration: none;
+    border-bottom: 1px dashed #ccc;
+    transition: color 0.2s;
+  }
+
+  .sf-price-decline-link a:hover {
+    color: #666;
+  }
+
+  @media (max-width: 480px) {
+    .sf-price-section { padding: 40px 16px; }
+    .sf-price-title { font-size: 26px; }
+    .sf-price-area { padding: 28px 20px 24px; }
+    .sf-price-new { font-size: 52px; }
+    .sf-price-display { gap: 12px; }
+    .sf-price-features { padding: 0 20px 20px; }
+    .sf-price-cta-area { padding: 20px 20px 28px; }
+    .sf-price-countdown-unit { min-width: 46px; padding: 6px 8px; }
+    .sf-price-countdown-unit .sf-price-num { font-size: 20px; }
+    .sf-price-guarantee-banner { -webkit-flex-direction: column; flex-direction: column; text-align: center; }
+  }
+</style>
+
+<div class="sf-price-section">
+  <div class="sf-price-label">CHARTER MEMBER PRICING</div>
+  <div class="sf-price-title">Lock In Your Rate Today</div>
+  <div class="sf-price-subtitle">This price is only available right now, on this page.</div>
+
+  <div class="sf-price-card">
+    <div class="sf-price-badge">🔒 CHARTER MEMBER RATE — LOCKS IN FOR LIFE</div>
+
+    <div class="sf-price-area">
+      <div class="sf-price-amount-label">Metabolic Breakthrough Membership</div>
+      <div class="sf-price-display">
+        <span class="sf-price-old">$455+/mo value</span>
+        <span class="sf-price-arrow">→</span>
+      </div>
+      <div class="sf-price-new">$67<span>/mo</span></div>
+      <div class="sf-price-context">That's <strong>$2.23/day</strong> — less than your coffee before shift</div>
+      <div class="sf-price-lock">
+        <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        Lock in $67/month — even when price increases
+      </div>
+    </div>
+
+    <div class="sf-price-features">
+      <div class="sf-price-feature-item">
+        <div class="sf-price-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <div class="sf-price-feature-text"><strong>Weekly live coaching calls</strong> with IJ every Tuesday</div>
+      </div>
+      <div class="sf-price-feature-item">
+        <div class="sf-price-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <div class="sf-price-feature-text"><strong>1,000+ shift-proof recipes</strong> in the SmithFit app</div>
+      </div>
+      <div class="sf-price-feature-item">
+        <div class="sf-price-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <div class="sf-price-feature-text"><strong>15-minute cortisol-conscious workouts</strong> — 3 levels, no equipment</div>
+      </div>
+      <div class="sf-price-feature-item">
+        <div class="sf-price-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <div class="sf-price-feature-text"><strong>The Nurse Sisterhood community</strong> — 400+ nurses who get it</div>
+      </div>
+      <div class="sf-price-feature-item">
+        <div class="sf-price-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <div class="sf-price-feature-text"><strong>Monthly metabolism reset protocols</strong> so results never stall</div>
+      </div>
+      <div class="sf-price-feature-item">
+        <div class="sf-price-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <div class="sf-price-feature-text"><strong>Chaos-Day Rescue Plans</strong> — life falls apart, you don't</div>
+      </div>
+    </div>
+
+    <div class="sf-price-cta-area">
+      <div class="sf-price-countdown-wrapper">
+        <div class="sf-price-countdown-label">Charter rate expires in</div>
+        <div class="sf-price-countdown" id="sf-countdown">
+          <div class="sf-price-countdown-unit"><div class="sf-price-num" id="sf-hours">23</div><div class="sf-price-unit-label">Hours</div></div>
+          <div class="sf-price-countdown-unit"><div class="sf-price-num" id="sf-minutes">59</div><div class="sf-price-unit-label">Min</div></div>
+          <div class="sf-price-countdown-unit"><div class="sf-price-num" id="sf-seconds">59</div><div class="sf-price-unit-label">Sec</div></div>
+        </div>
+      </div>
+
+      <button class="sf-price-cta-button">YES — Start My Membership for $67/month →</button>
+      <div class="sf-price-cta-subtext">Cancel anytime. No contracts. No questions asked.</div>
+
+      <div class="sf-price-trust-row">
+        <div class="sf-price-trust-item">
+          <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg>
+          256-bit SSL
+        </div>
+        <div class="sf-price-trust-item">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          Stripe Verified
+        </div>
+        <div class="sf-price-trust-item">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          30-Day Guarantee
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sf-price-guarantee-banner">
+    <div class="sf-price-guarantee-shield">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+    </div>
+    <div class="sf-price-guarantee-text">
+      <strong>The Nurse's Honor 30-Day Guarantee:</strong> Try everything — the coaching calls, the meal plans, the community, the workouts. If you don't love it, email us and we'll refund every penny. No questions. No hoops.
+    </div>
+  </div>
+
+  <div class="sf-price-decline-link">
+    <a href="#">No thanks, I'll figure out Day 8 on my own →</a>
+  </div>
+</div>
+
+<script>
+(function() {
+  try {
+    var totalSeconds = 24 * 60 * 60;
+    var saved = sessionStorage.getItem('smithfit_countdown');
+    if (saved) {
+      var elapsed = Math.floor((Date.now() - parseInt(saved, 10)) / 1000);
+      totalSeconds = Math.max(0, totalSeconds - elapsed);
+    } else {
+      sessionStorage.setItem('smithfit_countdown', Date.now().toString());
+    }
+
+    function updateCountdown() {
+      if (totalSeconds <= 0) {
+        document.getElementById('sf-hours').textContent = '00';
+        document.getElementById('sf-minutes').textContent = '00';
+        document.getElementById('sf-seconds').textContent = '00';
+        return;
+      }
+      totalSeconds--;
+      var h = Math.floor(totalSeconds / 3600);
+      var m = Math.floor((totalSeconds % 3600) / 60);
+      var s = totalSeconds % 60;
+      document.getElementById('sf-hours').textContent = String(h).padStart(2, '0');
+      document.getElementById('sf-minutes').textContent = String(m).padStart(2, '0');
+      document.getElementById('sf-seconds').textContent = String(s).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(function() {
+      updateCountdown();
+    }, 1000);
+  } catch (e) {
+    console.error('SmithFit pricing card error:', e);
+  }
+})();
+</script>

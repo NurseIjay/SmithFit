@@ -1,0 +1,144 @@
+<!-- SmithFit Sticky CTA Bar — GHL Custom Code Block -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  .sf-sticky * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .sf-sticky-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 99999;
+    opacity: 0;
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+    -webkit-transition: opacity 0.4s ease, -webkit-transform 0.4s ease;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .sf-sticky-bar.sf-sticky-show {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  .sf-sticky-inner {
+    background: linear-gradient(135deg, #1a1a1a 0%, #1a2a1a 50%, #2d4a3f 100%);
+    border-top: 2px solid #c9a84c;
+    padding: 14px 24px;
+    display: -webkit-flex; display: flex;
+    -webkit-align-items: center; align-items: center;
+    -webkit-justify-content: center; justify-content: center;
+    gap: 20px;
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.25);
+    position: relative; overflow: hidden;
+  }
+
+  /* Shimmer sweep */
+  .sf-sticky-inner::before {
+    content: '';
+    position: absolute; top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.06), transparent);
+    -webkit-animation: sfStickyShimmer 4s linear infinite;
+    animation: sfStickyShimmer 4s linear infinite;
+  }
+  @-webkit-keyframes sfStickyShimmer { 0% { left: -100%; } 100% { left: 100%; } }
+  @keyframes sfStickyShimmer { 0% { left: -100%; } 100% { left: 100%; } }
+
+  .sf-sticky-price-group {
+    display: -webkit-flex; display: flex;
+    -webkit-align-items: baseline; align-items: baseline;
+    gap: 8px; position: relative; z-index: 1;
+  }
+  .sf-sticky-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; font-weight: 800; color: #ffffff;
+  }
+  .sf-sticky-price span {
+    font-size: 13px; color: rgba(255,255,255,0.5);
+    font-family: 'Inter', sans-serif; font-weight: 400;
+  }
+  .sf-sticky-per-day {
+    font-size: 12px; color: #d4b86a; font-weight: 600;
+    position: relative; z-index: 1;
+  }
+
+  .sf-sticky-divider {
+    width: 1px; height: 32px;
+    background: rgba(255,255,255,0.15);
+    position: relative; z-index: 1;
+  }
+
+  .sf-sticky-guarantee {
+    display: -webkit-flex; display: flex;
+    -webkit-align-items: center; align-items: center;
+    gap: 6px;
+    background: rgba(45,106,79,0.3);
+    border: 1px solid rgba(45,106,79,0.5);
+    padding: 6px 12px; border-radius: 10px;
+    position: relative; z-index: 1;
+  }
+  .sf-sticky-guarantee .sf-sticky-shield { font-size: 16px; }
+  .sf-sticky-guarantee .sf-sticky-gtxt {
+    color: #4ade80; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.5px; line-height: 1.2;
+  }
+
+  .sf-sticky-btn {
+    background: linear-gradient(135deg, #c9a84c, #a88a3a);
+    color: #fff; font-size: 15px; font-weight: 700;
+    padding: 14px 28px; border: none; border-radius: 10px;
+    cursor: pointer; white-space: nowrap; text-decoration: none;
+    position: relative; z-index: 1;
+    box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+    display: inline-block;
+    -webkit-transition: all 0.2s; transition: all 0.2s;
+  }
+  .sf-sticky-btn:hover {
+    -webkit-transform: scale(1.03); transform: scale(1.03);
+    box-shadow: 0 6px 24px rgba(201,168,76,0.4);
+  }
+
+  @media (max-width: 640px) {
+    .sf-sticky-inner {
+      -webkit-flex-wrap: wrap; flex-wrap: wrap;
+      gap: 10px; padding: 12px 16px;
+      -webkit-justify-content: center; justify-content: center;
+    }
+    .sf-sticky-divider { display: none; }
+    .sf-sticky-guarantee { display: none; }
+    .sf-sticky-price { font-size: 22px; }
+    .sf-sticky-btn { font-size: 14px; padding: 12px 20px; }
+    .sf-sticky-per-day { display: none; }
+  }
+</style>
+
+<div class="sf-sticky-bar" id="sfStickyBar">
+  <div class="sf-sticky-inner">
+    <div class="sf-sticky-price-group">
+      <div class="sf-sticky-price">$67<span>/mo</span></div>
+      <div class="sf-sticky-per-day">just $2.23/day</div>
+    </div>
+    <div class="sf-sticky-divider"></div>
+    <div class="sf-sticky-guarantee">
+      <div class="sf-sticky-shield">&#128737;</div>
+      <div class="sf-sticky-gtxt">30-DAY<br>GUARANTEE</div>
+    </div>
+    <a href="#checkout" class="sf-sticky-btn">Keep My Results Going &rarr;</a>
+  </div>
+</div>
+
+<script>
+(function() {
+  try {
+    var bar = document.getElementById('sfStickyBar');
+    if (!bar) return;
+
+    // Show after 1.5 seconds — guaranteed to work in GHL
+    // (GHL scroll context is unreliable for triggering visibility)
+    setTimeout(function() {
+      try { bar.className = 'sf-sticky-bar sf-sticky-show'; } catch(e) {}
+    }, 1500);
+
+  } catch(e) {}
+})();
+</script>

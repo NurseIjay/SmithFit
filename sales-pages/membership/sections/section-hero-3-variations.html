@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmithFit — Hero Section: 3 Variations</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #c9a84c; --gold-light: #d4b86a; --gold-dark: #a88a3a;
+    --cream: #faf6ef; --cream-dark: #f0e8d8;
+    --text-dark: #1a1a1a; --text-body: #3d3d3d; --text-muted: #6b6b6b;
+    --green: #2d6a4f; --green-light: #e8f5e9;
+    --white: #ffffff;
+  }
+  body { font-family: 'Inter', system-ui, sans-serif; background: #1a1a1a; color: var(--text-dark); line-height: 1.6; }
+
+  /* ===== VARIATION WRAPPER ===== */
+  .variation-separator {
+    max-width: 800px; margin: 0 auto; padding: 40px 20px;
+    text-align: center; border-bottom: 3px solid var(--gold);
+  }
+  .variation-separator .tag {
+    display: inline-block; background: var(--gold); color: #000;
+    font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 4px; margin-bottom: 12px;
+  }
+  .variation-separator h2 { font-family: 'Playfair Display', serif; font-size: 28px; color: white; margin-bottom: 6px; }
+  .variation-separator p { font-size: 14px; color: #999; }
+
+  /* ===== HERO BASE ===== */
+  .hero {
+    max-width: 800px; margin: 0 auto; padding: 56px 20px 48px;
+    text-align: center; background: var(--cream);
+  }
+
+  /* Confirmation bar */
+  .confirm-bar {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--green-light); border: 1px solid rgba(45,106,79,0.2);
+    padding: 10px 20px; border-radius: 12px; margin-bottom: 28px;
+  }
+  .confirm-bar .check-icon {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--green); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; flex-shrink: 0;
+  }
+  .confirm-bar .text { font-size: 14px; font-weight: 600; color: var(--green); }
+
+  /* Pre-headline */
+  .hero-pre {
+    font-size: 15px; font-weight: 600; color: var(--text-muted);
+    margin-bottom: 14px; line-height: 1.5;
+  }
+
+  /* Main headline */
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px; font-weight: 800; line-height: 1.15;
+    color: var(--text-dark); margin-bottom: 20px;
+  }
+  .hero-title .gold { color: var(--gold); }
+  .hero-title .highlight {
+    color: var(--gold); position: relative;
+  }
+  .hero-title .highlight::after {
+    content: '';
+    position: absolute; bottom: 2px; left: 0; right: 0;
+    height: 8px; background: rgba(201,168,76,0.15); border-radius: 4px;
+    z-index: -1;
+  }
+
+  /* Sub-headline */
+  .hero-sub {
+    font-size: 18px; color: var(--text-body); line-height: 1.7;
+    max-width: 620px; margin: 0 auto 24px;
+  }
+  .hero-sub strong { color: var(--text-dark); }
+  .hero-sub em { font-style: italic; color: var(--gold-dark); }
+
+  /* Scroll nudge */
+  .scroll-nudge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 15px; font-weight: 600; color: var(--green);
+    margin-top: 4px;
+  }
+  .scroll-nudge .arrow { animation: nudgeBounce 2s ease-in-out infinite; }
+  @keyframes nudgeBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+  /* ===== VARIATION A SPECIFIC: Momentum badge ===== */
+  .momentum-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.05));
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 10px 20px; border-radius: 40px; margin-bottom: 20px;
+  }
+  .momentum-badge .icon { font-size: 18px; }
+  .momentum-badge .text {
+    font-size: 13px; font-weight: 700; color: var(--gold-dark);
+    letter-spacing: 0.5px; text-transform: uppercase;
+  }
+
+  /* ===== VARIATION B SPECIFIC: Teaser stats ===== */
+  .teaser-stats {
+    display: flex; justify-content: center; gap: 32px;
+    flex-wrap: wrap; margin-bottom: 8px;
+  }
+  .teaser-stat { text-align: center; }
+  .teaser-stat .val {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 800; color: var(--gold); line-height: 1;
+  }
+  .teaser-stat .lbl {
+    font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 4px;
+  }
+
+  /* ===== VARIATION C SPECIFIC: Welcome card ===== */
+  .welcome-card {
+    background: linear-gradient(135deg, #1a2a1a, #2d5a4f);
+    border-radius: 20px; padding: 28px 32px;
+    margin-bottom: 28px; position: relative; overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+  .welcome-card::before {
+    content: '';
+    position: absolute; top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.06) 0%, transparent 60%);
+    animation: wcShimmer 6s ease-in-out infinite;
+  }
+  @keyframes wcShimmer { 0%,100% { transform: translateX(-10%); } 50% { transform: translateX(10%); } }
+  .welcome-card .wc-pre {
+    font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: #4ade80; margin-bottom: 10px; position: relative; z-index: 1;
+  }
+  .welcome-card .wc-title {
+    font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;
+    color: var(--gold-light); line-height: 1.3; margin-bottom: 8px; position: relative; z-index: 1;
+  }
+  .welcome-card .wc-body {
+    font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.6; position: relative; z-index: 1;
+  }
+  .welcome-card .wc-body strong { color: var(--gold-light); }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .hero { padding: 40px 16px 36px; }
+    .hero-title { font-size: 30px; }
+    .hero-sub { font-size: 16px; }
+    .teaser-stats { gap: 20px; }
+    .teaser-stat .val { font-size: 22px; }
+    .welcome-card { padding: 22px 20px; }
+    .welcome-card .wc-title { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!--  VARIATION A: EXCITEMENT + MOMENTUM                          -->
+<!-- ============================================================ -->
+<div class="variation-separator">
+  <div class="tag">VARIATION A</div>
+  <h2>Excitement + Momentum</h2>
+  <p>Rides the buying energy. "You just did something powerful — keep going."</p>
+</div>
+
+<div class="hero">
+  <!-- Purchase confirmation -->
+  <div class="confirm-bar">
+    <div class="check-icon">✓</div>
+    <div class="text">Your 7-Day Shift-Proof Metabolism Reset is confirmed!</div>
+  </div>
+
+  <!-- Momentum badge -->
+  <div class="momentum-badge">
+    <span class="icon">⚡</span>
+    <span class="text">You're already ahead of 97% of nurses</span>
+  </div>
+
+  <!-- Main headline -->
+  <h1 class="hero-title">
+    You Just Lit the Match.<br>
+    <span class="highlight">Now Let's Start the Fire.</span>
+  </h1>
+
+  <!-- Sub-headline -->
+  <p class="hero-sub">
+    Most nurses think about fixing their metabolism for months. <strong>You actually did something about it.</strong> The 7-Day Reset will show you what's possible — but what if you didn't have to stop there? What if the energy, the sleep, the control over cravings could become your <em>new normal</em> instead of a 7-day experiment?
+  </p>
+
+  <!-- Scroll nudge -->
+  <div class="scroll-nudge">
+    <span class="arrow">↓</span>
+    Watch what 400+ nurses discovered after Day 7
+    <span class="arrow">↓</span>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!--  VARIATION B: CURIOSITY + FOMO                               -->
+<!-- ============================================================ -->
+<div class="variation-separator">
+  <div class="tag">VARIATION B</div>
+  <h2>Curiosity + FOMO</h2>
+  <p>Creates an open loop. "There's something about Day 8 you need to know."</p>
+</div>
+
+<div class="hero">
+  <!-- Purchase confirmation -->
+  <div class="confirm-bar">
+    <div class="check-icon">✓</div>
+    <div class="text">Your 7-Day Shift-Proof Metabolism Reset is confirmed!</div>
+  </div>
+
+  <!-- Pre-headline -->
+  <div class="hero-pre">Your reset is on its way. But before you go — there's something most nurses don't find out until it's too late.</div>
+
+  <!-- Main headline -->
+  <h1 class="hero-title">
+    The 7-Day Reset Works.<br>
+    But <span class="highlight">Day 8 Is the Real Test.</span>
+  </h1>
+
+  <!-- Sub-headline -->
+  <p class="hero-sub">
+    Here's what the data shows: <strong>87% of nurses feel a shift by Day 3.</strong> Energy up. Cravings down. Sleep actually happening. But without a Day 8 plan, cortisol creeps back, old patterns win, and that progress fades within 3 weeks. The nurses who kept their results? They didn't just reset — <em>they had something waiting on the other side.</em>
+  </p>
+
+  <!-- Teaser stats -->
+  <div class="teaser-stats">
+    <div class="teaser-stat"><div class="val">87%</div><div class="lbl">feel it by Day 3</div></div>
+    <div class="teaser-stat"><div class="val">3 wks</div><div class="lbl">without a plan, progress fades</div></div>
+    <div class="teaser-stat"><div class="val">400+</div><div class="lbl">nurses chose Day 8</div></div>
+  </div>
+
+  <!-- Scroll nudge -->
+  <div class="scroll-nudge">
+    <span class="arrow">↓</span>
+    See what they found on the other side
+    <span class="arrow">↓</span>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!--  VARIATION C: CELEBRATION + REWARD                           -->
+<!-- ============================================================ -->
+<div class="variation-separator">
+  <div class="tag">VARIATION C</div>
+  <h2>Celebration + Reward</h2>
+  <p>Treats the purchase as an achievement. "You're not like most people. Here's what you've earned."</p>
+</div>
+
+<div class="hero">
+  <!-- Purchase confirmation -->
+  <div class="confirm-bar">
+    <div class="check-icon">✓</div>
+    <div class="text">Your 7-Day Shift-Proof Metabolism Reset is confirmed!</div>
+  </div>
+
+  <!-- Welcome card -->
+  <div class="welcome-card">
+    <div class="wc-pre">Welcome to the 1%</div>
+    <div class="wc-title">Most nurses say "I'll start Monday." You just actually started.</div>
+    <div class="wc-body">That puts you in rare company. The kind of nurse who <strong>does the thing instead of just thinking about it.</strong> Your reset is on its way — but you've earned the right to see what's next.</div>
+  </div>
+
+  <!-- Main headline -->
+  <h1 class="hero-title">
+    You Invested in Yourself.<br>
+    Now See <span class="highlight">What That Unlocks.</span>
+  </h1>
+
+  <!-- Sub-headline -->
+  <p class="hero-sub">
+    The 7-Day Reset is the spark. It'll show you that your body <em>can</em> respond again — that the exhaustion, the stubborn belly fat, the cravings aren't permanent. <strong>But the nurses who got the biggest transformations?</strong> They didn't stop at the spark. They walked through a door that most people never even see.
+  </p>
+
+  <!-- Scroll nudge -->
+  <div class="scroll-nudge">
+    <span class="arrow">↓</span>
+    Here's what's behind the door
+    <span class="arrow">↓</span>
+  </div>
+</div>
+
+</body>
+</html>

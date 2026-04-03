@@ -1,0 +1,309 @@
+<!-- SmithFit FAQ + Objection Handler — GHL Custom Code Block -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  .sf-faq * { margin: 0; padding: 0; box-sizing: border-box; }
+  .sf-faq {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #faf6ef;
+    max-width: 760px; margin: 0 auto; padding: 48px 16px;
+    color: #1a1a1a; line-height: 1.6;
+  }
+
+  .sf-faq-header { text-align: center; margin-bottom: 40px; }
+  .sf-faq-tag { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #a88a3a; margin-bottom: 10px; }
+  .sf-faq-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; line-height: 1.2; }
+  .sf-faq-sub { font-size: 15px; color: #6b6b6b; max-width: 520px; margin: 0 auto; }
+
+  /* Social Proof Banner */
+  .sf-faq-banner {
+    background: linear-gradient(90deg, #c9a84c, #d4b86a, #c9a84c);
+    background-size: 200% 200%;
+    padding: 14px 20px; border-radius: 12px; margin-bottom: 36px;
+    text-align: center; font-weight: 600; color: #1a1a1a; font-size: 14px;
+    animation: sfFaqShimmer 3s ease-in-out infinite;
+  }
+  @keyframes sfFaqShimmer { 0% { background-position: 200% center; } 50% { background-position: 0% center; } 100% { background-position: 200% center; } }
+
+  /* FAQ Items */
+  .sf-faq-list { margin-bottom: 48px; }
+  .sf-faq-item {
+    background: #ffffff; border-radius: 12px; border: 2px solid #e8e0d0;
+    margin-bottom: 12px; overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .sf-faq-item:hover { border-color: #c9a84c; }
+  .sf-faq-item.sf-faq-open { border-color: #c9a84c; box-shadow: 0 4px 20px rgba(201,168,76,0.15); }
+
+  .sf-faq-q {
+    padding: 18px 20px; cursor: pointer;
+    display: -webkit-flex; display: flex;
+    -webkit-align-items: center; align-items: center;
+    -webkit-justify-content: space-between; justify-content: space-between;
+    font-weight: 600; font-size: 15px; color: #1a1a1a;
+    user-select: none; -webkit-user-select: none;
+  }
+  .sf-faq-q:hover { color: #a88a3a; }
+
+  .sf-faq-arrow {
+    width: 20px; height: 20px; flex-shrink: 0; margin-left: 12px;
+    transition: transform 0.3s; -webkit-transition: -webkit-transform 0.3s;
+  }
+  .sf-faq-open .sf-faq-arrow { transform: rotate(180deg); -webkit-transform: rotate(180deg); }
+
+  .sf-faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease;
+    border-top: 1px solid #e8e0d0;
+  }
+  .sf-faq-open .sf-faq-a { max-height: 400px; }
+
+  .sf-faq-a-inner { padding: 18px 20px; }
+  .sf-faq-a-inner p { font-size: 14px; line-height: 1.7; color: #3d3d3d; }
+  .sf-faq-a-inner strong { color: #1a1a1a; }
+  .sf-faq-a-inner em { color: #a88a3a; font-style: normal; font-weight: 600; }
+
+  /* What You Get Table */
+  .sf-faq-table-header { text-align: center; margin-bottom: 20px; margin-top: 8px; }
+  .sf-faq-table-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+  .sf-faq-table-sub { font-size: 14px; color: #6b6b6b; }
+
+  .sf-faq-table {
+    background: #ffffff; border-radius: 14px; overflow: hidden;
+    border: 2px solid #e8e0d0; margin-bottom: 12px;
+  }
+  .sf-faq-table table { width: 100%; border-collapse: collapse; }
+  .sf-faq-table th {
+    background: linear-gradient(135deg, #c9a84c, #d4b86a);
+    padding: 16px 20px; text-align: left; font-weight: 700; color: #1a1a1a; font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+  .sf-faq-table td {
+    padding: 14px 20px; border-bottom: 1px solid #f0e8d8; font-size: 14px; color: #3d3d3d;
+  }
+  .sf-faq-table tr:last-child td { border-bottom: none; }
+  .sf-faq-table tr:nth-child(even) { background: #faf6ef; }
+  .sf-faq-check { color: #c9a84c; font-weight: 700; font-size: 18px; }
+
+  /* CTA at bottom */
+  .sf-faq-cta { text-align: center; margin-top: 36px; }
+  .sf-faq-cta-btn {
+    display: inline-block; background: linear-gradient(135deg, #c9a84c, #a88a3a);
+    color: #fff; font-size: 16px; font-weight: 700; padding: 16px 36px;
+    border: none; border-radius: 12px; cursor: pointer; text-decoration: none;
+    box-shadow: 0 4px 16px rgba(201,168,76,0.3); max-width: 480px; width: 100%;
+  }
+  .sf-faq-cta-btn:hover { box-shadow: 0 6px 24px rgba(201,168,76,0.4); }
+  .sf-faq-cta-sub { font-size: 12px; color: #6b6b6b; margin-top: 8px; }
+
+  @media (max-width: 640px) {
+    .sf-faq { padding: 32px 12px; }
+    .sf-faq-title { font-size: 26px; }
+    .sf-faq-q { font-size: 14px; padding: 16px; }
+    .sf-faq-a-inner p { font-size: 13px; }
+    .sf-faq-table td { padding: 12px 16px; font-size: 13px; }
+    .sf-faq-table-title { font-size: 20px; }
+    .sf-faq-cta-btn { font-size: 15px; padding: 14px 24px; }
+  }
+</style>
+
+<div class="sf-faq">
+  <div class="sf-faq-header">
+    <div class="sf-faq-tag">REAL ANSWERS FOR REAL NURSES</div>
+    <div class="sf-faq-title">You've Got Questions. We've Got Answers.</div>
+    <div class="sf-faq-sub">Everything you need to know before you join the Sisterhood.</div>
+  </div>
+
+  <div class="sf-faq-banner">
+    <span id="sfFaqMsg">87% of members feel a difference by Day 3</span>
+  </div>
+
+  <div class="sf-faq-list" id="sfFaqList">
+
+    <div class="sf-faq-item">
+      <div class="sf-faq-q">
+        <span>I work nights. Will this actually work with my schedule?</span>
+        <svg class="sf-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="#a88a3a" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="sf-faq-a"><div class="sf-faq-a-inner">
+        <p>This isn't clock-based. It's <em>shift-based</em>. Every protocol — your eating windows, your reset routine, your workouts — is built around 12-hour shifts, not a 9-to-5. Night shift, rotating, days — it all works because we built it for the schedule you actually live, not the one fitness influencers assume you have.</p>
+      </div></div>
+    </div>
+
+    <div class="sf-faq-item">
+      <div class="sf-faq-q">
+        <span>Do I have to track macros or count calories?</span>
+        <svg class="sf-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="#a88a3a" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="sf-faq-a"><div class="sf-faq-a-inner">
+        <p>No. Structure beats tracking. You get pre-built meal templates for Work Days, Off Days, and Chaos Days. Follow the plate structure, not a spreadsheet. If you want to track for extra insight, you can — but it's never required. Most of our members see results without ever logging a single calorie.</p>
+      </div></div>
+    </div>
+
+    <div class="sf-faq-item">
+      <div class="sf-faq-q">
+        <span>I barely have time to eat on shift — how is this realistic?</span>
+        <svg class="sf-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="#a88a3a" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="sf-faq-a"><div class="sf-faq-a-inner">
+        <p>Built for missed breaks. That's literally why it works. The Chaos-Day Rescue Plans exist because we know you'll have shifts where you can't sit down for 6 hours straight. You don't need perfect conditions — you need a system that holds up when conditions are terrible. That's what this is.</p>
+      </div></div>
+    </div>
+
+    <div class="sf-faq-item">
+      <div class="sf-faq-q">
+        <span>I've tried everything — keto, IF, Weight Watchers. Why would this be different?</span>
+        <svg class="sf-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="#a88a3a" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="sf-faq-a"><div class="sf-faq-a-inner">
+        <p>You tried effort. You haven't tried <em>regulation first</em>. Every program you've done assumed a stable circadian rhythm and low stress. But you're a shift nurse — you live in chronic fight-or-flight. We calm the nervous system first, then the body responds. That's why 87% feel different by Day 3. It's not willpower — it's physiology.</p>
+      </div></div>
+    </div>
+
+    <div class="sf-faq-item">
+      <div class="sf-faq-q">
+        <span>I'm in perimenopause / menopause. Will this still work for me?</span>
+        <svg class="sf-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="#a88a3a" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="sf-faq-a"><div class="sf-faq-a-inner">
+        <p>Hormonal changes make stress sensitivity <strong>higher</strong> — which means regulation becomes even more essential, not less. Many of our most successful members are peri- or post-menopausal. When your body is already fighting hormonal shifts, calming the cortisol response is the unlock that makes everything else start working again.</p>
+      </div></div>
+    </div>
+
+    <div class="sf-faq-item">
+      <div class="sf-faq-q">
+        <span>I'm too exhausted after my shift to work out. Can I still do this?</span>
+        <svg class="sf-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="#a88a3a" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="sf-faq-a"><div class="sf-faq-a-inner">
+        <p>We're not chasing sweat. We're sending a signal. The workouts are 15 minutes, cortisol-conscious, and designed to help — not punish. Plus there's a "Too Tired" 5-minute backup for your absolute worst days. And here's the truth: <strong>the eating protocol and nervous system reset do most of the heavy lifting</strong>. Movement helps, but it's not the make-or-break.</p>
+      </div></div>
+    </div>
+
+    <div class="sf-faq-item">
+      <div class="sf-faq-q">
+        <span>Is this just a meal plan I could find on Pinterest?</span>
+        <svg class="sf-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="#a88a3a" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="sf-faq-a"><div class="sf-faq-a-inner">
+        <p>Not even close. This is a shift-proof metabolic system. Meal templates are one piece. You also get the Nervous System Reset protocol, circadian-timed eating guides, cortisol-conscious workouts, Chaos-Day Rescue Plans, weekly live coaching with a nurse who's worked the floor, and a community of 400+ nurses who get it. A Pinterest meal plan doesn't rewire your stress response.</p>
+      </div></div>
+    </div>
+
+    <div class="sf-faq-item">
+      <div class="sf-faq-q">
+        <span>What if I can't make the live coaching calls?</span>
+        <svg class="sf-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="#a88a3a" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="sf-faq-a"><div class="sf-faq-a-inner">
+        <p>We know your schedule is unpredictable — that's the whole point. Calls are recorded and available in the app so you can watch on your own time. Most members catch replays between shifts or on off days. You'll never miss the value just because you're on the floor.</p>
+      </div></div>
+    </div>
+
+    <div class="sf-faq-item">
+      <div class="sf-faq-q">
+        <span>Can I cancel anytime?</span>
+        <svg class="sf-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="#a88a3a" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="sf-faq-a"><div class="sf-faq-a-inner">
+        <p>Yes. No contracts, no hoops to jump through. You stay because it's working, not because you're locked in. That said — most members who give it 30 days never look back. When your scrubs fit different and you stop dreading the mirror, canceling is the last thing on your mind.</p>
+      </div></div>
+    </div>
+
+  </div>
+
+  <!-- What You Get -->
+  <div class="sf-faq-table-header">
+    <div class="sf-faq-table-title">What You're Walking Into</div>
+    <div class="sf-faq-table-sub">Everything inside the Metabolic Breakthrough Membership</div>
+  </div>
+
+  <div class="sf-faq-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Inside Your Membership</th>
+          <th>Included</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Shift-Proof Meal Plans — Work Day, Off Day, and Chaos Day templates so you never wonder what to eat</td>
+          <td><span class="sf-faq-check">&#10003;</span></td>
+        </tr>
+        <tr>
+          <td>1,000+ Nurse-Friendly Recipe Database — quick meals that fit your schedule, not the other way around</td>
+          <td><span class="sf-faq-check">&#10003;</span></td>
+        </tr>
+        <tr>
+          <td>15-Minute Cortisol-Conscious Workouts — 3 progressive levels, no gym, plus a "Too Tired" 5-min backup</td>
+          <td><span class="sf-faq-check">&#10003;</span></td>
+        </tr>
+        <tr>
+          <td>Chaos-Day Rescue Plans — your lifeline for doubles, missed breaks, and night 3 of 4</td>
+          <td><span class="sf-faq-check">&#10003;</span></td>
+        </tr>
+        <tr>
+          <td>Weekly Live Coaching with IJ + Team — real answers from a nurse who's worked the floor</td>
+          <td><span class="sf-faq-check">&#10003;</span></td>
+        </tr>
+        <tr>
+          <td>The SmithFit Sisterhood Community — 400+ nurses who actually understand your schedule, your cravings, and your wins</td>
+          <td><span class="sf-faq-check">&#10003;</span></td>
+        </tr>
+        <tr>
+          <td>Weekly Check-Ins — stay on track and know exactly where you stand every single week</td>
+          <td><span class="sf-faq-check">&#10003;</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CTA -->
+  <div class="sf-faq-cta">
+    <a href="#checkout" class="sf-faq-cta-btn">YES — I'm Ready to Feel Like Myself Again &rarr;</a>
+    <div class="sf-faq-cta-sub">$67/month. Cancel anytime. No contracts.</div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // FAQ Accordion
+  try {
+    var items = document.querySelectorAll('.sf-faq-item');
+    for (var i = 0; i < items.length; i++) {
+      (function(item) {
+        var q = item.querySelector('.sf-faq-q');
+        if (!q) return;
+        q.addEventListener('click', function() {
+          var wasOpen = item.className.indexOf('sf-faq-open') !== -1;
+          // Close all
+          for (var j = 0; j < items.length; j++) {
+            items[j].className = 'sf-faq-item';
+          }
+          // Toggle clicked
+          if (!wasOpen) {
+            item.className = 'sf-faq-item sf-faq-open';
+          }
+        });
+      })(items[i]);
+    }
+  } catch(e) {}
+
+  // Rotating social proof
+  try {
+    var msgs = [
+      '87% of members feel a difference by Day 3',
+      '400+ shift nurses already inside the Sisterhood',
+      'Average 5 lbs lost in Week 1',
+      'Built by a nurse, for nurses'
+    ];
+    var mi = 0;
+    var msgEl = document.getElementById('sfFaqMsg');
+    setInterval(function() {
+      mi = (mi + 1) % msgs.length;
+      if (msgEl) msgEl.textContent = msgs[mi];
+    }, 5000);
+  } catch(e) {}
+})();
+</script>

@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmithFit Bundle Page Audit Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf6ef;
+            color: #2d2d2d;
+            line-height: 1.6;
+        }
+
+        /* Sticky Header */
+        .audit-header {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(135deg, #c9a84c 0%, #a88a3d 100%);
+            color: white;
+            padding: 20px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .header-left h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header-left p {
+            font-size: 13px;
+            opacity: 0.95;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .score-display {
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .score-current {
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .score-projected {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .gauge-container {
+            width: 180px;
+        }
+
+        .gauge {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+
+        .gauge-fill-current {
+            height: 100%;
+            width: 51%;
+            background: #ff4444;
+            transition: width 0.6s ease;
+        }
+
+        .gauge-fill-projected {
+            height: 100%;
+            width: 88%;
+            background: #4cd964;
+            transition: width 0.6s ease;
+        }
+
+        .gauge-label {
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 40px;
+        }
+
+        /* Executive Summary */
+        .summary-section {
+            background: white;
+            border-left: 5px solid #c9a84c;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .summary-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #2d2d2d;
+        }
+
+        .summary-section p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        .severity-counts {
+            display: flex;
+            gap: 25px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e8e8e8;
+        }
+
+        .count-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .severity-badge {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .badge-critical {
+            background: #ff4444;
+        }
+
+        .badge-important {
+            background: #ff9500;
+        }
+
+        .badge-enhancement {
+            background: #4cd964;
+        }
+
+        /* Audit Sections */
+        .audit-section {
+            background: white;
+            margin-bottom: 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .section-header {
+            padding: 20px 30px;
+            background: #f8f6f0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+            user-select: none;
+        }
+
+        .section-header:hover {
+            background: #f0ece0;
+        }
+
+        .section-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #2d2d2d;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .score-current-section {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2d2d2d;
+            min-width: 50px;
+            text-align: right;
+        }
+
+        .score-projected-section {
+            font-size: 12px;
+            color: #999;
+            min-width: 35px;
+            text-align: right;
+        }
+
+        .toggle-icon {
+            width: 28px;
+            height: 28px;
+            background: #c9a84c;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .audit-section.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .section-content {
+            display: none;
+            padding: 30px;
+            border-top: 1px solid #e8e8e8;
+            animation: slideDown 0.3s ease;
+        }
+
+        .audit-section.active .section-content {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Content Styles */
+        .content-subsection {
+            margin-bottom: 24px;
+        }
+
+        .subsection-title {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #c9a84c;
+            margin-bottom: 10px;
+        }
+
+        .good-items, .bad-items, .fix-items {
+            margin-bottom: 16px;
+        }
+
+        .item {
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            border-radius: 4px;
+            border-left: 3px solid;
+        }
+
+        .good-item {
+            background: #f0fdf4;
+            border-left-color: #4cd964;
+            color: #1b4d1b;
+        }
+
+        .bad-item {
+            background: #fef2f2;
+            border-left-color: #ff4444;
+            color: #7d1111;
+        }
+
+        .fix-item {
+            background: #fef9f0;
+            border-left-color: #ff9500;
+            color: #6b3e1f;
+        }
+
+        .copy-suggestion {
+            background: #f5f1e8;
+            border-left: 3px solid #c9a84c;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 16px 0;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .copy-suggestion strong {
+            color: #c9a84c;
+            font-weight: 600;
+        }
+
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 16px 0;
+        }
+
+        .before-block, .after-block {
+            padding: 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .before-block {
+            background: #fef2f2;
+            border: 2px solid #ff4444;
+        }
+
+        .after-block {
+            background: #f0fdf4;
+            border: 2px solid #4cd964;
+        }
+
+        .before-after-label {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Checklist */
+        .priority-checklist {
+            margin: 24px 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #f8f6f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item:hover {
+            background: #f0ece0;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-top: 3px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .checklist-item.checked {
+            opacity: 0.7;
+            text-decoration: line-through;
+        }
+
+        .checklist-item label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        /* Severity Indicator */
+        .severity-badge-inline {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 700;
+            color: white;
+            margin-right: 8px;
+        }
+
+        .severity-critical-inline {
+            background: #ff4444;
+        }
+
+        .severity-important-inline {
+            background: #ff9500;
+        }
+
+        .severity-enhancement-inline {
+            background: #4cd964;
+        }
+
+        /* Score Meter */
+        .score-meter {
+            margin: 24px 0;
+            padding: 20px;
+            background: #f8f6f0;
+            border-radius: 6px;
+        }
+
+        .meter-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            color: #666;
+        }
+
+        .meter {
+            height: 12px;
+            background: #e8e8e8;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .meter-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4444 0%, #ff9500 50%, #4cd964 100%);
+            width: 51%;
+            transition: width 0.6s ease;
+        }
+
+        .meter-comparison {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .meter-fill.projected {
+            width: 88%;
+            background: linear-gradient(90deg, #ff4444 0%, #ff9500 50%, #4cd964 100%);
+        }
+
+        /* Bottom CTA */
+        .final-cta {
+            background: linear-gradient(135deg, #c9a84c 0%, #a88a3d 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 60px 0 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .final-cta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .final-cta p {
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        .audit-footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #e8e8e8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .audit-header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .header-right {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+            }
+
+            .gauge-container {
+                width: 100%;
+            }
+
+            .before-after {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .section-header-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .severity-counts {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Header -->
+    <div class="audit-header">
+        <div class="header-left">
+            <h1>SmithFit Bundle Upgrade Audit</h1>
+            <p>Hormozi Framework Conversion Analysis — Bundle Sales Page</p>
+        </div>
+        <div class="header-right">
+            <div class="score-display">
+                <div class="score-label">Current Score</div>
+                <div class="score-current" id="currentScore">5.1</div>
+                <div class="score-projected">/ 10</div>
+            </div>
+            <div class="gauge-container">
+                <div style="margin-bottom: 8px;">
+                    <div class="gauge">
+                        <div class="gauge-fill-current"></div>
+                    </div>
+                    <div class="gauge-label">
+                        <span style="font-size: 10px;">Current</span>
+                        <span style="font-size: 10px;">51%</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="gauge">
+                        <div class="gauge-fill-projected"></div>
+                    </div>
+                    <div class="gauge-label">
+                        <span style="font-size: 10px;">Projected</span>
+                        <span style="font-size: 10px;">88%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="score-display">
+                <div class="score-label">Projected Score</div>
+                <div class="score-current" style="color: #4cd964;">8.8</div>
+                <div class="score-projected">/ 10</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Executive Summary -->
+        <div class="summary-section">
+            <h2>Executive Summary</h2>
+            <p><strong>Page Purpose:</strong> Upgrade monthly members ($67/mo) to 6-month ($335) or 12-month ($588) bundle with premium bonuses and quarterly coaching.</p>
+            <p><strong>Current Performance:</strong> The page has strong foundation (good copy, valid bonus images, clear pricing) but is undermined by critical trust/conversion blockers: no commitment-trust framing, broken video, wrong avatar photo, missing countdown timer, and weak social proof.</p>
+            <p><strong>Opportunity:</strong> 14 actionable fixes can elevate this page from 5.1 → 8.8/10, directly impacting bundle upgrade revenue. Highest-impact fixes: add commitment trust section, fix video, fix avatar, and add working countdown timer.</p>
+            
+            <div class="severity-counts">
+                <div class="count-item">
+                    <div class="severity-badge badge-critical">🚨</div>
+                    <span>5 Critical Fixes</span>
+                </div>
+                <div class="count-item">
+                    <div class="severity-badge badge-important">⚠️</div>
+                    <span>5 Important Fixes</span>
+                </div>
+                <div class="count-item">
+                    <div class="severity-badge badge-enhancement">💡</div>
+                    <span>4 Enhancement Fixes</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. Dream Outcome Clarity -->
+        <div class="audit-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>
+                    <span class="severity-badge badge-critical">🚨</span>
+                    Dream Outcome Clarity
+                </h3>
+                <div class="section-header-right">
+                    <div class="score-current-section">6/10</div>
+                    <div class="score-projected-section">→ 8/10</div>
+                    <div class="toggle-icon">▼</div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="content-subsection">
+                    <div class="subsection-title">✅ What's Working</div>
+                    <div class="good-items">
+                        <div class="item good-item">
+                            <strong>"87% of SmithFit members who commit to 6+ months reach their goal weight"</strong> — compelling stat validates commitment = results
+                        </div>
+                        <div class="item good-item">
+                            Hero headline validates their decision: "You're Officially a SmithFit Member" + "Now Let's Fast-Track Your Results"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">❌ What's Broken</div>
+                    <div class="bad-items">
+                        <div class="item bad-item">
+                            <strong>Hero section renders mostly blank/whitespace.</strong> No aspirational image of the transformation they'll achieve. Page opens with empty visual space.
+                        </div>
+                        <div class="item bad-item">
+                            Missing <strong>identity-level outcome painting.</strong> The brand voice says "the woman who looks put-together without trying" — this page never paints that vision.
+                        </div>
+                        <div class="item bad-item">
+                            No hero image or transformation visual. Cannot see what "fast-track results" looks like for a female nurse.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">🔧 How to Fix It</div>
+                    <div class="fix-items">
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-critical-inline">CRITICAL</strong>
+                            Add hero image: confident, put-together female nurse in scrubs, standing upright, relaxed posture. Caption: "She stopped fighting her body. She aligned it."
+                        </div>
+                        <div class="item fix-item">
+                            Inject identity-level outcome language in the hero section (below "Now Let's Fast-Track Your Results")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copy-suggestion">
+                    <strong>Hero Section Suggested Copy:</strong><br><br>
+                    <strong>Current:</strong> "You're Officially a SmithFit Member. Now Let's Fast-Track Your Results."<br><br>
+                    <strong>Suggested:</strong> "You're Officially a SmithFit Member.<br>Now Let's Get You Back to Feeling Like Yourself.<br><br>The nurses who lock in 6–12 months don't just lose the weight. They shift how they live. Meals become automatic. Workouts become non-negotiable. Your scrubs fit. Your posture lifts. You stop apologizing for your body.<br><br>Here's what commitment unlocks."
+                </div>
+
+                <div class="score-meter">
+                    <div class="meter-label">Conversion Impact: Adding Hero Image + Outcome Copy</div>
+                    <div class="meter-comparison">
+                        <span>Minimal Impact</span>
+                        <span style="text-align: right;">Major Impact</span>
+                    </div>
+                    <div class="meter">
+                        <div class="meter-fill" style="width: 72%; background: #ff9500;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Perceived Likelihood of Success -->
+        <div class="audit-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>
+                    <span class="severity-badge badge-critical">🚨</span>
+                    Perceived Likelihood of Success
+                </h3>
+                <div class="section-header-right">
+                    <div class="score-current-section">5/10</div>
+                    <div class="score-projected-section">→ 8/10</div>
+                    <div class="toggle-icon">▼</div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="content-subsection">
+                    <div class="subsection-title">✅ What's Working</div>
+                    <div class="good-items">
+                        <div class="item good-item">
+                            87% vs 23% stat creates powerful contrast (commitment matters)
+                        </div>
+                        <div class="item good-item">
+                            Metabolic timeline (Month 1-2 → 7-12) shows progression path
+                        </div>
+                        <div class="item good-item">
+                            Comparison table is well-structured and clear
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">❌ What's Broken</div>
+                    <div class="bad-items">
+                        <div class="item bad-item">
+                            <strong>VIDEO IS COMPLETELY BROKEN.</strong> "No compatible source was found for this media" — massive trust killer. Video embed fails entirely.
+                        </div>
+                        <div class="item bad-item">
+                            Testimonials appear placeholder-ish: no photos, generic names (Lisa, Rachel, Danielle). No faces = no trust.
+                        </div>
+                        <div class="item bad-item">
+                            "Commitment Results" case studies all start with identical copy: "Was doing everything 'right' but nothing was working..." — kills credibility. Should be diverse.
+                        </div>
+                        <div class="item bad-item">
+                            Missing "400+ nurses transformed" stat. No aggregated social proof anywhere on page.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">🔧 How to Fix It</div>
+                    <div class="fix-items">
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-critical-inline">CRITICAL</strong>
+                            Fix video embed. Ensure MP4/WebM is properly hosted and sourced. Test playback across devices.
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-important-inline">IMPORTANT</strong>
+                            Add high-res photos to all 3 testimonials. Use real client photos or hire a photographer to shoot with a female nurse in scrubs.
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-important-inline">IMPORTANT</strong>
+                            Diversify case study opening copy (see copy suggestion below)
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-enhancement-inline">ENHANCEMENT</strong>
+                            Add "400+ Nurses Transformed" animated counter at the top of the page
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copy-suggestion">
+                    <strong>Case Study Opening Copy — Diversify (Currently All Identical):</strong><br><br>
+                    <strong>Case Study 1 — "The Overachiever":</strong><br>
+                    "I was doing everything right. Meal prep on Sundays, workouts 5x/week, IF. Still stuck. Still tired."<br><br>
+                    <strong>Case Study 2 — "The Shift Worker":</strong><br>
+                    "Night shifts made everything harder. I'd commit Monday–Friday, then blow it on chaotic weekends. Felt like I was fighting my own schedule."<br><br>
+                    <strong>Case Study 3 — "The Burnout Case":</strong><br>
+                    "I stopped trying. Too exhausted from 12-hour shifts. Coffee and vibes. My scrubs were getting tighter every month."
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Time to Result -->
+        <div class="audit-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>
+                    <span class="severity-badge badge-important">⚠️</span>
+                    Time to Result
+                </h3>
+                <div class="section-header-right">
+                    <div class="score-current-section">7/10</div>
+                    <div class="score-projected-section">→ 9/10</div>
+                    <div class="toggle-icon">▼</div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="content-subsection">
+                    <div class="subsection-title">✅ What's Working</div>
+                    <div class="good-items">
+                        <div class="item good-item">
+                            Metabolic timeline clearly shows Month 1-2 through 7-12 progression
+                        </div>
+                        <div class="item good-item">
+                            Science section explains causality (why commitment = results)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">❌ What's Broken</div>
+                    <div class="bad-items">
+                        <div class="item bad-item">
+                            Missing the quick-win hook from brand voice: "Feel the difference by Day 3" is nowhere on this page
+                        </div>
+                        <div class="item bad-item">
+                            Timeline is text-heavy. Could be more visual/interactive (animated cards, progress bars)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">🔧 How to Fix It</div>
+                    <div class="fix-items">
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-enhancement-inline">ENHANCEMENT</strong>
+                            Add "Day 3" quick-win claim in the hero or early on page. Example: "Notice a shift in your energy by Day 3. That's how you know it's working."
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-enhancement-inline">ENHANCEMENT</strong>
+                            Visualize the metabolic timeline with animated progress cards (Month 1-2 → Month 3-4 → Month 5-6 → Month 7-12) instead of text blocks
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copy-suggestion">
+                    <strong>Timeline Section — Add Quick-Win Hook:</strong><br><br>
+                    "The Science of Commitment — Why 6–12 Months Changes Everything<br><br><em>But here's what they notice first: by Day 3, the fight goes quiet. Your body stops pulling you. That's regulation kicking in.</em><br><br>Here's the full progression:"
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Effort & Sacrifice -->
+        <div class="audit-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>
+                    <span class="severity-badge badge-enhancement">💡</span>
+                    Effort & Sacrifice
+                </h3>
+                <div class="section-header-right">
+                    <div class="score-current-section">6/10</div>
+                    <div class="score-projected-section">→ 8/10</div>
+                    <div class="toggle-icon">▼</div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="content-subsection">
+                    <div class="subsection-title">✅ What's Working</div>
+                    <div class="good-items">
+                        <div class="item good-item">
+                            Brand voice is present: no overly complex promises
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">❌ What's Broken</div>
+                    <div class="bad-items">
+                        <div class="item bad-item">
+                            Doesn't explicitly frame that the BUNDLE removes decision fatigue. Page asks for commitment but doesn't position it as "set it and forget it"
+                        </div>
+                        <div class="item bad-item">
+                            Missing positioning: "6-month plan = do the work once, the system carries you for 26 weeks"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">🔧 How to Fix It</div>
+                    <div class="fix-items">
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-enhancement-inline">ENHANCEMENT</strong>
+                            Frame bundle commitment as "Set It and Forget It" — your meal plans are done, your workouts are queued, your coaching is scheduled. Add this positioning copy before pricing cards.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copy-suggestion">
+                    <strong>Add Before Pricing Section:</strong><br><br>
+                    "The Real Win? You Stop Deciding.<br><br>Monthly gives you access. The bundle gives you a system.<br><br>Your meals are templated for every shift pattern. Your workouts are programmed. Your coach check-ins are booked. You're not fighting decision fatigue in Month 3 when life gets chaotic. It's already locked in."
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Bonus Stack Presentation -->
+        <div class="audit-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>
+                    <span class="severity-badge badge-important">⚠️</span>
+                    Bonus Stack Presentation
+                </h3>
+                <div class="section-header-right">
+                    <div class="score-current-section">7/10</div>
+                    <div class="score-projected-section">→ 9/10</div>
+                    <div class="toggle-icon">▼</div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="content-subsection">
+                    <div class="subsection-title">✅ What's Working</div>
+                    <div class="good-items">
+                        <div class="item good-item">
+                            Clear bonus values separated by tier ($610 for 6-month, $1,205 for 12-month)
+                        </div>
+                        <div class="item good-item">
+                            Good descriptions for each bonus (Onboarding Call, MealLens, BioSync, VIP Coach DM, Quarterly Checkpoints)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">❌ What's Broken</div>
+                    <div class="bad-items">
+                        <div class="item bad-item">
+                            No visual icons/images for bonuses. All text, no visual hierarchy
+                        </div>
+                        <div class="item bad-item">
+                            Dollar values may feel inflated without justification (why is Onboarding Call worth $197?)
+                        </div>
+                        <div class="item bad-item">
+                            Missing "normally $X, yours free" framing. Should say "normally $197, included free with 6-month"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">🔧 How to Fix It</div>
+                    <div class="fix-items">
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-important-inline">IMPORTANT</strong>
+                            Add icons for each bonus: calendar for Onboarding Call, fork/apple for MealLens, heart/pulse for BioSync, chat bubble for VIP DM, chart for Quarterly Checkpoints
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-important-inline">IMPORTANT</strong>
+                            Justify bonus values with copy. Example: "Onboarding Call ($197 value) — 60 minutes with IJ to map your shift patterns and set up your first 30 days"
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-enhancement-inline">ENHANCEMENT</strong>
+                            Add visual "included free" badges or checkmarks next to bonuses
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copy-suggestion">
+                    <strong>Bonus Description with Value Justification:</strong><br><br>
+                    "<strong>Onboarding Call ($197 value)</strong><br>60 minutes with IJ to map your exact shift patterns, set up your first 30 days of meal templates, and nail your morning cortisol routine. This call alone has saved members 40+ hours of guesswork."
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Pricing & Anchoring -->
+        <div class="audit-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>
+                    <span class="severity-badge badge-important">⚠️</span>
+                    Pricing & Anchoring
+                </h3>
+                <div class="section-header-right">
+                    <div class="score-current-section">7/10</div>
+                    <div class="score-projected-section">→ 9/10</div>
+                    <div class="toggle-icon">▼</div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="content-subsection">
+                    <div class="subsection-title">✅ What's Working</div>
+                    <div class="good-items">
+                        <div class="item good-item">
+                            Comparison table is well-structured and easy to scan
+                        </div>
+                        <div class="item good-item">
+                            Savings are clearly shown ($67 saved / $216 saved)
+                        </div>
+                        <div class="item good-item">
+                            "BEST VALUE" badge on 12-month creates clear hierarchy
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">❌ What's Broken</div>
+                    <div class="bad-items">
+                        <div class="item bad-item">
+                            <strong>Monthly option ($67/m) has a full CTA button</strong> — this could steal clicks from the desired upgrade. Monthly should be de-emphasized (text-only, no button).
+                        </div>
+                        <div class="item bad-item">
+                            Savings language is subtle. "Save $67 over 6 months" doesn't have the same visceral punch as "$67 less per month" or "equivalent to 1 free month"
+                        </div>
+                        <div class="item bad-item">
+                            Strikethrough pricing is present but could be bolder/more visual
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">🔧 How to Fix It</div>
+                    <div class="fix-items">
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-critical-inline">CRITICAL</strong>
+                            Remove CTA button from monthly option. Replace with text-only: "Stay with Monthly — $67/month, no premium bonuses" (greyed out, smaller text)
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-important-inline">IMPORTANT</strong>
+                            Reframe savings language. Instead of "$67 saved over 6 months," say: "Save $1.29 per day" or "Equivalent to 1 free month" (more visceral)
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-enhancement-inline">ENHANCEMENT</strong>
+                            Add a small visual comparison: "$67 × 6 months = $402. You pay $335. That's a savings of $67."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="before-after">
+                    <div class="before-block">
+                        <div class="before-after-label">❌ CURRENT (Confusing)</div>
+                        <strong>Monthly:</strong> $67/month<br>
+                        [Choose $67/M Button]<br><br>
+                        <strong>6-Month:</strong> $55/mo ($335)<br>
+                        [Upgrade to 6-Month Button]<br><br>
+                        Save $67
+                    </div>
+                    <div class="after-block">
+                        <div class="before-after-label">✅ IMPROVED (Clear)</div>
+                        <strong>6-Month Commitment</strong><br>
+                        <strike>$402</strike> <strong>$335</strong><br>
+                        <em>$55.83/month</em><br>
+                        Save $67 (equivalent to 1 free month)<br>
+                        [Primary CTA: Upgrade to 6-Month]<br><br>
+                        <small>Or stay with monthly: $67/month</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Urgency & Scarcity -->
+        <div class="audit-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>
+                    <span class="severity-badge badge-critical">🚨</span>
+                    Urgency & Scarcity
+                </h3>
+                <div class="section-header-right">
+                    <div class="score-current-section">4/10</div>
+                    <div class="score-projected-section">→ 8/10</div>
+                    <div class="toggle-icon">▼</div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="content-subsection">
+                    <div class="subsection-title">✅ What's Working</div>
+                    <div class="good-items">
+                        <div class="item good-item">
+                            "One-Time-Only Offer" section exists and makes the case that bonuses are temporary
+                        </div>
+                        <div class="item good-item">
+                            "ONLY available right now" language creates basic scarcity
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">❌ What's Broken</div>
+                    <div class="bad-items">
+                        <div class="item bad-item">
+                            <strong>Countdown timer heading exists but NO TIMER RENDERS.</strong> "Offer expires in" has no working countdown.
+                        </div>
+                        <div class="item bad-item">
+                            No specific deadline (date/time). Urgency feels generic and unsubstantiated.
+                        </div>
+                        <div class="item bad-item">
+                            Missing consequences. Don't tell them what they lose if they wait (bonuses go away, price goes up, etc.)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">🔧 How to Fix It</div>
+                    <div class="fix-items">
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-critical-inline">CRITICAL</strong>
+                            Add working countdown timer. Set expiration (e.g., 7 days from purchase, or a specific date like "March 31, 2026 at 11:59 PM PT"). Use JavaScript to render MM:SS or DD:HH:MM countdown.
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-important-inline">IMPORTANT</strong>
+                            Add consequence copy: "After this offer closes, these $610–$1,205 in bonuses disappear and the bundle price increases."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copy-suggestion">
+                    <strong>Urgency Section with Countdown:</strong><br><br>
+                    "<strong>This Is a One-Time-Only Offer</strong><br>Offer expires in: <strong>[HH:MM Countdown Timer]</strong><br><br>After this closes, the premium bonuses (Onboarding Call, MealLens AI, BioSync Bloodwork, VIP Coach DM, Quarterly Checkpoints) are off the table. Total value disappears: <strike>$1,205</strike>.<br><br>Lock in now or go back to the $67/month membership without the fast-track bonuses."
+                </div>
+
+                <div class="score-meter">
+                    <div class="meter-label">Conversion Impact: Adding Countdown Timer + Consequences</div>
+                    <div class="meter-comparison">
+                        <span>Minimal Impact</span>
+                        <span style="text-align: right;">Major Impact</span>
+                    </div>
+                    <div class="meter">
+                        <div class="meter-fill" style="width: 85%; background: #ff4444;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Social Proof -->
+        <div class="audit-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>
+                    <span class="severity-badge badge-important">⚠️</span>
+                    Social Proof
+                </h3>
+                <div class="section-header-right">
+                    <div class="score-current-section">4/10</div>
+                    <div class="score-projected-section">→ 8/10</div>
+                    <div class="toggle-icon">▼</div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="content-subsection">
+                    <div class="subsection-title">✅ What's Working</div>
+                    <div class="good-items">
+                        <div class="item good-item">
+                            3 testimonials with names and roles (Lisa, 40, ER Nurse, etc.)
+                        </div>
+                        <div class="item good-item">
+                            Case study cards exist with specific outcomes
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">❌ What's Broken</div>
+                    <div class="bad-items">
+                        <div class="item bad-item">
+                            <strong>NO PHOTOS with testimonials.</strong> Without faces, testimonials feel like generated text, not real people.
+                        </div>
+                        <div class="item bad-item">
+                            Missing "400+ Nurses Transformed" stat anywhere on page. No aggregated social proof.
+                        </div>
+                        <div class="item bad-item">
+                            All 3 case studies start with identical opening ("Was doing everything 'right' but nothing was working"). Kills credibility — should be diverse stories.
+                        </div>
+                        <div class="item bad-item">
+                            No video testimonials. Skeptical prospects would convert more seeing real video of transformation.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">🔧 How to Fix It</div>
+                    <div class="fix-items">
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-critical-inline">CRITICAL</strong>
+                            Add professional headshot photos to all 3 testimonials. Use real client photos or hire photographer for 1–2 hour shoot with actual members.
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-important-inline">IMPORTANT</strong>
+                            Add "400+ Nurses Transformed" animated counter near the top of the page (after hero, before stats card)
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-important-inline">IMPORTANT</strong>
+                            Diversify case study opening copy (see previous section for copy suggestions)
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-enhancement-inline">ENHANCEMENT</strong>
+                            Add 1–2 short video testimonials (15–30 seconds) from real members. Embed below text testimonials.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copy-suggestion">
+                    <strong>Add Section: Aggregated Social Proof (After Hero)</strong><br><br>
+                    <strong>Trusted by 400+ Nurses</strong><br>
+                    87% feel a difference by Day 3 | 5 lbs average Week 1 | Built by a Nurse, for Nurses<br><br>
+                    [Animated counter showing 400+ growing in real time with testimonial avatars scrolling]
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. Objection Handling -->
+        <div class="audit-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>
+                    <span class="severity-badge badge-critical">🚨</span>
+                    Objection Handling
+                </h3>
+                <div class="section-header-right">
+                    <div class="score-current-section">3/10</div>
+                    <div class="score-projected-section">→ 8/10</div>
+                    <div class="toggle-icon">▼</div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="content-subsection">
+                    <div class="subsection-title">✅ What's Working</div>
+                    <div class="good-items">
+                        <div class="item good-item">
+                            Some implicit objection handling in the metabolic timeline (answers "will this work for my body?")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">❌ What's Broken</div>
+                    <div class="bad-items">
+                        <div class="item bad-item">
+                            <strong>NO FAQ SECTION AT ALL.</strong> Page doesn't explicitly handle the objections nurses are actually thinking.
+                        </div>
+                        <div class="item bad-item">
+                            Missing answers to: "Can I cancel mid-term?" "What if it doesn't work?" "Is $335/$588 worth it?" "Do I have to do all 5 bonuses?"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">🔧 How to Fix It</div>
+                    <div class="fix-items">
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-critical-inline">CRITICAL</strong>
+                            Add full FAQ accordion section before final CTA. Include 6–8 common objections with clear, short answers.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copy-suggestion">
+                    <strong>Suggested FAQ Section (Add Before Final CTA):</strong><br><br>
+                    <strong>Questions? We Got You.</strong><br><br>
+                    <strong>Q: What if it doesn't work for me?</strong><br>
+                    A: 87% of members who commit to 6+ months reach their goal weight. You've already proven you're serious by joining. The onboarding call alone maps everything to YOUR life — your shifts, your family, your stress triggers. This isn't a gamble; it's a system built specifically for you.<br><br>
+                    <strong>Q: Can I cancel my bundle early?</strong><br>
+                    A: Yes. You can pause or cancel anytime. We don't lock you in. But 87% of members who stick with 6+ months hit their goals. Monthly members? 23%. The commitment is the unlock.<br><br>
+                    <strong>Q: Do I have to use all the bonuses?</strong><br>
+                    A: Nope. They're yours to use if/when you need them. Most members use the Onboarding Call in Month 1, MealLens throughout, and Quarterly Checkpoints to stay on track. But you're in control.<br><br>
+                    <strong>Q: I can't afford the lump sum. Can I do monthly payments?</strong><br>
+                    A: Not currently. We keep the bundle pricing tight by asking for one payment. If monthly ($67/month) works better for you, that's available — you just won't get the premium bonuses.<br><br>
+                    <strong>Q: How is this different from just staying in the membership?</strong><br>
+                    A: Monthly is the foundation. The bundle adds: your personal onboarding call, unlimited AI meal plans (MealLens), bloodwork analysis (BioSync), direct coach DM access, and quarterly check-ins. It's the difference between access and a personalized system.<br><br>
+                    <strong>Q: What if I have night shifts / rotating schedule?</strong><br>
+                    A: That's exactly why this works. Built by a nurse, for nurses. Your meal plans adjust for night shifts. Your workouts are 15 minutes. Your coach understands shift fatigue. This is shift-proof."
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. Commitment Trust & Positioning (Replaces Guarantee) -->
+        <div class="audit-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>
+                    <span class="severity-badge badge-critical">🚨</span>
+                    Commitment Trust &amp; Positioning
+                </h3>
+                <div class="section-header-right">
+                    <div class="score-current-section">3/10</div>
+                    <div class="score-projected-section">→ 8/10</div>
+                    <div class="toggle-icon">▼</div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="content-subsection">
+                    <div class="subsection-title">✅ What's Working</div>
+                    <div class="good-items">
+                        <div class="item good-item">
+                            Page correctly avoids a money-back guarantee — the bundle involves IJ's personal coaching time (onboarding calls, quarterly checkpoints). A refund guarantee is NOT appropriate here; these buyers have already purchased twice ($27 + $67/mo) and are committed.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">❌ What's Missing</div>
+                    <div class="bad-items">
+                        <div class="item bad-item">
+                            <strong>No "commitment trust" framing</strong> — the page doesn't position the bundle as exclusive to serious nurses. It needs identity-shifting language that makes this feel like "becoming her," not just buying more features.
+                        </div>
+                        <div class="item bad-item">
+                            No breakdown of what the onboarding call actually covers — this is the deepest look at their family, values, shift schedule, everything. That needs to be shown, not just listed.
+                        </div>
+                        <div class="item bad-item">
+                            Missing the "systems, not diets" framing — the bundle gives them systems they carry through all the good, bad, and ugly. Not just a plan for next month.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">🔧 How to Fix It</div>
+                    <div class="fix-items">
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-critical-inline">CRITICAL — HIGHEST PRIORITY</strong>
+                            Add Commitment Trust Section (<code>bundle-artifact-commitment-trust.html</code>). Position the bundle as exclusive to serious nurses using identity-shifting language ("Become the nurse who...") and a detailed onboarding call breakdown showing exactly what happens in the 60 minutes.
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-important-inline">IMPORTANT</strong>
+                            Frame commitment as removing decision fatigue, not adding obligation. "Set it and forget it" — meals are templated, protocols are mapped, you stop wondering what to do next.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copy-suggestion">
+                    <strong>Add Commitment Trust Section (Key Placement: Before Final CTA)</strong><br><br>
+                    <strong>"This Isn't For Everyone"</strong><br><br>
+                    The Bundle Is Built for Nurses Who Are Done Starting Over. You've already proven you're serious. You bought the course. You joined the membership. Now this is the part where you stop cycling through programs — and actually become her.<br><br>
+                    <strong>What Your Onboarding Call Actually Looks Like:</strong><br>
+                    → We map your shift pattern (days, nights, rotating, doubles)<br>
+                    → We build around your real life (kids, commute, partner's schedule)<br>
+                    → We identify your cortisol triggers<br>
+                    → We create YOUR protocol — not a template<br>
+                    → You leave with a 90-day blueprint and systems for all the good, bad, and ugly<br><br>
+                    <em>This isn't a sales call. It's the deepest look anyone has ever taken at what's actually going to work for YOU.</em>
+                </div>
+
+                <div class="score-meter">
+                    <div class="meter-label">Conversion Impact: Adding Commitment Trust Section</div>
+                    <div class="meter-comparison">
+                        <span>Minimal Impact</span>
+                        <span style="text-align: right;">Major Impact</span>
+                    </div>
+                    <div class="meter">
+                        <div class="meter-fill" style="width: 95%; background: #ff4444;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11. Trust & Credibility -->
+        <div class="audit-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>
+                    <span class="severity-badge badge-critical">🚨</span>
+                    Trust & Credibility
+                </h3>
+                <div class="section-header-right">
+                    <div class="score-current-section">5/10</div>
+                    <div class="score-projected-section">→ 9/10</div>
+                    <div class="toggle-icon">▼</div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="content-subsection">
+                    <div class="subsection-title">✅ What's Working</div>
+                    <div class="good-items">
+                        <div class="item good-item">
+                            SSL/Stripe/Secure badges in footer
+                        </div>
+                        <div class="item good-item">
+                            "A Note from Nurse Yay" personal touch from IJ adds warmth
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">❌ What's Broken</div>
+                    <div class="bad-items">
+                        <div class="item bad-item">
+                            <strong>MALE BODYBUILDER PHOTO in the Nurse Yay section.</strong> Massive avatar mismatch. Target audience is female nurses 35–52. A shirtless male with tattoos in a before/after is confusing and trust-breaking.
+                        </div>
+                        <div class="item bad-item">
+                            Footer links go to WRONG DOMAIN: "shiftreset-d2gwd5xd.manus.space" instead of SmithFit domain. Trust killer.
+                        </div>
+                        <div class="item bad-item">
+                            Missing "Built by a nurse, for nurses" credibility section. IJ's RN credential should be highlighted more prominently.
+                        </div>
+                        <div class="item bad-item">
+                            No credibility anchors: years of experience, certifications, testimonial counts, etc.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">🔧 How to Fix It</div>
+                    <div class="fix-items">
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-critical-inline">CRITICAL</strong>
+                            Replace male bodybuilder photo with a professional headshot of IJ (female nurse, in scrubs or professional attire, confident posture) or a photo of a real female nurse client.
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-critical-inline">CRITICAL</strong>
+                            Fix footer links. All links (Privacy, Terms, Support) should point to SmithFit domain (hub.courseiq.app or primary domain), NOT shiftreset-d2gwd5xd.manus.space.
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-important-inline">IMPORTANT</strong>
+                            Add credibility section before testimonials. Highlight: "Built by IJ Smith, RN — 15+ years in healthcare" (or actual numbers), certifications, 400+ nurses coached, etc.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copy-suggestion">
+                    <strong>Add Credibility Section (Before Testimonials):</strong><br><br>
+                    <strong>Why Trust SmithFit?</strong><br><br>
+                    <strong>Built by a nurse. For nurses.</strong><br>
+                    IJ Smith, RN, registered nurse with 15+ years in healthcare. Not a fitness influencer. A nurse who got tired of the generic fitness advice that doesn't work for shift workers. So she built SmithFit from her own experience—testing on herself, her wife (co-coach), and now 400+ nurses.<br><br>
+                    <strong>Certified to coach:</strong> Precision Nutrition Level 1, Health Coaching Certification, Sleep Science Foundation (or actual certs)<br><br>
+                    <strong>Proven results:</strong> 87% of 6+ month members hit their goal | 5 lbs average Week 1 | Built by a Nurse, for Nurses
+                </div>
+
+                <div class="before-after">
+                    <div class="before-block">
+                        <div class="before-after-label">❌ CURRENT (Avatar Mismatch)</div>
+                        "A Note from Nurse Yay"<br>
+                        [Shirtless male bodybuilder with tattoos — before/after transformation]<br>
+                        [Trust broken: Doesn't match target audience]
+                    </div>
+                    <div class="after-block">
+                        <div class="before-after-label">✅ IMPROVED (Avatar Match)</div>
+                        "A Note from IJ"<br>
+                        [Professional photo of female nurse in scrubs or business casual]<br>
+                        Confident, warm, relatable to target audience
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 12. Visual Design & UX -->
+        <div class="audit-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>
+                    <span class="severity-badge badge-important">⚠️</span>
+                    Visual Design & UX
+                </h3>
+                <div class="section-header-right">
+                    <div class="score-current-section">5/10</div>
+                    <div class="score-projected-section">→ 8/10</div>
+                    <div class="toggle-icon">▼</div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="content-subsection">
+                    <div class="subsection-title">✅ What's Working</div>
+                    <div class="good-items">
+                        <div class="item good-item">
+                            Gold/cream brand palette is consistent and on-brand
+                        </div>
+                        <div class="item good-item">
+                            Good section separation with whitespace
+                        </div>
+                        <div class="item good-item">
+                            Playfair Display + Inter font pairing is professional
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">❌ What's Broken</div>
+                    <div class="bad-items">
+                        <div class="item bad-item">
+                            Hero renders with blank/whitespace at top. Page opens hollow-looking.
+                        </div>
+                        <div class="item bad-item">
+                            Text contrast is very low in many sections (faded text on light backgrounds). Hard to read.
+                        </div>
+                        <div class="item bad-item">
+                            <strong>Page is VERY long with no sticky CTA bar.</strong> Users scrolling down have to scroll all the way back up to click "Upgrade." Friction.
+                        </div>
+                        <div class="item bad-item">
+                            No progress indicator. Users don't know where they are on the page (above the fold, middle, near CTA, etc.)
+                        </div>
+                        <div class="item bad-item">
+                            Bonus cards lack visual weight. Should have icons, larger text, more breathing room.
+                        </div>
+                        <div class="item bad-item">
+                            Large decorative images (nurse driving, nurse with lunch) take up space without conversion value. Consider replacing with more relevant visuals.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-subsection">
+                    <div class="subsection-title">🔧 How to Fix It</div>
+                    <div class="fix-items">
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-important-inline">IMPORTANT</strong>
+                            Fix hero section whitespace. Add hero image (confident female nurse in scrubs) at top so page opens visually strong.
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-important-inline">IMPORTANT</strong>
+                            Audit text contrast throughout. All body text should be #333 or darker on #faf6ef background (currently too light/faded). Use WCAG AA contrast checker.
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-important-inline">IMPORTANT</strong>
+                            Add sticky CTA bar (floats at bottom of screen). Shows: "Upgrade Now | 6-Month: $335 | 12-Month: $588" so users can CTA without scrolling.
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-enhancement-inline">ENHANCEMENT</strong>
+                            Add page progress indicator (breadcrumb or scrollbar indicator) so users know what section they're in
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-enhancement-inline">ENHANCEMENT</strong>
+                            Redesign bonus cards with icons (calendar, apple, heart, chat, chart). Give them more visual hierarchy.
+                        </div>
+                        <div class="item fix-item">
+                            <strong class="severity-badge-inline severity-enhancement-inline">ENHANCEMENT</strong>
+                            Replace decorative stock images with real client/transformation photos or remove entirely to reduce clutter
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Priority Fix Checklist -->
+        <div class="summary-section" style="margin: 60px 0 40px; border-left-color: #ff4444;">
+            <h2 style="color: #ff4444; margin-bottom: 20px;">🚨 Priority Fix Checklist</h2>
+            <div class="priority-checklist">
+                <div class="checklist-item">
+                    <input type="checkbox" id="fix1">
+                    <label for="fix1"><strong class="severity-badge-inline severity-critical-inline">CRITICAL #1</strong> Add Commitment Trust Section — identity-shifting language + onboarding call breakdown (bundle-artifact-commitment-trust.html)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="fix2">
+                    <label for="fix2"><strong class="severity-badge-inline severity-critical-inline">CRITICAL #2</strong> Fix broken video embed. Test playback across devices.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="fix3">
+                    <label for="fix3"><strong class="severity-badge-inline severity-critical-inline">CRITICAL #3</strong> Replace male bodybuilder photo with female nurse or IJ headshot</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="fix4">
+                    <label for="fix4"><strong class="severity-badge-inline severity-critical-inline">CRITICAL #4</strong> Add working countdown timer with specific expiration date/time</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="fix5">
+                    <label for="fix5"><strong class="severity-badge-inline severity-critical-inline">CRITICAL #5</strong> Fix footer links (change domain from shiftreset-d2gwd5xd.manus.space to SmithFit domain)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="fix6">
+                    <label for="fix6"><strong class="severity-badge-inline severity-important-inline">IMPORTANT #1</strong> Add full FAQ/objection handling section (6–8 questions with clear answers)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="fix7">
+                    <label for="fix7"><strong class="severity-badge-inline severity-important-inline">IMPORTANT #2</strong> Add professional photos to all 3 testimonials. No photos = no credibility.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="fix8">
+                    <label for="fix8"><strong class="severity-badge-inline severity-important-inline">IMPORTANT #3</strong> Diversify case study opening copy (currently all identical — breaks trust)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="fix9">
+                    <label for="fix9"><strong class="severity-badge-inline severity-important-inline">IMPORTANT #4</strong> De-emphasize monthly CTA button. Remove button, replace with text-only option.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="fix10">
+                    <label for="fix10"><strong class="severity-badge-inline severity-important-inline">IMPORTANT #5</strong> Add sticky CTA bar (floats at bottom). Users can upgrade without scrolling.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="fix11">
+                    <label for="fix11"><strong class="severity-badge-inline severity-enhancement-inline">ENHANCEMENT #1</strong> Add "400+ Nurses Transformed" counter with animated avatars scrolling</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="fix12">
+                    <label for="fix12"><strong class="severity-badge-inline severity-enhancement-inline">ENHANCEMENT #2</strong> Add credibility section highlighting IJ's RN background, certifications, years of experience</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="fix13">
+                    <label for="fix13"><strong class="severity-badge-inline severity-enhancement-inline">ENHANCEMENT #3</strong> Fix hero section whitespace. Add high-res hero image at top of page.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="fix14">
+                    <label for="fix14"><strong class="severity-badge-inline severity-enhancement-inline">ENHANCEMENT #4</strong> Audit text contrast throughout. Ensure WCAG AA compliance. Body text should be #333 or darker.</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final CTA Section -->
+        <div class="final-cta">
+            <h2>Ready to Upgrade Your Bundle Page?</h2>
+            <p>These 14 fixes will take your page from 5.1/10 → 8.8/10 conversion performance.</p>
+            <p><strong>Start with the 5 Critical fixes.</strong> Then layer in the Important and Enhancement fixes. Each addition compounds the conversion lift.</p>
+            <p style="font-size: 13px; margin-top: 20px;">Questions? Check the FAQ section in each audit category for copy suggestions and before/after examples.</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="audit-footer">
+            <p><strong>SmithFit Bundle Upgrade Page Audit</strong></p>
+            <p>Hormozi Conversion Framework | Generated March 2026</p>
+            <p>Questions about this audit? Review each collapsible section for detailed copy suggestions, examples, and implementation guidance.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(header) {
+            const section = header.closest('.audit-section');
+            section.classList.toggle('active');
+        }
+
+        // Auto-expand first section on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstSection = document.querySelector('.audit-section');
+            if (firstSection) {
+                firstSection.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

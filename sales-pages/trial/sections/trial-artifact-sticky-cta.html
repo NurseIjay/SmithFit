@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticky Trial CTA Bar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFFBF5 100%);
+            padding-bottom: 100px;
+            color: #4a4a4a;
+        }
+
+        /* Placeholder content for demo */
+        .page-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .page-content h2 {
+            color: #1a1a2e;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .page-content p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .demo-block {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        /* Sticky CTA Bar - Initially hidden */
+        .sticky-cta-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 2px solid #C5A55A;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            padding: 16px 20px;
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            opacity: 0;
+        }
+
+        .sticky-cta-bar.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .sticky-cta-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .cta-left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .cta-left-main {
+            font-weight: 700;
+            font-size: 18px;
+            color: #1a1a2e;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-left-sub {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .cta-left-sub strong {
+            color: #C5A55A;
+            font-weight: 600;
+        }
+
+        .cta-right {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .cta-button {
+            background-color: #2D7A3A;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(45, 122, 58, 0.25);
+        }
+
+        .cta-button:hover {
+            background-color: #245d2e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(45, 122, 58, 0.35);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(45, 122, 58, 0.2);
+        }
+
+        .dismiss-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #999;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+
+        .dismiss-btn:hover {
+            color: #1a1a2e;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .sticky-cta-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .cta-left {
+                width: 100%;
+                text-align: center;
+            }
+
+            .cta-right {
+                width: 100%;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .cta-button {
+                flex: 1;
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+
+            .cta-left-main {
+                font-size: 16px;
+            }
+
+            .cta-left-sub {
+                font-size: 12px;
+            }
+
+            .dismiss-btn {
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sticky-cta-bar {
+                padding: 12px 12px;
+            }
+
+            .cta-left-main {
+                font-size: 14px;
+            }
+
+            .cta-button {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-content">
+        <h2>Scroll down to see the sticky CTA bar appear</h2>
+        <p>The floating bar will smoothly slide up from the bottom after you scroll past the first CTA. It stays visible as you browse and can be dismissed with the X button.</p>
+    </div>
+
+    <div class="demo-block">
+        <div>First CTA / Hero Section Goes Here</div>
+    </div>
+
+    <div class="demo-block">
+        <div>Additional Page Content Section 1</div>
+    </div>
+
+    <div class="demo-block">
+        <div>Additional Page Content Section 2</div>
+    </div>
+
+    <div class="demo-block">
+        <div>Additional Page Content Section 3</div>
+    </div>
+
+    <div class="demo-block">
+        <div>Additional Page Content Section 4</div>
+    </div>
+
+    <div class="demo-block">
+        <div>Additional Page Content Section 5</div>
+    </div>
+
+    <!-- Sticky CTA Bar -->
+    <div class="sticky-cta-bar" id="stickyCta">
+        <div class="sticky-cta-container">
+            <div class="cta-left">
+                <div class="cta-left-main">14-Day FREE Trial</div>
+                <div class="cta-left-sub">Then <strong>$67/month</strong></div>
+            </div>
+            <div class="cta-right">
+                <button class="cta-button" onclick="handleCtaClick()">
+                    Start Free Trial →
+                </button>
+                <button class="dismiss-btn" onclick="dismissBar()" aria-label="Dismiss">
+                    ×
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const stickyCta = document.getElementById('stickyCta');
+        let isDismissed = false;
+
+        // Show sticky bar after scrolling past first content block
+        window.addEventListener('scroll', () => {
+            if (isDismissed) return;
+
+            const scrollTop = window.scrollY;
+            const triggerPoint = 400; // Show after scrolling 400px
+
+            if (scrollTop > triggerPoint) {
+                stickyCta.classList.add('visible');
+            } else {
+                stickyCta.classList.remove('visible');
+            }
+        });
+
+        // Handle CTA button click
+        function handleCtaClick() {
+            // Replace with actual trial signup URL
+            console.log('Start Free Trial clicked');
+            // window.location.href = 'https://your-trial-url.com';
+            alert('Redirect to free trial signup page');
+        }
+
+        // Handle dismiss
+        function dismissBar() {
+            isDismissed = true;
+            stickyCta.classList.remove('visible');
+        }
+
+        // Optional: Re-show on scroll down if dismissed
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+
+            if (isDismissed && scrollTop > lastScrollTop && scrollTop > 800) {
+                // User scrolling down — optionally re-show
+                // Uncomment line below to re-show after dismissal when scrolling further
+                // stickyCta.classList.add('visible');
+            }
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmithFit Bundle Page — Identity-Shifting Language Audit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #faf6ef 0%, #f5f0e6 100%);
+            color: #2d2d2d;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(135deg, #c9a84c 0%, #a88a3d 100%);
+            color: white;
+            padding: 20px 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            z-index: 999;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .header-title {
+            flex: 1;
+        }
+
+        .header-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+        }
+
+        .header-title p {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        .header-metrics {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 6px;
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .metric-subtext {
+            font-size: 12px;
+            opacity: 0.85;
+            margin-top: 4px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .intro-section {
+            background: white;
+            border-left: 6px solid #c9a84c;
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 60px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .intro-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .intro-section p {
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .methodology {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #e8e0d0;
+        }
+
+        .methodology-title {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #c9a84c;
+            margin-bottom: 12px;
+        }
+
+        .methodology-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .method-item {
+            display: flex;
+            gap: 12px;
+        }
+
+        .method-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #c9a84c;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .method-text {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .audit-section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #2d2d2d;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #c9a84c;
+        }
+
+        .section-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .audit-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .audit-item:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .audit-header-bar {
+            padding: 16px 20px;
+            background: #f9f5ee;
+            border-bottom: 1px solid #e8e0d0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .audit-header-bar:hover {
+            background: #f3ede5;
+        }
+
+        .audit-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: #2d2d2d;
+            flex: 1;
+        }
+
+        .badge-container {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .badge-feature {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .badge-benefit {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .badge-identity {
+            background: #e8f5e9;
+            color: #1b5e20;
+        }
+
+        .toggle-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c9a84c;
+            font-weight: bold;
+        }
+
+        .audit-content {
+            display: none;
+            padding: 24px;
+            background: white;
+            border-top: 1px solid #e8e0d0;
+        }
+
+        .audit-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .copy-box {
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            border-left: 4px solid;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .copy-current {
+            background: #ffebee;
+            border-left-color: #c62828;
+            color: #5d0000;
+        }
+
+        .copy-rewritten {
+            background: #e8f5e9;
+            border-left-color: #1b5e20;
+            color: #1b5e20;
+        }
+
+        .copy-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            opacity: 0.8;
+        }
+
+        .note-box {
+            margin-top: 16px;
+            padding: 14px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #555;
+            border-left: 4px solid #c9a84c;
+        }
+
+        .note-box strong {
+            color: #c9a84c;
+        }
+
+        .strength-badge {
+            display: inline-block;
+            padding: 8px 14px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+
+        .priority-section {
+            background: linear-gradient(135deg, #faf6ef 0%, #f3ede5 100%);
+            padding: 40px;
+            border-radius: 8px;
+            border: 2px solid #c9a84c;
+            margin: 60px 0;
+        }
+
+        .priority-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 24px;
+            color: #2d2d2d;
+        }
+
+        .priority-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .priority-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #c9a84c;
+        }
+
+        .priority-rank {
+            font-size: 18px;
+            font-weight: 700;
+            color: #c9a84c;
+            min-width: 30px;
+        }
+
+        .priority-content {
+            flex: 1;
+        }
+
+        .priority-section-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d2d2d;
+            margin-bottom: 4px;
+        }
+
+        .priority-reason {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .impact-tag {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 10px;
+            background: #fff3e0;
+            color: #e65100;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .footer-summary {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            border-left: 6px solid #c9a84c;
+            margin-top: 60px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-summary h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: #2d2d2d;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .summary-stat {
+            padding: 16px;
+            background: #f9f5ee;
+            border-radius: 6px;
+        }
+
+        .summary-stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .summary-stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #c9a84c;
+        }
+
+        .cta-section {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #e8e0d0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #c9a84c 0%, #a88a3d 100%);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201, 168, 76, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .header-metrics {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .methodology-list {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metric-value {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+        }
+
+        .expand-all {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #c9a84c;
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .expand-all:hover {
+            background: #a88a3d;
+        }
+
+        .strength-box {
+            background: #e8f5e9;
+            border-left: 4px solid #1b5e20;
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 16px;
+            font-size: 13px;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+
+        .strength-box strong {
+            color: #1b5e20;
+        }
+
+        .tab-indicator {
+            display: inline-block;
+            width: 20px;
+            padding: 2px 6px;
+            background: #e8e0d0;
+            border-radius: 3px;
+            font-size: 11px;
+            color: #666;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="sticky-header">
+        <div class="header-content">
+            <div class="header-title">
+                <h1>SmithFit Bundle Page</h1>
+                <p>Identity-Shifting Language Audit</p>
+            </div>
+            <div class="header-metrics">
+                <div class="metric">
+                    <div class="metric-label">Current Score</div>
+                    <div class="metric-value">38%</div>
+                    <div class="metric-subtext">Identity language</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Projected Score</div>
+                    <div class="metric-value">82%</div>
+                    <div class="metric-subtext">With all rewrites</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- INTRO SECTION -->
+        <div class="intro-section">
+            <h2>What Is Identity-Shifting Language?</h2>
+            <p>Identity-shifting language speaks directly to WHO she becomes — not just what she gets. It activates the psychological gap between her current self and her desired self: "The woman who looks put-together without trying. Scrubs fitting, posture up, not sucking in stomach. Steady, not reactive. Food doesn't control her."</p>
+
+            <p><strong>The Ladder:</strong> Feature (weakest) → Benefit → Identity (strongest)</p>
+
+            <p style="margin-top: 16px; padding: 12px; background: #f5f5f5; border-left: 4px solid #c9a84c; border-radius: 4px;"><strong>Example:</strong> "Weekly live coaching calls" (feature) becomes "Get your questions answered" (benefit) which becomes "Never feel alone in this again. You're surrounded by nurses who get it" (identity).</p>
+
+            <div class="methodology">
+                <div class="methodology-title">Audit Methodology</div>
+                <div class="methodology-list">
+                    <div class="method-item">
+                        <div class="method-icon">1</div>
+                        <div class="method-text">Every line of copy classified as Feature, Benefit, or Identity</div>
+                    </div>
+                    <div class="method-item">
+                        <div class="method-icon">2</div>
+                        <div class="method-text">Lines rated for upgrade potential — highest conversion impact first</div>
+                    </div>
+                    <div class="method-item">
+                        <div class="method-icon">3</div>
+                        <div class="method-text">Strong lines highlighted (ones already using identity language)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HERO SECTION -->
+        <div class="audit-section">
+            <h3 class="section-title">HERO SECTION</h3>
+            <p class="section-meta">First impression — establishes urgency, positions upgrade as natural next step</p>
+
+            <button class="expand-all" onclick="expandAll(this)">Expand All</button>
+
+            <!-- Item 1 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">🎉 You're Officially a SmithFit Member</span>
+                    <div class="badge-container">
+                        <span class="badge badge-benefit">BENEFIT</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "You're Officially a SmithFit Member"
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "You're Now Part of a Nurse Movement That Actually Works"
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> "Officially a member" is congratulatory but generic. "Part of a nurse movement" anchors identity (she's not just buying — she's joining a collective of nurses who are breaking through). Raises the stakes from transactional to transformational.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">Now Let's Fast-Track Your Results</span>
+                    <div class="badge-container">
+                        <span class="badge badge-benefit">BENEFIT</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "Now Let's Fast-Track Your Results"
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "Now Let's Finish What You Started — So You Can Be the Woman You Already Know You Are"
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> "Fast-track results" is about speed/efficiency (benefit). The rewrite is about completion + identity restoration. It says: you're not building a new self, you're reclaiming the one that shift work buried. Emotionally resonant with Shift Nurse Sarah who feels "betrayed by her body."
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">You just made a decision that 87% of nurses who reach their goal weight also made...</span>
+                    <div class="badge-container">
+                        <span class="badge badge-identity">IDENTITY</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "You just made a decision that 87% of nurses who reach their goal weight also made. Now there's one more step that separates those who hope from those who arrive."
+                    </div>
+                    <div class="strength-box">
+                        <strong>✓ ALREADY STRONG:</strong> This line nails identity language. "Those who hope vs. those who arrive" is a pure identity contrast. It positions her choice as a marker of a different kind of person — the one who follows through, who arrives at her destination, not just dreams of it. Social proof + identity activation. Keep this.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">87% of SmithFit members who commit to 6+ months reach their goal weight. Monthly members? Only 23% get there.</span>
+                    <div class="badge-container">
+                        <span class="badge badge-feature">FEATURE</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "87% of SmithFit members who commit to 6+ months reach their goal weight. Monthly members? Only 23% get there."
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "Women who commit to 6+ months don't just reach their goal weight — they become unshakable. They stop white-knuckling it. Monthly members plateau. Committed members transcend."
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> The current version is pure stat-dropping (feature). The rewrite keeps the proof but reframes the outcome as identity shift: "unshakable," "transcend." It's not about the number on the scale — it's about becoming someone who doesn't need willpower because she's already rewired. That's identity language.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">CTA: See My Upgrade Options →</span>
+                    <div class="badge-container">
+                        <span class="badge badge-feature">FEATURE</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "See My Upgrade Options →"
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "Show Me How to Get There →"
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> "Upgrade options" is transactional and passive ("see my options"). "Show me how to get there" is urgent, personal, and outcome-focused. It's the voice of someone ready to become that woman — not shopping for features.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCIENCE SECTION -->
+        <div class="audit-section">
+            <h3 class="section-title">SCIENCE SECTION</h3>
+            <p class="section-meta">Timeline-based proof — critical trust-builder before asking for bigger commitment</p>
+
+            <button class="expand-all" onclick="expandAll(this)">Expand All</button>
+
+            <!-- Item 1 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">The Science of Commitment — Why 6–12 Months Changes Everything</span>
+                    <div class="badge-container">
+                        <span class="badge badge-benefit">BENEFIT</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "The Science of Commitment — Why 6–12 Months Changes Everything"
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "Your Transformation Timeline — From Broken to Unshakeable in 12 Months"
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> "Science of commitment" is abstract. "Your transformation timeline: From broken to unshakeable" speaks directly to her journey from current pain (broken body, broken trust in herself) to desired identity (unshakeable, steady, doesn't doubt herself anymore).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">Your metabolism didn't break overnight. It adapted over years...</span>
+                    <div class="badge-container">
+                        <span class="badge badge-identity">IDENTITY</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="strength-box">
+                        <strong>✓ ALREADY STRONG:</strong> This validates her ("it's not your fault") and positions the timeline as realistic healing, not quick fix. Opens with empathy + science. The word "adapted" is identity-smart: she didn't fail, her body adapted to survive shift work. Perfect setup. Keep it.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">MONTH 1–2: Metabolic repair begins. Cravings reduce. Energy stabilizes.</span>
+                    <div class="badge-container">
+                        <span class="badge badge-feature">FEATURE</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "MONTH 1–2: Metabolic repair begins. Cravings reduce. Energy stabilizes."
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "MONTH 1–2: You Stop Being a Slave to Cravings. Your Body Becomes Reliable Again. Energy Returns."
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> Current is clinical/detached (metabolic repair, cravings reduce). Rewrite uses her language: "slave to cravings" is how Sarah feels. "Your body becomes reliable again" hits her deepest fear (body betrayal). "Energy returns" → she's getting her old self back. Identity language shifts from what happens to her body, to who she becomes.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">MONTH 3–4: Fat loss accelerates. Shift-proof habits lock in. Clothes fit differently.</span>
+                    <div class="badge-container">
+                        <span class="badge badge-feature">FEATURE</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "MONTH 3–4: Fat loss accelerates. Shift-proof habits lock in. Clothes fit differently."
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "MONTH 3–4: You Become the Nurse Who Doesn't White-Knuckle It. Habits Feel Natural. Your Scrubs Fit. You Recognize Yourself Again."
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> "Fat loss accelerates, clothes fit" is passive/external. Rewrite is active + identity-driven. "The nurse who doesn't white-knuckle it" (from CLAUDE.md voice) = she's the opposite of desperate, stressed, fighting her body. "Recognize yourself again" = identity restoration. This lands at a visceral level for someone who hasn't felt like herself in years.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">MONTH 5–6: Goal weight territory. Identity shift complete. Metabolism fully recalibrated.</span>
+                    <div class="badge-container">
+                        <span class="badge badge-identity">IDENTITY</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="strength-box">
+                        <strong>✓ ALREADY STRONG:</strong> "Identity shift complete" is explicitly identity language. This line understands that the transformation isn't just physical — it's psychological. She's not just thin, she's a different person. Recalibration = she's been rebuilt. Excellent.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">MONTH 7–12: Maintenance mode. Your body's new normal. Weight stays off permanently.</span>
+                    <div class="badge-container">
+                        <span class="badge badge-benefit">BENEFIT</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "MONTH 7–12: Maintenance mode. Your body's new normal. Weight stays off permanently."
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "MONTH 7–12: This Is Your Life Now. You're Not Fighting Your Body Anymore. You're Not Afraid of Night Shifts. The Woman You Are Now — That's Permanent."
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> "Maintenance mode, weight stays off" is mechanical and puts focus back on the scale. Rewrite reframes as identity permanence: she's not managing weight, she's living a different life. "Not afraid of night shifts" connects back to her real pain point. "The woman you are now" = that identity is locked in, non-negotiable.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 7 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">Monthly members quit at month 2. Committed members break through at month 4.</span>
+                    <div class="badge-container">
+                        <span class="badge badge-identity">IDENTITY</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="strength-box">
+                        <strong>✓ ALREADY STRONG:</strong> "Quitters vs. break-through makers" is a pure identity contrast. It's saying: which woman are you? The one who quits when it's hard, or the one who breaks through? No middle ground. Psychological activation is high. This works.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BONUS SECTION -->
+        <div class="audit-section">
+            <h3 class="section-title">BONUS SECTION</h3>
+            <p class="section-meta">Value storytelling — each bonus positioned as a transformation accelerator</p>
+
+            <button class="expand-all" onclick="expandAll(this)">Expand All</button>
+
+            <!-- Item 1 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">Premium Bonuses — What You Unlock With Your Commitment</span>
+                    <div class="badge-container">
+                        <span class="badge badge-benefit">BENEFIT</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "Premium Bonuses — What You Unlock With Your Commitment"
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "Premium Tools for the Woman Who's All-In"
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> "What you unlock" is transactional. "Tools for the woman who's all-in" speaks to her desired identity: decisive, committed, not fence-sitting. It's pre-qualification language that makes her feel like she's already the person who belongs here.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">These aren't add-ons. They're transformation accelerators...</span>
+                    <div class="badge-container">
+                        <span class="badge badge-identity">IDENTITY</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="strength-box">
+                        <strong>✓ ALREADY STRONG:</strong> Reframing bonuses as "transformation accelerators" instead of add-ons is smart. It says: these aren't extras, they're the difference between hoping and arriving. Positions them as essential to her identity journey. Excellent framing. Keep.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">6-MONTH: Unlock These 3 Bonuses — $610 Value</span>
+                    <div class="badge-container">
+                        <span class="badge badge-feature">FEATURE</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "6-MONTH: Unlock These 3 Bonuses — $610 Value"
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "6-MONTH: Everything You Need to Become Unshakeable"
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> Dollar value is feature language. "Everything you need to become unshakeable" is identity + outcome language. It's not about the price tag, it's about what she becomes. Shift focus from what she's getting to who she's becoming.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">1-on-1 Onboarding Call — Your Personalized Metabolism Blueprint / Jumpstart your progress from Day 1...</span>
+                    <div class="badge-container">
+                        <span class="badge badge-benefit">BENEFIT</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "1-on-1 Onboarding Call — Your Personalized Metabolism Blueprint. Jumpstart your progress from Day 1 with a plan built entirely around YOUR life."
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "Your Personal Roadmap Call With IJ. Stop Guessing. Start Knowing Exactly What Your Body Needs to Unwind From Years of Shift Work."
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> "Metabolism blueprint" + "jumpstart" is benefit-focused. Rewrite activates identity by addressing her core objection: "I don't know what my body needs." IJ's name = personal connection. "Stop guessing, start knowing" = she becomes a woman of certainty, not confusion.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">MealLens AI Tracker — Become the woman who knows exactly what she's eating...</span>
+                    <div class="badge-container">
+                        <span class="badge badge-identity">IDENTITY</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="strength-box">
+                        <strong>✓ ALREADY STRONG:</strong> "Become the woman who knows exactly what she's eating — without obsessing over it" is pure identity language. It's not about the feature (AI tracker), it's about who she is: intentional, not neurotic. This is excellent and should stay exactly as written.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">BioSync Bloodwork Portal — Finally understand WHY your body has been fighting you...</span>
+                    <div class="badge-container">
+                        <span class="badge badge-identity">IDENTITY</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="strength-box">
+                        <strong>✓ ALREADY STRONG:</strong> "Finally understand WHY your body has been fighting you" validates her pain (deepest fear: body is broken/betraying her) and reframes it as solvable through science. This is identity-smart because it gives her permission to stop blaming herself. Keep this.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 7 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="expandAll(this)">
+                    <span class="audit-text">VIP Coach DM Access — Become the woman who has a coach in her corner...</span>
+                    <div class="badge-container">
+                        <span class="badge badge-identity">IDENTITY</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="strength-box">
+                        <strong>✓ ALREADY STRONG:</strong> "Become the woman who has a coach in her corner — anytime, anywhere" is identity language. It shifts from feature (DM access) to transformation (never alone, supported, seen, heard). This resonates deeply with nurses who feel invisible and overwhelmed.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 8 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">Quarterly Checkpoint Reviews — The secret weapon that separates women who transform...</span>
+                    <div class="badge-container">
+                        <span class="badge badge-identity">IDENTITY</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="strength-box">
+                        <strong>✓ ALREADY STRONG:</strong> "Women who transform vs. women who plateau" is pure identity contrast. It's not about the feature (quarterly reviews), it's about which woman is she? Transformers or plateauers? The language activates her desire to be in the winning category. Excellent.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPARISON TABLE SECTION -->
+        <div class="audit-section">
+            <h3 class="section-title">COMPARISON TABLE</h3>
+            <p class="section-meta">Feature checklist — currently feature-focused, could be more identity-oriented</p>
+
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">Comparison Table (all rows are feature-focused)</span>
+                    <div class="badge-container">
+                        <span class="badge badge-feature">FEATURE</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "Shift-Proof Meal Plans / 15-Min Workouts / Nurse Sisterhood Community / Weekly Live Coaching / Chaos-Day Rescue Plans / Progress Tracking / etc."
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Reframed as Identity Checklist</div>
+                        Consider reframing the table header from "What's Included" to "Who You Become" or "Your Transformation Toolkit." Each feature becomes a question: "Do YOU become the nurse who...eats shift-proof? Moves even on hard days? Belongs to a sisterhood? Gets real-time support?" This shifts the table from a boring feature comparison to an identity alignment check.
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> Tables are typically feature-focused by nature, but the header and framing can change the psychological impact. Instead of "What do I get," readers will ask "Am I the kind of woman who needs this?" That's identity language.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRICING SECTION -->
+        <div class="audit-section">
+            <h3 class="section-title">PRICING CARDS</h3>
+            <p class="section-meta">Decision moment — should frame commitment choice as identity choice, not just cost choice</p>
+
+            <button class="expand-all" onclick="expandAll(this)">Expand All</button>
+
+            <!-- Item 1 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">Choose Your Commitment Level — Lock In Your Premium Access Now</span>
+                    <div class="badge-container">
+                        <span class="badge badge-benefit">BENEFIT</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "Choose Your Commitment Level — Lock In Your Premium Access Now"
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "Choose Who You Want to Be — A Hopper or a Breaker-Through"
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> "Commitment level" and "premium access" are about features and price. "Hopper or breaker-through" is pure identity. It forces her to choose not based on cost, but on which woman she wants to be. This is the psychological moment of truth.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">Monthly: Standard Access / $67/m / All core membership features</span>
+                    <div class="badge-container">
+                        <span class="badge badge-feature">FEATURE</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "Monthly: Standard Access. $67/m. All core membership features."
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "Monthly: The Tester. 'Let me see if this works.' (1 in 4 reach their goal.) $67/m"
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> This reframe isn't mean — it's honest and identity-based. Monthly becomes "the tester" identity. By labeling it, she can see herself: "Am I the kind of woman who tests, or commits?" The stat (1 in 4) is proof, not judgment. Makes the identity choice obvious without shaming.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">6-Month: Commitment + Bonuses / $55/month / $335 one-time payment</span>
+                    <div class="badge-container">
+                        <span class="badge badge-feature">FEATURE</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "6-Month: Commitment + Bonuses. $55/month. $335 one-time payment."
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "6-Month: The Committed. 'I'm serious about this.' You hit goal weight. Full bonus toolkit. $49/month when you invest upfront."
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> "The committed" is an identity label. Bonuses become a reward for that choice. The copy shows her reward for commitment (goal weight achieved). Pricing is still there but feels secondary to the identity narrative.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">12-Month: BEST VALUE / Premium Commitment / $49/month / $588 one-time payment</span>
+                    <div class="badge-container">
+                        <span class="badge badge-feature">FEATURE</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "12-Month: BEST VALUE. Premium Commitment. $49/month. $588 one-time payment."
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "12-Month: The Breaker-Through. 'I'm not going back.' Goal weight + body maintenance forever. Quarterly coaching. VIP community. $49/month when you invest now."
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> "The breaker-through" is the identity destination. "I'm not going back" = psychological commitment. Outcomes (goal weight, maintenance) show what that identity gets. This card should feel aspirational, not just financially smart.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">CTAs: Choose $67/m / Upgrade to 6-Month / Upgrade to 12-Month Premium</span>
+                    <div class="badge-container">
+                        <span class="badge badge-feature">FEATURE</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "'Choose $67/m' / 'Upgrade to 6-Month' / 'Upgrade to 12-Month Premium'"
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "'Test It Monthly' / 'Commit to 6 Months — Reach Your Goal' / 'Go All-In — Become Unshakeable'"
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> CTAs should echo the identity choice, not the transaction. "Test It Monthly" lowers stakes for the unsure. "Commit to 6 Months" is a psychological commitment statement. "Go All-In" appeals to the woman who's ready to transform. Each button reflects a different identity.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- URGENCY SECTION -->
+        <div class="audit-section">
+            <h3 class="section-title">URGENCY SECTION</h3>
+            <p class="section-meta">Scarcity messaging — currently feature-based, could activate identity fear</p>
+
+            <button class="expand-all" onclick="expandAll(this)">Expand All</button>
+
+            <!-- Item 1 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">⏰ This Is a One-Time-Only Offer</span>
+                    <div class="badge-container">
+                        <span class="badge badge-benefit">BENEFIT</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "These premium bonuses are ONLY available right now on this page. Once you leave this page, this specific upgrade package cannot be offered again."
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "This Version of You — the one who's ready — Only Shows Up Once. The woman who commits to becoming unshakeable lives a different life. That woman is standing here right now. Don't let her walk away."
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> "One-time offer" is transactional scarcity. The rewrite activates IDENTITY scarcity: this moment, this version of her that's willing to commit — it won't stick around if she leaves. She'll second-guess, talk herself down. The urgency becomes about becoming, not about missing a deal.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CASE STUDIES SECTION -->
+        <div class="audit-section">
+            <h3 class="section-title">CASE STUDIES SECTION</h3>
+            <p class="section-meta">Social proof — currently strong on pain validation, weaker on identity transformation</p>
+
+            <button class="expand-all" onclick="expandAll(this)">Expand All</button>
+
+            <!-- Item 1 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">WHERE SHE WAS: [All 3 case studies share this opening]</span>
+                    <div class="badge-container">
+                        <span class="badge badge-identity">IDENTITY</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "Was doing everything 'right' but nothing was working. Eating clean, working out, sleeping when she could. Still gaining. Felt like her body was betraying her."
+                    </div>
+                    <div class="strength-box">
+                        <strong>✓ ALREADY STRONG:</strong> This is identity-smart pain validation. "Everything right but nothing worked" = helplessness. "Body betraying her" = deepest fear. This is perfect setup for transformation. It's not just pain, it's identity pain. She's lost herself. Keep this structure.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">WHERE SHE IS NOW: [If present in copy]</span>
+                    <div class="badge-container">
+                        <span class="badge badge-feature">FEATURE</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Approach (assumed)</div>
+                        "Lost 23 lbs. Fit back into her skinny jeans. Has more energy. Feels good."
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "Lost 23 lbs, but that's not the biggest shift. She's the woman who doesn't panic on night shift anymore. Doesn't wake up starving. Her scrubs fit. More than that: she recognizes herself in the mirror. She's back."
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> Results (lbs, jeans) are features. Identity language focuses on who she became: calm under pressure, body-trust restored, self-recognition. The physical results prove it worked, but the identity shift is what she wanted all along.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FINAL CTA SECTION -->
+        <div class="audit-section">
+            <h3 class="section-title">FINAL CTA SECTION</h3>
+            <p class="section-meta">Conversion moment — highest-stakes copy on the page</p>
+
+            <button class="expand-all" onclick="expandAll(this)">Expand All</button>
+
+            <!-- Item 1 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">Lock In Your Commitment & Fast-Track Your Results</span>
+                    <div class="badge-container">
+                        <span class="badge badge-benefit">BENEFIT</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "Lock In Your Commitment & Fast-Track Your Results"
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "Become the Woman You Know You're Capable of Being"
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> "Lock in commitment, fast-track results" is benefit language. The rewrite is pure identity language: it speaks to her latent sense of who she could be if conditions were right. This is her moment to claim that identity.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">Yes! Upgrade to 12-Month Premium / Save $216 + Unlock $1,205 in Bonuses</span>
+                    <div class="badge-container">
+                        <span class="badge badge-feature">FEATURE</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "Yes! Upgrade to 12-Month Premium. $588 Today — Only $49/month. Save $216 + Unlock $1,205 in Bonuses."
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "Yes! I'm Going All-In. 12-Month to Unshakeable. Start Today — $588 One-Time."
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> Dollar math ("Save $216") is feature language. The rewrite puts identity first ("Going all-in"), then outcome ("Unshakeable"), then transaction. This makes the cost feel like the natural extension of a bigger identity commitment, not the main point.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">No, thank you. I'll start my standard membership without the premium bonuses.</span>
+                    <div class="badge-container">
+                        <span class="badge badge-feature">FEATURE</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="copy-box copy-current">
+                        <div class="copy-label">Current Copy</div>
+                        "No, thank you. I'll start my standard membership without the premium bonuses."
+                    </div>
+                    <div class="copy-box copy-rewritten">
+                        <div class="copy-label">Identity Rewrite</div>
+                        "Not Yet. I'm Testing First. (That's okay. Come Back When You're Ready to Commit.)"
+                    </div>
+                    <div class="note-box">
+                        <strong>Why stronger:</strong> The default downsell button should acknowledge her objection with identity language: she's not saying no to the bundle, she's saying she's testing first. No shame. But the parenthetical ("Come back when you're ready") gently reminds her: there's a deeper commitment waiting. This reframe is kinder AND more effective because it doesn't make her feel wrong for not converting.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NURSE YAY LETTER -->
+        <div class="audit-section">
+            <h3 class="section-title">"NURSE YAY" LETTER (From IJ)</h3>
+            <p class="section-meta">Founder's voice — should be highest identity language on the page</p>
+
+            <button class="expand-all" onclick="expandAll(this)">Expand All</button>
+
+            <!-- Item 1 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">I created these premium tiers because I watched too many nurses start strong and fade at month 2...</span>
+                    <div class="badge-container">
+                        <span class="badge badge-identity">IDENTITY</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="strength-box">
+                        <strong>✓ ALREADY STRONG:</strong> This is nurse-to-nurse identity language. "Not willpower, structure" is a powerful reframe that validates her struggle and shifts blame from her to her circumstances. "Watched too many nurses" = he sees her, understands her. Excellent founder voice.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">The onboarding call, the AI tracker, the bloodwork portal — these aren't upsells. They're the difference between guessing and knowing.</span>
+                    <div class="badge-container">
+                        <span class="badge badge-identity">IDENTITY</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="strength-box">
+                        <strong>✓ ALREADY STRONG:</strong> "Guessing vs. knowing" is pure identity language. It positions the bonuses not as nice-to-haves, but as the difference between two kinds of women: one in the dark, one empowered. This is psychologically brilliant.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">Between hoping and arriving.</span>
+                    <div class="badge-container">
+                        <span class="badge badge-identity">IDENTITY</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="strength-box">
+                        <strong>✓ ALREADY STRONG:</strong> "Hoping vs. arriving" is the full identity arc. This phrase is so powerful it appears multiple times on the page. It's the core emotional contrast: the woman who dreams vs. the woman who actually gets there. Excellent.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="audit-item">
+                <div class="audit-header-bar" onclick="toggleAudit(this)">
+                    <span class="audit-text">If you're the kind of nurse who goes all-in — this is your moment.</span>
+                    <div class="badge-container">
+                        <span class="badge badge-identity">IDENTITY</span>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                </div>
+                <div class="audit-content">
+                    <div class="strength-box">
+                        <strong>✓ ALREADY STRONG:</strong> This is pre-qualification through identity. It's saying: if you're this kind of woman, you belong here. It's not pushy, it's invitational. It makes her feel chosen, not sold to. Perfect closer.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRIORITY SECTION -->
+        <div class="priority-section">
+            <h2>PRIORITY ORDER — Highest Conversion Impact</h2>
+            <p style="font-size: 15px; margin-bottom: 24px; line-height: 1.6;">These rewrites would have the biggest emotional and conversion impact if implemented first:</p>
+
+            <div class="priority-list">
+                <div class="priority-item">
+                    <div class="priority-rank">1</div>
+                    <div class="priority-content">
+                        <div class="priority-section-name">Hero Section: "Now Let's Fast-Track Your Results"</div>
+                        <div class="priority-reason">This is the first reframe she sees after scrolling past the offer. Shifting from "fast-track results" to "finish what you started — so you can be the woman you know you are" reframes the entire psychological position of the page. Everything after it lands harder.</div>
+                        <span class="impact-tag">HIGHEST IMPACT</span>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-rank">2</div>
+                    <div class="priority-content">
+                        <div class="priority-section-name">Pricing Section: Reframe Card Labels as Identity Choices</div>
+                        <div class="priority-reason">Monthly = "The Tester" | 6-Month = "The Committed" | 12-Month = "The Breaker-Through". This reframing happens at the decision moment and directly activates the identity question: "Which woman am I?" If she sees herself as the breaker-through, she converts to 12-month. This is pure conversion leverage.</div>
+                        <span class="impact-tag">HIGH IMPACT</span>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-rank">3</div>
+                    <div class="priority-content">
+                        <div class="priority-section-name">Science Timeline: MONTH-by-MONTH Identity Shifts</div>
+                        <div class="priority-reason">The current timeline is clinical. Rewriting to focus on identity at each milestone ("You become the nurse who doesn't white-knuckle it" instead of "fat loss accelerates") makes the 6-12 month commitment feel like a journey of self-discovery, not just weight loss. This is where she sees herself becoming.</div>
+                        <span class="impact-tag">HIGH IMPACT</span>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-rank">4</div>
+                    <div class="priority-content">
+                        <div class="priority-section-name">Primary CTA: "Become the Woman You Know You're Capable of Being"</div>
+                        <div class="priority-reason">This is the final CTA. It should be the most psychologically potent copy on the page. Shifting from benefit language to identity language here is the last psychological push before checkout. If she reads this and feels it, she clicks.</div>
+                        <span class="impact-tag">HIGH IMPACT</span>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-rank">5</div>
+                    <div class="priority-content">
+                        <div class="priority-section-name">Urgency Section: Identity-Based FOMO</div>
+                        <div class="priority-reason">Current urgency is transactional ("premium bonuses only available now"). Identity-based urgency ("This version of you — ready to commit — won't stick around if you leave") is more psychologically powerful. It makes her feel the real cost of walking away: losing her own commitment to herself.</div>
+                        <span class="impact-tag">MEDIUM IMPACT</span>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-rank">6</div>
+                    <div class="priority-content">
+                        <div class="priority-section-name">Bonus Section: Reframe Title from "What You Unlock" to "Tools for the Woman Who's All-In"</div>
+                        <div class="priority-reason">Small reframe, big shift. This is a pre-qualification statement that makes the reader either feel excited (yes, that's me) or uncomfortable (am I the kind of person who goes all-in?). That discomfort is conversion leverage because it activates the desire to prove she's that woman.</div>
+                        <span class="impact-tag">MEDIUM IMPACT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER SUMMARY -->
+        <div class="footer-summary">
+            <h2>Key Findings & Recommendations</h2>
+
+            <div class="summary-grid">
+                <div class="summary-stat">
+                    <div class="summary-stat-label">Current Identity Language</div>
+                    <div class="summary-stat-value">38%</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="summary-stat-label">Potential After Rewrites</div>
+                    <div class="summary-stat-value">82%</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 32px; padding-top: 32px; border-top: 1px solid #e8e0d0;">
+                <h3 style="font-size: 18px; margin-bottom: 16px; color: #2d2d2d;">What's Already Working (Keep As-Is)</h3>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>Hero Section:</strong> "Those who hope vs. those who arrive" — Pure identity contrast. Excellent.</li>
+                    <li><strong>Science Timeline:</strong> "Identity shift complete" (Month 5-6) — Explicitly identity language. Brilliant.</li>
+                    <li><strong>Bonus Language:</strong> "Become the woman who knows exactly what she's eating" & "Finally understand WHY your body has been fighting you" — Both excellent identity + emotional validation.</li>
+                    <li><strong>Pricing Contrast:</strong> "Monthly quit at month 2. Committed members break through at month 4" — Identity-based comparison.</li>
+                    <li><strong>Founder Letter:</strong> All 4 quotes are identity-smart. "If you're the kind of nurse who goes all-in — this is your moment" is a perfect close.</li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 32px;">
+                <h3 style="font-size: 18px; margin-bottom: 16px; color: #2d2d2d;">Biggest Gaps (Feature Language That Needs Rewriting)</h3>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>Hero Section Introduction:</strong> Generic congratulations. Reframe as joining a movement.</li>
+                    <li><strong>Timeline Months 1-2, 3-4, 7-12:</strong> Clinical language (metabolic repair, fat loss accelerates) needs identity reframe (becomes unshakeable, stops being a slave to cravings).</li>
+                    <li><strong>Pricing Cards:</strong> All three cards use feature language ("Standard Access," "$55/m"). Reframe as identity choices.</li>
+                    <li><strong>Primary CTAs:</strong> "Fast-track," "unlock," "premium access" are all transactional. They need to speak to transformation and becoming.</li>
+                    <li><strong>Case Studies:</strong> If "Where She Is Now" sections are present, they likely focus on weight/jeans rather than identity restoration.</li>
+                </ul>
+            </div>
+
+            <div class="cta-section">
+                <p style="font-size: 15px; color: #666; margin-bottom: 16px;"><strong>Next Steps:</strong> Start with the Priority 1 and 2 rewrites. These two changes alone (Hero intro + Pricing labels) will shift the entire psychological tone of the page. Then move through the timeline and CTAs. The Nurse Yay Letter is already excellent — it sets the standard for the rest of the page to match.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAudit(element) {
+            const content = element.nextElementSibling;
+            content.classList.toggle('active');
+            const icon = element.querySelector('.toggle-icon');
+            if (content.classList.contains('active')) {
+                icon.textContent = '▲';
+            } else {
+                icon.textContent = '▼';
+            }
+        }
+
+        function expandAll(button) {
+            const section = button.parentElement;
+            const items = section.querySelectorAll('.audit-item');
+            const allExpanded = Array.from(items).every(item => 
+                item.querySelector('.audit-content').classList.contains('active')
+            );
+
+            items.forEach(item => {
+                const content = item.querySelector('.audit-content');
+                const headerBar = item.querySelector('.audit-header-bar');
+                const icon = headerBar.querySelector('.toggle-icon');
+                
+                if (allExpanded) {
+                    content.classList.remove('active');
+                    icon.textContent = '▼';
+                } else {
+                    content.classList.add('active');
+                    icon.textContent = '▲';
+                }
+            });
+
+            button.textContent = allExpanded ? 'Expand All' : 'Collapse All';
+        }
+    </script>
+</body>
+</html>

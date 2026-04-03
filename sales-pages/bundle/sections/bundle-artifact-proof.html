@@ -1,0 +1,977 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #faf6ef;
+        color: #2d2d2d;
+        line-height: 1.6;
+    }
+
+    .sf-proof-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 20px;
+    }
+
+    /* Header Styles */
+    .sf-proof-header {
+        text-align: center;
+        margin-bottom: 70px;
+        animation: fadeInDown 0.8s ease-out;
+    }
+
+    .sf-proof-eyebrow {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #c9a84c;
+        margin-bottom: 16px;
+    }
+
+    .sf-proof-heading {
+        font-family: 'Playfair Display', serif;
+        font-size: 48px;
+        font-weight: 700;
+        color: #2d2d2d;
+        margin-bottom: 16px;
+        line-height: 1.2;
+    }
+
+    .sf-proof-subheading {
+        font-size: 18px;
+        color: #555;
+        max-width: 700px;
+        margin: 0 auto;
+        font-weight: 400;
+        line-height: 1.8;
+    }
+
+    /* Stats Bar Styles */
+    .sf-stats-bar {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-bottom: 80px;
+        padding: 40px;
+        background: linear-gradient(135deg, rgba(201, 168, 76, 0.08) 0%, rgba(201, 168, 76, 0.02) 100%);
+        border-radius: 12px;
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .sf-stats-bar::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.1), transparent);
+        animation: shimmer 3s infinite;
+        pointer-events: none;
+    }
+
+    @keyframes shimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+
+    .sf-stat-box {
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .sf-stat-number {
+        font-family: 'Playfair Display', serif;
+        font-size: 42px;
+        font-weight: 700;
+        color: #c9a84c;
+        margin-bottom: 8px;
+        display: block;
+        min-height: 50px;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+
+    .sf-stat-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #2d2d2d;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    /* Gallery Styles */
+    .sf-gallery-container {
+        margin-bottom: 80px;
+    }
+
+    .sf-gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    @media (max-width: 768px) {
+        .sf-gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .sf-gallery-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .sf-gallery-card {
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        animation: cardReveal 0.6s ease-out backwards;
+    }
+
+    .sf-gallery-card:nth-child(1) { animation-delay: 0.1s; }
+    .sf-gallery-card:nth-child(2) { animation-delay: 0.2s; }
+    .sf-gallery-card:nth-child(3) { animation-delay: 0.3s; }
+    .sf-gallery-card:nth-child(4) { animation-delay: 0.4s; }
+    .sf-gallery-card:nth-child(5) { animation-delay: 0.5s; }
+    .sf-gallery-card:nth-child(6) { animation-delay: 0.6s; }
+
+    @keyframes cardReveal {
+        from {
+            opacity: 0;
+            -webkit-transform: translateY(20px);
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    .sf-gallery-card:hover {
+        box-shadow: 0 12px 30px rgba(201, 168, 76, 0.2);
+        border: 2px solid #c9a84c;
+        -webkit-transform: translateY(-4px);
+        transform: translateY(-4px);
+    }
+
+    .sf-gallery-image-wrapper {
+        width: 100%;
+        padding-bottom: 100%;
+        position: relative;
+        background: linear-gradient(135deg, #f5f0e8 0%, #ede6d8 100%);
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        color: #999;
+        font-size: 13px;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .sf-gallery-image-wrapper img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .sf-gallery-image-placeholder {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .sf-gallery-image-placeholder svg {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 12px;
+        opacity: 0.5;
+    }
+
+    .sf-gallery-caption {
+        padding: 16px;
+        background: white;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .sf-gallery-name {
+        font-weight: 500;
+        font-size: 14px;
+        color: #2d2d2d;
+    }
+
+    .sf-gallery-badge {
+        background: linear-gradient(135deg, #c9a84c 0%, #d4b86a 100%);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    /* Lightbox Styles */
+    .sf-lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.92);
+        z-index: 1000;
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    .sf-lightbox.active {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .sf-lightbox-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        animation: scaleIn 0.3s ease-out;
+    }
+
+    @keyframes scaleIn {
+        from {
+            opacity: 0;
+            -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+    }
+
+    .sf-lightbox-image {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 8px;
+    }
+
+    .sf-lightbox-close {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        font-size: 28px;
+        cursor: pointer;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+    }
+
+    .sf-lightbox-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+
+    .sf-lightbox-nav {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+    }
+
+    .sf-lightbox-nav:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .sf-lightbox-prev {
+        left: 30px;
+    }
+
+    .sf-lightbox-next {
+        right: 30px;
+    }
+
+    @media (max-width: 768px) {
+        .sf-lightbox-close,
+        .sf-lightbox-nav {
+            width: 36px;
+            height: 36px;
+            font-size: 20px;
+        }
+        .sf-lightbox-close {
+            top: 15px;
+            right: 15px;
+        }
+        .sf-lightbox-prev {
+            left: 10px;
+        }
+        .sf-lightbox-next {
+            right: 10px;
+        }
+    }
+
+    /* Quote Carousel Styles */
+    .sf-quote-carousel {
+        background: white;
+        border-radius: 12px;
+        padding: 50px 40px;
+        margin-bottom: 60px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .sf-quote-item {
+        text-align: center;
+        animation: fadeInOut 0.6s ease-in-out;
+    }
+
+    @keyframes fadeInOut {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .sf-quote-item.hidden {
+        display: none;
+    }
+
+    .sf-quote-text {
+        font-family: 'Playfair Display', serif;
+        font-size: 24px;
+        font-style: italic;
+        color: #2d2d2d;
+        margin-bottom: 16px;
+        line-height: 1.6;
+    }
+
+    .sf-quote-text::before {
+        content: '"';
+        color: #c9a84c;
+        font-size: 48px;
+        line-height: 0;
+        vertical-align: -0.4em;
+        margin-right: 8px;
+    }
+
+    .sf-quote-attribution {
+        font-size: 14px;
+        color: #999;
+        font-weight: 500;
+    }
+
+    .sf-carousel-dots {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: center;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 30px;
+    }
+
+    .sf-carousel-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #ddd;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+    }
+
+    .sf-carousel-dot.active {
+        background: #c9a84c;
+        width: 30px;
+        border-radius: 5px;
+    }
+
+    .sf-carousel-controls {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: center;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 20px;
+    }
+
+    .sf-carousel-arrow {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid #ddd;
+        background: white;
+        color: #2d2d2d;
+        cursor: pointer;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+    }
+
+    .sf-carousel-arrow:hover {
+        border-color: #c9a84c;
+        color: #c9a84c;
+        background: #faf6ef;
+    }
+
+    /* CTA Button Styles */
+    .sf-proof-cta {
+        text-align: center;
+        margin-top: 60px;
+    }
+
+    .sf-cta-button {
+        display: -webkit-inline-flex;
+        display: inline-flex;
+        -webkit-align-items: center;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 40px;
+        background: linear-gradient(135deg, #c9a84c 0%, #d4b86a 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .sf-cta-button:hover {
+        -webkit-transform: translateY(-2px);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(201, 168, 76, 0.3);
+    }
+
+    .sf-cta-button:active {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .sf-proof-section {
+            padding: 60px 16px;
+        }
+
+        .sf-proof-heading {
+            font-size: 36px;
+        }
+
+        .sf-proof-subheading {
+            font-size: 16px;
+        }
+
+        .sf-stats-bar {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 30px 20px;
+        }
+
+        .sf-stat-number {
+            font-size: 32px;
+        }
+
+        .sf-quote-carousel {
+            padding: 30px 20px;
+        }
+
+        .sf-quote-text {
+            font-size: 18px;
+        }
+    }
+
+    /* Animation Utils */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            -webkit-transform: translateY(-20px);
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    @-webkit-keyframes shimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+
+    @-webkit-keyframes cardReveal {
+        from {
+            opacity: 0;
+            -webkit-transform: translateY(20px);
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    @-webkit-keyframes scaleIn {
+        from {
+            opacity: 0;
+            -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+    }
+
+    @-webkit-keyframes fadeInOut {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @-webkit-keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @-webkit-keyframes fadeInDown {
+        from {
+            opacity: 0;
+            -webkit-transform: translateY(-20px);
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<section class="sf-proof-section">
+    <!-- Header -->
+    <div class="sf-proof-header">
+        <div class="sf-proof-eyebrow">Real Nurses. Real Results.</div>
+        <h2 class="sf-proof-heading">They Stopped Trying. They Started Becoming.</h2>
+        <p class="sf-proof-subheading">
+            These nurses didn't just lose weight. They became the version of themselves they'd been fighting to find — the woman who walks into every shift knowing her body has her back.
+        </p>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="sf-stats-bar">
+        <div class="sf-stat-box">
+            <span class="sf-stat-number" data-target="400">0</span>
+            <div class="sf-stat-label">Nurses Transformed</div>
+        </div>
+        <div class="sf-stat-box">
+            <span class="sf-stat-number" data-target="87">0</span>
+            <div class="sf-stat-label">Reach Goal Weight (6+ Mo)</div>
+        </div>
+        <div class="sf-stat-box">
+            <span class="sf-stat-number" data-target="5">0</span>
+            <div class="sf-stat-label">Average Week 1 Loss</div>
+        </div>
+        <div class="sf-stat-box">
+            <span class="sf-stat-number" data-target="3">0</span>
+            <div class="sf-stat-label">When Most Feel the Difference</div>
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="sf-gallery-container">
+        <div class="sf-gallery-grid" id="sfGalleryGrid">
+            <!-- Cards will be generated by JS -->
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="sf-lightbox" id="sfLightbox">
+        <button class="sf-lightbox-close" id="sfLightboxClose">&times;</button>
+        <button class="sf-lightbox-nav sf-lightbox-prev" id="sfLightboxPrev">&#10094;</button>
+        <div class="sf-lightbox-content">
+            <img class="sf-lightbox-image" id="sfLightboxImage" src="" alt="">
+        </div>
+        <button class="sf-lightbox-nav sf-lightbox-next" id="sfLightboxNext">&#10095;</button>
+    </div>
+
+    <!-- Quote Carousel -->
+    <div class="sf-quote-carousel">
+        <div class="sf-quote-item">
+            <div class="sf-quote-text">I used to dread walking past the mirror in the locker room. Now I catch myself standing a little taller before I even realize it.</div>
+            <div class="sf-quote-attribution">— Sarah M., 6-Month Member</div>
+        </div>
+        <div class="sf-quote-item hidden">
+            <div class="sf-quote-text">My coworkers asked what changed. I didn't say 'I'm on a program.' I said 'I finally stopped fighting my body and started working with it.'</div>
+            <div class="sf-quote-attribution">— Jennifer K., 12-Month Member</div>
+        </div>
+        <div class="sf-quote-item hidden">
+            <div class="sf-quote-text">I'm not the nurse who lives off coffee and vending machines anymore. I'm the one other nurses ask for meal prep tips.</div>
+            <div class="sf-quote-attribution">— Michelle T., 6-Month Member</div>
+        </div>
+        <div class="sf-carousel-dots">
+            <button class="sf-carousel-dot active" data-index="0"></button>
+            <button class="sf-carousel-dot" data-index="1"></button>
+            <button class="sf-carousel-dot" data-index="2"></button>
+        </div>
+        <div class="sf-carousel-controls">
+            <button class="sf-carousel-arrow" id="sfQuoteLeft">&#10094;</button>
+            <button class="sf-carousel-arrow" id="sfQuoteRight">&#10095;</button>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="sf-proof-cta">
+        <button class="sf-cta-button">
+            Join 400+ Nurses Who Went All-In
+            <span>→</span>
+        </button>
+    </div>
+</section>
+
+<script>
+(function() {
+    var currentLightboxIndex = 0;
+    var totalCards = 6;
+    var currentQuoteIndex = 0;
+    var totalQuotes = 3;
+    var counterAnimationTimers = {};
+
+    // ===== Stats Counter Animation (using setTimeout fallback) =====
+    function animateCounters() {
+        try {
+            var statNumbers = document.querySelectorAll('.sf-stat-number');
+            
+            // Use setTimeout as primary trigger since IntersectionObserver unreliable in GHL
+            setTimeout(function() {
+                for (var i = 0; i < statNumbers.length; i++) {
+                    var el = statNumbers[i];
+                    if (!el.dataset.animated) {
+                        el.dataset.animated = 'true';
+                        animateSingleCounter(el);
+                    }
+                }
+            }, 1500);
+        } catch(e) {
+            // Silent fail
+        }
+    }
+
+    function animateSingleCounter(el) {
+        try {
+            var target = parseInt(el.dataset.target);
+            var current = 0;
+            var increment = Math.ceil(target / 60);
+            
+            var interval = setInterval(function() {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(interval);
+                }
+                
+                // Add proper suffix based on target
+                var suffix = '';
+                if (target === 400) suffix = '+';
+                else if (target === 87) suffix = '%';
+                else if (target === 5) suffix = ' lbs';
+                else if (target === 3) suffix = ' Day';
+                
+                el.textContent = current + suffix;
+            }, 30);
+            
+            counterAnimationTimers[el] = interval;
+        } catch(e) {
+            // Silent fail
+        }
+    }
+
+    // ===== Gallery Generation =====
+    function generateGallery() {
+        try {
+            var gallery = document.getElementById('sfGalleryGrid');
+            var cardNames = [
+                { name: 'Sarah M.', tier: '6-Month Member' },
+                { name: 'Jennifer K.', tier: '12-Month Member' },
+                { name: 'Michelle T.', tier: '6-Month Member' },
+                { name: 'Lisa R.', tier: '12-Month Member' },
+                { name: 'Amanda D.', tier: '6-Month Member' },
+                { name: 'Christine L.', tier: '12-Month Member' }
+            ];
+
+            for (var i = 0; i < cardNames.length; i++) {
+                var card = cardNames[i];
+                var cardEl = document.createElement('div');
+                cardEl.className = 'sf-gallery-card';
+                cardEl.innerHTML = '<div class="sf-gallery-image-wrapper" data-index="' + i + '"><div class="sf-gallery-image-placeholder"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>Drop image here</div></div><div class="sf-gallery-caption"><span class="sf-gallery-name">' + card.name + '</span><span class="sf-gallery-badge">' + card.tier + '</span></div>';
+                
+                (function(index) {
+                    cardEl.addEventListener('click', function() {
+                        openLightbox(index);
+                    });
+                })(i);
+                
+                gallery.appendChild(cardEl);
+            }
+        } catch(e) {
+            // Silent fail
+        }
+    }
+
+    // ===== Lightbox Functions =====
+    function openLightbox(index) {
+        try {
+            currentLightboxIndex = index;
+            var wrapper = document.querySelectorAll('.sf-gallery-image-wrapper')[index];
+            var img = wrapper.querySelector('img');
+            
+            if (!img || !img.src) {
+                var lightboxImage = document.getElementById('sfLightboxImage');
+                lightboxImage.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"%3E%3Crect fill="%23f5f0e8" width="400" height="400"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="24" fill="%23999"%3ETransformation Image%3C/text%3E%3C/svg%3E';
+            } else {
+                document.getElementById('sfLightboxImage').src = img.src;
+            }
+            
+            var lightbox = document.getElementById('sfLightbox');
+            lightbox.className = lightbox.className.replace('active', '') + ' active';
+            document.body.style.overflow = 'hidden';
+        } catch(e) {
+            // Silent fail
+        }
+    }
+
+    function closeLightbox() {
+        try {
+            var lightbox = document.getElementById('sfLightbox');
+            lightbox.className = lightbox.className.replace(' active', '');
+            document.body.style.overflow = 'auto';
+        } catch(e) {
+            // Silent fail
+        }
+    }
+
+    function navigateLightbox(direction) {
+        try {
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = totalCards - 1;
+            if (currentLightboxIndex >= totalCards) currentLightboxIndex = 0;
+            openLightbox(currentLightboxIndex);
+        } catch(e) {
+            // Silent fail
+        }
+    }
+
+    // Lightbox Controls
+    var lightboxClose = document.getElementById('sfLightboxClose');
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', closeLightbox);
+    }
+    
+    var lightboxPrev = document.getElementById('sfLightboxPrev');
+    if (lightboxPrev) {
+        lightboxPrev.addEventListener('click', function() {
+            navigateLightbox(-1);
+        });
+    }
+    
+    var lightboxNext = document.getElementById('sfLightboxNext');
+    if (lightboxNext) {
+        lightboxNext.addEventListener('click', function() {
+            navigateLightbox(1);
+        });
+    }
+    
+    var lightbox = document.getElementById('sfLightbox');
+    if (lightbox) {
+        lightbox.addEventListener('click', function(e) {
+            if (e.target.id === 'sfLightbox') {
+                closeLightbox();
+            }
+        });
+    }
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', function(e) {
+        try {
+            var lightbox = document.getElementById('sfLightbox');
+            if (!lightbox || lightbox.className.indexOf('active') === -1) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            if (e.key === 'ArrowRight') navigateLightbox(1);
+        } catch(ex) {
+            // Silent fail
+        }
+    });
+
+    // ===== Quote Carousel =====
+    function updateQuote(index) {
+        try {
+            var items = document.querySelectorAll('.sf-quote-item');
+            for (var i = 0; i < items.length; i++) {
+                if (i === index) {
+                    items[i].className = items[i].className.replace(' hidden', '');
+                } else {
+                    if (items[i].className.indexOf('hidden') === -1) {
+                        items[i].className += ' hidden';
+                    }
+                }
+            }
+            
+            var dots = document.querySelectorAll('.sf-carousel-dot');
+            for (var j = 0; j < dots.length; j++) {
+                if (j === index) {
+                    dots[j].className += ' active';
+                } else {
+                    dots[j].className = dots[j].className.replace(' active', '');
+                }
+            }
+        } catch(e) {
+            // Silent fail
+        }
+    }
+
+    function nextQuote() {
+        try {
+            currentQuoteIndex = (currentQuoteIndex + 1) % totalQuotes;
+            updateQuote(currentQuoteIndex);
+        } catch(e) {
+            // Silent fail
+        }
+    }
+
+    function prevQuote() {
+        try {
+            currentQuoteIndex = (currentQuoteIndex - 1 + totalQuotes) % totalQuotes;
+            updateQuote(currentQuoteIndex);
+        } catch(e) {
+            // Silent fail
+        }
+    }
+
+    var quoteLeft = document.getElementById('sfQuoteLeft');
+    if (quoteLeft) {
+        quoteLeft.addEventListener('click', prevQuote);
+    }
+    
+    var quoteRight = document.getElementById('sfQuoteRight');
+    if (quoteRight) {
+        quoteRight.addEventListener('click', nextQuote);
+    }
+    
+    var dots = document.querySelectorAll('.sf-carousel-dot');
+    for (var k = 0; k < dots.length; k++) {
+        (function(idx) {
+            dots[idx].addEventListener('click', function() {
+                currentQuoteIndex = idx;
+                updateQuote(idx);
+            });
+        })(k);
+    }
+
+    // Auto-rotate quotes every 5 seconds
+    setInterval(nextQuote, 5000);
+
+    // ===== Initialize =====
+    document.addEventListener('DOMContentLoaded', function() {
+        generateGallery();
+        animateCounters();
+    });
+
+    // Fallback if DOMContentLoaded already fired
+    if (document.readyState === 'loading') {
+        // DOM still loading
+    } else {
+        generateGallery();
+        animateCounters();
+    }
+})();
+</script>

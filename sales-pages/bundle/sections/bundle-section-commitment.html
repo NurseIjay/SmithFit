@@ -1,0 +1,699 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #faf6ef;
+    color: #2d2d2d;
+    padding: 40px 20px;
+  }
+
+  .sf-commit-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .sf-commit-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .sf-commit-main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #2d2d2d;
+    margin-bottom: 16px;
+  }
+
+  .sf-commit-subtitle {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .sf-commit-tiers-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 60px;
+  }
+
+  /* MONTHLY TIER - MUTED GRAY */
+  .sf-commit-tier-monthly {
+    background: #f9f9f9;
+    border: 2px solid #d9d9d9;
+    border-radius: 12px;
+    padding: 40px;
+    opacity: 0;
+    animation: sf-commit-fade-in 0.8s ease-out 0.1s forwards;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-tier-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-tier-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #e8e8e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #999;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-tier-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #666;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-tier-label {
+    font-size: 12px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-price {
+    font-size: 32px;
+    font-weight: 700;
+    color: #999;
+    margin-bottom: 8px;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-billing {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 28px;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-stat-block {
+    background: rgba(153, 153, 153, 0.08);
+    border-left: 4px solid #999;
+    padding: 20px;
+    margin-bottom: 28px;
+    border-radius: 4px;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    color: #999;
+    line-height: 1;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-stat-label {
+    font-size: 13px;
+    color: #999;
+    margin-top: 6px;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-feature-item {
+    font-size: 15px;
+    color: #666;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-feature-icon {
+    color: #999;
+    margin-top: 2px;
+    min-width: 16px;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-locked-item {
+    color: #bbb;
+    opacity: 0.5;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-locked-item .sf-commit-feature-icon {
+    color: #ddd;
+  }
+
+  .sf-commit-cta-button {
+    display: inline-block;
+    background: #999;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 15px;
+    margin-top: 24px;
+    transition: background 0.3s ease;
+  }
+
+  .sf-commit-tier-monthly .sf-commit-cta-button:hover {
+    background: #777;
+  }
+
+  /* 6-MONTH BUNDLE - GOLD ACCENTS */
+  .sf-commit-tier-6month {
+    background: linear-gradient(135deg, #faf6ef 0%, rgba(201, 168, 76, 0.04) 100%);
+    border: 2px solid #c9a84c;
+    border-radius: 12px;
+    padding: 40px;
+    position: relative;
+    opacity: 0;
+    animation: sf-commit-fade-in 0.8s ease-out 0.3s forwards;
+    box-shadow: 0 4px 16px rgba(201, 168, 76, 0.12);
+  }
+
+  .sf-commit-tier-6month::before {
+    content: "UNLOCK PREMIUM FEATURES";
+    position: absolute;
+    top: -12px;
+    left: 40px;
+    background: #c9a84c;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .sf-commit-tier-6month .sf-commit-tier-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .sf-commit-tier-6month .sf-commit-tier-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c9a84c 0%, #d4b66a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+    box-shadow: 0 2px 8px rgba(201, 168, 76, 0.3);
+  }
+
+  .sf-commit-tier-6month .sf-commit-tier-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #c9a84c;
+  }
+
+  .sf-commit-tier-6month .sf-commit-tier-label {
+    font-size: 12px;
+    color: #c9a84c;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .sf-commit-tier-6month .sf-commit-price {
+    font-size: 32px;
+    font-weight: 700;
+    color: #c9a84c;
+    margin-bottom: 8px;
+  }
+
+  .sf-commit-tier-6month .sf-commit-billing {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 28px;
+  }
+
+  .sf-commit-tier-6month .sf-commit-stat-block {
+    background: rgba(201, 168, 76, 0.12);
+    border-left: 4px solid #c9a84c;
+    padding: 20px;
+    margin-bottom: 28px;
+    border-radius: 4px;
+  }
+
+  .sf-commit-tier-6month .sf-commit-stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    color: #c9a84c;
+    line-height: 1;
+  }
+
+  .sf-commit-tier-6month .sf-commit-stat-label {
+    font-size: 13px;
+    color: #666;
+    margin-top: 6px;
+  }
+
+  .sf-commit-tier-6month .sf-commit-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sf-commit-tier-6month .sf-commit-feature-item {
+    font-size: 15px;
+    color: #2d2d2d;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .sf-commit-tier-6month .sf-commit-feature-icon {
+    color: #c9a84c;
+    margin-top: 2px;
+    min-width: 16px;
+  }
+
+  .sf-commit-tier-6month .sf-commit-new-feature {
+    background: rgba(201, 168, 76, 0.08);
+    padding: 12px 14px;
+    border-left: 3px solid #c9a84c;
+    border-radius: 4px;
+    opacity: 0;
+    animation: sf-commit-unlock-feature 0.6s ease-out 0.6s forwards;
+  }
+
+  .sf-commit-tier-6month .sf-commit-cta-button {
+    background: #c9a84c;
+    color: white;
+  }
+
+  .sf-commit-tier-6month .sf-commit-cta-button:hover {
+    background: #b39442;
+  }
+
+  /* 12-MONTH BUNDLE - FULL PREMIUM GOLD */
+  .sf-commit-tier-12month {
+    background: linear-gradient(135deg, #f5f1e8 0%, rgba(201, 168, 76, 0.1) 100%);
+    border: 2px solid #c9a84c;
+    border-radius: 12px;
+    padding: 40px;
+    position: relative;
+    opacity: 0;
+    animation: sf-commit-fade-in 0.8s ease-out 0.5s forwards;
+    box-shadow: 0 8px 32px rgba(201, 168, 76, 0.18);
+  }
+
+  .sf-commit-tier-12month::before {
+    content: "RECOMMENDED";
+    position: absolute;
+    top: -12px;
+    left: 40px;
+    background: linear-gradient(135deg, #c9a84c 0%, #d4b66a 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .sf-commit-tier-12month .sf-commit-tier-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .sf-commit-tier-12month .sf-commit-tier-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4b66a 0%, #c9a84c 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: white;
+    box-shadow: 0 4px 16px rgba(201, 168, 76, 0.4);
+  }
+
+  .sf-commit-tier-12month .sf-commit-tier-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #c9a84c;
+  }
+
+  .sf-commit-tier-12month .sf-commit-tier-label {
+    font-size: 12px;
+    color: #c9a84c;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  .sf-commit-tier-12month .sf-commit-price {
+    font-size: 40px;
+    font-weight: 700;
+    color: #c9a84c;
+    margin-bottom: 8px;
+  }
+
+  .sf-commit-tier-12month .sf-commit-billing {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 28px;
+  }
+
+  .sf-commit-tier-12month .sf-commit-stat-block {
+    background: linear-gradient(135deg, rgba(201, 168, 76, 0.15) 0%, rgba(201, 168, 76, 0.08) 100%);
+    border-left: 4px solid #c9a84c;
+    padding: 20px;
+    margin-bottom: 28px;
+    border-radius: 4px;
+  }
+
+  .sf-commit-tier-12month .sf-commit-stat-number {
+    font-size: 40px;
+    font-weight: 700;
+    color: #c9a84c;
+    line-height: 1;
+  }
+
+  .sf-commit-tier-12month .sf-commit-stat-label {
+    font-size: 13px;
+    color: #2d2d2d;
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  .sf-commit-tier-12month .sf-commit-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sf-commit-tier-12month .sf-commit-feature-item {
+    font-size: 15px;
+    color: #2d2d2d;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-weight: 500;
+  }
+
+  .sf-commit-tier-12month .sf-commit-feature-icon {
+    color: #c9a84c;
+    margin-top: 2px;
+    min-width: 16px;
+  }
+
+  .sf-commit-tier-12month .sf-commit-cta-button {
+    background: linear-gradient(135deg, #c9a84c 0%, #d4b66a 100%);
+    color: white;
+    font-weight: 700;
+  }
+
+  .sf-commit-tier-12month .sf-commit-cta-button:hover {
+    background: linear-gradient(135deg, #b39442 0%, #c39642 100%);
+  }
+
+  /* CLOSING STATEMENT */
+  .sf-commit-closing {
+    text-align: center;
+    padding: 40px 20px;
+    background: white;
+    border: 1px solid #e8e0d0;
+    border-radius: 12px;
+    opacity: 0;
+    animation: sf-commit-fade-in 0.8s ease-out 0.7s forwards;
+  }
+
+  .sf-commit-closing-text {
+    font-size: 18px;
+    color: #2d2d2d;
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  .sf-commit-closing-text strong {
+    color: #c9a84c;
+    font-weight: 700;
+  }
+
+  /* ANIMATIONS */
+  @keyframes sf-commit-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes sf-commit-unlock-feature {
+    from {
+      opacity: 0;
+      transform: translateX(-12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* MOBILE RESPONSIVE */
+  @media (max-width: 768px) {
+    .sf-commit-main-title {
+      font-size: 32px;
+    }
+
+    .sf-commit-subtitle {
+      font-size: 16px;
+    }
+
+    .sf-commit-tier-monthly,
+    .sf-commit-tier-6month,
+    .sf-commit-tier-12month {
+      padding: 28px;
+    }
+
+    .sf-commit-tier-monthly .sf-commit-tier-title,
+    .sf-commit-tier-6month .sf-commit-tier-title,
+    .sf-commit-tier-12month .sf-commit-tier-title {
+      font-size: 22px;
+    }
+
+    .sf-commit-tier-monthly .sf-commit-price,
+    .sf-commit-tier-6month .sf-commit-price {
+      font-size: 24px;
+    }
+
+    .sf-commit-tier-12month .sf-commit-price {
+      font-size: 28px;
+    }
+
+    .sf-commit-tier-12month .sf-commit-stat-number {
+      font-size: 32px;
+    }
+
+    .sf-commit-tier-monthly .sf-commit-stat-number,
+    .sf-commit-tier-6month .sf-commit-stat-number {
+      font-size: 28px;
+    }
+
+    .sf-commit-closing-text {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<div class="sf-commit-container">
+  <div class="sf-commit-header">
+    <h1 class="sf-commit-main-title">What Commitment Actually Unlocks</h1>
+    <p class="sf-commit-subtitle">The longer you commit, the deeper your transformation goes. See what each tier includes and why nurses choose the path they do.</p>
+  </div>
+
+  <div class="sf-commit-tiers-wrapper">
+    <!-- MONTHLY TIER -->
+    <div class="sf-commit-tier-monthly">
+      <div class="sf-commit-tier-header">
+        <div class="sf-commit-tier-icon">●</div>
+        <div>
+          <div class="sf-commit-tier-label">Entry Point</div>
+          <div class="sf-commit-tier-title">Monthly</div>
+        </div>
+      </div>
+      <div class="sf-commit-price">$67<span style="font-size: 16px;">/mo</span></div>
+      <div class="sf-commit-billing">Cancel anytime</div>
+      
+      <div class="sf-commit-stat-block">
+        <div class="sf-commit-stat-number">23%</div>
+        <div class="sf-commit-stat-label">Reach their goal in 3 months</div>
+      </div>
+
+      <div class="sf-commit-features-list">
+        <div class="sf-commit-feature-item">
+          <span class="sf-commit-feature-icon">✓</span>
+          <span>Weekly shift-proof meal plans</span>
+        </div>
+        <div class="sf-commit-feature-item">
+          <span class="sf-commit-feature-icon">✓</span>
+          <span>1,000+ recipe database</span>
+        </div>
+        <div class="sf-commit-feature-item">
+          <span class="sf-commit-feature-icon">✓</span>
+          <span>15-minute cortisol-conscious workouts</span>
+        </div>
+        <div class="sf-commit-feature-item">
+          <span class="sf-commit-feature-icon">✓</span>
+          <span>Weekly FitMetrics AI check-ins</span>
+        </div>
+        <div class="sf-commit-feature-item">
+          <span class="sf-commit-feature-icon">✓</span>
+          <span>1 weekly group coaching call</span>
+        </div>
+        <div class="sf-commit-feature-item sf-commit-locked-item">
+          <span class="sf-commit-feature-icon">🔒</span>
+          <span>Personal gameplan call with IJ</span>
+        </div>
+        <div class="sf-commit-feature-item sf-commit-locked-item">
+          <span class="sf-commit-feature-icon">🔒</span>
+          <span>MealLens AI (personalized nutrition)</span>
+        </div>
+        <div class="sf-commit-feature-item sf-commit-locked-item">
+          <span class="sf-commit-feature-icon">🔒</span>
+          <span>BioSync Bloodwork Portal</span>
+        </div>
+        <div class="sf-commit-feature-item sf-commit-locked-item">
+          <span class="sf-commit-feature-icon">🔒</span>
+          <span>VIP 1-on-1 community access (Month 1)</span>
+        </div>
+        <div class="sf-commit-feature-item sf-commit-locked-item">
+          <span class="sf-commit-feature-icon">🔒</span>
+          <span>Quarterly coaching calls with IJ</span>
+        </div>
+      </div>
+      <a href="#" class="sf-commit-cta-button">Start Monthly</a>
+    </div>
+
+    <!-- 6-MONTH BUNDLE -->
+    <div class="sf-commit-tier-6month">
+      <div class="sf-commit-tier-header">
+        <div class="sf-commit-tier-icon">⭐</div>
+        <div>
+          <div class="sf-commit-tier-label">Most Popular</div>
+          <div class="sf-commit-tier-title">6-Month Bundle</div>
+        </div>
+      </div>
+      <div class="sf-commit-price">$335<span style="font-size: 16px;"> total</span></div>
+      <div class="sf-commit-billing"><strong style="color: #c9a84c;">$55.83/mo</strong> — lock in the discount</div>
+      
+      <div class="sf-commit-stat-block">
+        <div class="sf-commit-stat-number">80%</div>
+        <div class="sf-commit-stat-label">Transform on every metric by month 5</div>
+      </div>
+
+      <div class="sf-commit-features-list">
+        <div class="sf-commit-feature-item">
+          <span class="sf-commit-feature-icon">✓</span>
+          <span>Everything in Monthly</span>
+        </div>
+        <div class="sf-commit-feature-item sf-commit-new-feature">
+          <span class="sf-commit-feature-icon">★</span>
+          <span><strong>1×60-min personal gameplan call with IJ</strong> (timeline, goals, your barriers)</span>
+        </div>
+        <div class="sf-commit-feature-item sf-commit-new-feature">
+          <span class="sf-commit-feature-icon">★</span>
+          <span><strong>MealLens AI</strong> (personalized nutrition coaching)</span>
+        </div>
+        <div class="sf-commit-feature-item sf-commit-new-feature">
+          <span class="sf-commit-feature-icon">★</span>
+          <span><strong>BioSync Bloodwork Portal</strong> (track metabolic shifts)</span>
+        </div>
+        <div class="sf-commit-feature-item sf-commit-new-feature">
+          <span class="sf-commit-feature-icon">★</span>
+          <span><strong>VIP community access Month 1</strong> (1-on-1 channel with IJ & team)</span>
+        </div>
+        <div class="sf-commit-feature-item sf-commit-locked-item">
+          <span class="sf-commit-feature-icon">🔒</span>
+          <span>Quarterly 20-min coaching calls with IJ</span>
+        </div>
+        <div class="sf-commit-feature-item sf-commit-locked-item">
+          <span class="sf-commit-feature-icon">🔒</span>
+          <span>VIP 1-on-1 agentic DM access (all 6 months)</span>
+        </div>
+      </div>
+      <a href="#" class="sf-commit-cta-button">Choose 6-Month Bundle</a>
+    </div>
+
+    <!-- 12-MONTH BUNDLE -->
+    <div class="sf-commit-tier-12month">
+      <div class="sf-commit-tier-header">
+        <div class="sf-commit-tier-icon">👑</div>
+        <div>
+          <div class="sf-commit-tier-label">Maximum Transformation</div>
+          <div class="sf-commit-tier-title">12-Month Bundle</div>
+        </div>
+      </div>
+      <div class="sf-commit-price">$588<span style="font-size: 16px;"> total</span></div>
+      <div class="sf-commit-billing"><strong style="color: #c9a84c;">$49/mo</strong> — best value, full ecosystem</div>
+      
+      <div class="sf-commit-stat-block">
+        <div class="sf-commit-stat-number">94%</div>
+        <div class="sf-commit-stat-label">Reach lasting transformation + prevent relapse</div>
+      </div>
+
+      <div class="sf-commit-features-list">
+        <div class="sf-commit-feature-item">
+          <span class="sf-commit-feature-icon">✓</span>
+          <span>Everything in 6-Month Bundle</span>
+        </div>
+        <div class="sf-commit-feature-item">
+          <span class="sf-commit-feature-icon">✓</span>
+          <span><strong>Quarterly 20-min coaching calls with IJ</strong> (4 calls/year — built-in accountability)</span>
+        </div>
+        <div class="sf-commit-feature-item">
+          <span class="sf-commit-feature-icon">✓</span>
+          <span><strong>VIP 1-on-1 agentic DM access all 12 months</strong> (direct channel, priority replies)</span>
+        </div>
+        <div class="sf-commit-feature-item">
+          <span class="sf-commit-feature-icon">✓</span>
+          <span>Priority access to new tools & cohorts</span>
+        </div>
+        <div class="sf-commit-feature-item">
+          <span class="sf-commit-feature-icon">✓</span>
+          <span>Lifetime Shift-Proof Methodology access (after 12 months)</span>
+        </div>
+      </div>
+      <a href="#" class="sf-commit-cta-button">Choose 12-Month Bundle</a>
+    </div>
+  </div>
+
+  <div class="sf-commit-closing">
+    <p class="sf-commit-closing-text">
+      Monthly members <strong>see results</strong>. Bundle members <strong>transform</strong>. 12-month members <strong>become unshakable</strong>.
+    </p>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // Initialize unlock animations for 6-month features
+    var unlockItems = document.querySelectorAll('.sf-commit-new-feature');
+    unlockItems.forEach(function(item, index) {
+      item.style.animation = 'sf-commit-unlock-feature 0.6s ease-out ' + (0.6 + (index * 0.1)) + 's forwards';
+    });
+  })();
+</script>

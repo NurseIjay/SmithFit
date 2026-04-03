@@ -27,6 +27,12 @@ coverage/
 .cache/
 tmp/
 
+# External downloaded repos (not project code, re-downloadable)
+n8n-mcp/
+get-shit-done/
+awesome-claude-skills/
+
 # Claude Code config (private - skills, memory, settings)
 .claude/
 .bg-shell/
+.gstack/

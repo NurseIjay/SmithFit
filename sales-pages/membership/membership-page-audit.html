@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmithFit $67/mo Membership Page — Hormozi Audit Report</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0f0f0f; color: #e8e8e8; line-height: 1.6; }
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 20px; }
+
+  /* Header */
+  .header { text-align: center; padding: 48px 0 32px; border-bottom: 2px solid #c9a84c; margin-bottom: 40px; }
+  .header h1 { font-size: 28px; color: #c9a84c; margin-bottom: 8px; }
+  .header .subtitle { font-size: 16px; color: #999; }
+  .header .date { font-size: 13px; color: #666; margin-top: 8px; }
+
+  /* Score Cards */
+  .score-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 32px 0; }
+  .score-card { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 20px; text-align: center; }
+  .score-card .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #999; margin-bottom: 8px; }
+  .score-card .score { font-size: 48px; font-weight: 700; }
+  .score-card .max { font-size: 16px; color: #666; }
+  .score-card .note { font-size: 13px; color: #aaa; margin-top: 8px; line-height: 1.4; }
+  .green { color: #4ade80; }
+  .yellow { color: #facc15; }
+  .orange { color: #fb923c; }
+  .red { color: #f87171; }
+
+  .overall-score { background: linear-gradient(135deg, #1a1a1a, #252525); border: 2px solid #c9a84c; border-radius: 16px; padding: 32px; text-align: center; margin: 32px 0; }
+  .overall-score .label { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #c9a84c; }
+  .overall-score .score { font-size: 72px; font-weight: 800; color: #facc15; }
+  .overall-score .verdict { font-size: 18px; color: #ccc; margin-top: 8px; }
+
+  /* Sections */
+  h2 { font-size: 22px; color: #c9a84c; margin: 40px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #333; }
+  h3 { font-size: 17px; color: #e8e8e8; margin: 24px 0 10px; }
+  p { margin-bottom: 14px; color: #ccc; }
+
+  /* Issue Cards */
+  .issue { background: #1a1a1a; border-left: 4px solid #f87171; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 16px 0; }
+  .issue.critical { border-left-color: #f87171; }
+  .issue.high { border-left-color: #fb923c; }
+  .issue.medium { border-left-color: #facc15; }
+  .issue.low { border-left-color: #4ade80; }
+  .issue .severity { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 6px; }
+  .issue.critical .severity { color: #f87171; }
+  .issue.high .severity { color: #fb923c; }
+  .issue.medium .severity { color: #facc15; }
+  .issue.low .severity { color: #4ade80; }
+  .issue .title { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+  .issue .detail { font-size: 14px; color: #aaa; line-height: 1.5; }
+  .issue .fix { font-size: 14px; color: #93c5fd; margin-top: 10px; padding-top: 10px; border-top: 1px solid #333; }
+  .issue .fix strong { color: #60a5fa; }
+
+  /* Checklist */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { padding: 10px 0; border-bottom: 1px solid #222; display: flex; align-items: flex-start; gap: 10px; font-size: 14px; }
+  .checklist .icon { font-size: 18px; flex-shrink: 0; }
+  .pass { color: #4ade80; }
+  .fail { color: #f87171; }
+  .partial { color: #facc15; }
+
+  /* Section flow */
+  .section-flow { background: #1a1a1a; border-radius: 12px; padding: 20px; margin: 20px 0; }
+  .section-flow .step { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #252525; }
+  .section-flow .step:last-child { border-bottom: none; }
+  .section-flow .num { background: #333; color: #c9a84c; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-flow .step-content { flex: 1; }
+  .section-flow .step-name { font-weight: 600; color: #e8e8e8; font-size: 14px; }
+  .section-flow .step-grade { font-size: 12px; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-left: 8px; }
+  .grade-a { background: #166534; color: #4ade80; }
+  .grade-b { background: #854d0e; color: #facc15; }
+  .grade-c { background: #9a3412; color: #fb923c; }
+  .grade-f { background: #991b1b; color: #f87171; }
+  .section-flow .step-note { font-size: 13px; color: #999; margin-top: 4px; }
+
+  /* Priority list */
+  .priority-list { counter-reset: priority; list-style: none; padding: 0; }
+  .priority-list li { counter-increment: priority; padding: 16px; margin: 10px 0; background: #1a1a1a; border-radius: 8px; border: 1px solid #333; }
+  .priority-list li::before { content: "#" counter(priority); color: #c9a84c; font-weight: 800; font-size: 18px; margin-right: 12px; }
+  .priority-list .item-title { font-weight: 600; color: #fff; display: inline; }
+  .priority-list .item-impact { display: block; font-size: 13px; color: #4ade80; margin-top: 6px; }
+  .priority-list .item-detail { display: block; font-size: 13px; color: #999; margin-top: 4px; }
+
+  /* Mobile callout */
+  .mobile-callout { background: linear-gradient(135deg, #1e1b4b, #312e81); border: 1px solid #4f46e5; border-radius: 12px; padding: 20px; margin: 24px 0; }
+  .mobile-callout h3 { color: #a5b4fc; margin-top: 0; }
+  .mobile-callout p { color: #c7d2fe; }
+
+  @media (max-width: 600px) {
+    .score-grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 22px; }
+    .overall-score .score { font-size: 48px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>HORMOZI FRAMEWORK AUDIT</h1>
+  <div class="subtitle">$67/mo Metabolic Breakthrough Membership — Upsell Page</div>
+  <div class="date">Audited March 28, 2026 &bull; SmithFit &bull; hub.courseiq.app</div>
+</div>
+
+<!-- ====== VALUE EQUATION ====== -->
+<h2>1. Value Equation Score</h2>
+<p>Each variable rated 1–10 using Hormozi's formula: VALUE = (Dream Outcome × Perceived Likelihood) / (Time Delay × Effort & Sacrifice)</p>
+
+<div class="score-grid">
+  <div class="score-card">
+    <div class="label">Dream Outcome</div>
+    <div class="score green">8<span class="max">/10</span></div>
+    <div class="note">Strong identity-based copy: "Become the woman who finishes what she starts." Paints the future vividly. Could be even more sensory — what does it FEEL like?</div>
+  </div>
+  <div class="score-card">
+    <div class="label">Perceived Likelihood</div>
+    <div class="score yellow">6<span class="max">/10</span></div>
+    <div class="note">4 testimonials with names + roles is good but ALL are text-only. No video, no screenshots, no before/after of actual female nurses. The male bodybuilder photo destroys credibility.</div>
+  </div>
+  <div class="score-card">
+    <div class="label">Time Delay</div>
+    <div class="score green">8<span class="max">/10</span></div>
+    <div class="note">"Feel the difference by Day 3" and "immediate access" are strong. The progress graph is excellent — visually shows the Day 8 cliff. Very effective urgency mechanism.</div>
+  </div>
+  <div class="score-card">
+    <div class="label">Effort &amp; Sacrifice</div>
+    <div class="score green">7<span class="max">/10</span></div>
+    <div class="note">"15-minute workouts" and "no macros" reduce perceived effort well. Chaos-Day Rescue Plans are brilliant. Missing: explicit "no meal prep marathons" and "works on night shift" in the feature section.</div>
+  </div>
+</div>
+
+<div class="overall-score">
+  <div class="label">Overall Value Equation Score</div>
+  <div class="score">6.8</div>
+  <div class="verdict">GOOD foundation — but 5+ fixable issues are costing you conversions right now</div>
+</div>
+
+<!-- ====== GRAND SLAM CHECKLIST ====== -->
+<h2>2. Grand Slam Offer Checklist</h2>
+<p>Running the 5 Enhancers against your current page:</p>
+
+<ul class="checklist">
+  <li><span class="icon pass">&#10003;</span> <div><strong>Scarcity</strong> — Not used (correct for a $67/mo membership — fake scarcity would hurt trust at this price point)</div></li>
+  <li><span class="icon partial">&#9888;</span> <div><strong>Urgency</strong> — Timer present ("THIS PRICE EXPIRES IN") but no actual countdown numbers visible. Timer appears broken or not rendering. Also: "81% off today only" claim needs a visible countdown to feel real, otherwise it reads as fake urgency.</div></li>
+  <li><span class="icon partial">&#9888;</span> <div><strong>Bonuses</strong> — Features listed (recipes, workouts, community, coaching, chaos plans, monthly resets) but NOT framed as bonuses with individual dollar values. They're presented as "what you get" instead of "plus you ALSO get..." This misses the Hormozi bonus stacking psychology.</div></li>
+  <li><span class="icon pass">&#10003;</span> <div><strong>Guarantee</strong> — "Nurse's Honor 30-Day Guarantee" is present and well-named. Copy is clear: use everything, if you don't love it, full refund. Strong.</div></li>
+  <li><span class="icon pass">&#10003;</span> <div><strong>Naming</strong> — "Metabolic Breakthrough Membership" + "The Sisterhood" branding. Good use of MAGIC formula. "Sisterhood" creates belonging and identity.</div></li>
+</ul>
+
+<!-- ====== SECTION-BY-SECTION AUDIT ====== -->
+<h2>3. Section-by-Section Page Audit</h2>
+<p>Every section graded on copy quality, conversion potential, and Hormozi alignment:</p>
+
+<div class="section-flow">
+  <div class="step">
+    <div class="num">1</div>
+    <div class="step-content">
+      <div class="step-name">Confirmation Header <span class="step-grade grade-b">B</span></div>
+      <div class="step-note">"Your 7-Day Reset is confirmed" — good pattern interrupt. But the page starts with massive whitespace before ANY content appears. On mobile, users may think the page is broken.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">2</div>
+    <div class="step-content">
+      <div class="step-name">Headline + Hook <span class="step-grade grade-a">A</span></div>
+      <div class="step-note">"You Did It. Now Let's Make It Last." — Excellent. Validates their purchase, creates open loop about Day 8. "But what happens on Day 8?" is a perfect fear-based bridge.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">3</div>
+    <div class="step-content">
+      <div class="step-name">VSL / Video <span class="step-grade grade-b">B+</span></div>
+      <div class="step-note">Video present with waterfall thumbnail. "Watch this quick video — it could change everything" is a solid CTA. However: the thumbnail is a nature/waterfall scene — should be IJ or a nurse. The "Enable Sound" button suggests autoplay-muted which is good UX.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">4</div>
+    <div class="step-content">
+      <div class="step-name">Progress Graph <span class="step-grade grade-a">A+</span></div>
+      <div class="step-note">The "WITH MEMBERSHIP vs WITHOUT" momentum graph is the best element on this page. Visually shows the Day 8 cliff. "87% of nurses who don't have a Day 8 plan lose all their progress within 3 weeks" — powerful stat. This is doing heavy lifting for urgency.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">5</div>
+    <div class="step-content">
+      <div class="step-name">First CTA <span class="step-grade grade-b">B</span></div>
+      <div class="step-note">"Yes — Upgrade Me to the Sisterhood for $67/mo →" — good action-oriented language. "81% off today only. Cancel anytime. No contracts." underneath is solid risk reversal. However: the "81% off" claim ($349→$67) feels inflated. If $349 was never the real price, this erodes trust with skeptical nurse buyers.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">6</div>
+    <div class="step-content">
+      <div class="step-name">Social Proof Counter <span class="step-grade grade-c">C</span></div>
+      <div class="step-note">"2,847+ Nurses Already Inside" — but CLAUDE.md says "400+ nurses transformed." The page also shows "283+" in one spot and "2,847+" everywhere else. Major consistency problem. Which number is real? Inflated numbers destroy trust when discovered.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">7</div>
+    <div class="step-content">
+      <div class="step-name">Testimonial Cards <span class="step-grade grade-c">C</span></div>
+      <div class="step-note">4 transformation stories with "WHERE SHE WAS / WHERE SHE IS NOW" format — the structure is excellent. BUT: (1) Cards render as mostly blank white on screen — critical rendering/contrast issue. (2) No photos of the actual women. (3) All text-only — no screenshots of DMs, no video testimonials. Text-only testimonials in 2026 look fabricated.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">8</div>
+    <div class="step-content">
+      <div class="step-name">Feature Quote (Crystal M.) <span class="step-grade grade-a">A</span></div>
+      <div class="step-note">Full-width image of a nurse in her car with an overlay quote. Authentic, relatable, visually strong. Best social proof element on the page. More of this throughout would help massively.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">9</div>
+    <div class="step-content">
+      <div class="step-name">"THE SOLUTION" Feature Breakdown <span class="step-grade grade-b">B-</span></div>
+      <div class="step-note">6 feature cards with "Become the woman who..." identity positioning — the copy concept is A-tier. But: (1) Text contrast is extremely low — almost invisible against background. (2) Feature cards are not framed as bonuses with dollar values. (3) Too many features listed without clear hierarchy — user doesn't know where to focus.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">10</div>
+    <div class="step-content">
+      <div class="step-name">Visual Summary Cards <span class="step-grade grade-b">B</span></div>
+      <div class="step-note">6 mini cards (Command Center, 1,000+ Recipes, 15-Min Workouts, Live Coaching, Chaos-Day Plans, The Sisterhood) with phone mockups. Good visual variety. But: text is still very low contrast. "Total value: $1,300+/month" anchor is present but undersold.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">11</div>
+    <div class="step-content">
+      <div class="step-name">Pricing Section <span class="step-grade grade-c">C+</span></div>
+      <div class="step-note">$349 crossed out → $67/mo with "81% OFF" badge. The pricing card is washed out and hard to read. Key value props are listed but not visually punchy. "Lock in $67/month for LIFE" is a strong message but gets lost. Timer placeholder says "THIS PRICE EXPIRES IN" with no visible countdown.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">12</div>
+    <div class="step-content">
+      <div class="step-name">"Imagine This" Story Section <span class="step-grade grade-a">A-</span></div>
+      <div class="step-note">"It's 6:30 AM. You just got home from a 12-hour night shift." — Excellent Hormozi "sell the vacation" copy. Paints a vivid after-picture. Paired with a great image of a nurse in scrubs. One of the strongest sections.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">13</div>
+    <div class="step-content">
+      <div class="step-name">FAQ Accordion <span class="step-grade grade-b">B+</span></div>
+      <div class="step-note">6 questions covering the top objections. "What if I don't have time" and "Is this another restrictive diet?" are perfect for this avatar. Answers are warm and specific. Could be stronger with embedded proof in answers.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">14</div>
+    <div class="step-content">
+      <div class="step-name">"She didn't just lose the weight" Bridge <span class="step-grade grade-b">B</span></div>
+      <div class="step-note">Emotional identity shift copy with a nurse-in-scrubs background image. Text overlaid on a dark photo is hard to read — contrast issue again. Good copy, poor visibility.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">15</div>
+    <div class="step-content">
+      <div class="step-name">"Are You Ready" Identity Section <span class="step-grade grade-a">A-</span></div>
+      <div class="step-note">"The nurse who doesn't panic when she gains 2 pounds..." "The one her coworkers ask: 'What are you doing differently?'" — Top-tier identity-based copy. This is Hormozi "sell the vacation" at its best. Slightly let down by low text contrast.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">16</div>
+    <div class="step-content">
+      <div class="step-name">Guarantee Section <span class="step-grade grade-b">B+</span></div>
+      <div class="step-note">"Nurse's Honor 30-Day Guarantee" — great naming. Copy is clear and confident. But it's buried deep in the page (section 16 of 20+). Should appear much earlier, ideally near the first pricing CTA.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">17</div>
+    <div class="step-content">
+      <div class="step-name">Personal Note from "Hayley" <span class="step-grade grade-f">F</span></div>
+      <div class="step-note">CRITICAL: (1) The note says "Hayley Smith, RN" but your brand owner is IJ Smith. Who is Hayley? (2) Below this note is a MALE BODYBUILDER before/after photo. This is a program for female nurses 35-52 struggling with belly fat. A shredded male torso immediately signals "this isn't for me" and destroys all the trust built above.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">18</div>
+    <div class="step-content">
+      <div class="step-name">Comparison Cards <span class="step-grade grade-b">B</span></div>
+      <div class="step-note">"Without the Sisterhood" vs "With the Sisterhood" side-by-side. Good use of loss aversion. Red/green color coding works. Copy is specific. A solid section but text contrast is still low.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">19</div>
+    <div class="step-content">
+      <div class="step-name">Final CTA + Decline Link <span class="step-grade grade-b">B</span></div>
+      <div class="step-note">"YES — Start My Membership for Just $67/month →" with "81% off. Cancel anytime. 30-day money-back guarantee." and trust badges. The decline link "No thanks, I'll figure out Day 8 on my own →" adds good FOMO. Solid close.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== CRITICAL ISSUES ====== -->
+<h2>4. Critical & High-Priority Issues</h2>
+
+<div class="issue critical">
+  <div class="severity">&#128308; CRITICAL — Conversion Killer</div>
+  <div class="title">Male Bodybuilder Photo on a Female Nurse Page</div>
+  <div class="detail">A shredded male before/after photo appears near the bottom of the page. Your avatar is a 35-52 year old female nurse. This single image may be tanking your conversion rate by 30-50% for anyone who scrolls to it. It signals "this isn't for people like me" and contradicts every word of copy above it.</div>
+  <div class="fix"><strong>Fix:</strong> Remove immediately. Replace with a female nurse transformation (or remove the section entirely until you have one). Even a testimonial screenshot from your community would be better.</div>
+</div>
+
+<div class="issue critical">
+  <div class="severity">&#128308; CRITICAL — Brand Confusion</div>
+  <div class="title">"Hayley Smith, RN" — Who Is This?</div>
+  <div class="detail">The personal note section is signed "Hayley Smith, RN" but your brand is built around IJ Smith, RN. If Hayley is your wife, she needs to be introduced as such. A prospect who just bought from IJ now sees a stranger's name — this creates confusion and breaks the parasocial trust built through your content.</div>
+  <div class="fix"><strong>Fix:</strong> Either change to IJ's name and voice, or introduce Hayley properly: "A Note from Hayley Smith, RN — IJ's wife and your Head Coach inside the Sisterhood."</div>
+</div>
+
+<div class="issue critical">
+  <div class="severity">&#128308; CRITICAL — Visibility</div>
+  <div class="title">Page-Wide Text Contrast Failure</div>
+  <div class="detail">At least 8 sections have text so light it's nearly invisible against the cream/beige background. Testimonial cards, feature descriptions, pricing details, and the "Imagine This" section all suffer. If prospects can't READ your copy, it doesn't matter how good it is. This is likely even worse on mobile.</div>
+  <div class="fix"><strong>Fix:</strong> Audit every text element. Body text should be at minimum #333333 on light backgrounds. Headlines should be #1a1a1a or darker. Run the entire page through a WCAG contrast checker.</div>
+</div>
+
+<div class="issue critical">
+  <div class="severity">&#128308; CRITICAL — Trust</div>
+  <div class="title">Inconsistent Social Proof Numbers</div>
+  <div class="detail">The page alternates between "2,847+" and "283+" nurses. Your CLAUDE.md says "400+ nurses transformed." Three different numbers = zero credibility. Any savvy buyer will notice this.</div>
+  <div class="fix"><strong>Fix:</strong> Pick ONE real number and use it everywhere. If it's 400+, use 400+. Round up slightly if needed (e.g., "400+" is fine if you have 387). Never inflate by 7x.</div>
+</div>
+
+<div class="issue high">
+  <div class="severity">&#128992; HIGH — Revenue Impact</div>
+  <div class="title">$349 "Regular Price" Feels Fabricated</div>
+  <div class="detail">Claiming a "regular price" of $349/mo crossed out to $67/mo (81% off) triggers skepticism in educated buyers. Nurses are smart. If this was never actually $349, you're trading short-term urgency for long-term trust damage. Hormozi's principle: use REAL scarcity and pricing, not manufactured discounts.</div>
+  <div class="fix"><strong>Fix:</strong> Either (a) justify the $349 by showing what comparable programs charge, or (b) reframe as "launch price" or "charter member rate" instead of a fake crossed-out price. "Join during our launch for just $67/month — this price locks in for life" is more honest and still urgent.</div>
+</div>
+
+<div class="issue high">
+  <div class="severity">&#128992; HIGH — Lost Revenue</div>
+  <div class="title">Features Not Stacked as Hormozi Bonuses</div>
+  <div class="detail">The 6 features (coaching, recipes, workouts, community, chaos plans, monthly resets) are listed as "what you get." In Hormozi's framework, each should be a NAMED BONUS with its own perceived dollar value, building a value stack that dwarfs the price. Currently the value anchor is one line: "Total value: $1,300+/month" — but no individual values are broken out.</div>
+  <div class="fix"><strong>Fix:</strong> Reframe each feature as a bonus with an individual value. Example: "BONUS 1: 1,000+ Recipe Library ($97/mo value) — Your favorite comfort food, shift-proofed." Stack all values visually, then show the total vs. the $67 price. This is Hormozi 101.</div>
+</div>
+
+<div class="issue high">
+  <div class="severity">&#128992; HIGH — Mobile</div>
+  <div class="title">Massive Whitespace + Broken Layout at Top</div>
+  <div class="detail">The page opens with a huge blank white area before any content. On desktop this means ~2 full scrolls of nothing. On mobile this will be even worse — users will bounce thinking the page didn't load.</div>
+  <div class="fix"><strong>Fix:</strong> Remove all excess padding/margin at the top. The confirmation text + headline should be immediately visible on page load without scrolling.</div>
+</div>
+
+<div class="issue high">
+  <div class="severity">&#128992; HIGH — Urgency</div>
+  <div class="title">Countdown Timer Not Rendering</div>
+  <div class="detail">"THIS PRICE EXPIRES IN" appears twice but no actual countdown numbers are visible. A deadline without a visible countdown is just text — it creates no urgency. Combined with the "81% off today only" claim, this makes the urgency feel hollow.</div>
+  <div class="fix"><strong>Fix:</strong> Either fix the countdown timer to actually display, or remove the urgency claim entirely. A broken timer is worse than no timer.</div>
+</div>
+
+<div class="issue medium">
+  <div class="severity">&#128993; MEDIUM</div>
+  <div class="title">Video Thumbnail Is a Waterfall (Not a Nurse)</div>
+  <div class="detail">The VSL thumbnail shows a nature/waterfall scene. In direct response, the thumbnail IS the ad — it determines whether people click play. A waterfall has zero connection to nursing, metabolism, or the avatar's pain.</div>
+  <div class="fix"><strong>Fix:</strong> Custom thumbnail of IJ speaking to camera, or a nurse in scrubs, or a text overlay that says "What Happens After Day 7? (Watch This)" with a play button.</div>
+</div>
+
+<div class="issue medium">
+  <div class="severity">&#128993; MEDIUM</div>
+  <div class="title">Testimonials Are Text-Only — No Visual Proof</div>
+  <div class="detail">All 4 testimonials are text with names and roles. No photos, no DM screenshots, no video. In 2026, text-only testimonials on a sales page are widely assumed to be AI-generated or fabricated.</div>
+  <div class="fix"><strong>Fix:</strong> Add at least: headshot photos next to each testimonial, or screenshots of real DM conversations, or short video clips. The Crystal M. full-width photo section is the model — do more of that.</div>
+</div>
+
+<div class="issue medium">
+  <div class="severity">&#128993; MEDIUM</div>
+  <div class="title">Guarantee Buried Too Deep</div>
+  <div class="detail">The "Nurse's Honor 30-Day Guarantee" doesn't appear until section 16 of ~20. Hormozi teaches that the guarantee should appear right after the price reveal to immediately neutralize the "what if it doesn't work" objection at the moment of highest buyer anxiety.</div>
+  <div class="fix"><strong>Fix:</strong> Add a mini guarantee badge or one-liner directly under the first pricing CTA, then keep the full guarantee section where it is for those who scroll.</div>
+</div>
+
+<!-- ====== MOBILE ISSUES ====== -->
+<div class="mobile-callout">
+  <h3>📱 Mobile-Specific Issues</h3>
+  <p>You mentioned this needs mobile optimization. Based on what I observed, here are the mobile-critical problems:</p>
+  <p><strong>1. Top whitespace</strong> — Will require 3-4+ scrolls on mobile before content appears. Instant bounce risk.</p>
+  <p><strong>2. Text contrast</strong> — Already nearly invisible on desktop; on mobile with outdoor/bright lighting, it will be completely unreadable.</p>
+  <p><strong>3. Testimonial cards</strong> — 4 horizontal cards will stack vertically on mobile but their rendering is already broken on desktop.</p>
+  <p><strong>4. Feature cards</strong> — 2×3 grid will need to become a single column. Check that phone mockup images scale properly.</p>
+  <p><strong>5. Comparison table</strong> — "Without vs With" side-by-side may stack awkwardly. Test on iPhone SE (smallest common screen).</p>
+  <p><strong>6. CTA buttons</strong> — "YES — Start My Membership for Just $67/month →" is very long. On mobile, ensure it doesn't wrap to 3+ lines.</p>
+  <p><strong>7. Video player</strong> — Ensure the VSL plays properly on mobile and the "Enable Sound" button is tappable.</p>
+  <p><strong>I recommend testing on both an iPhone (Safari) and an Android device before making any other changes.</strong></p>
+</div>
+
+<!-- ====== PRIORITIZED ACTIONS ====== -->
+<h2>5. Prioritized Action List (Highest Impact First)</h2>
+
+<ol class="priority-list">
+  <li>
+    <span class="item-title">Remove male bodybuilder photo + fix the "Hayley" attribution</span>
+    <span class="item-impact">Impact: Stops the #1 conversion killer immediately. 5-minute fix.</span>
+    <span class="item-detail">Delete the male before/after. Change "Hayley Smith, RN" to "IJ Smith, RN" or properly introduce Hayley as co-coach.</span>
+  </li>
+  <li>
+    <span class="item-title">Fix text contrast across entire page</span>
+    <span class="item-impact">Impact: Makes your existing (good) copy actually readable. Every section benefits.</span>
+    <span class="item-detail">Set body text to #333 minimum, headlines to #1a1a1a. Test on mobile in bright light.</span>
+  </li>
+  <li>
+    <span class="item-title">Unify social proof numbers to one real figure</span>
+    <span class="item-impact">Impact: Eliminates the trust-breaking inconsistency. 10-minute fix.</span>
+    <span class="item-detail">Replace all instances of "2,847+" and "283+" with your real number (400+ or whatever is accurate today).</span>
+  </li>
+  <li>
+    <span class="item-title">Remove top whitespace so content loads above the fold</span>
+    <span class="item-impact">Impact: Prevents mobile bounces from users thinking the page is broken.</span>
+    <span class="item-detail">The confirmation headline should be visible immediately on page load.</span>
+  </li>
+  <li>
+    <span class="item-title">Fix or remove the countdown timer</span>
+    <span class="item-impact">Impact: A broken timer actively hurts credibility. Either make it work or remove it.</span>
+    <span class="item-detail">If fixing: use a GHL countdown element with a real 24-hour deadline tied to their purchase timestamp.</span>
+  </li>
+  <li>
+    <span class="item-title">Reframe features as Hormozi bonus stack with individual values</span>
+    <span class="item-impact">Impact: This is where the biggest revenue gain lives. Turns "what you get" into "look at this insane value."</span>
+    <span class="item-detail">Name each bonus, assign a credible dollar value, present them sequentially, then stack the total vs. $67.</span>
+  </li>
+  <li>
+    <span class="item-title">Add visual proof to testimonials (photos, DM screenshots, or video)</span>
+    <span class="item-impact">Impact: Moves perceived likelihood score from 6 → 8+. Makes testimonials feel real.</span>
+    <span class="item-detail">Even profile photos next to names would be a major improvement.</span>
+  </li>
+  <li>
+    <span class="item-title">Replace video thumbnail with custom nurse/IJ image</span>
+    <span class="item-impact">Impact: Increases video play rate, which increases conversion.</span>
+    <span class="item-detail">Best option: IJ in nurse context + text overlay about what Day 8 means.</span>
+  </li>
+  <li>
+    <span class="item-title">Add guarantee badge near first pricing CTA</span>
+    <span class="item-impact">Impact: Reduces buyer anxiety at the critical decision moment.</span>
+    <span class="item-detail">Small shield icon + "30-Day Money Back Guarantee" directly below the first CTA button.</span>
+  </li>
+  <li>
+    <span class="item-title">Reconsider the $349 anchor price</span>
+    <span class="item-impact">Impact: Honest pricing builds long-term brand trust with a skeptical avatar.</span>
+    <span class="item-detail">Reframe as "charter member rate" or "launch pricing" rather than a questionable 81% discount.</span>
+  </li>
+</ol>
+
+<h2>6. What's Already Working Well</h2>
+<p style="color: #4ade80; font-weight: 600;">Don't change these — they're strong:</p>
+<ul class="checklist">
+  <li><span class="icon pass">&#10003;</span> <div>The progress graph (Day 8 cliff) — best conversion element on the page</div></li>
+  <li><span class="icon pass">&#10003;</span> <div>"You Did It. Now Let's Make It Last" headline — perfect post-purchase hook</div></li>
+  <li><span class="icon pass">&#10003;</span> <div>Identity-based copy throughout ("Become the woman who...")</div></li>
+  <li><span class="icon pass">&#10003;</span> <div>"Nurse's Honor 30-Day Guarantee" naming</div></li>
+  <li><span class="icon pass">&#10003;</span> <div>The "Imagine This" narrative section (6:30 AM after night shift)</div></li>
+  <li><span class="icon pass">&#10003;</span> <div>Crystal M. full-width testimonial with real photo</div></li>
+  <li><span class="icon pass">&#10003;</span> <div>FAQ section — right objections, warm answers</div></li>
+  <li><span class="icon pass">&#10003;</span> <div>"Without vs With" comparison cards</div></li>
+  <li><span class="icon pass">&#10003;</span> <div>Decline link wording: "No thanks, I'll figure out Day 8 on my own →"</div></li>
+  <li><span class="icon pass">&#10003;</span> <div>Chaos-Day Rescue Plans concept — unique differentiator</div></li>
+</ul>
+
+<div style="text-align: center; padding: 48px 0 24px; color: #666; font-size: 13px;">
+  SmithFit Hormozi Audit &bull; Generated March 28, 2026 &bull; Ready for discussion
+</div>
+
+</div>
+</body>
+</html>

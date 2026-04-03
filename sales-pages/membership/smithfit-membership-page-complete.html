@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmithFit — Metabolic Breakthrough Membership</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SMITHFIT MEMBERSHIP PAGE — COMPLETE PRODUCTION BUILD
+   All 12 sections in optimized Hormozi order
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --gold: #c9a84c; --gold-light: #d4b86a; --gold-dark: #a88a3a;
+  --cream: #faf6ef; --cream-dark: #f0e8d8;
+  --dark: #1a1a1a; --dark-mid: #2d2d2d;
+  --text-dark: #1a1a1a; --text-body: #3d3d3d; --text-muted: #6b6b6b;
+  --green: #2d6a4f; --green-light: #e8f5e9;
+  --red: #c0392b;
+  --white: #ffffff;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--cream); color: var(--text-dark);
+  line-height: 1.6; overflow-x: hidden;
+  padding-bottom: 80px; /* room for sticky bar */
+}
+.section { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+.section-wide { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+.section-label { text-align: center; font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; line-height: 1.2; }
+.section-subtitle { text-align: center; font-size: 17px; color: var(--text-muted); margin-bottom: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+/* Shared CTA button */
+.cta-btn {
+  display: inline-block; background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: white; font-size: 17px; font-weight: 700;
+  padding: 18px 48px; border: none; border-radius: 12px; cursor: pointer;
+  transition: all 0.2s; box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+  text-decoration: none; text-align: center; max-width: 520px; width: 100%;
+}
+.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(201,168,76,0.4); }
+.cta-sub { font-size: 13px; color: var(--text-muted); margin-top: 10px; text-align: center; }
+
+/* ============================================================
+   SECTION 1: HERO
+   ============================================================ */
+.hero {
+  background: linear-gradient(135deg, var(--dark) 0%, #1a2a1a 60%, var(--dark-mid) 100%);
+  padding: 80px 20px; text-align: center; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 60%);
+}
+.hero-content { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-badge { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: var(--gold-light); font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 8px 20px; border-radius: 24px; margin-bottom: 24px; }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 800; color: white; line-height: 1.15; margin-bottom: 16px; }
+.hero h1 em { font-style: normal; color: var(--gold-light); }
+.hero-sub { font-size: 18px; color: rgba(255,255,255,0.75); line-height: 1.6; margin-bottom: 32px; max-width: 560px; margin-left: auto; margin-right: auto; }
+.hero .cta-btn { font-size: 18px; padding: 20px 48px; }
+.hero-proof { margin-top: 20px; font-size: 14px; color: rgba(255,255,255,0.5); }
+.hero-proof strong { color: var(--gold-light); }
+
+/* Hero image placeholder */
+.hero-image { max-width: 500px; margin: 32px auto 0; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 48px rgba(0,0,0,0.3); }
+.hero-image .placeholder-img {
+  aspect-ratio: 16/10; background: linear-gradient(135deg, #2a3a2a, #3d5a4f);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px;
+}
+.hero-image .placeholder-img .ph-icon { font-size: 40px; margin-bottom: 12px; }
+.hero-image .placeholder-img .ph-text { color: var(--gold-light); font-size: 14px; font-weight: 600; text-align: center; }
+.hero-image .placeholder-img .ph-hint { color: rgba(255,255,255,0.4); font-size: 12px; text-align: center; margin-top: 4px; }
+
+/* ============================================================
+   SECTION 2: ANIMATED PROGRESS GRAPH
+   ============================================================ */
+.graph-section { background: var(--white); border-top: 1px solid #e8e0d0; border-bottom: 1px solid #e8e0d0; }
+.graph-container { max-width: 700px; margin: 0 auto; }
+.graph-canvas { position: relative; width: 100%; height: 300px; background: #f5f0e8; border-radius: 12px; overflow: hidden; }
+.graph-svg { width: 100%; height: 100%; }
+.graph-stat { text-align: center; margin-top: 20px; font-size: 16px; color: var(--red); font-weight: 600; opacity: 0; transition: opacity 1s ease 2s; }
+.graph-stat.visible { opacity: 1; }
+
+/* ============================================================
+   SECTION 3: PROOF — VIDEO + PEEK CAROUSEL
+   ============================================================ */
+.proof-counter { text-align: center; margin-bottom: 40px; }
+.proof-counter .number { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 800; color: var(--gold); line-height: 1; }
+.proof-counter .label { font-size: 16px; color: var(--text-muted); margin-top: 4px; }
+
+.stat-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; max-width: 600px; margin-left: auto; margin-right: auto; }
+.stat-item { text-align: center; padding: 20px 12px; background: var(--white); border-radius: 12px; border: 1px solid #e8e0d0; }
+.stat-number { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 4px; }
+.stat-label { font-size: 13px; color: var(--text-muted); line-height: 1.3; }
+
+.video-block { margin-bottom: 48px; text-align: center; }
+.video-label { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
+.video-headline { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--text-dark); margin-bottom: 20px; }
+.video-wrapper { max-width: 400px; margin: 0 auto; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.12); background: #000; }
+.video-wrapper iframe { width: 100%; aspect-ratio: 9/16; display: block; border: none; }
+.video-caption { font-size: 14px; color: var(--text-muted); font-style: italic; margin-top: 16px; }
+
+/* Peek Carousel */
+.carousel-wrapper { position: relative; width: 100%; overflow: hidden; padding: 20px 0; }
+.carousel-track { display: flex; align-items: center; justify-content: center; transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94); gap: 20px; padding: 0 40px; }
+.carousel-card {
+  flex-shrink: 0; width: 340px; border-radius: 18px; overflow: hidden;
+  background: var(--white); border: 2px solid #e8e0d0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  cursor: pointer; position: relative;
+  transform: scale(0.78); opacity: 0.45; filter: blur(1px);
+}
+.carousel-card.active { transform: scale(1); opacity: 1; filter: blur(0); border-color: var(--gold); box-shadow: 0 12px 48px rgba(201,168,76,0.2); z-index: 10; }
+.carousel-card.adjacent { transform: scale(0.85); opacity: 0.6; filter: blur(0); }
+.carousel-card.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold)); }
+.carousel-card img { width: 100%; height: auto; display: block; }
+.carousel-card .card-placeholder { aspect-ratio: 3/4; background: linear-gradient(135deg, #e8e0d0, #d8d0c0); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; }
+.card-placeholder .ph-num { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 800; color: var(--gold); opacity: 0.4; margin-bottom: 8px; }
+.card-placeholder .ph-text { font-size: 14px; font-weight: 600; color: var(--text-muted); }
+.card-placeholder .ph-hint { font-size: 12px; color: #aaa; margin-top: 4px; }
+
+.carousel-nav-btn {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 20;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: white; border: none; font-size: 24px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(201,168,76,0.35); transition: all 0.2s;
+}
+.carousel-nav-btn:hover { transform: translateY(-50%) scale(1.08); }
+.carousel-nav-btn.prev { left: 12px; }
+.carousel-nav-btn.next { right: 12px; }
+
+.carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
+.c-dot { width: 10px; height: 10px; border-radius: 50%; background: #d0c8b8; transition: all 0.3s; cursor: pointer; }
+.c-dot.active { background: var(--gold); transform: scale(1.3); }
+.carousel-counter { text-align: center; font-size: 14px; color: var(--text-muted); margin-bottom: 16px; }
+.carousel-counter strong { color: var(--gold-dark); }
+.swipe-hint { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 10px; opacity: 0.7; }
+
+/* Featured quote */
+.featured-quote { background: linear-gradient(135deg, var(--dark), var(--dark-mid)); border-radius: 20px; padding: 40px 36px; margin: 40px auto; text-align: center; position: relative; max-width: 720px; }
+.featured-quote::before { content: '\201C'; font-family: 'Playfair Display', serif; font-size: 120px; color: var(--gold); opacity: 0.15; position: absolute; top: -10px; left: 24px; line-height: 1; }
+.featured-quote .qt { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: white; line-height: 1.5; margin-bottom: 16px; position: relative; z-index: 1; }
+.featured-quote .qa { font-size: 14px; color: var(--gold); font-weight: 600; }
+.featured-quote .qr { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+/* ============================================================
+   SECTION 4: BONUS STACK
+   ============================================================ */
+.bonus-section { background: var(--white); border-top: 1px solid #e8e0d0; border-bottom: 1px solid #e8e0d0; }
+.bonus-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 36px; }
+.bonus-card { background: var(--cream); border: 1px solid #e8e0d0; border-radius: 16px; padding: 24px; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
+.bonus-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.bonus-value { position: absolute; top: 12px; right: 16px; font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 800; color: var(--gold); }
+.bonus-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; padding-right: 60px; line-height: 1.3; }
+.bonus-desc { font-size: 14px; color: var(--text-body); line-height: 1.6; margin-bottom: 12px; }
+.bonus-identity { font-size: 13px; font-weight: 600; color: var(--gold-dark); font-style: italic; padding-top: 10px; border-top: 1px solid #e0d8c8; }
+
+/* Value stack summary */
+.value-stack { background: linear-gradient(135deg, var(--dark), var(--dark-mid)); border-radius: 20px; padding: 36px; text-align: center; margin-top: 20px; }
+.vs-label { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+.vs-total { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 800; color: var(--gold); margin-bottom: 4px; }
+.vs-period { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
+.vs-divider { width: 60px; height: 2px; background: var(--gold); margin: 20px auto; opacity: 0.3; }
+.vs-you-pay-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+.vs-you-pay { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 800; color: white; }
+.vs-you-pay span { font-size: 18px; color: rgba(255,255,255,0.5); font-family: 'Inter', sans-serif; font-weight: 400; }
+.vs-charter { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: var(--gold-light); font-size: 12px; font-weight: 700; padding: 6px 16px; border-radius: 20px; margin-top: 12px; }
+
+/* ============================================================
+   SECTION 5: APP PEEK CAROUSEL
+   ============================================================ */
+.app-carousel-container { max-width: 600px; margin: 0 auto; text-align: center; }
+.app-track { display: flex; overflow: hidden; border-radius: 20px; position: relative; background: #1a1a1a; aspect-ratio: 9/16; max-width: 300px; margin: 0 auto; box-shadow: 0 8px 40px rgba(0,0,0,0.15); }
+.app-slide { min-width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px 24px; transition: transform 0.4s ease; color: white; }
+.app-slide .s-icon { font-size: 48px; margin-bottom: 16px; }
+.app-slide .s-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+.app-slide .s-desc { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+.app-s1 { background: linear-gradient(135deg, #1a3a2a, #2d6a4f); }
+.app-s2 { background: linear-gradient(135deg, #3a1a2a, #6a2d4f); }
+.app-s3 { background: linear-gradient(135deg, #1a2a3a, #2d4f6a); }
+.app-s4 { background: linear-gradient(135deg, #3a2a1a, #6a4f2d); }
+.app-s5 { background: linear-gradient(135deg, #2a1a3a, #4f2d6a); }
+.app-nav { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 20px; }
+.app-nav-btn { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--gold); background: transparent; color: var(--gold); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.app-nav-btn:hover { background: var(--gold); color: white; }
+.app-dots { display: flex; gap: 8px; }
+.app-dot { width: 10px; height: 10px; border-radius: 50%; background: #d0c8b8; transition: all 0.3s; }
+.app-dot.active { background: var(--gold); transform: scale(1.2); }
+
+/* ============================================================
+   SECTION 6: PRICING CARD
+   ============================================================ */
+.pricing-section { background: var(--white); border-top: 1px solid #e8e0d0; border-bottom: 1px solid #e8e0d0; }
+.pricing-card { max-width: 480px; margin: 0 auto; background: var(--cream); border: 2px solid var(--gold); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(201,168,76,0.12); }
+.pricing-timer { background: linear-gradient(135deg, var(--dark), var(--dark-mid)); padding: 14px; text-align: center; color: white; font-size: 14px; font-weight: 600; }
+.pricing-timer .timer-num { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800; color: var(--gold-light); }
+.pricing-body { padding: 32px 28px; text-align: center; }
+.pricing-charter { display: inline-block; background: var(--gold); color: white; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-bottom: 16px; }
+.pricing-amount { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 800; color: var(--text-dark); line-height: 1; }
+.pricing-amount span { font-size: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-weight: 400; }
+.pricing-daily { font-size: 15px; color: var(--gold-dark); font-weight: 600; margin-top: 4px; margin-bottom: 4px; }
+.pricing-lock { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+.pricing-features { list-style: none; text-align: left; margin-bottom: 24px; }
+.pricing-features li { padding: 8px 0; font-size: 14px; color: var(--text-body); display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #e8e0d0; }
+.pricing-features li:last-child { border-bottom: none; }
+.pf-check { color: var(--green); font-weight: 700; font-size: 16px; flex-shrink: 0; }
+
+.pricing-guarantee { display: flex; align-items: center; gap: 10px; background: var(--green-light); border: 1px solid rgba(45,106,79,0.2); border-radius: 12px; padding: 12px 16px; margin-bottom: 20px; }
+.pricing-guarantee .shield { font-size: 24px; flex-shrink: 0; }
+.pricing-guarantee .g-text { font-size: 13px; color: var(--green); font-weight: 600; line-height: 1.4; }
+
+.pricing-body .cta-btn { width: 100%; font-size: 18px; }
+.pricing-trust { display: flex; justify-content: center; gap: 16px; margin-top: 16px; }
+.trust-item { font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+.pricing-decline { text-align: center; margin-top: 16px; }
+.pricing-decline a { font-size: 13px; color: var(--text-muted); text-decoration: underline; cursor: pointer; }
+
+/* ============================================================
+   SECTION 7: SAVINGS CALCULATOR
+   ============================================================ */
+.calc-container { max-width: 520px; margin: 0 auto; }
+.calc-field { margin-bottom: 24px; }
+.calc-field label { display: block; font-size: 14px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+.calc-slider-row { display: flex; align-items: center; gap: 16px; }
+.calc-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px; background: #e0d8c8; outline: none; }
+.calc-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--gold); cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.calc-value { min-width: 60px; text-align: center; font-size: 20px; font-weight: 800; color: var(--gold-dark); }
+.calc-result { background: linear-gradient(135deg, var(--dark), var(--dark-mid)); border-radius: 16px; padding: 28px; text-align: center; color: white; margin-top: 8px; }
+.calc-result .wasted { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+.calc-result .wasted-amount { font-size: 36px; font-weight: 800; color: #f87171; margin-bottom: 16px; }
+.calc-result .sf-cost { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+.calc-result .sf-amount { font-size: 36px; font-weight: 800; color: #4ade80; margin-bottom: 16px; }
+.calc-result .punch { font-size: 15px; color: var(--gold-light); font-weight: 600; line-height: 1.5; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1); }
+
+/* ============================================================
+   SECTION 8: FAQ ACCORDION
+   ============================================================ */
+.faq-section { max-width: 720px; margin: 0 auto; padding: 60px 20px; }
+.faq-item { background: var(--white); border: 1px solid #e8e0d0; border-radius: 14px; margin-bottom: 12px; overflow: hidden; transition: box-shadow 0.2s; }
+.faq-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.faq-item.active { border-color: var(--gold-light); box-shadow: 0 4px 20px rgba(201,168,76,0.12); }
+.faq-q { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; cursor: pointer; gap: 16px; user-select: none; }
+.faq-q:hover { background: #faf8f4; }
+.faq-q-left { display: flex; align-items: center; gap: 14px; }
+.faq-emoji { font-size: 22px; flex-shrink: 0; }
+.faq-q-text { font-size: 16px; font-weight: 600; color: var(--text-dark); line-height: 1.4; }
+.faq-chev { width: 24px; height: 24px; flex-shrink: 0; transition: transform 0.3s; fill: var(--gold); }
+.faq-item.active .faq-chev { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-item.active .faq-a { max-height: 500px; }
+.faq-a-inner { padding: 0 24px 20px; }
+.faq-reframe { font-size: 15px; font-weight: 700; color: var(--gold-dark); margin-bottom: 8px; }
+.faq-detail { font-size: 15px; color: var(--text-body); line-height: 1.7; }
+.faq-detail strong { color: var(--text-dark); }
+.faq-tag { display: inline-block; background: var(--green-light); color: var(--green); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; margin-top: 10px; }
+
+/* ============================================================
+   SECTION 9: COMPARISON TABLE
+   ============================================================ */
+.compare-section { max-width: 720px; margin: 0 auto; padding: 0 20px 60px; }
+.rec-badge-row { text-align: center; margin-bottom: -1px; }
+.rec-badge { display: inline-block; background: var(--gold); color: white; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 16px; border-radius: 8px 8px 0 0; margin-left: 36%; }
+.cmp-table { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--white); border-radius: 16px; overflow: hidden; border: 1px solid #e8e0d0; box-shadow: 0 2px 16px rgba(0,0,0,0.04); }
+.cmp-table th { padding: 16px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+.cmp-table th:first-child { text-align: left; color: var(--text-muted); background: #f8f5ee; width: 44%; }
+.cmp-table th:nth-child(2) { color: #999; background: #f4f0e8; text-align: center; width: 28%; }
+.cmp-table th:nth-child(3) { color: var(--gold-dark); background: linear-gradient(135deg, #faf6ef, #f0e8d8); text-align: center; width: 28%; }
+.cmp-table td { padding: 14px 16px; border-top: 1px solid #f0ebe0; font-size: 14px; }
+.cmp-table td:first-child { font-weight: 500; color: var(--text-body); }
+.cmp-table td:nth-child(2) { text-align: center; color: #999; }
+.cmp-table td:nth-child(3) { text-align: center; color: var(--green); font-weight: 600; background: rgba(201,168,76,0.03); }
+.cmp-table tr:hover td { background: #faf8f4; }
+.cmp-table .ck { color: var(--green); font-weight: 700; font-size: 16px; }
+.cmp-table .xm { color: #ccc; font-size: 16px; }
+
+/* ============================================================
+   SECTION 10: FINAL CTA
+   ============================================================ */
+.final-cta { background: linear-gradient(135deg, var(--dark), #1a2a1a, var(--dark-mid)); padding: 80px 20px; text-align: center; }
+.final-cta .section-title { color: white; }
+.final-cta .section-subtitle { color: rgba(255,255,255,0.6); }
+.final-guarantee { max-width: 480px; margin: 0 auto 28px; background: rgba(45,106,79,0.15); border: 1px solid rgba(45,106,79,0.3); border-radius: 16px; padding: 20px; display: flex; align-items: center; gap: 16px; }
+.final-guarantee .shield { font-size: 32px; flex-shrink: 0; }
+.final-guarantee .g-text { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.5; }
+.final-guarantee .g-text strong { color: #4ade80; }
+.final-cta .cta-btn { font-size: 20px; padding: 22px 48px; }
+.final-cta .cta-sub { color: rgba(255,255,255,0.4); }
+
+/* ============================================================
+   SECTION 11: SOCIAL PROOF BANNER
+   ============================================================ */
+.sp-section { max-width: 720px; margin: 0 auto; padding: 20px 20px 40px; }
+.sp-banner {
+  background: linear-gradient(135deg, #1a2a1a, #1a3a2a, #2d6a4f);
+  border-radius: 20px; padding: 28px 32px;
+  display: flex; align-items: center; gap: 20px;
+  position: relative; overflow: hidden;
+  border: 1px solid rgba(201,168,76,0.2);
+  box-shadow: 0 8px 32px rgba(45,106,79,0.15);
+}
+.sp-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.08), transparent 60%); animation: spShimmer 6s ease-in-out infinite; }
+@keyframes spShimmer { 0%,100% { transform: translateX(-10%); } 50% { transform: translateX(10%); } }
+.sp-icon-ring { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; flex-shrink: 0; }
+.sp-icon-ring::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid var(--gold); opacity: 0.4; animation: ringPulse 2.5s ease-in-out infinite; }
+@keyframes ringPulse { 0%,100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.15); opacity: 0; } }
+.sp-icon-ring .sp-icon { font-size: 24px; }
+.sp-content { flex: 1; position: relative; z-index: 1; transition: opacity 0.4s ease; }
+.sp-content.fading { opacity: 0; }
+.sp-hl { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--gold-light); line-height: 1.3; margin-bottom: 6px; }
+.sp-hl .sp-num { font-size: 28px; font-weight: 800; background: linear-gradient(135deg, var(--gold-light), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.sp-bd { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+.sp-bd strong { color: var(--gold-light); }
+.sp-live { position: absolute; top: 16px; right: 16px; display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #4ade80; }
+.sp-live .dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; animation: livePulse 1.5s infinite; }
+@keyframes livePulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,222,128,0.4); } 50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(74,222,128,0); } }
+
+/* ============================================================
+   SECTION 12: STICKY CTA BAR
+   ============================================================ */
+.sticky-bar { position: fixed; bottom: -100px; left: 0; right: 0; z-index: 999; transition: bottom 0.4s ease; }
+.sticky-bar.visible { bottom: 0; }
+.sticky-inner {
+  background: linear-gradient(135deg, #1a1a1a, #1a2a1a, #2d4a3f);
+  border-top: 2px solid var(--gold); padding: 14px 24px;
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.25); position: relative; overflow: hidden;
+}
+.sticky-inner::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.06), transparent); animation: stickyShimmer 4s linear infinite; }
+@keyframes stickyShimmer { 0% { left: -100%; } 100% { left: 100%; } }
+.stk-price { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 800; color: white; position: relative; z-index: 1; }
+.stk-price span { font-size: 13px; color: rgba(255,255,255,0.5); font-family: 'Inter', sans-serif; font-weight: 400; }
+.stk-daily { font-size: 12px; color: var(--gold-light); font-weight: 600; position: relative; z-index: 1; }
+.stk-div { width: 1px; height: 32px; background: rgba(255,255,255,0.15); position: relative; z-index: 1; }
+.stk-guarantee { display: flex; align-items: center; gap: 6px; background: rgba(45,106,79,0.3); border: 1px solid rgba(45,106,79,0.5); padding: 6px 12px; border-radius: 10px; position: relative; z-index: 1; }
+.stk-guarantee .shield { font-size: 16px; }
+.stk-guarantee .text { color: #4ade80; font-size: 11px; font-weight: 700; line-height: 1.2; }
+.stk-btn { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: white; font-size: 15px; font-weight: 700; padding: 14px 28px; border: none; border-radius: 10px; cursor: pointer; white-space: nowrap; transition: all 0.2s; position: relative; z-index: 1; box-shadow: 0 4px 16px rgba(201,168,76,0.3); }
+.stk-btn:hover { transform: scale(1.03); }
+
+/* Lightbox */
+.lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.lightbox.active { display: flex; }
+.lightbox img { max-width: 90%; max-height: 90vh; border-radius: 12px; }
+.lb-close { position: absolute; top: 20px; right: 24px; color: white; font-size: 36px; cursor: pointer; z-index: 2001; }
+.lb-nav { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 48px; cursor: pointer; padding: 20px; user-select: none; z-index: 2001; }
+.lb-nav.prev { left: 10px; }
+.lb-nav.next { right: 10px; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 32px; }
+  .hero-sub { font-size: 16px; }
+  .section-title { font-size: 28px; }
+  .bonus-grid { grid-template-columns: 1fr; }
+  .stat-bar { gap: 8px; }
+  .stat-number { font-size: 24px; }
+  .stat-label { font-size: 11px; }
+  .carousel-card { width: 280px; }
+  .carousel-nav-btn { width: 44px; height: 44px; font-size: 20px; }
+  .carousel-nav-btn.prev { left: 4px; }
+  .carousel-nav-btn.next { right: 4px; }
+  .featured-quote { padding: 28px 20px; }
+  .featured-quote .qt { font-size: 18px; }
+  .pricing-amount { font-size: 42px; }
+  .app-track { max-width: 260px; }
+  .sp-banner { flex-direction: column; text-align: center; padding: 24px 20px; }
+  .sp-hl { font-size: 20px; }
+  .sp-live { position: static; justify-content: center; margin-bottom: 8px; }
+  .sticky-inner { flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
+  .stk-div, .stk-guarantee, .stk-daily { display: none; }
+  .stk-price { font-size: 22px; }
+  .stk-btn { font-size: 14px; padding: 12px 20px; }
+  .cmp-table th, .cmp-table td { padding: 10px 8px; font-size: 12px; }
+  .rec-badge { margin-left: 38%; font-size: 9px; }
+  .compare-section { padding: 0 12px 40px; }
+  .hero-image { max-width: 340px; }
+}
+@media (max-width: 480px) {
+  .carousel-card { width: 240px; }
+  .carousel-track { gap: 12px; }
+  .hero h1 { font-size: 28px; }
+  .proof-counter .number { font-size: 42px; }
+  .vs-total { font-size: 36px; }
+  .vs-you-pay { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SECTION 1: HERO
+     ============================================================ -->
+<section class="hero" id="heroSection">
+  <div class="hero-content">
+    <div class="hero-badge">BUILT BY A NURSE, FOR NURSES</div>
+    <h1>You Proved the Reset Works.<br><em>Now Never Go Back.</em></h1>
+    <p class="hero-sub">The 7-Day Reset gave you a taste. The Metabolic Breakthrough Membership gives you the system, the coaching, and the community to make it permanent.</p>
+    <button class="cta-btn" onclick="scrollToPricing()">Join the Sisterhood for $67/month &rarr;</button>
+    <div class="hero-proof"><strong>400+</strong> nurses already inside &bull; <strong>87%</strong> feel different by Day 3</div>
+  </div>
+  <div class="hero-image">
+    <!--
+      REPLACE THIS with your hero image:
+      <img src="YOUR_IMAGE_URL" alt="SmithFit coaching session" style="width:100%; display:block;">
+
+      Recommended: Photo of IJ coaching, or a female SmithFit member
+      DO NOT use the male bodybuilder photo
+    -->
+    <div class="placeholder-img">
+      <div class="ph-icon">📸</div>
+      <div class="ph-text">Hero Image Placeholder</div>
+      <div class="ph-hint">Replace with: IJ coaching or female nurse member photo</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 2: ANIMATED PROGRESS GRAPH
+     ============================================================ -->
+<section class="graph-section">
+  <div class="section" style="padding-bottom:40px;">
+    <div class="section-label">THE DAY 8 PROBLEM</div>
+    <div class="section-title">What Happens After Your Reset Ends?</div>
+    <div class="section-subtitle">Most nurses lose all their progress within 3 weeks. Here's why — and how to stop it.</div>
+    <div class="graph-container">
+      <div class="graph-canvas">
+        <svg class="graph-svg" viewBox="0 0 700 300" id="progressGraph">
+          <line x1="60" y1="40" x2="60" y2="260" stroke="#d8d0c0" stroke-width="1"/>
+          <line x1="60" y1="260" x2="660" y2="260" stroke="#d8d0c0" stroke-width="1"/>
+          <line x1="60" y1="150" x2="660" y2="150" stroke="#e8e0d0" stroke-width="1" stroke-dasharray="4"/>
+          <text x="30" y="48" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">High</text>
+          <text x="30" y="155" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">Base</text>
+          <text x="30" y="265" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">Low</text>
+          <text x="100" y="285" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">Day 7</text>
+          <text x="220" y="285" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">Day 14</text>
+          <text x="340" y="285" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">Day 21</text>
+          <text x="460" y="285" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">Month 2</text>
+          <text x="580" y="285" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">Month 6</text>
+          <circle cx="100" cy="130" r="6" fill="#c9a84c" stroke="white" stroke-width="2"/>
+          <text x="100" y="118" fill="#c9a84c" font-size="10" text-anchor="middle" font-weight="700" font-family="Inter">YOU ARE HERE</text>
+          <rect x="140" y="170" width="120" height="80" rx="8" fill="#c0392b" opacity="0" id="dangerZone" style="transition: opacity 1s ease 1.5s;"/>
+          <text x="200" y="215" fill="#c0392b" font-size="10" text-anchor="middle" font-weight="700" font-family="Inter" opacity="0" id="dangerText" style="transition: opacity 1s ease 1.5s;">DANGER ZONE</text>
+          <path id="withLine" d="M100,130 C180,120 280,80 400,60 S560,45 640,40" fill="none" stroke="#c9a84c" stroke-width="3" stroke-linecap="round" stroke-dasharray="600" stroke-dashoffset="600" style="transition: stroke-dashoffset 2.5s ease;"/>
+          <text x="645" y="35" fill="#c9a84c" font-size="10" font-weight="700" font-family="Inter" opacity="0" id="withLabel" style="transition: opacity 0.5s ease 2.5s;">WITH MEMBERSHIP</text>
+          <path id="withoutLine" d="M100,130 C160,155 200,190 260,220 S380,240 500,245 S600,248 640,250" fill="none" stroke="#c0392b" stroke-width="3" stroke-linecap="round" stroke-dasharray="600" stroke-dashoffset="600" style="transition: stroke-dashoffset 2.5s ease 0.5s;"/>
+          <text x="645" y="255" fill="#c0392b" font-size="10" font-weight="700" font-family="Inter" opacity="0" id="withoutLabel" style="transition: opacity 0.5s ease 2.5s;">WITHOUT</text>
+        </svg>
+      </div>
+      <div class="graph-stat" id="graphStat">87% of nurses without a Day 8 plan lose all progress within 3 weeks.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 3: PROOF — VIDEO + PEEK CAROUSEL
+     ============================================================ -->
+<section class="section-wide">
+  <div class="section-label">REAL NURSES. REAL RESULTS.</div>
+  <div class="section-title">They Didn't Just Lose Weight.</div>
+  <div class="section-subtitle">They became the nurse who finally stopped starting over.</div>
+
+  <div class="proof-counter">
+    <div class="number" id="mainCounter">0</div>
+    <div class="label">Nurses Already Transformed Inside the Sisterhood</div>
+  </div>
+
+  <div class="stat-bar" id="statBar">
+    <div class="stat-item"><div class="stat-number" id="stat1">0%</div><div class="stat-label">Feel different<br>by Day 3</div></div>
+    <div class="stat-item"><div class="stat-number" id="stat2">0 lbs</div><div class="stat-label">Average lost<br>in Week 1</div></div>
+    <div class="stat-item"><div class="stat-number" id="stat3">0+ mo</div><div class="stat-label">Average member<br>retention</div></div>
+  </div>
+
+  <div class="video-block">
+    <div class="video-label">&#9654; HEAR IT FROM THEM</div>
+    <div class="video-headline">Watch What These Nurses Have to Say</div>
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/qh8wC7-qKYU" title="SmithFit Testimonials" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="video-caption">"Down 10 lbs without giving up my favorite food." — Real SmithFit members</div>
+  </div>
+
+  <!-- PEEK CAROUSEL -->
+  <div style="text-align:center; margin-bottom:8px;">
+    <div class="section-label" style="margin-bottom:8px;">BEFORE &amp; AFTER</div>
+    <div style="font-family:'Playfair Display',serif; font-size:24px; font-weight:700; color:var(--text-dark);">Swipe Through the Transformations</div>
+  </div>
+  <div class="carousel-counter"><strong id="currentCard">1</strong> of <strong>10</strong> transformations</div>
+
+  <div class="carousel-wrapper">
+    <button class="carousel-nav-btn prev" id="cPrev">&#8249;</button>
+    <button class="carousel-nav-btn next" id="cNext">&#8250;</button>
+    <div class="carousel-track" id="carouselTrack">
+      <!-- 10 transformation card slots -->
+      <div class="carousel-card" data-index="0"><div class="card-placeholder"><div class="ph-num">1</div><div class="ph-text">Transformation Card 1</div><div class="ph-hint">Drop image card here</div></div></div>
+      <div class="carousel-card" data-index="1"><div class="card-placeholder"><div class="ph-num">2</div><div class="ph-text">Transformation Card 2</div><div class="ph-hint">Drop image card here</div></div></div>
+      <div class="carousel-card" data-index="2"><div class="card-placeholder"><div class="ph-num">3</div><div class="ph-text">Transformation Card 3</div><div class="ph-hint">Drop image card here</div></div></div>
+      <div class="carousel-card" data-index="3"><div class="card-placeholder"><div class="ph-num">4</div><div class="ph-text">Transformation Card 4</div><div class="ph-hint">Drop image card here</div></div></div>
+      <div class="carousel-card" data-index="4"><div class="card-placeholder"><div class="ph-num">5</div><div class="ph-text">Transformation Card 5</div><div class="ph-hint">Drop image card here</div></div></div>
+      <div class="carousel-card" data-index="5"><div class="card-placeholder"><div class="ph-num">6</div><div class="ph-text">Transformation Card 6</div><div class="ph-hint">Drop image card here</div></div></div>
+      <div class="carousel-card" data-index="6"><div class="card-placeholder"><div class="ph-num">7</div><div class="ph-text">Transformation Card 7</div><div class="ph-hint">Drop image card here</div></div></div>
+      <div class="carousel-card" data-index="7"><div class="card-placeholder"><div class="ph-num">8</div><div class="ph-text">Transformation Card 8</div><div class="ph-hint">Drop image card here</div></div></div>
+      <div class="carousel-card" data-index="8"><div class="card-placeholder"><div class="ph-num">9</div><div class="ph-text">Transformation Card 9</div><div class="ph-hint">Drop image card here</div></div></div>
+      <div class="carousel-card" data-index="9"><div class="card-placeholder"><div class="ph-num">10</div><div class="ph-text">Transformation Card 10</div><div class="ph-hint">Drop image card here</div></div></div>
+    </div>
+  </div>
+  <div class="carousel-dots" id="carouselDots"></div>
+  <div class="swipe-hint">&#8592; Swipe or click arrows to see more &#8594;</div>
+
+  <div class="featured-quote">
+    <div class="qt">I used to dread my break room because I'd eat whatever was there. Now I open my app, check my plan, and feel like I'm in control.</div>
+    <div class="qa">Crystal M.</div>
+    <div class="qr">Night Shift RN</div>
+  </div>
+
+  <div style="text-align:center;">
+    <button class="cta-btn" onclick="scrollToPricing()">YES — I Want Results Like These &rarr;</button>
+    <div class="cta-sub">30-day money-back guarantee. Cancel anytime.</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 4: BONUS STACK
+     ============================================================ -->
+<section class="bonus-section">
+  <div class="section">
+    <div class="section-label">WHAT'S INSIDE THE SISTERHOOD</div>
+    <div class="section-title">Everything You Need to Never Start Over Again</div>
+    <div class="section-subtitle">Each piece was designed by IJ Smith, RN — specifically for the nurse who works 12-hour shifts.</div>
+
+    <div class="bonus-grid">
+      <div class="bonus-card">
+        <div class="bonus-value">$197</div>
+        <div class="bonus-name">The Shift-Proof Nutrition System</div>
+        <div class="bonus-desc">3 meal templates — Work Day, Off Day, Chaos Day. 1,000+ recipes. Pocket meals for missed breaks. Eat what you love, lose what you don't.</div>
+        <div class="bonus-identity">Become the woman who eats well on night shift without a second thought.</div>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-value">$47</div>
+        <div class="bonus-name">Cortisol-Conscious Workout Library</div>
+        <div class="bonus-desc">15-minute workouts, 3 levels, no equipment. Designed to signal fat loss without spiking cortisol. Plus a "Too Tired" 5-min backup.</div>
+        <div class="bonus-identity">Become the woman who moves her body — even after a 12-hour shift.</div>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-value">$97</div>
+        <div class="bonus-name">Weekly Live Coaching with IJ</div>
+        <div class="bonus-desc">Every week, IJ and the SmithFit team go live. Ask questions. Get answers. Stay accountable. Replays available if you're on shift.</div>
+        <div class="bonus-identity">Become the woman who has a coach in her corner — not just an app on her phone.</div>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-value">Priceless</div>
+        <div class="bonus-name">The Sisterhood Community</div>
+        <div class="bonus-desc">400+ nurses who get it. Win Wednesdays, shift check-ins, and a community that celebrates your 2-lb win like a marathon finish.</div>
+        <div class="bonus-identity">Become the woman who has a tribe — not just a timeline.</div>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-value">$67</div>
+        <div class="bonus-name">FitMetrics AI Check-Ins</div>
+        <div class="bonus-desc">Weekly automated check-ins that track your progress, flag patterns, and keep you accountable — even when life gets chaotic.</div>
+        <div class="bonus-identity">Become the woman whose progress never falls through the cracks.</div>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-value">$47</div>
+        <div class="bonus-name">Chaos-Day Rescue Plans</div>
+        <div class="bonus-desc">Double shift. Sick kid. Zero sleep. Open the plan, follow 3 steps, stay on track. This is why members stay 8+ months.</div>
+        <div class="bonus-identity">Become the woman who bends but never breaks.</div>
+      </div>
+    </div>
+
+    <div class="value-stack">
+      <div class="vs-label">TOTAL VALUE</div>
+      <div class="vs-total">$455+</div>
+      <div class="vs-period">per month</div>
+      <div class="vs-divider"></div>
+      <div class="vs-you-pay-label">YOUR CHARTER MEMBER RATE</div>
+      <div class="vs-you-pay">$67<span>/mo</span></div>
+      <div class="vs-charter">&#9733; Charter rate — locks in before next price increase</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 5: APP PEEK CAROUSEL
+     ============================================================ -->
+<section class="section">
+  <div class="section-label">PEEK INSIDE</div>
+  <div class="section-title">See What's Waiting for You</div>
+  <div class="section-subtitle">This isn't a PDF. It's your new command center.</div>
+
+  <div class="app-carousel-container">
+    <div class="app-track" id="appTrack">
+      <div class="app-slide app-s1"><div class="s-icon">🍽️</div><div class="s-title">Shift-Proof Meal Plans</div><div class="s-desc">Work Day. Off Day. Chaos Day. Three plans that match your actual life.</div></div>
+      <div class="app-slide app-s2"><div class="s-icon">📖</div><div class="s-title">1,000+ Recipes</div><div class="s-desc">Comfort food. Cultural dishes. 5-minute meals. Sorted by prep time.</div></div>
+      <div class="app-slide app-s3"><div class="s-icon">💪</div><div class="s-title">15-Min Workouts</div><div class="s-desc">Three levels. No equipment. Done before your coffee cools.</div></div>
+      <div class="app-slide app-s4"><div class="s-icon">👩‍⚕️</div><div class="s-title">The Sisterhood</div><div class="s-desc">400+ nurses who get it. Never feel alone in this again.</div></div>
+      <div class="app-slide app-s5"><div class="s-icon">🛡️</div><div class="s-title">Chaos-Day Rescue</div><div class="s-desc">Life explodes? Open the plan. 3 steps. Stay on track.</div></div>
+    </div>
+    <div class="app-nav">
+      <button class="app-nav-btn" id="appPrev">&#8249;</button>
+      <div class="app-dots" id="appDots"><div class="app-dot active"></div><div class="app-dot"></div><div class="app-dot"></div><div class="app-dot"></div><div class="app-dot"></div></div>
+      <button class="app-nav-btn" id="appNext">&#8250;</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 6: PRICING CARD
+     ============================================================ -->
+<section class="pricing-section" id="pricingSection">
+  <div class="section">
+    <div class="section-label">READY?</div>
+    <div class="section-title">Lock In Your Charter Member Rate</div>
+    <div class="section-subtitle" style="margin-bottom:32px;">This rate won't last forever. Join now and keep it for life.</div>
+
+    <div class="pricing-card">
+      <div class="pricing-timer">Charter rate expires in: <span class="timer-num" id="timerDisplay">23:59:59</span></div>
+      <div class="pricing-body">
+        <div class="pricing-charter">&#9733; CHARTER MEMBER RATE</div>
+        <div class="pricing-amount">$67<span>/mo</span></div>
+        <div class="pricing-daily">That's just $2.23/day</div>
+        <div class="pricing-lock">Lock in this rate — it stays yours as long as you're a member.</div>
+
+        <ul class="pricing-features">
+          <li><span class="pf-check">&#10003;</span> Shift-proof meal plans (Work, Off, Chaos Day)</li>
+          <li><span class="pf-check">&#10003;</span> 1,000+ recipe database in the SmithFit app</li>
+          <li><span class="pf-check">&#10003;</span> 15-minute cortisol-conscious workouts</li>
+          <li><span class="pf-check">&#10003;</span> Weekly live coaching with IJ Smith, RN</li>
+          <li><span class="pf-check">&#10003;</span> The Sisterhood community (400+ nurses)</li>
+          <li><span class="pf-check">&#10003;</span> FitMetrics AI weekly check-ins</li>
+        </ul>
+
+        <div class="pricing-guarantee">
+          <div class="shield">🛡️</div>
+          <div class="g-text"><strong>30-Day Money-Back Guarantee.</strong> Try it for a full month. If you don't feel the difference, we'll refund every penny. No questions.</div>
+        </div>
+
+        <button class="cta-btn">Join the Sisterhood — $67/month &rarr;</button>
+
+        <div class="pricing-trust">
+          <div class="trust-item">🔒 SSL Secure</div>
+          <div class="trust-item">💳 Stripe Powered</div>
+          <div class="trust-item">🛡️ 30-Day Guarantee</div>
+        </div>
+
+        <div class="pricing-decline"><a>No thanks, I'll try to figure it out on my own.</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 7: SAVINGS CALCULATOR
+     ============================================================ -->
+<section class="section">
+  <div class="section-label">THE REAL COST</div>
+  <div class="section-title">How Much Have You Already Spent on Programs That Didn't Stick?</div>
+  <div class="section-subtitle" style="margin-bottom:32px;">Be honest. It adds up.</div>
+
+  <div class="calc-container">
+    <div class="calc-field">
+      <label>How many programs, diets, or plans have you tried?</label>
+      <div class="calc-slider-row">
+        <input type="range" class="calc-slider" id="progSlider" min="1" max="15" value="5">
+        <div class="calc-value" id="progVal">5</div>
+      </div>
+    </div>
+    <div class="calc-field">
+      <label>About how much did each one cost? (apps, supplements, plans, gym...)</label>
+      <div class="calc-slider-row">
+        <input type="range" class="calc-slider" id="costSlider" min="20" max="500" step="10" value="120">
+        <div class="calc-value" id="costVal">$120</div>
+      </div>
+    </div>
+    <div class="calc-result">
+      <div class="wasted">You've already spent approximately:</div>
+      <div class="wasted-amount" id="wastedAmt">$600</div>
+      <div class="sf-cost">The Sisterhood membership:</div>
+      <div class="sf-amount">$67/mo</div>
+      <div class="punch" id="punchline">That's less than what ONE of those failed programs cost you — except this one was built by a nurse who understands your shift schedule.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 8: FAQ ACCORDION
+     ============================================================ -->
+<div class="faq-section">
+  <div class="section-label">EVERY QUESTION ANSWERED</div>
+  <div class="section-title">You've Got Questions. We've Got Honest Answers.</div>
+  <div class="section-subtitle" style="margin-bottom:40px;">These are the exact questions the 400+ nurses inside asked before they joined.</div>
+
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-left"><div class="faq-emoji">🌙</div><div class="faq-q-text">"Does this work if I'm on night shift?"</div></div><svg class="faq-chev" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div><div class="faq-a"><div class="faq-a-inner"><div class="faq-reframe">&#10148; This isn't clock-based. It's shift-based.</div><div class="faq-detail">Every meal plan, protocol, and workout is designed around 12-hour shifts — days, nights, and rotating. <strong>This program was built around your life.</strong></div><div class="faq-tag">Most asked question</div></div></div></div>
+
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-left"><div class="faq-emoji">📊</div><div class="faq-q-text">"Do I have to track macros or count calories?"</div></div><svg class="faq-chev" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div><div class="faq-a"><div class="faq-a-inner"><div class="faq-reframe">&#10148; Structure beats tracking. We stabilize first.</div><div class="faq-detail">No calorie counting. No macro logging. We use a simple plate formula and shift-based meal templates. <strong>You'll learn to eat intuitively.</strong></div></div></div></div>
+
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-left"><div class="faq-emoji">😓</div><div class="faq-q-text">"I've tried everything. Why would this be different?"</div></div><svg class="faq-chev" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div><div class="faq-a"><div class="faq-a-inner"><div class="faq-reframe">&#10148; You tried effort. You haven't tried regulation first.</div><div class="faq-detail">When cortisol is chronically elevated from shift stress, "eat less, move more" makes it <em>worse</em>. We regulate your nervous system first. <strong>That's why members say "this is the first thing that actually worked."</strong></div><div class="faq-tag">Second most asked</div></div></div></div>
+
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-left"><div class="faq-emoji">🔥</div><div class="faq-q-text">"I'm in perimenopause/menopause. Nothing works anymore."</div></div><svg class="faq-chev" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div><div class="faq-a"><div class="faq-a-inner"><div class="faq-reframe">&#10148; Hormonal changes make stress sensitivity higher — regulation becomes the unlock.</div><div class="faq-detail">Our cortisol-first approach is even <em>more</em> effective for women 40+. <strong>Some of our most dramatic transformations are from nurses in their late 40s and 50s.</strong></div></div></div></div>
+
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-left"><div class="faq-emoji">😴</div><div class="faq-q-text">"I'm too exhausted to work out after my shift."</div></div><svg class="faq-chev" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div><div class="faq-a"><div class="faq-a-inner"><div class="faq-reframe">&#10148; We're not chasing sweat. We're sending a signal.</div><div class="faq-detail">15 minutes, no equipment. Plus a 5-minute backup for your worst days. <strong>If you can stand at a nurse's station for 12 hours, you can do these.</strong></div></div></div></div>
+
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-left"><div class="faq-emoji">⏰</div><div class="faq-q-text">"What if I miss my lunch break?"</div></div><svg class="faq-chev" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div><div class="faq-a"><div class="faq-a-inner"><div class="faq-reframe">&#10148; Built for missed breaks. That's why it works.</div><div class="faq-detail">Chaos-Day Rescue Plan + pocket meals you can eat in 90 seconds at the station. <strong>Designed by someone who knows you can't pause a code blue to eat a salad.</strong></div></div></div></div>
+
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-left"><div class="faq-emoji">🍽️</div><div class="faq-q-text">"Is this just another meal plan?"</div></div><svg class="faq-chev" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div><div class="faq-a"><div class="faq-a-inner"><div class="faq-reframe">&#10148; It's a shift-proof physiology system with templates.</div><div class="faq-detail">Meal plans + coaching + workouts + nervous system resets + community. <strong>A meal plan tells you what to eat. This teaches your body how to respond again.</strong></div></div></div></div>
+</div>
+
+<!-- ============================================================
+     SECTION 9: COMPARISON TABLE
+     ============================================================ -->
+<div class="compare-section">
+  <div class="section-label">WHY THIS IS DIFFERENT</div>
+  <div class="section-title" style="margin-bottom:32px;">The Sisterhood vs. Everything Else You've Tried</div>
+
+  <div class="rec-badge-row"><div class="rec-badge">&#9733; RECOMMENDED</div></div>
+  <table class="cmp-table">
+    <thead><tr><th>Feature</th><th>Generic Programs</th><th>SmithFit Sisterhood</th></tr></thead>
+    <tbody>
+      <tr><td>Built for shift workers</td><td class="xm">&#10005;</td><td class="ck">&#10003;</td></tr>
+      <tr><td>Live weekly coaching</td><td class="xm">&#10005;</td><td class="ck">&#10003;</td></tr>
+      <tr><td>Cortisol-first approach</td><td class="xm">&#10005;</td><td class="ck">&#10003;</td></tr>
+      <tr><td>Chaos-Day Rescue Plans</td><td class="xm">&#10005;</td><td class="ck">&#10003;</td></tr>
+      <tr><td>Nurse-only community</td><td class="xm">&#10005;</td><td class="ck">&#10003;</td></tr>
+      <tr><td>15-min workouts (no gym)</td><td>Sometimes</td><td class="ck">&#10003; Always</td></tr>
+      <tr><td>Monthly protocol updates</td><td class="xm">&#10005;</td><td class="ck">&#10003;</td></tr>
+      <tr><td>Works with night shift</td><td>&#x2753; Maybe</td><td class="ck">&#10003; Designed for it</td></tr>
+      <tr><td>30-day guarantee</td><td>Rare</td><td class="ck">&#10003; Always</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============================================================
+     SECTION 10: SOCIAL PROOF BANNER
+     ============================================================ -->
+<div class="sp-section">
+  <div class="sp-banner">
+    <div class="sp-live"><div class="dot"></div> LIVE</div>
+    <div class="sp-icon-ring"><div class="sp-icon" id="spIcon">👩‍⚕️</div></div>
+    <div class="sp-content" id="spContent">
+      <div class="sp-hl"><span class="sp-num" id="spNum">12</span> nurses joined this week</div>
+      <div class="sp-bd">The Sisterhood is growing fast — your <strong>$67/mo charter rate</strong> locks in before the next price increase.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SECTION 11: FINAL CTA
+     ============================================================ -->
+<section class="final-cta">
+  <div class="section-label" style="color: var(--gold-light);">ONE DECISION AWAY</div>
+  <div class="section-title">You Already Proved Your Body Responds.<br>Don't Let It Go Back.</div>
+  <div class="section-subtitle" style="margin-bottom:32px;">The nurses inside were exactly where you are right now. They chose to keep going.</div>
+
+  <div class="final-guarantee">
+    <div class="shield">🛡️</div>
+    <div class="g-text"><strong>30-Day Money-Back Guarantee.</strong> Try the full membership for one month. If you don't feel the difference in your energy, your cravings, and how your scrubs fit — we'll refund every penny. Zero risk.</div>
+  </div>
+
+  <div style="text-align:center;">
+    <button class="cta-btn" style="font-size:20px; padding:22px 48px;">Join the Sisterhood — $67/month &rarr;</button>
+    <div class="cta-sub" style="color:rgba(255,255,255,0.4);">Cancel anytime. No contracts. No games.</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 12: STICKY CTA BAR
+     ============================================================ -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-inner">
+    <div style="display:flex; align-items:baseline; gap:8px; position:relative; z-index:1;">
+      <div class="stk-price">$67<span>/mo</span></div>
+      <div class="stk-daily">$2.23/day</div>
+    </div>
+    <div class="stk-div"></div>
+    <div class="stk-guarantee"><div class="shield">🛡️</div><div class="text">30-DAY<br>GUARANTEE</div></div>
+    <button class="stk-btn" onclick="scrollToPricing()">Join the Sisterhood &rarr;</button>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-close" onclick="closeLightbox()">&times;</div>
+  <div class="lb-nav prev" onclick="lbNav(-1)">&#8249;</div>
+  <div class="lb-nav next" onclick="lbNav(1)">&#8250;</div>
+  <img id="lbImg" src="" alt="Transformation">
+</div>
+
+<!-- ============================================================
+     ALL JAVASCRIPT
+     ============================================================ -->
+<script>
+// Scroll to pricing
+function scrollToPricing() {
+  document.getElementById('pricingSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// ===== ANIMATED PROGRESS GRAPH =====
+const graphObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.getElementById('withLine').style.strokeDashoffset = '0';
+      document.getElementById('withoutLine').style.strokeDashoffset = '0';
+      document.getElementById('dangerZone').style.opacity = '0.08';
+      document.getElementById('dangerText').style.opacity = '1';
+      document.getElementById('withLabel').style.opacity = '1';
+      document.getElementById('withoutLabel').style.opacity = '1';
+      document.getElementById('graphStat').classList.add('visible');
+    }
+  });
+}, { threshold: 0.3 });
+graphObs.observe(document.getElementById('progressGraph'));
+
+// ===== ANIMATED COUNTERS =====
+function animVal(el, target, suffix, dur) {
+  let s = 0; const inc = Math.max(1, Math.ceil(target / (dur / 16)));
+  (function tick() { s += inc; if (s >= target) { el.textContent = target + suffix; return; } el.textContent = s + suffix; requestAnimationFrame(tick); })();
+}
+const cObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animVal(document.getElementById('mainCounter'), 400, '+', 2000);
+      animVal(document.getElementById('stat1'), 87, '%', 1500);
+      animVal(document.getElementById('stat2'), 5, ' lbs', 800);
+      animVal(document.getElementById('stat3'), 8, '+ mo', 800);
+      cObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+cObs.observe(document.getElementById('statBar'));
+
+// ===== PEEK CAROUSEL =====
+const cards = document.querySelectorAll('.carousel-card');
+const cTrack = document.getElementById('carouselTrack');
+const cDots = document.getElementById('carouselDots');
+const totalC = cards.length;
+let currentIndex = 0;
+
+for (let i = 0; i < totalC; i++) {
+  const d = document.createElement('div');
+  d.className = 'c-dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goCard(i);
+  cDots.appendChild(d);
+}
+const dots = cDots.querySelectorAll('.c-dot');
+
+function goCard(idx) {
+  idx = Math.max(0, Math.min(idx, totalC - 1));
+  currentIndex = idx;
+  cards.forEach((c, i) => {
+    c.classList.remove('active', 'adjacent');
+    if (i === idx) c.classList.add('active');
+    else if (Math.abs(i - idx) === 1) c.classList.add('adjacent');
+  });
+  const cw = cards[0].offsetWidth, gap = 20, tw = cTrack.parentElement.offsetWidth;
+  cTrack.style.transform = `translateX(${-(idx * (cw + gap)) + (tw / 2) - (cw / 2)}px)`;
+  dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  document.getElementById('currentCard').textContent = idx + 1;
+}
+document.getElementById('cPrev').onclick = () => goCard(currentIndex - 1);
+document.getElementById('cNext').onclick = () => goCard(currentIndex + 1);
+window.addEventListener('load', () => { goCard(0); window.addEventListener('resize', () => goCard(currentIndex)); });
+
+// Touch swipe
+let tsX = 0;
+cTrack.addEventListener('touchstart', (e) => { tsX = e.changedTouches[0].screenX; }, { passive: true });
+cTrack.addEventListener('touchend', (e) => { const d = tsX - e.changedTouches[0].screenX; if (Math.abs(d) > 50) goCard(currentIndex + (d > 0 ? 1 : -1)); }, { passive: true });
+
+// ===== APP CAROUSEL =====
+let appIdx = 0; const appTotal = 5;
+const appSlides = document.querySelectorAll('.app-slide');
+const appDots = document.querySelectorAll('.app-dot');
+function goApp(n) {
+  appIdx = ((n % appTotal) + appTotal) % appTotal;
+  appSlides.forEach((s, i) => { s.style.transform = `translateX(${(i - appIdx) * 100}%)`; });
+  appDots.forEach((d, i) => d.classList.toggle('active', i === appIdx));
+}
+document.getElementById('appNext').onclick = () => goApp(appIdx + 1);
+document.getElementById('appPrev').onclick = () => goApp(appIdx - 1);
+setInterval(() => goApp(appIdx + 1), 4000);
+goApp(0);
+
+// ===== PRICING TIMER =====
+let timerSec = 86399; // 23:59:59
+const saved = sessionStorage.getItem('sf_timer');
+if (saved) timerSec = Math.max(0, parseInt(saved));
+function updateTimer() {
+  const h = Math.floor(timerSec / 3600), m = Math.floor((timerSec % 3600) / 60), s = timerSec % 60;
+  document.getElementById('timerDisplay').textContent =
+    String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  if (timerSec > 0) timerSec--;
+  sessionStorage.setItem('sf_timer', timerSec);
+}
+updateTimer();
+setInterval(updateTimer, 1000);
+
+// ===== SAVINGS CALCULATOR =====
+const pSlider = document.getElementById('progSlider'), cSlider = document.getElementById('costSlider');
+function updateCalc() {
+  const p = parseInt(pSlider.value), c = parseInt(cSlider.value), t = p * c;
+  document.getElementById('progVal').textContent = p;
+  document.getElementById('costVal').textContent = '$' + c;
+  document.getElementById('wastedAmt').textContent = '$' + t.toLocaleString();
+  const pl = document.getElementById('punchline');
+  if (t > 500) pl.textContent = "You've spent $" + t.toLocaleString() + " on programs that weren't built for your life. The Sisterhood costs less per month than most of those cost total — and this one actually understands night shift.";
+  else if (t > 200) pl.textContent = "That's $" + t.toLocaleString() + " on programs that didn't stick. For $67/month, you get coaching, community, and a system built by a nurse — not a fitness influencer.";
+  else pl.textContent = "Even a modest investment adds up when it doesn't work. $67/month for a system built around your actual schedule — not someone else's.";
+}
+pSlider.addEventListener('input', updateCalc);
+cSlider.addEventListener('input', updateCalc);
+
+// ===== FAQ ACCORDION =====
+function toggleFaq(item) {
+  const was = item.classList.contains('active');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+  if (!was) item.classList.add('active');
+}
+
+// ===== STICKY CTA BAR =====
+window.addEventListener('scroll', () => {
+  document.getElementById('stickyBar').classList.toggle('visible', window.scrollY > 800);
+});
+
+// ===== SOCIAL PROOF ROTATION =====
+const spMsgs = [
+  { icon: '👩‍⚕️', num: '12', hl: '<span class="sp-num">12</span> nurses joined this week', bd: 'The Sisterhood is growing fast — your <strong>$67/mo charter rate</strong> locks in before the next price increase.' },
+  { icon: '🎯', num: '87%', hl: '<span class="sp-num">87%</span> feel different by Day 3', bd: 'That\'s what members report in their first weekly check-in. <strong>Your body is ready.</strong>' },
+  { icon: '🏋️', num: '3', hl: '<span class="sp-num">3</span> nurses just posted wins today', bd: 'Crystal shared her 10-lb milestone. Sarah hit her first full week. <strong>The community is active and waiting.</strong>' },
+  { icon: '💛', num: '8+', hl: 'Average member stays <span class="sp-num">8+ months</span>', bd: 'This isn\'t a program people quit. <strong>It\'s one that works — so they stay.</strong>' }
+];
+let spIdx = 0;
+setInterval(() => {
+  const c = document.getElementById('spContent');
+  c.classList.add('fading');
+  setTimeout(() => {
+    spIdx = (spIdx + 1) % spMsgs.length;
+    const m = spMsgs[spIdx];
+    document.getElementById('spIcon').textContent = m.icon;
+    c.querySelector('.sp-hl').innerHTML = m.hl;
+    c.querySelector('.sp-bd').innerHTML = m.bd;
+    c.classList.remove('fading');
+  }, 400);
+}, 6000);
+
+// ===== LIGHTBOX =====
+let lbIdx = 0;
+function openLightbox(i) {
+  const img = cards[i]?.querySelector('img');
+  if (!img) return;
+  lbIdx = i;
+  document.getElementById('lbImg').src = img.src;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+function lbNav(dir) {
+  let n = lbIdx + dir;
+  while (n >= 0 && n < totalC) { if (cards[n].querySelector('img')) { openLightbox(n); return; } n += dir; }
+}
+document.addEventListener('keydown', (e) => {
+  if (document.getElementById('lightbox').classList.contains('active')) {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lbNav(-1);
+    if (e.key === 'ArrowRight') lbNav(1);
+  } else {
+    if (e.key === 'ArrowLeft') goCard(currentIndex - 1);
+    if (e.key === 'ArrowRight') goCard(currentIndex + 1);
+  }
+});
+document.getElementById('lightbox').addEventListener('click', (e) => { if (e.target === document.getElementById('lightbox')) closeLightbox(); });
+
+// Click carousel cards for lightbox
+cards.forEach((c, i) => { c.addEventListener('click', () => openLightbox(i)); });
+</script>
+
+</body>
+</html>

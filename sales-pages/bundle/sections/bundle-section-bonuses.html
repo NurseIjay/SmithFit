@@ -1,0 +1,613 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #faf6ef;
+  color: #2d2d2d;
+}
+
+.sf-bonuses-container {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.sf-bonuses-intro {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.sf-bonuses-intro h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  color: #2d2d2d;
+  margin-bottom: 12px;
+}
+
+.sf-bonuses-intro p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.sf-bonuses-tabs-section {
+  margin-bottom: 40px;
+}
+
+.sf-bonuses-tabs-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.sf-bonuses-tab-badge {
+  position: absolute;
+  top: -30px;
+  right: 50%;
+  transform: translateX(50%);
+  background: linear-gradient(135deg, #c9a84c 0%, #e8d5a8 100%);
+  color: #2d2d2d;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+.sf-bonuses-tab-badge.sf-bonuses-active-badge {
+  opacity: 1;
+}
+
+.sf-bonuses-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.sf-bonuses-tab-btn {
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid #c9a84c;
+  background: transparent;
+  color: #c9a84c;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sf-bonuses-tab-btn:hover {
+  box-shadow: 0 4px 12px rgba(201, 168, 76, 0.2);
+}
+
+.sf-bonuses-tab-btn.sf-bonuses-12month {
+  animation: sf-bonuses-pulse 2s ease-in-out infinite;
+}
+
+@keyframes sf-bonuses-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(201, 168, 76, 0.1);
+  }
+}
+
+.sf-bonuses-tab-btn.sf-bonuses-active {
+  background: linear-gradient(135deg, #c9a84c 0%, #e8d5a8 100%);
+  color: #fff;
+  border-color: #c9a84c;
+  font-weight: 700;
+}
+
+.sf-bonuses-tab-btn.sf-bonuses-active.sf-bonuses-12month {
+  animation: sf-bonuses-pulse-active 1.5s ease-in-out infinite;
+}
+
+@keyframes sf-bonuses-pulse-active {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(201, 168, 76, 0.3);
+  }
+}
+
+.sf-bonuses-12month-callout {
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.15) 0%, rgba(232, 213, 168, 0.1) 100%);
+  border-left: 4px solid #c9a84c;
+  padding: 16px 20px;
+  margin-bottom: 30px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2d2d2d;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease, max-height 0.4s ease;
+  pointer-events: none;
+}
+
+.sf-bonuses-12month-callout.sf-bonuses-visible {
+  opacity: 1;
+  max-height: 100px;
+  pointer-events: auto;
+}
+
+.sf-bonuses-content {
+  display: grid;
+  gap: 20px;
+  min-height: 400px;
+}
+
+.sf-bonuses-tab-content {
+  display: none;
+  animation: sf-bonuses-fadeIn 0.5s ease;
+}
+
+@keyframes sf-bonuses-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sf-bonuses-tab-content.sf-bonuses-active {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.sf-bonuses-card {
+  background: #fff;
+  border: 1px solid #e0d5c7;
+  border-radius: 8px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.sf-bonuses-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.sf-bonuses-card-header {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.sf-bonuses-card.sf-bonuses-exclusive .sf-bonuses-card-header {
+  background: linear-gradient(135deg, #c9a84c 0%, #e8d5a8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: sf-bonuses-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes sf-bonuses-shimmer {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+.sf-bonuses-exclusive-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: linear-gradient(135deg, #c9a84c 0%, #e8d5a8 100%);
+  color: #2d2d2d;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.sf-bonuses-card.sf-bonuses-exclusive {
+  border: 2px solid #c9a84c;
+  background: linear-gradient(135deg, #faf6ef 0%, #fff9f0 100%);
+  position: relative;
+}
+
+.sf-bonuses-card.sf-bonuses-exclusive::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at top right, rgba(201, 168, 76, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.sf-bonuses-card-desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.sf-bonuses-card-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sf-bonuses-benefit {
+  font-size: 13px;
+  color: #555;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.sf-bonuses-benefit::before {
+  content: '✓';
+  color: #c9a84c;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.sf-bonuses-value-section {
+  margin: 40px 0;
+  padding: 30px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e0d5c7;
+  text-align: center;
+}
+
+.sf-bonuses-value-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin-bottom: 20px;
+}
+
+.sf-bonuses-value-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.sf-bonuses-value-item {
+  text-align: center;
+}
+
+.sf-bonuses-value-label {
+  font-size: 12px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.sf-bonuses-value-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #c9a84c;
+}
+
+.sf-bonuses-value-bar {
+  background: #e0d5c7;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.sf-bonuses-value-fill {
+  background: linear-gradient(90deg, #c9a84c 0%, #e8d5a8 100%);
+  height: 100%;
+  border-radius: 4px;
+  animation: sf-bonuses-fill 2s ease-out forwards;
+}
+
+@keyframes sf-bonuses-fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.sf-bonuses-cta-section {
+  text-align: center;
+  margin-top: 40px;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.08) 0%, rgba(232, 213, 168, 0.05) 100%);
+  border-radius: 8px;
+}
+
+.sf-bonuses-cta-identity {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin-bottom: 12px;
+}
+
+.sf-bonuses-cta-btn {
+  display: inline-block;
+  padding: 16px 40px;
+  font-size: 16px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #c9a84c 0%, #e8d5a8 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  display: inline-block;
+  animation: sf-bonuses-cta-pulse 2s ease-in-out infinite;
+}
+
+@keyframes sf-bonuses-cta-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(201, 168, 76, 0.2);
+  }
+}
+
+.sf-bonuses-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(201, 168, 76, 0.3);
+}
+
+@media (max-width: 768px) {
+  .sf-bonuses-intro h2 {
+    font-size: 28px;
+  }
+  
+  .sf-bonuses-tab-btn {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+  
+  .sf-bonuses-tab-content.sf-bonuses-active {
+    grid-template-columns: 1fr;
+  }
+  
+  .sf-bonuses-value-items {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .sf-bonuses-cta-identity {
+    font-size: 18px;
+  }
+}
+</style>
+
+<div class="sf-bonuses-container">
+  <div class="sf-bonuses-intro">
+    <h2>Exclusive Bundle Bonuses</h2>
+    <p>Transform your health journey with premium tools, personalized coaching, and a community built for nurses who refuse to settle.</p>
+  </div>
+
+  <div class="sf-bonuses-tabs-section">
+    <div class="sf-bonuses-tabs-wrapper">
+      <div class="sf-bonuses-tab-badge" id="tabBadge">Become Unshakable</div>
+      <div class="sf-bonuses-tabs">
+        <button class="sf-bonuses-tab-btn sf-bonuses-6month sf-bonuses-active" data-tab="6month">
+          6-Month Bundle
+        </button>
+        <button class="sf-bonuses-tab-btn sf-bonuses-12month" data-tab="12month">
+          12-Month Bundle
+        </button>
+      </div>
+    </div>
+
+    <div class="sf-bonuses-12month-callout" id="callout12month">
+      💎 Our members report this is the breakthrough that sticks. Get it now before the offer ends.
+    </div>
+
+    <div class="sf-bonuses-content">
+      <div class="sf-bonuses-tab-content sf-bonuses-active" data-tab="6month">
+        <div class="sf-bonuses-card">
+          <h3 class="sf-bonuses-card-header">Become the Nurse Who Owns Her Gameplan</h3>
+          <p class="sf-bonuses-card-desc">1 × 60-minute personal gameplan call with IJ.</p>
+          <div class="sf-bonuses-card-benefits">
+            <div class="sf-bonuses-benefit">Custom metabolic strategy for your shifts</div>
+            <div class="sf-bonuses-benefit">Your personal pressure points diagnosed</div>
+            <div class="sf-bonuses-benefit">Roadmap built for you, not a template</div>
+          </div>
+        </div>
+
+        <div class="sf-bonuses-card">
+          <h3 class="sf-bonuses-card-header">Become the Nurse Who Eats With Intention</h3>
+          <p class="sf-bonuses-card-desc">MealLens AI: Scan, analyze, and log your meals in seconds.</p>
+          <div class="sf-bonuses-card-benefits">
+            <div class="sf-bonuses-benefit">No more "is this protein enough?"</div>
+            <div class="sf-bonuses-benefit">Smart meal logging powered by AI vision</div>
+            <div class="sf-bonuses-benefit">Real-time nutrition feedback</div>
+          </div>
+        </div>
+
+        <div class="sf-bonuses-card">
+          <h3 class="sf-bonuses-card-header">Become the Nurse Who Knows Her Numbers</h3>
+          <p class="sf-bonuses-card-desc">BioSync Bloodwork Portal: Track cortisol, metabolic markers, hormone panels.</p>
+          <div class="sf-bonuses-card-benefits">
+            <div class="sf-bonuses-benefit">See the science behind your progress</div>
+            <div class="sf-bonuses-benefit">Biomarkers that matter for nurses</div>
+            <div class="sf-bonuses-benefit">Quarterly insights to adjust your protocol</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sf-bonuses-tab-content" data-tab="12month">
+        <div class="sf-bonuses-card">
+          <h3 class="sf-bonuses-card-header">Become the Nurse Who Owns Her Gameplan</h3>
+          <p class="sf-bonuses-card-desc">1 × 60-minute personal gameplan call with IJ.</p>
+          <div class="sf-bonuses-card-benefits">
+            <div class="sf-bonuses-benefit">Custom metabolic strategy for your shifts</div>
+            <div class="sf-bonuses-benefit">Your personal pressure points diagnosed</div>
+            <div class="sf-bonuses-benefit">Roadmap built for you, not a template</div>
+          </div>
+        </div>
+
+        <div class="sf-bonuses-card">
+          <h3 class="sf-bonuses-card-header">Become the Nurse Who Eats With Intention</h3>
+          <p class="sf-bonuses-card-desc">MealLens AI: Scan, analyze, and log your meals in seconds.</p>
+          <div class="sf-bonuses-card-benefits">
+            <div class="sf-bonuses-benefit">No more "is this protein enough?"</div>
+            <div class="sf-bonuses-benefit">Smart meal logging powered by AI vision</div>
+            <div class="sf-bonuses-benefit">Real-time nutrition feedback</div>
+          </div>
+        </div>
+
+        <div class="sf-bonuses-card">
+          <h3 class="sf-bonuses-card-header">Become the Nurse Who Knows Her Numbers</h3>
+          <p class="sf-bonuses-card-desc">BioSync Bloodwork Portal: Track cortisol, metabolic markers, hormone panels.</p>
+          <div class="sf-bonuses-card-benefits">
+            <div class="sf-bonuses-benefit">See the science behind your progress</div>
+            <div class="sf-bonuses-benefit">Biomarkers that matter for nurses</div>
+            <div class="sf-bonuses-benefit">Quarterly insights to adjust your protocol</div>
+          </div>
+        </div>
+
+        <div class="sf-bonuses-card sf-bonuses-exclusive">
+          <div class="sf-bonuses-exclusive-badge">12-Month Only</div>
+          <h3 class="sf-bonuses-card-header">Become the Nurse Who Never Starts Over</h3>
+          <p class="sf-bonuses-card-desc">Quarterly 20-minute coaching calls with IJ (4 calls/year).</p>
+          <div class="sf-bonuses-card-benefits">
+            <div class="sf-bonuses-benefit">Seasonal protocol recalibration</div>
+            <div class="sf-bonuses-benefit">Accountability check-ins when it matters</div>
+            <div class="sf-bonuses-benefit">Stay on track through life changes</div>
+          </div>
+        </div>
+
+        <div class="sf-bonuses-card sf-bonuses-exclusive">
+          <div class="sf-bonuses-exclusive-badge">12-Month Only</div>
+          <h3 class="sf-bonuses-card-header">Become the Nurse in VIP Community (Month 1)</h3>
+          <p class="sf-bonuses-card-desc">Direct agentic DM access with the SmithFit team—your personal advisor for the first month.</p>
+          <div class="sf-bonuses-card-benefits">
+            <div class="sf-bonuses-benefit">Real-time questions answered</div>
+            <div class="sf-bonuses-benefit">Priority support during your breakthrough month</div>
+            <div class="sf-bonuses-benefit">Feel held through your biggest wins</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sf-bonuses-value-section">
+      <h3 class="sf-bonuses-value-title">Real Value You're Getting</h3>
+      <div class="sf-bonuses-value-items">
+        <div class="sf-bonuses-value-item">
+          <div class="sf-bonuses-value-label">Total Bonus Value</div>
+          <div class="sf-bonuses-value-amount" id="valueAmount">$2,847</div>
+        </div>
+        <div class="sf-bonuses-value-item">
+          <div class="sf-bonuses-value-label">Your Investment (6-Month)</div>
+          <div class="sf-bonuses-value-amount" id="investmentAmount">$335</div>
+        </div>
+        <div class="sf-bonuses-value-item">
+          <div class="sf-bonuses-value-label">True ROI</div>
+          <div class="sf-bonuses-value-amount" id="roiAmount">750%</div>
+        </div>
+      </div>
+      <div class="sf-bonuses-value-bar">
+        <div class="sf-bonuses-value-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sf-bonuses-cta-section">
+    <div class="sf-bonuses-cta-identity">For Nurses Who Are Done Starting Over</div>
+    <a href="#" class="sf-bonuses-cta-btn">Become Unshakable Today</a>
+  </div>
+</div>
+
+<script>
+(function() {
+  var tabBtns = document.querySelectorAll('.sf-bonuses-tab-btn');
+  var tabContents = document.querySelectorAll('.sf-bonuses-tab-content');
+  var tabBadge = document.getElementById('tabBadge');
+  var callout12month = document.getElementById('callout12month');
+
+  tabBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var tabName = this.getAttribute('data-tab');
+
+      tabBtns.forEach(function(b) {
+        b.className = b.className.replace(' sf-bonuses-active', '');
+      });
+      if (this.className.indexOf('sf-bonuses-active') === -1) {
+        this.className = this.className + ' sf-bonuses-active';
+      }
+
+      tabContents.forEach(function(content) {
+        content.className = content.className.replace(' sf-bonuses-active', '');
+      });
+
+      var activeContent = null;
+      tabContents.forEach(function(content) {
+        if (content.getAttribute('data-tab') === tabName) {
+          if (content.className.indexOf('sf-bonuses-active') === -1) {
+            content.className = content.className + ' sf-bonuses-active';
+          }
+          activeContent = content;
+        }
+      });
+
+      if (tabName === '12month') {
+        if (tabBadge.className.indexOf('sf-bonuses-active-badge') === -1) {
+          tabBadge.className = tabBadge.className + ' sf-bonuses-active-badge';
+        }
+        if (callout12month.className.indexOf('sf-bonuses-visible') === -1) {
+          callout12month.className = callout12month.className + ' sf-bonuses-visible';
+        }
+      } else {
+        tabBadge.className = tabBadge.className.replace(' sf-bonuses-active-badge', '');
+        callout12month.className = callout12month.className.replace(' sf-bonuses-visible', '');
+      }
+    });
+  });
+
+  var pulseInterval = setInterval(function() {}, 2000);
+})();
+</script>

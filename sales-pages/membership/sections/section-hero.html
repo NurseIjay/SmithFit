@@ -1,0 +1,299 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  :root {
+    --gold: #c9a84c; --gold-light: #d4b86a; --gold-dark: #a88a3a;
+    --cream: #faf6ef; --cream-dark: #f0e8d8;
+    --text-dark: #1a1a1a; --text-body: #3d3d3d; --text-muted: #6b6b6b;
+    --green: #2d6a4f; --green-light: #e8f5e9;
+    --white: #ffffff;
+  }
+  
+  body { 
+    font-family: 'Inter', system-ui, sans-serif; 
+    background: var(--cream); 
+    color: var(--text-dark); 
+    line-height: 1.6; 
+  }
+
+  .sf-hero {
+    max-width: 800px; 
+    margin: 0 auto; 
+    padding: 56px 20px 48px;
+    text-align: center; 
+    position: relative; 
+    overflow: hidden;
+  }
+
+  /* ===== CONFETTI ===== */
+  .sf-confetti-container {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    height: 200px;
+    pointer-events: none; 
+    overflow: hidden; 
+    z-index: 0;
+  }
+  
+  .sf-confetti-piece {
+    position: absolute; 
+    width: 10px; 
+    height: 10px;
+    opacity: 0; 
+    animation: sf-confettiFall 3s ease-out forwards;
+  }
+  
+  .sf-confetti-piece:nth-child(odd) { border-radius: 50%; }
+  .sf-confetti-piece:nth-child(even) { border-radius: 2px; }
+  
+  @keyframes sf-confettiFall {
+    0% { 
+      -webkit-transform: translateY(-20px) rotate(0deg) scale(0); 
+      transform: translateY(-20px) rotate(0deg) scale(0); 
+      opacity: 0; 
+    }
+    10% { 
+      opacity: 1; 
+      -webkit-transform: translateY(0) rotate(45deg) scale(1);
+      transform: translateY(0) rotate(45deg) scale(1);
+    }
+    100% { 
+      -webkit-transform: translateY(180px) rotate(720deg) scale(0.3); 
+      transform: translateY(180px) rotate(720deg) scale(0.3); 
+      opacity: 0; 
+    }
+  }
+
+  /* ===== CONFIRMATION BANNER ===== */
+  .sf-confirm-banner {
+    position: relative; 
+    z-index: 1;
+    background: var(--green-light);
+    border: 2px solid rgba(45,106,79,0.25);
+    border-radius: 16px; 
+    padding: 20px 28px;
+    margin-bottom: 32px;
+    display: -webkit-flex;
+    display: flex; 
+    -webkit-align-items: center;
+    align-items: center; 
+    -webkit-justify-content: center;
+    justify-content: center; 
+    gap: 14px;
+    box-shadow: 0 4px 16px rgba(45,106,79,0.08);
+  }
+  
+  .sf-confirm-icon {
+    width: 36px; 
+    height: 36px; 
+    border-radius: 50%;
+    background: var(--green); 
+    color: white;
+    display: -webkit-flex;
+    display: flex; 
+    -webkit-align-items: center;
+    align-items: center; 
+    -webkit-justify-content: center;
+    justify-content: center;
+    font-size: 20px; 
+    font-weight: 700; 
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+  }
+  
+  .sf-confirm-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; 
+    font-weight: 700; 
+    color: var(--green);
+    line-height: 1.3;
+  }
+
+  /* ===== WELCOME CARD ===== */
+  .sf-welcome-card {
+    position: relative; 
+    z-index: 1;
+    background: linear-gradient(135deg, #1a2a1a, #2d5a4f);
+    border-radius: 20px; 
+    padding: 32px 36px;
+    margin-bottom: 32px; 
+    overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+  
+  .sf-welcome-card::before {
+    content: '';
+    position: absolute; 
+    top: -50%; 
+    left: -50%;
+    width: 200%; 
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.06) 0%, transparent 60%);
+    animation: sf-wcShimmer 6s ease-in-out infinite;
+  }
+  
+  @keyframes sf-wcShimmer { 
+    0%, 100% { -webkit-transform: translateX(-10%); transform: translateX(-10%); } 
+    50% { -webkit-transform: translateX(10%); transform: translateX(10%); } 
+  }
+
+  .sf-welcome-card .sf-wc-title {
+    font-family: 'Playfair Display', serif; 
+    font-size: 28px; 
+    font-weight: 800;
+    color: var(--gold-light); 
+    line-height: 1.3; 
+    margin-bottom: 10px;
+    position: relative; 
+    z-index: 1;
+  }
+  
+  .sf-welcome-card .sf-wc-body {
+    font-size: 16px; 
+    color: rgba(255,255,255,0.75); 
+    line-height: 1.6;
+    position: relative; 
+    z-index: 1;
+  }
+  
+  .sf-welcome-card .sf-wc-body strong { 
+    color: var(--gold-light); 
+  }
+
+  /* ===== HEADLINE ===== */
+  .sf-hero-title {
+    position: relative; 
+    z-index: 1;
+    font-family: 'Playfair Display', serif;
+    font-size: 38px; 
+    font-weight: 800; 
+    line-height: 1.2;
+    color: var(--text-dark); 
+    margin-bottom: 16px;
+  }
+  
+  .sf-hero-title .sf-highlight {
+    color: var(--gold); 
+    position: relative;
+  }
+  
+  .sf-hero-title .sf-highlight::after {
+    content: '';
+    position: absolute; 
+    bottom: 2px; 
+    left: 0; 
+    right: 0;
+    height: 8px; 
+    background: rgba(201,168,76,0.15); 
+    border-radius: 4px;
+    z-index: -1;
+  }
+
+  /* ===== SUB-HEADLINE ===== */
+  .sf-hero-sub {
+    position: relative; 
+    z-index: 1;
+    font-size: 17px; 
+    color: var(--text-body); 
+    line-height: 1.6;
+    max-width: 560px; 
+    margin: 0 auto 24px;
+  }
+
+  /* ===== SCROLL NUDGE ===== */
+  .sf-scroll-nudge {
+    position: relative; 
+    z-index: 1;
+    display: -webkit-inline-flex;
+    display: inline-flex; 
+    -webkit-align-items: center;
+    align-items: center; 
+    gap: 8px;
+    font-size: 15px; 
+    font-weight: 600; 
+    color: var(--green);
+  }
+  
+  .sf-scroll-nudge .sf-arrow { 
+    animation: sf-nudgeBounce 2s ease-in-out infinite; 
+  }
+  
+  @keyframes sf-nudgeBounce { 
+    0%, 100% { -webkit-transform: translateY(0); transform: translateY(0); } 
+    50% { -webkit-transform: translateY(5px); transform: translateY(5px); } 
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    .sf-hero { padding: 40px 16px 36px; }
+    .sf-confirm-banner { -webkit-flex-direction: column; flex-direction: column; padding: 16px 20px; gap: 10px; }
+    .sf-confirm-text { font-size: 17px; }
+    .sf-welcome-card { padding: 24px 20px; }
+    .sf-welcome-card .sf-wc-title { font-size: 22px; }
+    .sf-welcome-card .sf-wc-body { font-size: 15px; }
+    .sf-hero-title { font-size: 28px; }
+    .sf-hero-sub { font-size: 15px; }
+  }
+</style>
+
+<div class="sf-hero">
+  <!-- Confetti burst -->
+  <div class="sf-confetti-container" id="sf-confettiBox"></div>
+
+  <!-- Purchase confirmation — prominent -->
+  <div class="sf-confirm-banner">
+    <div class="sf-confirm-icon">✓</div>
+    <div class="sf-confirm-text">Your 7-Day Shift-Proof Metabolism Reset Is Confirmed!</div>
+  </div>
+
+  <!-- Welcome card — celebration + identity -->
+  <div class="sf-welcome-card">
+    <div class="sf-wc-title">Most Nurses Say "I'll Start Monday." You Just Actually Started.</div>
+    <div class="sf-wc-body">That puts you in rare company — <strong>the kind of nurse who does the thing instead of just talking about it.</strong></div>
+  </div>
+
+  <!-- Headline — curiosity + Day 8 -->
+  <h1 class="sf-hero-title">
+    Now Here's What Happens<br>on <span class="sf-highlight">Day 8</span>.
+  </h1>
+
+  <!-- Sub — short, intriguing -->
+  <p class="sf-hero-sub">
+    The reset shows you what's possible. But Day 8 is where it either <strong>sticks</strong> — or fades away like the others... Here's what these women did differently to stop starting over and finally feel like themselves again.
+  </p>
+
+  <!-- Scroll nudge -->
+  <div class="sf-scroll-nudge">
+    <span class="sf-arrow">↓</span>
+    Keep scrolling to find out
+    <span class="sf-arrow">↓</span>
+  </div>
+</div>
+
+<script>
+(function() {
+  try {
+    // Generate confetti pieces
+    var box = document.getElementById('sf-confettiBox');
+    var colors = ['#c9a84c', '#d4b86a', '#2d6a4f', '#4ade80', '#faf6ef', '#a88a3a'];
+    
+    for (var i = 0; i < 40; i++) {
+      var piece = document.createElement('div');
+      piece.className = 'sf-confetti-piece';
+      piece.style.left = Math.random() * 100 + '%';
+      piece.style.width = (6 + Math.random() * 8) + 'px';
+      piece.style.height = (6 + Math.random() * 8) + 'px';
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.animationDelay = (Math.random() * 1.5) + 's';
+      piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+      box.appendChild(piece);
+    }
+  } catch (e) {
+    console.log('Confetti error:', e);
+  }
+})();
+</script>

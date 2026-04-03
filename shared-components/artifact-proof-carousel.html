@@ -1,0 +1,457 @@
+<!-- SmithFit Proof Carousel — GHL Custom Code Block -->
+<!-- Paste this ENTIRE block into a GHL Custom Code element -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  .sf-proof * { margin: 0; padding: 0; box-sizing: border-box; }
+  .sf-proof {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: #faf6ef; color: #1a1a1a; line-height: 1.6;
+    max-width: 720px; margin: 0 auto; padding: 48px 16px;
+    width: 100%; overflow-x: hidden;
+  }
+  .sf-proof .sf-label { text-align: center; font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #c9a84c; margin-bottom: 12px; }
+  .sf-proof .sf-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; line-height: 1.2; }
+  .sf-proof .sf-subtitle { text-align: center; font-size: 16px; color: #6b6b6b; margin-bottom: 16px; max-width: 540px; margin-left: auto; margin-right: auto; }
+
+  /* Counter */
+  .sf-proof .sf-counter { text-align: center; margin-bottom: 32px; }
+  .sf-proof .sf-counter-num { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 800; color: #c9a84c; line-height: 1; }
+  .sf-proof .sf-counter-label { font-size: 15px; color: #6b6b6b; margin-top: 4px; }
+
+  /* Stat Bar */
+  .sf-proof .sf-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 40px; max-width: 540px; margin-left: auto; margin-right: auto; }
+  .sf-proof .sf-stat { text-align: center; padding: 16px 8px; background: #ffffff; border-radius: 12px; border: 1px solid #e8e0d0; }
+  .sf-proof .sf-stat-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 800; color: #c9a84c; line-height: 1; margin-bottom: 4px; }
+  .sf-proof .sf-stat-txt { font-size: 12px; color: #6b6b6b; line-height: 1.3; }
+
+  /* Carousel */
+  .sf-proof .sf-car-section { margin-bottom: 40px; }
+  .sf-proof .sf-car-header { text-align: center; margin-bottom: 8px; }
+  .sf-proof .sf-car-tag { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #a88a3a; margin-bottom: 8px; }
+  .sf-proof .sf-car-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: #1a1a1a; }
+  .sf-proof .sf-car-count { text-align: center; font-size: 14px; color: #6b6b6b; margin-bottom: 20px; }
+  .sf-proof .sf-car-count strong { color: #a88a3a; font-weight: 700; }
+
+  .sf-proof .sf-car-wrap {
+    position: relative; width: 100%; max-width: 480px; margin: 0 auto;
+    overflow: hidden; border-radius: 16px;
+    border: 2px solid #c9a84c;
+    box-shadow: 0 6px 24px rgba(201,168,76,0.15);
+    background: #f0e8d8;
+  }
+  .sf-proof .sf-car-track {
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    -webkit-transition: -webkit-transform 0.4s ease;
+    transition: transform 0.4s ease;
+  }
+  .sf-proof .sf-car-card {
+    -webkit-box-flex: 0; -ms-flex: 0 0 100%; flex: 0 0 100%;
+    width: 100%; min-width: 100%;
+  }
+  .sf-proof .sf-car-card img {
+    width: 100%; height: auto; display: block;
+    max-height: 580px; object-fit: contain;
+    background: #f0e8d8;
+  }
+
+  /* Nav arrows */
+  .sf-proof .sf-arr {
+    position: absolute; top: 50%;
+    -webkit-transform: translateY(-50%); transform: translateY(-50%);
+    z-index: 20; width: 44px; height: 44px;
+    border-radius: 50%; background: rgba(255,255,255,0.92);
+    border: 2px solid #c9a84c; color: #a88a3a;
+    font-size: 22px; cursor: pointer;
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    -webkit-box-align: center; -ms-flex-align: center; align-items: center;
+    -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    line-height: 1; padding: 0;
+  }
+  .sf-proof .sf-arr:hover { background: #c9a84c; color: #fff; }
+  .sf-proof .sf-arr-l { left: 8px; }
+  .sf-proof .sf-arr-r { right: 8px; }
+
+  /* Dots */
+  .sf-proof .sf-dots { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; gap: 6px; margin-top: 16px; -ms-flex-wrap: wrap; flex-wrap: wrap; }
+  .sf-proof .sf-dot { width: 10px; height: 10px; border-radius: 50%; background: #d0c8b8; cursor: pointer; border: none; padding: 0; -webkit-transition: all 0.3s; transition: all 0.3s; }
+  .sf-proof .sf-dot-on { background: #c9a84c; width: 24px; border-radius: 5px; }
+
+  .sf-proof .sf-swipe-hint { text-align: center; font-size: 12px; color: #6b6b6b; margin-top: 8px; opacity: 0.7; }
+
+  /* Video */
+  .sf-proof .sf-vid-section { margin-bottom: 40px; text-align: center; }
+  .sf-proof .sf-vid-tag { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #a88a3a; margin-bottom: 8px; }
+  .sf-proof .sf-vid-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 16px; }
+  .sf-proof .sf-vid-wrap {
+    max-width: 480px; width: 100%; margin: 0 auto;
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.10);
+    border: 2px solid #e8e0d0; background: #111;
+    position: relative;
+  }
+  .sf-proof .sf-vid-wrap video { width: 100%; height: auto; display: block; }
+  .sf-proof .sf-vid-fb { display: none; padding: 40px 20px; text-align: center; }
+  .sf-proof .sf-vid-fb a {
+    display: inline-block; background: #c9a84c; color: #fff; font-weight: 700;
+    padding: 14px 28px; border-radius: 10px; text-decoration: none; font-size: 15px;
+  }
+  .sf-proof .sf-vid-fb a:hover { background: #a88a3a; }
+  .sf-proof .sf-vid-cap { font-size: 13px; color: #6b6b6b; font-style: italic; margin-top: 12px; }
+
+  /* Quote Card */
+  .sf-proof .sf-quote {
+    position: relative; border-radius: 18px;
+    padding: 40px 36px 36px; margin: 40px auto;
+    max-width: 640px; overflow: hidden;
+    background: #ffffff; border: 1px solid #e8e0d0;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.06);
+  }
+  .sf-proof .sf-quote-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #c9a84c, #d4b86a, #c9a84c); }
+  .sf-proof .sf-quote-mark { font-family: 'Playfair Display', serif; font-size: 72px; line-height: 1; color: #c9a84c; opacity: 0.2; margin-bottom: -12px; }
+  .sf-proof .sf-stars { display: -webkit-box; display: -ms-flexbox; display: flex; gap: 3px; margin-bottom: 16px; }
+  .sf-proof .sf-star { color: #c9a84c; font-size: 16px; }
+  .sf-proof .sf-quote-txt { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 600; color: #1a1a1a; line-height: 1.6; margin-bottom: 24px; }
+  .sf-proof .sf-quote-line { width: 48px; height: 2px; background: #d4b86a; margin-bottom: 18px; }
+  .sf-proof .sf-author { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; gap: 12px; }
+  .sf-proof .sf-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, #f0e8d8, #faf6ef);
+    border: 2px solid #d4b86a;
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    -webkit-box-align: center; -ms-flex-align: center; align-items: center;
+    -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;
+    -ms-flex-negative: 0; flex-shrink: 0;
+  }
+  .sf-proof .sf-monogram { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 800; color: #a88a3a; }
+  .sf-proof .sf-author-name { font-size: 14px; font-weight: 700; color: #1a1a1a; line-height: 1.3; }
+  .sf-proof .sf-author-role { font-size: 12px; font-weight: 500; color: #6b6b6b; line-height: 1.3; }
+  .sf-proof .sf-verified { margin-left: auto; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: #a88a3a; -ms-flex-negative: 0; flex-shrink: 0; }
+  .sf-proof .sf-verified svg { width: 14px; height: 14px; fill: #c9a84c; }
+
+  /* CTA */
+  .sf-proof .sf-cta { text-align: center; margin-top: 36px; }
+  .sf-proof .sf-cta-btn { display: inline-block; background: linear-gradient(135deg, #c9a84c 0%, #a88a3a 100%); color: #fff; font-size: 16px; font-weight: 700; padding: 16px 36px; border: none; border-radius: 12px; cursor: pointer; box-shadow: 0 4px 16px rgba(201,168,76,0.3); max-width: 480px; width: 100%; text-decoration: none; }
+  .sf-proof .sf-cta-btn:hover { box-shadow: 0 6px 24px rgba(201,168,76,0.4); }
+  .sf-proof .sf-cta-sub { font-size: 12px; color: #6b6b6b; margin-top: 8px; }
+
+  /* Lightbox */
+  .sf-lb { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 99999; padding: 20px; }
+  .sf-lb-on { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; }
+  .sf-lb img { max-width: 90%; max-height: 90vh; border-radius: 12px; }
+  .sf-lb-x { position: absolute; top: 16px; right: 20px; color: #fff; font-size: 32px; cursor: pointer; z-index: 100000; background: none; border: none; }
+  .sf-lb-nav { position: absolute; top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%); color: #fff; font-size: 40px; cursor: pointer; padding: 16px; z-index: 100000; background: none; border: none; }
+  .sf-lb-nav-l { left: 8px; }
+  .sf-lb-nav-r { right: 8px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .sf-proof { padding: 32px 12px; }
+    .sf-proof .sf-title { font-size: 26px; }
+    .sf-proof .sf-subtitle { font-size: 14px; }
+    .sf-proof .sf-counter-num { font-size: 40px; }
+    .sf-proof .sf-counter-label { font-size: 13px; }
+    .sf-proof .sf-stats { gap: 6px; }
+    .sf-proof .sf-stat-num { font-size: 22px; }
+    .sf-proof .sf-stat-txt { font-size: 11px; }
+    .sf-proof .sf-stat { padding: 12px 6px; }
+    .sf-proof .sf-car-title { font-size: 19px; }
+    .sf-proof .sf-car-wrap { border-radius: 12px; }
+    .sf-proof .sf-arr { width: 36px; height: 36px; font-size: 18px; }
+    .sf-proof .sf-arr-l { left: 6px; }
+    .sf-proof .sf-arr-r { right: 6px; }
+    .sf-proof .sf-quote { padding: 28px 20px 24px; }
+    .sf-proof .sf-quote-txt { font-size: 17px; }
+    .sf-proof .sf-author { -ms-flex-wrap: wrap; flex-wrap: wrap; }
+    .sf-proof .sf-verified { margin-left: 0; margin-top: 6px; width: 100%; }
+    .sf-proof .sf-vid-title { font-size: 19px; }
+    .sf-proof .sf-vid-wrap { border-radius: 10px; }
+    .sf-proof .sf-cta-btn { font-size: 15px; padding: 14px 24px; }
+  }
+  @media (max-width: 400px) {
+    .sf-proof .sf-title { font-size: 22px; }
+    .sf-proof .sf-counter-num { font-size: 36px; }
+    .sf-proof .sf-stat-num { font-size: 20px; }
+    .sf-proof .sf-car-title { font-size: 17px; }
+    .sf-proof .sf-quote-txt { font-size: 16px; }
+  }
+</style>
+
+<div class="sf-proof">
+  <div class="sf-label">REAL NURSES. REAL RESULTS.</div>
+  <div class="sf-title">They Didn't Just Lose Weight.</div>
+  <div class="sf-subtitle">They became the nurse who finally stopped starting over.</div>
+
+  <div class="sf-counter">
+    <div class="sf-counter-num" id="sfMainNum">0</div>
+    <div class="sf-counter-label">Nurses Already Transformed Inside the Sisterhood</div>
+  </div>
+
+  <div class="sf-stats" id="sfStats">
+    <div class="sf-stat">
+      <div class="sf-stat-num" id="sfStat1">0%</div>
+      <div class="sf-stat-txt">Feel different<br>by Day 3</div>
+    </div>
+    <div class="sf-stat">
+      <div class="sf-stat-num" id="sfStat2">0 lbs</div>
+      <div class="sf-stat-txt">Average lost<br>in Week 1</div>
+    </div>
+    <div class="sf-stat">
+      <div class="sf-stat-num" id="sfStat3">0+ mo</div>
+      <div class="sf-stat-txt">Average member<br>retention</div>
+    </div>
+  </div>
+
+  <!-- CAROUSEL -->
+  <div class="sf-car-section">
+    <div class="sf-car-header">
+      <div class="sf-car-tag">WOMEN WHO STOPPED STARTING OVER</div>
+      <div class="sf-car-title">Meet the Nurses Who Finally Feel Like Themselves</div>
+    </div>
+    <div class="sf-car-count">Transformation <strong id="sfCurCard">1</strong> of <strong>10</strong> — she decided she was done waiting</div>
+
+    <div class="sf-car-wrap" id="sfCarWrap">
+      <button class="sf-arr sf-arr-l" id="sfPrev">&#8249;</button>
+      <button class="sf-arr sf-arr-r" id="sfNext">&#8250;</button>
+
+      <div class="sf-car-track" id="sfTrack">
+        <div class="sf-car-card"><img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69bf98945596d1df53f0e2b2.png" alt="SmithFit Transformation 1"></div>
+        <div class="sf-car-card"><img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69bf98949bd1391242f4bce4.png" alt="SmithFit Transformation 2"></div>
+        <div class="sf-car-card"><img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69bf9894ad14005e9ee362bc.png" alt="SmithFit Transformation 3"></div>
+        <div class="sf-car-card"><img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69bf9894ad140085b3e362be.png" alt="SmithFit Transformation 4"></div>
+        <div class="sf-car-card"><img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69bf98943b3a58c443cdf65c.png" alt="SmithFit Transformation 5"></div>
+        <div class="sf-car-card"><img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69bf98945596d15303f0e2b4.png" alt="SmithFit Transformation 6"></div>
+        <div class="sf-car-card"><img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69bf98945596d1377cf0e2b3.png" alt="SmithFit Transformation 7"></div>
+        <div class="sf-car-card"><img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69bf98945596d13068f0e2ad.png" alt="SmithFit Transformation 8"></div>
+        <div class="sf-car-card"><img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69bf9895ad14007c5fe362bf.png" alt="SmithFit Transformation 9"></div>
+        <div class="sf-car-card"><img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69bf9894ad1400ce0ae362bd.png" alt="SmithFit Transformation 10"></div>
+      </div>
+    </div>
+
+    <div class="sf-dots" id="sfDots"></div>
+    <div class="sf-swipe-hint">Swipe or tap arrows to see more</div>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="sf-vid-section">
+    <div class="sf-vid-tag">A LOOK INSIDE THE SISTERHOOD</div>
+    <div class="sf-vid-title">See What It's Really Like When Nurses Stop Doing This Alone</div>
+    <div class="sf-vid-wrap">
+      <video id="sfVid" controls playsinline preload="metadata">
+        <source src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69abe36136702f9ab236c9d0.mov" type="video/mp4">
+      </video>
+      <div class="sf-vid-fb" id="sfVidFb">
+        <a href="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69abe36136702f9ab236c9d0.mov" target="_blank" rel="noopener">&#9654; Tap to Watch Video</a>
+      </div>
+    </div>
+    <div class="sf-vid-cap">"I finally feel like myself again." — Real SmithFit members</div>
+  </div>
+
+  <!-- QUOTE CARD -->
+  <div class="sf-quote">
+    <div class="sf-quote-bar"></div>
+    <div class="sf-quote-mark">&ldquo;</div>
+    <div class="sf-stars">
+      <span class="sf-star">&#9733;</span>
+      <span class="sf-star">&#9733;</span>
+      <span class="sf-star">&#9733;</span>
+      <span class="sf-star">&#9733;</span>
+      <span class="sf-star">&#9733;</span>
+    </div>
+    <div class="sf-quote-txt">I used to dread my break room because I'd eat whatever was there. Now I open my app, check my plan, and feel like I'm in control. For the first time in years, I actually feel like <em>me</em> again.</div>
+    <div class="sf-quote-line"></div>
+    <div class="sf-author">
+      <div class="sf-avatar"><span class="sf-monogram">CM</span></div>
+      <div>
+        <div class="sf-author-name">Crystal M.</div>
+        <div class="sf-author-role">Night Shift RN</div>
+      </div>
+      <div class="sf-verified">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+        Verified Member
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="sf-cta">
+    <a href="#checkout" class="sf-cta-btn">YES — I Want Results Like These for $67/month &rarr;</a>
+    <div class="sf-cta-sub">30-day money-back guarantee. Cancel anytime.</div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="sf-lb" id="sfLb">
+  <button class="sf-lb-x" id="sfLbX">&times;</button>
+  <button class="sf-lb-nav sf-lb-nav-l" id="sfLbP">&#8249;</button>
+  <button class="sf-lb-nav sf-lb-nav-r" id="sfLbN">&#8250;</button>
+  <img id="sfLbImg" src="" alt="Transformation">
+</div>
+
+<script>
+(function() {
+  // Wrap everything in a function so it runs clean in GHL
+  // Use try-catch so one error doesn't kill everything
+
+  // ===== COUNTERS (setInterval — works in all GHL contexts) =====
+  var countersDone = false;
+
+  function countUp(el, target, suffix, totalMs) {
+    try {
+      var current = 0;
+      var steps = Math.max(10, Math.floor(totalMs / 30));
+      var step = Math.max(1, Math.ceil(target / steps));
+      var timer = setInterval(function() {
+        current = current + step;
+        if (current >= target) {
+          current = target;
+          el.textContent = target + suffix;
+          clearInterval(timer);
+        } else {
+          el.textContent = current + suffix;
+        }
+      }, 30);
+    } catch(e) {
+      try { el.textContent = target + suffix; } catch(e2) {}
+    }
+  }
+
+  function startCounters() {
+    if (countersDone) return;
+    countersDone = true;
+    try {
+      countUp(document.getElementById('sfMainNum'), 400, '+', 2000);
+      countUp(document.getElementById('sfStat1'), 87, '%', 1500);
+      countUp(document.getElementById('sfStat2'), 5, ' lbs', 800);
+      countUp(document.getElementById('sfStat3'), 8, '+ mo', 800);
+    } catch(e) {
+      try {
+        document.getElementById('sfMainNum').textContent = '400+';
+        document.getElementById('sfStat1').textContent = '87%';
+        document.getElementById('sfStat2').textContent = '5 lbs';
+        document.getElementById('sfStat3').textContent = '8+ mo';
+      } catch(e2) {}
+    }
+  }
+
+  // Fire on a 1.5s delay — GHL blocks are usually in view on load
+  setTimeout(startCounters, 1500);
+
+  // ===== CAROUSEL =====
+  try {
+    var cards = document.querySelectorAll('.sf-car-card');
+    var track = document.getElementById('sfTrack');
+    var wrap = document.getElementById('sfCarWrap');
+    var dotsBox = document.getElementById('sfDots');
+    var total = cards.length;
+    var idx = 0;
+    var dots = [];
+
+    // Build dots
+    for (var i = 0; i < total; i++) {
+      var d = document.createElement('div');
+      d.className = i === 0 ? 'sf-dot sf-dot-on' : 'sf-dot';
+      d.setAttribute('data-i', String(i));
+      d.addEventListener('click', function() {
+        go(parseInt(this.getAttribute('data-i')));
+      });
+      dotsBox.appendChild(d);
+      dots.push(d);
+    }
+
+    function go(n) {
+      if (n < 0) n = total - 1;
+      if (n >= total) n = 0;
+      idx = n;
+      track.style.webkitTransform = 'translateX(-' + (idx * 100) + '%)';
+      track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+      for (var j = 0; j < dots.length; j++) {
+        dots[j].className = j === idx ? 'sf-dot sf-dot-on' : 'sf-dot';
+      }
+      try { document.getElementById('sfCurCard').textContent = idx + 1; } catch(e) {}
+    }
+
+    // Arrow buttons
+    document.getElementById('sfPrev').addEventListener('click', function(e) {
+      e.preventDefault(); e.stopPropagation(); go(idx - 1);
+    });
+    document.getElementById('sfNext').addEventListener('click', function(e) {
+      e.preventDefault(); e.stopPropagation(); go(idx + 1);
+    });
+
+    // Touch/swipe on wrapper
+    var tx = 0;
+    var ty = 0;
+    wrap.addEventListener('touchstart', function(e) {
+      tx = e.touches[0].clientX;
+      ty = e.touches[0].clientY;
+    }, false);
+    wrap.addEventListener('touchend', function(e) {
+      var dx = tx - e.changedTouches[0].clientX;
+      var dy = Math.abs(ty - e.changedTouches[0].clientY);
+      if (Math.abs(dx) > 35 && Math.abs(dx) > dy) {
+        if (dx > 0) go(idx + 1);
+        else go(idx - 1);
+      }
+    }, false);
+
+    // Click to lightbox
+    for (var c = 0; c < cards.length; c++) {
+      (function(ci) {
+        cards[ci].addEventListener('click', function() { openLb(ci); });
+      })(c);
+    }
+  } catch(e) {}
+
+  // ===== VIDEO FALLBACK =====
+  try {
+    var vid = document.getElementById('sfVid');
+    var fb = document.getElementById('sfVidFb');
+    function showFb() {
+      try { vid.style.display = 'none'; fb.style.display = 'block'; } catch(e) {}
+    }
+    vid.addEventListener('error', showFb);
+    // Check after 5s if video loaded
+    setTimeout(function() {
+      try {
+        if (vid.readyState === 0) showFb();
+      } catch(e) {}
+    }, 5000);
+  } catch(e) {}
+
+  // ===== LIGHTBOX =====
+  var lbi = 0;
+  function openLb(n) {
+    try {
+      var img = cards[n].querySelector('img');
+      if (!img) return;
+      lbi = n;
+      document.getElementById('sfLbImg').src = img.src;
+      document.getElementById('sfLb').className = 'sf-lb sf-lb-on';
+      document.body.style.overflow = 'hidden';
+    } catch(e) {}
+  }
+  function closeLb() {
+    try {
+      document.getElementById('sfLb').className = 'sf-lb';
+      document.body.style.overflow = '';
+    } catch(e) {}
+  }
+  function navLb(dir) {
+    var n = lbi + dir;
+    if (n < 0) n = total - 1;
+    if (n >= total) n = 0;
+    openLb(n);
+  }
+
+  try {
+    document.getElementById('sfLbX').addEventListener('click', closeLb);
+    document.getElementById('sfLbP').addEventListener('click', function() { navLb(-1); });
+    document.getElementById('sfLbN').addEventListener('click', function() { navLb(1); });
+    document.getElementById('sfLb').addEventListener('click', function(e) {
+      if (e.target === document.getElementById('sfLb')) closeLb();
+    });
+  } catch(e) {}
+
+})();
+</script>

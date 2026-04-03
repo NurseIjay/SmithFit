@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmithFit — Free Trial Page Implementation Guide</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fafafa; color: #333; line-height: 1.7; }
+.container { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
+h1 { font-size: 1.8rem; color: #1a1a2e; margin-bottom: 4px; }
+.subtitle { color: #C5A55A; margin-bottom: 32px; }
+.priority { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+.priority.p1 { border-left: 4px solid #e74c3c; }
+.priority.p2 { border-left: 4px solid #f39c12; }
+.priority.p3 { border-left: 4px solid #3498db; }
+.badge { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 2px 10px; border-radius: 4px; margin-bottom: 8px; }
+.badge.do-first { background: #e74c3c22; color: #e74c3c; }
+.badge.do-next { background: #f39c1222; color: #f39c12; }
+.badge.do-last { background: #3498db22; color: #3498db; }
+h3 { font-size: 1.1rem; color: #1a1a2e; margin-bottom: 6px; }
+p { margin-bottom: 8px; color: #555; }
+.steps { margin-top: 12px; padding-left: 20px; }
+.steps li { margin-bottom: 8px; color: #444; }
+.steps li strong { color: #1a1a2e; }
+code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; color: #c0392b; }
+.note { background: #FFF8F0; border: 1px solid #C5A55A44; border-radius: 8px; padding: 16px; margin-top: 16px; }
+.note strong { color: #C5A55A; }
+.summary { background: #1a1a2e; color: #fff; border-radius: 12px; padding: 24px; margin-top: 40px; }
+.summary h2 { color: #C5A55A; margin-bottom: 12px; }
+.summary table { width: 100%; border-collapse: collapse; }
+.summary td { padding: 8px 12px; border-bottom: 1px solid #2a2a3e; font-size: 0.9rem; }
+.summary td:first-child { color: #aaa; }
+.summary td:last-child { color: #2ecc71; font-weight: 600; text-align: right; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Free Trial Downsell — Implementation Guide</h1>
+  <p class="subtitle">Step-by-step instructions for applying all fixes in GHL</p>
+
+  <div class="priority p1">
+    <span class="badge do-first">DO FIRST — 5 min each</span>
+    <h3>Step 1: Replace blank hero</h3>
+    <p>The top of the page is completely empty. This is the #1 bounce cause.</p>
+    <ol class="steps">
+      <li>Open the free trial page in GHL page editor</li>
+      <li>Find the empty section at the very top (before "A Personal Note")</li>
+      <li>Delete the blank section</li>
+      <li>Add a new Custom HTML/Code element at the top</li>
+      <li>Paste the contents of <code>trial-artifact-hero.html</code></li>
+      <li>Save and preview — you should see the headline and green CTA button</li>
+    </ol>
+  </div>
+
+  <div class="priority p1">
+    <span class="badge do-first">DO FIRST — 5 min</span>
+    <h3>Step 2: Fix or remove broken video</h3>
+    <ol class="steps">
+      <li>Find the video section (between Sarah K. testimonial and the timeline)</li>
+      <li><strong>Option A:</strong> Upload a working video to GHL media library → update the video element source</li>
+      <li><strong>Option B:</strong> Replace with a Loom embed if you have one recorded</li>
+      <li><strong>Option C:</strong> Delete the entire video section if no video exists yet (better to have no video than a broken one)</li>
+    </ol>
+  </div>
+
+  <div class="priority p1">
+    <span class="badge do-first">DO FIRST — 5 min</span>
+    <h3>Step 3: Replace blank feature cards</h3>
+    <ol class="steps">
+      <li>Find the "FULL ACCESS — Not a Trial Version" section with 6 blank white cards</li>
+      <li>Delete all 6 cards and the section container</li>
+      <li>Add a new Custom HTML/Code element in its place</li>
+      <li>Paste the contents of <code>trial-artifact-feature-cards.html</code></li>
+      <li>Preview — you should see 6 cards with emoji icons and descriptions</li>
+    </ol>
+  </div>
+
+  <div class="priority p1">
+    <span class="badge do-first">DO FIRST — 2 min</span>
+    <h3>Step 4: Fix all broken links</h3>
+    <ol class="steps">
+      <li><strong>Footer links:</strong> Update Privacy Policy, Terms of Service, and Contact to real SmithFit URLs (or # if pages don't exist yet)</li>
+      <li><strong>"No thanks" link:</strong> Change from manus.space to either your $27 course page URL or simply <code>#</code></li>
+      <li>Search the page for "manus.space" — replace ALL instances</li>
+    </ol>
+  </div>
+
+  <div class="priority p1">
+    <span class="badge do-first">DO FIRST — 5 min</span>
+    <h3>Step 5: Replace fake pricing table</h3>
+    <ol class="steps">
+      <li>Find the pricing table section (shows ~~$349/mo~~ → $67/mo)</li>
+      <li>Delete the entire pricing table</li>
+      <li>Add a Custom HTML/Code element</li>
+      <li>Paste the contents of <code>trial-artifact-pricing-card.html</code></li>
+      <li>Verify the CTA button links to your GHL checkout/trial signup URL</li>
+    </ol>
+  </div>
+
+  <div class="priority p2">
+    <span class="badge do-next">DO NEXT — 5 min each</span>
+    <h3>Step 6: Replace closing photo</h3>
+    <ol class="steps">
+      <li>Find the closing section with "Let's See What Your Body Can Do" and the male before/after photo</li>
+      <li>Replace the image with a photo of IJ in scrubs, coaching context, or a friendly headshot</li>
+      <li>Do NOT use a shirtless transformation photo — the page audience is female nurses</li>
+    </ol>
+    <div class="note">
+      <strong>Note:</strong> Same fix applied to membership and bundle pages. Use the same replacement photo across all 3 for brand consistency.
+    </div>
+  </div>
+
+  <div class="priority p2">
+    <span class="badge do-next">DO NEXT — 5 min</span>
+    <h3>Step 7: Add expanded FAQ section</h3>
+    <ol class="steps">
+      <li>Find the "Why Do I Need to Enter a Credit Card" single-question section</li>
+      <li>Delete it</li>
+      <li>Add a Custom HTML/Code element</li>
+      <li>Paste the contents of <code>trial-artifact-objection-faq.html</code></li>
+      <li>This replaces the single question with a full 6-question accordion that also covers the "Canceling Is Simple" steps</li>
+    </ol>
+  </div>
+
+  <div class="priority p2">
+    <span class="badge do-next">DO NEXT — 5 min</span>
+    <h3>Step 8: Upgrade the timeline</h3>
+    <ol class="steps">
+      <li>Find the current 14-day timeline section</li>
+      <li>Replace with <code>trial-artifact-timeline.html</code> for the animated version</li>
+      <li>OR keep the current timeline if you prefer — it's functional, just less engaging</li>
+    </ol>
+  </div>
+
+  <div class="priority p3">
+    <span class="badge do-last">DO LAST — 3 min</span>
+    <h3>Step 9: Add sticky CTA</h3>
+    <ol class="steps">
+      <li>Add a Custom HTML/Code element at the very bottom of the page (after footer)</li>
+      <li>Paste the contents of <code>trial-artifact-sticky-cta.html</code></li>
+      <li>This creates a floating bar that appears after scrolling — no layout changes needed</li>
+      <li>Update the CTA link URL to your trial signup checkout</li>
+    </ol>
+  </div>
+
+  <div class="priority p3">
+    <span class="badge do-last">DO LAST — 5 min</span>
+    <h3>Step 10: Verify all CTA buttons link correctly</h3>
+    <ol class="steps">
+      <li>Click through every green "YES — Start My 14-Day FREE Trial →" button</li>
+      <li>Confirm they all go to the correct GHL checkout/trial signup page</li>
+      <li>Test on both desktop and mobile</li>
+      <li>Verify the sticky CTA button also links correctly</li>
+    </ol>
+  </div>
+
+  <div class="summary">
+    <h2>Deliverables Checklist</h2>
+    <table>
+      <tr><td>trial-artifact-hero.html</td><td>Hero section (replaces blank top)</td></tr>
+      <tr><td>trial-artifact-feature-cards.html</td><td>6 feature cards (replaces blank cards)</td></tr>
+      <tr><td>trial-artifact-timeline.html</td><td>Animated 14-day timeline (upgrade)</td></tr>
+      <tr><td>trial-artifact-sticky-cta.html</td><td>Floating sticky CTA bar</td></tr>
+      <tr><td>trial-artifact-objection-faq.html</td><td>6-question FAQ accordion</td></tr>
+      <tr><td>trial-artifact-pricing-card.html</td><td>Honest pricing card (no fake anchor)</td></tr>
+      <tr><td>trial-page-audit.html</td><td>Full audit report with scoring</td></tr>
+      <tr><td>trial-page-implementation-guide.html</td><td>This file — step-by-step instructions</td></tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>

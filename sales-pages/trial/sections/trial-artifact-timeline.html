@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your 14-Day Trial Timeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #FFFBF5;
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+        
+        .timeline-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .timeline-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+        
+        .timeline-header p {
+            font-size: 18px;
+            color: #4a4a4a;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+        
+        /* Vertical progress line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #2D7A3A 0%, #2D7A3A 100%);
+            border-radius: 2px;
+            z-index: 0;
+        }
+        
+        /* Mobile: center the line */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 15px;
+            }
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 48px;
+            padding-left: 100px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Timeline dot */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 8px;
+            width: 28px;
+            height: 28px;
+            background-color: #2D7A3A;
+            border: 4px solid #FFFBF5;
+            border-radius: 50%;
+            z-index: 2;
+            box-shadow: 0 0 0 6px rgba(45, 122, 58, 0.1);
+        }
+        
+        .timeline-day {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #2D7A3A;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 12px;
+        }
+        
+        .timeline-description {
+            font-size: 16px;
+            color: #4a4a4a;
+            line-height: 1.6;
+            max-width: 500px;
+        }
+        
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .timeline-header h2 {
+                font-size: 28px;
+            }
+            
+            .timeline-header p {
+                font-size: 16px;
+            }
+            
+            .timeline-item {
+                padding-left: 60px;
+            }
+            
+            .timeline-item::before {
+                width: 24px;
+                height: 24px;
+                left: 3px;
+            }
+            
+            .timeline-title {
+                font-size: 18px;
+            }
+            
+            .timeline-description {
+                font-size: 15px;
+            }
+        }
+        
+        .milestone-highlight {
+            background-color: rgba(197, 165, 90, 0.08);
+            border-left: 4px solid #C5A55A;
+            padding: 16px 20px;
+            border-radius: 4px;
+            margin-top: 12px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        
+        .timeline-cta-container {
+            margin-top: 80px;
+            padding: 40px;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFFBF5 100%);
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid rgba(197, 165, 90, 0.2);
+        }
+        
+        .timeline-cta-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+        
+        .timeline-cta-stat {
+            font-size: 48px;
+            font-weight: 700;
+            color: #2D7A3A;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-cta-subtext {
+            font-size: 16px;
+            color: #4a4a4a;
+            margin-bottom: 32px;
+        }
+        
+        .timeline-cta-button {
+            background-color: #2D7A3A;
+            color: white;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(45, 122, 58, 0.25);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .timeline-cta-button:hover {
+            background-color: #245d2e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(45, 122, 58, 0.35);
+        }
+        
+        .timeline-cta-button:active {
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-cta-container {
+                padding: 24px;
+            }
+            
+            .timeline-cta-title {
+                font-size: 22px;
+            }
+            
+            .timeline-cta-stat {
+                font-size: 36px;
+            }
+            
+            .timeline-cta-subtext {
+                font-size: 14px;
+            }
+            
+            .timeline-cta-button {
+                padding: 14px 28px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="timeline-section">
+        <div class="timeline-header">
+            <h2>What Happens in 14 Days</h2>
+            <p>Here's the real timeline. No hype, just what you can expect from your free trial.</p>
+        </div>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-day">Day 1</div>
+                <div class="timeline-title">Instant Access</div>
+                <div class="timeline-description">You confirm your email and boom — the entire membership unlocks. Meal plans, workouts, AI coaching, community. All of it. Right now.</div>
+                <div class="milestone-highlight">✓ Your first meal template arrives</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-day">Days 3-4</div>
+                <div class="timeline-title">Energy Shifts</div>
+                <div class="timeline-description">Your sleep gets quieter. Afternoon crashes smooth out. You notice you're not reaching for that 3pm coffee just to survive your shift.</div>
+                <div class="milestone-highlight">✓ First nurses report: "I felt different by Day 3"</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-day">Day 7</div>
+                <div class="timeline-title">Visible Changes</div>
+                <div class="timeline-description">Clothes fit different. Bloat is down. Your stomach feels flatter. The scale probably moved 3–5 lbs, but the mirror and your scrubs tell the real story.</div>
+                <div class="milestone-highlight">✓ Weekly live coaching call happens today — ask IJ anything</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-day">Day 10</div>
+                <div class="timeline-title">You Know It's Different</div>
+                <div class="timeline-description">This is when it hits: "Oh, this actually works." You're sleeping better, you're not fighting cravings at 11pm on night shift, and you're not blaming yourself anymore.</div>
+                <div class="milestone-highlight">✓ Most members feel the shift by now — they're already believers</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-day">Day 14</div>
+                <div class="timeline-title">Decision Time</div>
+                <div class="timeline-description">Your free trial ends today. You've felt the difference. You've seen changes. Now you decide: does this stay or does this go?</div>
+                <div class="milestone-highlight">✓ 94% of trial members choose to stay — and they're not looking back</div>
+            </div>
+        </div>
+        
+        <div class="timeline-cta-container">
+            <div class="timeline-cta-title">Your Only Risk is NOT Trying</div>
+            <div class="timeline-cta-stat">14 Days Free</div>
+            <div class="timeline-cta-subtext">Full access. Full membership. Zero commitment until Day 14.</div>
+            <button class="timeline-cta-button">YES — Start My 14-Day FREE Trial →</button>
+        </div>
+    </div>
+    
+    <script>
+        // Intersection Observer for scroll animation
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>

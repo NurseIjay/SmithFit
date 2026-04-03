@@ -1,0 +1,334 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .sf-sticky-cta-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-top: 1px solid #e8e0d0;
+        padding: 1.2rem 2rem;
+        z-index: 1000;
+        display: none;
+        opacity: 0;
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%);
+        -webkit-transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+    }
+
+    .sf-sticky-cta-bar.sf-active {
+        display: -webkit-flex;
+        display: flex;
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    .sf-sticky-cta-content {
+        max-width: 900px;
+        margin: 0 auto;
+        width: 100%;
+        display: -webkit-flex;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    .sf-sticky-cta-text {
+        -webkit-flex: 1;
+        flex: 1;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #2d2d2d;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .sf-sticky-cta-text strong {
+        color: #c9a84c;
+    }
+
+    .sf-sticky-cta-buttons {
+        display: -webkit-flex;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .sf-btn-primary {
+        background-color: #c9a84c;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .sf-btn-primary:hover {
+        background-color: #b39844;
+        -webkit-transform: translateY(-2px);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+    }
+
+    .sf-btn-primary:active {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    .sf-btn-secondary {
+        background-color: transparent;
+        color: #c9a84c;
+        border: 1.5px solid #c9a84c;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .sf-btn-secondary:hover {
+        background-color: #c9a84c;
+        color: white;
+        -webkit-transform: translateY(-2px);
+        transform: translateY(-2px);
+    }
+
+    .sf-btn-secondary:active {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    .sf-btn-dismiss {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #888;
+        cursor: pointer;
+        padding: 0.5rem;
+        -webkit-transition: color 0.3s ease;
+        transition: color 0.3s ease;
+        margin-left: auto;
+    }
+
+    .sf-btn-dismiss:hover {
+        color: #c9a84c;
+    }
+
+    @media (max-width: 768px) {
+        .sf-sticky-cta-bar {
+            padding: 1rem 1.5rem;
+        }
+
+        .sf-sticky-cta-content {
+            -webkit-flex-direction: column;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        .sf-sticky-cta-text {
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .sf-sticky-cta-buttons {
+            -webkit-flex-direction: column;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .sf-btn-primary,
+        .sf-btn-secondary {
+            width: 100%;
+            padding: 1rem;
+        }
+
+        .sf-btn-dismiss {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            margin-left: 0;
+        }
+    }
+</style>
+
+<div class="sf-sticky-cta-bar">
+    <div class="sf-sticky-cta-content">
+        <div class="sf-sticky-cta-text">
+            <span>🔥 Lock in your bundle — Save up to <strong>$216</strong> + unlock <strong>$1,205 in bonuses</strong></span>
+        </div>
+        <div class="sf-sticky-cta-buttons">
+            <button class="sf-btn-primary" data-bundle="12-month">Upgrade to 12-Month — $588</button>
+            <button class="sf-btn-secondary" data-bundle="6-month">6-Month — $335</button>
+        </div>
+        <button class="sf-btn-dismiss">×</button>
+    </div>
+</div>
+
+<script>
+(function() {
+    var stickyBar;
+    var dismissBtn;
+    var primaryBtn;
+    var secondaryBtn;
+    var isDismissed = false;
+    var scrollTimeout;
+
+    try {
+        stickyBar = document.querySelector('.sf-sticky-cta-bar');
+        dismissBtn = document.querySelector('.sf-btn-dismiss');
+        primaryBtn = document.querySelector('.sf-btn-primary');
+        secondaryBtn = document.querySelector('.sf-btn-secondary');
+    } catch(e) {
+        console.error('Element query failed: ' + e.message);
+        return;
+    }
+
+    // Check if element has a specific class string
+    function hasClass(el, className) {
+        if (!el || !el.className) return false;
+        return el.className.indexOf(className) > -1;
+    }
+
+    // Add class to element
+    function addClass(el, className) {
+        if (!el) return;
+        if (el.className.indexOf(className) === -1) {
+            el.className = el.className + ' ' + className;
+        }
+    }
+
+    // Remove class from element
+    function removeClass(el, className) {
+        if (!el) return;
+        el.className = el.className.replace(className, '').trim();
+    }
+
+    // Initialize CTA visibility
+    function initCTA() {
+        try {
+            // Default: bar hidden until scroll
+            removeClass(stickyBar, 'sf-active');
+        } catch(e) {
+            console.error('initCTA failed: ' + e.message);
+        }
+    }
+
+    // Show CTA after scroll (timeout-based trigger)
+    function showCTA() {
+        try {
+            if (!isDismissed && !hasClass(stickyBar, 'sf-active')) {
+                addClass(stickyBar, 'sf-active');
+            }
+        } catch(e) {
+            console.error('showCTA failed: ' + e.message);
+        }
+    }
+
+    // Dismiss CTA
+    function dismissCTA() {
+        try {
+            isDismissed = true;
+            removeClass(stickyBar, 'sf-active');
+        } catch(e) {
+            console.error('dismissCTA failed: ' + e.message);
+        }
+    }
+
+    // Handle button clicks
+    function handleCTA(bundleType) {
+        try {
+            console.log('User clicked: ' + bundleType + ' bundle');
+            // In production, replace with actual purchase URL
+            // window.location.href = '/checkout?bundle=' + bundleType;
+        } catch(e) {
+            console.error('handleCTA failed: ' + e.message);
+        }
+    }
+
+    // Attach event listeners
+    function attachListeners() {
+        try {
+            if (dismissBtn) {
+                dismissBtn.addEventListener('click', function() {
+                    dismissCTA();
+                });
+            }
+
+            if (primaryBtn) {
+                primaryBtn.addEventListener('click', function() {
+                    var bundleType = this.getAttribute('data-bundle');
+                    handleCTA(bundleType);
+                });
+            }
+
+            if (secondaryBtn) {
+                secondaryBtn.addEventListener('click', function() {
+                    var bundleType = this.getAttribute('data-bundle');
+                    handleCTA(bundleType);
+                });
+            }
+        } catch(e) {
+            console.error('attachListeners failed: ' + e.message);
+        }
+    }
+
+    // Trigger CTA on scroll (timeout-based, since IntersectionObserver unreliable in GHL)
+    function setupScrollTrigger() {
+        try {
+            setInterval(function() {
+                if (!isDismissed && window.scrollY > 200) {
+                    showCTA();
+                } else if (window.scrollY <= 200) {
+                    removeClass(stickyBar, 'sf-active');
+                }
+            }, 500);
+        } catch(e) {
+            console.error('setupScrollTrigger failed: ' + e.message);
+        }
+    }
+
+    // Initialize on page load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                initCTA();
+                attachListeners();
+                setupScrollTrigger();
+            } catch(e) {
+                console.error('DOMContentLoaded handler failed: ' + e.message);
+            }
+        });
+    } else {
+        try {
+            initCTA();
+            attachListeners();
+            setupScrollTrigger();
+        } catch(e) {
+            console.error('Immediate init failed: ' + e.message);
+        }
+    }
+})();
+</script>

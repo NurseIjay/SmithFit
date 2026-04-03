@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7-Day Shift-Proof Metabolism Reset™ | SmithFit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    :root { --primary-blue: #1e3a5f; --accent-green: #2d5a3d; } <style>
+        :root {
+            --primary-blue: #1e3a5f;
+            --accent-green: #2d5a3d;
+            --warm-white: #fefefe;
+            --soft-gray: #f8f9fa;
+            --medical-blue: #e3f2fd;
+            --stress-red: #ffebee;
+            --calm-teal: #e0f2f1;
+            --text-dark: #2c3e50;
+            --text-medium: #5a6c7d;
+            --shadow-soft: 0 4px 20px rgba(30, 58, 95, 0.08);
+            --shadow-strong: 0 8px 32px rgba(30, 58, 95, 0.12);
+            --border-radius: 12px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--warm-white) 0%, var(--medical-blue) 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--primary-blue);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary-blue);
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            color: var(--accent-green);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+            color: var(--text-medium);
+            margin: 1rem 0 2rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, var(--accent-green), #4a7c59);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(45, 90, 61, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(30, 58, 95, 0.05) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .social-proof {
+            background: var(--accent-green);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-soft);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent-green), #4a7c59);
+            color: white;
+            border: none;
+            padding: 1.25rem 3rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-soft);
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        /* Video Section */
+        .video-section {
+            background: white;
+            padding: 4rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            margin: 2rem 0;
+            border-radius: var(--border-radius);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+            background: linear-gradient(135deg, var(--primary-blue), #2c4a6b);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder::before {
+            content: '▶';
+            font-size: 4rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.8;
+        }
+
+        /* Problem/Solution Sections */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-alt {
+            background: var(--soft-gray);
+        }
+
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .problem {
+            background: var(--stress-red);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .solution {
+            background: var(--calm-teal);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--accent-green);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+        }
+
+        .testimonial:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .testimonial-quote {
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--accent-green);
+        }
+
+        /* Pricing */
+        .pricing {
+            background: linear-gradient(135deg, var(--primary-blue), #2c4a6b);
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+            border-radius: var(--border-radius);
+            margin: 3rem 0;
+        }
+
+        .price-original {
+            text-decoration: line-through;
+            opacity: 0.7;
+            font-size: 1.5rem;
+        }
+
+        .price-current {
+            font-size: 4rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .guarantee {
+            background: var(--accent-green);
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+
+        /* FAQ */
+        .faq {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin: 1rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: var(--soft-gray);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: var(--medical-blue);
+        }
+
+        .faq-answer {
+            padding: 1.5rem;
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            transition: var(--transition);
+        }
+
+        .animate-on-scroll.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .problem-solution {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero {
+                padding: 2rem 0 4rem;
+            }
+
+            .pricing {
+                padding: 2rem 0;
+            }
+
+            .price-current {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="social-proof">
+                    🔥 437 nurses have started this month
+                </div>
+                <h1>FOR THE NURSE OVER 35 WHO FEELS LIKE SHE'S TRIED EVERYTHING</h1>
+                <p class="hero-subtitle">
+                    If Your Belly Fat Won't Budge After a 12-Hour Shift—<span class="highlight">It's Not Your Discipline.</span><br>
+                    Your Body Is Stuck in Fight-or-Flight.
+                </p>
+                <p class="hero-subtitle">
+                    The only 7-day metabolism reset built by a nurse, for nurses — no macros, no punishing cardio, no perfect schedule required. Works on day shift, night shift, and the weeks where everything falls apart.
+                </p>
+                <a href="#purchase" class="cta-button">
+                    YES — I'M READY TO RESET MY METABOLISM FOR JUST $27 →
+                </a>
+                <p style="margin-top: 1rem; opacity: 0.8;">One-time payment · 60-Day Guarantee · Instant access</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="video-section">
+        <div class="container">
+            <h2>Nurses like you — real results</h2>
+            <p style="margin: 1rem 0 2rem;">Watch this before you scroll — it explains exactly why nothing has worked until now.</p>
+            <div class="video-placeholder">
+                ▶ 2-Minute Breakdown
+            </div>
+            <a href="#purchase" class="cta-button">
+                START MY 7-DAY RESET — JUST $27 →
+            </a>
+            <p style="margin-top: 1rem; opacity: 0.8;">One-time payment of $27 · Instant digital access · 60-Day "Feel The Difference" Guarantee</p>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="container">
+            <div class="problem-solution">
+                <div class="problem">
+                    <h3>The Real Problem</h3>
+                    <p><strong>If You Feel Like You're Failing, It's Not Your Fault.</strong></p>
+                    <p>Let me guess. You're living off coffee and vibes. You do good for like two days, and then your shift schedule ruins everything.</p>
+                    <p>You can go all shift without eating, get home, and suddenly you're in the pantry like a raccoon.</p>
+                    <p>You can go all shift without eating, get home, and suddenly you're in the pantry like a raccoon.</p>
+                    <p><em>"Why am I not losing weight? Why do my scrubs feel so tight?"</em></p>
+                    <p>And it's not just the physical feeling. It's the exhaustion. The feeling of being so tired all the time, but then wide awake at night, your mind racing.</p>
+                </div>
+                <div class="solution">
+                    <h3>The Shift-Proof Way</h3>
+                    <p><strong>✅ Feed your metabolism. Fuel your shifts.</strong></p>
+                    <p><strong>✅ Move strategically — 20 minutes that work WITH your cortisol.</strong></p>
+                    <p><strong>✅ Work WITH your body's signals. Eat more of the right things.</strong></p>
+                    <p><strong>✅ Watch your body FINALLY start responding again — like it did 10 years ago.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Results Everyone Around You Can See</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p class="testimonial-quote">"My husband noticed before I did. My scrubs are looser and I actually have energy after my shift."</p>
+                    <p class="testimonial-author">— Kristal, RN</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-quote">"I stopped punishing myself and the weight finally came off. This program gave me my life back."</p>
+                    <p class="testimonial-author">— Cynthia</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-quote">"I've tried every diet — this is the only thing that worked"</p>
+                    <p class="testimonial-author">— Sarah</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Everything You Get</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 3rem 0;">
+                <div style="text-align: center;">
+                    <h4>Pillar 1 — Diagnose</h4>
+                    <p>Metabolism Stress-Type Quiz + Personalized Plan</p>
+                    <p style="color: var(--accent-green); font-weight: 600;">Value: $75</p>
+                </div>
+                <div style="text-align: center;">
+                    <h4>Pillar 2 — Stabilize</h4>
+                    <p>Protein Anchor System + Meal Templates</p>
+                    <p style="color: var(--accent-green); font-weight: 600;">Value: $87</p>
+                </div>
+                <div style="text-align: center;">
+                    <h4>Pillar 3 — Calm</h4>
+                    <p>Nervous System Reset + Caffeine Rules</p>
+                    <p style="color: var(--accent-green); font-weight: 600;">Value: $87</p>
+                </div>
+                <div style="text-align: center;">
+                    <h4>Pillar 4 — Strengthen</h4>
+                    <p>15-Minute Workouts + Progress Map</p>
+                    <p style="color: var(--accent-green); font-weight: 600;">Value: $107</p>
+                </div>
+                <div style="text-align: center;">
+                    <h4>Pillar 5 — Sustain</h4>
+                    <p>Work/Off/Chaos Templates + Momentum</p>
+                    <p style="color: var(--accent-green); font-weight: 600;">Value: $85</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="purchase">
+        <div class="container">
+            <h2>Today's Special Offer</h2>
+            <p style="margin: 2rem 0;">Get Instant, Lifetime Access To The Complete Shift-Proof System</p>
+            <div style="margin: 3rem 0;">
+                <p class="price-original">Total Value: $679</p>
+                <p class="price-current">$27</p>
+                <p>You save $652 — that's 96% off.</p>
+                <p style="margin-top: 1rem; opacity: 0.9;">One-time payment · Not a subscription · Yours forever</p>
+            </div>
+            <a href="#" class="cta-button" style="font-size: 1.5rem; padding: 1.5rem 4rem;">
+                YES — I'M READY TO RESET MY METABOLISM FOR JUST $27 →
+            </a>
+            <div class="guarantee">
+                <h3>60-Day "Feel The Difference" Guarantee</h3>
+                <p>Go through the Reset — even just 3 days of it. If you don't feel a real, tangible difference in your energy, your cravings, or the way your clothes fit within 60 days — email me once. One email. I will refund every single penny. No forms. No questions. No hoops.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Your Questions, Answered</h2>
+            <div class="faq">
+                <div class="faq-item">
+                    <div class="faq-question">I work 12-hour shifts. When am I supposed to do this?</div>
+                    <div class="faq-answer">This system isn't based on the clock — it's based on your body. The templates are designed for Work Days, Off Days, and Chaos Days, and we teach you how to adapt the principles to your start and end times, whether that's 7 AM or 7 PM. This was built specifically for 12-hour shift life.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">I've tried everything. Why would this be different?</div>
+                    <div class="faq-answer">Because everything you've tried was likely focused on calories and cardio, which adds more stress to an already-stressed body. This is the only system that focuses on calming your body's fight-or-flight response first. We're fixing the root cause, not just patching the symptoms.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What if it doesn't work for me?</div>
+                    <div class="faq-answer">You're covered by our 60-Day "Feel The Difference" Guarantee. Go through the entire 7-Day Reset. If you don't feel a tangible difference in your energy, cravings, or the way your clothes fit within 60 days, simply send one email to our support team and we'll refund every penny. No forms, no questions asked.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: var(--primary-blue); color: white; padding: 3rem 0; text-align: center;">
+        <div class="container">
+            <h3>She's Already Inside You. She's Just Been Waiting for the Right System to Let Her Out.</h3>
+            <p style="margin: 2rem 0; max-width: 600px; margin-left: auto; margin-right: auto;">
+                She walks into her shift without dreading the next 12 hours. She gets dressed in the morning without the weight of what she sees in the mirror. She's in the photos — not hiding behind everyone else. That woman is not a fantasy. She is you — seven days from now.
+            </p>
+            <a href="#purchase" class="cta-button" style="background: var(--accent-green);">
+                YES — I'M READY TO RESET MY METABOLISM FOR JUST $27 →
+            </a>
+            <p style="margin-top: 1rem; opacity: 0.8;">Protected by our 60-Day "Feel The Difference" Guarantee. Zero risk.</p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isOpen = answer.style.display === 'block';
+                document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+                if (!isOpen) {
+                    answer.style.display = 'block';
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add animate-on-scroll class to sections
+        document.querySelectorAll('.section, .testimonial, .faq-item').forEach(el => {
+            el.classList.add('animate-on-scroll');
+            el.classList.add('animate'); // Make visible immediately
+        });
+    </script>
+</body>
+</html>

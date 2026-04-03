@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Comparison - 14-Day Free Trial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #FFF8F0 0%, #f5f1ed 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .pricing-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .pricing-header h2 {
+            font-size: 32px;
+            color: #1a1a2e;
+            margin-bottom: 12px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .pricing-header p {
+            font-size: 16px;
+            color: #4a4a4a;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .pricing-cards-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px 24px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .pricing-card.trial {
+            border-color: #2D7A3A;
+            background: linear-gradient(135deg, #FFF8F0 0%, #fefcf9 100%);
+        }
+
+        .pricing-card.trial::before {
+            content: 'YOUR ADVANTAGE';
+            position: absolute;
+            top: -12px;
+            left: 24px;
+            background: #2D7A3A;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+        .pricing-card.after {
+            border-color: #C5A55A;
+        }
+
+        .pricing-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #4a4a4a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .pricing-title {
+            font-size: 24px;
+            color: #1a1a2e;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .pricing-duration {
+            font-size: 14px;
+            color: #4a4a4a;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .price-block {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid #e8e5e0;
+        }
+
+        .price-amount {
+            font-size: 52px;
+            font-weight: 700;
+            color: #1a1a2e;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .price-currency {
+            font-size: 20px;
+            vertical-align: super;
+        }
+
+        .price-period {
+            font-size: 14px;
+            color: #4a4a4a;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .features-list li {
+            font-size: 15px;
+            color: #4a4a4a;
+            padding: 12px 0;
+            padding-left: 28px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #2D7A3A;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 16px 24px;
+            background: #2D7A3A;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            margin-bottom: 16px;
+        }
+
+        .cta-button:hover {
+            background: #246631;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(45, 122, 58, 0.3);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .reassurance-text {
+            font-size: 12px;
+            color: #4a4a4a;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .reassurance-text strong {
+            color: #2D7A3A;
+            font-weight: 700;
+        }
+
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #e8e5e0;
+        }
+
+        .badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-size: 11px;
+            color: #4a4a4a;
+            font-weight: 600;
+        }
+
+        .badge-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
+        .highlight-box {
+            background: #f9f7f4;
+            border-left: 4px solid #C5A55A;
+            padding: 16px;
+            margin-top: 24px;
+            border-radius: 4px;
+        }
+
+        .highlight-box p {
+            font-size: 14px;
+            color: #4a4a4a;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .highlight-box strong {
+            color: #1a1a2e;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-header h2 {
+                font-size: 24px;
+                margin-bottom: 16px;
+            }
+
+            .pricing-header p {
+                font-size: 14px;
+            }
+
+            .pricing-cards-wrapper {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                margin-bottom: 32px;
+            }
+
+            .pricing-card {
+                padding: 24px 20px;
+            }
+
+            .pricing-card.trial::before {
+                left: 20px;
+                font-size: 10px;
+                padding: 5px 10px;
+            }
+
+            .pricing-title {
+                font-size: 20px;
+            }
+
+            .price-amount {
+                font-size: 40px;
+            }
+
+            .price-currency {
+                font-size: 18px;
+            }
+
+            .features-list li {
+                font-size: 14px;
+                padding: 10px 0;
+                padding-left: 26px;
+            }
+
+            .cta-button {
+                font-size: 15px;
+                padding: 14px 20px;
+            }
+
+            .security-badges {
+                gap: 12px;
+            }
+
+            .badge-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+            }
+
+            .badge {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 24px 16px;
+            }
+
+            .pricing-header h2 {
+                font-size: 20px;
+                margin-bottom: 12px;
+            }
+
+            .pricing-header p {
+                font-size: 13px;
+            }
+
+            .pricing-card {
+                padding: 20px 16px;
+            }
+
+            .pricing-label {
+                font-size: 12px;
+            }
+
+            .pricing-title {
+                font-size: 18px;
+                margin-bottom: 6px;
+            }
+
+            .pricing-duration {
+                font-size: 13px;
+                margin-bottom: 20px;
+            }
+
+            .price-block {
+                margin-bottom: 24px;
+                padding-bottom: 24px;
+            }
+
+            .price-amount {
+                font-size: 36px;
+                margin-bottom: 2px;
+            }
+
+            .price-currency {
+                font-size: 16px;
+            }
+
+            .price-period {
+                font-size: 13px;
+            }
+
+            .features-list {
+                margin-bottom: 24px;
+            }
+
+            .features-list li {
+                font-size: 13px;
+                padding: 9px 0;
+                padding-left: 24px;
+            }
+
+            .features-list li::before {
+                font-size: 16px;
+            }
+
+            .cta-button {
+                font-size: 14px;
+                padding: 13px 18px;
+                margin-bottom: 12px;
+            }
+
+            .reassurance-text {
+                font-size: 11px;
+                margin-bottom: 20px;
+            }
+
+            .highlight-box {
+                padding: 12px;
+                margin-top: 16px;
+            }
+
+            .highlight-box p {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pricing-container">
+        <div class="pricing-header">
+            <h2>No Risk. Full Access. Your Choice.</h2>
+            <p>Start with 14 days free. Experience the full membership. Decide if it's right for you—no strings attached.</p>
+        </div>
+
+        <div class="pricing-cards-wrapper">
+            <!-- Free Trial Card -->
+            <div class="pricing-card trial">
+                <span class="pricing-label">Right Now</span>
+                <h3 class="pricing-title">Your Free Trial</h3>
+                <p class="pricing-duration">14 days of full access</p>
+
+                <div class="price-block">
+                    <div class="price-amount"><span class="price-currency">$</span>0</div>
+                    <p class="price-period">No credit card required*</p>
+                </div>
+
+                <ul class="features-list">
+                    <li>Complete shift-proof meal plans (Work Day, Off Day, Chaos Day)</li>
+                    <li>1,000+ recipe database with meal builder</li>
+                    <li>15-minute cortisol-conscious workouts (all levels)</li>
+                    <li>Weekly FitMetrics AI check-ins</li>
+                    <li>1 live group coaching call with IJ</li>
+                    <li>SmithFit FAM community access</li>
+                </ul>
+
+                <button class="cta-button">Start Your Free Trial</button>
+                <p class="reassurance-text">*Card required to hold your spot. <strong>No charge for 14 days.</strong> Cancel anytime.</p>
+
+                <div class="security-badges">
+                    <div class="badge">
+                        <div class="badge-icon">🔒</div>
+                        Secure
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">⚡</div>
+                        Instant Access
+                    </div>
+                </div>
+            </div>
+
+            <!-- After Day 14 Card -->
+            <div class="pricing-card after">
+                <span class="pricing-label">After Day 14</span>
+                <h3 class="pricing-title">Membership</h3>
+                <p class="pricing-duration">Keep everything you love</p>
+
+                <div class="price-block">
+                    <div class="price-amount"><span class="price-currency">$</span>67<span class="price-period" style="display: inline; font-size: 16px; margin-left: 4px;">/month</span></div>
+                    <p class="price-period">Billed monthly. Cancel anytime.</p>
+                </div>
+
+                <ul class="features-list">
+                    <li>Everything in the free trial</li>
+                    <li>Continuous shift-proof meal plan updates</li>
+                    <li>Ongoing FitMetrics AI coaching</li>
+                    <li>Weekly live group calls with IJ</li>
+                    <li>Growing SmithFit FAM community</li>
+                    <li>Chaos-Day Rescue Plans</li>
+                </ul>
+
+                <div style="opacity: 0; pointer-events: none; height: 0; margin: 0; padding: 0;">
+                    <button class="cta-button" disabled>Placeholder</button>
+                </div>
+
+                <p class="reassurance-text">Don't love it? <strong>One click to cancel.</strong> No questions asked.</p>
+
+                <div class="highlight-box">
+                    <p><strong>💡 Here's what most nurses discover:</strong> By Day 7, you'll feel the shift-proof difference. By Day 30, you won't want to go back.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trust Section -->
+        <div style="text-align: center; margin-top: 48px;">
+            <div class="security-badges" style="flex-wrap: wrap; justify-content: center;">
+                <div class="badge">
+                    <div class="badge-icon">✓</div>
+                    60-Day Money-Back Guarantee
+                </div>
+                <div class="badge">
+                    <div class="badge-icon">🛡️</div>
+                    SSL Encrypted & Secure
+                </div>
+                <div class="badge">
+                    <div class="badge-icon">👥</div>
+                    400+ Nurses Transformed
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

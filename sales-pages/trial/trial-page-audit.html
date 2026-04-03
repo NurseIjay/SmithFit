@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmithFit — 14-Day Free Trial Downsell Page Audit</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f1a; color: #e0e0e0; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+h1 { font-size: 2rem; color: #fff; margin-bottom: 8px; }
+.subtitle { color: #C5A55A; font-size: 1.1rem; margin-bottom: 32px; }
+.score-bar { display: flex; align-items: center; gap: 24px; background: #1a1a2e; border-radius: 16px; padding: 24px 32px; margin-bottom: 40px; }
+.score-current { text-align: center; }
+.score-current .number { font-size: 3rem; font-weight: 800; color: #e74c3c; }
+.score-current .label { font-size: 0.8rem; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+.arrow { font-size: 2rem; color: #C5A55A; }
+.score-projected { text-align: center; }
+.score-projected .number { font-size: 3rem; font-weight: 800; color: #2ecc71; }
+.score-projected .label { font-size: 0.8rem; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+.score-breakdown { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-left: 24px; }
+.metric { display: flex; justify-content: space-between; align-items: center; padding: 6px 12px; background: #12122a; border-radius: 8px; font-size: 0.85rem; }
+.metric .name { color: #aaa; }
+.metric .val { font-weight: 700; }
+.metric .val.red { color: #e74c3c; }
+.metric .val.yellow { color: #f39c12; }
+.metric .val.green { color: #2ecc71; }
+
+h2 { font-size: 1.4rem; color: #C5A55A; margin: 40px 0 16px; border-bottom: 1px solid #2a2a3e; padding-bottom: 8px; }
+.issue { background: #1a1a2e; border-radius: 12px; padding: 20px 24px; margin-bottom: 16px; border-left: 4px solid #e74c3c; }
+.issue.warning { border-left-color: #f39c12; }
+.issue.good { border-left-color: #2ecc71; }
+.issue .tag { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; }
+.issue .tag.critical { background: #e74c3c22; color: #e74c3c; }
+.issue .tag.moderate { background: #f39c1222; color: #f39c12; }
+.issue .tag.strength { background: #2ecc7122; color: #2ecc71; }
+.issue h3 { font-size: 1.05rem; color: #fff; margin-bottom: 6px; }
+.issue p { color: #bbb; font-size: 0.9rem; }
+.issue .fix { color: #C5A55A; font-weight: 600; margin-top: 8px; font-size: 0.9rem; }
+
+.artifacts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.artifact-card { background: #12122a; border: 1px solid #2a2a3e; border-radius: 12px; padding: 20px; transition: border-color 0.2s; }
+.artifact-card:hover { border-color: #C5A55A; }
+.artifact-card .filename { font-family: monospace; color: #C5A55A; font-size: 0.85rem; margin-bottom: 6px; }
+.artifact-card .desc { color: #bbb; font-size: 0.9rem; }
+.artifact-card .fixes { color: #2ecc71; font-size: 0.8rem; margin-top: 8px; }
+
+.page-map { background: #1a1a2e; border-radius: 12px; padding: 24px; margin-top: 16px; }
+.section-row { display: flex; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid #2a2a3e; }
+.section-row:last-child { border-bottom: none; }
+.section-num { width: 32px; height: 32px; background: #C5A55A22; color: #C5A55A; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
+.section-name { flex: 1; color: #fff; font-weight: 600; font-size: 0.9rem; }
+.section-status { font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; font-weight: 600; }
+.section-status.broken { background: #e74c3c22; color: #e74c3c; }
+.section-status.needs-fix { background: #f39c1222; color: #f39c12; }
+.section-status.ok { background: #2ecc7122; color: #2ecc71; }
+.section-status.replace { background: #9b59b622; color: #9b59b6; }
+
+footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid #2a2a3e; text-align: center; color: #666; font-size: 0.8rem; }
+
+@media (max-width: 768px) {
+  .score-bar { flex-direction: column; text-align: center; }
+  .score-breakdown { margin-left: 0; grid-template-columns: 1fr; }
+  .artifacts { grid-template-columns: 1fr; }
+  .arrow { transform: rotate(90deg); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>14-Day Free Trial Downsell — Page Audit</h1>
+  <p class="subtitle">SmithFit Funnel Page 4 of 4 &bull; Audited March 29, 2026</p>
+
+  <div class="score-bar">
+    <div class="score-current">
+      <div class="number">5.2</div>
+      <div class="label">Current</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="score-projected">
+      <div class="number">9.0</div>
+      <div class="label">Projected</div>
+    </div>
+    <div class="score-breakdown">
+      <div class="metric"><span class="name">Copy Quality</span><span class="val green">7/10</span></div>
+      <div class="metric"><span class="name">Visual Design</span><span class="val red">3/10</span></div>
+      <div class="metric"><span class="name">Social Proof</span><span class="val yellow">5/10</span></div>
+      <div class="metric"><span class="name">CTA Strategy</span><span class="val yellow">5/10</span></div>
+      <div class="metric"><span class="name">Trust Elements</span><span class="val red">4/10</span></div>
+      <div class="metric"><span class="name">Objection Handling</span><span class="val yellow">6/10</span></div>
+    </div>
+  </div>
+
+  <h2>Critical Issues (9)</h2>
+
+  <div class="issue">
+    <span class="tag critical">CRITICAL</span>
+    <h3>1. Massive blank hero — nothing above the fold</h3>
+    <p>The entire top of the page is empty pink/cream space. Visitors see zero content for the first full viewport scroll. No headline, no hook, no image. Immediate bounce risk.</p>
+    <p class="fix">FIX → Replace with trial-artifact-hero.html</p>
+  </div>
+
+  <div class="issue">
+    <span class="tag critical">CRITICAL</span>
+    <h3>2. Broken video embed</h3>
+    <p>"No compatible source was found for this media." Black rectangle in prime real estate. Same issue as the bundle page — video file source is missing or incompatible.</p>
+    <p class="fix">FIX → Upload working video to GHL media library or replace with Loom embed. If no video exists yet, remove the section entirely.</p>
+  </div>
+
+  <div class="issue">
+    <span class="tag critical">CRITICAL</span>
+    <h3>3. Six completely blank feature cards</h3>
+    <p>The "Full Access — Not a Trial Version" section renders 6 empty white cards. HTML contains the text (Membership Portal, Meal Plans, Workouts, etc.) but it's invisible — likely white text on white, or missing icon images pulling the layout.</p>
+    <p class="fix">FIX → Replace with trial-artifact-feature-cards.html (uses emoji icons, no external images)</p>
+  </div>
+
+  <div class="issue">
+    <span class="tag critical">CRITICAL</span>
+    <h3>4. Footer links point to staging URLs</h3>
+    <p>Privacy Policy, Terms of Service, and Contact all link to predeploy-001706ff-nurseshift...manus.space. Anyone who checks these sees a random staging domain. Trust killer.</p>
+    <p class="fix">FIX → Update all footer links to real SmithFit URLs</p>
+  </div>
+
+  <div class="issue">
+    <span class="tag critical">CRITICAL</span>
+    <h3>5. "No thanks" exit link goes to staging URL</h3>
+    <p>The decline link at page bottom links to shiftreset-d2gwd5xd.manus.space instead of a real page. Dead end for anyone who clicks.</p>
+    <p class="fix">FIX → Point to either the $27 course page or a "are you sure?" interstitial</p>
+  </div>
+
+  <div class="issue">
+    <span class="tag critical">CRITICAL</span>
+    <h3>6. $349/mo fake anchor price</h3>
+    <p>Pricing table shows ~~$349/mo~~ crossed out next to $67/mo. No $349 tier exists anywhere in the SmithFit offer stack. Savvy buyers see through this instantly — it damages credibility.</p>
+    <p class="fix">FIX → Replace with trial-artifact-pricing-card.html (honest pricing, no fake anchor)</p>
+  </div>
+
+  <div class="issue">
+    <span class="tag critical">CRITICAL</span>
+    <h3>7. Closing photo is male transformation (avatar mismatch)</h3>
+    <p>Page speaks entirely to female nurses (Sarah K., Regina M., Amanda R.) but the final trust section shows a male shirtless before/after. Same issue fixed on membership and bundle pages.</p>
+    <p class="fix">FIX → Replace with a photo of IJ in scrubs or coaching context (not shirtless transformation)</p>
+  </div>
+
+  <div class="issue warning">
+    <span class="tag moderate">MODERATE</span>
+    <h3>8. No sticky CTA</h3>
+    <p>Long-scroll page with 3 CTA buttons but no persistent floating bar. Visitors ready to convert mid-page must scroll to find a button.</p>
+    <p class="fix">FIX → Add trial-artifact-sticky-cta.html</p>
+  </div>
+
+  <div class="issue warning">
+    <span class="tag moderate">MODERATE</span>
+    <h3>9. Cancel steps barely visible</h3>
+    <p>"Canceling Is Simple" section lists 3 steps but the text is nearly invisible — same white-on-light CSS issue as the feature cards. The content is there in HTML but users can't read it.</p>
+    <p class="fix">FIX → Rebuild in trial-artifact-objection-faq.html (FAQ #6 covers cancel process clearly)</p>
+  </div>
+
+  <h2>What's Working (Keep)</h2>
+
+  <div class="issue good">
+    <span class="tag strength">STRENGTH</span>
+    <h3>Empathy opening copy</h3>
+    <p>"Hey. I Get It." — the opening letter reads like a real person talking to someone who's been burned. Validates the prospect's skepticism before asking for anything. Keep this tone.</p>
+  </div>
+
+  <div class="issue good">
+    <span class="tag strength">STRENGTH</span>
+    <h3>14-Day Timeline concept</h3>
+    <p>Day 1 → Day 14 milestone progression makes the trial feel like a journey, not just a free period. Each step builds anticipation. The 94% retention stat at Day 14 is a strong close.</p>
+  </div>
+
+  <div class="issue good">
+    <span class="tag strength">STRENGTH</span>
+    <h3>Credit card objection handling</h3>
+    <p>Addressing "Why do I need a credit card?" head-on with honest commitment psychology framing is above average for downsell pages.</p>
+  </div>
+
+  <div class="issue good">
+    <span class="tag strength">STRENGTH</span>
+    <h3>"You Have a Simple Choice" comparison</h3>
+    <p>Two-column Leave vs. Start format at the bottom is solid closing psychology. Clear contrast between inaction and action.</p>
+  </div>
+
+  <h2>Page Section Map</h2>
+  <div class="page-map">
+    <div class="section-row"><div class="section-num">1</div><div class="section-name">Hero / Above the Fold</div><span class="section-status broken">BLANK</span></div>
+    <div class="section-row"><div class="section-num">2</div><div class="section-name">"A Personal Note" — empathy copy</div><span class="section-status ok">KEEP</span></div>
+    <div class="section-row"><div class="section-num">3</div><div class="section-name">"So Let's Do This Differently" — CTA card</div><span class="section-status ok">KEEP</span></div>
+    <div class="section-row"><div class="section-num">4</div><div class="section-name">Testimonial banner (Sarah K.)</div><span class="section-status needs-fix">CHECK PHOTO</span></div>
+    <div class="section-row"><div class="section-num">5</div><div class="section-name">Video embed</div><span class="section-status broken">BROKEN</span></div>
+    <div class="section-row"><div class="section-num">6</div><div class="section-name">14-Day Timeline</div><span class="section-status replace">UPGRADE</span></div>
+    <div class="section-row"><div class="section-num">7</div><div class="section-name">Testimonial (Regina M.)</div><span class="section-status ok">KEEP</span></div>
+    <div class="section-row"><div class="section-num">8</div><div class="section-name">Amanda R. story block</div><span class="section-status ok">KEEP</span></div>
+    <div class="section-row"><div class="section-num">9</div><div class="section-name">"Full Access" feature cards (6)</div><span class="section-status broken">BLANK</span></div>
+    <div class="section-row"><div class="section-num">10</div><div class="section-name">Credit card FAQ</div><span class="section-status replace">EXPAND</span></div>
+    <div class="section-row"><div class="section-num">11</div><div class="section-name">"Canceling Is Simple"</div><span class="section-status broken">INVISIBLE</span></div>
+    <div class="section-row"><div class="section-num">12</div><div class="section-name">94% conversion stat</div><span class="section-status ok">KEEP</span></div>
+    <div class="section-row"><div class="section-num">13</div><div class="section-name">Pricing table</div><span class="section-status replace">REPLACE</span></div>
+    <div class="section-row"><div class="section-num">14</div><div class="section-name">"You Have a Simple Choice" comparison</div><span class="section-status ok">KEEP</span></div>
+    <div class="section-row"><div class="section-num">15</div><div class="section-name">Closing sign-off + CTA</div><span class="section-status needs-fix">FIX PHOTO</span></div>
+    <div class="section-row"><div class="section-num">16</div><div class="section-name">Footer</div><span class="section-status broken">BAD LINKS</span></div>
+  </div>
+
+  <h2>Artifacts Built (6 files)</h2>
+  <div class="artifacts">
+    <div class="artifact-card">
+      <div class="filename">trial-artifact-hero.html</div>
+      <div class="desc">Proper hero section with headline, subhead, and CTA</div>
+      <div class="fixes">Fixes: #1 (blank hero)</div>
+    </div>
+    <div class="artifact-card">
+      <div class="filename">trial-artifact-feature-cards.html</div>
+      <div class="desc">6 visible feature cards with emoji icons and descriptions</div>
+      <div class="fixes">Fixes: #3 (blank cards)</div>
+    </div>
+    <div class="artifact-card">
+      <div class="filename">trial-artifact-timeline.html</div>
+      <div class="desc">Animated 14-day timeline with scroll animations</div>
+      <div class="fixes">Upgrades: Section 6 (timeline)</div>
+    </div>
+    <div class="artifact-card">
+      <div class="filename">trial-artifact-sticky-cta.html</div>
+      <div class="desc">Floating bottom CTA bar with dismiss</div>
+      <div class="fixes">Fixes: #8 (no sticky CTA)</div>
+    </div>
+    <div class="artifact-card">
+      <div class="filename">trial-artifact-objection-faq.html</div>
+      <div class="desc">6-question accordion FAQ covering all trial objections</div>
+      <div class="fixes">Fixes: #9 (invisible cancel steps) + expands FAQ</div>
+    </div>
+    <div class="artifact-card">
+      <div class="filename">trial-artifact-pricing-card.html</div>
+      <div class="desc">Honest pricing comparison (no fake anchor)</div>
+      <div class="fixes">Fixes: #6 ($349 fake price)</div>
+    </div>
+  </div>
+
+  <footer>
+    SmithFit Sales Page Optimization &bull; Page 4 of 4 &bull; Audit by Claude &bull; March 29, 2026
+  </footer>
+</div>
+</body>
+</html>

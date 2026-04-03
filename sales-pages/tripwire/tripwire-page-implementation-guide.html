@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmithFit $27 Tripwire — Implementation Guide (Revised)</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',system-ui,sans-serif; background:#faf6ef; color:#2d2d2d; line-height:1.6; }
+.header { background:linear-gradient(135deg,#c9a84c 0%,#a88a3d 100%); color:#fff; padding:32px; text-align:center; }
+.header h1 { font-family:'Playfair Display',serif; font-size:28px; margin-bottom:6px; }
+.header p { font-size:14px; opacity:.9; }
+.container { max-width:800px; margin:0 auto; padding:32px 24px; }
+h2 { font-family:'Playfair Display',serif; font-size:22px; margin:36px 0 14px; color:#2d2d2d; padding-bottom:8px; border-bottom:2px solid #c9a84c; }
+h3 { font-size:16px; margin:20px 0 8px; color:#2d2d2d; }
+p { font-size:14px; color:#555; margin-bottom:12px; line-height:1.7; }
+.step { background:#fff; border-radius:10px; padding:24px; margin:16px 0; box-shadow:0 2px 10px rgba(0,0,0,.06); border-left:4px solid #c9a84c; }
+.step-num { font-size:12px; font-weight:700; color:#c9a84c; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px; }
+.step h3 { margin-top:0; font-size:17px; }
+.step p { margin-bottom:8px; }
+code { background:#f5f1e8; padding:2px 8px; border-radius:4px; font-size:13px; font-family:'SF Mono',monospace; color:#854d0e; }
+.file-ref { background:#f0fdf4; border-left:3px solid #4cd964; padding:12px 16px; border-radius:0 6px 6px 0; margin:10px 0; font-size:13px; }
+.file-ref strong { color:#15803d; }
+.warning { background:#fef2f2; border-left:3px solid #ff4444; padding:12px 16px; border-radius:0 6px 6px 0; margin:10px 0; font-size:13px; color:#7d1111; }
+.tip { background:#eff6ff; border-left:3px solid #3b82f6; padding:12px 16px; border-radius:0 6px 6px 0; margin:10px 0; font-size:13px; color:#1e40af; }
+.revision-banner { background:linear-gradient(135deg,#1e3a5f,#2c5282); color:#fff; padding:18px 22px; border-radius:10px; margin-bottom:24px; font-size:14px; line-height:1.6; }
+.revision-banner strong { color:#a3e635; }
+.checklist { list-style:none; padding:0; }
+.checklist li { padding:8px 0; border-bottom:1px solid #f0f0f0; font-size:14px; display:flex; align-items:flex-start; gap:8px; }
+.checklist li::before { content:'☐'; font-size:16px; flex-shrink:0; }
+.summary-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:14px; }
+.summary-table th { text-align:left; padding:10px; color:#999; font-size:12px; text-transform:uppercase; letter-spacing:1px; border-bottom:2px solid #e8e8e8; }
+.summary-table td { padding:10px; border-bottom:1px solid #f0f0f0; }
+.time-est { font-size:12px; color:#15803d; font-weight:600; }
+.footer { text-align:center; padding:40px 20px; color:#999; font-size:12px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Implementation Guide (Revised)</h1>
+  <p>$27 Tripwire — 6 Technical Fixes &bull; ~30-45 Minutes Total</p>
+</div>
+
+<div class="container">
+
+<!-- REVISION NOTICE -->
+<div class="revision-banner">
+  <strong>🔄 Revised March 29, 2026:</strong> The original guide offered two options — full page replacement or patching components. After a thorough re-review of the live page, the live page is <strong>significantly more content-rich</strong> than the previously built optimized replacement (55 testimonial cards, 8 B&A stories, complete FAQ, guarantee, 5-pillar breakdown, bonuses, Future Fork close). <strong>The recommended approach is now: patch 6 technical fixes onto the live page.</strong> Do NOT replace the live page wholesale — it has more content and proof than the replacement.
+</div>
+
+<!-- OVERVIEW -->
+<h2>Overview</h2>
+<p>Your live tripwire page scores <strong>7.8/10</strong> — the content, copy, and proof are exceptional. The 6 issues below are all technical bugs or missing enhancements, not structural problems. Fixing them projects a score of <strong>9.1/10</strong>.</p>
+
+<table class="summary-table">
+  <thead><tr><th>#</th><th>Fix</th><th>Time</th><th>Impact</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Fix page title</td><td class="time-est">2 min</td><td>Trust + SEO (Critical)</td></tr>
+    <tr><td>2</td><td>Replace animated counters</td><td class="time-est">10 min</td><td>Proof credibility (Critical)</td></tr>
+    <tr><td>3</td><td>Remove duplicate Identity Mirrors section</td><td class="time-est">5 min</td><td>Page professionalism (High)</td></tr>
+    <tr><td>4</td><td>Fix footer links</td><td class="time-est">5 min</td><td>Trust + legal (High)</td></tr>
+    <tr><td>5</td><td>Remove blank space at top</td><td class="time-est">5 min</td><td>First impression (Medium)</td></tr>
+    <tr><td>6</td><td>Add sticky CTA bar</td><td class="time-est">5 min</td><td>Conversion capture (Enhancement)</td></tr>
+  </tbody>
+</table>
+
+<!-- FIX 1 -->
+<h2>Fix 1: Page Title (2 min)</h2>
+
+<div class="step">
+  <div class="step-num">Critical Fix</div>
+  <h3>Change "Cortisol Cycle Diagram" to a real page title</h3>
+  <p>Go to GHL → Funnels → find <code>get-access-page-5760-6913</code> → click the gear icon → Page Settings → SEO Meta Data.</p>
+  <ul style="padding-left:20px; font-size:14px; color:#555; margin:8px 0;">
+    <li style="margin-bottom:6px;">Page Title: <code>SmithFit | 7-Day Shift-Proof Metabolism Reset for Nurses Over 35</code></li>
+    <li style="margin-bottom:6px;">Meta Description: <code>The only metabolism reset built by a nurse, for nurses. No macros, no punishing cardio. Feel the shift by Day 3. $27 one-time.</code></li>
+    <li>Favicon: Upload SmithFit logo if not already set</li>
+  </ul>
+  <div class="warning"><strong>Why this matters:</strong> "Cortisol Cycle Diagram" in the browser tab makes the page look unfinished or like a draft. Anyone who bookmarks or shares this page sees that title. It also hurts SEO for "nurse metabolism reset" searches.</div>
+</div>
+
+<!-- FIX 2 -->
+<h2>Fix 2: Animated Counters (10 min)</h2>
+
+<div class="step">
+  <div class="step-num">Critical Fix</div>
+  <h3>Replace broken animated counters with static proof numbers</h3>
+  <p>The animated counters (400+, 87%, 5 lbs, 60-Day) use JavaScript animation that renders incorrectly on some browsers, showing "-3+", "-1%", "-0 lbs" etc. The fix is to replace them with static HTML numbers that always render correctly.</p>
+
+  <p><strong>Step 1:</strong> In the GHL Funnels editor, find the "Join Over 400+ Nurses" section with the animated counters.</p>
+  <p><strong>Step 2:</strong> Delete the existing counter section (or hide it).</p>
+  <p><strong>Step 3:</strong> Add a new Custom Code element in the same position. Paste <strong>only Section A</strong> (the static proof bar) from the file below:</p>
+
+  <div class="file-ref"><strong>File:</strong> <code>tripwire-artifact-proof.html</code> — Copy the code from <code>&lt;!-- SECTION A: STATIC PROOF BAR --&gt;</code> through the closing <code>&lt;/section&gt;</code> tag. Do NOT include Section B (the B&A gallery) — your live page already has far better proof galleries.</div>
+
+  <div class="warning"><strong>Important:</strong> Make sure to disable or delete the original animated counter JavaScript. Even with static numbers in place, the old script may still run and override them.</div>
+
+  <div class="tip"><strong>The static numbers are:</strong> 400+ (Nurses Transformed) · 87% (Feel a Difference by Day 3) · ~5 lbs (Lost in Week 1) · 60-Day (Money-Back Guarantee)</div>
+</div>
+
+<!-- FIX 3 -->
+<h2>Fix 3: Remove Duplicate Section (5 min)</h2>
+
+<div class="step">
+  <div class="step-num">High Priority</div>
+  <h3>Delete the duplicate Identity Mirrors carousel</h3>
+  <p>The "Identity Mirrors" section (8 detailed before/after stories — Hanna, Regina, Sarah, Shellie, Crystal, Cynthia, Branda, Nixie) appears to render <strong>twice</strong> on the page. This means the same 8 stories show up back-to-back, doubling the page length in that area.</p>
+  <p><strong>In GHL Funnels editor:</strong> Look for two identical carousel/section blocks containing these 8 stories. Delete one of them — keep whichever one renders correctly with the video buttons and before/after layout intact.</p>
+  <div class="tip"><strong>How to spot it:</strong> Scroll through the page in the GHL editor. You'll see two blocks with identical content (Hanna: "No More Bloating & Puffiness", Regina: "Freedom from Food Obsession", etc.). Delete the second one.</div>
+</div>
+
+<!-- FIX 4 -->
+<h2>Fix 4: Footer Links (5 min)</h2>
+
+<div class="step">
+  <div class="step-num">High Priority</div>
+  <h3>Update footer links from staging URL to live domain</h3>
+  <p>The footer currently links to <code>predeploy-4a902395-shiftreset-...manus.space</code> — this is a development/staging URL that shouldn't be on the live page.</p>
+  <p><strong>In GHL Funnels editor:</strong> Find the footer section and update all 4 links:</p>
+  <ul style="padding-left:20px; font-size:14px; color:#555; margin:8px 0;">
+    <li style="margin-bottom:6px;">Privacy Policy → <code>https://smithfit.online/privacy-policy</code></li>
+    <li style="margin-bottom:6px;">Terms of Service → <code>https://smithfit.online/terms-of-service</code></li>
+    <li style="margin-bottom:6px;">Contact Support → <code>https://smithfit.online/contact</code></li>
+    <li>Refund Policy → <code>https://smithfit.online/refund-policy</code></li>
+  </ul>
+  <div class="warning"><strong>Note:</strong> If these policy pages don't exist yet on smithfit.online, create them in GHL as simple pages. At minimum, you need a Privacy Policy and Terms of Service for legal compliance.</div>
+</div>
+
+<!-- FIX 5 -->
+<h2>Fix 5: Blank Space at Top (5 min)</h2>
+
+<div class="step">
+  <div class="step-num">Medium Priority</div>
+  <h3>Remove dead space above the hero</h3>
+  <p>There's blank space at the very top of the page before the hero content loads. This is likely an empty GHL section or excessive top padding.</p>
+  <p><strong>In GHL Funnels editor:</strong> Check for empty rows or sections above the hero. Delete any empty elements. If it's padding-related, select the topmost section → Settings → reduce top padding/margin to 0.</p>
+</div>
+
+<!-- FIX 6 -->
+<h2>Fix 6: Add Sticky CTA Bar (5 min)</h2>
+
+<div class="step">
+  <div class="step-num">Enhancement</div>
+  <h3>Add a floating bottom CTA bar</h3>
+  <p>Your page is extremely long (55+ testimonials, 8 B&A stories, 5 pillars, bonuses, FAQ, guarantee, Future Fork). A prospect who's ready to buy mid-scroll shouldn't have to hunt for a CTA button.</p>
+
+  <p><strong>Step 1:</strong> In GHL Funnels editor, add a Custom Code element at the very bottom of the page (after the footer).</p>
+  <p><strong>Step 2:</strong> Paste the contents of <code>tripwire-artifact-sticky-cta.html</code>.</p>
+  <p><strong>Step 3:</strong> Skip the demo spacer div (the <code>&lt;div style="height:120vh..."&gt;</code> element). Only paste the sticky bar HTML + JavaScript.</p>
+  <p><strong>Step 4:</strong> Update the CTA link (<code>href="#pricing"</code>) to your actual GHL checkout URL.</p>
+
+  <div class="file-ref"><strong>File:</strong> <code>tripwire-artifact-sticky-cta.html</code> — Fixed bottom bar showing $27 price, $679 strikethrough, guarantee reminder, and "Start the 7-Day Reset" CTA. Appears after 600px scroll.</div>
+</div>
+
+<!-- TESTING CHECKLIST -->
+<h2>Post-Fix Testing Checklist</h2>
+<ul class="checklist">
+  <li>Browser tab shows correct title (not "Cortisol Cycle Diagram")</li>
+  <li>Proof numbers show static 400+, 87%, ~5 lbs, 60-Day (no animation bugs)</li>
+  <li>Identity Mirrors section appears only once (not duplicated)</li>
+  <li>Footer links go to smithfit.online pages (not staging URL)</li>
+  <li>No blank space above hero section</li>
+  <li>Sticky CTA appears when scrolling past 600px</li>
+  <li>All CTA buttons link to correct checkout URL</li>
+  <li>Test on mobile (iOS Safari + Android Chrome)</li>
+  <li>Test on Instagram in-app browser (primary traffic source)</li>
+  <li>Verify GHL purchase tag fires on checkout</li>
+  <li>Confirm upsell redirect works after $27 purchase</li>
+  <li>Monitor conversion rate for 48 hours vs. previous performance</li>
+</ul>
+
+<!-- FILE MANIFEST -->
+<h2>File Manifest</h2>
+<table class="summary-table">
+  <thead><tr><th>File</th><th>Type</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td><code>tripwire-page-audit.html</code></td><td>Audit Report</td><td>Full Hormozi comparison audit (revised — 7.8 → 9.1)</td></tr>
+    <tr><td><code>tripwire-artifact-proof.html</code></td><td>Component</td><td><strong>USE Section A ONLY</strong> — static proof bar to replace broken counters</td></tr>
+    <tr><td><code>tripwire-artifact-sticky-cta.html</code></td><td>Component</td><td><strong>USE</strong> — floating bottom CTA bar</td></tr>
+    <tr><td><code>tripwire-artifact-faq.html</code></td><td>Component</td><td>Optional backup — only if GHL FAQ has toggle issues</td></tr>
+    <tr><td><code>tripwire-artifact-guarantee.html</code></td><td>Component</td><td>Not needed — live page has excellent guarantee</td></tr>
+    <tr><td><code>tripwire-artifact-bonus-stack.html</code></td><td>Component</td><td>Not needed — live page has complete bonus section</td></tr>
+    <tr><td><code>tripwire-page-optimized.html</code></td><td>Full Page</td><td>Not recommended — live page has more content</td></tr>
+    <tr><td><code>tripwire-page-implementation-guide.html</code></td><td>Guide</td><td>This file — revised deployment instructions</td></tr>
+  </tbody>
+</table>
+
+<div class="footer">
+  SmithFit Implementation Guide &bull; $27 Tripwire Optimization &bull; Revised March 29, 2026<br>
+  6 technical fixes &bull; ~30-45 minutes &bull; 7.8 → 9.1
+</div>
+
+</div>
+</body>
+</html>

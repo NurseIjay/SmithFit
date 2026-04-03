@@ -1,0 +1,418 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.sf-science-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 40px 20px;
+  font-family: 'Inter', sans-serif;
+  color: #2d2d2d;
+}
+
+.sf-science-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.sf-science-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #2d2d2d;
+  margin-bottom: 12px;
+}
+
+.sf-science-header p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.sf-science-timeline {
+  position: relative;
+  padding: 0 20px;
+}
+
+.sf-science-timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #c9a84c, #faf6ef);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.sf-science-phase {
+  margin-bottom: 50px;
+  padding-left: 60px;
+  position: relative;
+  opacity: 0;
+  -webkit-transform: translateY(20px);
+  transform: translateY(20px);
+  -webkit-transition: opacity 0.6s ease, -webkit-transform 0.6s ease;
+  transition: opacity 0.6s ease, -webkit-transform 0.6s ease, transform 0.6s ease;
+}
+
+.sf-science-phase.visible {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.sf-science-dot {
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  width: 24px;
+  height: 24px;
+  background: #c9a84c;
+  border: 3px solid #faf6ef;
+  border-radius: 50%;
+  z-index: 2;
+  -webkit-animation: sf-science-pulse 2s infinite;
+  animation: sf-science-pulse 2s infinite;
+  -webkit-box-shadow: 0 0 0 rgba(201, 168, 76, 0.4);
+  box-shadow: 0 0 0 rgba(201, 168, 76, 0.4);
+}
+
+@-webkit-keyframes sf-science-pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.7);
+    box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.7);
+  }
+  70% {
+    -webkit-box-shadow: 0 0 0 10px rgba(201, 168, 76, 0);
+    box-shadow: 0 0 0 10px rgba(201, 168, 76, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgba(201, 168, 76, 0);
+    box-shadow: 0 0 0 0 rgba(201, 168, 76, 0);
+  }
+}
+
+@keyframes sf-science-pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.7);
+    box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.7);
+  }
+  70% {
+    -webkit-box-shadow: 0 0 0 10px rgba(201, 168, 76, 0);
+    box-shadow: 0 0 0 10px rgba(201, 168, 76, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgba(201, 168, 76, 0);
+    box-shadow: 0 0 0 0 rgba(201, 168, 76, 0);
+  }
+}
+
+.sf-science-phase h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin-bottom: 16px;
+}
+
+.sf-science-phase-label {
+  display: inline-block;
+  background: #c9a84c;
+  color: #faf6ef;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sf-science-body {
+  background: #faf6ef;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border-left: 3px solid #c9a84c;
+}
+
+.sf-science-body-title {
+  font-weight: 600;
+  font-size: 13px;
+  color: #c9a84c;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.sf-science-body-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.sf-science-identity {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border-left: 3px solid #c9a84c;
+}
+
+.sf-science-identity-title {
+  font-weight: 600;
+  font-size: 13px;
+  color: #c9a84c;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.sf-science-identity-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.7;
+  color: #2d2d2d;
+}
+
+.sf-science-identity-text::before {
+  content: '"';
+  color: #c9a84c;
+  font-size: 28px;
+  vertical-align: -8px;
+  margin-right: 4px;
+}
+
+.sf-science-identity-text::after {
+  content: '"';
+  color: #c9a84c;
+  font-size: 28px;
+  vertical-align: -8px;
+  margin-left: 4px;
+}
+
+.sf-science-stat {
+  display: inline-block;
+  background: #c9a84c;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin-top: 12px;
+}
+
+.sf-science-cta {
+  background: #2d2d2d;
+  color: #faf6ef;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 60px;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.sf-science-cta strong {
+  color: #c9a84c;
+}
+
+@media (max-width: 768px) {
+  .sf-science-container {
+    padding: 30px 16px;
+    margin: 40px auto;
+  }
+
+  .sf-science-header h2 {
+    font-size: 26px;
+  }
+
+  .sf-science-timeline::before {
+    left: 12px;
+  }
+
+  .sf-science-phase {
+    padding-left: 50px;
+  }
+
+  .sf-science-dot {
+    left: 0;
+  }
+
+  .sf-science-phase h3 {
+    font-size: 20px;
+  }
+
+  .sf-science-identity-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sf-science-header h2 {
+    font-size: 22px;
+  }
+
+  .sf-science-phase {
+    padding-left: 45px;
+    margin-bottom: 40px;
+  }
+
+  .sf-science-phase h3 {
+    font-size: 18px;
+  }
+
+  .sf-science-body-text,
+  .sf-science-identity-text {
+    font-size: 14px;
+  }
+
+  .sf-science-cta {
+    font-size: 16px;
+  }
+}
+</style>
+
+<div class="sf-science-container">
+  <div class="sf-science-header">
+    <h2>Your Body Didn't Break Overnight.<br>It Won't Fix Overnight Either.</h2>
+    <p>Here's what actually happens.</p>
+  </div>
+
+  <div class="sf-science-timeline">
+    <!-- Month 1-2: The Unraveling -->
+    <div class="sf-science-phase" data-delay="200">
+      <div class="sf-science-dot"></div>
+      <h3>Month 1–2: The Unraveling</h3>
+      <span class="sf-science-phase-label">Weeks 1-8</span>
+
+      <div class="sf-science-body">
+        <div class="sf-science-body-title">What's Happening in Your Body</div>
+        <div class="sf-science-body-text">Cortisol starts to regulate. Your nervous system stops screaming for emergency fuel. Energy stabilizes within 72 hours. Cravings quiet — not through willpower, but because your body finally feels safe.</div>
+      </div>
+
+      <div class="sf-science-identity">
+        <div class="sf-science-identity-title">Identity Shift</div>
+        <div class="sf-science-identity-text">You stop being a slave to the vending machine. You stop dreading the scale. You start noticing something different.</div>
+      </div>
+
+      <span class="sf-science-stat">87% feel a difference by Day 3</span>
+    </div>
+
+    <!-- Month 3-4: The Shift -->
+    <div class="sf-science-phase" data-delay="400">
+      <div class="sf-science-dot"></div>
+      <h3>Month 3–4: The Shift</h3>
+      <span class="sf-science-phase-label">Weeks 9-16</span>
+
+      <div class="sf-science-body">
+        <div class="sf-science-body-title">What's Happening in Your Body</div>
+        <div class="sf-science-body-text">White-knuckle habits become natural. Metabolism adapts. Fat loss accelerates because your body trusts the process. You're not fighting yourself anymore.</div>
+      </div>
+
+      <div class="sf-science-identity">
+        <div class="sf-science-identity-title">Identity Shift</div>
+        <div class="sf-science-identity-text">You stop trying to eat healthy. You just do. The woman who used to binge after night shift? She doesn't live here anymore.</div>
+      </div>
+
+      <span class="sf-science-stat">Average 15–20 lbs lost</span>
+    </div>
+
+    <!-- Month 5-6: The Becoming -->
+    <div class="sf-science-phase" data-delay="600">
+      <div class="sf-science-dot"></div>
+      <h3>Month 5–6: The Becoming</h3>
+      <span class="sf-science-phase-label">Weeks 17-26</span>
+
+      <div class="sf-science-body">
+        <div class="sf-science-body-title">What's Happening in Your Body</div>
+        <div class="sf-science-body-text">Metabolic flexibility kicks in. Your body handles chaos days, missed meals, and schedule changes without spiraling. You're genuinely shift-proof now.</div>
+      </div>
+
+      <div class="sf-science-identity">
+        <div class="sf-science-identity-title">Identity Shift</div>
+        <div class="sf-science-identity-text">You recognize yourself again. Not the pre-kids version. A stronger, calmer, more capable version you didn't know existed.</div>
+      </div>
+
+      <span class="sf-science-stat">80% of 6-month members reach goal weight</span>
+    </div>
+
+    <!-- Month 7-10: The Lock-In -->
+    <div class="sf-science-phase" data-delay="800">
+      <div class="sf-science-dot"></div>
+      <h3>Month 7–10: The Lock-In</h3>
+      <span class="sf-science-phase-label">Weeks 27-40</span>
+
+      <div class="sf-science-body">
+        <div class="sf-science-body-title">What's Happening in Your Body</div>
+        <div class="sf-science-body-text">This is your new baseline. Your metabolism isn't fighting you anymore — it's working FOR you. Hormonal patterns stabilize. Sleep improves. Energy sustains.</div>
+      </div>
+
+      <div class="sf-science-identity">
+        <div class="sf-science-identity-title">Identity Shift</div>
+        <div class="sf-science-identity-text">This isn't something you're doing anymore. It's who you are. You're not on a program. You're living differently.</div>
+      </div>
+
+      <span class="sf-science-stat">12-month members maintain 94% of results</span>
+    </div>
+
+    <!-- Month 11-12: Unshakable -->
+    <div class="sf-science-phase" data-delay="1000">
+      <div class="sf-science-dot"></div>
+      <h3>Month 11–12: Unshakable</h3>
+      <span class="sf-science-phase-label">Weeks 41-52</span>
+
+      <div class="sf-science-body">
+        <div class="sf-science-body-title">What's Happening in Your Body</div>
+        <div class="sf-science-body-text">Full metabolic reset. Hormonal adaptation. Your body composition has permanently shifted. You've built a physiology that works for night shift, chaos, and real life.</div>
+      </div>
+
+      <div class="sf-science-identity">
+        <div class="sf-science-identity-title">Identity Shift</div>
+        <div class="sf-science-identity-text">You're not going back. Not because of discipline. Because this woman — the one who walks into every shift with energy, who sleeps well, who doesn't obsess over food — she's you now.</div>
+      </div>
+
+      <span class="sf-science-stat">This is your new normal</span>
+    </div>
+  </div>
+
+  <div class="sf-science-cta">
+    The <strong>6-month bundle</strong> gets you through The Becoming.<br>
+    The <strong>12-month</strong> takes you all the way to Unshakable.
+  </div>
+</div>
+
+<script>
+(function() {
+  function triggerVisibility() {
+    var phases = document.querySelectorAll('.sf-science-phase');
+    phases.forEach(function(phase) {
+      var rect = phase.getBoundingClientRect();
+      var delay = parseInt(phase.getAttribute('data-delay'), 10) || 0;
+      
+      if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+        if (phase.className.indexOf('visible') === -1) {
+          setTimeout(function() {
+            phase.className = phase.className + ' visible';
+          }, delay);
+        }
+      }
+    });
+  }
+
+  window.addEventListener('scroll', triggerVisibility);
+  window.addEventListener('load', triggerVisibility);
+  triggerVisibility();
+})();
+</script>

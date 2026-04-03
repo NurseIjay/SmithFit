@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmithFit Bundle - Commitment Trust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf6ef;
+            color: #2d2d2d;
+            line-height: 1.6;
+        }
+
+        .commitment-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 12px;
+            color: #2d2d2d;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subheading {
+            font-size: clamp(16px, 3vw, 20px);
+            text-align: center;
+            color: #666;
+            margin-bottom: 60px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .pillar {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #f0ede4;
+            text-align: center;
+            opacity: 0;
+            transition: all 0.6s ease-out;
+            transform: translateY(30px);
+        }
+
+        .pillar.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .pillar:hover {
+            border-color: #c9a84c;
+            box-shadow: 0 12px 24px rgba(201, 168, 76, 0.1);
+            transform: translateY(-8px);
+        }
+
+        .pillar-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: inline-block;
+            animation: gentle-float 3s ease-in-out infinite;
+        }
+
+        .pillar:nth-child(2) .pillar-icon {
+            animation-delay: 0.3s;
+        }
+
+        .pillar:nth-child(3) .pillar-icon {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes gentle-float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .pillar-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2d2d2d;
+        }
+
+        .pillar-description {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .identity-statement-block {
+            background: white;
+            border-left: 4px solid #c9a84c;
+            padding: 40px;
+            margin-bottom: 60px;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .identity-statement-block::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(201, 168, 76, 0.1) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) translateY(-100%);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%);
+            }
+        }
+
+        .identity-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(18px, 4vw, 28px);
+            font-weight: 600;
+            color: #2d2d2d;
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .micro-proof {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 15px;
+            color: #666;
+        }
+
+        .proof-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #c9a84c;
+            margin-right: 8px;
+        }
+
+        .proof-text {
+            display: inline;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #c9a84c;
+            color: white;
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(201, 168, 76, 0.2);
+        }
+
+        .cta-button:hover {
+            background-color: #b89037;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201, 168, 76, 0.3);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .cta-wrapper {
+            text-align: center;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .commitment-container {
+                padding: 40px 16px;
+            }
+
+            .section-heading {
+                font-size: 28px;
+            }
+
+            .section-subheading {
+                font-size: 16px;
+                margin-bottom: 40px;
+            }
+
+            .pillars-grid {
+                gap: 24px;
+                margin-bottom: 50px;
+            }
+
+            .pillar {
+                padding: 24px;
+            }
+
+            .pillar-icon {
+                font-size: 36px;
+            }
+
+            .identity-statement-block {
+                padding: 24px;
+                margin-bottom: 40px;
+            }
+
+            .identity-text {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="commitment-container">
+        <h2 class="section-heading">This Isn't Another Program. It's Your System.</h2>
+        <p class="section-subheading">Built around YOUR shifts. YOUR family. YOUR life.</p>
+
+        <div class="pillars-grid">
+            <div class="pillar">
+                <div class="pillar-icon">🎯</div>
+                <h3 class="pillar-title">Personalized to Your Life</h3>
+                <p class="pillar-description">Your onboarding call maps everything — your shift rotation, your family's schedule, your stress triggers, your food preferences. No generic plans. A system built for YOUR chaos.</p>
+            </div>
+
+            <div class="pillar">
+                <div class="pillar-icon">🔄</div>
+                <h3 class="pillar-title">Adjusts When Life Does</h3>
+                <p class="pillar-description">Quarterly checkpoints catch every plateau before it becomes a quit-point. Your coach adjusts protocols, not you. The system evolves with you — through holidays, schedule changes, and the weeks when everything falls apart.</p>
+            </div>
+
+            <div class="pillar">
+                <div class="pillar-icon">🛡️</div>
+                <h3 class="pillar-title">Built by a Nurse Who Gets It</h3>
+                <p class="pillar-description">IJ didn't build this in a lab. He built it between 12-hour shifts, after years of watching nurses fail programs that weren't designed for their reality. This is the system he wished existed.</p>
+            </div>
+        </div>
+
+        <div class="identity-statement-block">
+            <p class="identity-text">You're not buying a bundle. You're becoming the woman who doesn't negotiate with herself anymore. Scrubs fitting. Energy steady. The nurse who walks into every shift knowing she has a system — not willpower — holding it all together.</p>
+        </div>
+
+        <div class="micro-proof">
+            <span class="proof-number" id="proof-counter">0</span><span class="proof-text">nurses chose to go all-in. This is where their transformation accelerated.</span>
+        </div>
+
+        <div class="cta-wrapper">
+            <button class="cta-button" onclick="handleCTA()">Lock In Your System →</button>
+        </div>
+    </div>
+
+    <script>
+        // Scroll-triggered fade-in for pillars
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('in-view');
+                    }, index * 150);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.pillar').forEach(pillar => {
+            observer.observe(pillar);
+        });
+
+        // Counter animation for proof number
+        function animateCounter() {
+            const counterElement = document.getElementById('proof-counter');
+            const targetNumber = 400;
+            const duration = 2000;
+            const increment = targetNumber / (duration / 16);
+            let currentNumber = 0;
+
+            const countInterval = setInterval(() => {
+                currentNumber += increment;
+                if (currentNumber >= targetNumber) {
+                    currentNumber = targetNumber;
+                    counterElement.textContent = '400+';
+                    clearInterval(countInterval);
+                } else {
+                    counterElement.textContent = Math.floor(currentNumber);
+                }
+            }, 16);
+        }
+
+        // Start counter when page loads
+        window.addEventListener('load', () => {
+            setTimeout(animateCounter, 300);
+        });
+
+        // CTA button handler
+        function handleCTA() {
+            // Replace with actual URL or action
+            console.log('CTA clicked: Lock In Your System');
+            // window.location.href = '[BUNDLE_PURCHASE_URL]';
+        }
+
+        // Fallback counter animation if page is already loaded
+        if (document.readyState === 'complete') {
+            setTimeout(animateCounter, 300);
+        }
+    </script>
+</body>
+</html>

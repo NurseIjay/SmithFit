@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's Your Metabolism Stress Type? — SmithFit</title>
+    <meta name="description" content="Take this free 2-minute quiz to find your Metabolism Stress Type and learn why nothing has worked — built by a nurse, for nurses over 35.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #b8892a;
+            --gold-light: #d4a94c;
+            --gold-bright: #e8c36a;
+            --gold-glow: rgba(184, 137, 42, 0.12);
+            --gold-bg: rgba(184, 137, 42, 0.05);
+            --white: #ffffff;
+            --cream: #faf8f4;
+            --warm-1: #f4f1eb;
+            --warm-2: #e8e3da;
+            --warm-3: #d5cfc4;
+            --warm-4: #b8b0a2;
+            --border: rgba(0,0,0,0.06);
+            --border-hover: rgba(0,0,0,0.12);
+            --text-hero: #1e1b16;
+            --text-primary: #2e2a24;
+            --text-secondary: #5c554d;
+            --text-muted: #8a8078;
+            --blue: #4a89a8;
+            --green: #4a9e4a;
+            --green-light: rgba(74, 158, 74, 0.08);
+            --red-soft: #b85c5c;
+            --red-light: rgba(184, 92, 92, 0.06);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+            --shadow-gold: 0 8px 30px rgba(184, 137, 42, 0.2);
+            --serif: 'Playfair Display', Georgia, serif;
+            --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            min-height: 100vh;
+            background: var(--cream);
+            color: var(--text-primary);
+            font-family: var(--sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── HEADER ── */
+        .site-header {
+            padding: 0.85rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            background: rgba(255,255,255,0.88);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-count {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .header-count .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .header-badge {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid rgba(184,137,42,0.2);
+            background: var(--gold-bg);
+            padding: 0.3rem 0.75rem;
+            border-radius: 100px;
+        }
+
+        /* ── SCREENS ── */
+        .screen { display: none; }
+        .screen.active { display: block; animation: screenIn 0.5s var(--ease-out) both; }
+
+        @keyframes screenIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ══════════════════════════════════════════
+           HERO — Above the fold. CTA visible immediately.
+           ══════════════════════════════════════════ */
+        .hero {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem 0;
+            text-align: center;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: var(--gold-bg);
+            border: 1px solid rgba(184,137,42,0.15);
+            padding: 0.45rem 1.1rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-eyebrow .dot {
+            width: 5px;
+            height: 5px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: var(--text-hero);
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 em {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .hero-sub {
+            font-size: 1.12rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 1.75rem;
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ── CTA BLOCK (above the fold) ── */
+        .hero-cta-block {
+            margin-bottom: 1.25rem;
+        }
+
+        .btn-quiz {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            padding: 1.15rem 2.75rem;
+            border-radius: 12px;
+            font-family: var(--sans);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-out);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(184,137,42,0.2);
+            animation: gentle-pulse 2.5s infinite;
+        }
+
+        .btn-quiz::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 35%, rgba(255,255,255,0.2) 50%, transparent 65%);
+            transform: translateX(-100%);
+            animation: shimmer 3s infinite 1s;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            40% { transform: translateX(100%); }
+        }
+
+        @keyframes gentle-pulse {
+            0%, 100% { box-shadow: 0 4px 16px rgba(184,137,42,0.2); }
+            50% { box-shadow: 0 6px 28px rgba(184,137,42,0.35); }
+        }
+
+        .btn-quiz:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .btn-quiz:active { transform: translateY(0); }
+
+        .btn-arrow {
+            transition: transform 0.3s var(--ease-spring);
+            display: inline-block;
+            font-size: 1.2rem;
+        }
+
+        .btn-quiz:hover .btn-arrow {
+            transform: translateX(3px);
+        }
+
+        /* Trust strip right under button */
+        .hero-trust {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.85rem;
+        }
+
+        .hero-trust-dot {
+            width: 3px;
+            height: 3px;
+            background: var(--warm-3);
+            border-radius: 50%;
+        }
+
+        /* ── SOCIAL PROOF BAR (above the fold) ── */
+        .proof-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            padding: 1.25rem 0 1.75rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .proof-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .proof-item strong {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* ══════════════════════════════════════════
+           BELOW-THE-FOLD: Pain + Reveal + Secondary CTA
+           ══════════════════════════════════════════ */
+        .landing-below {
+            max-width: 660px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .section-divider {
+            width: 48px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto 2.5rem;
+            border-radius: 100px;
+        }
+
+        .pain-block {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .pain-text {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        .reveal-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.75rem 2rem;
+            margin: 0 auto 2.5rem;
+            max-width: 560px;
+            text-align: left;
+            font-size: 0.98rem;
+            color: var(--text-primary);
+            line-height: 1.85;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .reveal-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--gold), var(--gold-bright));
+            border-radius: 100px 0 0 100px;
+        }
+
+        .reveal-card strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Second CTA block (below the fold) */
+        .second-cta {
+            text-align: center;
+            padding: 2rem 0 1rem;
+        }
+
+        .second-cta .btn-quiz {
+            animation: none;
+            box-shadow: 0 4px 16px rgba(184,137,42,0.15);
+        }
+
+        /* ── Testimonial strip ── */
+        .testimonials-strip {
+            max-width: 660px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+        }
+
+        .testimonials-strip-title {
+            text-align: center;
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-hero);
+            margin-bottom: 1.25rem;
+        }
+
+        .tstrip-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .tstrip-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            position: relative;
+        }
+
+        .tstrip-card::before {
+            content: "\201C";
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            color: var(--gold);
+            opacity: 0.25;
+            position: absolute;
+            top: 0.4rem;
+            left: 0.85rem;
+            line-height: 1;
+        }
+
+        .tstrip-text {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            padding-top: 1rem;
+        }
+
+        .tstrip-attr {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-style: normal;
+            margin-top: 0.65rem;
+            display: block;
+        }
+
+        /* ── FAQ mini ── */
+        .faq-section {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .faq-title {
+            text-align: center;
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-hero);
+            margin-bottom: 1.25rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        .faq-q {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .faq-q::after {
+            content: "+";
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: 400;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .faq-item.open .faq-q::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-a {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s var(--ease-out), padding 0.35s var(--ease-out);
+            padding-top: 0;
+        }
+
+        .faq-item.open .faq-a {
+            max-height: 200px;
+            padding-top: 0.75rem;
+        }
+
+        /* ── Final CTA banner ── */
+        .final-cta-bar {
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .final-cta-inner {
+            max-width: 560px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .final-cta-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .final-cta-text strong {
+            color: var(--text-hero);
+        }
+
+        .btn-quiz-sm {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.75rem;
+            border-radius: 10px;
+            font-family: var(--sans);
+            font-size: 0.92rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-out);
+        }
+
+        .btn-quiz-sm:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        /* ══════════════════════════════════════════
+           QUIZ SCREEN
+           ══════════════════════════════════════════ */
+        .quiz-wrapper {
+            max-width: 580px;
+            margin: 0 auto;
+            padding: 0 1.5rem 5rem;
+        }
+
+        .quiz-progress-bar {
+            max-width: 580px;
+            margin: 0 auto;
+            padding: 1.5rem 1.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .progress-track {
+            flex: 1;
+            height: 5px;
+            background: var(--warm-2);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+            border-radius: 100px;
+            transition: width 0.5s var(--ease-out);
+            width: 0%;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: -2px;
+            width: 9px;
+            height: 9px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(184,137,42,0.4);
+        }
+
+        .progress-count {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+            min-width: 40px;
+            text-align: right;
+        }
+
+        .progress-count .current-num {
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        /* Question Card */
+        .question-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem 2.25rem;
+            margin-top: 1.5rem;
+            box-shadow: var(--shadow-md);
+            animation: cardIn 0.45s var(--ease-out) both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-bright), var(--gold));
+        }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .question-section-label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-dot {
+            width: 5px;
+            height: 5px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .question-text {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--text-hero);
+            line-height: 1.45;
+            margin-bottom: 2rem;
+        }
+
+        .question-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+            padding: 1.1rem 1.25rem;
+            background: var(--cream);
+            border: 1.5px solid transparent;
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.5;
+            cursor: pointer;
+            transition: all 0.25s var(--ease-out);
+            text-align: left;
+            position: relative;
+        }
+
+        .option-btn:hover {
+            background: var(--warm-1);
+            border-color: var(--warm-3);
+            transform: translateX(4px);
+        }
+
+        .option-btn.selected {
+            border-color: var(--gold);
+            background: var(--gold-bg);
+            transform: translateX(4px);
+        }
+
+        .option-btn.selected::after {
+            content: "";
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: checkPop 0.3s var(--ease-spring) both;
+        }
+
+        @keyframes checkPop {
+            from { transform: translateY(-50%) scale(0); }
+            to { transform: translateY(-50%) scale(1); }
+        }
+
+        .option-indicator {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--warm-3);
+            transition: all 0.25s var(--ease-out);
+        }
+
+        .option-btn.selected .option-indicator {
+            border-color: var(--gold);
+            background: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-glow);
+        }
+
+        .option-btn.selected .indicator-inner { opacity: 1; }
+
+        .indicator-inner {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--white);
+            opacity: 0;
+            margin: 4px;
+            transition: opacity 0.2s;
+        }
+
+        /* Nav */
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.75rem;
+            gap: 1rem;
+        }
+
+        .btn-back {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.7rem 1.25rem;
+            border-radius: 8px;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-back:hover {
+            border-color: var(--border-hover);
+            color: var(--text-secondary);
+        }
+
+        .btn-next {
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-out);
+            margin-left: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-next:hover:not(:disabled) {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .btn-next:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .btn-next.final {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            padding: 0.85rem 2.25rem;
+            font-size: 0.95rem;
+            animation: gentle-pulse 2s infinite;
+        }
+
+        /* ══════════════════════════════════════════
+           EMAIL GATE
+           ══════════════════════════════════════════ */
+        .gate-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(250, 248, 244, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gate-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .gate-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            animation: cardIn 0.5s var(--ease-out) both;
+        }
+
+        .gate-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--gold-bg), var(--gold-glow));
+            border: 1px solid rgba(184,137,42,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.6rem;
+        }
+
+        .gate-card h2 {
+            font-family: var(--serif);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text-hero);
+            margin-bottom: 0.5rem;
+        }
+
+        .gate-card > p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .gate-form { display: flex; flex-direction: column; gap: 0.65rem; }
+
+        .gate-input {
+            padding: 0.85rem 1rem;
+            background: var(--cream);
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .gate-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-glow); }
+        .gate-input::placeholder { color: var(--warm-4); }
+
+        .gate-submit {
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            padding: 0.85rem 2rem;
+            border-radius: 10px;
+            font-family: var(--sans);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-out);
+            margin-top: 0.35rem;
+        }
+
+        .gate-submit:hover { background: var(--gold-light); box-shadow: var(--shadow-gold); }
+
+        .gate-trust {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+
+        /* ══════════════════════════════════════════
+           RESULTS
+           ══════════════════════════════════════════ */
+        .results {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+
+        .results-hero {
+            text-align: center;
+            padding: 3.5rem 1rem 2.5rem;
+        }
+
+        .results-eyebrow {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: var(--gold-bg);
+            border: 1px solid rgba(184,137,42,0.15);
+            padding: 0.35rem 0.9rem;
+            border-radius: 100px;
+            margin-bottom: 1.25rem;
+        }
+
+        .results-hero h1 {
+            font-family: var(--serif);
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--text-hero);
+            margin-bottom: 0.75rem;
+        }
+
+        .results-hero-sub {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Score */
+        .score-panel {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .score-panel-label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .score-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.85rem; }
+        .score-row:last-child { margin-bottom: 0; }
+
+        .score-name {
+            min-width: 55px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            letter-spacing: 0.02em;
+        }
+
+        .score-track {
+            flex: 1;
+            height: 8px;
+            background: var(--warm-1);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .score-bar {
+            height: 100%;
+            border-radius: 100px;
+            transition: width 1s var(--ease-out);
+        }
+
+        .score-bar.bar-a { background: linear-gradient(90deg, var(--gold), var(--gold-bright)); }
+        .score-bar.bar-b { background: linear-gradient(90deg, #3d7a96, var(--blue)); }
+        .score-bar.bar-c { background: linear-gradient(90deg, #3d8e3d, var(--green)); }
+
+        .score-val {
+            min-width: 36px;
+            text-align: right;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Result Card */
+        .result-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem 2.25rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            animation: staggerIn 0.6s var(--ease-out) both;
+        }
+
+        @keyframes staggerIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-card-top {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .result-badge {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--sans);
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--white);
+            flex-shrink: 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .result-badge.badge-a { background: linear-gradient(135deg, var(--gold), var(--gold-bright)); }
+        .result-badge.badge-b { background: linear-gradient(135deg, #3d7a96, var(--blue)); }
+        .result-badge.badge-c { background: linear-gradient(135deg, #3d8e3d, var(--green)); }
+
+        .result-type-name {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-hero);
+            margin-bottom: 0.2rem;
+        }
+
+        .result-type-pattern {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .rc-section { margin-bottom: 2rem; }
+        .rc-section:last-child { margin-bottom: 0; }
+
+        .rc-heading {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .rc-text {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .priority-box {
+            background: var(--green-light);
+            border: 1px solid rgba(74,158,74,0.15);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .priority-box::before {
+            content: "";
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: var(--green);
+        }
+
+        .priority-label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 0.5rem;
+        }
+
+        .priority-text {
+            font-size: 0.92rem;
+            color: var(--text-primary);
+            line-height: 1.65;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .comparison-side { padding: 1.25rem 1.5rem; }
+        .comparison-side:first-child { background: var(--warm-1); border-right: 1px solid var(--border); }
+        .comparison-side:last-child { background: var(--white); }
+
+        .comparison-label {
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-side:first-child .comparison-label { color: var(--red-soft); }
+        .comparison-side:last-child .comparison-label { color: var(--green); }
+
+        .comparison-text { font-size: 0.88rem; line-height: 1.65; }
+        .comparison-side:first-child .comparison-text { color: var(--text-muted); }
+        .comparison-side:last-child .comparison-text { color: var(--text-primary); }
+
+        .likely-list { list-style: none; padding: 0; }
+        .likely-list li {
+            padding: 0.45rem 0 0.45rem 1.25rem;
+            position: relative;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .likely-list li::before {
+            content: "";
+            position: absolute;
+            left: 0; top: 0.8rem;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        .cue-item {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.88rem;
+            line-height: 1.65;
+            color: var(--text-primary);
+        }
+
+        .cue-number { color: var(--gold); font-weight: 700; margin-right: 0.5rem; }
+
+        .cue-teaser {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.7;
+            margin-top: 0.5rem;
+            position: relative;
+            border: 1px solid var(--border);
+        }
+
+        .cue-teaser::before {
+            content: "";
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: var(--gold);
+            border-radius: 100px 0 0 100px;
+        }
+
+        .callout-box {
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .callout-box::before {
+            content: "";
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+        }
+
+        .callout-box.trap { background: var(--red-light); }
+        .callout-box.trap::before { background: var(--red-soft); }
+        .callout-box.proof { background: var(--gold-bg); }
+        .callout-box.proof::before { background: var(--gold); }
+
+        .callout-label {
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+        .callout-box.trap .callout-label { color: var(--red-soft); }
+        .callout-box.proof .callout-label { color: var(--gold); }
+
+        .callout-body {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .testimonial {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-top: 1.5rem;
+            position: relative;
+            border: 1px solid var(--border);
+        }
+
+        .testimonial::before {
+            content: "\201C";
+            font-family: var(--serif);
+            font-size: 3rem;
+            color: var(--gold);
+            position: absolute;
+            top: 0.5rem; left: 1rem;
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .testimonial-text { padding-left: 1.5rem; }
+        .testimonial-attr {
+            display: block;
+            margin-top: 0.5rem;
+            font-style: normal;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            padding-left: 1.5rem;
+        }
+
+        .hybrid-msg {
+            background: var(--white);
+            border: 1.5px solid var(--gold);
+            border-radius: 16px;
+            padding: 1.5rem 1.75rem;
+            margin-bottom: 2rem;
+            font-size: 0.92rem;
+            line-height: 1.75;
+            color: var(--text-secondary);
+            box-shadow: 0 2px 8px rgba(184,137,42,0.06);
+        }
+        .hybrid-msg strong { color: var(--text-hero); }
+
+        /* CTA Panel */
+        .cta-panel {
+            background: var(--white);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 3rem 2.25rem;
+            text-align: center;
+            margin: 2.5rem 0;
+            box-shadow: 0 6px 24px rgba(184,137,42,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-panel::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-bright), var(--gold));
+        }
+
+        .cta-headline {
+            font-family: var(--serif);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-hero);
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-bridge {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+
+        .value-stack {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .value-item {
+            padding: 0.4rem 0 0.4rem 1.5rem;
+            position: relative;
+            font-size: 0.88rem;
+            color: var(--text-primary);
+            line-height: 1.65;
+        }
+        .value-item::before {
+            content: "\2713";
+            position: absolute;
+            left: 0;
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .trust-cell {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.85rem 0.5rem;
+            text-align: center;
+        }
+        .trust-num { font-size: 1.05rem; font-weight: 700; color: var(--gold); display: block; margin-bottom: 0.1rem; }
+        .trust-label { font-size: 0.6rem; color: var(--text-muted); line-height: 1.3; }
+
+        .cta-urgency { font-size: 0.92rem; color: var(--text-primary); margin: 1.25rem 0; }
+
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            padding: 1.15rem 2.75rem;
+            border-radius: 10px;
+            font-family: var(--sans);
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-out);
+            text-decoration: none;
+            margin-top: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-cta::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        .btn-cta:hover::after { transform: translateX(100%); }
+        .btn-cta:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: var(--shadow-gold); }
+
+        .cta-fine { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.85rem; }
+
+        /* Share */
+        .share-panel {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .share-heading { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--text-hero); margin-bottom: 0.35rem; }
+        .share-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.25rem; }
+        .share-btns { display: flex; gap: 0.75rem; justify-content: center; }
+
+        .btn-share {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.6rem 1.25rem;
+            border-radius: 8px;
+            font-family: var(--sans);
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-share:hover { border-color: var(--gold); color: var(--gold); }
+
+        .btn-retake {
+            display: block;
+            margin: 0 auto;
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.65rem 1.5rem;
+            border-radius: 8px;
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-retake:hover { border-color: var(--border-hover); color: var(--text-secondary); }
+
+        /* Footer */
+        .site-footer {
+            border-top: 1px solid var(--border);
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            background: var(--white);
+        }
+
+        /* ══════════════════════════════════════════
+           RESPONSIVE
+           ══════════════════════════════════════════ */
+        @media (max-width: 640px) {
+            .hero { padding: 2rem 1.25rem 0; }
+            .hero h1 { font-size: 2rem; }
+            .hero-sub { font-size: 1rem; }
+            .landing-below { padding: 0 1.25rem 3rem; }
+            .tstrip-grid { grid-template-columns: 1fr; }
+            .question-card { padding: 2rem 1.5rem; border-radius: 14px; }
+            .question-text { font-size: 1.15rem; }
+            .gate-card { padding: 2.5rem 1.5rem; }
+            .comparison { grid-template-columns: 1fr; }
+            .comparison-side:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+            .trust-grid { grid-template-columns: repeat(2, 1fr); }
+            .site-footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+            .share-btns { flex-direction: column; }
+            .result-card { padding: 2rem 1.5rem; }
+            .cta-panel { padding: 2.5rem 1.5rem; }
+            .site-header { padding: 0.85rem 1.25rem; }
+            .final-cta-inner { flex-direction: column; gap: 0.75rem; }
+            .proof-bar { gap: 1rem; }
+            .reveal-card { padding: 1.5rem; }
+        }
+
+        @media print {
+            body { background: #fff; color: #000; }
+            .site-header, .site-footer, .gate-overlay, .quiz-progress-bar, .quiz-nav, .share-panel, .btn-retake, .landing-below, .final-cta-bar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="site-header">
+    <div class="brand">SmithFit</div>
+    <div class="header-right">
+        <div class="header-count"><span class="dot"></span> 400+ nurses</div>
+        <div class="header-badge">Free Quiz</div>
+    </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════
+     SCREEN 1: LANDING PAGE (Intro)
+     ═══════════════════════════════════════════════ -->
+<div class="screen active" id="screenIntro">
+
+    <!-- ── HERO (above the fold) ── -->
+    <div class="hero">
+        <div class="hero-eyebrow"><span class="dot"></span> Free 2-Minute Quiz</div>
+
+        <h1>You&rsquo;ve Been Losing the&nbsp;Fight &mdash; But <em>Not</em> the&nbsp;Weight.</h1>
+
+        <p class="hero-sub">Take this 2-minute quiz to stop guessing and finally find out your body&rsquo;s <strong>Metabolism Stress Type</strong> &mdash; and how to fix&nbsp;it.</p>
+
+        <div class="hero-cta-block">
+            <button class="btn-quiz" onclick="startQuiz()">Take the Free Quiz <span class="btn-arrow">&rarr;</span></button>
+            <div class="hero-trust">
+                <span>15 questions</span>
+                <span class="hero-trust-dot"></span>
+                <span>2 minutes</span>
+                <span class="hero-trust-dot"></span>
+                <span>100% free</span>
+            </div>
+        </div>
+
+        <div class="proof-bar">
+            <div class="proof-item"><strong>400+</strong> nurses transformed</div>
+            <div class="proof-item"><strong>87%</strong> feel different by Day&nbsp;3</div>
+            <div class="proof-item"><strong>~5 lbs</strong> lost in Week&nbsp;1</div>
+        </div>
+    </div>
+
+    <!-- ── BELOW THE FOLD: Pain + Reveal + Supporting Content ── -->
+    <div class="landing-below">
+        <div class="section-divider"></div>
+
+        <div class="pain-block">
+            <p class="pain-text">You&rsquo;ve cut the calories. Counted the macros. Skipped meals you didn&rsquo;t have time for anyway. You&rsquo;ve dragged yourself to workouts running on fumes and no sleep &mdash; just to wake up the next day even more exhausted and see the scale go&nbsp;up.</p>
+        </div>
+
+        <div class="reveal-card">
+            <strong>Here&rsquo;s what no one told you:</strong> there are 3 Metabolism Stress Types, and each one needs a completely different approach. If you&rsquo;ve been working hard and seeing nothing &mdash; you haven&rsquo;t been failing. You&rsquo;ve been fighting the wrong&nbsp;fight.
+        </div>
+
+        <div class="second-cta">
+            <button class="btn-quiz" onclick="startQuiz()">Find My Metabolism Stress Type <span class="btn-arrow">&rarr;</span></button>
+            <div class="hero-trust" style="margin-top:0.85rem;">
+                <span>Built by a nurse, for nurses</span>
+                <span class="hero-trust-dot"></span>
+                <span>No email required to start</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Social proof: Testimonials ── -->
+    <div class="testimonials-strip">
+        <div class="testimonials-strip-title">What Nurses Are Saying</div>
+        <div class="tstrip-grid">
+            <div class="tstrip-card">
+                <p class="tstrip-text">I was skipping meals all shift, then bingeing at midnight. By Day 3 of eating consistently, the cravings just... got quieter.</p>
+                <span class="tstrip-attr">&mdash; Megan, Day Shift RN, 38</span>
+            </div>
+            <div class="tstrip-card">
+                <p class="tstrip-text">I was doing the phone-in-bed thing every night, wired but exhausted. Within a week of the nervous system reset, I was falling asleep faster.</p>
+                <span class="tstrip-attr">&mdash; Tamika, Night Shift ICU, 44</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Mini FAQ ── -->
+    <div class="faq-section">
+        <div class="faq-title">Quick Questions</div>
+        <div class="faq-item">
+            <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is this quiz really free?</div>
+            <div class="faq-a">Yes, completely free. You&rsquo;ll get your full Metabolism Stress Type results with personalized insights. We&rsquo;ll ask for your email at the end so we can send your results &mdash; that&rsquo;s it.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Does this work for night shift?</div>
+            <div class="faq-a">This was built specifically for shift workers &mdash; days, nights, and rotating. The entire system is shift-based, not clock-based.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Who created this?</div>
+            <div class="faq-a">IJ Smith, RN &mdash; a registered nurse who spent years figuring out why traditional diet advice fails for nurses on shift schedules. 400+ nurses have used this system.</div>
+        </div>
+    </div>
+
+    <!-- ── Final CTA bar ── -->
+    <div class="final-cta-bar">
+        <div class="final-cta-inner">
+            <div class="final-cta-text"><strong>Ready?</strong> Find your type in 2 minutes.</div>
+            <button class="btn-quiz-sm" onclick="startQuiz()">Take the Quiz &rarr;</button>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SCREEN 2: QUIZ
+     ═══════════════════════════════════════════════ -->
+<div class="screen" id="screenQuiz">
+    <div class="quiz-progress-bar">
+        <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-count"><span class="current-num" id="qCurrent">1</span> / 15</div>
+    </div>
+    <div class="quiz-wrapper">
+        <div id="questionContainer"></div>
+        <div class="quiz-nav">
+            <button class="btn-back" id="btnBack" onclick="prevQuestion()" style="visibility:hidden;">&larr; Back</button>
+            <button class="btn-next" id="btnNext" onclick="nextQuestion()" disabled>Next &rarr;</button>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ EMAIL GATE ═══ -->
+<div class="gate-overlay" id="gateOverlay">
+    <div class="gate-card">
+        <div class="gate-icon">&#10024;</div>
+        <h2>Your Results Are Ready</h2>
+        <p>See your Metabolism Stress Type, what&rsquo;s happening in your body, the #1 trap keeping you stuck, and exactly what to change this week.</p>
+        <form class="gate-form" id="gateForm" onsubmit="submitGate(event)">
+            <input class="gate-input" type="text" id="gateFirstName" placeholder="First name" required>
+            <input class="gate-input" type="email" id="gateEmail" placeholder="Email address" required>
+            <button type="submit" class="gate-submit">Show Me My Type &rarr;</button>
+        </form>
+        <p class="gate-trust">No spam. Just your results + a message from IJ.</p>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SCREEN 3: RESULTS
+     ═══════════════════════════════════════════════ -->
+<div class="screen" id="screenResults">
+    <div class="results">
+        <div class="results-hero">
+            <div class="results-eyebrow">Your Results</div>
+            <h1>Your Metabolism Stress Type</h1>
+            <p class="results-hero-sub"><span id="displayName">there</span>, here&rsquo;s what your body has been trying to tell you.</p>
+        </div>
+        <div id="resultsBody"></div>
+        <div id="ctaBody"></div>
+        <div class="share-panel">
+            <div class="share-heading">Know a Nurse Who Needs This?</div>
+            <p class="share-sub">It takes 2 minutes and it might change how she thinks about her body.</p>
+            <div class="share-btns">
+                <button class="btn-share" onclick="copyLink(event)">Copy Link</button>
+                <button class="btn-share" onclick="shareNative(event)">Share with a Friend</button>
+            </div>
+        </div>
+        <button class="btn-retake" onclick="retake()">Retake Quiz</button>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <span>For nurses over 35 &middot; Educational resource, not medical advice</span>
+    <span>Created by IJ Smith, RN</span>
+</footer>
+
+<script>
+const CONFIG = { webhookUrl: 'YOUR_GHL_WEBHOOK_URL', purchaseLink: 'YOUR_PURCHASE_LINK_URL', quizUrl: window.location.href };
+
+const QUESTIONS = [
+    { section: "Energy & Eating", text: "I often skip meals or miss breaks during shifts \u2014 sometimes I don\u2019t eat for 6+ hours.", type: "a" },
+    { section: "Energy & Eating", text: "Coffee or caffeine is usually my \u201Cfirst meal\u201D of the day.", type: "a" },
+    { section: "Energy & Eating", text: "I feel exhausted and stuck even though I\u2019m eating less than I used to.", type: "a" },
+    { section: "Energy & Eating", text: "I crash or get hangry, shaky, or irritable when I go too long without eating.", type: "c" },
+    { section: "Energy & Eating", text: "I rely on quick snacks \u2014 crackers, chips, granola bars \u2014 to survive long shifts.", type: "c" },
+    { section: "Sleep & Recovery", text: "I\u2019m exhausted after a shift but can\u2019t fall asleep \u2014 I feel \u201Cwired but tired.\u201D", type: "b" },
+    { section: "Sleep & Recovery", text: "My sleep is light, broken, or restless \u2014 I rarely wake up feeling truly rested.", type: "b" },
+    { section: "Sleep & Recovery", text: "I use caffeine late into my shift or evening to keep going.", type: "b" },
+    { section: "Sleep & Recovery", text: "My workouts feel draining rather than energizing \u2014 I often feel worse after exercise.", type: "a" },
+    { section: "Sleep & Recovery", text: "I scroll on my phone to \u201Cshut my brain off\u201D before bed \u2014 it\u2019s become a habit.", type: "b" },
+    { section: "Cravings & Body Signals", text: "My cravings are worst at night or after shifts \u2014 especially for sweet or salty snacks.", type: "b" },
+    { section: "Cravings & Body Signals", text: "I do okay during the day but then \u201Cunravel\u201D with cravings or overeating in the evening.", type: "c" },
+    { section: "Cravings & Body Signals", text: "I experience constant fatigue, a puffy or tight waist, and night-time cravings that won\u2019t quit.", type: "a" },
+    { section: "Cravings & Body Signals", text: "My energy is unpredictable \u2014 I have good hours and then sudden crashes with brain fog.", type: "c" },
+    { section: "Cravings & Body Signals", text: "I often feel bloated, puffy, or inflamed \u2014 especially after meals that are mostly carbs.", type: "c" }
+];
+
+const TYPES = {
+    A: { name:'Under-Fueled & Stressed', pattern:'Your body is getting repeated famine + stress signals from your shift schedule', priority:'Close the fuel gaps. Your body needs to stop receiving famine signals before anything else will change.', mostDo:'Skip meals or \u201Cwhite-knuckle\u201D through shifts without eating, then restrict harder to compensate', whatWorks:'Consistent fueling every 3\u20134 hours + protein-first at your first real meal. Structure, not restriction.', likelyIf:['You skip meals or miss breaks during shifts','Coffee feels like breakfast most days','You\u2019re exhausted and stuck despite eating less','Workouts feel draining, not energizing'], happening:'When you repeatedly under-eat and run on stress hormones, your body interprets this as a famine signal. It responds by slowing metabolism, increasing cortisol, spiking cravings (especially at night), and holding water around the midsection. Cutting more food makes this worse, not better. This is not a discipline problem \u2014 it\u2019s a signal problem.', cues:['Stop going 6+ hours without fuel on shift days. Even a protein shake counts.','Protein-first at your first real meal of the day.'], teaser:'The full Type A protocol \u2014 your exact meal timing, fueling strategy, missed-break rescue plan, and chaos-day backup \u2014 is inside the 7-Day Reset.', trap:'Cutting harder when you\u2019re already under-fueled. More restriction = more stress signal = more holding on. Your body interprets \u201Ceating less\u201D as danger.', proof:'Night cravings quieter. Less waist tightness and bloat. Fewer mid-shift crashes.', testimonial:'I was skipping meals all shift, then bingeing at midnight. By Day 3 of eating consistently, the cravings just... got quieter. I wasn\u2019t white-knuckling it anymore.', testimonialAttr:'\u2014 Megan, Day Shift RN, 38', ctaHeadline:'Your Type A Reset Plan Is Inside the 7-Day Shift-Proof Metabolism Reset', ctaBridge:'Your body has been getting famine + stress signals from your shift schedule. The 7-Day Reset includes the exact protocol built for your type.', ctaStack:['Your Type A fueling protocol (close the 6+ hour fuel gaps)','Shift-proof meal templates: Work Day, Off Day, and Chaos Day','The Metabolic Cocktail that resets your morning cortisol','The Nervous System Reset tool (5 minutes, built for post-shift)','Interactive trackers so you can see the shift happening','60-day guarantee \u2014 if you don\u2019t feel different, you get every penny back'], ctaButton:'Start My Type A Reset' },
+    B: { name:'Sleep-Deprived & Overstimulated', pattern:'Your nervous system is stuck in \u201Cgo mode\u201D and can\u2019t downshift', priority:'Help your nervous system downshift. Until it does, your body can\u2019t enter recovery mode \u2014 and that\u2019s where fat-burning and hunger regulation happen.', mostDo:'Use late-night caffeine and scrolling to keep going, then wonder why you can\u2019t sleep and wake up ravenous', whatWorks:'A pre-sleep nervous system reset protocol + caffeine cutoff + protein landing snack after shift.', likelyIf:['You\u2019re tired but wired at night \u2014 can\u2019t wind down','You scroll to \u201Cshut your brain off\u201D before bed','Cravings are worst at night or after shifts','Sleep is light, broken, or never feels restorative'], happening:'When your nervous system stays in \u201Cgo mode,\u201D your body can\u2019t enter the recovery state where fat-burning, hunger regulation, and cellular repair happen. Poor sleep elevates ghrelin (hunger hormone) and suppresses leptin (fullness hormone) \u2014 making cravings feel louder and willpower feel lower. This is not a discipline problem \u2014 it\u2019s a nervous system problem.', cues:['Phone away 10 minutes earlier than you normally would before bed.','Protein + carb \u201Clanding snack\u201D within 30\u201360 minutes of getting home from a shift.'], teaser:'The full Type B protocol \u2014 your nervous system reset ritual, caffeine timing strategy, sleep-switch guide, and morning Metabolic Cocktail \u2014 is inside the 7-Day Reset.', trap:'Late-night screens + caffeine too late. Both keep your nervous system locked in \u201Con\u201D mode when it desperately needs to downshift.', proof:'Falling asleep faster. Fewer late-night cravings. Waking up less groggy.', testimonial:'I was doing the phone-in-bed thing every night, wired but exhausted. Within a week of the nervous system reset, I was falling asleep faster and not waking up starving. I didn\u2019t change my diet at all.', testimonialAttr:'\u2014 Tamika, Night Shift ICU, 44', ctaHeadline:'Your Type B Recovery Protocol Is Inside the 7-Day Shift-Proof Metabolism Reset', ctaBridge:'Your nervous system has been stuck in \u201Cgo mode\u201D from shift work. The 7-Day Reset includes the exact protocol built for your type.', ctaStack:['Your Type B nervous system reset ritual (5 min, built for post-shift)','The caffeine timing strategy that works with YOUR schedule','Shift-proof meal templates: Work Day, Off Day, and Chaos Day','The Metabolic Cocktail that resets your morning cortisol','Interactive trackers so you can see the shift happening','60-day guarantee \u2014 if you don\u2019t feel different, you get every penny back'], ctaButton:'Start My Type B Reset' },
+    C: { name:'Blood-Sugar Rollercoaster', pattern:'Long fuel gaps + unbalanced meals are creating a spike-crash-craving cycle', priority:'Stabilize blood sugar by pairing carbs with protein at every meal and snack. No more carbs alone.', mostDo:'Eat quick carbs without protein between long gaps, setting off another crash cycle, then blame themselves for the cravings', whatWorks:'Mini-fuel every 3\u20134 hours + pair all carbs with protein or fat + start the day with a protein-first meal.', likelyIf:['You crash or get hangry when you go too long without food','You rely on quick carb snacks to survive shifts','You unravel with cravings or overeating in the evening','Energy is unpredictable \u2014 good hours then sudden crashes'], happening:'Long gaps between meals followed by quick-carb snacks create a blood sugar spike-and-crash cycle. Each crash triggers a cortisol response (your body\u2019s stress alarm), which drives cravings, promotes fat storage around the midsection, and causes inflammation and water retention. The fix is not eating less \u2014 it\u2019s eating smarter and more consistently.', cues:['Pair every carb with protein or fat \u2014 no more crackers, granola bars, or fruit alone.','Close the extreme gaps: mini-fuel every 3\u20134 hours even if it\u2019s just a protein bar + water.'], teaser:'The full Type C protocol \u2014 your stabilization meal plan, carb-pairing system, blood sugar rescue strategy, and chaos-day backup \u2014 is inside the 7-Day Reset.', trap:'Quick-carb snacks with no protein. Crackers, granola bars, and fruit alone spike blood sugar and accelerate the crash cycle. It feels like fuel but it\u2019s feeding the rollercoaster.', proof:'Fewer energy crashes. Less irritability mid-shift. Cravings less intense at night.', testimonial:'I was living on granola bars and coffee. I thought I just had no willpower. Turns out my blood sugar was on a rollercoaster all day. Once I started pairing protein with everything, the cravings dropped within days.', testimonialAttr:'\u2014 Danielle, ER Nurse, 41', ctaHeadline:'Your Type C Stabilization Plan Is Inside the 7-Day Shift-Proof Metabolism Reset', ctaBridge:'Your blood sugar has been on a rollercoaster from long shift gaps and unbalanced fueling. The 7-Day Reset includes the exact protocol built for your type.', ctaStack:['Your Type C blood sugar stabilization protocol','The carb-pairing system that stops the crash cycle','Shift-proof meal templates: Work Day, Off Day, and Chaos Day','The Metabolic Cocktail that resets your morning cortisol','Interactive trackers so you can see the shift happening','60-day guarantee \u2014 if you don\u2019t feel different, you get every penny back'], ctaButton:'Start My Type C Reset' }
+};
+
+let currentQ = 0, answers = new Array(15).fill(null), userName = '', userEmail = '';
+
+function switchScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
+    const el = document.getElementById(id);
+    el.style.display = 'block';
+    void el.offsetWidth;
+    el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function startQuiz() { switchScreen('screenQuiz'); renderQuestion(); }
+
+function renderQuestion() {
+    const q = QUESTIONS[currentQ], answered = answers[currentQ], isLast = currentQ === 14;
+    document.getElementById('qCurrent').textContent = currentQ + 1;
+    document.getElementById('progressFill').style.width = ((currentQ + 1) / 15 * 100) + '%';
+    document.getElementById('questionContainer').innerHTML = `
+        <div class="question-card">
+            <div class="question-section-label"><span class="section-dot"></span>${q.section}</div>
+            <div class="question-text">${q.text}</div>
+            <div class="question-options">
+                <button class="option-btn ${answered === true ? 'selected' : ''}" onclick="answer(true)">
+                    <span class="option-indicator"><span class="indicator-inner"></span></span>
+                    Yes, that\u2019s me
+                </button>
+                <button class="option-btn ${answered === false ? 'selected' : ''}" onclick="answer(false)">
+                    <span class="option-indicator"><span class="indicator-inner"></span></span>
+                    Not really
+                </button>
+            </div>
+        </div>`;
+    document.getElementById('btnBack').style.visibility = currentQ === 0 ? 'hidden' : 'visible';
+    const nb = document.getElementById('btnNext');
+    nb.disabled = answered === null;
+    nb.textContent = isLast ? 'See My Results \u2192' : 'Next \u2192';
+    nb.className = isLast && answered !== null ? 'btn-next final' : 'btn-next';
+}
+
+function answer(v) { answers[currentQ] = v; renderQuestion(); }
+
+function nextQuestion() {
+    if (answers[currentQ] === null) return;
+    if (currentQ < 14) { currentQ++; renderQuestion(); } else { showGate(); }
+}
+
+function prevQuestion() { if (currentQ > 0) { currentQ--; renderQuestion(); } }
+
+function showGate() { document.getElementById('gateOverlay').classList.add('active'); }
+
+function submitGate(e) {
+    e.preventDefault();
+    userName = document.getElementById('gateFirstName').value.trim();
+    userEmail = document.getElementById('gateEmail').value.trim();
+    const result = calcResult();
+    if (CONFIG.webhookUrl !== 'YOUR_GHL_WEBHOOK_URL') {
+        fetch(CONFIG.webhookUrl, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ firstName:userName, email:userEmail, quizType:result.types.join('-'), isHybrid:result.isHybrid, scoreA:result.scores.A, scoreB:result.scores.B, scoreC:result.scores.C, totalAnswered:answers.filter(a=>a!==null).length, timestamp:new Date().toISOString() }) }).catch(()=>{});
+    }
+    document.getElementById('gateOverlay').classList.remove('active');
+    showResults(result);
+}
+
+function calcResult() {
+    let s = {A:0,B:0,C:0};
+    QUESTIONS.forEach((q,i) => { if (answers[i]===true) s[q.type.toUpperCase()]++; });
+    const sorted = Object.entries(s).sort((a,b)=>b[1]-a[1]);
+    if (sorted[0][1]===0) return {types:['A'],scores:s,isHybrid:false};
+    if (sorted[0][1]===sorted[1][1]&&sorted[0][1]>0) return {types:[sorted[0][0],sorted[1][0]],scores:s,isHybrid:true};
+    return {types:[sorted[0][0]],scores:s,isHybrid:false};
+}
+
+function showResults(r) {
+    switchScreen('screenResults');
+    document.getElementById('displayName').textContent = userName || 'there';
+    let h = buildScorePanel(r.scores);
+    if (r.isHybrid) { h += `<div class="hybrid-msg"><strong>You\u2019re a Hybrid Type.</strong> You have strong elements of both Type ${r.types[0]} and Type ${r.types[1]}. This is common for shift workers \u2014 the stressors overlap. Read both breakdowns and notice which resonates most.</div>`; r.types.forEach(t => h += buildCard(t)); } else { h += buildCard(r.types[0]); }
+    document.getElementById('resultsBody').innerHTML = h;
+    document.getElementById('ctaBody').innerHTML = buildCta(r.types[0]);
+    setTimeout(() => { document.querySelectorAll('.score-bar').forEach(b => b.style.width = b.dataset.w); }, 150);
+}
+
+function buildScorePanel(s) {
+    return `<div class="score-panel"><div class="score-panel-label">Your Score Breakdown</div>${['A','B','C'].map(t=>`<div class="score-row"><span class="score-name">Type ${t}</span><div class="score-track"><div class="score-bar bar-${t.toLowerCase()}" style="width:0%" data-w="${(s[t]/5)*100}%"></div></div><span class="score-val">${s[t]}/5</span></div>`).join('')}</div>`;
+}
+
+function buildCard(t) {
+    const d=TYPES[t];
+    return `<div class="result-card"><div class="result-card-top"><div class="result-badge badge-${t.toLowerCase()}">${t}</div><div><div class="result-type-name">${d.name}</div><div class="result-type-pattern">${d.pattern}</div></div></div><div class="priority-box"><div class="priority-label">Your #1 Priority</div><div class="priority-text">${d.priority}</div></div><div class="comparison"><div class="comparison-side"><div class="comparison-label">What Most Nurses Do</div><div class="comparison-text">${d.mostDo}</div></div><div class="comparison-side"><div class="comparison-label">What Works for Your Type</div><div class="comparison-text">${d.whatWorks}</div></div></div><div class="rc-section"><div class="rc-heading">You\u2019re Likely This Type If:</div><ul class="likely-list">${d.likelyIf.map(i=>`<li>${i}</li>`).join('')}</ul></div><div class="rc-section"><div class="rc-heading">What\u2019s Happening In Your Body:</div><p class="rc-text">${d.happening}</p></div><div class="rc-section"><div class="rc-heading">Your Starting Point (Pick 1):</div>${d.cues.map((c,i)=>`<div class="cue-item"><span class="cue-number">#${i+1}</span>${c}</div>`).join('')}<div class="cue-teaser">${d.teaser}</div></div><div class="callout-box trap"><div class="callout-label">#1 Trap to Stop</div><div class="callout-body">${d.trap}</div></div><div class="callout-box proof"><div class="callout-label">What to Watch For by Day 2\u20133</div><div class="callout-body">${d.proof}</div></div><div class="testimonial"><div class="testimonial-text">${d.testimonial}</div><span class="testimonial-attr">${d.testimonialAttr}</span></div></div>`;
+}
+
+function buildCta(t) {
+    const d=TYPES[t], link=CONFIG.purchaseLink!=='YOUR_PURCHASE_LINK_URL'?CONFIG.purchaseLink:'#';
+    return `<div class="cta-panel"><div class="cta-headline">${d.ctaHeadline}</div><p class="cta-bridge">${userName||'there'}, ${d.ctaBridge}</p><p class="cta-bridge" style="margin-top:0;">Here\u2019s what\u2019s inside:</p><div class="value-stack">${d.ctaStack.map(i=>`<div class="value-item">${i}</div>`).join('')}</div><div class="trust-grid"><div class="trust-cell"><span class="trust-num">400+</span><span class="trust-label">Nurses transformed</span></div><div class="trust-cell"><span class="trust-num">87%</span><span class="trust-label">Feel different by Day 3</span></div><div class="trust-cell"><span class="trust-num">~5 lbs</span><span class="trust-label">Week 1 average</span></div><div class="trust-cell"><span class="trust-num">60-Day</span><span class="trust-label">Money-back guarantee</span></div></div><p class="cta-urgency">Most Type ${t} nurses feel different by Day 3 when they follow the right protocol for their type.</p><a href="${link}" class="btn-cta">${d.ctaButton} \u2192 $27</a><p class="cta-fine">One-time payment. Lifetime access. Built by IJ Smith, RN.</p></div>`;
+}
+
+function copyLink(e) {
+    const t=`I just found out my Metabolism Stress Type \u2014 and it explains why nothing was working. Take the free 2-minute quiz: ${CONFIG.quizUrl}`;
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(()=>{if(e&&e.target){const o=e.target.textContent;e.target.textContent='Copied!';setTimeout(()=>e.target.textContent=o,2000);}}).catch(()=>{});}
+}
+
+function shareNative(e) {
+    const t=`I just found my Metabolism Stress Type \u2014 it explains why nothing was working. Take the free 2-minute quiz: ${CONFIG.quizUrl}`;
+    if(navigator.share){navigator.share({title:'SmithFit Metabolism Quiz',text:t,url:CONFIG.quizUrl}).catch(()=>{});}else{copyLink(e);}
+}
+
+function retake() { currentQ=0; answers=new Array(15).fill(null); switchScreen('screenIntro'); }
+</script>
+</body>
+</html>

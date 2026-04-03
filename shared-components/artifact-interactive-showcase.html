@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmithFit — Interactive Elements Showcase</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #c9a84c; --gold-light: #d4b86a; --gold-dark: #a88a3a;
+    --cream: #faf6ef; --cream-dark: #f0e8d8;
+    --text-dark: #1a1a1a; --text-body: #3d3d3d; --text-muted: #6b6b6b;
+    --green: #2d6a4f; --green-light: #d4edda;
+    --red: #c0392b; --red-light: #fde8e8;
+    --white: #ffffff;
+  }
+  body { font-family: 'Inter', system-ui, sans-serif; background: #0f0f0f; color: #e8e8e8; }
+
+  /* Showcase wrapper */
+  .showcase { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+  .showcase-header { text-align: center; padding: 40px 0 32px; border-bottom: 2px solid var(--gold); margin-bottom: 48px; }
+  .showcase-header h1 { font-size: 28px; color: var(--gold); margin-bottom: 8px; }
+  .showcase-header p { color: #999; font-size: 15px; }
+
+  .element-label { display: inline-block; background: var(--gold); color: #000; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; border-radius: 4px; margin-bottom: 12px; }
+  .element-title { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .element-desc { font-size: 14px; color: #999; margin-bottom: 24px; line-height: 1.6; }
+  .element-wrapper { background: var(--cream); border-radius: 20px; padding: 40px 24px; margin-bottom: 60px; overflow: hidden; }
+  .divider { height: 1px; background: #333; margin: 60px 0; }
+
+  /* ===== 1. ANIMATED PROGRESS GRAPH ===== */
+  .graph-container { max-width: 700px; margin: 0 auto; position: relative; }
+  .graph-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 28px; color: var(--text-dark); margin-bottom: 8px; }
+  .graph-subtitle { text-align: center; font-size: 15px; color: var(--text-muted); margin-bottom: 32px; }
+  .graph-canvas { position: relative; width: 100%; height: 300px; background: #f5f0e8; border-radius: 12px; overflow: hidden; }
+  .graph-svg { width: 100%; height: 100%; }
+  .graph-stat { text-align: center; margin-top: 20px; font-size: 16px; color: var(--red); font-weight: 600; opacity: 0; transition: opacity 1s ease 2s; }
+  .graph-stat.visible { opacity: 1; }
+
+  /* ===== 2. SAVINGS CALCULATOR ===== */
+  .calc-container { max-width: 520px; margin: 0 auto; }
+  .calc-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 26px; color: var(--text-dark); margin-bottom: 6px; }
+  .calc-subtitle { text-align: center; font-size: 15px; color: var(--text-muted); margin-bottom: 32px; }
+  .calc-field { margin-bottom: 24px; }
+  .calc-field label { display: block; font-size: 14px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+  .calc-slider-row { display: flex; align-items: center; gap: 16px; }
+  .calc-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px; background: #e0d8c8; outline: none; }
+  .calc-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--gold); cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+  .calc-value { min-width: 60px; text-align: center; font-size: 20px; font-weight: 800; color: var(--gold-dark); }
+  .calc-result { background: linear-gradient(135deg, var(--text-dark), #2d2d2d); border-radius: 16px; padding: 28px; text-align: center; color: white; margin-top: 8px; }
+  .calc-result .wasted { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+  .calc-result .wasted-amount { font-size: 36px; font-weight: 800; color: #f87171; margin-bottom: 16px; }
+  .calc-result .sisterhood { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+  .calc-result .sisterhood-amount { font-size: 36px; font-weight: 800; color: #4ade80; margin-bottom: 16px; }
+  .calc-result .punchline { font-size: 15px; color: var(--gold-light); font-weight: 600; line-height: 1.5; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1); }
+
+  /* ===== 3. APP CAROUSEL ===== */
+  .carousel-container { max-width: 600px; margin: 0 auto; text-align: center; }
+  .carousel-title { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--text-dark); margin-bottom: 6px; }
+  .carousel-subtitle { font-size: 15px; color: var(--text-muted); margin-bottom: 28px; }
+  .carousel-track { display: flex; overflow: hidden; border-radius: 20px; position: relative; background: #1a1a1a; aspect-ratio: 9/16; max-width: 300px; margin: 0 auto; box-shadow: 0 8px 40px rgba(0,0,0,0.15); }
+  .carousel-slide { min-width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px 24px; transition: transform 0.4s ease; color: white; }
+  .carousel-slide .slide-icon { font-size: 48px; margin-bottom: 16px; }
+  .carousel-slide .slide-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+  .carousel-slide .slide-desc { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+  .slide-1 { background: linear-gradient(135deg, #1a3a2a, #2d6a4f); }
+  .slide-2 { background: linear-gradient(135deg, #3a1a2a, #6a2d4f); }
+  .slide-3 { background: linear-gradient(135deg, #1a2a3a, #2d4f6a); }
+  .slide-4 { background: linear-gradient(135deg, #3a2a1a, #6a4f2d); }
+  .slide-5 { background: linear-gradient(135deg, #2a1a3a, #4f2d6a); }
+  .carousel-nav { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 20px; }
+  .carousel-btn { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--gold); background: transparent; color: var(--gold); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .carousel-btn:hover { background: var(--gold); color: white; }
+  .carousel-dots { display: flex; gap: 8px; }
+  .carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: #d0c8b8; transition: all 0.3s; }
+  .carousel-dot.active { background: var(--gold); transform: scale(1.2); }
+
+  /* ===== 4. ANIMATED STAT COUNTERS ===== */
+  .counters-container { max-width: 600px; margin: 0 auto; }
+  .counters-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 26px; color: var(--text-dark); margin-bottom: 28px; }
+  .counters-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .counter-card { text-align: center; padding: 28px 16px; background: white; border-radius: 16px; border: 2px solid #e8e0d0; transition: transform 0.3s, border-color 0.3s; }
+  .counter-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .counter-num { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 800; color: var(--gold); line-height: 1; }
+  .counter-suffix { font-size: 20px; color: var(--gold-dark); }
+  .counter-label { font-size: 13px; color: var(--text-muted); margin-top: 8px; line-height: 1.4; }
+
+  /* ===== 5. STICKY CTA BAR ===== */
+  .sticky-demo { position: relative; max-width: 600px; margin: 0 auto; }
+  .sticky-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 26px; color: var(--text-dark); margin-bottom: 8px; }
+  .sticky-subtitle { text-align: center; font-size: 15px; color: var(--text-muted); margin-bottom: 24px; }
+  .sticky-bar-preview { background: linear-gradient(135deg, var(--text-dark), #2a2a2a); border-radius: 16px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; box-shadow: 0 -4px 20px rgba(0,0,0,0.15); }
+  .sticky-left { display: flex; align-items: center; gap: 12px; }
+  .sticky-price { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 800; color: white; }
+  .sticky-price span { font-size: 14px; color: rgba(255,255,255,0.5); font-family: 'Inter', sans-serif; font-weight: 400; }
+  .sticky-badge { background: var(--green); color: white; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 12px; }
+  .sticky-cta { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: white; font-size: 15px; font-weight: 700; padding: 14px 28px; border: none; border-radius: 10px; cursor: pointer; white-space: nowrap; transition: transform 0.2s; }
+  .sticky-cta:hover { transform: scale(1.03); }
+  .sticky-note { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 16px; font-style: italic; }
+
+  /* ===== 6. URGENCY MICRO-BANNER ===== */
+  .urgency-container { max-width: 520px; margin: 0 auto; }
+  .urgency-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 26px; color: var(--text-dark); margin-bottom: 8px; }
+  .urgency-subtitle { text-align: center; font-size: 15px; color: var(--text-muted); margin-bottom: 24px; }
+  .urgency-banner { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); border-radius: 16px; padding: 24px; display: flex; align-items: center; gap: 20px; border: 1px solid #333; }
+  .urgency-pulse { width: 12px; height: 12px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; flex-shrink: 0; }
+  @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,222,128,0.4); } 50% { opacity: 0.8; box-shadow: 0 0 0 8px rgba(74,222,128,0); } }
+  .urgency-text { font-size: 15px; color: rgba(255,255,255,0.9); line-height: 1.5; }
+  .urgency-text strong { color: var(--gold-light); }
+  .urgency-count { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 800; color: var(--gold); flex-shrink: 0; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .showcase { padding: 20px 16px; }
+    .element-wrapper { padding: 28px 16px; }
+    .counters-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .counter-num { font-size: 28px; }
+    .counter-card { padding: 16px 8px; }
+    .sticky-bar-preview { flex-direction: column; text-align: center; }
+    .carousel-track { max-width: 260px; }
+    .urgency-banner { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="showcase">
+  <div class="showcase-header">
+    <h1>INTERACTIVE ELEMENTS SHOWCASE</h1>
+    <p>Preview each element below. Tell me which ones you want on your membership page.</p>
+  </div>
+
+  <!-- ===== ELEMENT 1: ANIMATED PROGRESS GRAPH ===== -->
+  <div class="element-label">ELEMENT 1</div>
+  <div class="element-title">Animated Progress Graph — "The Day 8 Cliff"</div>
+  <div class="element-desc">The graph draws itself as the user scrolls to it. The "With Membership" line climbs while the "Without" line drops into the danger zone. This replaces your current static graph image with a dynamic, attention-grabbing version that feels alive. High-impact visual storytelling.</div>
+
+  <div class="element-wrapper">
+    <div class="graph-container">
+      <div class="graph-title">What Happens After Day 7?</div>
+      <div class="graph-subtitle">Your progress doesn't have to stop here.</div>
+      <div class="graph-canvas">
+        <svg class="graph-svg" viewBox="0 0 700 300" id="progressGraph">
+          <!-- Grid lines -->
+          <line x1="60" y1="40" x2="60" y2="260" stroke="#d8d0c0" stroke-width="1"/>
+          <line x1="60" y1="260" x2="660" y2="260" stroke="#d8d0c0" stroke-width="1"/>
+          <line x1="60" y1="150" x2="660" y2="150" stroke="#e8e0d0" stroke-width="1" stroke-dasharray="4"/>
+          <!-- Labels -->
+          <text x="30" y="48" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">High</text>
+          <text x="30" y="155" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">Base</text>
+          <text x="30" y="265" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">Low</text>
+          <!-- X-axis labels -->
+          <text x="100" y="285" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">Day 7</text>
+          <text x="220" y="285" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">Day 14</text>
+          <text x="340" y="285" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">Day 21</text>
+          <text x="460" y="285" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">Month 2</text>
+          <text x="580" y="285" fill="#999" font-size="11" text-anchor="middle" font-family="Inter">Month 6</text>
+          <!-- YOU ARE HERE marker -->
+          <circle cx="100" cy="130" r="6" fill="#c9a84c" stroke="white" stroke-width="2"/>
+          <text x="100" y="118" fill="#c9a84c" font-size="10" text-anchor="middle" font-weight="700" font-family="Inter">YOU ARE HERE</text>
+          <!-- DANGER ZONE -->
+          <rect x="140" y="170" width="120" height="80" rx="8" fill="#c0392b" opacity="0.08" id="dangerZone" style="opacity:0; transition: opacity 1s ease 1.5s;"/>
+          <text x="200" y="215" fill="#c0392b" font-size="10" text-anchor="middle" font-weight="700" font-family="Inter" opacity="0" id="dangerText" style="transition: opacity 1s ease 1.5s;">DANGER ZONE</text>
+          <!-- WITH MEMBERSHIP line (animated) -->
+          <path id="withLine" d="M100,130 C180,120 280,80 400,60 S560,45 640,40" fill="none" stroke="#c9a84c" stroke-width="3" stroke-linecap="round" stroke-dasharray="600" stroke-dashoffset="600" style="transition: stroke-dashoffset 2.5s ease;"/>
+          <text x="645" y="35" fill="#c9a84c" font-size="10" font-weight="700" font-family="Inter" opacity="0" id="withLabel" style="transition: opacity 0.5s ease 2.5s;">WITH MEMBERSHIP</text>
+          <!-- WITHOUT line (animated) -->
+          <path id="withoutLine" d="M100,130 C160,155 200,190 260,220 S380,240 500,245 S600,248 640,250" fill="none" stroke="#c0392b" stroke-width="3" stroke-linecap="round" stroke-dasharray="600" stroke-dashoffset="600" style="transition: stroke-dashoffset 2.5s ease 0.5s;"/>
+          <text x="645" y="255" fill="#c0392b" font-size="10" font-weight="700" font-family="Inter" opacity="0" id="withoutLabel" style="transition: opacity 0.5s ease 2.5s;">WITHOUT</text>
+        </svg>
+      </div>
+      <div class="graph-stat" id="graphStat">87% of nurses without a Day 8 plan lose all progress within 3 weeks.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== ELEMENT 2: SAVINGS CALCULATOR ===== -->
+  <div class="element-label">ELEMENT 2</div>
+  <div class="element-title">Savings Calculator — "The Real Cost of Starting Over"</div>
+  <div class="element-desc">Interactive sliders let the visitor input how many programs they've tried and how much they spent. The calculator reveals they've already spent hundreds or thousands on things that didn't work — making $67/mo feel like a bargain. This reframes the price objection from "is it worth it?" to "can I afford NOT to?"</div>
+
+  <div class="element-wrapper">
+    <div class="calc-container">
+      <div class="calc-title">The Real Cost of "Starting Over"</div>
+      <div class="calc-subtitle">How much have you already invested in programs that didn't stick?</div>
+
+      <div class="calc-field">
+        <label>How many programs, diets, or plans have you tried?</label>
+        <div class="calc-slider-row">
+          <input type="range" class="calc-slider" id="programSlider" min="1" max="15" value="5">
+          <div class="calc-value" id="programValue">5</div>
+        </div>
+      </div>
+
+      <div class="calc-field">
+        <label>About how much did each one cost? (apps, supplements, plans, gym...)</label>
+        <div class="calc-slider-row">
+          <input type="range" class="calc-slider" id="costSlider" min="20" max="500" step="10" value="120">
+          <div class="calc-value" id="costValue">$120</div>
+        </div>
+      </div>
+
+      <div class="calc-result">
+        <div class="wasted">You've already spent approximately:</div>
+        <div class="wasted-amount" id="wastedAmount">$600</div>
+        <div class="sisterhood">The Sisterhood membership:</div>
+        <div class="sisterhood-amount">$67/mo</div>
+        <div class="punchline" id="punchline">That's less than what ONE of those failed programs cost you — except this one was built by a nurse who understands your shift schedule.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== ELEMENT 3: APP CAROUSEL ===== -->
+  <div class="element-label">ELEMENT 3</div>
+  <div class="element-title">"Peek Inside the App" Carousel</div>
+  <div class="element-desc">A swipeable phone-style carousel showing what the membership actually looks like inside. Makes it tangible instead of abstract. Each screen shows a different feature. Replace the placeholder content with actual app screenshots for maximum impact.</div>
+
+  <div class="element-wrapper">
+    <div class="carousel-container">
+      <div class="carousel-title">See What's Waiting Inside</div>
+      <div class="carousel-subtitle">Swipe through your new command center</div>
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide slide-1" style="transform: translateX(0%);">
+          <div class="slide-icon">🍽️</div>
+          <div class="slide-title">Shift-Proof Meal Plans</div>
+          <div class="slide-desc">Work Day. Off Day. Chaos Day. Three plans that match your actual life — not a fantasy schedule you'll never follow.</div>
+        </div>
+        <div class="carousel-slide slide-2" style="transform: translateX(0%);">
+          <div class="slide-icon">📖</div>
+          <div class="slide-title">1,000+ Recipes</div>
+          <div class="slide-desc">Comfort food. Cultural dishes. 5-minute meals. Sorted by prep time and shift type. Eat what you love.</div>
+        </div>
+        <div class="carousel-slide slide-3" style="transform: translateX(0%);">
+          <div class="slide-icon">💪</div>
+          <div class="slide-title">15-Min Workouts</div>
+          <div class="slide-desc">Three levels. No equipment. Designed to signal fat loss — not spike cortisol. Done before your coffee cools.</div>
+        </div>
+        <div class="carousel-slide slide-4" style="transform: translateX(0%);">
+          <div class="slide-icon">👩‍⚕️</div>
+          <div class="slide-title">The Sisterhood</div>
+          <div class="slide-desc">400+ nurses who get it. Post your wins, ask questions, and never feel alone in this again.</div>
+        </div>
+        <div class="carousel-slide slide-5" style="transform: translateX(0%);">
+          <div class="slide-icon">🛡️</div>
+          <div class="slide-title">Chaos-Day Rescue</div>
+          <div class="slide-desc">Life explodes? Open the plan. 3 steps. Stay on track. This is why members stay 8+ months.</div>
+        </div>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-btn" id="prevBtn">‹</button>
+        <div class="carousel-dots" id="carouselDots">
+          <div class="carousel-dot active"></div>
+          <div class="carousel-dot"></div>
+          <div class="carousel-dot"></div>
+          <div class="carousel-dot"></div>
+          <div class="carousel-dot"></div>
+        </div>
+        <button class="carousel-btn" id="nextBtn">›</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== ELEMENT 4: ANIMATED STAT COUNTERS ===== -->
+  <div class="element-label">ELEMENT 4</div>
+  <div class="element-title">Animated Stat Counters</div>
+  <div class="element-desc">Numbers count up from zero when the user scrolls to them. Movement catches the eye and makes stats feel more impactful than static text. These replace the plain stat numbers on your current page.</div>
+
+  <div class="element-wrapper">
+    <div class="counters-container">
+      <div class="counters-title">The Numbers Don't Lie</div>
+      <div class="counters-grid">
+        <div class="counter-card">
+          <div><span class="counter-num" data-target="400" id="counter1">0</span><span class="counter-suffix">+</span></div>
+          <div class="counter-label">Nurses Transformed</div>
+        </div>
+        <div class="counter-card">
+          <div><span class="counter-num" data-target="87" id="counter2">0</span><span class="counter-suffix">%</span></div>
+          <div class="counter-label">Feel Different by Day 3</div>
+        </div>
+        <div class="counter-card">
+          <div><span class="counter-num" data-target="8" id="counter3">0</span><span class="counter-suffix">+ mo</span></div>
+          <div class="counter-label">Average Member Retention</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== ELEMENT 5: STICKY CTA BAR ===== -->
+  <div class="element-label">ELEMENT 5</div>
+  <div class="element-title">Sticky CTA Bar (Bottom of Screen)</div>
+  <div class="element-desc">A slim bar that sticks to the bottom of the viewport once the user scrolls past the first CTA. Shows the price, a "30-day guarantee" badge, and a button — always visible, never intrusive. This catches people who scroll the whole page but don't click a CTA along the way. Especially powerful on mobile.</div>
+
+  <div class="element-wrapper">
+    <div class="sticky-demo">
+      <div class="sticky-title">Always-Visible CTA</div>
+      <div class="sticky-subtitle">Appears after scrolling past the first CTA button</div>
+      <div class="sticky-bar-preview">
+        <div class="sticky-left">
+          <div class="sticky-price">$67<span>/mo</span></div>
+          <div class="sticky-badge">30-DAY GUARANTEE</div>
+        </div>
+        <button class="sticky-cta">Join the Sisterhood →</button>
+      </div>
+      <div class="sticky-note">This bar sticks to the bottom of the screen as the user scrolls. It appears/disappears based on scroll position.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== ELEMENT 6: LIVE ACTIVITY BANNER ===== -->
+  <div class="element-label">ELEMENT 6</div>
+  <div class="element-title">Live Activity / Social Proof Banner</div>
+  <div class="element-desc">A subtle pulsing banner showing real-time-style activity: "12 nurses joined this week" or "Sarah just posted her Day 14 check-in." Creates FOMO and makes the community feel alive and active right now. Can be placed near the CTA or near the community section.</div>
+
+  <div class="element-wrapper">
+    <div class="urgency-container">
+      <div class="urgency-title">Live Social Proof</div>
+      <div class="urgency-subtitle">Makes the community feel active and alive</div>
+      <div class="urgency-banner">
+        <div class="urgency-pulse"></div>
+        <div class="urgency-text"><strong>12 nurses joined this week.</strong> The Sisterhood is growing — and your spot at $67/mo locks in before the next price increase.</div>
+        <div class="urgency-count">12</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ===== PROGRESS GRAPH ANIMATION =====
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.getElementById('withLine').style.strokeDashoffset = '0';
+        document.getElementById('withoutLine').style.strokeDashoffset = '0';
+        document.getElementById('dangerZone').style.opacity = '0.08';
+        document.getElementById('dangerText').style.opacity = '1';
+        document.getElementById('withLabel').style.opacity = '1';
+        document.getElementById('withoutLabel').style.opacity = '1';
+        document.getElementById('graphStat').classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3 });
+  observer.observe(document.getElementById('progressGraph'));
+
+  // ===== SAVINGS CALCULATOR =====
+  const progSlider = document.getElementById('programSlider');
+  const costSlider = document.getElementById('costSlider');
+  const progValue = document.getElementById('programValue');
+  const costValue = document.getElementById('costValue');
+  const wastedAmount = document.getElementById('wastedAmount');
+  const punchline = document.getElementById('punchline');
+
+  function updateCalc() {
+    const progs = parseInt(progSlider.value);
+    const cost = parseInt(costSlider.value);
+    const total = progs * cost;
+    progValue.textContent = progs;
+    costValue.textContent = '$' + cost;
+    wastedAmount.textContent = '$' + total.toLocaleString();
+
+    if (total > 500) {
+      punchline.textContent = "You've spent $" + total.toLocaleString() + " on programs that weren't built for your life. The Sisterhood costs less per month than what most of those cost total — and this one actually understands night shift.";
+    } else if (total > 200) {
+      punchline.textContent = "That's $" + total.toLocaleString() + " on programs that didn't stick. For $67/month, you get coaching, community, and a system built by a nurse — not a fitness influencer.";
+    } else {
+      punchline.textContent = "Even a modest investment adds up when it doesn't work. $67/month for a system built around your actual schedule — not someone else's.";
+    }
+  }
+  progSlider.addEventListener('input', updateCalc);
+  costSlider.addEventListener('input', updateCalc);
+
+  // ===== CAROUSEL =====
+  let currentSlide = 0;
+  const totalSlides = 5;
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.carousel-dot');
+
+  function goToSlide(n) {
+    currentSlide = ((n % totalSlides) + totalSlides) % totalSlides;
+    slides.forEach((slide, i) => {
+      slide.style.transform = `translateX(${(i - currentSlide) * 100}%)`;
+    });
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+  }
+  document.getElementById('nextBtn').addEventListener('click', () => goToSlide(currentSlide + 1));
+  document.getElementById('prevBtn').addEventListener('click', () => goToSlide(currentSlide - 1));
+  // Auto-advance every 4s
+  setInterval(() => goToSlide(currentSlide + 1), 4000);
+  goToSlide(0);
+
+  // ===== COUNTER ANIMATION =====
+  function animateCounter(el, target, duration) {
+    let start = 0;
+    const step = Math.ceil(target / (duration / 16));
+    function tick() {
+      start += step;
+      if (start >= target) { el.textContent = target; return; }
+      el.textContent = start;
+      requestAnimationFrame(tick);
+    }
+    tick();
+  }
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(document.getElementById('counter1'), 400, 2000);
+        animateCounter(document.getElementById('counter2'), 87, 1500);
+        animateCounter(document.getElementById('counter3'), 8, 1000);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  counterObserver.observe(document.querySelector('.counters-grid'));
+</script>
+
+</body>
+</html>

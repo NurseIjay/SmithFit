@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmithFit $27 Tripwire — Hormozi Comparison Audit (Revised)</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',system-ui,sans-serif; background:#faf6ef; color:#2d2d2d; line-height:1.6; }
+
+/* Sticky Header */
+.audit-header {
+  position:sticky; top:0; z-index:1000;
+  background:linear-gradient(135deg,#c9a84c 0%,#a88a3d 100%);
+  color:#fff; padding:16px 32px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.15);
+  display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;
+}
+.header-left h1 { font-family:'Playfair Display',serif; font-size:24px; margin-bottom:2px; }
+.header-left p { font-size:12px; opacity:.92; }
+.header-right { display:flex; gap:24px; align-items:center; }
+.score-display { text-align:center; }
+.score-label { font-size:10px; text-transform:uppercase; letter-spacing:1px; opacity:.85; margin-bottom:4px; }
+.score-val { font-size:36px; font-weight:800; line-height:1; }
+.score-sub { font-size:11px; opacity:.85; margin-top:2px; }
+.score-arrow { font-size:28px; font-weight:800; opacity:.75; align-self:center; }
+
+/* Container */
+.container { max-width:1100px; margin:0 auto; padding:32px 28px; }
+
+/* Executive Summary */
+.exec-summary {
+  background:#fff; border-left:5px solid #c9a84c; padding:28px; margin-bottom:36px;
+  border-radius:8px; box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+.exec-summary h2 { font-family:'Playfair Display',serif; font-size:22px; margin-bottom:14px; }
+.exec-summary p { font-size:14px; color:#555; margin-bottom:10px; line-height:1.7; }
+.severity-counts { display:flex; gap:20px; margin-top:18px; padding-top:18px; border-top:1px solid #e8e8e8; flex-wrap:wrap; }
+.count-item { display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600; }
+.badge { width:22px; height:22px; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#fff; font-weight:700; }
+.badge-crit { background:#ff4444; }
+.badge-high { background:#ff9500; }
+.badge-med { background:#f5c842; }
+.badge-low { background:#4cd964; }
+
+/* Revised Notice */
+.revision-banner {
+  background:linear-gradient(135deg,#1e3a5f,#2c5282); color:#fff;
+  padding:20px 24px; border-radius:10px; margin-bottom:28px;
+  display:flex; align-items:flex-start; gap:14px;
+}
+.revision-banner .rev-icon { font-size:28px; flex-shrink:0; }
+.revision-banner .rev-text h3 { font-size:16px; margin-bottom:6px; }
+.revision-banner .rev-text p { font-size:13px; opacity:.92; line-height:1.6; }
+
+/* Comparison Grid */
+.compare-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:24px 0; }
+.compare-card {
+  background:#fff; border-radius:10px; padding:24px; text-align:center;
+  box-shadow:0 2px 10px rgba(0,0,0,.06); border:2px solid transparent; position:relative;
+}
+.compare-card.live { border-color:#f5c842; }
+.compare-card.optimized { border-color:#4cd964; }
+.compare-card .card-label {
+  font-size:11px; text-transform:uppercase; letter-spacing:1.5px; font-weight:700;
+  margin-bottom:12px; display:flex; align-items:center; justify-content:center; gap:6px;
+}
+.compare-card.live .card-label { color:#b8860b; }
+.compare-card.optimized .card-label { color:#15803d; }
+.compare-card .big-score { font-size:56px; font-weight:800; line-height:1; }
+.compare-card.live .big-score { color:#b8860b; }
+.compare-card.optimized .big-score { color:#15803d; }
+.compare-card .verdict-text { font-size:13px; color:#777; margin-top:8px; }
+.card-ribbon {
+  position:absolute; top:-1px; right:16px; background:#4cd964; color:#fff;
+  font-size:10px; font-weight:700; padding:4px 10px; border-radius:0 0 6px 6px;
+  text-transform:uppercase; letter-spacing:1px;
+}
+
+/* Value Equation */
+.ve-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:20px 0; }
+.ve-card {
+  background:#fff; border-radius:8px; padding:16px 12px; text-align:center;
+  box-shadow:0 1px 8px rgba(0,0,0,.05);
+}
+.ve-card .ve-label { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:#999; margin-bottom:6px; font-weight:600; }
+.ve-scores { display:flex; justify-content:center; align-items:baseline; gap:6px; margin-bottom:8px; }
+.ve-live { font-size:28px; font-weight:800; color:#b8860b; }
+.ve-arrow { font-size:14px; color:#999; }
+.ve-opt { font-size:28px; font-weight:800; color:#15803d; }
+.ve-card .ve-note { font-size:12px; color:#888; line-height:1.5; }
+
+/* Grand Slam Checklist */
+.checklist-table { width:100%; border-collapse:collapse; margin:20px 0; }
+.checklist-table th {
+  font-size:12px; text-transform:uppercase; letter-spacing:1px; color:#999;
+  padding:10px 14px; text-align:left; border-bottom:2px solid #e8e8e8;
+}
+.checklist-table td { padding:14px; border-bottom:1px solid #f0f0f0; font-size:14px; vertical-align:top; }
+.checklist-table .enhancer { font-weight:600; color:#2d2d2d; min-width:100px; }
+.status-icon { font-size:18px; text-align:center; min-width:32px; }
+.pass-icon { color:#4cd964; }
+.fail-icon { color:#ff4444; }
+.partial-icon { color:#f5c842; }
+
+/* Audit Sections (collapsible) */
+.audit-section {
+  background:#fff; margin-bottom:20px; border-radius:8px;
+  box-shadow:0 2px 12px rgba(0,0,0,.08); overflow:hidden;
+}
+.section-header {
+  padding:18px 24px; background:#f8f6f0; cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center;
+  transition:background .2s; user-select:none;
+}
+.section-header:hover { background:#f0ece0; }
+.section-header h3 { font-family:'Playfair Display',serif; font-size:17px; flex:1; display:flex; align-items:center; gap:10px; }
+.section-meta { display:flex; align-items:center; gap:12px; }
+.live-grade, .opt-grade {
+  font-size:13px; font-weight:700; padding:3px 10px; border-radius:4px; min-width:36px; text-align:center;
+}
+.grade-a { background:#dcfce7; color:#15803d; }
+.grade-b { background:#fef9c3; color:#854d0e; }
+.grade-c { background:#ffedd5; color:#9a3412; }
+.grade-f { background:#fecaca; color:#991b1b; }
+.grade-na { background:#e5e7eb; color:#6b7280; }
+.toggle-icon {
+  width:26px; height:26px; background:#c9a84c; border-radius:4px;
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-weight:700; font-size:14px; transition:transform .3s;
+}
+.audit-section.active .toggle-icon { transform:rotate(180deg); }
+.section-content { display:none; padding:24px; border-top:1px solid #e8e8e8; }
+.audit-section.active .section-content { display:block; animation:slideIn .3s ease; }
+@keyframes slideIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+
+/* Items inside sections */
+.subsection-title { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#c9a84c; margin:0 0 10px; }
+.item { font-size:14px; line-height:1.7; margin-bottom:10px; padding:12px 15px; border-radius:4px; border-left:3px solid; }
+.good-item { background:#f0fdf4; border-left-color:#4cd964; color:#1b4d1b; }
+.bad-item { background:#fef2f2; border-left-color:#ff4444; color:#7d1111; }
+.fix-item { background:#fef9f0; border-left-color:#ff9500; color:#6b3e1f; }
+.missing-item { background:#f3f4f6; border-left-color:#9ca3af; color:#4b5563; }
+.copy-box { background:#f5f1e8; border-left:3px solid #c9a84c; padding:14px; border-radius:4px; margin:14px 0; font-size:13px; line-height:1.7; }
+.copy-box strong { color:#c9a84c; }
+
+/* Priority List */
+.priority-list { counter-reset:priority; list-style:none; padding:0; }
+.priority-list li {
+  counter-increment:priority; padding:18px 20px; margin:10px 0;
+  background:#fff; border-radius:8px; border:1px solid #e8e8e8;
+  box-shadow:0 1px 6px rgba(0,0,0,.04);
+}
+.priority-list li::before { content:"#" counter(priority); color:#c9a84c; font-weight:800; font-size:18px; margin-right:12px; }
+.item-title { font-weight:700; color:#2d2d2d; display:inline; }
+.item-impact { display:block; font-size:13px; color:#15803d; margin-top:6px; font-weight:600; }
+.item-detail { display:block; font-size:13px; color:#777; margin-top:4px; line-height:1.6; }
+
+/* Funnel Tracker */
+.funnel-track { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:20px 0; }
+.funnel-card {
+  background:#fff; border-radius:8px; padding:16px; text-align:center;
+  box-shadow:0 1px 8px rgba(0,0,0,.05); border:2px solid #e8e8e8;
+}
+.funnel-card.done { border-color:#4cd964; }
+.funnel-card.current { border-color:#c9a84c; background:#fffdf5; }
+.funnel-card .f-emoji { font-size:22px; margin-bottom:6px; }
+.funnel-card .f-name { font-weight:700; font-size:13px; margin-bottom:4px; }
+.funnel-card .f-score { font-size:12px; color:#888; }
+.funnel-card.done .f-score { color:#15803d; }
+
+/* Footer */
+.audit-footer { text-align:center; padding:40px 20px 32px; color:#999; font-size:12px; }
+
+/* Responsive */
+@media(max-width:768px){
+  .audit-header { padding:14px 16px; flex-direction:column; text-align:center; }
+  .header-right { justify-content:center; }
+  .compare-grid { grid-template-columns:1fr; }
+  .ve-grid { grid-template-columns:1fr 1fr; }
+  .checklist-table { font-size:13px; }
+  .container { padding:20px 16px; }
+  .section-header { padding:14px 16px; }
+  .section-content { padding:18px 16px; }
+  .funnel-track { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:480px){
+  .ve-grid { grid-template-columns:1fr; }
+  .score-val { font-size:28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ====== STICKY HEADER ====== -->
+<div class="audit-header">
+  <div class="header-left">
+    <h1>HORMOZI FRAMEWORK AUDIT</h1>
+    <p>$27 Tripwire — 7-Day Shift-Proof Metabolism Reset&trade; &bull; Revised Comparison Report</p>
+  </div>
+  <div class="header-right">
+    <div class="score-display">
+      <div class="score-label">Live Page</div>
+      <div class="score-val" style="color:#f5e6a3">7.8</div>
+      <div class="score-sub">Strong foundation</div>
+    </div>
+    <div class="score-arrow">&rarr;</div>
+    <div class="score-display">
+      <div class="score-label">With Fixes</div>
+      <div class="score-val" style="color:#a3e635">9.1</div>
+      <div class="score-sub">+1.3 points</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ====== REVISION NOTICE ====== -->
+<div class="revision-banner">
+  <div class="rev-icon">🔄</div>
+  <div class="rev-text">
+    <h3>Revised Audit — March 29, 2026</h3>
+    <p>This is a corrected audit. The original assessment (4.8/10) significantly underscored the live page due to incomplete content capture. A fresh visual review via Chrome confirmed the live page contains <strong>55 testimonial cards</strong>, <strong>8 detailed before/after stories with video</strong>, a <strong>complete FAQ</strong>, a <strong>detailed 60-day guarantee</strong>, a <strong>full 5-pillar offer breakdown with value anchoring</strong>, <strong>3 bonuses</strong>, a <strong>Future Fork closing section</strong>, and an <strong>"Is This For You" qualifier</strong>. The content and proof on this page are exceptional — the fixes needed are primarily technical, not structural.</p>
+  </div>
+</div>
+
+<!-- ====== EXECUTIVE SUMMARY ====== -->
+<div class="exec-summary">
+  <h2>Executive Summary</h2>
+  <p>The live $27 tripwire page at <code>smithfit.online/get-access-page-5760-6913</code> is actually the <strong>most content-rich and proof-heavy page in the SmithFit funnel</strong>. It contains an extraordinary volume of social proof (55 client story cards, 8 detailed before/after narratives with video buttons, named testimonials from Kristal, Sarah, Shellie, Crystal, Cynthia, Branda, Nixie, Hanna, Regina, Elizabeth, and dozens more), compelling copy that deeply resonates with the avatar, a working VSL, full 5-pillar offer breakdown, 3 bonuses, detailed guarantee, FAQ, Future Fork close, and Is-This-For-You qualifier.</p>
+  <p>The issues that remain are <strong>primarily technical</strong>: the browser tab reads "Cortisol Cycle Diagram," the animated counters may display broken numbers on some browsers, the Identity Mirrors section appears to render twice (duplicate), footer links point to a predeploy staging URL, there's blank space at the very top, and there's no sticky CTA bar. Fixing these 6 issues would project a <strong>+1.3 point improvement</strong> (7.8 → 9.1/10).</p>
+
+  <div class="severity-counts">
+    <div class="count-item"><div class="badge badge-crit">2</div> Critical (title, counters)</div>
+    <div class="count-item"><div class="badge badge-high">2</div> High (duplicate section, footer links)</div>
+    <div class="count-item"><div class="badge badge-med">1</div> Medium (blank space at top)</div>
+    <div class="count-item"><div class="badge badge-low">1</div> Enhancement (add sticky CTA)</div>
+  </div>
+</div>
+
+<!-- ====== OVERALL SCORES ====== -->
+<h2 style="font-family:'Playfair Display',serif;font-size:22px;margin:0 0 6px;">Overall Scores</h2>
+<p style="font-size:14px;color:#777;margin-bottom:18px;">Live page vs. live page with technical fixes applied</p>
+
+<div class="compare-grid">
+  <div class="compare-card live">
+    <div class="card-label">🟡 Live Page (Current)</div>
+    <div class="big-score">7.8</div>
+    <div class="verdict-text">Strong content, technical bugs holding it back</div>
+  </div>
+  <div class="compare-card optimized">
+    <div class="card-ribbon">Target</div>
+    <div class="card-label">✅ With Technical Fixes</div>
+    <div class="big-score">9.1</div>
+    <div class="verdict-text">+1.3 pts — all fixes are quick technical patches</div>
+  </div>
+</div>
+
+<!-- ====== VALUE EQUATION ====== -->
+<h2 style="font-family:'Playfair Display',serif;font-size:20px;margin:32px 0 6px;">Hormozi Value Equation</h2>
+<p style="font-size:13px;color:#777;margin-bottom:14px;">Value = (Dream Outcome × Perceived Likelihood) / (Time Delay × Effort &amp; Sacrifice)</p>
+
+<div class="ve-grid">
+  <div class="ve-card">
+    <div class="ve-label">Dream Outcome</div>
+    <div class="ve-scores">
+      <span class="ve-live">9</span>
+      <span class="ve-arrow">→</span>
+      <span class="ve-opt">9.5</span>
+    </div>
+    <div class="ve-note">Identity-level messaging. "Feel like yourself again." Future Fork close. Exceptional.</div>
+  </div>
+  <div class="ve-card">
+    <div class="ve-label">Perceived Likelihood</div>
+    <div class="ve-scores">
+      <span class="ve-live">9</span>
+      <span class="ve-arrow">→</span>
+      <span class="ve-opt">9.5</span>
+    </div>
+    <div class="ve-note">55 testimonial cards + 8 detailed B&A stories. Most proof in the entire funnel.</div>
+  </div>
+  <div class="ve-card">
+    <div class="ve-label">Time Delay</div>
+    <div class="ve-scores">
+      <span class="ve-live">8</span>
+      <span class="ve-arrow">→</span>
+      <span class="ve-opt">8.5</span>
+    </div>
+    <div class="ve-note">"Day 3" promise clear. 7-day journey section present. Counter bug undermines this slightly.</div>
+  </div>
+  <div class="ve-card">
+    <div class="ve-label">Effort &amp; Sacrifice</div>
+    <div class="ve-scores">
+      <span class="ve-live">8</span>
+      <span class="ve-arrow">→</span>
+      <span class="ve-opt">8.5</span>
+    </div>
+    <div class="ve-note">Work/Off/Chaos Day templates. "No macros, no punishing cardio." 15-minute workouts.</div>
+  </div>
+</div>
+
+<!-- ====== GRAND SLAM CHECKLIST ====== -->
+<h2 style="font-family:'Playfair Display',serif;font-size:20px;margin:32px 0 6px;">Grand Slam Offer Checklist</h2>
+<p style="font-size:13px;color:#777;margin-bottom:14px;">The 5 Enhancers that turn a good offer into a Grand Slam Offer</p>
+
+<table class="checklist-table">
+  <thead><tr><th>Enhancer</th><th>Live</th><th>Fixed</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="enhancer">Scarcity</td>
+      <td class="status-icon partial-icon">⚠️</td>
+      <td class="status-icon partial-icon">⚠️</td>
+      <td>Countdown timer exists ("This Offer Expires In:") — but no genuine scarcity (limited spots, cohort-based, etc.). Adding a genuine constraint would push this to green.</td>
+    </tr>
+    <tr>
+      <td class="enhancer">Urgency</td>
+      <td class="status-icon pass-icon">✅</td>
+      <td class="status-icon pass-icon">✅</td>
+      <td>Countdown timer + Future Fork section ("Future A: Close This Page" vs "Future B: Start Today") creates strong psychological urgency. Well done.</td>
+    </tr>
+    <tr>
+      <td class="enhancer">Bonuses</td>
+      <td class="status-icon pass-icon">✅</td>
+      <td class="status-icon pass-icon">✅</td>
+      <td>3 detailed bonuses with specific copy: Grocery Guide ($47), Beat the Binge Protocol ($47), Restaurant Survival Guide ($47). Each has a headline, subheadline, and benefit paragraph. Strong.</td>
+    </tr>
+    <tr>
+      <td class="enhancer">Guarantee</td>
+      <td class="status-icon pass-icon">✅</td>
+      <td class="status-icon pass-icon">✅</td>
+      <td>Detailed 60-Day "Even If Life Gets in the Way" guarantee with emotional copy, "even just 3 days," specific claim process, and trust proof grid. Excellent.</td>
+    </tr>
+    <tr>
+      <td class="enhancer">Naming</td>
+      <td class="status-icon pass-icon">✅</td>
+      <td class="status-icon pass-icon">✅</td>
+      <td>"7-Day Shift-Proof Metabolism Reset™" — niche-specific, outcome-oriented, trademarked. 5 Pillars named (Diagnose, Stabilize, Calm, Strengthen, Sustain). Each bonus has a distinct name.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ====== SECTION-BY-SECTION AUDIT ====== -->
+<h2 style="font-family:'Playfair Display',serif;font-size:22px;margin:36px 0 6px;">Section-by-Section Audit</h2>
+<p style="font-size:14px;color:#777;margin-bottom:20px;">Click any section to expand. Grades: A = exceptional, B = solid, C = needs work, F = broken/missing.</p>
+
+<!-- Section 1: Hero -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>1. Hero / Above the Fold</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-b">B+</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="subsection-title">What's Working</div>
+    <div class="good-item"><strong>Qualifier text:</strong> "For the nurse over 35 who feels like she's tried everything" — perfect avatar call-out above the headline.</div>
+    <div class="good-item"><strong>Social proof ticker:</strong> "🔥 437 nurses have started this month" — real-time urgency and social proof in one line.</div>
+    <div class="good-item"><strong>Headline:</strong> "If Your Belly Fat Won't Budge After a 12-Hour Shift — It's Not Your Discipline. Your Body Is Stuck in Fight-or-Flight" — nails the pain point AND reframes blame.</div>
+    <div class="good-item"><strong>Subheadline:</strong> "The only 7-day metabolism reset built by a nurse, for nurses — no macros, no punishing cardio" — differentiator + objection killer.</div>
+    <div class="good-item"><strong>CTA:</strong> "YES — I'm Ready to Reset My Metabolism for Just $27 →" with guarantee microcopy underneath.</div>
+
+    <div class="subsection-title" style="margin-top:18px;">What Needs Fixing</div>
+    <div class="fix-item"><strong>Blank space at top:</strong> There's dead space above the hero content. Likely a GHL builder spacing issue — remove any empty sections or reduce top padding.</div>
+    <div class="bad-item"><strong>Page title:</strong> Browser tab shows "Cortisol Cycle Diagram" — should be "SmithFit | 7-Day Shift-Proof Metabolism Reset for Nurses Over 35".</div>
+
+    <div class="subsection-title" style="margin-top:18px;">To reach A</div>
+    <div class="copy-box">Fix the blank space at top so the hero loads immediately. Fix the page title in GHL Page Settings → SEO Meta Data. Both are 2-minute fixes.</div>
+  </div>
+</div>
+
+<!-- Section 2: VSL Video -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>2. VSL Video</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-a">A-</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>Video works:</strong> Functional video player with play button, sound toggle, and fullscreen controls.</div>
+    <div class="good-item"><strong>Intro copy:</strong> "Watch this before you scroll — it explains exactly why nothing has worked until now." Creates curiosity and pre-frames the mechanism.</div>
+    <div class="good-item"><strong>Second CTA below video:</strong> "Start My 7-Day Reset — Just $27 →" with guarantee microcopy. Catches people who watch the video and are ready to buy.</div>
+    <div class="fix-item"><strong>Minor:</strong> "▶ 2-Minute Breakdown" label — verify the video is actually ~2 minutes or update this label to match actual length.</div>
+  </div>
+</div>
+
+<!-- Section 3: Social Proof Numbers -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>3. Animated Counters / Proof Bar</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-c">C</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="subsection-title">The Problem</div>
+    <div class="bad-item"><strong>Counter animation is unreliable.</strong> Previous reviews showed these counters rendering as "-3+", "-1%", "-0 lbs", and "-0" on certain browsers. The accessibility tree shows double values (e.g., two "400+" entries) suggesting the animation script may be overlapping start/end states.</div>
+    <div class="bad-item"><strong>"Day Money-Back Guarantee"</strong> — the "60-" prefix appears to be missing from the 4th counter, rendering as "Day" instead of "60-Day".</div>
+
+    <div class="subsection-title" style="margin-top:18px;">What's Intended</div>
+    <div class="good-item">The numbers themselves are correct when they work: 400+ Nurses Transformed, 87% Feel a Difference by Day 3, 5 lbs Avg Lost in Week 1, 60-Day Money-Back Guarantee.</div>
+
+    <div class="subsection-title" style="margin-top:18px;">Fix</div>
+    <div class="copy-box"><strong>Replace animated counters with static numbers.</strong> Use the static proof bar from <code>tripwire-artifact-proof.html</code> (Section A). Static numbers always render correctly — no JavaScript dependency, no animation bugs. This is the single highest-ROI fix on the page.</div>
+  </div>
+</div>
+
+<!-- Section 4: Problem/Pain Copy -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>4. Problem / Pain Section</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-a">A</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>"If You Feel Like You're Failing, It's Not Your Fault"</strong> — validates before solving. This is exactly what the avatar needs to hear.</div>
+    <div class="good-item"><strong>Vivid, specific copy:</strong> "Living off coffee and vibes," "in the pantry like a raccoon," "scrubs feel so tight" — these are real phrases nurses use. The copy feels like it was written by someone who lives this life.</div>
+    <div class="good-item"><strong>Identity-level fear copy:</strong> "The fear that you're losing the woman you used to be" — this is the deepest layer of the avatar's pain. Masterfully written.</div>
+    <div class="good-item"><strong>"You're not lazy. You're just exhausted."</strong> — one-line reframe that builds instant trust.</div>
+    <div class="good-item"><strong>Powerful imagery:</strong> The nurse-in-car photo (looking at old photo of herself on phone) perfectly matches the "who I used to be" narrative.</div>
+    <div class="copy-box"><strong>Verdict:</strong> This section is outstanding. No changes needed. The copy is the best in the funnel.</div>
+  </div>
+</div>
+
+<!-- Section 5: Old Way vs Shift-Proof Way -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>5. Old Way vs. Shift-Proof Way</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-a">A-</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>Clear comparison structure:</strong> "❌ The Old, Failed Way" vs "✦ The Shift-Proof Way" — visual distinction with X's and checks.</div>
+    <div class="good-item"><strong>Specific contrasts:</strong> "Make carbs the enemy / Feed your metabolism" — each line directly inverts a failed approach into the SmithFit method.</div>
+    <div class="good-item"><strong>Appears twice:</strong> Once in the early pain section AND again later with "THE WRONG WAY: MORE STRESS" vs "THE SHIFT-PROOF WAY: CALM FIRST" — reinforces the mechanism from two angles.</div>
+    <div class="fix-item"><strong>Minor:</strong> On some viewport sizes, the comparison headers may render but the content appears below the visible area. Verify the layout on mobile.</div>
+  </div>
+</div>
+
+<!-- Section 6: Kristal B&A + Night Shift -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>6. Kristal Testimonial + Night Shift Section</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-a">A</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>Kristal B&A:</strong> Full before/after with detailed story — "Avoided mirrors, wore oversized hoodies" → "Her husband grabbed her waist and said 'Where did you go?' Down 31 lbs." Has video button for deeper engagement.</div>
+    <div class="good-item"><strong>Night shift dedicated section:</strong> "If You Work Nights, Your Body Is Fighting Even Harder Than You Think" — addresses the #1 objection (night shift compatibility) with its own dedicated section.</div>
+    <div class="good-item"><strong>Shift templates:</strong> Work Day / Off Day / Chaos Day templates explicitly called out — this is the tangible "how it works for ME" proof.</div>
+    <div class="good-item"><strong>Elizabeth testimonial:</strong> "I've tried every program out there and they all assumed I slept at night. This is the first one that actually works for my schedule." Named, real, shift-specific.</div>
+    <div class="good-item"><strong>Full-width banner:</strong> "You spend 12 hours keeping everyone else alive. When was the last time you took care of you?" — emotional gut punch.</div>
+  </div>
+</div>
+
+<!-- Section 7: Cortisol Mechanism -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>7. Cortisol Cycle Mechanism</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-a">A</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>"The Shift-Work Metabolism Trap"</strong> — names the enemy. Cortisol cycle diagram visualizes the vicious cycle: Chronic Stress → Cortisol Spikes → Fat Storage → More Stress.</div>
+    <div class="good-item"><strong>"The Shift-Proof Reset Breaks the Cycle Here"</strong> — positions the product as the pattern interrupt.</div>
+    <div class="good-item"><strong>Check engine metaphor:</strong> "You've Been Trying to Lose Weight With Your Body's 'Check Engine' Light On" — brilliant analogy that makes cortisol science instantly understandable.</div>
+    <div class="good-item"><strong>Second comparison:</strong> "THE WRONG WAY: MORE STRESS" vs "THE SHIFT-PROOF WAY: CALM FIRST" with specific action items.</div>
+    <div class="good-item"><strong>CTA:</strong> "I'm Ready to Turn Off My Check Engine Light — $27" — ties the metaphor directly to the purchase.</div>
+  </div>
+</div>
+
+<!-- Section 8: Origin Story -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>8. IJ's Origin Story</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-a">A</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>"The Story Behind The System"</strong> — full origin story with emotional arc: travel nurse → exhausted → tried everything → "felt like a ghost in my own life" → nursing background led to cortisol discovery → created protocol → shared with unit → 400+ nurses.</div>
+    <div class="good-item"><strong>Multiple photos of IJ:</strong> Personal, authentic. Not stock photos. Shows the real person behind the brand.</div>
+    <div class="good-item"><strong>Powerful vulnerability:</strong> "I'm breaking..." / "felt like a fraud to my patients" — this level of honesty builds deep trust.</div>
+    <div class="good-item"><strong>Mechanism discovery:</strong> "I stopped asking about calories and started asking how to escape being trapped in Fight-or-Flight" — frames the pivot from effort to regulation.</div>
+    <div class="good-item"><strong>Social proof bridge:</strong> "400 nurses have used this exact 7-day reset" with counter (87% feel a difference by Day 3) — transitions smoothly from story to proof.</div>
+  </div>
+</div>
+
+<!-- Section 9: Stories Gallery -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>9. "Stories That Sound Like Yours" Gallery</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-a">A+</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>55 testimonial cards.</strong> This is an extraordinary volume of social proof. Named clients include: Seena Choksmi, Rachael Fry, Regina Sanchez, Marisela Hernandez, Sarah Reiter, Diana Courtney, Heather Wirt, Lo Stern, Shan Edney, Jamie Dunn, Elizabeth Strong, Mella San Juan, Blaire Cammans, Adrienne Kimak, Sabrina Walia, Nadi Rodriguez, Octavia Roberts, April Ching, Ashlee Avelar, Babra Mumia, Margaret Lescano, Jamie Niblack, Taneasha Evans, Chelsey Davault, Jessica Esteves, Elizabeth Coparanis, Marquita Johnson, Melissa J, Tammie Bridegroom, and more.</div>
+    <div class="good-item"><strong>Each card has a specific win:</strong> "8 lbs This Month," "Wedding Ring Slides Off," "Pre-Pregnancy Scrubs Loose," "Brain Fog Cleared," "Conquered the 12-Hr Shift," "Son Following Her Lead" — these aren't generic, they're real.</div>
+    <div class="good-item"><strong>"Showing 6 of 55 stories"</strong> — progressive disclosure. Shows 6 initially, reveals more on click. "Your story starts here" CTA at the bottom.</div>
+    <div class="good-item"><strong>Real screenshots:</strong> Chat/DM screenshots of actual client wins — "I WOKE UP HUNGRY!!" — these feel raw and authentic.</div>
+    <div class="copy-box"><strong>Verdict:</strong> This is the strongest social proof section in the entire SmithFit funnel. No changes needed. The volume and specificity are conversion gold.</div>
+  </div>
+</div>
+
+<!-- Section 10: Identity Mirrors B&A -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>10. Identity Mirrors — Detailed B&A Stories</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-b">B+</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>8 detailed before/after narratives with video buttons:</strong> Hanna (19 lbs, bloating gone), Regina (22 lbs, food freedom), Sarah (38 lbs, 14 months maintained), Shellie (29 lbs, identity reclaimed), Crystal (33 lbs, 3 years maintained), Cynthia (24 lbs, eats more/works out less), Branda (25 lbs, coaches daughter's softball), Nixie (16 lbs, mental clarity).</div>
+    <div class="good-item"><strong>Each story maps to a specific avatar fear:</strong> Bloating, food obsession, diet fatigue, identity loss, yo-yo cycling, over-exercising, exhaustion/family, food anxiety. Brilliant mapping.</div>
+    <div class="good-item"><strong>Video buttons on each story:</strong> "Enable sound" + play button — deeper engagement for prospects who want more proof.</div>
+
+    <div class="subsection-title" style="margin-top:18px;">Bug</div>
+    <div class="bad-item"><strong>Duplicate section:</strong> The entire Identity Mirrors carousel appears to render TWICE on the page (all 8 stories are listed twice in the DOM). This likely means the GHL builder has a duplicated section. One instance should be removed.</div>
+  </div>
+</div>
+
+<!-- Section 11: 5-Pillar Offer Breakdown -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>11. "Everything You Get" — 5-Pillar Breakdown</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-a">A</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>Complete 5-pillar breakdown with individual value anchoring:</strong> Pillar 1: Diagnose ($75), Pillar 2: Stabilize ($87), Pillar 3: Calm ($87), Pillar 4: Strengthen ($107), Pillar 5: Sustain ($85), Download Pack ($29). Total value builds to $679.</div>
+    <div class="good-item"><strong>Each pillar has:</strong> Headline, subheadline explaining the benefit, 2-3 line description of HOW it works, 3 bullet points of specific deliverables, value anchor price.</div>
+    <div class="good-item"><strong>Framing:</strong> "This isn't another PDF you'll forget about. It's a complete transformation system" — overcomes the "is this just a PDF" objection.</div>
+    <div class="good-item"><strong>Follows the 5-pillar structure of the actual course:</strong> Diagnose → Stabilize → Calm → Strengthen → Sustain. Prospects understand the journey before buying.</div>
+  </div>
+</div>
+
+<!-- Section 12: Bonuses -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>12. Fast-Action Bonuses</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-a">A</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>3 bonuses, each with full copy:</strong><br>
+    Bonus 1: "The Shift-Worker's Grocery Guide & 15-Minute Meal Prep Plan" ($47) — "Walk into any grocery store and know exactly what to grab."<br>
+    Bonus 2: "Beat the Binge: The After-Shift Protocol" ($47) — "Walk through your front door after a brutal shift and feel calm."<br>
+    Bonus 3: "The Restaurant & Takeout Survival Guide" ($47) — "Go out to eat with your family and enjoy every bite."</div>
+    <div class="good-item"><strong>Each bonus solves the NEXT problem:</strong> Grocery → post-shift → eating out. This is Hormozi-style "stacking the value" done right.</div>
+    <div class="good-item"><strong>Total bonus value: $141</strong> — clearly stated in the header.</div>
+  </div>
+</div>
+
+<!-- Section 13: Pricing -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>13. Pricing / Offer Stack</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-a">A-</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>Full value stack summary:</strong> Lists every component with its individual value — Core Program $97, Pillar 1 $75, Pillar 2 $87, Pillar 3 $87, Pillar 4 $107, Pillar 5 $85, plus all 3 bonuses.</div>
+    <div class="good-item"><strong>Countdown timer:</strong> "This Offer Expires In:" — adds urgency.</div>
+    <div class="good-item"><strong>Price anchoring:</strong> "Total Value: $679" → "Your Price Today: $27" → "You save $652 — that's 96% off."</div>
+    <div class="good-item"><strong>CTA:</strong> "YES — I'm Ready to Reset My Metabolism for Just $27" with trust badges (60-Day Guarantee, Instant Access, Secure Checkout, 400+ Nurses).</div>
+    <div class="good-item"><strong>Framing:</strong> "One-time payment · Not a subscription · Yours forever."</div>
+    <div class="fix-item"><strong>Consider:</strong> Add a credit card icon or security badge image near the CTA for additional checkout trust.</div>
+  </div>
+</div>
+
+<!-- Section 14: Is This For You -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>14. "Is This For You?" Qualifier</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-a">A</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>Clean dual-column qualifier:</strong> "✅ This Is For You If..." (5 items) vs "❌ This Is NOT For You If..." (5 items).</div>
+    <div class="good-item"><strong>For-You items hit avatar identity:</strong> "The nurse who gives everything and has nothing left," "You remember when your body used to cooperate," "You're willing to commit 7 days."</div>
+    <div class="good-item"><strong>Not-For-You items filter honestly:</strong> "Looking for a magic pill," "Not willing to make any changes," "Pregnant or have a serious medical condition." Builds trust through honesty.</div>
+    <div class="good-item"><strong>Bridge copy:</strong> "If you're in the first column, this was built for you" → CTA: "Yes, This Is For Me — Start My Reset."</div>
+  </div>
+</div>
+
+<!-- Section 15: Guarantee -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>15. 60-Day Guarantee</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-a">A</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>"The 60-Day 'Even If Life Gets in the Way' Guarantee"</strong> — the name itself overcomes the #1 objection (busy schedule).</div>
+    <div class="good-item"><strong>Empathetic copy:</strong> "I know you've started things before and not finished them. I know your schedule is unpredictable." — validates the fear before addressing it.</div>
+    <div class="good-item"><strong>Low-bar trial:</strong> "Go through the Reset — even just 3 days of it" — reduces the commitment threshold dramatically.</div>
+    <div class="good-item"><strong>Specific claim process:</strong> "One email to claim, No forms or hoops, 60 full days, Even if you only do 3 days." Trust proof grid.</div>
+    <div class="good-item"><strong>Risk reframe:</strong> "I'm not asking you to trust me. I'm asking you to trust what 400+ nurses already know."</div>
+    <div class="good-item"><strong>CTA:</strong> "Risk-Free — Start My 7-Day Reset Now" with "Protected by our 60-Day Guarantee. Zero risk."</div>
+  </div>
+</div>
+
+<!-- Section 16: FAQ -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>16. FAQ Section</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-a">A-</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>7 questions covering key objections:</strong> 12-hour shifts, "tried everything," PCOS/thyroid, not a nurse, price catch, doesn't work, speed of results.</div>
+    <div class="good-item"><strong>Answers are specific and empathetic:</strong> "This system isn't based on the clock — it's based on your body" / "Everything you've tried was likely focused on calories and cardio, which adds more stress."</div>
+    <div class="fix-item"><strong>Consider:</strong> Verify accordion expand/collapse is working correctly on mobile. If the GHL native FAQ element doesn't have smooth toggling, the standalone <code>tripwire-artifact-faq.html</code> component could replace it.</div>
+  </div>
+</div>
+
+<!-- Section 17: Future Fork -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>17. Future Fork Close</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-a">A</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>"One Year From Now, You Will Have Arrived. The Only Question Is Where."</strong> — powerful opening line.</div>
+    <div class="good-item"><strong>Future A (Close This Page):</strong> Day 7 still bloated → Week 3 keto again → Month 2 coworker lost weight → Month 6 still Googling → "Another year passes." Specific, visceral, painful.</div>
+    <div class="good-item"><strong>Future B (Start Today):</strong> Day 7 energy up → Week 3 scrubs looser → Month 2 "the woman who has it figured out" → "You become the woman you've been picturing. She was always you."</div>
+    <div class="good-item"><strong>Close:</strong> "Future B is $27 and 7 days away. Future A costs you nothing today — and everything tomorrow." Perfect reframe.</div>
+    <div class="good-item"><strong>CTA:</strong> "I Choose Future B — Start My Reset Now."</div>
+    <div class="copy-box"><strong>Verdict:</strong> This is one of the best closing sections I've audited. The contrast between futures is visceral and the copy is emotionally devastating in the best way. No changes needed.</div>
+  </div>
+</div>
+
+<!-- Section 18: Final Close -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>18. Final Emotional Close + Footer</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-b">B</span>
+      <span class="opt-grade grade-a">A-</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="good-item"><strong>"She's Already Inside You. She's Just Been Waiting for the Right System to Let Her Out."</strong> — identity-level close.</div>
+    <div class="good-item"><strong>Final testimonial quotes:</strong> Cynthia and Kristal. Two different angles (self-acceptance + physical results).</div>
+    <div class="good-item"><strong>Final CTA:</strong> "YES — I'm Ready to Reset My Metabolism for Just $27" with trust badges.</div>
+
+    <div class="subsection-title" style="margin-top:18px;">Footer Issues</div>
+    <div class="bad-item"><strong>Footer links point to wrong URL:</strong> Links go to <code>predeploy-4a902395-shiftreset-...manus.space</code> — this is a staging/development URL, not the live SmithFit domain. Update Privacy Policy, Terms, Contact, and Refund Policy links to point to <code>smithfit.online</code>.</div>
+  </div>
+</div>
+
+<!-- Section 19: Missing Element — Sticky CTA -->
+<div class="audit-section">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('active')">
+    <h3>19. Missing: Sticky CTA Bar</h3>
+    <div class="section-meta">
+      <span class="live-grade grade-na">N/A</span>
+      <span class="opt-grade grade-a">A</span>
+      <div class="toggle-icon">▼</div>
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="missing-item"><strong>No floating CTA bar.</strong> The page is extremely long (55+ testimonials, 8 B&A stories, 5 pillars, bonuses, FAQ, guarantee, future fork). Without a sticky CTA, a prospect who's ready to buy mid-page has to scroll a long way to find a button.</div>
+    <div class="copy-box"><strong>Fix:</strong> Add the sticky CTA bar from <code>tripwire-artifact-sticky-cta.html</code> as a GHL Custom Code block at the bottom of the page. Shows $27 price, $679 strikethrough, guarantee reminder, and "Start the 7-Day Reset" button. Appears after 600px scroll. ~5 minute implementation.</div>
+  </div>
+</div>
+
+<!-- ====== PRIORITY FIX LIST ====== -->
+<h2 style="font-family:'Playfair Display',serif;font-size:22px;margin:36px 0 6px;">Priority Fix List</h2>
+<p style="font-size:14px;color:#777;margin-bottom:18px;">6 fixes, all technical — estimated 30–45 minutes total</p>
+
+<ol class="priority-list">
+  <li>
+    <span class="item-title">Fix Page Title</span>
+    <span class="item-impact">Impact: Trust + SEO | Time: 2 minutes | Severity: Critical</span>
+    <span class="item-detail">GHL → Funnels → Page Settings → SEO Meta Data → Change "Cortisol Cycle Diagram" to "SmithFit | 7-Day Shift-Proof Metabolism Reset for Nurses Over 35". Also add meta description: "The only metabolism reset built by a nurse, for nurses. No macros, no punishing cardio. Feel the shift by Day 3. $27 one-time."</span>
+  </li>
+  <li>
+    <span class="item-title">Replace Animated Counters with Static Numbers</span>
+    <span class="item-impact">Impact: Proof credibility | Time: 10 minutes | Severity: Critical</span>
+    <span class="item-detail">Delete or disable the animated counter JavaScript. Replace with the static proof bar from <code>tripwire-artifact-proof.html</code> (Section A only). Paste into a GHL Custom Code element where the current counters sit. This eliminates the "-3+", "-1%", "-0 lbs" rendering bug.</span>
+  </li>
+  <li>
+    <span class="item-title">Remove Duplicate Identity Mirrors Section</span>
+    <span class="item-impact">Impact: Page length + professionalism | Time: 5 minutes | Severity: High</span>
+    <span class="item-detail">In GHL Funnels editor, find the Identity Mirrors carousel section. It appears to be duplicated (all 8 B&A stories render twice). Delete one of the two instances. Keep the one that renders correctly with the video buttons.</span>
+  </li>
+  <li>
+    <span class="item-title">Fix Footer Links</span>
+    <span class="item-impact">Impact: Trust + legal compliance | Time: 5 minutes | Severity: High</span>
+    <span class="item-detail">Update Privacy Policy, Terms of Service, Contact Support, and Refund Policy links from the <code>predeploy-...manus.space</code> staging URL to the correct <code>smithfit.online</code> URLs.</span>
+  </li>
+  <li>
+    <span class="item-title">Remove Blank Space at Top of Page</span>
+    <span class="item-impact">Impact: First impression | Time: 5 minutes | Severity: Medium</span>
+    <span class="item-detail">In GHL Funnels editor, check for empty sections or excessive padding above the hero. Delete empty rows or reduce top margin/padding so the hero content loads immediately.</span>
+  </li>
+  <li>
+    <span class="item-title">Add Sticky CTA Bar</span>
+    <span class="item-impact">Impact: Conversion rate | Time: 5 minutes | Severity: Enhancement</span>
+    <span class="item-detail">Add a GHL Custom Code block at the very bottom of the page. Paste the contents of <code>tripwire-artifact-sticky-cta.html</code> (skip the demo spacer div). Update the CTA href to your actual checkout URL. This gives prospects a persistent buy button as they scroll through 55+ testimonials.</span>
+  </li>
+</ol>
+
+<!-- ====== WHAT'S ALREADY GREAT ====== -->
+<h2 style="font-family:'Playfair Display',serif;font-size:22px;margin:36px 0 6px;">What's Already Great (Don't Touch)</h2>
+<p style="font-size:14px;color:#777;margin-bottom:18px;">These sections are at or near best-in-class. No changes needed.</p>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;">
+  <div class="good-item" style="margin:0;"><strong>Problem/Pain Copy:</strong> "Raccoon in the pantry" / "losing the woman you used to be" — exceptional avatar resonance.</div>
+  <div class="good-item" style="margin:0;"><strong>Origin Story:</strong> "Felt like a ghost in my own life, to my own kids, and a fraud to my patients." Authentic and powerful.</div>
+  <div class="good-item" style="margin:0;"><strong>55 Testimonial Cards:</strong> More social proof than the membership and bundle pages combined. Overwhelming evidence.</div>
+  <div class="good-item" style="margin:0;"><strong>8 Identity Mirror Stories:</strong> Each maps to a specific avatar fear. Named clients with video buttons.</div>
+  <div class="good-item" style="margin:0;"><strong>Future Fork Close:</strong> "Future A costs you nothing today — and everything tomorrow." One of the best closes in the funnel.</div>
+  <div class="good-item" style="margin:0;"><strong>Guarantee Copy:</strong> "Even just 3 days of it." Empathetic, low-bar, with specific claim process.</div>
+  <div class="good-item" style="margin:0;"><strong>Night Shift Section:</strong> Dedicated section with Work/Off/Chaos Day templates and Elizabeth's testimonial.</div>
+  <div class="good-item" style="margin:0;"><strong>5-Pillar Breakdown:</strong> Complete value stack with individual pricing — $679 total anchored against $27.</div>
+  <div class="good-item" style="margin:0;"><strong>Check Engine Metaphor:</strong> Makes cortisol science instantly understandable. Tied directly to CTA.</div>
+  <div class="good-item" style="margin:0;"><strong>Bonuses:</strong> 3 well-articulated bonuses that solve the next problem after the reset.</div>
+</div>
+
+<!-- ====== SCORE PROJECTION ====== -->
+<h2 style="font-family:'Playfair Display',serif;font-size:22px;margin:36px 0 6px;">Score Projection</h2>
+<p style="font-size:14px;color:#777;margin-bottom:18px;">Impact of each fix on overall score</p>
+
+<table class="checklist-table">
+  <thead><tr><th>Fix</th><th>Current Impact</th><th>Points Added</th><th>Cumulative Score</th></tr></thead>
+  <tbody>
+    <tr><td>Current live page</td><td>Strong content, technical bugs</td><td>—</td><td style="font-weight:700;">7.8</td></tr>
+    <tr><td>Fix page title</td><td>Trust + SEO credibility</td><td>+0.2</td><td>8.0</td></tr>
+    <tr><td>Fix animated counters</td><td>Proof numbers render correctly</td><td>+0.4</td><td>8.4</td></tr>
+    <tr><td>Remove duplicate section</td><td>Cleaner page, less confusion</td><td>+0.2</td><td>8.6</td></tr>
+    <tr><td>Fix footer links</td><td>Legal compliance + trust</td><td>+0.1</td><td>8.7</td></tr>
+    <tr><td>Fix blank space at top</td><td>Stronger first impression</td><td>+0.1</td><td>8.8</td></tr>
+    <tr><td>Add sticky CTA bar</td><td>Conversion capture throughout page</td><td>+0.3</td><td style="font-weight:700;color:#15803d;">9.1</td></tr>
+  </tbody>
+</table>
+
+<!-- ====== FUNNEL PROGRESS ====== -->
+<h2 style="font-family:'Playfair Display',serif;font-size:22px;margin:36px 0 6px;">Funnel-Wide Progress</h2>
+<p style="font-size:14px;color:#777;margin-bottom:18px;">3 of 4 funnel pages audited — 1 remaining</p>
+
+<div class="funnel-track">
+  <div class="funnel-card done">
+    <div class="f-emoji">✅</div>
+    <div class="f-name">$27 Tripwire</div>
+    <div class="f-score">7.8 → 9.1 (+1.3)</div>
+  </div>
+  <div class="funnel-card done">
+    <div class="f-emoji">✅</div>
+    <div class="f-name">$67/mo Membership</div>
+    <div class="f-score">6.8 → 9.2 (+2.4)</div>
+  </div>
+  <div class="funnel-card done">
+    <div class="f-emoji">✅</div>
+    <div class="f-name">Bundle Upgrade</div>
+    <div class="f-score">5.1 → 8.8 (+3.7)</div>
+  </div>
+  <div class="funnel-card current">
+    <div class="f-emoji">⏳</div>
+    <div class="f-name">Free Trial Downsale</div>
+    <div class="f-score">Not yet audited</div>
+  </div>
+</div>
+
+<!-- ====== COMPONENT FILES ====== -->
+<h2 style="font-family:'Playfair Display',serif;font-size:22px;margin:36px 0 6px;">Available Component Files</h2>
+<p style="font-size:14px;color:#777;margin-bottom:18px;">Pre-built components that can be patched onto the live page</p>
+
+<table class="checklist-table">
+  <thead><tr><th>File</th><th>Use Case</th><th>Needed?</th></tr></thead>
+  <tbody>
+    <tr><td><code>tripwire-artifact-proof.html</code></td><td>Static proof bar (replaces broken animated counters)</td><td style="color:#ff4444;font-weight:600;">YES — Priority #2</td></tr>
+    <tr><td><code>tripwire-artifact-sticky-cta.html</code></td><td>Floating bottom CTA bar ($27 + guarantee)</td><td style="color:#ff9500;font-weight:600;">YES — Priority #6</td></tr>
+    <tr><td><code>tripwire-artifact-faq.html</code></td><td>Standalone FAQ accordion (backup if GHL FAQ is buggy)</td><td style="color:#888;">Optional — only if GHL FAQ has issues</td></tr>
+    <tr><td><code>tripwire-artifact-guarantee.html</code></td><td>Standalone guarantee section</td><td style="color:#15803d;">Not needed — live page has excellent guarantee</td></tr>
+    <tr><td><code>tripwire-artifact-bonus-stack.html</code></td><td>Bonus value stack + pricing</td><td style="color:#15803d;">Not needed — live page has complete bonus section</td></tr>
+    <tr><td><code>tripwire-page-optimized.html</code></td><td>Full replacement page (21 sections)</td><td style="color:#15803d;">Not recommended — live page has MORE content</td></tr>
+  </tbody>
+</table>
+
+<div style="background:#eff6ff;border-left:3px solid #3b82f6;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;font-size:14px;color:#1e40af;line-height:1.7;">
+<strong>Note on the optimized page:</strong> The previously built <code>tripwire-page-optimized.html</code> (21 sections, 1,176 lines) was designed to replace what was initially assessed as a 4.8/10 page with major content gaps. Now that the live page is confirmed to have 55 testimonial cards, 8 detailed B&A stories, a complete 5-pillar breakdown, 3 bonuses, a full guarantee, FAQ, Future Fork, and more — the live page actually contains <strong>significantly more content</strong> than the optimized replacement. <strong>The recommended approach is to patch the 6 technical fixes onto the live page</strong>, not to replace it wholesale.
+</div>
+
+<div class="audit-footer">
+  SmithFit Hormozi Framework Audit &bull; $27 Tripwire &bull; Revised March 29, 2026<br>
+  Live: 7.8/10 → With Fixes: 9.1/10 &bull; 6 technical fixes &bull; ~30-45 minutes implementation
+</div>
+
+</div>
+
+<script>
+// Auto-expand first section
+document.querySelector('.audit-section')?.classList.add('active');
+</script>
+</body>
+</html>

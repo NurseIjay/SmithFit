@@ -1,0 +1,508 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background: #faf6ef;
+        color: #2d2d2d;
+        line-height: 1.6;
+    }
+
+    .sf-faq-container {
+        max-width: 700px;
+        margin: 60px auto;
+        padding: 0 20px;
+    }
+
+    .sf-faq-header {
+        text-align: center;
+        margin-bottom: 50px;
+        opacity: 0;
+        animation: sf-fadeInUp 0.8s ease-out forwards;
+    }
+
+    .sf-faq-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 42px;
+        font-weight: 700;
+        color: #2d2d2d;
+        margin-bottom: 12px;
+    }
+
+    .sf-faq-subtitle {
+        font-size: 16px;
+        color: #666;
+        font-weight: 400;
+    }
+
+    .sf-accordion {
+        list-style: none;
+    }
+
+    .sf-accordion-item {
+        margin-bottom: 16px;
+        opacity: 0;
+        animation: sf-fadeInUp 0.8s ease-out forwards;
+    }
+
+    .sf-accordion-item:nth-child(1) { animation-delay: 0.1s; }
+    .sf-accordion-item:nth-child(2) { animation-delay: 0.2s; }
+    .sf-accordion-item:nth-child(3) { animation-delay: 0.3s; }
+    .sf-accordion-item:nth-child(4) { animation-delay: 0.4s; }
+    .sf-accordion-item:nth-child(5) { animation-delay: 0.5s; }
+    .sf-accordion-item:nth-child(6) { animation-delay: 0.6s; }
+    .sf-accordion-item:nth-child(7) { animation-delay: 0.7s; }
+
+    .sf-accordion-header {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+        padding: 20px;
+        background: #fff;
+        border: 1px solid #e8e0d0;
+        border-left: 4px solid transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 4px;
+    }
+
+    .sf-accordion-header:hover {
+        background: #fefdfb;
+        border-color: #d9cfc0;
+    }
+
+    .sf-accordion-item.sf-active .sf-accordion-header {
+        border-left-color: #c9a84c;
+        background: #fefdfb;
+    }
+
+    .sf-accordion-question {
+        font-size: 16px;
+        font-weight: 600;
+        color: #2d2d2d;
+        margin: 0;
+        text-align: left;
+        flex: 1;
+    }
+
+    .sf-accordion-icon {
+        width: 24px;
+        height: 24px;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        margin-left: 16px;
+        flex-shrink: 0;
+        transition: -webkit-transform 0.3s ease, transform 0.3s ease;
+        color: #c9a84c;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .sf-accordion-item.sf-active .sf-accordion-icon {
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    .sf-accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+        opacity: 0;
+    }
+
+    .sf-accordion-item.sf-active .sf-accordion-content {
+        opacity: 1;
+    }
+
+    .sf-accordion-answer {
+        padding: 0 20px;
+        background: #fff;
+        border: 1px solid #e8e0d0;
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+        color: #555;
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .sf-accordion-answer p {
+        padding: 20px 0;
+    }
+
+    .sf-accordion-answer p:first-child {
+        padding-top: 20px;
+    }
+
+    .sf-accordion-answer p:last-child {
+        padding-bottom: 20px;
+    }
+
+    .sf-social-proof-section {
+        margin-top: 50px;
+        text-align: center;
+        opacity: 0;
+        animation: sf-fadeInUp 0.8s ease-out 0.8s forwards;
+    }
+
+    .sf-ticker-container {
+        background: linear-gradient(135deg, #c9a84c 0%, #d4b859 100%);
+        border-radius: 8px;
+        padding: 16px 20px;
+        color: #faf6ef;
+        font-size: 14px;
+        font-weight: 500;
+        overflow: hidden;
+        height: 50px;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+
+    .sf-ticker-message {
+        display: inline-block;
+        animation: sf-slideIn 0.6s ease-out forwards;
+        white-space: nowrap;
+    }
+
+    .sf-ticker-message.sf-exiting {
+        animation: sf-slideOut 0.6s ease-in forwards;
+    }
+
+    @keyframes sf-slideIn {
+        from {
+            opacity: 0;
+            -webkit-transform: translateX(20px);
+            transform: translateX(20px);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+    }
+
+    @-webkit-keyframes sf-slideIn {
+        from {
+            opacity: 0;
+            -webkit-transform: translateX(20px);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: translateX(0);
+        }
+    }
+
+    @keyframes sf-slideOut {
+        from {
+            opacity: 1;
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+        to {
+            opacity: 0;
+            -webkit-transform: translateX(-20px);
+            transform: translateX(-20px);
+        }
+    }
+
+    @-webkit-keyframes sf-slideOut {
+        from {
+            opacity: 1;
+            -webkit-transform: translateX(0);
+        }
+        to {
+            opacity: 0;
+            -webkit-transform: translateX(-20px);
+        }
+    }
+
+    .sf-contact-section {
+        margin-top: 50px;
+        padding: 30px;
+        background: #f5f1e8;
+        border-radius: 8px;
+        text-align: center;
+        opacity: 0;
+        animation: sf-fadeInUp 0.8s ease-out 1s forwards;
+    }
+
+    .sf-contact-section h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 20px;
+        margin-bottom: 12px;
+        color: #2d2d2d;
+    }
+
+    .sf-contact-section p {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 8px;
+    }
+
+    .sf-contact-link {
+        color: #c9a84c;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .sf-contact-link:hover {
+        color: #b89a3f;
+        text-decoration: underline;
+    }
+
+    @keyframes sf-fadeInUp {
+        from {
+            opacity: 0;
+            -webkit-transform: translateY(20px);
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    @-webkit-keyframes sf-fadeInUp {
+        from {
+            opacity: 0;
+            -webkit-transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .sf-faq-container {
+            margin: 40px auto;
+        }
+
+        .sf-faq-title {
+            font-size: 32px;
+        }
+
+        .sf-faq-subtitle {
+            font-size: 14px;
+        }
+
+        .sf-accordion-header {
+            padding: 16px;
+        }
+
+        .sf-accordion-question {
+            font-size: 15px;
+        }
+
+        .sf-accordion-answer {
+            font-size: 14px;
+        }
+
+        .sf-contact-section {
+            padding: 20px;
+        }
+
+        .sf-contact-section h3 {
+            font-size: 18px;
+        }
+
+        .sf-ticker-message {
+            font-size: 13px;
+        }
+    }
+</style>
+
+<div class="sf-faq-container">
+    <div class="sf-faq-header">
+        <h2 class="sf-faq-title">Questions? We've Got You.</h2>
+        <p class="sf-faq-subtitle">Everything nurses ask before committing</p>
+    </div>
+
+    <ul class="sf-accordion" id="sfFaqAccordion">
+        <li class="sf-accordion-item">
+            <button class="sf-accordion-header" aria-expanded="false">
+                <h3 class="sf-accordion-question">What if I can't afford $335 or $588 right now?</h3>
+                <span class="sf-accordion-icon">+</span>
+            </button>
+            <div class="sf-accordion-content">
+                <div class="sf-accordion-answer">
+                    <p>We get it — nursing doesn't exactly come with a trust fund. But here's the math: the 6-month bundle works out to $55/month — less than one DoorDash order after a rough night shift. The 12-month is $49/month. And both include bonuses worth 2-3x what you're paying. You're not spending more — you're locking in a better deal while these bonuses are available.</p>
+                </div>
+            </div>
+        </li>
+
+        <li class="sf-accordion-item">
+            <button class="sf-accordion-header" aria-expanded="false">
+                <h3 class="sf-accordion-question">What if I want to cancel? Am I locked in?</h3>
+                <span class="sf-accordion-icon">+</span>
+            </button>
+            <div class="sf-accordion-content">
+                <div class="sf-accordion-answer">
+                    <p>This is a commitment-level offer for nurses who are done starting over. The bundle includes a 1-on-1 onboarding call where we build YOUR protocol — that kind of personal investment is why we reserve this for serious nurses only. You keep full access for your entire bundle term, and the onboarding call alone is worth the entire price. That's what sets this apart.</p>
+                </div>
+            </div>
+        </li>
+
+        <li class="sf-accordion-item">
+            <button class="sf-accordion-header" aria-expanded="false">
+                <h3 class="sf-accordion-question">I work nights/rotating shifts. Will this actually work for me?</h3>
+                <span class="sf-accordion-icon">+</span>
+            </button>
+            <div class="sf-accordion-content">
+                <div class="sf-accordion-answer">
+                    <p>This was literally built for you. IJ is a nurse. His wife is a nurse. Every protocol, every meal template, every workout is designed around 12-hour shifts, night rotations, and days when 'meal prep' means grabbing whatever's in the break room. The onboarding call specifically maps your schedule to the program.</p>
+                </div>
+            </div>
+        </li>
+
+        <li class="sf-accordion-item">
+            <button class="sf-accordion-header" aria-expanded="false">
+                <h3 class="sf-accordion-question">What's the difference between monthly and the bundles?</h3>
+                <span class="sf-accordion-icon">+</span>
+            </button>
+            <div class="sf-accordion-content">
+                <div class="sf-accordion-answer">
+                    <p>Monthly gives you the core program — meal plans, workouts, community, coaching calls. The bundles unlock premium bonuses that accelerate your results: a 1-on-1 onboarding call that personalizes everything to YOUR body and schedule, AI-powered meal tracking, bloodwork analysis, and (for 12-month) direct coach access plus quarterly check-ins. Monthly members see results. Bundle members transform.</p>
+                </div>
+            </div>
+        </li>
+
+        <li class="sf-accordion-item">
+            <button class="sf-accordion-header" aria-expanded="false">
+                <h3 class="sf-accordion-question">I've tried everything else and nothing worked. Why would this be different?</h3>
+                <span class="sf-accordion-icon">+</span>
+            </button>
+            <div class="sf-accordion-content">
+                <div class="sf-accordion-answer">
+                    <p>Because everything else started with 'eat less, move more.' We start with regulation. Your body isn't broken — it's stuck in fight-or-flight from years of shift stress. We fix the cortisol problem first, then the weight handles itself. That's why 87% of committed members reach their goal weight. They're not trying harder — they're doing it in the right order.</p>
+                </div>
+            </div>
+        </li>
+
+        <li class="sf-accordion-item">
+            <button class="sf-accordion-header" aria-expanded="false">
+                <h3 class="sf-accordion-question">What exactly happens on the 1-on-1 onboarding call?</h3>
+                <span class="sf-accordion-icon">+</span>
+            </button>
+            <div class="sf-accordion-content">
+                <div class="sf-accordion-answer">
+                    <p>You'll spend 60 minutes with IJ going through your shift schedule, your eating patterns, your stress triggers, your bloodwork (if available), and your specific goals. You'll walk away with a personalized protocol — not a generic plan. This call alone is worth the entire bundle price. Members consistently say it's the moment everything clicked.</p>
+                </div>
+            </div>
+        </li>
+
+        <li class="sf-accordion-item">
+            <button class="sf-accordion-header" aria-expanded="false">
+                <h3 class="sf-accordion-question">Is the $588 really worth it over the $335?</h3>
+                <span class="sf-accordion-icon">+</span>
+            </button>
+            <div class="sf-accordion-content">
+                <div class="sf-accordion-answer">
+                    <p>If you're serious about a full transformation — yes. The 12-month adds VIP coach DM access (message your coach anytime, not just during calls) and quarterly checkpoint reviews where your protocols get adjusted every 90 days. That's the difference between losing 15 lbs and losing 35-50 lbs. The nurses who go 12 months don't just lose weight — they become completely different women.</p>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <div class="sf-social-proof-section">
+        <div class="sf-ticker-container">
+            <div class="sf-ticker-message" id="sfTickerMessage">Sarah just upgraded to the 12-month bundle</div>
+        </div>
+    </div>
+
+    <div class="sf-contact-section">
+        <h3>Still have questions?</h3>
+        <p>DM us on Instagram <a href="https://instagram.com/smithfit" class="sf-contact-link" target="_blank">@smithfit</a> or email <a href="mailto:support@smithfit.com" class="sf-contact-link">support@smithfit.com</a></p>
+    </div>
+</div>
+
+<script>
+(function() {
+    var tickerMessages = [
+        'Sarah just upgraded to the 12-month bundle',
+        'Lisa just locked in her 6-month commitment',
+        'Jennifer completed Day 7 and already sees a difference',
+        'Michelle just registered for her onboarding call'
+    ];
+
+    var currentMessageIndex = 0;
+
+    try {
+        var accordion = document.getElementById('sfFaqAccordion');
+        var items = accordion.querySelectorAll('.sf-accordion-item');
+
+        items.forEach(function(item) {
+            var header = item.querySelector('.sf-accordion-header');
+            var content = item.querySelector('.sf-accordion-content');
+            var answer = item.querySelector('.sf-accordion-answer');
+
+            header.addEventListener('click', function() {
+                items.forEach(function(otherItem) {
+                    if (otherItem !== item) {
+                        var className = otherItem.className;
+                        if (className.indexOf('sf-active') !== -1) {
+                            otherItem.className = className.replace(' sf-active', '').replace('sf-active ', '');
+                            var otherContent = otherItem.querySelector('.sf-accordion-content');
+                            otherContent.style.maxHeight = '0px';
+                        }
+                    }
+                });
+
+                var itemClassName = item.className;
+                var isActive = itemClassName.indexOf('sf-active') !== -1;
+
+                if (!isActive) {
+                    item.className = itemClassName + ' sf-active';
+                    content.style.maxHeight = answer.scrollHeight + 'px';
+                    header.setAttribute('aria-expanded', 'true');
+                } else {
+                    item.className = itemClassName.replace(' sf-active', '').replace('sf-active ', '');
+                    content.style.maxHeight = '0px';
+                    header.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    } catch (e) {
+        console.error('Accordion error:', e);
+    }
+
+    try {
+        var tickerMessage = document.getElementById('sfTickerMessage');
+
+        function rotateTickerMessage() {
+            var messageEl = document.getElementById('sfTickerMessage');
+            var className = messageEl.className;
+            messageEl.className = className + ' sf-exiting';
+
+            setTimeout(function() {
+                currentMessageIndex = (currentMessageIndex + 1) % tickerMessages.length;
+                messageEl.textContent = tickerMessages[currentMessageIndex];
+                var newClassName = className.replace(' sf-exiting', '').replace('sf-exiting ', '');
+                messageEl.className = newClassName;
+            }, 600);
+        }
+
+        setInterval(rotateTickerMessage, 4000);
+    } catch (e) {
+        console.error('Ticker error:', e);
+    }
+})();
+</script>

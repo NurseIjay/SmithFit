@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmithFit — Membership Page Implementation Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #c9a84c; --gold-light: #d4b86a; --gold-dark: #a88a3a;
+    --cream: #faf6ef; --text-dark: #1a1a1a; --text-body: #3d3d3d; --text-muted: #6b6b6b;
+    --green: #2d6a4f; --green-light: #d4edda; --red: #c0392b; --red-light: #fde8e8;
+    --white: #ffffff; --blue: #2563eb; --blue-light: #eff6ff;
+  }
+  body { font-family: 'Inter', system-ui, sans-serif; background: #f8f9fa; color: var(--text-dark); line-height: 1.7; }
+
+  .guide { max-width: 860px; margin: 0 auto; padding: 40px 24px; }
+
+  .guide-header { text-align: center; padding: 40px 0 32px; border-bottom: 3px solid var(--gold); margin-bottom: 48px; }
+  .guide-header h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--text-dark); margin-bottom: 8px; }
+  .guide-header p { font-size: 16px; color: var(--text-muted); }
+
+  /* Score card */
+  .score-card { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 48px; }
+  .score-box { background: white; border-radius: 16px; padding: 28px; text-align: center; border: 1px solid #e2e8f0; }
+  .score-box.before { border-left: 4px solid var(--red); }
+  .score-box.after { border-left: 4px solid var(--green); }
+  .score-label { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .score-box.before .score-label { color: var(--red); }
+  .score-box.after .score-label { color: var(--green); }
+  .score-number { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 800; line-height: 1; }
+  .score-box.before .score-number { color: var(--red); }
+  .score-box.after .score-number { color: var(--green); }
+  .score-out-of { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+
+  /* Section headers */
+  h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--text-dark); margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+  h3 { font-size: 17px; font-weight: 700; color: var(--text-dark); margin: 24px 0 8px; }
+
+  /* Page order list */
+  .page-order { counter-reset: section; }
+  .page-section { background: white; border-radius: 14px; border: 1px solid #e2e8f0; margin-bottom: 16px; overflow: hidden; transition: box-shadow 0.2s; }
+  .page-section:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+
+  .section-header { display: flex; align-items: center; gap: 16px; padding: 20px 24px; cursor: default; }
+  .section-num { counter-increment: section; width: 36px; height: 36px; background: var(--gold); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; }
+  .section-num::before { content: counter(section); }
+  .section-info { flex: 1; }
+  .section-name { font-weight: 700; font-size: 16px; color: var(--text-dark); }
+  .section-desc { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+  .section-file { font-size: 12px; font-weight: 600; color: var(--blue); background: var(--blue-light); padding: 4px 10px; border-radius: 8px; white-space: nowrap; }
+  .section-file.native { color: var(--green); background: var(--green-light); }
+  .section-file.critical { color: var(--red); background: var(--red-light); }
+
+  /* Checklist */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { padding: 10px 16px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: flex-start; gap: 10px; font-size: 14px; }
+  .checklist li:last-child { border-bottom: none; }
+  .check-icon { color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .warn-icon { color: #f59e0b; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .crit-icon { color: var(--red); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+  /* File inventory */
+  .file-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; margin: 16px 0; }
+  .file-table th { background: #f8f9fa; padding: 12px 16px; text-align: left; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); }
+  .file-table td { padding: 12px 16px; border-top: 1px solid #f0f0f0; font-size: 14px; }
+  .file-table td:first-child { font-weight: 600; color: var(--text-dark); }
+  .badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 8px; }
+  .badge-new { background: var(--green-light); color: var(--green); }
+  .badge-rebuild { background: var(--blue-light); color: var(--blue); }
+  .badge-existing { background: #f3f4f6; color: #6b7280; }
+
+  /* Notes */
+  .note { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 14px; line-height: 1.6; }
+  .note strong { color: #92400e; }
+
+  @media (max-width: 640px) {
+    .guide { padding: 20px 16px; }
+    .score-card { grid-template-columns: 1fr; }
+    .section-header { flex-wrap: wrap; }
+    .section-file { margin-top: 4px; }
+    .file-table { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="guide">
+  <div class="guide-header">
+    <h1>$67/mo Membership Page — Implementation Guide</h1>
+    <p>Complete rebuild plan with all artifacts, recommended page order, and GHL embed instructions</p>
+  </div>
+
+  <!-- SCORE IMPROVEMENT -->
+  <div class="score-card">
+    <div class="score-box before">
+      <div class="score-label">Current Hormozi Score</div>
+      <div class="score-number">6.8</div>
+      <div class="score-out-of">out of 10</div>
+    </div>
+    <div class="score-box after">
+      <div class="score-label">Projected After Implementation</div>
+      <div class="score-number">9.2</div>
+      <div class="score-out-of">out of 10</div>
+    </div>
+  </div>
+
+  <!-- FILE INVENTORY -->
+  <h2>Artifact Inventory</h2>
+  <table class="file-table">
+    <thead>
+      <tr><th>File</th><th>What It Is</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>artifact-bonus-stack.html</td>
+        <td>Hormozi bonus stack with 6 named bonuses + value summary</td>
+        <td><span class="badge badge-new">Ready</span></td>
+      </tr>
+      <tr>
+        <td>artifact-pricing-card.html</td>
+        <td>Optimized pricing card with timer, guarantee badge, trust signals</td>
+        <td><span class="badge badge-new">Ready</span></td>
+      </tr>
+      <tr>
+        <td>artifact-proof-section-v2.html</td>
+        <td>Image-card gallery with lightbox, animated counters, video embed</td>
+        <td><span class="badge badge-rebuild">Rebuilt</span></td>
+      </tr>
+      <tr>
+        <td>artifact-interactive-showcase.html</td>
+        <td>6 interactive elements (graph, calculator, carousel, counters, sticky CTA, social proof)</td>
+        <td><span class="badge badge-new">Ready</span></td>
+      </tr>
+      <tr>
+        <td>artifact-faq-objection-handler.html</td>
+        <td>FAQ accordion + comparison table + sticky CTA + social proof banner</td>
+        <td><span class="badge badge-new">Ready</span></td>
+      </tr>
+      <tr>
+        <td>membership-page-audit.html</td>
+        <td>Full Hormozi audit report with scores and action items</td>
+        <td><span class="badge badge-existing">Reference</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- RECOMMENDED PAGE ORDER -->
+  <h2>Recommended Page Section Order</h2>
+  <p style="font-size:15px; color:var(--text-muted); margin-bottom:24px;">This is the optimal sequence based on the Hormozi Hook-Retain-Reward framework. Each section builds on the previous one to maximize conversion.</p>
+
+  <div class="page-order">
+    <!-- 1 -->
+    <div class="page-section">
+      <div class="section-header">
+        <div class="section-num"></div>
+        <div class="section-info">
+          <div class="section-name">Hero Section — Identity Hook</div>
+          <div class="section-desc">Headline, subhead, hero image (replace male bodybuilder with female nurse). "You just proved the $27 Reset works. Here's how to never go back."</div>
+        </div>
+        <div class="section-file critical">Fix on GHL page</div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="page-section">
+      <div class="section-header">
+        <div class="section-num"></div>
+        <div class="section-info">
+          <div class="section-name">The Day 8 Problem — Animated Progress Graph</div>
+          <div class="section-desc">Self-drawing SVG graph showing what happens after the $27 course ends. Creates urgency without being pushy.</div>
+        </div>
+        <div class="section-file">artifact-interactive-showcase.html (Element 1)</div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="page-section">
+      <div class="section-header">
+        <div class="section-num"></div>
+        <div class="section-info">
+          <div class="section-name">Proof Section — Video + Image Card Gallery</div>
+          <div class="section-desc">Animated 400+ counter, stat bar, video testimonial compilation, then the image card gallery with lightbox + "Show More" toggle.</div>
+        </div>
+        <div class="section-file">artifact-proof-section-v2.html</div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="page-section">
+      <div class="section-header">
+        <div class="section-num"></div>
+        <div class="section-info">
+          <div class="section-name">Bonus Stack — Hormozi Value Build</div>
+          <div class="section-desc">6 named bonuses with individual dollar values, identity-based "Become the woman who..." framing, dark value stack totaling $455+/mo.</div>
+        </div>
+        <div class="section-file">artifact-bonus-stack.html</div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="page-section">
+      <div class="section-header">
+        <div class="section-num"></div>
+        <div class="section-info">
+          <div class="section-name">"Peek Inside the App" Carousel</div>
+          <div class="section-desc">Phone-style swipeable carousel showing what the membership looks like. Replace placeholder slides with actual app screenshots.</div>
+        </div>
+        <div class="section-file">artifact-interactive-showcase.html (Element 3)</div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="page-section">
+      <div class="section-header">
+        <div class="section-num"></div>
+        <div class="section-info">
+          <div class="section-name">Pricing Card — Charter Member Rate</div>
+          <div class="section-desc">$67/mo pricing with countdown timer, $2.23/day reframe, guarantee badge right next to CTA, trust badges.</div>
+        </div>
+        <div class="section-file">artifact-pricing-card.html</div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="page-section">
+      <div class="section-header">
+        <div class="section-num"></div>
+        <div class="section-info">
+          <div class="section-name">Savings Calculator</div>
+          <div class="section-desc">Interactive sliders: "How many programs have you tried?" — reveals total wasted vs. $67/mo. Reframes from "is it worth it?" to "can I afford NOT to?"</div>
+        </div>
+        <div class="section-file">artifact-interactive-showcase.html (Element 2)</div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="page-section">
+      <div class="section-header">
+        <div class="section-num"></div>
+        <div class="section-info">
+          <div class="section-name">FAQ Accordion — Objection Handling</div>
+          <div class="section-desc">7 Hormozi-style reframes for the top objections (night shift, macros, tried everything, menopause, exhaustion, missed breaks, "just a meal plan").</div>
+        </div>
+        <div class="section-file">artifact-faq-objection-handler.html</div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="page-section">
+      <div class="section-header">
+        <div class="section-num"></div>
+        <div class="section-info">
+          <div class="section-name">Comparison Table — "Us vs. Everything Else"</div>
+          <div class="section-desc">9-row feature comparison with checkmarks. SmithFit column highlighted as "RECOMMENDED." Visual proof of differentiation.</div>
+        </div>
+        <div class="section-file">artifact-faq-objection-handler.html</div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="page-section">
+      <div class="section-header">
+        <div class="section-num"></div>
+        <div class="section-info">
+          <div class="section-name">Final CTA + Guarantee</div>
+          <div class="section-desc">Full 30-day guarantee statement, final pricing CTA with all trust signals, decline link.</div>
+        </div>
+        <div class="section-file">artifact-pricing-card.html</div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="page-section">
+      <div class="section-header">
+        <div class="section-num"></div>
+        <div class="section-info">
+          <div class="section-name">Sticky CTA Bar (Persistent)</div>
+          <div class="section-desc">Fixed bottom bar with price + guarantee badge + CTA. Appears after scrolling past Section 6. Always visible on mobile.</div>
+        </div>
+        <div class="section-file">artifact-faq-objection-handler.html</div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="page-section">
+      <div class="section-header">
+        <div class="section-num"></div>
+        <div class="section-info">
+          <div class="section-name">Live Social Proof Banner (Floating)</div>
+          <div class="section-desc">Rotating messages with pulsing green dot: "12 nurses joined this week" — placed near CTA areas. Auto-rotates every 6 seconds.</div>
+        </div>
+        <div class="section-file">artifact-faq-objection-handler.html</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRITICAL FIXES -->
+  <h2>Critical Fixes (Do First)</h2>
+  <ul class="checklist">
+    <li><span class="crit-icon">!!</span> <strong>Replace hero image</strong> — Remove male bodybuilder photo. Use a photo of a female nurse (ideally a SmithFit member or IJ coaching). This is the #1 conversion killer.</li>
+    <li><span class="crit-icon">!!</span> <strong>Fix attribution</strong> — Change "Hayley Smith, RN" to "IJ Smith, RN" throughout the page.</li>
+    <li><span class="crit-icon">!!</span> <strong>Fix inconsistent numbers</strong> — The page shows "2,847+" in some spots and "283+" in others. Standardize to "400+" (your real number).</li>
+    <li><span class="crit-icon">!!</span> <strong>Remove fake $349 anchor price</strong> — Replace with "Charter Member Rate" framing (already built into artifact-pricing-card.html).</li>
+  </ul>
+
+  <!-- HIGH-IMPACT FIXES -->
+  <h2>High-Impact Improvements</h2>
+  <ul class="checklist">
+    <li><span class="warn-icon">!</span> <strong>Move guarantee next to CTA</strong> — Currently buried 10+ sections down. The pricing card artifact places it right next to the button.</li>
+    <li><span class="warn-icon">!</span> <strong>Replace feature list with bonus stack</strong> — Current "Here's what's included" is a plain list. The bonus stack artifact gives each feature a name, dollar value, and identity hook.</li>
+    <li><span class="warn-icon">!</span> <strong>Add FAQ section</strong> — Current page has zero objection handling. The FAQ accordion covers all 7 top objections with Hormozi-style reframes.</li>
+    <li><span class="warn-icon">!</span> <strong>Fix text contrast</strong> — Light gray text on cream background fails WCAG. Darken body text to #3d3d3d minimum.</li>
+    <li><span class="warn-icon">!</span> <strong>Add comparison table</strong> — Shows visitors exactly why this is different from the generic programs they've already tried and failed.</li>
+    <li><span class="warn-icon">!</span> <strong>Add sticky CTA bar</strong> — Catches scrollers who never click inline CTAs. Especially powerful on mobile.</li>
+  </ul>
+
+  <!-- GHL EMBED INSTRUCTIONS -->
+  <h2>How to Embed in GoHighLevel</h2>
+
+  <h3>Method 1: Custom HTML Block (Recommended)</h3>
+  <ul class="checklist">
+    <li><span class="check-icon">&#10003;</span> Open your funnel page in GHL editor</li>
+    <li><span class="check-icon">&#10003;</span> Add a "Custom JS/HTML" element where you want the section</li>
+    <li><span class="check-icon">&#10003;</span> Copy the full contents of the artifact HTML file</li>
+    <li><span class="check-icon">&#10003;</span> Paste into the Custom HTML block</li>
+    <li><span class="check-icon">&#10003;</span> Remove the &lt;html&gt;, &lt;head&gt;, and &lt;body&gt; wrapper tags — keep only the &lt;style&gt;, the content &lt;div&gt;, and the &lt;script&gt;</li>
+    <li><span class="check-icon">&#10003;</span> Preview and adjust padding/margins to match your page flow</li>
+  </ul>
+
+  <h3>Method 2: iFrame Embed</h3>
+  <ul class="checklist">
+    <li><span class="check-icon">&#10003;</span> Host the HTML file on your domain or a CDN (e.g., upload to GHL file manager)</li>
+    <li><span class="check-icon">&#10003;</span> Use an iframe element: &lt;iframe src="YOUR_URL" style="width:100%; border:none; min-height:800px;"&gt;&lt;/iframe&gt;</li>
+    <li><span class="check-icon">&#10003;</span> Add iframe auto-resize script for dynamic height adjustment</li>
+  </ul>
+
+  <div class="note">
+    <strong>Important:</strong> When embedding multiple artifacts on the same page, namespace your CSS class names if you see style conflicts. Each artifact uses scoped class names to minimize conflicts, but if two sections share the same variable names (e.g., <code>--gold</code>), only include the <code>:root</code> variables once at the top of the page.
+  </div>
+
+  <!-- IMAGE CARD STRATEGY -->
+  <h2>Image Card Placement Strategy</h2>
+  <ul class="checklist">
+    <li><span class="check-icon">&#10003;</span> <strong>Tripwire page ($27):</strong> 6-8 cards showing quick wins (Week 1 results, Day 3 energy, fast transformations)</li>
+    <li><span class="check-icon">&#10003;</span> <strong>Membership upsell ($67/mo):</strong> 10-12 cards showing sustained results (Month 3+, lifestyle changes, long-term members)</li>
+    <li><span class="check-icon">&#10003;</span> The v2 proof section has 5 cards visible by default + 7 more behind "Show More" toggle</li>
+    <li><span class="check-icon">&#10003;</span> Each card slot is a simple &lt;img&gt; tag — just replace the placeholder div with your image URL</li>
+    <li><span class="check-icon">&#10003;</span> Lightbox enabled: clicking any card opens it full-screen for easy reading</li>
+  </ul>
+
+  <!-- WHAT'S NEXT -->
+  <h2>After This Page Is Live</h2>
+  <ul class="checklist">
+    <li><span class="check-icon">&#10003;</span> <strong>Page 2:</strong> $27 Tripwire sales page audit + optimization</li>
+    <li><span class="check-icon">&#10003;</span> <strong>Page 3:</strong> Free Trial downsale page audit + optimization</li>
+    <li><span class="check-icon">&#10003;</span> <strong>Page 4:</strong> Bundle upgrade page audit + optimization</li>
+    <li><span class="check-icon">&#10003;</span> <strong>Email sequences:</strong> Build all 5 campaign email templates in GHL</li>
+    <li><span class="check-icon">&#10003;</span> <strong>GHL workflows:</strong> Build all 5 automation workflows per WORKFLOW_BUILD_GUIDE.md</li>
+  </ul>
+
+</div>
+
+</body>
+</html>

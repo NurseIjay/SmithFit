@@ -1,0 +1,375 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #faf6ef;
+    color: #2d2d2d;
+    line-height: 1.6;
+  }
+
+  .sf-faq-container {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 40px 24px;
+  }
+
+  .sf-faq-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .sf-faq-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #2d2d2d;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .sf-faq-subtitle {
+    font-size: 16px;
+    color: #666;
+    font-weight: 400;
+  }
+
+  .sf-faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .sf-faq-item {
+    border: 1px solid #e0d5c7;
+    border-left: 4px solid #e0d5c7;
+    background-color: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .sf-faq-item.sf-faq-active {
+    border-left-color: #c9a84c;
+    box-shadow: 0 4px 12px rgba(201, 168, 76, 0.15);
+  }
+
+  .sf-faq-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 24px;
+    cursor: pointer;
+    background-color: #faf6ef;
+    border: none;
+    text-align: left;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .sf-faq-item.sf-faq-active .sf-faq-trigger {
+    background-color: #f5f0e8;
+  }
+
+  .sf-faq-trigger:hover {
+    background-color: #f5f0e8;
+  }
+
+  .sf-faq-question {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d2d2d;
+    flex: 1;
+    padding-right: 16px;
+    line-height: 1.4;
+  }
+
+  .sf-faq-icon {
+    font-size: 20px;
+    color: #c9a84c;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+
+  .sf-faq-item.sf-faq-active .sf-faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .sf-faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    background-color: #fff;
+  }
+
+  .sf-faq-item.sf-faq-active .sf-faq-answer {
+    max-height: 800px;
+    padding: 0 24px 24px 24px;
+  }
+
+  .sf-faq-answer-text {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.8;
+  }
+
+  .sf-faq-highlight {
+    color: #c9a84c;
+    font-weight: 600;
+  }
+
+  .sf-faq-stat {
+    display: inline-block;
+    background-color: #faf6ef;
+    padding: 8px 12px;
+    border-left: 3px solid #c9a84c;
+    margin: 16px 0;
+    border-radius: 2px;
+  }
+
+  .sf-faq-ticker {
+    background-color: #2d2d2d;
+    color: #faf6ef;
+    padding: 16px 24px;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 40px;
+    border-radius: 4px;
+  }
+
+  .sf-faq-ticker-text {
+    display: inline-block;
+    animation: scroll 30s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  @media (max-width: 640px) {
+    .sf-faq-container {
+      padding: 24px 16px;
+      margin: 40px auto;
+    }
+
+    .sf-faq-title {
+      font-size: 28px;
+    }
+
+    .sf-faq-trigger {
+      padding: 16px 16px;
+    }
+
+    .sf-faq-question {
+      font-size: 15px;
+    }
+
+    .sf-faq-answer-text {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<div class="sf-faq-container">
+  <div class="sf-faq-header">
+    <h2 class="sf-faq-title">Questions About the Bundle? Let's Clear the Air.</h2>
+    <p class="sf-faq-subtitle">You're already in the system. These answers are about why the bundle is the real unlock.</p>
+  </div>
+
+  <div class="sf-faq-accordion" id="faqAccordion">
+    <!-- Q1 -->
+    <div class="sf-faq-item" data-faq-index="0">
+      <button class="sf-faq-trigger" type="button">
+        <span class="sf-faq-question">I already have the membership — why do I need the bundle?</span>
+        <span class="sf-faq-icon">▼</span>
+      </button>
+      <div class="sf-faq-answer">
+        <div class="sf-faq-answer-text">
+          The membership gives you the <span class="sf-faq-highlight">system</span>. The bundle gives you the <span class="sf-faq-highlight">shortcut</span>.<br><br>
+          You have meal templates now. With the bundle, you get a 60-minute call where IJ maps your exact protocol — to your shift pattern, your stress triggers, your family chaos. That 1-on-1 call alone eliminates 40+ hours of trial-and-error. You stop following a template. You start following YOUR plan.<br><br>
+          <div class="sf-faq-stat">
+            <strong>80% of bundle members reach their goal weight. 23% of monthly-only members do.</strong>
+          </div><br>
+          The difference? Personalization. Everyone's cortisol stress is different. Your night shifts hit you differently than they hit the next nurse. Without the 1-on-1, you're hoping the template fits. With it, it's engineered for you.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="sf-faq-item" data-faq-index="1">
+      <button class="sf-faq-trigger" type="button">
+        <span class="sf-faq-question">What if I do the 6-month and wish I'd done the 12?</span>
+        <span class="sf-faq-icon">▼</span>
+      </button>
+      <div class="sf-faq-answer">
+        <div class="sf-faq-answer-text">
+          This is the most common regret we hear from 6-month members.<br><br>
+          Here's what happens: Month 1–3 you're in honeymoon mode. Your body responds. You lose weight, sleep better, shift days feel easier. But Month 4–5? Your body adapts. What worked Week 1 stops working Week 12. That's when you need a protocol adjustment — and that's where 12-month members win.<br><br>
+          <span class="sf-faq-highlight">12-month members get:</span><br>
+          • Quarterly protocol adjustments (automatic)<br>
+          • VIP coach access (text IJ or her team at 2am after a rough shift)<br>
+          • Real-time support when life derails your plan<br><br>
+          6-month members? You're back on the monthly template. No adjustments. No VIP access. If 6-month feels good to you now, that's honest. But if you have ANY doubt — if you're thinking "I want to make sure this sticks permanently" — 12 months is the insurance policy that makes that happen.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="sf-faq-item" data-faq-index="2">
+      <button class="sf-faq-trigger" type="button">
+        <span class="sf-faq-question">Is the 1-on-1 call really worth upgrading for?</span>
+        <span class="sf-faq-icon">▼</span>
+      </button>
+      <div class="sf-faq-answer">
+        <div class="sf-faq-answer-text">
+          Every single bundle member says the same thing after their call: "That's where everything clicked."<br><br>
+          In 60 minutes, IJ goes deeper into YOUR life than any trainer ever has:<br>
+          • Your exact shift rotation (not just "nights") and how it hits your cortisol<br>
+          • Your real eating windows (not theory — your actual 12-hour rotation)<br>
+          • Your stress triggers (hospital politics, family demands, sleep debt)<br>
+          • Your bloodwork (if you have it) — thyroid, metabolic markers, hormones<br>
+          • Your sleep challenges and how to actually protect it<br><br>
+          You walk away with a personalized protocol. Not a meal plan. Not a generic workout. A complete system engineered for exactly one person: you.<br><br>
+          That's not a sales call. That's the single most personalized health investment you'll make. It's why bundle members don't wonder "Am I doing this right?" They know.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="sf-faq-item" data-faq-index="3">
+      <button class="sf-faq-trigger" type="button">
+        <span class="sf-faq-question">$335 or $588 feels like a lot right now.</span>
+        <span class="sf-faq-icon">▼</span>
+      </button>
+      <div class="sf-faq-answer">
+        <div class="sf-faq-answer-text">
+          Let's do the math:<br><br>
+          <strong>6-Month Bundle:</strong> $55.83/month<br>
+          That's one DoorDash order after a rough shift. Less than a co-pay. One workout supplement.<br><br>
+          <strong>12-Month Bundle:</strong> $49/month<br>
+          Cheaper than your average gym membership. Cheaper than the monthly membership alone over 12 months.<br><br>
+          <strong>Compare this to staying on monthly only:</strong><br>
+          • 6 months of $67/mo = $402 total<br>
+          • No personal 1-on-1 call<br>
+          • No protocol customization<br>
+          • No quarterly adjustments<br>
+          • No VIP coach access<br><br>
+          With the 6-month bundle:<br>
+          • $335 total<br>
+          • 60-min personalized call ($500+ value alone)<br>
+          • MealLens AI (track meals, get feedback)<br>
+          • BioSync bloodwork insights ($200+ value)<br>
+          • VIP community access Month 1<br><br>
+          You're not spending more. You're spending smarter — and getting $1,200+ in bonuses that don't exist on monthly-only.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="sf-faq-item" data-faq-index="4">
+      <button class="sf-faq-trigger" type="button">
+        <span class="sf-faq-question">What happens after my bundle term ends?</span>
+        <span class="sf-faq-icon">▼</span>
+      </button>
+      <div class="sf-faq-answer">
+        <div class="sf-faq-answer-text">
+          You keep everything you built.<br><br>
+          The protocol is yours. The habits are locked in. The way you now eat, move, and manage stress after shifts? That's permanent. By Month 6 (or 12), you're not learning anymore — you're maintaining. You don't need the training wheels.<br><br>
+          <strong>After your bundle ends:</strong><br>
+          Your membership automatically continues at the standard monthly rate ($67/mo). You keep access to workouts, meal templates, the community, and weekly group calls. But you won't need the 1-on-1 adjustments because by then, you've already transformed into someone who knows how to eat for shift work. You know your body. You know what works.<br><br>
+          That's the whole point of the bundle: to front-load the transformation so you don't need heavy support forever. You're paying for speed and certainty now, so you can coast later.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="sf-faq-item" data-faq-index="5">
+      <button class="sf-faq-trigger" type="button">
+        <span class="sf-faq-question">Can I upgrade from 6-month to 12-month later?</span>
+        <span class="sf-faq-icon">▼</span>
+      </button>
+      <div class="sf-faq-answer">
+        <div class="sf-faq-answer-text">
+          The bundle pricing and bonuses on this page are a one-time offer available right now.<br><br>
+          Once you move forward with a 6-month bundle, the exclusive 12-month pricing and bonuses (VIP coach access, quarterly check-ins, extended support period) won't be available at this rate. This is the window to lock it in.<br><br>
+          If you're even 30% considering the 12-month, choose it now. You can't retrofit these bonuses later. The price goes up. The offer resets. And honestly? The clients who "upgrade later" almost never do — they get comfortable on 6-month and don't revisit.<br><br>
+          If you know you want the permanent transformation and ongoing support? 12-month is your move right now.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="sf-faq-item" data-faq-index="6">
+      <button class="sf-faq-trigger" type="button">
+        <span class="sf-faq-question">What makes the bundle different from just staying on monthly longer?</span>
+        <span class="sf-faq-icon">▼</span>
+      </button>
+      <div class="sf-faq-answer">
+        <div class="sf-faq-answer-text">
+          Time alone doesn't transform you. <span class="sf-faq-highlight">Structure does.</span><br><br>
+          <strong>Monthly members:</strong> Have the program. Follow the templates. Get results (if they're consistent).<br><br>
+          <strong>Bundle members:</strong> Have personalized protocols. AI meal tracking that learns YOUR patterns. Bloodwork analysis. Direct coach support. The framework is identical. What changes is how deeply it's customized to you.<br><br>
+          It's like the difference between having a gym membership and having a personal trainer standing next to you saying, "Here's the exact lift for YOUR body. Here's why. Now let's adjust it for YOUR schedule."<br><br>
+          The monthly membership is a toolbox. The bundle is a craftsman showing you exactly how to use every tool for your specific problem. That's why:<br><br>
+          <div class="sf-faq-stat">
+            <strong>23% of monthly-only members reach goal. 80% of bundle members do.</strong>
+          </div><br>
+          It's not because bundle members are more disciplined. It's because they're not guessing.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sf-faq-ticker">
+    <div class="sf-faq-ticker-text">✓ 400+ nurses transformed | ✓ 80% reach goal in bundle | ✓ 60-day VIP support | ✓ Personalized protocol for life</div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    try {
+      var accordion = document.getElementById('faqAccordion');
+      if (!accordion) return;
+
+      var items = accordion.querySelectorAll('.sf-faq-item');
+
+      items.forEach(function(item, idx) {
+        var trigger = item.querySelector('.sf-faq-trigger');
+        if (!trigger) return;
+
+        trigger.addEventListener('click', function(e) {
+          e.preventDefault();
+
+          var isActive = item.className.indexOf('sf-faq-active') > -1;
+
+          items.forEach(function(otherItem) {
+            if (otherItem.className.indexOf('sf-faq-active') > -1) {
+              otherItem.className = otherItem.className.replace('sf-faq-active', '').trim();
+            }
+          });
+
+          if (!isActive) {
+            item.className += ' sf-faq-active';
+          }
+        });
+      });
+
+      // Auto-open first item on load
+      if (items.length > 0) {
+        items[0].className += ' sf-faq-active';
+      }
+    } catch (err) {
+      console.error('FAQ accordion error:', err);
+    }
+  })();
+</script>

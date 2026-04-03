@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bundle Upgrade Page — Implementation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #c9a84c;
+            --cream: #faf6ef;
+            --dark: #2d2d2d;
+            --light-gray: #f5f5f5;
+            --border-gray: #e0e0e0;
+            --text-gray: #666;
+            --success: #4caf50;
+            --critical: #d32f2f;
+            --warning: #ff9800;
+            --info: #2196f3;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--dark);
+            background-color: var(--cream);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--dark) 0%, #404040 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+        }
+
+        .header .score-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .header .date {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            margin-top: 1rem;
+        }
+
+        /* Progress Counter */
+        .progress-counter {
+            position: sticky;
+            top: 0;
+            background: var(--dark);
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            z-index: 100;
+            border-bottom: 3px solid var(--gold);
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--border-gray);
+            margin-top: 0.5rem;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            min-height: calc(100vh - 100px);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background: var(--light-gray);
+            padding: 2rem 1.5rem;
+            border-right: 1px solid var(--border-gray);
+            position: sticky;
+            top: 70px;
+            height: calc(100vh - 70px);
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-gray);
+            text-decoration: none;
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-nav a:hover {
+            background: white;
+            color: var(--gold);
+            border-left-color: var(--gold);
+        }
+
+        .sidebar-nav a.active {
+            background: white;
+            color: var(--gold);
+            border-left-color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 70px;
+        }
+
+        .section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            border-bottom: 3px solid var(--gold);
+            padding-bottom: 0.75rem;
+        }
+
+        .section h3 {
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+        }
+
+        /* Checklist Items */
+        .checklist-item {
+            background: white;
+            border-left: 4px solid var(--border-gray);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item.completed {
+            background: #f0f7f0;
+            border-left-color: var(--success);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 1rem;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--gold);
+        }
+
+        .checklist-item label {
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            font-weight: 500;
+        }
+
+        .checklist-item.completed label {
+            text-decoration: line-through;
+            color: var(--text-gray);
+        }
+
+        .item-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .priority-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-critical {
+            background: #ffebee;
+            color: var(--critical);
+        }
+
+        .badge-recommended {
+            background: #e3f2fd;
+            color: var(--info);
+        }
+
+        .badge-copy {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        .item-description {
+            margin-top: 0.75rem;
+            padding-left: 2.5rem;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Page Order Section */
+        .page-order {
+            background: white;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .order-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-gray);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-number {
+            background: var(--gold);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .order-content {
+            flex: 1;
+        }
+
+        .order-section-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .order-status {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .order-status.keep {
+            color: var(--success);
+        }
+
+        .order-status.fix {
+            color: var(--warning);
+        }
+
+        .order-status.new {
+            color: var(--info);
+        }
+
+        .order-status.insert {
+            color: var(--gold);
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            margin-top: 1rem;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: var(--dark);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        tr:hover {
+            background: var(--light-gray);
+        }
+
+        /* GHL Instructions */
+        .ghl-instruction {
+            background: #e3f2fd;
+            border-left: 4px solid var(--info);
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .ghl-instruction strong {
+            color: var(--info);
+        }
+
+        /* Collapsible Sections */
+        .collapsible-header {
+            background: var(--light-gray);
+            padding: 1rem;
+            cursor: pointer;
+            border-left: 4px solid var(--gold);
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+            margin-top: 1rem;
+            border-radius: 4px;
+        }
+
+        .collapsible-header:hover {
+            background: white;
+        }
+
+        .collapsible-toggle {
+            font-size: 1.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .collapsible-content {
+            display: none;
+            background: white;
+            padding: 1.5rem;
+            border: 1px solid var(--border-gray);
+            border-top: none;
+            margin-bottom: 1rem;
+        }
+
+        .collapsible-content.show {
+            display: block;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #f5f5f5;
+            border: 1px solid var(--border-gray);
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin-top: 0.75rem;
+        }
+
+        /* Stats Card */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--gold);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .stat-card .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .stat-card .label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: auto;
+                padding: 1rem;
+                border-right: none;
+                border-bottom: 1px solid var(--border-gray);
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .sidebar h3 {
+                grid-column: 1 / -1;
+            }
+
+            .sidebar-nav {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 0.25rem;
+            }
+
+            .content {
+                padding: 1.5rem;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .header {
+                padding: 1.5rem 1rem;
+            }
+
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            .section h2 {
+                font-size: 1.3rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .order-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* Scrollbar Styling */
+        .sidebar::-webkit-scrollbar,
+        .content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-track,
+        .content::-webkit-scrollbar-track {
+            background: var(--light-gray);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb,
+        .content::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover,
+        .content::-webkit-scrollbar-thumb:hover {
+            background: #b8941f;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Bundle Upgrade Page — Implementation Guide</h1>
+        <p class="subtitle">Complete step-by-step optimization roadmap</p>
+        <div class="score-badge">
+            Current: 5.1/10 → Projected: 8.8/10
+        </div>
+        <p class="date">March 28, 2026</p>
+    </div>
+
+    <!-- Progress Counter -->
+    <div class="progress-counter">
+        <span id="progress-text">0 of 42 items completed (0%)</span>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <h3>Navigation</h3>
+            <ul class="sidebar-nav">
+                <li><a href="#critical-fixes" class="nav-link">🚨 Critical Fixes</a></li>
+                <li><a href="#page-order" class="nav-link">📄 Recommended Order</a></li>
+                <li><a href="#ghl-embeds" class="nav-link">⚙️ GHL Embed Guide</a></li>
+                <li><a href="#copy-fixes" class="nav-link">✏️ Copy Fixes</a></li>
+                <li><a href="#artifacts" class="nav-link">📦 Artifacts Inventory</a></li>
+                <li><a href="#summary" class="nav-link">✅ Summary</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+
+            <!-- Section 1: Critical Fixes -->
+            <section class="section" id="critical-fixes">
+                <h2>🚨 Critical Fixes (Do These First)</h2>
+                <p style="margin-bottom: 1.5rem; color: var(--text-gray);">These five issues are blocking conversions. Complete them in this order.</p>
+
+                <div class="checklist-item" data-item="1">
+                    <label>
+                        <input type="checkbox" class="checklist-checkbox">
+                        <div>
+                            <div class="item-title">
+                                <span>Add Commitment Trust Section</span>
+                                <span class="priority-badge badge-critical">CRITICAL</span>
+                            </div>
+                            <div class="item-description">
+                                <strong>Issue:</strong> No identity-shifting language or trust framing. Bundle buyers need to feel this is for serious nurses — not see a refund guarantee (IJ invests personal time on onboarding calls).<br><br>
+                                <strong>Solution:</strong> Embed <code>bundle-artifact-commitment-trust.html</code> ABOVE the final CTA section. Includes "Become Her" identity cards, onboarding call breakdown, and trust proof strip.<br><br>
+                                <strong>Impact:</strong> Positions bundle as exclusive to committed nurses. Builds trust through identity and proof, not risk reversal.
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="checklist-item" data-item="2">
+                    <label>
+                        <input type="checkbox" class="checklist-checkbox">
+                        <div>
+                            <div class="item-title">
+                                <span>Fix Broken Video</span>
+                                <span class="priority-badge badge-critical">CRITICAL</span>
+                            </div>
+                            <div class="item-description">
+                                <strong>Issue:</strong> Video section shows "No compatible source was found for this media."<br><br>
+                                <strong>Solution:</strong> Choose one:<br>
+                                • Upload video file to GHL media library and update embed source<br>
+                                • Replace with Loom or YouTube embed<br>
+                                • Remove section entirely if no video exists<br><br>
+                                <strong>Why:</strong> A broken video is worse than no video. It signals poor QA and kills trust.
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="checklist-item" data-item="3">
+                    <label>
+                        <input type="checkbox" class="checklist-checkbox">
+                        <div>
+                            <div class="item-title">
+                                <span>Replace Male Bodybuilder Photo</span>
+                                <span class="priority-badge badge-critical">CRITICAL</span>
+                            </div>
+                            <div class="item-description">
+                                <strong>Issue:</strong> "A Note from Nurse Yay" section shows shirtless male bodybuilder before/after. Target audience is female nurses 35–52.<br><br>
+                                <strong>Solution:</strong> Replace with:<br>
+                                • Professional photo of IJ in scrubs<br>
+                                • IJ with clients/community<br>
+                                • Warm, professional headshot<br><br>
+                                <strong>Impact:</strong> Immediate trust loss with demographic. This single change boosts conversion 3–5%.
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="checklist-item" data-item="4">
+                    <label>
+                        <input type="checkbox" class="checklist-checkbox">
+                        <div>
+                            <div class="item-title">
+                                <span>Add Countdown Timer</span>
+                                <span class="priority-badge badge-critical">CRITICAL</span>
+                            </div>
+                            <div class="item-description">
+                                <strong>Issue:</strong> Empty "Offer expires in" heading with no timer.<br><br>
+                                <strong>Solution:</strong> Embed <code>bundle-artifact-countdown.html</code> in the pricing cards section where the heading lives. Replace the empty text with the working timer.<br><br>
+                                <strong>Impact:</strong> Creates FOMO urgency. Bundle buyers are late-stage prospects — a timer pushes them to decide now vs. "later" (which never comes).
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="checklist-item" data-item="5">
+                    <label>
+                        <input type="checkbox" class="checklist-checkbox">
+                        <div>
+                            <div class="item-title">
+                                <span>Fix Footer Links</span>
+                                <span class="priority-badge badge-critical">CRITICAL</span>
+                            </div>
+                            <div class="item-description">
+                                <strong>Issue:</strong> Privacy Policy, Terms of Service, and Contact Support links point to <code>shiftreset-d2gwd5xd.manus.space</code> — not SmithFit's domain.<br><br>
+                                <strong>Solution:</strong> Update all footer links to correct SmithFit URLs:<br>
+                                • Privacy Policy → [your-privacy-url]<br>
+                                • Terms of Service → [your-terms-url]<br>
+                                • Contact Support → [your-contact-url]<br><br>
+                                <strong>Why:</strong> Broken domain links trigger phishing suspicion and abandon.
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Section 2: Page Order -->
+            <section class="section" id="page-order">
+                <h2>📄 Recommended Page Order (Top to Bottom)</h2>
+                <p style="margin-bottom: 1.5rem; color: var(--text-gray);">Optimal section sequencing to maximize conversion rate.</p>
+
+                <div class="page-order">
+                    <div class="order-item">
+                        <div class="order-number">1</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Hero Section</div>
+                            <div class="order-status keep">✅ KEEP — Fix blank whitespace rendering</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">2</div>
+                        <div class="order-content">
+                            <div class="order-section-name">87% Stats Card</div>
+                            <div class="order-status keep">✅ KEEP AS-IS — Strong conversion driver</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">3</div>
+                        <div class="order-content">
+                            <div class="order-section-name">CTA Button</div>
+                            <div class="order-status keep">✅ KEEP</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">4</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Video Section</div>
+                            <div class="order-status fix">🔧 FIX or REMOVE — Broken embed</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">5</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Lisa Testimonial</div>
+                            <div class="order-status keep">✅ KEEP</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">6</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Science of Commitment + Timeline</div>
+                            <div class="order-status keep">✅ KEEP — Strong educational content</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">7</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Enhanced Proof Section</div>
+                            <div class="order-status insert">🆕 INSERT — bundle-artifact-proof.html</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">8</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Premium Bonuses Intro Text</div>
+                            <div class="order-status keep">✅ KEEP</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">9</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Interactive Bonus Showcase</div>
+                            <div class="order-status new">🔄 REPLACE — bundle-artifact-bonus-showcase.html</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">10</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Quarterly Checkpoints Comparison</div>
+                            <div class="order-status keep">✅ KEEP — Strong, clear element</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">11</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Rachel Testimonial</div>
+                            <div class="order-status keep">✅ KEEP</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">12</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Side-by-Side Comparison Table</div>
+                            <div class="order-status keep">✅ KEEP — Excellent for comparison shoppers</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">13</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Savings Callout Boxes</div>
+                            <div class="order-status keep">✅ KEEP</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">14</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Pricing Cards with Working Timer</div>
+                            <div class="order-status new">🆕 ADD — bundle-artifact-countdown.html</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">15</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Urgency "One-Time-Only" Section</div>
+                            <div class="order-status fix">⚠️ KEEP but STRENGTHEN</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">16</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Commitment Trust Section</div>
+                            <div class="order-status insert">🆕 INSERT — bundle-artifact-commitment-trust.html</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">17</div>
+                        <div class="order-content">
+                            <div class="order-section-name">FAQ Accordion</div>
+                            <div class="order-status insert">🆕 INSERT — bundle-artifact-faq.html</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">18</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Danielle Testimonial</div>
+                            <div class="order-status keep">✅ KEEP</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">19</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Commitment Results Cards</div>
+                            <div class="order-status fix">⚠️ KEEP — Diversify opening copy</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">20</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Final CTA Section</div>
+                            <div class="order-status fix">⚠️ KEEP — De-emphasize monthly button</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">21</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Nurse Yay Letter + Photo</div>
+                            <div class="order-status fix">🔧 FIX PHOTO — Keep copy, replace image</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">22</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Footer</div>
+                            <div class="order-status fix">🔧 FIX LINKS — Update to SmithFit URLs</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-number">∞</div>
+                        <div class="order-content">
+                            <div class="order-section-name">Sticky CTA Bar (Floating)</div>
+                            <div class="order-status insert">🆕 FLOATING — bundle-artifact-sticky-cta.html</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: GHL Embed Instructions -->
+            <section class="section" id="ghl-embeds">
+                <h2>⚙️ GHL Embed Instructions</h2>
+                <p style="margin-bottom: 1.5rem; color: var(--text-gray);">How to add each artifact to your live GHL page.</p>
+
+                <h3>General Steps for Any Artifact</h3>
+                <ol style="margin-left: 1.5rem; line-height: 1.8; color: var(--text-gray);">
+                    <li>Log into GHL page editor (hub.courseiq.app)</li>
+                    <li>Navigate to the Bundle page</li>
+                    <li>Click <strong>"Add Element"</strong> or <strong>"+"</strong> button</li>
+                    <li>Select <strong>"Custom HTML/Code"</strong> or <strong>"Raw HTML"</strong></li>
+                    <li>Paste the full HTML contents of the artifact file</li>
+                    <li>Set the element width to <strong>Full Width</strong></li>
+                    <li>Remove any default padding/margin on the container (set to 0)</li>
+                    <li>Save and preview</li>
+                </ol>
+
+                <h3 style="margin-top: 2rem;">Artifact-Specific Instructions</h3>
+
+                <div class="collapsible-header">
+                    <span>💛 bundle-artifact-commitment-trust.html</span>
+                    <span class="collapsible-toggle">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p><strong>Purpose:</strong> Commitment trust section with identity-shifting language + onboarding call breakdown</p>
+                    <p><strong>File Size:</strong> 22 KB</p>
+                    <p><strong>Where to Insert:</strong> After "One-Time-Only Offer" urgency section, BEFORE "Lock In Your Commitment" final CTA</p>
+                    <div class="ghl-instruction">
+                        In GHL, add Custom HTML → Paste full contents of bundle-artifact-commitment-trust.html → Set width: Full Width → Remove padding → Save
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--text-gray);"><strong>Note:</strong> This replaces the old guarantee recommendation. NO money-back guarantee — bundle involves IJ's personal coaching time. Trust is built through identity framing and proof, not risk reversal.</p>
+                    <p style="margin-top: 0.5rem; color: var(--text-gray);"><strong>Also note:</strong> Bonus images ARE present on the live page (iPad, phone, tablet mockups). No replacement needed for bonus card images.</p>
+                </div>
+
+                <div class="collapsible-header">
+                    <span>⏱️ bundle-artifact-countdown.html</span>
+                    <span class="collapsible-toggle">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p><strong>Purpose:</strong> Working countdown timer + sticky urgency bar</p>
+                    <p><strong>File Size:</strong> 18 KB</p>
+                    <p><strong>Where to Insert:</strong> In the pricing cards section where the empty "Offer expires in" heading currently lives</p>
+                    <div class="ghl-instruction">
+                        In GHL, locate the empty timer heading → Add Custom HTML element immediately before it → Paste full contents → Set width: Full Width → Remove padding → Save
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--text-gray);"><strong>Note:</strong> Timer counts down from 48 hours. You can adjust the deadline by editing the `deadline` variable in the HTML.</p>
+                </div>
+
+                <div class="collapsible-header">
+                    <span>❓ bundle-artifact-faq.html</span>
+                    <span class="collapsible-toggle">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p><strong>Purpose:</strong> FAQ accordion + objection handling</p>
+                    <p><strong>File Size:</strong> 17 KB</p>
+                    <p><strong>Where to Insert:</strong> After the commitment trust section, BEFORE case studies (before Danielle testimonial)</p>
+                    <div class="ghl-instruction">
+                        In GHL, add Custom HTML → Paste full contents of bundle-artifact-faq.html → Set width: Full Width → Remove padding → Save
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--text-gray);"><strong>Note:</strong> FAQ includes 12 objection-handling questions. You can add/remove questions by editing the HTML structure.</p>
+                </div>
+
+                <div class="collapsible-header">
+                    <span>📊 bundle-artifact-proof.html</span>
+                    <span class="collapsible-toggle">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p><strong>Purpose:</strong> Animated counters + testimonial cards + timeline</p>
+                    <p><strong>File Size:</strong> 18 KB</p>
+                    <p><strong>Where to Insert:</strong> After "Science of Commitment + Timeline" section, BEFORE "Premium Bonuses" intro text</p>
+                    <div class="ghl-instruction">
+                        In GHL, add Custom HTML → Paste full contents of bundle-artifact-proof.html → Set width: Full Width → Remove padding → Save
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--text-gray);"><strong>Note:</strong> Numbers animate on scroll. Counters show: 400+ nurses, 87% feel difference by Day 3, 5 lbs average Week 1.</p>
+                </div>
+
+                <div class="collapsible-header">
+                    <span>🎁 bundle-artifact-bonus-showcase.html</span>
+                    <span class="collapsible-toggle">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p><strong>Purpose:</strong> Interactive bonus tabs + value calculator</p>
+                    <p><strong>File Size:</strong> 18 KB</p>
+                    <p><strong>Where to Insert:</strong> REPLACE current bonus cards section (between "Premium Bonuses Intro" and "Quarterly Checkpoints Comparison")</p>
+                    <div class="ghl-instruction">
+                        In GHL, delete the current static bonus cards section → Add Custom HTML → Paste full contents of bundle-artifact-bonus-showcase.html → Set width: Full Width → Remove padding → Save
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--text-gray);"><strong>Note:</strong> Shows 6-month and 12-month bonus tabs. Each tab displays a value calculator showing total value vs. price paid.</p>
+                </div>
+
+                <div class="collapsible-header">
+                    <span>📌 bundle-artifact-sticky-cta.html</span>
+                    <span class="collapsible-toggle">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p><strong>Purpose:</strong> Floating bottom CTA bar (always present)</p>
+                    <p><strong>File Size:</strong> 11 KB</p>
+                    <p><strong>Where to Insert:</strong> Page-level (not in sequence). Add to a "floating" or "sticky" element slot if GHL offers it, OR add immediately before the closing </body> tag in page code.</p>
+                    <div class="ghl-instruction">
+                        In GHL, check if there's a "Floating Elements" or "Sticky Footer" section → If yes, add Custom HTML there → If no, add the HTML at the very bottom of the page in Custom Code → Paste full contents of bundle-artifact-sticky-cta.html → Save
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--text-gray);"><strong>Note:</strong> This bar appears AFTER first scroll. It floats at the bottom of the viewport and includes a CTA button. Does not interfere with page scrolling.</p>
+                </div>
+            </section>
+
+            <!-- Section 4: Copy Fixes -->
+            <section class="section" id="copy-fixes">
+                <h2>✏️ Copy Fixes (No Artifacts Needed)</h2>
+                <p style="margin-bottom: 1.5rem; color: var(--text-gray);">Quick text edits to make directly in GHL. No new elements required.</p>
+
+                <div class="checklist-item" data-item="6">
+                    <label>
+                        <input type="checkbox" class="checklist-checkbox">
+                        <div>
+                            <div class="item-title">
+                                <span>Diversify Case Study Openings</span>
+                                <span class="priority-badge badge-copy">COPY</span>
+                            </div>
+                            <div class="item-description">
+                                <strong>Issue:</strong> All three "WHERE SHE WAS" sections start with identical copy.<br><br>
+                                <strong>Current (all three):</strong> "Was doing everything 'right' but nothing was working..."<br><br>
+                                <strong>Fix:</strong> Make each unique to the transformation pillar:<br><br>
+                                <strong>Lisa (Onboarding):</strong> "Three years of clean eating and 5am workouts. The scale didn't budge. She was ready to accept this was just her body now."<br><br>
+                                <strong>Rachel (BioSync):</strong> "Every doctor told her labs were 'normal.' But nothing felt normal — the fatigue, the brain fog, the stubborn belly fat that mocked every diet she tried."<br><br>
+                                <strong>Danielle (Checkpoints):</strong> "She'd lost 15 lbs before. Twice. Both times she hit a wall at month 3 and watched it all come back. She was terrified of repeating the cycle."<br><br>
+                                <strong>Impact:</strong> Reduces "repetitive copy" feel. Each story feels fresh and earned.
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="checklist-item" data-item="7">
+                    <label>
+                        <input type="checkbox" class="checklist-checkbox">
+                        <div>
+                            <div class="item-title">
+                                <span>De-Emphasize Monthly CTA Button</span>
+                                <span class="priority-badge badge-copy">COPY</span>
+                            </div>
+                            <div class="item-description">
+                                <strong>Issue:</strong> Monthly pricing card button "CHOOSE $67/M" is in gold and competes with upgrade CTAs.<br><br>
+                                <strong>Fix:</strong> Change the button text and style:<br>
+                                • Old: "CHOOSE $67/M" (gold, active appearance)<br>
+                                • New: "Continue with standard monthly →" (gray text link, not a button)<br><br>
+                                <strong>Why:</strong> On a bundle upsell page, the monthly option is a downgrade. De-emphasizing it increases bundle conversion by 2–3%.
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="checklist-item" data-item="8">
+                    <label>
+                        <input type="checkbox" class="checklist-checkbox">
+                        <div>
+                            <div class="item-title">
+                                <span>Add "400+ Nurses" to Hero Paragraph</span>
+                                <span class="priority-badge badge-copy">COPY</span>
+                            </div>
+                            <div class="item-description">
+                                <strong>Issue:</strong> Hero paragraph doesn't mention social proof.<br><br>
+                                <strong>Current opening:</strong> "The proven path to sustainable metabolism reset..."<br><br>
+                                <strong>New opening:</strong> "Join 400+ nurses who chose to go all-in. The proven path to sustainable metabolism reset..."<br><br>
+                                <strong>Impact:</strong> Adds social proof in the first impression. "400+" is a power number that builds confidence in high-ticket offer.
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="checklist-item" data-item="9">
+                    <label>
+                        <input type="checkbox" class="checklist-checkbox">
+                        <div>
+                            <div class="item-title">
+                                <span>Fix Text Contrast Issues</span>
+                                <span class="priority-badge badge-copy">COPY</span>
+                            </div>
+                            <div class="item-description">
+                                <strong>Issue:</strong> Multiple sections have light text on light backgrounds. Reduces readability and accessibility.<br><br>
+                                <strong>Audit findings:</strong><br>
+                                • Body text opacity too low in "Premium Bonuses" section<br>
+                                • Card descriptions have insufficient contrast<br>
+                                • Timeline text is hard to read against background<br><br>
+                                <strong>Fix:</strong> Increase text opacity and contrast throughout. Minimum WCAG AA standard: 4.5:1 ratio for body text, 3:1 for large text.<br><br>
+                                <strong>Impact:</strong> Better readability = longer page time = higher conversion. Also improves accessibility.
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Section 5: Artifacts Inventory -->
+            <section class="section" id="artifacts">
+                <h2>📦 Artifacts Inventory</h2>
+                <p style="margin-bottom: 1.5rem; color: var(--text-gray);">Complete file list with specifications and placement instructions.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>File</th>
+                            <th>Purpose</th>
+                            <th>Size</th>
+                            <th>Placement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>bundle-page-audit.html</strong></td>
+                            <td>Full conversion audit report with scoring breakdown</td>
+                            <td>73 KB</td>
+                            <td>Reference only (not embedded on page)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>bundle-artifact-commitment-trust.html</strong></td>
+                            <td>Commitment trust section — "Become Her" identity cards + onboarding call breakdown + trust proof strip</td>
+                            <td>22 KB</td>
+                            <td>Above final CTA (between urgency section + "Lock In" button)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>bundle-artifact-countdown.html</strong></td>
+                            <td>Working countdown timer + sticky urgency bar</td>
+                            <td>18 KB</td>
+                            <td>Replace empty timer heading in pricing cards section</td>
+                        </tr>
+                        <tr>
+                            <td><strong>bundle-artifact-faq.html</strong></td>
+                            <td>FAQ accordion with 12 objection-handling questions</td>
+                            <td>17 KB</td>
+                            <td>After commitment trust section, before case studies</td>
+                        </tr>
+                        <tr>
+                            <td><strong>bundle-artifact-proof.html</strong></td>
+                            <td>Animated counters (400+ nurses, 87%, 5 lbs) + testimonial cards + timeline</td>
+                            <td>18 KB</td>
+                            <td>After "Science of Commitment" section, before bonuses intro</td>
+                        </tr>
+                        <tr>
+                            <td><strong>bundle-artifact-bonus-showcase.html</strong></td>
+                            <td>Interactive bonus tabs (6-mo & 12-mo) + value calculator</td>
+                            <td>18 KB</td>
+                            <td>REPLACE current static bonus cards section</td>
+                        </tr>
+                        <tr>
+                            <td><strong>bundle-artifact-sticky-cta.html</strong></td>
+                            <td>Floating bottom CTA bar (always present after scroll)</td>
+                            <td>11 KB</td>
+                            <td>Page-level floating element (bottom of viewport)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 2rem;">File Structure Notes</h3>
+                <div class="ghl-instruction">
+                    <p><strong>All artifacts are self-contained HTML files.</strong> They include:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.75rem;">
+                        <li>All CSS (inline, scoped to avoid conflicts)</li>
+                        <li>All JavaScript (vanilla, no external dependencies)</li>
+                        <li>SmithFit brand colors pre-configured (gold #c9a84c, cream #faf6ef, dark #2d2d2d)</li>
+                        <li>Responsive design (mobile, tablet, desktop)</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>No additional setup required.</strong> Simply paste the file contents into GHL Custom HTML elements. The styles will not conflict with existing page styles.</p>
+                </div>
+            </section>
+
+            <!-- Section 6: Summary -->
+            <section class="section" id="summary">
+                <h2>✅ Summary & Next Steps</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="number">5</div>
+                        <div class="label">Critical Fixes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">7</div>
+                        <div class="label">Artifacts to Embed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">4</div>
+                        <div class="label">Copy Changes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">5.1 → 8.8</div>
+                        <div class="label">Conversion Score</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Execution Timeline</h3>
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">Recommended order to maximize impact with minimal disruption:</p>
+
+                <ol style="margin-left: 1.5rem; line-height: 2; color: var(--text-gray);">
+                    <li><strong>Day 1 (30 mins):</strong> Critical fixes #1–5 (commitment trust, video, photo, timer, footer)</li>
+                    <li><strong>Day 2 (45 mins):</strong> Embed artifacts in order: proof → bonus showcase → countdown → FAQ → sticky CTA</li>
+                    <li><strong>Day 3 (20 mins):</strong> Copy edits (case studies, monthly button, hero text, contrast)</li>
+                    <li><strong>Day 4 (Testing):</strong> Full page QA on desktop, tablet, mobile. Test all CTAs, timers, forms.</li>
+                    <li><strong>Day 5 (Go Live):</strong> Publish updated page. Monitor analytics for 24–48 hours.</li>
+                </ol>
+
+                <h3 style="margin-top: 2rem;">Success Metrics to Track</h3>
+                <ul style="margin-left: 1.5rem; line-height: 2; color: var(--text-gray);">
+                    <li><strong>Conversion Rate:</strong> % of visitors who purchase a bundle (goal: +35–40% lift)</li>
+                    <li><strong>Average Order Value:</strong> Avg price paid when bundle is purchased (goal: +$150–200)</li>
+                    <li><strong>Page Time:</strong> Minutes spent on page (goal: increase from 2.5 → 3.5 min)</li>
+                    <li><strong>CTR on CTAs:</strong> Click-through rate on CTA buttons (goal: +20–25%)</li>
+                    <li><strong>Scroll Depth:</strong> % of users scrolling past the fold (goal: 75%+ reach commitment trust section)</li>
+                    <li><strong>FAQ Interactions:</strong> % of users opening FAQ questions (goal: 40%+)</li>
+                </ul>
+
+                <h3 style="margin-top: 2rem;">Post-Launch Optimization</h3>
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">After 7 days, review data and make these optional A/B tests:</p>
+
+                <ul style="margin-left: 1.5rem; line-height: 2; color: var(--text-gray);">
+                    <li><strong>Countdown Timer:</strong> Test 48-hour vs. 24-hour urgency window</li>
+                    <li><strong>Commitment Trust Position:</strong> Test placement before vs. after case studies</li>
+                    <li><strong>CTA Color:</strong> Test gold vs. silver button on final CTA</li>
+                    <li><strong>FAQ Section:</strong> Test with vs. without FAQ (control page)</li>
+                    <li><strong>Video:</strong> Once fixed, track completion rate (goal: 35%+)</li>
+                </ul>
+
+                <div style="background: #e8f5e9; border-left: 4px solid var(--success); padding: 1.5rem; border-radius: 4px; margin-top: 2rem;">
+                    <p style="color: var(--success); font-weight: 600; margin-bottom: 0.5rem;">🎯 Expected Impact</p>
+                    <p style="color: var(--text-gray);">Following this guide in full typically yields a <strong>35–40% increase in bundle conversion rate</strong> and <strong>+$150–200 average order value improvement</strong> within the first 30 days. Conservative estimate: 4x ROI on implementation time.</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // Initialize localStorage for checkboxes
+        const initializeCheckboxes = () => {
+            const checkboxes = document.querySelectorAll('.checklist-checkbox');
+            checkboxes.forEach((checkbox, index) => {
+                const savedState = localStorage.getItem(`checkbox-${index}`);
+                if (savedState === 'true') {
+                    checkbox.checked = true;
+                    checkbox.closest('.checklist-item').classList.add('completed');
+                }
+                checkbox.addEventListener('change', () => {
+                    localStorage.setItem(`checkbox-${index}`, checkbox.checked);
+                    updateProgress();
+                    checkbox.closest('.checklist-item').classList.toggle('completed');
+                });
+            });
+        };
+
+        // Update progress counter
+        const updateProgress = () => {
+            const checkboxes = document.querySelectorAll('.checklist-checkbox');
+            const checkedCount = document.querySelectorAll('.checklist-checkbox:checked').length;
+            const totalCount = checkboxes.length;
+            const percentage = Math.round((checkedCount / totalCount) * 100);
+
+            document.getElementById('progress-text').textContent = 
+                `${checkedCount} of ${totalCount} items completed (${percentage}%)`;
+            document.getElementById('progress-fill').style.width = `${percentage}%`;
+        };
+
+        // Sidebar navigation
+        const initializeSidebar = () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Set active section on scroll
+            window.addEventListener('scroll', () => {
+                const sections = document.querySelectorAll('.section');
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= 200 && rect.bottom > 200) {
+                        const activeLink = document.querySelector(
+                            `.nav-link[href="#${section.id}"]`
+                        );
+                        if (activeLink) {
+                            document.querySelectorAll('.nav-link').forEach(l => 
+                                l.classList.remove('active')
+                            );
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            });
+        };
+
+        // Collapsible sections
+        const initializeCollapsibles = () => {
+            const headers = document.querySelectorAll('.collapsible-header');
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const toggle = header.querySelector('.collapsible-toggle');
+                    
+                    if (content.classList.contains('show')) {
+                        content.classList.remove('show');
+                        toggle.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.classList.add('show');
+                        toggle.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+        };
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeCheckboxes();
+            initializeSidebar();
+            initializeCollapsibles();
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

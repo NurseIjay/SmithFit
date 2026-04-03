@@ -1,0 +1,504 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.sf-proof-section {
+  background: #2d2d2d;
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sf-proof-bg-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.sf-proof-bg-glow-1 { top: -200px; left: -100px; }
+.sf-proof-bg-glow-2 { bottom: -200px; right: -100px; }
+
+.sf-proof-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.sf-proof-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #c9a84c;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sf-proof-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  font-weight: 800;
+  color: #faf6ef;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.sf-proof-headline-gold { color: #c9a84c; }
+
+.sf-proof-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  color: rgba(250,246,239,0.65);
+  text-align: center;
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto 60px auto;
+}
+
+/* === THE TWO FUTURES SPLIT === */
+.sf-proof-futures {
+  display: -webkit-flex;
+  display: flex;
+  gap: 0;
+  margin-bottom: 70px;
+  border-radius: 16px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.sf-proof-future {
+  -webkit-flex: 1;
+  flex: 1;
+  padding: 50px 32px;
+  position: relative;
+}
+
+.sf-proof-future-left {
+  background: linear-gradient(180deg, #3a3a3a 0%, #333 100%);
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.sf-proof-future-right {
+  background: linear-gradient(180deg, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.04) 100%);
+  border-left: 1px solid rgba(201,168,76,0.2);
+}
+
+.sf-proof-future-badge {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+
+.sf-proof-future-left .sf-proof-future-badge {
+  background: rgba(255,255,255,0.08);
+  color: #999;
+}
+
+.sf-proof-future-right .sf-proof-future-badge {
+  background: rgba(201,168,76,0.2);
+  color: #c9a84c;
+}
+
+.sf-proof-future-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 28px;
+  line-height: 1.3;
+}
+
+.sf-proof-future-left .sf-proof-future-title {
+  color: #999;
+}
+
+.sf-proof-future-right .sf-proof-future-title {
+  color: #faf6ef;
+}
+
+.sf-proof-future-item {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.sf-proof-future-icon {
+  font-size: 18px;
+  margin-top: 2px;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  width: 22px;
+  text-align: center;
+}
+
+.sf-proof-future-item-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.sf-proof-future-left .sf-proof-future-item-text {
+  color: #888;
+}
+
+.sf-proof-future-right .sf-proof-future-item-text {
+  color: rgba(250,246,239,0.85);
+}
+
+.sf-proof-future-bottom {
+  margin-top: 30px;
+  padding-top: 24px;
+  text-align: center;
+}
+
+.sf-proof-future-left .sf-proof-future-bottom {
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.sf-proof-future-right .sf-proof-future-bottom {
+  border-top: 1px solid rgba(201,168,76,0.2);
+}
+
+.sf-proof-future-stat {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.sf-proof-future-left .sf-proof-future-stat { color: #666; }
+.sf-proof-future-right .sf-proof-future-stat { color: #c9a84c; }
+
+.sf-proof-future-stat-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sf-proof-future-left .sf-proof-future-stat-label { color: #777; }
+.sf-proof-future-right .sf-proof-future-stat-label { color: rgba(250,246,239,0.6); }
+
+/* === VOICE CARDS === */
+.sf-proof-voices-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #c9a84c;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.sf-proof-voices-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #faf6ef;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sf-proof-voices {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 20px;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-bottom: 70px;
+}
+
+.sf-proof-voice-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 12px;
+  padding: 28px 24px;
+  width: 280px;
+  position: relative;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.sf-proof-voice-card:hover {
+  border-color: rgba(201,168,76,0.4);
+  -webkit-transform: translateY(-4px);
+  transform: translateY(-4px);
+  -webkit-box-shadow: 0 12px 30px rgba(201,168,76,0.08);
+  box-shadow: 0 12px 30px rgba(201,168,76,0.08);
+}
+
+.sf-proof-voice-before {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #888;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  text-decoration: line-through;
+  -webkit-text-decoration-color: rgba(255,255,255,0.15);
+  text-decoration-color: rgba(255,255,255,0.15);
+}
+
+.sf-proof-voice-arrow {
+  font-size: 14px;
+  color: #c9a84c;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.sf-proof-voice-after {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: #faf6ef;
+  line-height: 1.5;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.sf-proof-voice-tag {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: #c9a84c;
+  background: rgba(201,168,76,0.12);
+  padding: 4px 10px;
+  border-radius: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* === THE BRIDGE === */
+.sf-proof-bridge {
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+}
+
+.sf-proof-bridge-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #faf6ef;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.sf-proof-bridge-accent { color: #c9a84c; }
+
+.sf-proof-bridge-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: rgba(250,246,239,0.5);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .sf-proof-section { padding: 60px 16px; }
+  .sf-proof-headline { font-size: 30px; }
+  .sf-proof-futures { -webkit-flex-direction: column; flex-direction: column; }
+  .sf-proof-future { padding: 36px 24px; }
+  .sf-proof-future-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .sf-proof-future-left { border-left: none; border-top: 1px solid rgba(201,168,76,0.2); }
+  .sf-proof-voice-card { width: 100%; max-width: 340px; }
+  .sf-proof-voices-title { font-size: 26px; }
+}
+</style>
+
+<div class="sf-proof-section">
+  <div class="sf-proof-bg-glow sf-proof-bg-glow-1"></div>
+  <div class="sf-proof-bg-glow sf-proof-bg-glow-2"></div>
+
+  <div class="sf-proof-inner">
+    <p class="sf-proof-eyebrow">You've already started. Now finish.</p>
+    <h2 class="sf-proof-headline">Two Futures. <span class="sf-proof-headline-gold">One Decision.</span></h2>
+    <p class="sf-proof-sub">You bought the course. You joined the membership. You've proven you're serious. But here's what 400+ nurses have shown us about what happens next:</p>
+
+    <!-- THE TWO FUTURES SPLIT -->
+    <div class="sf-proof-futures">
+      <!-- LEFT: Stay Monthly -->
+      <div class="sf-proof-future sf-proof-future-left">
+        <span class="sf-proof-future-badge">If you stay monthly</span>
+        <h3 class="sf-proof-future-title">Month 3: motivation fades. Month 5: you cancel.</h3>
+
+        <div class="sf-proof-future-item">
+          <span class="sf-proof-future-icon">&#x23F3;</span>
+          <span class="sf-proof-future-item-text">No personalized protocol. Same generic plan every month.</span>
+        </div>
+        <div class="sf-proof-future-item">
+          <span class="sf-proof-future-icon">&#x1F50C;</span>
+          <span class="sf-proof-future-item-text">No coach access when the 2am post-shift cravings hit.</span>
+        </div>
+        <div class="sf-proof-future-item">
+          <span class="sf-proof-future-icon">&#x1F504;</span>
+          <span class="sf-proof-future-item-text">The restart cycle begins again. New program. Same result.</span>
+        </div>
+        <div class="sf-proof-future-item">
+          <span class="sf-proof-future-icon">&#x1F6AB;</span>
+          <span class="sf-proof-future-item-text">No bloodwork insight. Guessing at what's working.</span>
+        </div>
+        <div class="sf-proof-future-item">
+          <span class="sf-proof-future-icon">&#x1F614;</span>
+          <span class="sf-proof-future-item-text">6 months from now: "I should've committed when I had the chance."</span>
+        </div>
+
+        <div class="sf-proof-future-bottom">
+          <div class="sf-proof-future-stat" id="sf-proof-stat-left">23%</div>
+          <div class="sf-proof-future-stat-label">Reach their goal weight</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Go Bundle -->
+      <div class="sf-proof-future sf-proof-future-right">
+        <span class="sf-proof-future-badge">If you go all in today</span>
+        <h3 class="sf-proof-future-title">Month 3: scrubs fit. Month 6: she doesn't recognize you.</h3>
+
+        <div class="sf-proof-future-item">
+          <span class="sf-proof-future-icon">&#x1F3AF;</span>
+          <span class="sf-proof-future-item-text">A protocol built around YOUR shifts, YOUR body, YOUR stressors.</span>
+        </div>
+        <div class="sf-proof-future-item">
+          <span class="sf-proof-future-icon">&#x1F4AC;</span>
+          <span class="sf-proof-future-item-text">Coach access when it actually matters: during the shift, not after the damage.</span>
+        </div>
+        <div class="sf-proof-future-item">
+          <span class="sf-proof-future-icon">&#x1F512;</span>
+          <span class="sf-proof-future-item-text">Results that lock in. Your metabolism resets for good, not just for a month.</span>
+        </div>
+        <div class="sf-proof-future-item">
+          <span class="sf-proof-future-icon">&#x1FA78;</span>
+          <span class="sf-proof-future-item-text">See your cortisol drop. See your hormones regulate. See proof in blood.</span>
+        </div>
+        <div class="sf-proof-future-item">
+          <span class="sf-proof-future-icon">&#x2728;</span>
+          <span class="sf-proof-future-item-text">6 months from now: "I can't believe I almost didn't do this."</span>
+        </div>
+
+        <div class="sf-proof-future-bottom">
+          <div class="sf-proof-future-stat" id="sf-proof-stat-right">87%</div>
+          <div class="sf-proof-future-stat-label">Reach their goal weight</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VOICE CARDS: Identity Shifts -->
+    <p class="sf-proof-voices-label">From 400+ nurses who chose the bundle</p>
+    <h3 class="sf-proof-voices-title">The Shift They Didn't Expect</h3>
+
+    <div class="sf-proof-voices">
+      <div class="sf-proof-voice-card">
+        <div class="sf-proof-voice-before">"I'm too tired to meal prep after a 12."</div>
+        <span class="sf-proof-voice-arrow">&#x2193; 3 months later</span>
+        <div class="sf-proof-voice-after">"I don't even think about food anymore. It just... handles itself."</div>
+        <span class="sf-proof-voice-tag">Night Shift RN, 42</span>
+      </div>
+
+      <div class="sf-proof-voice-card">
+        <div class="sf-proof-voice-before">"I've tried everything. My body is broken."</div>
+        <span class="sf-proof-voice-arrow">&#x2193; 6 months later</span>
+        <div class="sf-proof-voice-after">"My body wasn't broken. It was stuck in fight-or-flight. Now I understand it."</div>
+        <span class="sf-proof-voice-tag">ER Nurse, 47</span>
+      </div>
+
+      <div class="sf-proof-voice-card">
+        <div class="sf-proof-voice-before">"$335 feels like a lot for a fitness program."</div>
+        <span class="sf-proof-voice-arrow">&#x2193; What she says now</span>
+        <div class="sf-proof-voice-after">"I spent more than that on programs I quit. This is the one I finished."</div>
+        <span class="sf-proof-voice-tag">ICU Nurse, 38</span>
+      </div>
+
+      <div class="sf-proof-voice-card">
+        <div class="sf-proof-voice-before">"I don't recognize my body anymore."</div>
+        <span class="sf-proof-voice-arrow">&#x2193; 4 months later</span>
+        <div class="sf-proof-voice-after">"My daughter said, 'Mom, you look like you again.' I cried in the parking lot."</div>
+        <span class="sf-proof-voice-tag">L&D Nurse, 44</span>
+      </div>
+
+      <div class="sf-proof-voice-card">
+        <div class="sf-proof-voice-before">"I'm good all week then blow it on night shifts."</div>
+        <span class="sf-proof-voice-arrow">&#x2193; 8 weeks later</span>
+        <div class="sf-proof-voice-after">"Night shifts used to wreck me. Now I have a protocol. I don't even think about it."</div>
+        <span class="sf-proof-voice-tag">Med-Surg RN, 39</span>
+      </div>
+
+      <div class="sf-proof-voice-card">
+        <div class="sf-proof-voice-before">"Nothing works with peri-menopause."</div>
+        <span class="sf-proof-voice-arrow">&#x2193; 5 months later</span>
+        <div class="sf-proof-voice-after">"My bloodwork showed my cortisol dropped 40%. The belly fat followed."</div>
+        <span class="sf-proof-voice-tag">OR Nurse, 51</span>
+      </div>
+    </div>
+
+    <!-- BRIDGE -->
+    <div class="sf-proof-bridge">
+      <p class="sf-proof-bridge-text">You already proved you're serious. The course gave you the knowledge. The membership gave you the tools. <span class="sf-proof-bridge-accent">The bundle gives you the transformation.</span></p>
+      <p class="sf-proof-bridge-sub">This is the part where you stop preparing and start becoming.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  try {
+    var cards = document.querySelectorAll('.sf-proof-voice-card');
+    for (var i = 0; i < cards.length; i++) {
+      cards[i].style.opacity = '0';
+      cards[i].style.WebkitTransform = 'translateY(20px)';
+      cards[i].style.transform = 'translateY(20px)';
+    }
+
+    var revealed = false;
+    function checkReveal() {
+      if (revealed) return;
+      var firstCard = cards[0];
+      if (!firstCard) return;
+      var rect = firstCard.getBoundingClientRect();
+      var windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      if (rect.top < windowHeight - 80) {
+        revealed = true;
+        for (var j = 0; j < cards.length; j++) {
+          (function(idx) {
+            setTimeout(function() {
+              cards[idx].style.WebkitTransition = 'opacity 0.6s ease, transform 0.6s ease, -webkit-transform 0.6s ease';
+              cards[idx].style.transition = 'opacity 0.6s ease, transform 0.6s ease, -webkit-transform 0.6s ease';
+              cards[idx].style.opacity = '1';
+              cards[idx].style.WebkitTransform = 'translateY(0)';
+              cards[idx].style.transform = 'translateY(0)';
+            }, idx * 120);
+          })(j);
+        }
+      }
+    }
+
+    window.addEventListener('scroll', checkReveal);
+    setTimeout(checkReveal, 500);
+  } catch (e) {
+    console.error('Proof init error:', e);
+  }
+})();
+</script>

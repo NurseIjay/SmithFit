@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmithFit Tripwire — FAQ Accordion</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0;padding:0;font-family:'Inter',system-ui,sans-serif;background:#FFF8F0;color:#2D2D2D;">
+
+<!-- ===== FAQ SECTION — Drop into GHL custom code block ===== -->
+<section id="faq" style="padding:56px 20px;background:#FFF8F0;">
+  <div style="max-width:600px;margin:0 auto;">
+
+    <p style="text-align:center;font-size:13px;text-transform:uppercase;letter-spacing:2px;color:#C5A55A;margin:0 0 8px;font-weight:700;">Before You Decide</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:28px;text-align:center;margin:0 0 32px;line-height:1.3;">Questions Nurses Always Ask</h2>
+
+    <!-- FAQ Items -->
+    <div id="faq-container">
+
+      <div class="faq-item" style="border-bottom:1px solid #e8e0d0;margin-bottom:0;">
+        <div class="faq-q" onclick="toggleFaq(this)" style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;gap:16px;">
+          <span style="font-size:16px;font-weight:600;color:#2D2D2D;line-height:1.4;">Does this work if I'm on night shift?</span>
+          <span class="faq-icon" style="font-size:24px;color:#C5A55A;flex-shrink:0;transition:transform 0.3s;font-weight:300;line-height:1;">+</span>
+        </div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding-bottom 0.35s ease;">
+          <p style="font-size:15px;line-height:1.7;color:#555;margin:0;padding-bottom:20px;">
+            This was <em>built</em> for night shift. IJ is a nurse — he designed every piece of this around 7p-7a schedules, rotating shifts, and the chaos that comes with them. The protocol is shift-based, not clock-based. It works whether you're on days, nights, rotating, or whatever your hospital throws at you this week.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" style="border-bottom:1px solid #e8e0d0;">
+        <div class="faq-q" onclick="toggleFaq(this)" style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;gap:16px;">
+          <span style="font-size:16px;font-weight:600;color:#2D2D2D;line-height:1.4;">Do I need to track macros or count calories?</span>
+          <span class="faq-icon" style="font-size:24px;color:#C5A55A;flex-shrink:0;transition:transform 0.3s;font-weight:300;line-height:1;">+</span>
+        </div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding-bottom 0.35s ease;">
+          <p style="font-size:15px;line-height:1.7;color:#555;margin:0;padding-bottom:20px;">
+            No. Zero macro tracking. Zero calorie counting. The 7-Day Reset uses a structure-first approach — you'll learn <em>when</em> and <em>how</em> to eat around your shifts, not how to obsess over numbers. Structure beats tracking every time, especially when you're running on 4 hours of sleep between shifts.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" style="border-bottom:1px solid #e8e0d0;">
+        <div class="faq-q" onclick="toggleFaq(this)" style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;gap:16px;">
+          <span style="font-size:16px;font-weight:600;color:#2D2D2D;line-height:1.4;">What if I'm in menopause or perimenopause?</span>
+          <span class="faq-icon" style="font-size:24px;color:#C5A55A;flex-shrink:0;transition:transform 0.3s;font-weight:300;line-height:1;">+</span>
+        </div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding-bottom 0.35s ease;">
+          <p style="font-size:15px;line-height:1.7;color:#555;margin:0;padding-bottom:20px;">
+            Hormonal changes actually make this <em>more</em> important, not less. Perimenopause and menopause increase cortisol sensitivity — meaning stress hits your metabolism even harder. The Reset Protocol works by regulating your stress response first, which is exactly what your body needs when hormones are already in flux. Many of our best results come from nurses 45+.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" style="border-bottom:1px solid #e8e0d0;">
+        <div class="faq-q" onclick="toggleFaq(this)" style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;gap:16px;">
+          <span style="font-size:16px;font-weight:600;color:#2D2D2D;line-height:1.4;">How much time does this take per day?</span>
+          <span class="faq-icon" style="font-size:24px;color:#C5A55A;flex-shrink:0;transition:transform 0.3s;font-weight:300;line-height:1;">+</span>
+        </div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding-bottom 0.35s ease;">
+          <p style="font-size:15px;line-height:1.7;color:#555;margin:0;padding-bottom:20px;">
+            About 10-15 minutes. The protocol is designed for nurses who have zero spare time — no 60-minute workout blocks, no Sunday meal prep marathons. The daily actions fit into gaps you already have: between patients, before a shift, during a break. If you have time to scroll Instagram, you have time for this.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" style="border-bottom:1px solid #e8e0d0;">
+        <div class="faq-q" onclick="toggleFaq(this)" style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;gap:16px;">
+          <span style="font-size:16px;font-weight:600;color:#2D2D2D;line-height:1.4;">I've tried everything. Why would this be different?</span>
+          <span class="faq-icon" style="font-size:24px;color:#C5A55A;flex-shrink:0;transition:transform 0.3s;font-weight:300;line-height:1;">+</span>
+        </div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding-bottom 0.35s ease;">
+          <p style="font-size:15px;line-height:1.7;color:#555;margin:0;padding-bottom:20px;">
+            Everything you've tried attacked the <em>symptoms</em> — eat less, move more, cut carbs. This attacks the <em>cause</em>: a nervous system stuck in fight-or-flight from years of shift stress. When your cortisol is chronically elevated, your body stores belly fat as a survival mechanism. No amount of dieting fixes that. The Reset Protocol regulates your stress response first — then fat loss follows naturally. You tried effort. You haven't tried regulation.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" style="border-bottom:1px solid #e8e0d0;">
+        <div class="faq-q" onclick="toggleFaq(this)" style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;gap:16px;">
+          <span style="font-size:16px;font-weight:600;color:#2D2D2D;line-height:1.4;">What exactly do I get for $27?</span>
+          <span class="faq-icon" style="font-size:24px;color:#C5A55A;flex-shrink:0;transition:transform 0.3s;font-weight:300;line-height:1;">+</span>
+        </div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding-bottom 0.35s ease;">
+          <p style="font-size:15px;line-height:1.7;color:#555;margin:0;padding-bottom:20px;">
+            The complete 7-Day Shift-Proof Metabolism Reset course: 4 video modules (why you're stuck, the 2-step reset, shift-proof nutrition, circadian eating), the Metabolic Cocktail Protocol, Box Breathing Audio Guide, Shift-Proof Meal Templates, and access to the private community. One payment, lifetime access. No subscription, no hidden fees.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" style="border-bottom:1px solid #e8e0d0;">
+        <div class="faq-q" onclick="toggleFaq(this)" style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;gap:16px;">
+          <span style="font-size:16px;font-weight:600;color:#2D2D2D;line-height:1.4;">What if it doesn't work for me?</span>
+          <span class="faq-icon" style="font-size:24px;color:#C5A55A;flex-shrink:0;transition:transform 0.3s;font-weight:300;line-height:1;">+</span>
+        </div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding-bottom 0.35s ease;">
+          <p style="font-size:15px;line-height:1.7;color:#555;margin:0;padding-bottom:20px;">
+            That's exactly why we have the 60-day money-back guarantee. Try 3 days. If you don't feel the shift in your energy and cravings, email us and we'll refund every penny — no questions, no hoops. 87% of nurses say they feel a difference by Day 3. But if you're in the 13%, you're fully protected.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom CTA -->
+    <div style="text-align:center;margin-top:32px;">
+      <a href="#pricing" style="display:inline-block;padding:18px 48px;background:linear-gradient(135deg,#C5A55A 0%,#d4a94c 50%,#C5A55A 100%);color:#1a1a1a;font-size:18px;font-weight:700;border-radius:8px;text-decoration:none;box-shadow:0 4px 15px rgba(197,165,90,0.35);transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(197,165,90,0.5)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(197,165,90,0.35)'">
+        Start the 7-Day Reset — $27
+      </a>
+      <p style="font-size:13px;color:#888;margin:10px 0 0;">Still have questions? Email support@smithfit.com</p>
+    </div>
+
+  </div>
+</section>
+
+<script>
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const answer = item.querySelector('.faq-a');
+  const icon = item.querySelector('.faq-icon');
+  const isOpen = item.classList.contains('open');
+
+  // Close all
+  document.querySelectorAll('.faq-item').forEach(function(fi) {
+    fi.classList.remove('open');
+    fi.querySelector('.faq-a').style.maxHeight = '0';
+    fi.querySelector('.faq-a').style.paddingBottom = '0';
+    fi.querySelector('.faq-icon').textContent = '+';
+    fi.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+  });
+
+  // Open clicked (if was closed)
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 20 + 'px';
+    icon.textContent = '\u2212';
+    icon.style.transform = 'rotate(180deg)';
+  }
+}
+</script>
+</body>
+</html>

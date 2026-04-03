@@ -1,0 +1,552 @@
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #faf6ef;
+  color: #2d2d2d;
+  padding: 16px;
+}
+
+.sf-timer-urgency-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #c9a84c 0%, #d4b856 100%);
+  padding: 12px 16px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sf-timer-urgency-bar-content {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-gap: 12px;
+  gap: 12px;
+  flex: 1;
+}
+
+.sf-timer-bar-text {
+  font-weight: 600;
+  font-size: 14px;
+  color: #2d2d2d;
+}
+
+.sf-timer-close-bar {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #2d2d2d;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.sf-timer-main {
+  margin-top: 60px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-gap: 24px;
+  gap: 24px;
+}
+
+.sf-timer-container {
+  text-align: center;
+}
+
+.sf-timer-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.sf-timer-display {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-gap: 8px;
+  gap: 8px;
+  font-size: 48px;
+  font-weight: 700;
+  color: #c9a84c;
+}
+
+.sf-timer-digit {
+  display: inline-block;
+  min-width: 60px;
+  height: 70px;
+  background-color: #ffffff;
+  border: 2px solid #d0d0d0;
+  border-radius: 8px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-transform: perspective(1000px) rotateX(0deg);
+  transform: perspective(1000px) rotateX(0deg);
+  -webkit-transition: -webkit-transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: -webkit-transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.sf-timer-digit.sf-timer-flip {
+  -webkit-transform: perspective(1000px) rotateX(90deg);
+  transform: perspective(1000px) rotateX(90deg);
+}
+
+.sf-timer-separator {
+  font-weight: 700;
+  font-size: 40px;
+  color: #c9a84c;
+  margin-top: -8px;
+}
+
+.sf-timer-progress-section {
+  width: 100%;
+  max-width: 400px;
+}
+
+.sf-timer-progress-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #888;
+  margin-bottom: 6px;
+}
+
+.sf-timer-progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #d0d0d0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.sf-timer-progress-fill {
+  height: 100%;
+  background-color: #c9a84c;
+  -webkit-transition: width 0.3s ease, background-color 0.3s ease;
+  transition: width 0.3s ease, background-color 0.3s ease;
+  -webkit-animation: none;
+  animation: none;
+}
+
+.sf-timer-progress-fill.sf-timer-critical {
+  background-color: #ff6b6b;
+  -webkit-animation: sf-timer-pulse-bar 0.8s ease-in-out infinite;
+  animation: sf-timer-pulse-bar 0.8s ease-in-out infinite;
+}
+
+@-webkit-keyframes sf-timer-pulse-bar {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes sf-timer-pulse-bar {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.sf-timer-viewers-section {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-gap: 6px;
+  gap: 6px;
+  -webkit-justify-content: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #888;
+}
+
+.sf-timer-viewer-dots {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-gap: 3px;
+  gap: 3px;
+}
+
+.sf-timer-viewer-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #c9a84c;
+  border-radius: 50%;
+  -webkit-animation: sf-timer-pulse-dot 1.2s ease-in-out infinite;
+  animation: sf-timer-pulse-dot 1.2s ease-in-out infinite;
+}
+
+.sf-timer-viewer-dot:nth-child(2) {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+.sf-timer-viewer-dot:nth-child(3) {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+@-webkit-keyframes sf-timer-pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes sf-timer-pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.sf-timer-viewer-count {
+  font-weight: 500;
+}
+
+.sf-timer-cta {
+  background: linear-gradient(135deg, #c9a84c 0%, #d4b856 100%);
+  color: #2d2d2d;
+  border: none;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.2s ease, box-shadow 0.2s ease;
+  transition: -webkit-transform 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+}
+
+.sf-timer-cta:hover:not(.sf-timer-disabled) {
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(201, 168, 76, 0.4);
+}
+
+.sf-timer-cta:active:not(.sf-timer-disabled) {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.sf-timer-cta.sf-timer-disabled {
+  background-color: #ccc;
+  color: #aaa;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.sf-timer-countdown-text {
+  font-size: 12px;
+  color: #888;
+  margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+  .sf-timer-urgency-bar {
+    padding: 10px 12px;
+  }
+
+  .sf-timer-bar-text {
+    font-size: 12px;
+  }
+
+  .sf-timer-main {
+    margin-top: 50px;
+  }
+
+  .sf-timer-display {
+    font-size: 36px;
+    -webkit-gap: 4px;
+    gap: 4px;
+  }
+
+  .sf-timer-digit {
+    min-width: 48px;
+    height: 56px;
+  }
+
+  .sf-timer-separator {
+    font-size: 28px;
+  }
+
+  .sf-timer-cta {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
+</style>
+
+<div class="sf-timer-urgency-bar" id="urgencyBar">
+  <div class="sf-timer-urgency-bar-content">
+    <span class="sf-timer-bar-text">Limited Time: Bundle offer expires soon!</span>
+  </div>
+  <button class="sf-timer-close-bar" id="closeBar" aria-label="Close urgency bar">×</button>
+</div>
+
+<div class="sf-timer-main">
+  <div class="sf-timer-container">
+    <div class="sf-timer-label">Offer Expires In</div>
+    <div class="sf-timer-display" id="timerDisplay">
+      <span class="sf-timer-digit" id="day1">0</span>
+      <span class="sf-timer-digit" id="day2">0</span>
+      <span class="sf-timer-separator">:</span>
+      <span class="sf-timer-digit" id="hour1">0</span>
+      <span class="sf-timer-digit" id="hour2">0</span>
+      <span class="sf-timer-separator">:</span>
+      <span class="sf-timer-digit" id="min1">0</span>
+      <span class="sf-timer-digit" id="min2">0</span>
+      <span class="sf-timer-separator">:</span>
+      <span class="sf-timer-digit" id="sec1">0</span>
+      <span class="sf-timer-digit" id="sec2">0</span>
+    </div>
+  </div>
+
+  <div class="sf-timer-progress-section">
+    <div class="sf-timer-progress-label">Time Remaining</div>
+    <div class="sf-timer-progress-bar">
+      <div class="sf-timer-progress-fill" id="progressFill" style="width: 100%;"></div>
+    </div>
+  </div>
+
+  <div class="sf-timer-viewers-section">
+    <div class="sf-timer-viewer-dots">
+      <div class="sf-timer-viewer-dot"></div>
+      <div class="sf-timer-viewer-dot"></div>
+      <div class="sf-timer-viewer-dot"></div>
+    </div>
+    <span>
+      <span class="sf-timer-viewer-count" id="viewerCount">47</span> people viewing
+    </span>
+  </div>
+
+  <button class="sf-timer-cta" id="ctaButton">Upgrade to Bundle Now</button>
+  <div class="sf-timer-countdown-text" id="countdownText"></div>
+</div>
+
+<script>
+(function() {
+  try {
+    var EXPIRY_TIME_KEY = 'sf-bundle-expiry';
+    var EXPIRY_VIEWED_KEY = 'sf-expiry-bar-viewed';
+    var TOTAL_DURATION = 3 * 24 * 60 * 60 * 1000;
+    var CRITICAL_THRESHOLD = 6 * 60 * 60 * 1000;
+    var timerInterval = null;
+    var viewerInterval = null;
+
+    function initializeTimer() {
+      try {
+        var now = new Date().getTime();
+        var stored = localStorage.getItem(EXPIRY_TIME_KEY);
+        var expiryTime;
+
+        if (stored && !isNaN(parseInt(stored))) {
+          expiryTime = parseInt(stored);
+          if (expiryTime <= now) {
+            handleExpired();
+            return;
+          }
+        } else {
+          expiryTime = now + TOTAL_DURATION;
+          localStorage.setItem(EXPIRY_TIME_KEY, expiryTime.toString());
+        }
+
+        updateTimer();
+
+        if (timerInterval) {
+          clearInterval(timerInterval);
+        }
+        timerInterval = setInterval(updateTimer, 100);
+      } catch (e) {
+        console.error('Timer initialization error:', e);
+      }
+    }
+
+    function updateTimer() {
+      try {
+        var now = new Date().getTime();
+        var expiryTime = parseInt(localStorage.getItem(EXPIRY_TIME_KEY));
+        var remaining = expiryTime - now;
+
+        if (remaining <= 0) {
+          handleExpired();
+          return;
+        }
+
+        var days = Math.floor(remaining / (24 * 60 * 60 * 1000));
+        var hours = Math.floor((remaining % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+        var mins = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
+        var secs = Math.floor((remaining % (60 * 1000)) / 1000);
+
+        var displayDays = days.toString().padStart(2, '0');
+        var displayHours = hours.toString().padStart(2, '0');
+        var displayMins = mins.toString().padStart(2, '0');
+        var displaySecs = secs.toString().padStart(2, '0');
+
+        updateDigit('day1', displayDays[0]);
+        updateDigit('day2', displayDays[1]);
+        updateDigit('hour1', displayHours[0]);
+        updateDigit('hour2', displayHours[1]);
+        updateDigit('min1', displayMins[0]);
+        updateDigit('min2', displayMins[1]);
+        updateDigit('sec1', displaySecs[0]);
+        updateDigit('sec2', displaySecs[1]);
+
+        var progressPercent = (remaining / TOTAL_DURATION) * 100;
+        var progressFill = document.getElementById('progressFill');
+        progressFill.style.width = Math.max(0, progressPercent) + '%';
+
+        if (remaining <= CRITICAL_THRESHOLD) {
+          progressFill.classList.add('sf-timer-critical');
+        } else {
+          progressFill.classList.remove('sf-timer-critical');
+        }
+
+        if (days === 0 && hours === 0 && mins < 5) {
+          document.getElementById('countdownText').innerText = 'Last chance! Get the bundle before it\u2019s gone.';
+        }
+      } catch (e) {
+        console.error('Timer update error:', e);
+      }
+    }
+
+    function updateDigit(elementId, newValue) {
+      try {
+        var element = document.getElementById(elementId);
+        if (element && element.innerText !== newValue) {
+          element.classList.add('sf-timer-flip');
+          setTimeout(function() {
+            try {
+              element.innerText = newValue;
+              element.classList.remove('sf-timer-flip');
+            } catch (e) {
+              console.error('Digit update error:', e);
+            }
+          }, 300);
+        }
+      } catch (e) {
+        console.error('Update digit error:', e);
+      }
+    }
+
+    function handleExpired() {
+      try {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+        }
+        document.getElementById('timerDisplay').innerText = 'Offer Expired';
+        document.getElementById('ctaButton').classList.add('sf-timer-disabled');
+        document.getElementById('ctaButton').innerText = 'Offer Expired';
+        document.getElementById('progressFill').style.width = '0%';
+      } catch (e) {
+        console.error('Handle expired error:', e);
+      }
+    }
+
+    function updateViewerCount() {
+      try {
+        var baseCount = 47;
+        var variation = Math.floor(Math.random() * 8) - 4;
+        var count = Math.max(baseCount + variation, 35);
+        document.getElementById('viewerCount').innerText = count.toString();
+      } catch (e) {
+        console.error('Viewer count update error:', e);
+      }
+    }
+
+    function closeUrgencyBar() {
+      try {
+        var bar = document.getElementById('urgencyBar');
+        if (bar) {
+          bar.style.display = 'none';
+          sessionStorage.setItem(EXPIRY_VIEWED_KEY, 'true');
+          var mainElement = document.querySelector('.sf-timer-main');
+          if (mainElement) {
+            mainElement.style.marginTop = '16px';
+          }
+        }
+      } catch (e) {
+        console.error('Close urgency bar error:', e);
+      }
+    }
+
+    function restoreUrgencyBar() {
+      try {
+        var viewed = sessionStorage.getItem(EXPIRY_VIEWED_KEY);
+        if (viewed === 'true') {
+          var bar = document.getElementById('urgencyBar');
+          if (bar) {
+            bar.style.display = 'none';
+          }
+        }
+      } catch (e) {
+        console.error('Restore urgency bar error:', e);
+      }
+    }
+
+    function initializeOnLoad() {
+      try {
+        var closeBtn = document.getElementById('closeBar');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', closeUrgencyBar);
+        }
+
+        var ctaBtn = document.getElementById('ctaButton');
+        if (ctaBtn) {
+          ctaBtn.addEventListener('click', function() {
+            try {
+              if (this.className.indexOf('sf-timer-disabled') === -1) {
+                window.location.href = '[BUNDLE_CTA_LINK]';
+              }
+            } catch (e) {
+              console.error('CTA click error:', e);
+            }
+          });
+        }
+
+        restoreUrgencyBar();
+        initializeTimer();
+
+        if (viewerInterval) {
+          clearInterval(viewerInterval);
+        }
+        viewerInterval = setInterval(updateViewerCount, 8000);
+      } catch (e) {
+        console.error('Initialize on load error:', e);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeOnLoad);
+    } else {
+      initializeOnLoad();
+    }
+  } catch (e) {
+    console.error('Global script error:', e);
+  }
+})();
+</script>

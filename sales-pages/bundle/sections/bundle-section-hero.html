@@ -1,0 +1,642 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .sf-hero-section {
+    background: linear-gradient(180deg, #faf6ef 0%, #f5f0e8 40%, #faf6ef 100%);
+    padding: 80px 20px 100px 20px;
+    min-height: 100vh;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sf-hero-glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    -webkit-animation: sf-hero-orb-breathe 6s ease-in-out infinite;
+    animation: sf-hero-orb-breathe 6s ease-in-out infinite;
+  }
+
+  .sf-hero-glow-orb-1 {
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    right: -100px;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+  }
+
+  .sf-hero-glow-orb-2 {
+    width: 300px;
+    height: 300px;
+    bottom: -50px;
+    left: -80px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s;
+  }
+
+  @-webkit-keyframes sf-hero-orb-breathe {
+    0%, 100% { opacity: 0.4; -webkit-transform: scale(0.95); transform: scale(0.95); }
+    50% { opacity: 1; -webkit-transform: scale(1.05); transform: scale(1.05); }
+  }
+  @keyframes sf-hero-orb-breathe {
+    0%, 100% { opacity: 0.4; -webkit-transform: scale(0.95); transform: scale(0.95); }
+    50% { opacity: 1; -webkit-transform: scale(1.05); transform: scale(1.05); }
+  }
+
+  .sf-hero-inner {
+    max-width: 960px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .sf-hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #c9a84c;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    opacity: 0;
+    -webkit-animation: sf-hero-fadeDown 0.8s ease-out 0.2s forwards;
+    animation: sf-hero-fadeDown 0.8s ease-out 0.2s forwards;
+  }
+
+  .sf-hero-eyebrow-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #c9a84c;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+    -webkit-animation: sf-hero-dot-pulse 1.5s ease-in-out infinite;
+    animation: sf-hero-dot-pulse 1.5s ease-in-out infinite;
+  }
+
+  @-webkit-keyframes sf-hero-dot-pulse {
+    0%, 100% { opacity: 0.4; -webkit-transform: scale(0.8); transform: scale(0.8); }
+    50% { opacity: 1; -webkit-transform: scale(1.3); transform: scale(1.3); }
+  }
+  @keyframes sf-hero-dot-pulse {
+    0%, 100% { opacity: 0.4; -webkit-transform: scale(0.8); transform: scale(0.8); }
+    50% { opacity: 1; -webkit-transform: scale(1.3); transform: scale(1.3); }
+  }
+
+  /* === SVG PROGRESS RING === */
+  .sf-hero-ring-block {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    margin-bottom: 50px;
+    opacity: 0;
+    -webkit-animation: sf-hero-fadeDown 0.8s ease-out 0.4s forwards;
+    animation: sf-hero-fadeDown 0.8s ease-out 0.4s forwards;
+  }
+
+  .sf-hero-ring-wrap {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin-bottom: 20px;
+  }
+
+  .sf-hero-ring-svg {
+    width: 220px;
+    height: 220px;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+  }
+
+  .sf-hero-ring-track {
+    fill: none;
+    stroke: rgba(201,168,76,0.15);
+    stroke-width: 10;
+  }
+
+  .sf-hero-ring-fill {
+    fill: none;
+    stroke: #c9a84c;
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-dasharray: 565.48;
+    stroke-dashoffset: 565.48;
+    -webkit-transition: stroke-dashoffset 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: stroke-dashoffset 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: drop-shadow(0 0 8px rgba(201,168,76,0.4));
+  }
+
+  .sf-hero-ring-percent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 800;
+    color: #2d2d2d;
+    line-height: 1;
+  }
+
+  .sf-hero-ring-percent-symbol {
+    font-size: 32px;
+    color: #c9a84c;
+    font-weight: 700;
+  }
+
+  .sf-hero-ring-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #5a5a5a;
+    line-height: 1.6;
+    max-width: 400px;
+  }
+
+  .sf-hero-ring-label-accent {
+    color: #c9a84c;
+    font-weight: 700;
+  }
+
+  /* === HEADLINE === */
+  .sf-hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #2d2d2d;
+    margin-bottom: 20px;
+    opacity: 0;
+    -webkit-animation: sf-hero-fadeDown 0.8s ease-out 0.6s forwards;
+    animation: sf-hero-fadeDown 0.8s ease-out 0.6s forwards;
+  }
+
+  .sf-hero-headline-gold {
+    color: #c9a84c;
+  }
+
+  .sf-hero-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #5a5a5a;
+    margin-bottom: 60px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    -webkit-animation: sf-hero-fadeUp 0.8s ease-out 0.8s forwards;
+    animation: sf-hero-fadeUp 0.8s ease-out 0.8s forwards;
+  }
+
+  /* === IDENTITY PROMISE CARDS === */
+  .sf-hero-promises {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+
+  .sf-hero-promise-card {
+    background: #fff;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    padding: 28px 24px;
+    width: 210px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    -webkit-animation: sf-hero-cardIn 0.7s ease-out forwards;
+    animation: sf-hero-cardIn 0.7s ease-out forwards;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+  }
+
+  .sf-hero-promise-card:hover {
+    -webkit-transform: translateY(-6px);
+    transform: translateY(-6px);
+    -webkit-box-shadow: 0 12px 30px rgba(201,168,76,0.15);
+    box-shadow: 0 12px 30px rgba(201,168,76,0.15);
+    border-color: #c9a84c;
+  }
+
+  .sf-hero-promise-card:nth-child(1) { -webkit-animation-delay: 1s; animation-delay: 1s; }
+  .sf-hero-promise-card:nth-child(2) { -webkit-animation-delay: 1.15s; animation-delay: 1.15s; }
+  .sf-hero-promise-card:nth-child(3) { -webkit-animation-delay: 1.3s; animation-delay: 1.3s; }
+  .sf-hero-promise-card:nth-child(4) { -webkit-animation-delay: 1.45s; animation-delay: 1.45s; }
+
+  .sf-hero-promise-card-top {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .sf-hero-promise-card-icon {
+    font-size: 32px;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .sf-hero-promise-card-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #c9a84c;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .sf-hero-promise-card-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #2d2d2d;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* === BRIDGE TEXT === */
+  .sf-hero-bridge {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #2d2d2d;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    -webkit-animation: sf-hero-fadeUp 0.8s ease-out 1.7s forwards;
+    animation: sf-hero-fadeUp 0.8s ease-out 1.7s forwards;
+  }
+
+  .sf-hero-bridge-accent {
+    color: #c9a84c;
+    font-weight: 700;
+  }
+
+  /* === CTA BUTTONS === */
+  .sf-hero-cta-area {
+    max-width: 480px;
+    margin: 0 auto;
+    opacity: 0;
+    -webkit-animation: sf-hero-fadeUp 0.8s ease-out 1.9s forwards;
+    animation: sf-hero-fadeUp 0.8s ease-out 1.9s forwards;
+  }
+
+  .sf-hero-cta-identity {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: #c9a84c;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .sf-hero-btn-primary {
+    display: block;
+    width: 100%;
+    padding: 22px 40px;
+    background: #c9a84c;
+    color: #2d2d2d;
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    -webkit-animation: sf-hero-pulse 2s ease-in-out infinite;
+    animation: sf-hero-pulse 2s ease-in-out infinite;
+    -webkit-transition: -webkit-transform 0.3s ease;
+    transition: transform 0.3s ease;
+    -webkit-appearance: none;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sf-hero-btn-primary:hover {
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
+  }
+
+  @-webkit-keyframes sf-hero-pulse {
+    0% { -webkit-box-shadow: 0 0 0 0 rgba(201,168,76,0.6); box-shadow: 0 0 0 0 rgba(201,168,76,0.6); }
+    70% { -webkit-box-shadow: 0 0 0 20px rgba(201,168,76,0); box-shadow: 0 0 0 20px rgba(201,168,76,0); }
+    100% { -webkit-box-shadow: 0 0 0 0 rgba(201,168,76,0); box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+  }
+  @keyframes sf-hero-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(201,168,76,0.6); }
+    70% { box-shadow: 0 0 0 20px rgba(201,168,76,0); }
+    100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+  }
+
+  .sf-hero-btn-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #a89968;
+    text-align: center;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .sf-hero-btn-secondary {
+    display: block;
+    width: 100%;
+    padding: 18px 40px;
+    background: transparent;
+    color: #c9a84c;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    border: 2px solid #c9a84c;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    -webkit-appearance: none;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sf-hero-btn-secondary:hover {
+    background: rgba(201,168,76,0.1);
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+  }
+
+  .sf-hero-btn-secondary-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #a89968;
+    text-align: center;
+  }
+
+  /* === TRUST BAR === */
+  .sf-hero-trust-bar {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 50px;
+    opacity: 0;
+    -webkit-animation: sf-hero-fadeUp 0.8s ease-out 2.2s forwards;
+    animation: sf-hero-fadeUp 0.8s ease-out 2.2s forwards;
+  }
+
+  .sf-hero-trust-item {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #a89968;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .sf-hero-trust-divider {
+    width: 4px;
+    height: 4px;
+    background: #c9a84c;
+    border-radius: 50%;
+  }
+
+  /* === KEYFRAMES === */
+  @-webkit-keyframes sf-hero-fadeDown {
+    from { opacity: 0; -webkit-transform: translateY(-20px); transform: translateY(-20px); }
+    to { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); }
+  }
+  @keyframes sf-hero-fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @-webkit-keyframes sf-hero-fadeUp {
+    from { opacity: 0; -webkit-transform: translateY(20px); transform: translateY(20px); }
+    to { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); }
+  }
+  @keyframes sf-hero-fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @-webkit-keyframes sf-hero-cardIn {
+    from { opacity: 0; -webkit-transform: translateY(30px) scale(0.95); transform: translateY(30px) scale(0.95); }
+    to { opacity: 1; -webkit-transform: translateY(0) scale(1); transform: translateY(0) scale(1); }
+  }
+  @keyframes sf-hero-cardIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .sf-hero-section { padding: 60px 16px 80px 16px; min-height: auto; }
+    .sf-hero-headline { font-size: 34px; }
+    .sf-hero-sub { font-size: 16px; margin-bottom: 40px; }
+    .sf-hero-ring-wrap { width: 180px; height: 180px; }
+    .sf-hero-ring-svg { width: 180px; height: 180px; }
+    .sf-hero-ring-percent { font-size: 52px; }
+    .sf-hero-ring-percent-symbol { font-size: 26px; }
+    .sf-hero-promises { gap: 14px; }
+    .sf-hero-promise-card { width: 160px; padding: 22px 16px; }
+    .sf-hero-promise-card-text { font-size: 14px; }
+    .sf-hero-trust-bar { -webkit-flex-wrap: wrap; flex-wrap: wrap; gap: 16px; }
+  }
+
+  @media (max-width: 480px) {
+    .sf-hero-headline { font-size: 28px; }
+    .sf-hero-promise-card { width: 100%; max-width: 280px; }
+    .sf-hero-promises { -webkit-flex-direction: column; flex-direction: column; -webkit-align-items: center; align-items: center; }
+  }
+</style>
+
+<div class="sf-hero-section">
+  <div class="sf-hero-glow-orb sf-hero-glow-orb-1"></div>
+  <div class="sf-hero-glow-orb sf-hero-glow-orb-2"></div>
+
+  <div class="sf-hero-inner">
+    <p class="sf-hero-eyebrow">
+      <span class="sf-hero-eyebrow-dot"></span>ONE-TIME UPGRADE OFFER
+    </p>
+
+    <!-- SVG Animated Progress Ring -->
+    <div class="sf-hero-ring-block">
+      <div class="sf-hero-ring-wrap">
+        <svg class="sf-hero-ring-svg" viewBox="0 0 220 220">
+          <circle class="sf-hero-ring-track" cx="110" cy="110" r="90"></circle>
+          <circle class="sf-hero-ring-fill" id="sf-hero-ring-fill" cx="110" cy="110" r="90"></circle>
+        </svg>
+        <div class="sf-hero-ring-percent">
+          <span id="sf-hero-counter">0</span><span class="sf-hero-ring-percent-symbol">%</span>
+        </div>
+      </div>
+      <p class="sf-hero-ring-label">of bundle members reach their goal weight. <span class="sf-hero-ring-label-accent">You're about to join them.</span></p>
+    </div>
+
+    <h1 class="sf-hero-headline">One Decision Away From <span class="sf-hero-headline-gold">Becoming Her</span></h1>
+
+    <p class="sf-hero-sub">Not another restart. Not another promise that fades by Week 3. This is the moment you stop trying to change — and start becoming the nurse who already has.</p>
+
+    <!-- Identity Promise Cards -->
+    <div class="sf-hero-promises">
+      <div class="sf-hero-promise-card">
+        <div class="sf-hero-promise-card-top"></div>
+        <span class="sf-hero-promise-card-icon">&#x1f374;</span>
+        <div class="sf-hero-promise-card-label">Become</div>
+        <div class="sf-hero-promise-card-text">The nurse who eats without overthinking every shift</div>
+      </div>
+
+      <div class="sf-hero-promise-card">
+        <div class="sf-hero-promise-card-top"></div>
+        <span class="sf-hero-promise-card-icon">&#x26a1;</span>
+        <div class="sf-hero-promise-card-label">Become</div>
+        <div class="sf-hero-promise-card-text">The nurse with energy left at the end of a 12-hour shift</div>
+      </div>
+
+      <div class="sf-hero-promise-card">
+        <div class="sf-hero-promise-card-top"></div>
+        <span class="sf-hero-promise-card-icon">&#x1f525;</span>
+        <div class="sf-hero-promise-card-label">Become</div>
+        <div class="sf-hero-promise-card-text">The nurse whose scrubs fit the way they're supposed to</div>
+      </div>
+
+      <div class="sf-hero-promise-card">
+        <div class="sf-hero-promise-card-top"></div>
+        <span class="sf-hero-promise-card-icon">&#x2728;</span>
+        <div class="sf-hero-promise-card-label">Become</div>
+        <div class="sf-hero-promise-card-text">The nurse other nurses ask: "What are you doing differently?"</div>
+      </div>
+    </div>
+
+    <p class="sf-hero-bridge">You already have the course. You already have the membership. The bundle is what turns knowledge into <span class="sf-hero-bridge-accent">your permanent transformation</span> — personalized protocols, direct coach access, and a system engineered for your exact shifts, your stress, your life.</p>
+
+    <!-- CTA Buttons -->
+    <div class="sf-hero-cta-area">
+      <p class="sf-hero-cta-identity">For nurses who are done starting over</p>
+      <button class="sf-hero-btn-primary" data-sf-hero-action="bundle-12">
+        I'm Going All In — 12 Months for Lifelong Results
+      </button>
+      <div class="sf-hero-btn-meta">
+        $49/mo · Save $216 · All 5 Premium Bonuses · VIP Coach Access
+      </div>
+      <button class="sf-hero-btn-secondary" data-sf-hero-action="bundle-6">
+        Start With 6 Months — $335
+      </button>
+      <div class="sf-hero-btn-secondary-meta">
+        $55.83/mo · Save $67 · 3 Premium Bonuses
+      </div>
+    </div>
+
+    <!-- Trust Bar -->
+    <div class="sf-hero-trust-bar">
+      <span class="sf-hero-trust-item">400+ Nurses Transformed</span>
+      <span class="sf-hero-trust-divider"></span>
+      <span class="sf-hero-trust-item">Built by an RN</span>
+      <span class="sf-hero-trust-divider"></span>
+      <span class="sf-hero-trust-item">Feel Different by Day 3</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  try {
+    var ringFill = document.getElementById('sf-hero-ring-fill');
+    var counterEl = document.getElementById('sf-hero-counter');
+    var targetPercent = 87;
+    var circumference = 2 * Math.PI * 90;
+    var targetOffset = circumference - (circumference * targetPercent / 100);
+
+    function animateRing() {
+      if (!ringFill || !counterEl) return;
+
+      ringFill.style.strokeDashoffset = String(targetOffset);
+
+      var startTime = Date.now();
+      var duration = 2000;
+
+      function tick() {
+        var elapsed = Date.now() - startTime;
+        var progress = Math.min(elapsed / duration, 1);
+        var eased = progress < 0.5
+          ? 2 * progress * progress
+          : -1 + (4 - 2 * progress) * progress;
+        var current = Math.floor(eased * targetPercent);
+        counterEl.textContent = String(current);
+
+        if (progress < 1) {
+          setTimeout(tick, 16);
+        } else {
+          counterEl.textContent = String(targetPercent);
+        }
+      }
+
+      tick();
+    }
+
+    setTimeout(animateRing, 1500);
+
+    var buttons = document.querySelectorAll('[data-sf-hero-action]');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('click', function(e) {
+        try {
+          var action = e.target.getAttribute('data-sf-hero-action');
+          if (!action) return;
+          e.preventDefault();
+
+          if (action.indexOf('bundle-12') > -1) {
+            console.log('Hero: 12-month bundle clicked');
+            if (typeof gtag !== 'undefined') {
+              gtag('event', 'hero_12mo_click', { event_category: 'engagement' });
+            }
+          } else if (action.indexOf('bundle-6') > -1) {
+            console.log('Hero: 6-month bundle clicked');
+            if (typeof gtag !== 'undefined') {
+              gtag('event', 'hero_6mo_click', { event_category: 'engagement' });
+            }
+          }
+        } catch (err) {
+          console.error('Hero button error:', err);
+        }
+      });
+    }
+  } catch (e) {
+    console.error('Hero init error:', e);
+  }
+})();
+</script>

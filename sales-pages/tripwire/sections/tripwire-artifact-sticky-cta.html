@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmithFit Tripwire — Sticky CTA Bar</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0;padding:0;font-family:'Inter',system-ui,sans-serif;">
+
+<!-- ===== STICKY CTA BAR — Drop into GHL custom code block (place at bottom of page) ===== -->
+
+<!-- Spacer to simulate page content for demo -->
+<div style="height:120vh;background:#FFF8F0;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:14px;">
+  Scroll down to see the sticky CTA appear
+</div>
+
+<!-- Sticky Bar -->
+<div id="sticky-cta" style="position:fixed;bottom:0;left:0;right:0;transform:translateY(100%);transition:transform 0.35s ease;z-index:9999;background:linear-gradient(135deg,#1a1a1a 0%,#252525 100%);border-top:2px solid #C5A55A;padding:12px 20px;box-shadow:0 -4px 20px rgba(0,0,0,0.3);">
+  <div style="max-width:600px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+
+    <!-- Left: Price + Guarantee -->
+    <div style="flex-shrink:0;">
+      <div style="display:flex;align-items:baseline;gap:6px;">
+        <span style="font-size:24px;font-weight:800;color:#C5A55A;">$27</span>
+        <span style="font-size:13px;color:#888;text-decoration:line-through;">$679</span>
+      </div>
+      <div style="font-size:11px;color:#888;margin-top:2px;">60-day guarantee</div>
+    </div>
+
+    <!-- Right: CTA Button -->
+    <a href="#pricing" id="sticky-btn" style="display:inline-block;padding:14px 28px;background:linear-gradient(135deg,#C5A55A 0%,#d4a94c 50%,#C5A55A 100%);color:#1a1a1a;font-size:15px;font-weight:700;border-radius:8px;text-decoration:none;white-space:nowrap;box-shadow:0 4px 15px rgba(197,165,90,0.35);transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(197,165,90,0.5)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(197,165,90,0.35)'">
+      Start the 7-Day Reset
+    </a>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var bar = document.getElementById('sticky-cta');
+  var visible = false;
+  var threshold = 600; // Show after scrolling 600px
+
+  function checkScroll() {
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    if (scrollY > threshold && !visible) {
+      bar.style.transform = 'translateY(0)';
+      visible = true;
+    } else if (scrollY <= threshold && visible) {
+      bar.style.transform = 'translateY(100%)';
+      visible = false;
+    }
+  }
+
+  // Debounced scroll listener
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        checkScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Initial check
+  checkScroll();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmithFit — Transformation Proof Section v2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #c9a84c; --gold-light: #d4b86a; --gold-dark: #a88a3a;
+    --cream: #faf6ef; --cream-dark: #f0e8d8;
+    --text-dark: #1a1a1a; --text-body: #3d3d3d; --text-muted: #6b6b6b;
+    --green: #2d6a4f; --green-light: #d4edda; --white: #ffffff;
+  }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--cream); color: var(--text-dark); line-height: 1.6; }
+  .section { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+
+  /* Header */
+  .section-label { text-align: center; font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; line-height: 1.2; }
+  .section-subtitle { text-align: center; font-size: 17px; color: var(--text-muted); margin-bottom: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+  /* Animated Counter */
+  .proof-counter { text-align: center; margin-bottom: 48px; }
+  .proof-counter .number { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 800; color: var(--gold); line-height: 1; }
+  .proof-counter .label { font-size: 16px; color: var(--text-muted); margin-top: 4px; }
+
+  /* Stat Bar with animated counters */
+  .stat-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+  .stat-item { text-align: center; padding: 20px 12px; background: var(--white); border-radius: 12px; border: 1px solid #e8e0d0; transition: transform 0.2s; }
+  .stat-item:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .stat-number { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 4px; }
+  .stat-label { font-size: 13px; color: var(--text-muted); line-height: 1.3; }
+
+  /* Video Section */
+  .video-section { margin-bottom: 48px; }
+  .video-label { text-align: center; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
+  .video-headline { text-align: center; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--text-dark); margin-bottom: 20px; }
+  .video-wrapper { max-width: 400px; margin: 0 auto; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.12); background: #000; }
+  .video-wrapper iframe { width: 100%; aspect-ratio: 9/16; display: block; border: none; }
+  .video-caption { text-align: center; font-size: 14px; color: var(--text-muted); font-style: italic; margin-top: 16px; }
+
+  /* ===== IMAGE CARD GALLERY ===== */
+  .gallery-header { text-align: center; margin-bottom: 24px; }
+  .gallery-header .label { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; }
+  .gallery-header .title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--text-dark); }
+
+  /* Main featured row — 2 large cards side by side */
+  .gallery-featured { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
+
+  /* Secondary row — 3 smaller cards */
+  .gallery-secondary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
+
+  /* Expandable row — hidden until "Show More" */
+  .gallery-expanded { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.6s ease, opacity 0.4s ease, margin 0.4s ease; }
+  .gallery-expanded.open { max-height: 2000px; opacity: 1; }
+
+  /* Individual card */
+  .image-card { border-radius: 14px; overflow: hidden; background: var(--white); border: 1px solid #e8e0d0; box-shadow: 0 2px 12px rgba(0,0,0,0.04); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; position: relative; }
+  .image-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.10); }
+
+  /* The image inside the card — drops right in */
+  .image-card img { width: 100%; height: auto; display: block; }
+
+  /* Placeholder for cards without images yet */
+  .image-card .placeholder { aspect-ratio: 3/4; background: linear-gradient(135deg, #e8e0d0, #d8d0c0); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+  .image-card .placeholder .ph-icon { font-size: 32px; margin-bottom: 8px; }
+  .image-card .placeholder .ph-name { font-weight: 700; font-size: 15px; color: var(--text-dark); margin-bottom: 4px; }
+  .image-card .placeholder .ph-hint { font-size: 12px; color: var(--text-muted); text-align: center; }
+
+  /* Subtle name badge overlay (optional — only if your image cards DON'T already have the name) */
+  .card-badge { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: linear-gradient(transparent, rgba(0,0,0,0.6)); display: none; /* hidden by default — enable if needed */ }
+  .card-badge .name { color: white; font-weight: 700; font-size: 14px; }
+  .card-badge .type { color: rgba(255,255,255,0.7); font-size: 12px; }
+
+  /* Show More / Show Less button */
+  .gallery-toggle { text-align: center; margin: 24px 0; }
+  .gallery-toggle button { background: transparent; border: 2px solid var(--gold); color: var(--gold-dark); font-size: 14px; font-weight: 700; padding: 12px 32px; border-radius: 10px; cursor: pointer; transition: all 0.2s ease; letter-spacing: 0.5px; }
+  .gallery-toggle button:hover { background: var(--gold); color: white; }
+  .gallery-toggle button .arrow { display: inline-block; transition: transform 0.3s ease; margin-left: 6px; }
+  .gallery-toggle button.open .arrow { transform: rotate(180deg); }
+
+  /* Gallery counter */
+  .gallery-counter { text-align: center; font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
+  .gallery-counter strong { color: var(--gold-dark); }
+
+  /* Featured Quote */
+  .featured-quote { background: linear-gradient(135deg, var(--text-dark) 0%, #2d2d2d 100%); border-radius: 20px; padding: 40px 36px; margin: 40px 0; text-align: center; position: relative; }
+  .featured-quote::before { content: '\201C'; font-family: 'Playfair Display', serif; font-size: 120px; color: var(--gold); opacity: 0.15; position: absolute; top: -10px; left: 24px; line-height: 1; }
+  .featured-quote .quote-text { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: white; line-height: 1.5; margin-bottom: 16px; position: relative; z-index: 1; }
+  .featured-quote .quote-author { font-size: 14px; color: var(--gold); font-weight: 600; }
+  .featured-quote .quote-role { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+  /* CTA */
+  .proof-cta { text-align: center; margin-top: 40px; }
+  .cta-button { display: inline-block; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: white; font-size: 17px; font-weight: 700; padding: 18px 48px; border: none; border-radius: 12px; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 16px rgba(201,168,76,0.3); max-width: 520px; width: 100%; }
+  .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(201,168,76,0.4); }
+  .cta-sub { font-size: 13px; color: var(--text-muted); margin-top: 10px; }
+
+  /* Lightbox */
+  .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+  .lightbox.active { display: flex; }
+  .lightbox img { max-width: 90%; max-height: 90vh; border-radius: 12px; box-shadow: 0 0 60px rgba(0,0,0,0.5); }
+  .lightbox-close { position: absolute; top: 20px; right: 24px; color: white; font-size: 36px; cursor: pointer; line-height: 1; font-weight: 300; z-index: 1001; }
+  .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 48px; cursor: pointer; padding: 20px; user-select: none; z-index: 1001; }
+  .lightbox-nav.prev { left: 10px; }
+  .lightbox-nav.next { right: 10px; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .section { padding: 40px 16px; }
+    .section-title { font-size: 28px; }
+    .proof-counter .number { font-size: 42px; }
+    .gallery-featured { grid-template-columns: 1fr; }
+    .gallery-secondary { grid-template-columns: repeat(2, 1fr); }
+    .gallery-expanded { grid-template-columns: repeat(2, 1fr); }
+    .stat-bar { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .stat-number { font-size: 24px; }
+    .stat-label { font-size: 11px; }
+    .featured-quote { padding: 28px 20px; }
+    .featured-quote .quote-text { font-size: 18px; }
+    .video-wrapper { max-width: 320px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="section">
+  <div class="section-label">REAL NURSES. REAL RESULTS.</div>
+  <div class="section-title">They Didn't Just Lose Weight.</div>
+  <div class="section-subtitle">They became the nurse who finally stopped starting over.</div>
+
+  <div class="proof-counter">
+    <div class="number" id="mainCounter">0</div>
+    <div class="label">Nurses Already Transformed Inside the Sisterhood</div>
+  </div>
+
+  <!-- ANIMATED STAT BAR -->
+  <div class="stat-bar" id="statBar">
+    <div class="stat-item">
+      <div class="stat-number" id="stat1">0%</div>
+      <div class="stat-label">Feel different<br>by Day 3</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" id="stat2">0 lbs</div>
+      <div class="stat-label">Average lost<br>in Week 1</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" id="stat3">0+ mo</div>
+      <div class="stat-label">Average member<br>retention</div>
+    </div>
+  </div>
+
+  <!-- VIDEO TESTIMONIAL -->
+  <div class="video-section">
+    <div class="video-label">&#9654; HEAR IT FROM THEM</div>
+    <div class="video-headline">Watch What These Nurses Have to Say</div>
+    <div class="video-wrapper">
+      <iframe
+        src="https://www.youtube.com/embed/qh8wC7-qKYU"
+        title="SmithFit Client Testimonials"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="video-caption">"Down 10 lbs without giving up my favorite food." — Real SmithFit members</div>
+  </div>
+
+  <!-- ===== IMAGE CARD GALLERY ===== -->
+  <div class="gallery-header">
+    <div class="label">BEFORE &amp; AFTER</div>
+    <div class="title">See the Transformations for Yourself</div>
+  </div>
+
+  <!--
+    HOW TO USE:
+    1. Replace each <div class="placeholder">...</div> with your actual image:
+       <img src="YOUR_IMAGE_URL" alt="Name - Before and After">
+    2. Your image cards are self-contained (they already show before/after + story),
+       so NO extra text is needed — just drop the image in.
+    3. The gallery shows 5 cards initially, then reveals more on "Show More" click.
+    4. Click any card to open it full-screen in the lightbox.
+  -->
+
+  <!-- ROW 1: 2 Featured Large Cards -->
+  <div class="gallery-featured">
+    <div class="image-card" onclick="openLightbox(0)">
+      <div class="placeholder">
+        <div class="ph-icon">📸</div>
+        <div class="ph-name">Transformation Card 1</div>
+        <div class="ph-hint">Drop your image card here<br>(before/after + story included)</div>
+      </div>
+    </div>
+    <div class="image-card" onclick="openLightbox(1)">
+      <div class="placeholder">
+        <div class="ph-icon">📸</div>
+        <div class="ph-name">Transformation Card 2</div>
+        <div class="ph-hint">Drop your image card here<br>(before/after + story included)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: 3 Secondary Cards -->
+  <div class="gallery-secondary">
+    <div class="image-card" onclick="openLightbox(2)">
+      <div class="placeholder">
+        <div class="ph-icon">📸</div>
+        <div class="ph-name">Transformation Card 3</div>
+        <div class="ph-hint">Drop image card here</div>
+      </div>
+    </div>
+    <div class="image-card" onclick="openLightbox(3)">
+      <div class="placeholder">
+        <div class="ph-icon">📸</div>
+        <div class="ph-name">Transformation Card 4</div>
+        <div class="ph-hint">Drop image card here</div>
+      </div>
+    </div>
+    <div class="image-card" onclick="openLightbox(4)">
+      <div class="placeholder">
+        <div class="ph-icon">📸</div>
+        <div class="ph-name">Transformation Card 5</div>
+        <div class="ph-hint">Drop image card here</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gallery-counter">Showing <strong>5</strong> of <strong>12</strong> transformations</div>
+
+  <!-- ROW 3+: Expandable — Hidden Until Toggle -->
+  <div class="gallery-expanded" id="expandedGallery">
+    <div class="image-card" onclick="openLightbox(5)">
+      <div class="placeholder">
+        <div class="ph-icon">📸</div>
+        <div class="ph-name">Transformation Card 6</div>
+        <div class="ph-hint">Drop image card here</div>
+      </div>
+    </div>
+    <div class="image-card" onclick="openLightbox(6)">
+      <div class="placeholder">
+        <div class="ph-icon">📸</div>
+        <div class="ph-name">Transformation Card 7</div>
+        <div class="ph-hint">Drop image card here</div>
+      </div>
+    </div>
+    <div class="image-card" onclick="openLightbox(7)">
+      <div class="placeholder">
+        <div class="ph-icon">📸</div>
+        <div class="ph-name">Transformation Card 8</div>
+        <div class="ph-hint">Drop image card here</div>
+      </div>
+    </div>
+    <div class="image-card" onclick="openLightbox(8)">
+      <div class="placeholder">
+        <div class="ph-icon">📸</div>
+        <div class="ph-name">Transformation Card 9</div>
+        <div class="ph-hint">Drop image card here</div>
+      </div>
+    </div>
+    <div class="image-card" onclick="openLightbox(9)">
+      <div class="placeholder">
+        <div class="ph-icon">📸</div>
+        <div class="ph-name">Transformation Card 10</div>
+        <div class="ph-hint">Drop image card here</div>
+      </div>
+    </div>
+    <div class="image-card" onclick="openLightbox(10)">
+      <div class="placeholder">
+        <div class="ph-icon">📸</div>
+        <div class="ph-name">Transformation Card 11</div>
+        <div class="ph-hint">Drop image card here</div>
+      </div>
+    </div>
+    <div class="image-card" onclick="openLightbox(11)">
+      <div class="placeholder">
+        <div class="ph-icon">📸</div>
+        <div class="ph-name">Transformation Card 12</div>
+        <div class="ph-hint">Drop image card here</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Show More / Less Toggle -->
+  <div class="gallery-toggle">
+    <button id="toggleBtn" onclick="toggleGallery()">Show More Transformations <span class="arrow">&#9660;</span></button>
+  </div>
+
+  <!-- FEATURED QUOTE -->
+  <div class="featured-quote">
+    <div class="quote-text">I used to dread my break room because I'd eat whatever was there. Now I open my app, check my plan, and feel like I'm in control.</div>
+    <div class="quote-author">Crystal M.</div>
+    <div class="quote-role">Night Shift RN</div>
+  </div>
+
+  <!-- CTA -->
+  <div class="proof-cta">
+    <button class="cta-button">YES — I Want Results Like These for $67/month &rarr;</button>
+    <div class="cta-sub">30-day money-back guarantee. Cancel anytime.</div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-close" onclick="closeLightbox()">&times;</div>
+  <div class="lightbox-nav prev" onclick="navLightbox(-1)">&#8249;</div>
+  <div class="lightbox-nav next" onclick="navLightbox(1)">&#8250;</div>
+  <img id="lightboxImg" src="" alt="Transformation">
+</div>
+
+<script>
+  // ===== ANIMATED COUNTERS =====
+  function animateValue(el, target, suffix, duration) {
+    let start = 0;
+    const increment = Math.max(1, Math.ceil(target / (duration / 16)));
+    function tick() {
+      start += increment;
+      if (start >= target) { el.textContent = target + suffix; return; }
+      el.textContent = start + suffix;
+      requestAnimationFrame(tick);
+    }
+    tick();
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateValue(document.getElementById('mainCounter'), 400, '+', 2000);
+        animateValue(document.getElementById('stat1'), 87, '%', 1500);
+        animateValue(document.getElementById('stat2'), 5, ' lbs', 800);
+        animateValue(document.getElementById('stat3'), 8, '+ mo', 800);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  counterObserver.observe(document.getElementById('statBar'));
+
+  // ===== GALLERY TOGGLE =====
+  function toggleGallery() {
+    const expanded = document.getElementById('expandedGallery');
+    const btn = document.getElementById('toggleBtn');
+    const counter = document.querySelector('.gallery-counter strong:first-child');
+    expanded.classList.toggle('open');
+    btn.classList.toggle('open');
+    if (expanded.classList.contains('open')) {
+      btn.innerHTML = 'Show Fewer <span class="arrow">&#9660;</span>';
+      counter.textContent = '12';
+    } else {
+      btn.innerHTML = 'Show More Transformations <span class="arrow">&#9660;</span>';
+      counter.textContent = '5';
+    }
+  }
+
+  // ===== LIGHTBOX =====
+  let lightboxIndex = 0;
+  const allCards = document.querySelectorAll('.image-card');
+
+  function openLightbox(index) {
+    const card = allCards[index];
+    const img = card.querySelector('img');
+    if (!img) return; // don't open lightbox for placeholder cards
+    lightboxIndex = index;
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function navLightbox(dir) {
+    let next = lightboxIndex + dir;
+    // Find next card that has an actual image
+    while (next >= 0 && next < allCards.length) {
+      if (allCards[next].querySelector('img')) {
+        openLightbox(next);
+        return;
+      }
+      next += dir;
+    }
+  }
+
+  // Close lightbox on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navLightbox(-1);
+    if (e.key === 'ArrowRight') navLightbox(1);
+  });
+
+  // Close lightbox on background click
+  document.getElementById('lightbox').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,551 @@
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 20px;
+    min-height: 100vh;
+  }
+
+  .sf-trust-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .sf-trust-header {
+    text-align: center;
+    margin-bottom: 50px;
+    color: #fff;
+  }
+
+  .sf-trust-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #d4af37 0%, #f4e4c1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .sf-trust-header p {
+    font-size: 1rem;
+    color: #aaa;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .sf-trust-identity-section {
+    margin-bottom: 60px;
+  }
+
+  .sf-trust-section-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    color: #fff;
+  }
+
+  .sf-trust-cards-grid {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: 30px;
+    -webkit-justify-content: center;
+    justify-content: center;
+    margin-bottom: 50px;
+  }
+
+  .sf-trust-flip-card {
+    width: 280px;
+    height: 320px;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+    cursor: pointer;
+  }
+
+  .sf-trust-flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: -webkit-transform 0.6s;
+    transition: transform 0.6s;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+  }
+
+  .sf-trust-flip-card:hover .sf-trust-flip-card-inner {
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+  }
+
+  .sf-trust-flip-card-front, .sf-trust-flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    padding: 25px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .sf-trust-flip-card-front {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(244, 228, 193, 0.1) 100%);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+  }
+
+  .sf-trust-flip-card-back {
+    background: linear-gradient(135deg, #d4af37 0%, #f4e4c1 100%);
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    color: #1a1a1a;
+  }
+
+  .sf-trust-card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+
+  .sf-trust-card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+
+  .sf-trust-flip-card-back .sf-trust-card-title {
+    color: #1a1a1a;
+  }
+
+  .sf-trust-card-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #ccc;
+  }
+
+  .sf-trust-flip-card-back .sf-trust-card-description {
+    color: #1a1a1a;
+    font-weight: 500;
+  }
+
+  .sf-trust-timeline-section {
+    margin-bottom: 60px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+  }
+
+  .sf-trust-timeline {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .sf-trust-timeline-item {
+    display: -webkit-flex;
+    display: flex;
+    gap: 20px;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+  }
+
+  .sf-trust-timeline-dot {
+    min-width: 12px;
+    width: 12px;
+    height: 12px;
+    background: #d4af37;
+    border-radius: 50%;
+    margin-top: 6px;
+    -webkit-animation: sf-trust-pulse 2s infinite;
+    animation: sf-trust-pulse 2s infinite;
+  }
+
+  .sf-trust-timeline-line {
+    position: absolute;
+    left: 5px;
+    top: 24px;
+    width: 2px;
+    height: calc(100% + 30px);
+    background: linear-gradient(180deg, #d4af37 0%, rgba(212, 175, 55, 0.2) 100%);
+  }
+
+  .sf-trust-timeline-item:last-child .sf-trust-timeline-line {
+    display: none;
+  }
+
+  .sf-trust-timeline-content {
+    flex: 1;
+  }
+
+  .sf-trust-timeline-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 5px;
+  }
+
+  .sf-trust-timeline-description {
+    font-size: 0.9rem;
+    color: #aaa;
+    line-height: 1.5;
+  }
+
+  @-webkit-keyframes sf-trust-pulse {
+    0%, 100% { -webkit-box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+    50% { -webkit-box-shadow: 0 0 0 6px rgba(212, 175, 55, 0); box-shadow: 0 0 0 6px rgba(212, 175, 55, 0); }
+  }
+
+  @keyframes sf-trust-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+    50% { box-shadow: 0 0 0 6px rgba(212, 175, 55, 0); }
+  }
+
+  .sf-trust-proof-section {
+    padding: 40px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(244, 228, 193, 0.05) 100%);
+    border-radius: 20px;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    margin-bottom: 40px;
+  }
+
+  .sf-trust-proof-title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 30px;
+  }
+
+  .sf-trust-proof-strip {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: 30px;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  .sf-trust-proof-item {
+    text-align: center;
+  }
+
+  .sf-trust-proof-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #d4af37 0%, #f4e4c1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .sf-trust-proof-label {
+    font-size: 0.95rem;
+    color: #ccc;
+    font-weight: 500;
+  }
+
+  .sf-trust-cta-section {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .sf-trust-cta-button {
+    position: relative;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    background: linear-gradient(135deg, #d4af37 0%, #f4e4c1 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .sf-trust-cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    -webkit-animation: sf-trust-shimmer 3s infinite;
+    animation: sf-trust-shimmer 3s infinite;
+  }
+
+  .sf-trust-cta-button:hover {
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+    -webkit-box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+  }
+
+  @-webkit-keyframes sf-trust-shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  @keyframes sf-trust-shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  @media (max-width: 768px) {
+    .sf-trust-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .sf-trust-cards-grid {
+      gap: 20px;
+    }
+
+    .sf-trust-flip-card {
+      width: 240px;
+      height: 280px;
+    }
+
+    .sf-trust-proof-strip {
+      gap: 20px;
+    }
+
+    .sf-trust-proof-number {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .sf-trust-container {
+      padding: 20px 10px;
+    }
+
+    .sf-trust-header h1 {
+      font-size: 1.4rem;
+    }
+
+    .sf-trust-cards-grid {
+      gap: 15px;
+    }
+
+    .sf-trust-flip-card {
+      width: 100%;
+      max-width: 220px;
+      height: 260px;
+    }
+
+    .sf-trust-timeline-section, .sf-trust-proof-section {
+      padding: 20px;
+    }
+
+    .sf-trust-proof-strip {
+      -webkit-flex-direction: column;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .sf-trust-cta-button {
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="sf-trust-container">
+  <div class="sf-trust-header">
+    <h1>Your Commitment Matters</h1>
+    <p>Join 400+ nurses who've reclaimed their bodies and their lives. Built by a nurse. For nurses.</p>
+  </div>
+
+  <div class="sf-trust-identity-section">
+    <h2 class="sf-trust-section-title">Why This Works for You</h2>
+    <div class="sf-trust-cards-grid">
+      <div class="sf-trust-flip-card">
+        <div class="sf-trust-flip-card-inner">
+          <div class="sf-trust-flip-card-front">
+            <div class="sf-trust-card-icon">🩺</div>
+            <div class="sf-trust-card-title">Built by a Nurse</div>
+            <div class="sf-trust-card-description">No generic fitness advice. This is designed by someone who knows shift work.</div>
+          </div>
+          <div class="sf-trust-flip-card-back">
+            <div class="sf-trust-card-description">IJ Smith, RN — Created this after her own transformation on night shift. She gets it.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sf-trust-flip-card">
+        <div class="sf-trust-flip-card-inner">
+          <div class="sf-trust-flip-card-front">
+            <div class="sf-trust-card-icon">⏰</div>
+            <div class="sf-trust-card-title">Shift-Proof System</div>
+            <div class="sf-trust-card-description">Works around your 12-hour shifts, not against them.</div>
+          </div>
+          <div class="sf-trust-flip-card-back">
+            <div class="sf-trust-card-description">Meal templates for Work Days, Off Days, and Chaos Days. No guess-work.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sf-trust-flip-card">
+        <div class="sf-trust-flip-card-inner">
+          <div class="sf-trust-flip-card-front">
+            <div class="sf-trust-card-icon">✅</div>
+            <div class="sf-trust-card-title">Proven Results</div>
+            <div class="sf-trust-card-description">87% feel a difference by Day 3. 5 lbs in Week 1 is typical.</div>
+          </div>
+          <div class="sf-trust-flip-card-back">
+            <div class="sf-trust-card-description">Backed by 400+ real transformations. Not influencers. Real nurses.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sf-trust-timeline-section">
+    <h2 class="sf-trust-section-title">Your First 90 Days</h2>
+    <div class="sf-trust-timeline">
+      <div class="sf-trust-timeline-item">
+        <div class="sf-trust-timeline-dot"></div>
+        <div class="sf-trust-timeline-line"></div>
+        <div class="sf-trust-timeline-content">
+          <div class="sf-trust-timeline-title">Days 1-3: Feel the Shift</div>
+          <div class="sf-trust-timeline-description">Stabilize your nervous system. Most notice calmer energy and better sleep by Day 2.</div>
+        </div>
+      </div>
+
+      <div class="sf-trust-timeline-item">
+        <div class="sf-trust-timeline-dot"></div>
+        <div class="sf-trust-timeline-line"></div>
+        <div class="sf-trust-timeline-content">
+          <div class="sf-trust-timeline-title">Week 1: The Reset Kicks In</div>
+          <div class="sf-trust-timeline-description">Appetite normalizes. Cravings drop. Average 5 lbs down. You'll feel it in your scrubs.</div>
+        </div>
+      </div>
+
+      <div class="sf-trust-timeline-item">
+        <div class="sf-trust-timeline-dot"></div>
+        <div class="sf-trust-timeline-line"></div>
+        <div class="sf-trust-timeline-content">
+          <div class="sf-trust-timeline-title">Weeks 2-4: Momentum Builds</div>
+          <div class="sf-trust-timeline-description">Workouts become easier. Sleep is deeper. Confidence starts returning.</div>
+        </div>
+      </div>
+
+      <div class="sf-trust-timeline-item">
+        <div class="sf-trust-timeline-dot"></div>
+        <div class="sf-trust-timeline-line"></div>
+        <div class="sf-trust-timeline-content">
+          <div class="sf-trust-timeline-title">Month 2-3: The Transformation</div>
+          <div class="sf-trust-timeline-description">By Day 60, most clients are down 10-15 lbs. Scrubs fit. Posture lifts. You feel like yourself again.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sf-trust-proof-section">
+    <h2 class="sf-trust-proof-title">Why Nurses Trust Us</h2>
+    <div class="sf-trust-proof-strip">
+      <div class="sf-trust-proof-item">
+        <div class="sf-trust-proof-number" data-target="400">0</div>
+        <div class="sf-trust-proof-label">Nurses Transformed</div>
+      </div>
+      <div class="sf-trust-proof-item">
+        <div class="sf-trust-proof-number" data-target="87">0</div>
+        <div class="sf-trust-proof-label">Feel Difference by Day 3</div>
+      </div>
+      <div class="sf-trust-proof-item">
+        <div class="sf-trust-proof-number" data-target="60">0</div>
+        <div class="sf-trust-proof-label">Day Money Back Guarantee</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sf-trust-cta-section">
+    <button class="sf-trust-cta-button" id="sf-trust-cta-btn">I'm Ready to Go All-In →</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  try {
+    var counters = document.querySelectorAll('[data-target]');
+    counters.forEach(function(counter) {
+      var target = parseInt(counter.getAttribute('data-target'), 10);
+      var current = 0;
+      var increment = Math.ceil(target / 100);
+
+      var interval = setInterval(function() {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(interval);
+        }
+        counter.textContent = current;
+      }, 20);
+    });
+  } catch(e) {
+    console.error('Counter animation error:', e);
+  }
+
+  try {
+    var elementsToObserve = document.querySelectorAll('.sf-trust-timeline-item, .sf-trust-flip-card, .sf-trust-proof-item');
+    elementsToObserve.forEach(function(el) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.webkitTransform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      el.style.webkitTransition = 'opacity 0.6s ease, -webkit-transform 0.6s ease';
+    });
+    setTimeout(function() {
+      elementsToObserve.forEach(function(el, i) {
+        setTimeout(function() {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+          el.style.webkitTransform = 'translateY(0)';
+        }, i * 150);
+      });
+    }, 1500);
+  } catch(e) {
+    console.error('Scroll animation error:', e);
+  }
+
+  try {
+    var ctaBtn = document.getElementById('sf-trust-cta-btn');
+    if (ctaBtn) {
+      ctaBtn.addEventListener('click', function() {
+        window.location.href = '#pricing';
+      });
+    }
+  } catch(e) {
+    console.error('CTA click error:', e);
+  }
+})();
+</script>

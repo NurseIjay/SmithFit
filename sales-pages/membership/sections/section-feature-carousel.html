@@ -1,0 +1,391 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #c9a84c; --gold-light: #d4b86a; --gold-dark: #a88a3a;
+    --cream: #faf6ef; --cream-dark: #f0e8d8;
+    --text-dark: #1a1a1a; --text-body: #3d3d3d; --text-muted: #6b6b6b;
+    --green: #2d6a4f; --green-light: #e8f5e9;
+    --white: #ffffff;
+  }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--cream); color: var(--text-dark); line-height: 1.6; }
+
+  /* ===== SECTION HEADER ===== */
+  .sf-feat-section { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+  .sf-feat-section-label { text-align: center; font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .sf-feat-section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; line-height: 1.2; }
+  .sf-feat-section-subtitle { text-align: center; font-size: 16px; color: var(--text-muted); margin-bottom: 40px; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+  /* ===== CAROUSEL ===== */
+  .sf-feat-carousel-wrapper { position: relative; overflow: hidden; }
+
+  .sf-feat-track {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .sf-feat-slide {
+    -webkit-flex: 0 0 100%;
+    flex: 0 0 100%;
+    min-width: 100%;
+    padding: 0 12px;
+  }
+
+  .sf-feat-card {
+    background: var(--white);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    border: 1px solid #e8e0d0;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+
+  /* Image area */
+  .sf-feat-card-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #e8e0d0, #f0e8d8);
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .sf-feat-card-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .sf-feat-card-image .sf-feat-placeholder {
+    font-size: 13px; color: var(--text-muted); text-align: center; padding: 20px;
+    line-height: 1.5;
+  }
+
+  /* Feature number badge */
+  .sf-feat-badge {
+    position: absolute; top: 16px; left: 16px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: white; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  /* Content area */
+  .sf-feat-card-body { padding: 28px 28px 32px; }
+
+  .sf-feat-card-name {
+    font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700;
+    color: var(--text-dark); margin-bottom: 4px; line-height: 1.3;
+  }
+  .sf-feat-card-value {
+    font-size: 13px; font-weight: 700; color: var(--gold-dark); margin-bottom: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .sf-feat-card-identity {
+    font-size: 17px; font-weight: 600; color: var(--green);
+    line-height: 1.4; margin-bottom: 12px;
+    padding-left: 16px; border-left: 3px solid var(--gold);
+  }
+
+  .sf-feat-card-desc {
+    font-size: 15px; color: var(--text-body); line-height: 1.65;
+  }
+  .sf-feat-card-desc strong { color: var(--text-dark); }
+
+  /* ===== NAV ARROWS ===== */
+  .sf-feat-arrow {
+    position: absolute; top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(255,255,255,0.95); border: 2px solid var(--gold);
+    color: var(--gold-dark); font-size: 20px; cursor: pointer;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    z-index: 10;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  }
+  .sf-feat-arrow:hover { background: var(--gold); color: white; }
+  .sf-feat-arrow-left { left: 12px; }
+  .sf-feat-arrow-right { right: 12px; }
+
+  /* ===== DOT INDICATORS ===== */
+  .sf-feat-dots {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .sf-feat-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #d8d0c0; cursor: pointer;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  .sf-feat-dot.sf-feat-active {
+    background: var(--gold); width: 28px; border-radius: 5px;
+  }
+
+  /* ===== COUNTER ===== */
+  .sf-feat-counter {
+    text-align: center; margin-top: 14px;
+    font-size: 13px; color: var(--text-muted); font-weight: 500;
+  }
+  .sf-feat-counter strong { color: var(--gold-dark); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    .sf-feat-section { padding: 40px 16px; }
+    .sf-feat-section-title { font-size: 26px; }
+    .sf-feat-card-body { padding: 20px 20px 24px; }
+    .sf-feat-card-name { font-size: 19px; }
+    .sf-feat-card-identity { font-size: 15px; }
+    .sf-feat-card-desc { font-size: 14px; }
+    .sf-feat-arrow { width: 40px; height: 40px; font-size: 16px; }
+    .sf-feat-arrow-left { left: 6px; }
+    .sf-feat-arrow-right { right: 6px; }
+  }
+</style>
+
+<div class="sf-feat-section">
+  <div class="sf-feat-section-label">WHAT'S INSIDE THE SISTERHOOD</div>
+  <div class="sf-feat-section-title">Everything You Need. Nothing You Don't.</div>
+  <div class="sf-feat-section-subtitle">Swipe through to see exactly what you're getting — and who you become with it.</div>
+
+  <div class="sf-feat-carousel-wrapper" id="fcCarousel">
+    <div class="sf-feat-track" id="fcTrack">
+
+      <!-- SLIDE 1: Command Center -->
+      <div class="sf-feat-slide">
+        <div class="sf-feat-card">
+          <div class="sf-feat-card-image">
+            <div class="sf-feat-badge">Bonus 1</div>
+            <img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69b9c56e81a8480d8d13fa07.webp" alt="SmithFit Command Center">
+          </div>
+          <div class="sf-feat-card-body">
+            <div class="sf-feat-card-name">The SmithFit Command Center</div>
+            <div class="sf-feat-card-value">Valued at $197/mo</div>
+            <div class="sf-feat-card-identity">"I stopped winging it. I just open the app and know exactly what to do — even after a double."</div>
+            <div class="sf-feat-card-desc">Your entire protocol, meals, workouts, and check-ins live in one place. No more screenshot folders, forgotten PDFs, or 47 open tabs. <strong>Open it. Follow it. Done.</strong> You become the nurse who always has a plan — without spending a single second planning.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: 1,000+ Recipes -->
+      <div class="sf-feat-slide">
+        <div class="sf-feat-card">
+          <div class="sf-feat-card-image">
+            <div class="sf-feat-badge">Bonus 2</div>
+            <img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69b9c673f8443cd859636e68.webp" alt="1000+ Recipe Database">
+          </div>
+          <div class="sf-feat-card-body">
+            <div class="sf-feat-card-name">1,000+ Shift-Proof Recipe Database</div>
+            <div class="sf-feat-card-value">Valued at $47/mo</div>
+            <div class="sf-feat-card-identity">"I eat well on shift now — without meal prepping my entire Sunday away."</div>
+            <div class="sf-feat-card-desc">Breakfast in 5 minutes before a 12-hour. Meal prep that survives 3 nights in a row. <strong>Pocket meals you can eat between rounds at the nurses' station.</strong> Every recipe is cortisol-conscious and tagged: work day, off day, chaos day. You become the nurse who eats well without it consuming her life.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: 15-Minute Workouts -->
+      <div class="sf-feat-slide">
+        <div class="sf-feat-card">
+          <div class="sf-feat-card-image">
+            <div class="sf-feat-badge">Bonus 3</div>
+            <img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69b9c70ef8443cbf80638369.webp" alt="15-Minute Cortisol-Conscious Workouts">
+          </div>
+          <div class="sf-feat-card-body">
+            <div class="sf-feat-card-name">15-Minute Cortisol-Conscious Workouts</div>
+            <div class="sf-feat-card-value">Valued at $97/mo</div>
+            <div class="sf-feat-card-identity">"I feel strong again — and I haven't stepped foot in a gym in 3 months."</div>
+            <div class="sf-feat-card-desc">Three progressive levels. No equipment. No gym membership. Plus a "Too Tired" 5-minute backup for your worst days. <strong>These workouts send a fat-loss signal without spiking the cortisol that's already wrecking you.</strong> You become the nurse who moves her body because it feels good — not because she's punishing herself.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: Live Coaching -->
+      <div class="sf-feat-slide">
+        <div class="sf-feat-card">
+          <div class="sf-feat-card-image">
+            <div class="sf-feat-badge">Bonus 4</div>
+            <img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69b9c821dac5847286ad2150.webp" alt="Weekly Live Coaching">
+          </div>
+          <div class="sf-feat-card-body">
+            <div class="sf-feat-card-name">Weekly Live Coaching With IJ + Team</div>
+            <div class="sf-feat-card-value">Priceless</div>
+            <div class="sf-feat-card-identity">"I asked about night-shift cravings and IJ answered like he'd lived it — because he has."</div>
+            <div class="sf-feat-card-desc">Every week, hop on live with IJ and the SmithFit team. Ask your exact question, get a real answer — from a nurse who's worked the floor, not someone who read about it in a textbook. <strong>You become the nurse who has a coach in her corner, not another app giving generic advice.</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: Chaos-Day Rescue Plans -->
+      <div class="sf-feat-slide">
+        <div class="sf-feat-card">
+          <div class="sf-feat-card-image">
+            <div class="sf-feat-badge">Bonus 5</div>
+            <img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69b9c8479ab5e2516e66ee4e.webp" alt="Chaos-Day Rescue Plans">
+          </div>
+          <div class="sf-feat-card-body">
+            <div class="sf-feat-card-name">Chaos-Day Rescue Plans</div>
+            <div class="sf-feat-card-value">Valued at $67/mo</div>
+            <div class="sf-feat-card-identity">"Night 3 of 4, no break, ran on coffee — and I still didn't blow it. The rescue plan saved me."</div>
+            <div class="sf-feat-card-desc">Missed your break? Double shift? Night 3 of 4 and running on fumes? <strong>Open the plan. Follow 3 steps. Stay on track.</strong> You become the nurse who bounces back from a bad shift instead of spiraling into the drive-through. That's what a program built by a nurse — not a fitness influencer — actually looks like.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: The Sisterhood Community -->
+      <div class="sf-feat-slide">
+        <div class="sf-feat-card">
+          <div class="sf-feat-card-image">
+            <div class="sf-feat-badge">Bonus 6</div>
+            <img src="https://assets.cdn.filesafe.space/TSWnCFvIE58IDjlDc4Ym/media/69b9c8d89c98173e86cf1f4c.webp" alt="SmithFit Sisterhood Community">
+          </div>
+          <div class="sf-feat-card-body">
+            <div class="sf-feat-card-name">The SmithFit Sisterhood Community</div>
+            <div class="sf-feat-card-value">Valued at $47/mo</div>
+            <div class="sf-feat-card-identity">"I posted about gaining weight on night shift and got 30 'me too' replies in an hour. I finally don't feel broken."</div>
+            <div class="sf-feat-card-desc">400+ nurses who work the same shifts, fight the same cravings, and celebrate the same wins you do. Win Wednesday calls, daily motivation, and the kind of support that only comes from women who actually understand what 3 a.m. charting does to your body. <strong>This isn't a Facebook group. It's your people.</strong></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Arrows -->
+    <div class="sf-feat-arrow sf-feat-arrow-left" id="fcArrowLeft">&#10094;</div>
+    <div class="sf-feat-arrow sf-feat-arrow-right" id="fcArrowRight">&#10095;</div>
+  </div>
+
+  <!-- Dots -->
+  <div class="sf-feat-dots" id="fcDots"></div>
+
+  <!-- Counter -->
+  <div class="sf-feat-counter" id="fcCounter"><strong>1</strong> of <strong>6</strong></div>
+</div>
+
+<script>
+(function() {
+  try {
+    var fcTrack = document.getElementById('fcTrack');
+    var fcDotsCont = document.getElementById('fcDots');
+    var fcCounter = document.getElementById('fcCounter');
+    var fcArrowLeft = document.getElementById('fcArrowLeft');
+    var fcArrowRight = document.getElementById('fcArrowRight');
+    var totalSlides = document.querySelectorAll('.sf-feat-slide').length;
+    var fcIndex = 0;
+    var fcStartX = 0;
+    var fcDragging = false;
+    var fcAuto = null;
+
+    // Build dot indicators
+    for (var i = 0; i < totalSlides; i++) {
+      var dot = document.createElement('div');
+      dot.className = 'sf-feat-dot' + (i === 0 ? ' sf-feat-active' : '');
+      dot.setAttribute('data-index', i);
+      fcDotsCont.appendChild(dot);
+    }
+
+    function fcGoTo(idx) {
+      fcIndex = Math.max(0, Math.min(idx, totalSlides - 1));
+      fcTrack.style.transform = 'translateX(-' + (fcIndex * 100) + '%)';
+      
+      var dots = document.querySelectorAll('.sf-feat-dot');
+      for (var i = 0; i < dots.length; i++) {
+        if (i === fcIndex) {
+          dots[i].classList.add('sf-feat-active');
+        } else {
+          dots[i].classList.remove('sf-feat-active');
+        }
+      }
+      
+      fcCounter.innerHTML = '<strong>' + (fcIndex + 1) + '</strong> of <strong>' + totalSlides + '</strong>';
+    }
+
+    function fcNext() {
+      fcGoTo(fcIndex + 1 >= totalSlides ? 0 : fcIndex + 1);
+    }
+
+    function fcPrev() {
+      fcGoTo(fcIndex - 1 < 0 ? totalSlides - 1 : fcIndex - 1);
+    }
+
+    // Arrow click handlers
+    fcArrowLeft.addEventListener('click', function() {
+      fcPrev();
+    });
+    fcArrowRight.addEventListener('click', function() {
+      fcNext();
+    });
+
+    // Dot click handlers
+    var dots = document.querySelectorAll('.sf-feat-dot');
+    for (var i = 0; i < dots.length; i++) {
+      (function(index) {
+        dots[index].addEventListener('click', function() {
+          fcGoTo(index);
+        });
+      })(i);
+    }
+
+    // Touch swipe
+    fcTrack.addEventListener('touchstart', function(e) {
+      fcStartX = e.touches[0].clientX;
+      fcDragging = true;
+    }, { passive: true });
+
+    fcTrack.addEventListener('touchend', function(e) {
+      if (!fcDragging) return;
+      var diff = fcStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          fcNext();
+        } else {
+          fcPrev();
+        }
+      }
+      fcDragging = false;
+    }, { passive: true });
+
+    // Keyboard nav
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight') fcNext();
+      if (e.key === 'ArrowLeft') fcPrev();
+    });
+
+    // Auto-advance every 8 seconds
+    fcAuto = setInterval(function() {
+      fcNext();
+    }, 8000);
+
+    // Pause on hover
+    var carousel = document.getElementById('fcCarousel');
+    carousel.addEventListener('mouseenter', function() {
+      clearInterval(fcAuto);
+    });
+    carousel.addEventListener('mouseleave', function() {
+      fcAuto = setInterval(function() {
+        fcNext();
+      }, 8000);
+    });
+
+  } catch (err) {
+    console.error('SmithFit carousel error:', err);
+  }
+})();
+</script>

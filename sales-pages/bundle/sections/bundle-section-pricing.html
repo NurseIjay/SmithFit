@@ -1,0 +1,719 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.sf-price-section {
+  background: linear-gradient(180deg, #faf6ef 0%, #f5f0e8 100%);
+  padding: 80px 20px;
+  position: relative;
+}
+
+.sf-price-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.sf-price-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #c9a84c;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.sf-price-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  font-weight: 800;
+  color: #2d2d2d;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.sf-price-headline-gold { color: #c9a84c; }
+
+.sf-price-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: #777;
+  text-align: center;
+  line-height: 1.6;
+  max-width: 580px;
+  margin: 0 auto 50px auto;
+}
+
+/* === CARDS CONTAINER === */
+.sf-price-cards {
+  display: -webkit-flex;
+  display: flex;
+  gap: 24px;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  margin-bottom: 50px;
+}
+
+/* === MONTHLY CARD (Small, faded) === */
+.sf-price-card-monthly {
+  -webkit-flex: 0 0 220px;
+  flex: 0 0 220px;
+  background: #f0ece3;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 30px 20px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  opacity: 0.7;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+
+.sf-price-card-monthly:hover { opacity: 0.85; }
+
+.sf-price-monthly-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.sf-price-monthly-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #777;
+  margin-bottom: 4px;
+}
+
+.sf-price-monthly-identity {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #aaa;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.sf-price-monthly-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.sf-price-monthly-period {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #bbb;
+  margin-bottom: 24px;
+}
+
+.sf-price-monthly-stat {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #bbb;
+  padding: 10px 0;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  margin-top: auto;
+}
+
+.sf-price-monthly-stat-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ccc;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.sf-price-monthly-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 16px;
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #999;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  -webkit-appearance: none;
+}
+
+.sf-price-monthly-btn:hover {
+  border-color: #c9a84c;
+  color: #c9a84c;
+}
+
+/* === BUNDLE CARDS (Premium, large) === */
+.sf-price-bundle-stack {
+  -webkit-flex: 1;
+  flex: 1;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sf-price-bundle-card {
+  border-radius: 16px;
+  padding: 36px 32px;
+  position: relative;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.sf-price-bundle-card:hover {
+  -webkit-transform: translateY(-3px);
+  transform: translateY(-3px);
+}
+
+/* 6-Month */
+.sf-price-card-6mo {
+  background: #fff;
+  border: 2px solid rgba(201,168,76,0.3);
+}
+
+.sf-price-card-6mo:hover {
+  -webkit-box-shadow: 0 12px 40px rgba(201,168,76,0.1);
+  box-shadow: 0 12px 40px rgba(201,168,76,0.1);
+}
+
+/* 12-Month */
+.sf-price-card-12mo {
+  background: linear-gradient(135deg, #2d2d2d 0%, #3a3531 100%);
+  border: 2px solid #c9a84c;
+  -webkit-box-shadow: 0 16px 50px rgba(201,168,76,0.15);
+  box-shadow: 0 16px 50px rgba(201,168,76,0.15);
+}
+
+.sf-price-card-12mo:hover {
+  -webkit-box-shadow: 0 20px 60px rgba(201,168,76,0.25);
+  box-shadow: 0 20px 60px rgba(201,168,76,0.25);
+}
+
+/* Recommended badge */
+.sf-price-rec-badge {
+  position: absolute;
+  top: -14px;
+  right: 28px;
+  background: #c9a84c;
+  color: #2d2d2d;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+/* Card top row */
+.sf-price-card-top {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sf-price-card-top-left { }
+
+.sf-price-bundle-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.sf-price-card-6mo .sf-price-bundle-tag { color: #c9a84c; }
+.sf-price-card-12mo .sf-price-bundle-tag { color: #c9a84c; }
+
+.sf-price-bundle-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.sf-price-card-6mo .sf-price-bundle-name { color: #2d2d2d; }
+.sf-price-card-12mo .sf-price-bundle-name { color: #faf6ef; }
+
+.sf-price-bundle-identity {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-style: italic;
+  margin-top: 6px;
+}
+
+.sf-price-card-6mo .sf-price-bundle-identity { color: #999; }
+.sf-price-card-12mo .sf-price-bundle-identity { color: rgba(201,168,76,0.7); }
+
+/* Price block */
+.sf-price-card-top-right {
+  text-align: right;
+}
+
+.sf-price-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.sf-price-card-6mo .sf-price-amount { color: #2d2d2d; }
+.sf-price-card-12mo .sf-price-amount { color: #c9a84c; }
+
+.sf-price-per-month {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.sf-price-card-6mo .sf-price-per-month { color: #999; }
+.sf-price-card-12mo .sf-price-per-month { color: rgba(250,246,239,0.5); }
+
+.sf-price-savings-pill {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 10px;
+  margin-top: 6px;
+}
+
+.sf-price-card-6mo .sf-price-savings-pill {
+  background: rgba(201,168,76,0.1);
+  color: #c9a84c;
+}
+
+.sf-price-card-12mo .sf-price-savings-pill {
+  background: rgba(201,168,76,0.2);
+  color: #c9a84c;
+}
+
+/* Feature grid inside cards */
+.sf-price-features-grid {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.sf-price-feature-chip {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.sf-price-card-6mo .sf-price-feature-chip {
+  background: #faf6ef;
+  color: #2d2d2d;
+  border: 1px solid rgba(201,168,76,0.15);
+}
+
+.sf-price-card-12mo .sf-price-feature-chip {
+  background: rgba(255,255,255,0.06);
+  color: rgba(250,246,239,0.85);
+  border: 1px solid rgba(201,168,76,0.15);
+}
+
+.sf-price-feature-chip-icon {
+  font-size: 16px;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+}
+
+.sf-price-feature-chip-exclusive {
+  border-color: #c9a84c !important;
+}
+
+.sf-price-card-12mo .sf-price-feature-chip-exclusive {
+  background: rgba(201,168,76,0.1);
+  color: #c9a84c;
+  font-weight: 600;
+}
+
+/* CTA inside card */
+.sf-price-bundle-cta {
+  display: block;
+  width: 100%;
+  padding: 18px 24px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  -webkit-appearance: none;
+}
+
+.sf-price-card-6mo .sf-price-bundle-cta {
+  background: transparent;
+  border: 2px solid #c9a84c;
+  color: #c9a84c;
+}
+
+.sf-price-card-6mo .sf-price-bundle-cta:hover {
+  background: rgba(201,168,76,0.08);
+}
+
+.sf-price-card-12mo .sf-price-bundle-cta {
+  background: #c9a84c;
+  color: #2d2d2d;
+  -webkit-animation: sf-price-btn-pulse 2s ease-in-out infinite;
+  animation: sf-price-btn-pulse 2s ease-in-out infinite;
+}
+
+.sf-price-card-12mo .sf-price-bundle-cta:hover {
+  -webkit-transform: scale(1.02);
+  transform: scale(1.02);
+}
+
+@-webkit-keyframes sf-price-btn-pulse {
+  0% { -webkit-box-shadow: 0 0 0 0 rgba(201,168,76,0.5); box-shadow: 0 0 0 0 rgba(201,168,76,0.5); }
+  70% { -webkit-box-shadow: 0 0 0 16px rgba(201,168,76,0); box-shadow: 0 0 0 16px rgba(201,168,76,0); }
+  100% { -webkit-box-shadow: 0 0 0 0 rgba(201,168,76,0); box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+}
+@keyframes sf-price-btn-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(201,168,76,0.5); }
+  70% { box-shadow: 0 0 0 16px rgba(201,168,76,0); }
+  100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+}
+
+.sf-price-cta-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.sf-price-card-6mo .sf-price-cta-sub { color: #aaa; }
+.sf-price-card-12mo .sf-price-cta-sub { color: rgba(250,246,239,0.4); }
+
+/* === REAL COST REFRAME === */
+.sf-price-reframe {
+  background: #fff;
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 12px;
+  padding: 36px 32px;
+  margin-bottom: 50px;
+}
+
+.sf-price-reframe-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #2d2d2d;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.sf-price-reframe-grid {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 16px;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.sf-price-reframe-item {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  background: #faf6ef;
+  border: 1px solid rgba(201,168,76,0.12);
+  width: 300px;
+}
+
+.sf-price-reframe-icon {
+  font-size: 24px;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+}
+
+.sf-price-reframe-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.sf-price-reframe-text-bold {
+  font-weight: 700;
+  color: #2d2d2d;
+}
+
+/* === CLOSING LINE === */
+.sf-price-closer {
+  text-align: center;
+  padding: 20px;
+}
+
+.sf-price-closer-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #2d2d2d;
+  font-style: italic;
+}
+
+.sf-price-closer-gold { color: #c9a84c; }
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  .sf-price-cards { -webkit-flex-direction: column; flex-direction: column; }
+  .sf-price-card-monthly { -webkit-flex: none; flex: none; width: 100%; -webkit-flex-direction: row; flex-direction: row; -webkit-flex-wrap: wrap; flex-wrap: wrap; gap: 12px; -webkit-align-items: center; align-items: center; padding: 20px; }
+  .sf-price-monthly-stat { margin-top: 0; border-top: none; border-left: 1px solid #ddd; padding-left: 16px; }
+  .sf-price-reframe-item { width: 100%; }
+}
+
+@media (max-width: 768px) {
+  .sf-price-headline { font-size: 32px; }
+  .sf-price-bundle-card { padding: 28px 20px; }
+  .sf-price-amount { font-size: 34px; }
+  .sf-price-card-top { -webkit-flex-direction: column; flex-direction: column; }
+  .sf-price-card-top-right { text-align: left; }
+}
+</style>
+
+<div class="sf-price-section">
+  <div class="sf-price-inner">
+    <p class="sf-price-eyebrow">You already own the course + membership</p>
+    <h1 class="sf-price-headline">This Is the Part Where You <span class="sf-price-headline-gold">Decide to Finish</span></h1>
+    <p class="sf-price-sub">The course taught you why. The membership gave you the tools. The bundle is the reason 87% of nurses actually get there — and stay there.</p>
+
+    <div class="sf-price-cards">
+      <!-- MONTHLY (Minimized) -->
+      <div class="sf-price-card-monthly">
+        <span class="sf-price-monthly-tag">Your current plan</span>
+        <div class="sf-price-monthly-name">Monthly</div>
+        <div class="sf-price-monthly-identity">"Let me see if this works"</div>
+        <div class="sf-price-monthly-price">$67</div>
+        <div class="sf-price-monthly-period">/month</div>
+        <div class="sf-price-monthly-stat">
+          <span class="sf-price-monthly-stat-num">23%</span>
+          reach goal weight
+        </div>
+        <button class="sf-price-monthly-btn" data-sf-price-tier="monthly">Keep Monthly</button>
+      </div>
+
+      <!-- BUNDLE STACK -->
+      <div class="sf-price-bundle-stack">
+
+        <!-- 6-MONTH CARD -->
+        <div class="sf-price-bundle-card sf-price-card-6mo">
+          <div class="sf-price-card-top">
+            <div class="sf-price-card-top-left">
+              <div class="sf-price-bundle-tag">6-Month Bundle</div>
+              <div class="sf-price-bundle-name">The Committed One</div>
+              <div class="sf-price-bundle-identity">"I'm done starting over."</div>
+            </div>
+            <div class="sf-price-card-top-right">
+              <div class="sf-price-amount">$335</div>
+              <div class="sf-price-per-month">$55.83/mo</div>
+              <span class="sf-price-savings-pill">Save $67</span>
+            </div>
+          </div>
+
+          <div class="sf-price-features-grid">
+            <div class="sf-price-feature-chip">
+              <span class="sf-price-feature-chip-icon">&#x2705;</span>
+              <span>Everything in your membership</span>
+            </div>
+            <div class="sf-price-feature-chip sf-price-feature-chip-exclusive">
+              <span class="sf-price-feature-chip-icon">&#x1F3AF;</span>
+              <span>60-min 1-on-1 Protocol Call with IJ</span>
+            </div>
+            <div class="sf-price-feature-chip sf-price-feature-chip-exclusive">
+              <span class="sf-price-feature-chip-icon">&#x1F4F8;</span>
+              <span>MealLens AI — snap a photo, get shift-timed feedback</span>
+            </div>
+            <div class="sf-price-feature-chip sf-price-feature-chip-exclusive">
+              <span class="sf-price-feature-chip-icon">&#x1FA78;</span>
+              <span>BioSync Bloodwork — see your cortisol drop in real numbers</span>
+            </div>
+          </div>
+
+          <button class="sf-price-bundle-cta" data-sf-price-tier="6mo">Commit to 6 Months — $335</button>
+          <div class="sf-price-cta-sub">80% reach their goal weight on this plan</div>
+        </div>
+
+        <!-- 12-MONTH CARD -->
+        <div class="sf-price-bundle-card sf-price-card-12mo">
+          <span class="sf-price-rec-badge">&#x1F451; Most Chosen by Nurses</span>
+          <div class="sf-price-card-top">
+            <div class="sf-price-card-top-left">
+              <div class="sf-price-bundle-tag">12-Month Bundle</div>
+              <div class="sf-price-bundle-name">All In — Unshakable</div>
+              <div class="sf-price-bundle-identity">"I'm never going back to who I was."</div>
+            </div>
+            <div class="sf-price-card-top-right">
+              <div class="sf-price-amount">$588</div>
+              <div class="sf-price-per-month">$49/mo</div>
+              <span class="sf-price-savings-pill">Save $216</span>
+            </div>
+          </div>
+
+          <div class="sf-price-features-grid">
+            <div class="sf-price-feature-chip">
+              <span class="sf-price-feature-chip-icon">&#x2705;</span>
+              <span>Everything in 6-Month</span>
+            </div>
+            <div class="sf-price-feature-chip sf-price-feature-chip-exclusive">
+              <span class="sf-price-feature-chip-icon">&#x1F4AC;</span>
+              <span>VIP Coach Access — message IJ anytime, even mid-shift</span>
+            </div>
+            <div class="sf-price-feature-chip sf-price-feature-chip-exclusive">
+              <span class="sf-price-feature-chip-icon">&#x1F4C8;</span>
+              <span>Quarterly 1-on-1 calls — your protocol evolves as your body does</span>
+            </div>
+            <div class="sf-price-feature-chip sf-price-feature-chip-exclusive">
+              <span class="sf-price-feature-chip-icon">&#x1F91D;</span>
+              <span>VIP Community — the most committed nurses in the program</span>
+            </div>
+            <div class="sf-price-feature-chip sf-price-feature-chip-exclusive">
+              <span class="sf-price-feature-chip-icon">&#x1F512;</span>
+              <span>Lifelong results — metabolism reset that sticks permanently</span>
+            </div>
+          </div>
+
+          <button class="sf-price-bundle-cta" data-sf-price-tier="12mo">I'm Going All In — 12 Months</button>
+          <div class="sf-price-cta-sub">94% maintain their results long-term</div>
+        </div>
+
+      </div><!-- /bundle-stack -->
+    </div><!-- /cards -->
+
+    <!-- REAL COST REFRAME -->
+    <div class="sf-price-reframe">
+      <h3 class="sf-price-reframe-title">What You've Already Spent Trying to Figure This Out</h3>
+      <div class="sf-price-reframe-grid">
+        <div class="sf-price-reframe-item">
+          <span class="sf-price-reframe-icon">&#x1F4B8;</span>
+          <div class="sf-price-reframe-text"><span class="sf-price-reframe-text-bold">$200–$500/yr</span> on programs you quit before Month 3</div>
+        </div>
+        <div class="sf-price-reframe-item">
+          <span class="sf-price-reframe-icon">&#x1F354;</span>
+          <div class="sf-price-reframe-text"><span class="sf-price-reframe-text-bold">$150+/mo</span> in stress-eating takeout after shifts</div>
+        </div>
+        <div class="sf-price-reframe-item">
+          <span class="sf-price-reframe-icon">&#x1F455;</span>
+          <div class="sf-price-reframe-text"><span class="sf-price-reframe-text-bold">$300+/yr</span> replacing clothes that stopped fitting</div>
+        </div>
+        <div class="sf-price-reframe-item">
+          <span class="sf-price-reframe-icon">&#x231B;</span>
+          <div class="sf-price-reframe-text"><span class="sf-price-reframe-text-bold">Years</span> of energy you'll never get back. That cost doesn't have a number.</div>
+        </div>
+        <div class="sf-price-reframe-item">
+          <span class="sf-price-reframe-icon">&#x2615;</span>
+          <div class="sf-price-reframe-text"><span class="sf-price-reframe-text-bold">$49/mo</span> is less than the coffee you're using to survive your shifts</div>
+        </div>
+        <div class="sf-price-reframe-item">
+          <span class="sf-price-reframe-icon">&#x1F4AA;</span>
+          <div class="sf-price-reframe-text"><span class="sf-price-reframe-text-bold">This one works</span> because it was built by a nurse who lives your schedule</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sf-price-closer">
+      <p class="sf-price-closer-text">You don't need another program. You need <span class="sf-price-closer-gold">the last one.</span></p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  try {
+    var cards = document.querySelectorAll('.sf-price-bundle-card');
+    for (var i = 0; i < cards.length; i++) {
+      cards[i].style.opacity = '0';
+      cards[i].style.WebkitTransform = 'translateY(20px)';
+      cards[i].style.transform = 'translateY(20px)';
+    }
+
+    var shown = false;
+    function checkCards() {
+      if (shown) return;
+      if (cards.length === 0) return;
+      var rect = cards[0].getBoundingClientRect();
+      var winH = window.innerHeight || document.documentElement.clientHeight;
+      if (rect.top < winH - 60) {
+        shown = true;
+        for (var j = 0; j < cards.length; j++) {
+          (function(idx) {
+            setTimeout(function() {
+              cards[idx].style.WebkitTransition = 'opacity 0.6s ease, transform 0.6s ease, -webkit-transform 0.6s ease';
+              cards[idx].style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+              cards[idx].style.opacity = '1';
+              cards[idx].style.WebkitTransform = 'translateY(0)';
+              cards[idx].style.transform = 'translateY(0)';
+            }, idx * 200);
+          })(j);
+        }
+      }
+    }
+
+    window.addEventListener('scroll', checkCards);
+    setTimeout(checkCards, 400);
+
+    var btns = document.querySelectorAll('[data-sf-price-tier]');
+    for (var k = 0; k < btns.length; k++) {
+      btns[k].addEventListener('click', function(e) {
+        try {
+          e.preventDefault();
+          var tier = this.getAttribute('data-sf-price-tier');
+          console.log('Pricing selected: ' + tier);
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'pricing_' + tier + '_click', { event_category: 'engagement' });
+          }
+        } catch (err) {
+          console.error('Pricing btn error:', err);
+        }
+      });
+    }
+  } catch (e) {
+    console.error('Pricing init error:', e);
+  }
+})();
+</script>

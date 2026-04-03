@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What's Keeping You Stuck? — SmithFit Metabolism Quiz</title>
+    <title>Why Nothing's Working — SmithFit Metabolism Quiz</title>
     <style>
         * {
             margin: 0;
@@ -104,7 +104,7 @@
             padding: 3rem 2rem;
             text-align: center;
             margin: 3rem auto;
-            max-width: 600px;
+            max-width: 650px;
         }
 
         .intro-container.hidden {
@@ -117,24 +117,56 @@
             color: #d4a94c;
             margin-bottom: 1rem;
             font-weight: 400;
+            line-height: 1.3;
         }
 
         .intro-subheadline {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #b8b0a0;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             line-height: 1.8;
+            text-align: left;
+        }
+
+        .intro-type-callout {
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            text-align: left;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #e0dcd4;
+        }
+
+        .intro-type-callout strong {
+            color: #d4a94c;
         }
 
         .intro-avatar-callout {
             background-color: #1a1a1a;
             border-left: 4px solid #d4a94c;
             padding: 1.5rem;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
             border-radius: 0 4px 4px 0;
             text-align: left;
             font-size: 0.95rem;
-            line-height: 1.6;
+            line-height: 1.7;
+            font-style: italic;
+            color: #b8b0a0;
+        }
+
+        .intro-stakes {
+            font-size: 0.95rem;
+            color: #e0dcd4;
+            margin: 1.5rem 0 0.5rem;
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        .intro-stakes strong {
+            color: #d4a94c;
         }
 
         .intro-trust-line {
@@ -212,85 +244,35 @@
             white-space: nowrap;
         }
 
-        /* Type Section */
-        .type-section {
-            background-color: #2a2a2a;
-            border-left: 4px solid;
-            border-radius: 0 4px 4px 0;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border: 1px solid #3a3a3a;
-            border-left-width: 4px;
-        }
-
-        .type-section.type-a {
-            border-left-color: #d4a94c;
-        }
-
-        .type-section.type-b {
-            border-left-color: #6ba5c4;
-        }
-
-        .type-section.type-c {
-            border-left-color: #7bc47a;
-        }
-
-        .type-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #3a3a3a;
-        }
-
-        .type-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #1a1a1a;
-        }
-
-        .type-badge.badge-a {
-            background-color: #d4a94c;
-        }
-
-        .type-badge.badge-b {
-            background-color: #6ba5c4;
-        }
-
-        .type-badge.badge-c {
-            background-color: #7bc47a;
-        }
-
-        .type-info h2 {
+        /* Quiz Section Headers */
+        .quiz-section-header {
             font-family: Georgia, serif;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
+            color: #d4a94c;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #3a3a3a;
             font-weight: 400;
-            margin-bottom: 0.5rem;
         }
 
-        .type-pattern {
+        .quiz-section-header:first-child {
+            margin-top: 0;
+        }
+
+        .quiz-instruction {
             color: #a89878;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
             font-style: italic;
-        }
-
-        .type-count {
-            color: #a89878;
-            font-size: 0.9rem;
+            text-align: center;
         }
 
         /* Checkbox List */
         .checkbox-list {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
         }
 
         .checkbox-item {
@@ -312,7 +294,7 @@
 
         .checkbox-item.checked {
             background-color: #2a2a2a;
-            border-color: #4a4a4a;
+            border-color: #d4a94c;
         }
 
         .checkbox-input {
@@ -359,7 +341,7 @@
             border: 1px solid #3a3a3a;
             border-radius: 4px;
             padding: 3rem 2rem;
-            max-width: 450px;
+            max-width: 480px;
             width: 90%;
             text-align: center;
         }
@@ -374,9 +356,16 @@
 
         .email-gate-box p {
             color: #b8b0a0;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             font-size: 0.95rem;
-            line-height: 1.6;
+            line-height: 1.7;
+        }
+
+        .email-gate-trust {
+            color: #8a8278;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin-top: 1rem;
         }
 
         .email-form-group {
@@ -697,35 +686,45 @@
         }
 
         .result-list li:before {
-            content: "·";
+            content: "\00B7";
             position: absolute;
             left: 0;
             color: #d4a94c;
             font-weight: bold;
         }
 
-        /* Focus Cues */
-        .focus-cues {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
+        /* Starting Point Cues (replaces Focus Cues) */
+        .starting-point {
             margin: 1.5rem 0;
         }
 
-        .focus-card {
+        .starting-point-item {
             background-color: #1a1a1a;
             border: 1px solid #3a3a3a;
-            padding: 1rem;
+            padding: 1rem 1.25rem;
             border-radius: 4px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             line-height: 1.5;
+            margin-bottom: 0.75rem;
         }
 
-        .focus-cue-number {
+        .starting-point-number {
             color: #d4a94c;
             font-weight: 700;
-            display: block;
-            margin-bottom: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .starting-point-teaser {
+            background-color: #1a1a1a;
+            border: 1px solid #d4a94c;
+            border-left: 4px solid #d4a94c;
+            padding: 1rem 1.25rem;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #b8b0a0;
+            font-style: italic;
+            margin-top: 0.75rem;
         }
 
         /* Callouts */
@@ -750,22 +749,83 @@
             color: #e0dcd4;
         }
 
-        .callout.minimum {
-            background-color: #1a3a2a;
-            border-left-color: #7bc47a;
-            color: #e0dcd4;
-        }
-
         .callout.proof {
             background-color: #3a3a1a;
             border-left-color: #d4a94c;
             color: #e0dcd4;
         }
 
+        /* Gap Statement */
+        .gap-statement {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .gap-statement p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #e0dcd4;
+            margin-bottom: 0.75rem;
+        }
+
+        .gap-statement p:last-child {
+            margin-bottom: 0;
+        }
+
+        .gap-statement strong {
+            color: #d4a94c;
+        }
+
+        /* Social Proof on Results */
+        .results-social-proof {
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .results-social-proof-stat {
+            color: #d4a94c;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .results-social-proof p {
+            color: #b8b0a0;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .results-testimonial {
+            background-color: #1a1a1a;
+            border-left: 4px solid #d4a94c;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+            font-style: italic;
+            color: #b8b0a0;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .results-testimonial .attribution {
+            display: block;
+            margin-top: 0.75rem;
+            font-style: normal;
+            color: #a89878;
+            font-size: 0.85rem;
+        }
+
         /* CTA Section */
         .cta-section {
             background-color: #2a2a2a;
-            border: 1px solid #3a3a3a;
+            border: 2px solid #d4a94c;
             border-radius: 4px;
             padding: 2.5rem 2rem;
             margin: 3rem 0 2rem;
@@ -776,15 +836,22 @@
             font-family: Georgia, serif;
             font-size: 1.4rem;
             color: #d4a94c;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             font-weight: 400;
+        }
+
+        .cta-bridge {
+            color: #b8b0a0;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
         }
 
         .value-stack {
             background-color: #1a1a1a;
             border: 1px solid #3a3a3a;
             padding: 1.5rem;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
             border-radius: 4px;
             text-align: left;
         }
@@ -799,7 +866,7 @@
         }
 
         .value-stack-item:before {
-            content: "✓";
+            content: "\2713";
             position: absolute;
             left: 0;
             color: #7bc47a;
@@ -830,6 +897,13 @@
             margin-bottom: 0.3rem;
         }
 
+        .cta-urgency {
+            color: #e0dcd4;
+            font-size: 0.95rem;
+            margin: 1.5rem 0;
+            line-height: 1.6;
+        }
+
         .btn-cta {
             background-color: #d4a94c;
             color: #1a1a1a;
@@ -842,8 +916,9 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
             display: inline-block;
+            text-decoration: none;
         }
 
         .btn-cta:hover {
@@ -854,18 +929,26 @@
         /* Share Section */
         .share-section {
             margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #3a3a3a;
+            padding: 2rem;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            background-color: #2a2a2a;
             text-align: center;
         }
 
         .share-label {
-            color: #a89878;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-            font-weight: 600;
+            color: #d4a94c;
+            font-family: Georgia, serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .share-sublabel {
+            color: #b8b0a0;
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
         }
 
         .share-buttons {
@@ -876,10 +959,10 @@
         }
 
         .btn-share {
-            background-color: #3a3a3a;
-            color: #e0dcd4;
+            background-color: #d4a94c;
+            color: #1a1a1a;
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 0.65rem 1.5rem;
             border-radius: 4px;
             font-size: 0.85rem;
             font-weight: 600;
@@ -890,7 +973,8 @@
         }
 
         .btn-share:hover {
-            background-color: #4a4a4a;
+            background-color: #e5ba5e;
+            transform: translateY(-1px);
         }
 
         /* Buttons */
@@ -915,6 +999,12 @@
             display: block;
             background-color: #3a3a3a;
             color: #e0dcd4;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
         }
 
         .btn-retake:hover {
@@ -930,6 +1020,16 @@
             z-index: 50;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             animation: pulse 2s infinite;
+            background-color: #d4a94c;
+            color: #1a1a1a;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         .btn-results.hidden {
@@ -983,11 +1083,6 @@
                 font-size: 1.5rem;
             }
 
-            .type-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
             main {
                 padding: 0 1rem 4rem;
             }
@@ -1004,10 +1099,6 @@
 
             .footer-right {
                 text-align: center;
-            }
-
-            .focus-cues {
-                grid-template-columns: 1fr;
             }
 
             .comparison-row {
@@ -1064,14 +1155,10 @@
                 display: none;
             }
 
-            .type-section {
+            .result-card {
                 page-break-inside: avoid;
                 border: 2px solid #999;
                 background-color: white;
-            }
-
-            .result-card {
-                page-break-inside: avoid;
             }
 
             .checkbox-input {
@@ -1101,20 +1188,29 @@
 </head>
 <body>
     <header>
-        <div class="brand-text">Shift-Proof Metabolism Reset™</div>
-        <div class="pillar-badge">Lead Magnet</div>
+        <div class="brand-text">Shift-Proof Metabolism Reset&trade;</div>
+        <div class="pillar-badge">Free Quiz</div>
     </header>
 
     <main>
         <!-- INTRO SCREEN -->
         <div class="intro-container" id="introContainer">
-            <h1 class="intro-headline">What's Really Keeping You Stuck?</h1>
-            <p class="intro-subheadline">Take the 2-minute Metabolism Stress-Type Quiz and find out why your body isn't responding — even when you're doing everything right.</p>
-            <div class="intro-avatar-callout">
-                Built specifically for nurses and healthcare workers over 35. Shift work, night shifts, or rotating schedules? This is for you.
+            <h1 class="intro-headline">Why Nothing's Working &mdash; And What Your Body Is Actually Trying to Tell You</h1>
+
+            <p class="intro-subheadline">You work 12-hour shifts. You've tried keto, IF, calorie counting, cardio. The belly fat won't budge. You're exhausted, and nothing sticks.<br><br>It's not your fault. And it's not about trying harder.<br><br>In the next 2 minutes, you'll find out exactly <strong style="color: #d4a94c;">why</strong> you're stuck and <strong style="color: #d4a94c;">what</strong> to do about it.</p>
+
+            <div class="intro-type-callout">
+                <strong>Most nurses over 35 are one of 3 Metabolism Stress Types.</strong> Each type needs a completely different approach. Taking the wrong approach is exactly why nothing's worked.
             </div>
-            <button class="btn-start-quiz" onclick="startQuiz()">Start the Quiz →</button>
-            <p class="intro-trust-line">Free · 2 minutes · No generic advice</p>
+
+            <div class="intro-avatar-callout">
+                If you've ever thought "my body just doesn't respond like it used to"... "I'm not lazy, I'm just exhausted"... or "I need something that works with night shift"... this quiz was built for you.
+            </div>
+
+            <p class="intro-stakes"><strong>Your type determines the exact protocol that works for your body.</strong> Get the wrong approach and you stay stuck. Get the right one and most nurses feel different by Day 3.</p>
+
+            <button class="btn-start-quiz" onclick="startQuiz()">Find My Type &rarr;</button>
+            <p class="intro-trust-line">Free &middot; 2 minutes &middot; Built by IJ Smith, RN &middot; Taken by 400+ nurses</p>
         </div>
 
         <!-- PROGRESS BAR -->
@@ -1125,129 +1221,96 @@
             <div class="progress-label"><span id="currentQuestion">0</span>/15</div>
         </div>
 
-        <!-- QUIZ QUESTIONS -->
+        <!-- QUIZ QUESTIONS (all 15 mixed, types hidden) -->
         <div class="quiz-container" id="quizContainer" style="display: none;">
-            <!-- TYPE A -->
-            <div class="type-section type-a">
-                <div class="type-header">
-                    <div class="type-info">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                            <div class="type-badge badge-a">A</div>
-                            <h2>Under-Fueled & Stressed</h2>
-                        </div>
-                        <p class="type-pattern">Your body is getting repeated famine + stress signals</p>
-                    </div>
-                    <div class="type-count"><span id="countA">0</span>/5</div>
-                </div>
-                <div class="checkbox-list" id="typeA">
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-a-check" data-type="a" data-question="1">
-                        <span class="checkbox-label">I often skip meals or miss breaks during shifts — sometimes I don't eat for 6+ hours</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-a-check" data-type="a" data-question="2">
-                        <span class="checkbox-label">Coffee or caffeine is usually my "first meal" of the day</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-a-check" data-type="a" data-question="3">
-                        <span class="checkbox-label">I feel exhausted and stuck even though I'm eating less than I used to</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-a-check" data-type="a" data-question="4">
-                        <span class="checkbox-label">My workouts feel draining rather than energizing — I often feel worse after exercise</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-a-check" data-type="a" data-question="5">
-                        <span class="checkbox-label">I experience constant fatigue, a puffy or tight waist, and cravings that hit hardest at night</span>
-                    </label>
-                </div>
+            <p class="quiz-instruction">Check everything that sounds like you.</p>
+
+            <h3 class="quiz-section-header">Your Energy &amp; Eating Patterns</h3>
+            <div class="checkbox-list">
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="a" data-question="1">
+                    <span class="checkbox-label">I often skip meals or miss breaks during shifts &mdash; sometimes I don't eat for 6+ hours</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="c" data-question="11">
+                    <span class="checkbox-label">I crash or get "hangry," shaky, or irritable when I go too long without eating</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="a" data-question="2">
+                    <span class="checkbox-label">Coffee or caffeine is usually my "first meal" of the day</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="c" data-question="12">
+                    <span class="checkbox-label">I rely on quick snacks (crackers, chips, granola bars) to survive long shifts</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="a" data-question="3">
+                    <span class="checkbox-label">I feel exhausted and stuck even though I'm eating less than I used to</span>
+                </label>
             </div>
 
-            <!-- TYPE B -->
-            <div class="type-section type-b">
-                <div class="type-header">
-                    <div class="type-info">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                            <div class="type-badge badge-b">B</div>
-                            <h2>Sleep-Deprived & Overstimulated</h2>
-                        </div>
-                        <p class="type-pattern">Your nervous system is stuck in 'go mode' and can't downshift</p>
-                    </div>
-                    <div class="type-count"><span id="countB">0</span>/5</div>
-                </div>
-                <div class="checkbox-list" id="typeB">
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-b-check" data-type="b" data-question="6">
-                        <span class="checkbox-label">I'm exhausted after a shift but can't fall asleep — I feel "wired but tired" at night</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-b-check" data-type="b" data-question="7">
-                        <span class="checkbox-label">My sleep is light, broken, or restless — I rarely wake up feeling truly rested</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-b-check" data-type="b" data-question="8">
-                        <span class="checkbox-label">I use caffeine late into my shift or evening to keep going</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-b-check" data-type="b" data-question="9">
-                        <span class="checkbox-label">I scroll on my phone to "shut my brain off" before bed — it's become a habit</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-b-check" data-type="b" data-question="10">
-                        <span class="checkbox-label">My cravings are worst at night or after shifts — especially for sweet or salty snacks</span>
-                    </label>
-                </div>
+            <h3 class="quiz-section-header">Your Sleep &amp; Recovery</h3>
+            <div class="checkbox-list">
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="b" data-question="6">
+                    <span class="checkbox-label">I'm exhausted after a shift but can't fall asleep &mdash; I feel "wired but tired" at night</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="b" data-question="7">
+                    <span class="checkbox-label">My sleep is light, broken, or restless &mdash; I rarely wake up feeling truly rested</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="b" data-question="8">
+                    <span class="checkbox-label">I use caffeine late into my shift or evening to keep going</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="a" data-question="4">
+                    <span class="checkbox-label">My workouts feel draining rather than energizing &mdash; I often feel worse after exercise</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="b" data-question="9">
+                    <span class="checkbox-label">I scroll on my phone to "shut my brain off" before bed &mdash; it's become a habit</span>
+                </label>
             </div>
 
-            <!-- TYPE C -->
-            <div class="type-section type-c">
-                <div class="type-header">
-                    <div class="type-info">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                            <div class="type-badge badge-c">C</div>
-                            <h2>Blood-Sugar Rollercoaster</h2>
-                        </div>
-                        <p class="type-pattern">Long gaps + unbalanced meals create crashes and craving spikes</p>
-                    </div>
-                    <div class="type-count"><span id="countC">0</span>/5</div>
-                </div>
-                <div class="checkbox-list" id="typeC">
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-c-check" data-type="c" data-question="11">
-                        <span class="checkbox-label">I crash or get "hangry," shaky, or irritable when I go too long without eating</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-c-check" data-type="c" data-question="12">
-                        <span class="checkbox-label">I rely on quick snacks (crackers, chips, granola bars) to survive long shifts</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-c-check" data-type="c" data-question="13">
-                        <span class="checkbox-label">I do okay during the day but then "unravel" with cravings or overeating in the evening</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-c-check" data-type="c" data-question="14">
-                        <span class="checkbox-label">My energy is unpredictable — I have good hours and then sudden crashes with brain fog</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox-input type-c-check" data-type="c" data-question="15">
-                        <span class="checkbox-label">I often feel bloated, puffy, or inflamed — especially after meals that are mostly carbs</span>
-                    </label>
-                </div>
+            <h3 class="quiz-section-header">Your Cravings &amp; Body Signals</h3>
+            <div class="checkbox-list">
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="b" data-question="10">
+                    <span class="checkbox-label">My cravings are worst at night or after shifts &mdash; especially for sweet or salty snacks</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="c" data-question="13">
+                    <span class="checkbox-label">I do okay during the day but then "unravel" with cravings or overeating in the evening</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="a" data-question="5">
+                    <span class="checkbox-label">I experience constant fatigue, a puffy or tight waist, and cravings that hit hardest at night</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="c" data-question="14">
+                    <span class="checkbox-label">My energy is unpredictable &mdash; I have good hours and then sudden crashes with brain fog</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" class="checkbox-input" data-type="c" data-question="15">
+                    <span class="checkbox-label">I often feel bloated, puffy, or inflamed &mdash; especially after meals that are mostly carbs</span>
+                </label>
             </div>
         </div>
 
         <!-- EMAIL GATE -->
         <div class="email-gate-container" id="emailGateContainer">
             <div class="email-gate-box">
-                <h2>See Your Results</h2>
-                <p>Get your personalized type + action plan. We'll send your full results and a special message from IJ.</p>
+                <h2>Your Results Are Ready</h2>
+                <p>See your full Metabolism Stress-Type breakdown &mdash; your stress type, what's happening in your body, the #1 trap keeping your type stuck, and exactly what to change this week.</p>
                 <form id="emailForm" onsubmit="submitEmail(event)">
                     <div class="email-form-group">
                         <input type="text" id="firstName" placeholder="First name" required>
                         <input type="email" id="emailAddress" placeholder="Email address" required>
                     </div>
-                    <button type="submit" class="btn-get-results">Get My Results →</button>
+                    <button type="submit" class="btn-get-results">Show Me My Type &rarr;</button>
                 </form>
+                <p class="email-gate-trust">Free. No spam. Just your results + a message from IJ.</p>
             </div>
         </div>
 
@@ -1255,53 +1318,22 @@
         <div class="results-container" id="resultsContainer">
             <div class="results-wrapper">
                 <div class="results-header">
-                    <h1 class="results-title">Your Result</h1>
-                    <p class="results-greeting">Hi <span id="firstNameDisplay">there</span>! Here's your breakdown.</p>
+                    <h1 class="results-title">Your Metabolism Stress Type</h1>
+                    <p class="results-greeting"><span id="firstNameDisplay">there</span>, here's what your body has been trying to tell you.</p>
                 </div>
 
                 <div id="resultsContent"></div>
 
+                <!-- CTA SECTION (populated dynamically) -->
+                <div class="cta-section" id="ctaSection"></div>
+
                 <div class="share-section">
-                    <div class="share-label">Share Your Type</div>
+                    <div class="share-label">Know a Nurse Who Needs This?</div>
+                    <p class="share-sublabel">Send her the quiz &mdash; it takes 2 minutes and it might change how she thinks about her body.</p>
                     <div class="share-buttons">
-                        <button class="btn-share" onclick="shareToClipboard()">Copy Link</button>
-                        <button class="btn-share" onclick="shareText()">Share Text</button>
+                        <button class="btn-share" onclick="shareToClipboard(event)">Copy Link</button>
+                        <button class="btn-share" onclick="shareText(event)">Share with a Friend</button>
                     </div>
-                </div>
-
-                <div class="cta-section">
-                    <h2 class="cta-headline">Ready to Actually Fix This?</h2>
-                    <p style="color: #b8b0a0; margin: 1rem 0;">Your full personalized system is inside the 7-Day Shift-Proof Metabolism Reset.</p>
-                    <div class="value-stack">
-                        <div class="value-stack-item">Step-by-step implementation for your specific type</div>
-                        <div class="value-stack-item">Shift-proof meal templates (work days + off days)</div>
-                        <div class="value-stack-item">The Metabolic Cocktail™ + nervous system reset protocols</div>
-                        <div class="value-stack-item">Interactive tools: metabolism tracker, meal planner, chaos-day rescue plans</div>
-                        <div class="value-stack-item">Video modules built by a nurse, for shift workers over 35</div>
-                        <div class="value-stack-item">60-day money-back guarantee — zero risk</div>
-                    </div>
-
-                    <div class="trust-signals">
-                        <div class="trust-signal">
-                            <span class="trust-signal-number">400+</span>
-                            Nurses transformed
-                        </div>
-                        <div class="trust-signal">
-                            <span class="trust-signal-number">87%</span>
-                            Feel difference by Day 3
-                        </div>
-                        <div class="trust-signal">
-                            <span class="trust-signal-number">~5 lbs</span>
-                            Week 1 average
-                        </div>
-                        <div class="trust-signal">
-                            <span class="trust-signal-number">60-Day</span>
-                            Money-back guarantee
-                        </div>
-                    </div>
-
-                    <a href="YOUR_PURCHASE_LINK_URL" class="btn-cta">Start Your Reset → $27</a>
-                    <p style="color: #8a8278; font-size: 0.85rem; margin-top: 1rem;">One-time payment. Access for life. Built by IJ Smith, RN.</p>
                 </div>
 
                 <div class="button-container">
@@ -1314,7 +1346,7 @@
     <button class="btn-results hidden" id="seeResultsBtn" onclick="showEmailGate()">See My Results</button>
 
     <footer>
-        <div class="footer-left">For nurses over 35 · Educational resource, not medical advice</div>
+        <div class="footer-left">For nurses over 35 &middot; Educational resource, not medical advice</div>
         <div class="footer-right">Created by IJ Smith, RN</div>
     </footer>
 
@@ -1337,21 +1369,13 @@
         let userEmail = '';
         let userFirstName = '';
 
-        // Update purchase link if not set (deferred to DOMContentLoaded)
-        function updatePurchaseLink() {
-            const ctaButton = document.querySelector('.btn-cta');
-            if (ctaButton && CONFIG.purchaseLink !== 'YOUR_PURCHASE_LINK_URL') {
-                ctaButton.href = CONFIG.purchaseLink;
-            }
-        }
-
         // Initialize Quiz
         function initializeQuiz() {
             document.querySelectorAll('.checkbox-input').forEach(input => {
                 input.addEventListener('change', function() {
                     const parent = this.closest('.checkbox-item');
                     const typeKey = `type${this.dataset.type.toUpperCase()}`;
-                    
+
                     if (this.checked) {
                         parent.classList.add('checked');
                         quizState[typeKey]++;
@@ -1360,7 +1384,7 @@
                         quizState[typeKey]--;
                     }
 
-                    updateCounts();
+                    quizState.totalAnswered = quizState.typeA + quizState.typeB + quizState.typeC;
                     updateProgress();
                     updateResultsButton();
                 });
@@ -1376,13 +1400,6 @@
             window.scrollTo(0, 0);
         }
 
-        function updateCounts() {
-            document.getElementById('countA').textContent = quizState.typeA;
-            document.getElementById('countB').textContent = quizState.typeB;
-            document.getElementById('countC').textContent = quizState.typeC;
-            quizState.totalAnswered = quizState.typeA + quizState.typeB + quizState.typeC;
-        }
-
         function updateProgress() {
             const progressPercent = (quizState.totalAnswered / 15) * 100;
             document.getElementById('progressFill').style.width = progressPercent + '%';
@@ -1392,11 +1409,9 @@
         function updateResultsButton() {
             const btn = document.getElementById('seeResultsBtn');
             if (!btn) return;
-            const allAnswered = quizState.totalAnswered === 15;
-            
-            if (allAnswered) {
+            if (quizState.totalAnswered >= 3) {
                 btn.classList.remove('hidden');
-                btn.textContent = 'See My Results';
+                btn.textContent = quizState.totalAnswered === 15 ? 'See My Results' : `See My Results (${quizState.totalAnswered}/15)`;
             } else {
                 btn.classList.add('hidden');
             }
@@ -1404,27 +1419,6 @@
 
         function showEmailGate() {
             document.getElementById('emailGateContainer').classList.add('visible');
-        }
-
-        function submitEmail(event) {
-            event.preventDefault();
-            userFirstName = document.getElementById('firstName').value.trim();
-            userEmail = document.getElementById('emailAddress').value.trim();
-
-            // Send to webhook if configured
-            if (CONFIG.webhookUrl !== 'YOUR_GHL_WEBHOOK_URL') {
-                fetch(CONFIG.webhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        firstName: userFirstName,
-                        email: userEmail,
-                        timestamp: new Date().toISOString()
-                    })
-                }).catch(err => console.log('Webhook sent (or failed silently)'));
-            }
-
-            showResults();
         }
 
         function getDominantType() {
@@ -1437,96 +1431,157 @@
             scores.sort((a, b) => b.score - a.score);
 
             if (scores[0].score === 0) {
-                return { types: ['mixed'], scores: { A: 0, B: 0, C: 0 } };
+                return { types: ['mixed'], scores: { A: 0, B: 0, C: 0 }, isHybrid: false };
             }
 
             if (scores[0].score === scores[1].score && scores[0].score > 0) {
-                return { types: [scores[0].type, scores[1].type], scores: { A: quizState.typeA, B: quizState.typeB, C: quizState.typeC } };
+                return { types: [scores[0].type, scores[1].type], scores: { A: quizState.typeA, B: quizState.typeB, C: quizState.typeC }, isHybrid: true };
             }
 
-            return { types: [scores[0].type], scores: { A: quizState.typeA, B: quizState.typeB, C: quizState.typeC } };
+            return { types: [scores[0].type], scores: { A: quizState.typeA, B: quizState.typeB, C: quizState.typeC }, isHybrid: false };
+        }
+
+        function submitEmail(event) {
+            event.preventDefault();
+            userFirstName = document.getElementById('firstName').value.trim();
+            userEmail = document.getElementById('emailAddress').value.trim();
+
+            const result = getDominantType();
+
+            // Send to webhook if configured — includes type data for GHL segmentation
+            if (CONFIG.webhookUrl !== 'YOUR_GHL_WEBHOOK_URL') {
+                fetch(CONFIG.webhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        firstName: userFirstName,
+                        email: userEmail,
+                        quizType: result.types.join('-'),
+                        isHybrid: result.isHybrid,
+                        scoreA: result.scores.A,
+                        scoreB: result.scores.B,
+                        scoreC: result.scores.C,
+                        totalAnswered: quizState.totalAnswered,
+                        timestamp: new Date().toISOString()
+                    })
+                }).catch(err => console.log('Webhook sent (or failed silently)'));
+            }
+
+            showResults();
         }
 
         function getResultContent(type, scores) {
             const resultData = {
                 A: {
                     name: 'Under-Fueled & Stressed',
-                    pattern: 'Your body is getting repeated famine + stress signals',
-                    priority: 'Get consistent fuel in your system (no 6+ hour gaps)',
+                    pattern: 'Your body is getting repeated famine + stress signals from your shift schedule',
+                    priority: 'Close the fuel gaps. Your body needs to stop receiving famine signals before anything else will change.',
                     mostDo: 'Skip meals or "white-knuckle" through shifts without eating, then restrict harder to compensate',
-                    whatWorks: 'Close extreme gaps with mini-fueling (protein shake, bar, yogurt counts) + protein-first at your first real meal',
+                    whatWorks: 'Consistent fueling every 3-4 hours + protein-first at your first real meal. Structure, not restriction.',
                     likelyIf: [
-                        'You skip meals or miss breaks often',
+                        'You skip meals or miss breaks during shifts',
                         'Coffee feels like breakfast most days',
                         'You\'re exhausted and stuck despite eating less',
                         'Workouts feel draining, not energizing'
                     ],
-                    happening: 'When you repeatedly under-eat and run on stress hormones, your body interprets this as a famine signal. It responds by slowing metabolism, increasing cortisol, spiking cravings (especially at night), and holding water around the midsection. Cutting more food makes this worse, not better.',
-                    focusCues: [
-                        'Protein-first at your first fuel opportunity (within 1–2 hrs of waking)',
-                        'Keep a missed-break rescue option in your bag at all times',
-                        '10-min strength OR 5-min backup movement (no punishment cardio)',
-                        'Hydration + minerals before caffeine each morning'
+                    happening: 'When you repeatedly under-eat and run on stress hormones, your body interprets this as a famine signal. It responds by slowing metabolism, increasing cortisol, spiking cravings (especially at night), and holding water around the midsection. Cutting more food makes this worse, not better. This is not a discipline problem. It is a signal problem.',
+                    startingCues: [
+                        'Stop going 6+ hours without fuel on shift days. Even a protein shake counts.',
+                        'Protein-first at your first real meal of the day.'
                     ],
-                    trap: 'Cutting harder when you\'re already under-fueled. More restriction = more stress signal = more holding on.',
-                    minimum: 'Protein shake + fruit + 2-minute breathing reset. That\'s it. That counts.',
-                    proof: 'Night cravings quieter · Less waist tightness/bloat · Fewer mid-shift crashes'
+                    teaserLine: 'The full Type A protocol -- your exact meal timing, fueling strategy, missed-break rescue plan, and chaos-day backup -- is inside the 7-Day Reset.',
+                    trap: 'Cutting harder when you\'re already under-fueled. More restriction = more stress signal = more holding on. Your body interprets "eating less" as danger.',
+                    proof: 'Night cravings quieter. Less waist tightness and bloat. Fewer mid-shift crashes.',
+                    testimonial: '"I was skipping meals all shift, then bingeing at midnight. By Day 3 of eating consistently, the cravings just... got quieter. I wasn\'t white-knuckling it anymore."',
+                    testimonialAttribution: '-- Megan, Day Shift RN, 38',
+                    ctaHeadline: 'Your Type A Reset Plan Is Inside the 7-Day Shift-Proof Metabolism Reset',
+                    ctaBridge: 'Your body has been getting famine + stress signals from your shift schedule. The 7-Day Reset includes the exact protocol built for your type.',
+                    ctaValueStack: [
+                        'Your Type A fueling protocol (close the 6+ hour fuel gaps)',
+                        'Shift-proof meal templates: Work Day, Off Day, and Chaos Day',
+                        'The Metabolic Cocktail that resets your morning cortisol',
+                        'The Nervous System Reset tool (5 minutes, built for post-shift)',
+                        'Interactive trackers so you can see the shift happening',
+                        '60-day guarantee -- if you don\'t feel different, you get every penny back'
+                    ],
+                    ctaButton: 'Start My Type A Reset'
                 },
                 B: {
                     name: 'Sleep-Deprived & Overstimulated',
                     pattern: 'Your nervous system is stuck in "go mode" and can\'t downshift',
-                    priority: 'Reset your nervous system before bed (phones off 10 min earlier)',
+                    priority: 'Help your nervous system downshift. Until it does, your body can\'t enter recovery mode -- and that\'s where fat-burning and hunger regulation happen.',
                     mostDo: 'Use late-night caffeine and scrolling to keep going, then wonder why you can\'t sleep and wake up ravenous',
-                    whatWorks: 'Metabolic Reset Cocktail in morning + 5-minute nervous system reset ritual before bed + phone away + protein landing snack',
+                    whatWorks: 'A pre-sleep nervous system reset protocol + caffeine cutoff + protein landing snack after shift.',
                     likelyIf: [
-                        'You\'re tired but wired at night — can\'t wind down',
+                        'You\'re tired but wired at night -- can\'t wind down',
                         'You scroll to "shut your brain off" before bed',
                         'Cravings are worst at night or after shifts',
                         'Sleep is light, broken, or never feels restorative'
                     ],
-                    happening: 'When your nervous system stays in "go mode," your body can\'t enter the recovery state where fat-burning, hunger regulation, and cellular repair happen. Poor sleep elevates ghrelin (hunger hormone) and suppresses leptin (fullness hormone) — making cravings feel louder and willpower feel lower. This isn\'t a discipline problem.',
-                    focusCues: [
-                        'Metabolic Reset Cocktail before caffeine each morning',
-                        '5-minute Nervous System Reset ritual daily (before bed or after shift)',
-                        'Set a caffeine cutoff that fits your schedule (6–8 hrs before sleep)',
-                        'Protein + carb "landing snack" within 30–60 min of getting home'
+                    happening: 'When your nervous system stays in "go mode," your body can\'t enter the recovery state where fat-burning, hunger regulation, and cellular repair happen. Poor sleep elevates ghrelin (hunger hormone) and suppresses leptin (fullness hormone) -- making cravings feel louder and willpower feel lower. This is not a discipline problem. It is a nervous system problem.',
+                    startingCues: [
+                        'Phone away 10 minutes earlier than you normally would before bed.',
+                        'Protein + carb "landing snack" within 30-60 minutes of getting home from a shift.'
                     ],
-                    trap: 'Late-night screens + caffeine too late. Both keep your nervous system in "on" mode when it needs to downshift.',
-                    minimum: '2-min SOS breathing reset + protein snack at first opportunity + phone away 10 min before bed.',
-                    proof: 'Falling asleep faster · Fewer late-night cravings · Waking up less groggy'
+                    teaserLine: 'The full Type B protocol -- your nervous system reset ritual, caffeine timing strategy, sleep-switch guide, and morning Metabolic Cocktail -- is inside the 7-Day Reset.',
+                    trap: 'Late-night screens + caffeine too late. Both keep your nervous system locked in "on" mode when it desperately needs to downshift.',
+                    proof: 'Falling asleep faster. Fewer late-night cravings. Waking up less groggy.',
+                    testimonial: '"I was doing the phone-in-bed thing every night, wired but exhausted. Within a week of the nervous system reset, I was falling asleep faster and not waking up starving. I didn\'t change my diet at all."',
+                    testimonialAttribution: '-- Tamika, Night Shift ICU, 44',
+                    ctaHeadline: 'Your Type B Recovery Protocol Is Inside the 7-Day Shift-Proof Metabolism Reset',
+                    ctaBridge: 'Your nervous system has been stuck in "go mode" from shift work. The 7-Day Reset includes the exact protocol built for your type.',
+                    ctaValueStack: [
+                        'Your Type B nervous system reset ritual (5 min, built for post-shift)',
+                        'The caffeine timing strategy that works with YOUR schedule',
+                        'Shift-proof meal templates: Work Day, Off Day, and Chaos Day',
+                        'The Metabolic Cocktail that resets your morning cortisol',
+                        'Interactive trackers so you can see the shift happening',
+                        '60-day guarantee -- if you don\'t feel different, you get every penny back'
+                    ],
+                    ctaButton: 'Start My Type B Reset'
                 },
                 C: {
                     name: 'Blood-Sugar Rollercoaster',
-                    pattern: 'Long gaps + unbalanced meals create crashes and craving spikes',
-                    priority: 'Pair carbs with protein at every meal + snack (no carbs alone)',
-                    mostDo: 'Eat quick carbs without protein between long gaps, setting off another crash cycle',
-                    whatWorks: 'Mini-fuel every 3-4 hours (protein bar + water), pair all carbs with protein/fat, start day with protein-first meal',
+                    pattern: 'Long fuel gaps + unbalanced meals are creating a spike-crash-craving cycle',
+                    priority: 'Stabilize blood sugar by pairing carbs with protein at every meal and snack. No more carbs alone.',
+                    mostDo: 'Eat quick carbs without protein between long gaps, setting off another crash cycle, then blame themselves for the cravings',
+                    whatWorks: 'Mini-fuel every 3-4 hours + pair all carbs with protein or fat + start the day with a protein-first meal.',
                     likelyIf: [
                         'You crash or get hangry when you go too long without food',
                         'You rely on quick carb snacks to survive shifts',
                         'You unravel with cravings or overeating in the evening',
-                        'Energy is unpredictable — good hours then sudden crashes'
+                        'Energy is unpredictable -- good hours then sudden crashes'
                     ],
-                    happening: 'Long gaps between meals followed by quick-carb snacks create a blood sugar spike-and-crash cycle. Each crash triggers a cortisol response (your body\'s stress alarm), which drives cravings, promotes fat storage around the midsection, and causes inflammation and water retention. The fix isn\'t eating less — it\'s eating smarter and more consistently.',
-                    focusCues: [
-                        'Close extreme gaps — mini-fuel counts (protein bar, shake, yogurt)',
-                        'Pair carbs with protein/fiber at every meal and snack',
-                        'Protein-first at your first real meal (within 1–2 hrs of waking)',
-                        'Hydration + minerals before caffeine to blunt the cortisol spike'
+                    happening: 'Long gaps between meals followed by quick-carb snacks create a blood sugar spike-and-crash cycle. Each crash triggers a cortisol response (your body\'s stress alarm), which drives cravings, promotes fat storage around the midsection, and causes inflammation and water retention. The fix is not eating less. It is eating smarter and more consistently.',
+                    startingCues: [
+                        'Pair every carb with protein or fat -- no more crackers, granola bars, or fruit alone.',
+                        'Close the extreme gaps: mini-fuel every 3-4 hours even if it is just a protein bar + water.'
                     ],
-                    trap: 'Quick-carb snacks with no protein. Crackers, granola bars, and fruit alone spike blood sugar and accelerate the crash cycle.',
-                    minimum: 'Protein bar + electrolyte water = stabilization. That\'s your floor. It counts.',
-                    proof: 'Fewer energy crashes · Less irritability mid-shift · Cravings less intense at night'
+                    teaserLine: 'The full Type C protocol -- your stabilization meal plan, carb-pairing system, blood sugar rescue strategy, and chaos-day backup -- is inside the 7-Day Reset.',
+                    trap: 'Quick-carb snacks with no protein. Crackers, granola bars, and fruit alone spike blood sugar and accelerate the crash cycle. It feels like fuel but it is feeding the rollercoaster.',
+                    proof: 'Fewer energy crashes. Less irritability mid-shift. Cravings less intense at night.',
+                    testimonial: '"I was living on granola bars and coffee. I thought I just had no willpower. Turns out my blood sugar was on a rollercoaster all day. Once I started pairing protein with everything, the cravings dropped within days."',
+                    testimonialAttribution: '-- Danielle, ER Nurse, 41',
+                    ctaHeadline: 'Your Type C Stabilization Plan Is Inside the 7-Day Shift-Proof Metabolism Reset',
+                    ctaBridge: 'Your blood sugar has been on a rollercoaster from long shift gaps and unbalanced fueling. The 7-Day Reset includes the exact protocol built for your type.',
+                    ctaValueStack: [
+                        'Your Type C blood sugar stabilization protocol',
+                        'The carb-pairing system that stops the crash cycle',
+                        'Shift-proof meal templates: Work Day, Off Day, and Chaos Day',
+                        'The Metabolic Cocktail that resets your morning cortisol',
+                        'Interactive trackers so you can see the shift happening',
+                        '60-day guarantee -- if you don\'t feel different, you get every penny back'
+                    ],
+                    ctaButton: 'Start My Type C Reset'
                 }
             };
 
             const data = resultData[type];
             const badgeClass = `type-${type.toLowerCase()}`;
-            const fillClass = `fill-${type.toLowerCase()}`;
 
             let html = `
                 <div class="score-breakdown">
-                    <div class="score-breakdown-title">Your Scores</div>
+                    <div class="score-breakdown-title">Your Score Breakdown</div>
                     <div class="score-row">
                         <div class="score-label">Type A</div>
                         <div class="score-bar">
@@ -1590,14 +1645,14 @@
                     </div>
 
                     <div>
-                        <h3 class="result-section-heading">Your Top Focus Cues (Choose 2):</h3>
-                        <div class="focus-cues">
-                            ${data.focusCues.map((cue, idx) => `
-                                <div class="focus-card">
-                                    <span class="focus-cue-number">#${idx + 1}</span>
-                                    ${cue}
+                        <h3 class="result-section-heading">Your Starting Point (Pick 1):</h3>
+                        <div class="starting-point">
+                            ${data.startingCues.map((cue, idx) => `
+                                <div class="starting-point-item">
+                                    <span class="starting-point-number">#${idx + 1}</span>${cue}
                                 </div>
                             `).join('')}
+                            <div class="starting-point-teaser">${data.teaserLine}</div>
                         </div>
                     </div>
 
@@ -1606,99 +1661,91 @@
                         <p>${data.trap}</p>
                     </div>
 
-                    <div class="callout minimum">
-                        <div class="callout-title">Chaos-Day Minimum</div>
-                        <p>${data.minimum}</p>
+                    <div class="callout proof">
+                        <div class="callout-title">What to Watch For by Day 2-3</div>
+                        <p>${data.proof}</p>
                     </div>
 
-                    <div class="callout proof">
-                        <div class="callout-title">Proof by Day 2–3</div>
-                        <p>${data.proof}</p>
+                    <div class="results-testimonial">
+                        ${data.testimonial}
+                        <span class="attribution">${data.testimonialAttribution}</span>
                     </div>
                 </div>
             `;
 
-            return html;
+            return { html, data };
+        }
+
+        function buildCtaSection(type, data) {
+            const name = userFirstName || 'there';
+            return `
+                <h2 class="cta-headline">${data.ctaHeadline}</h2>
+                <p class="cta-bridge">${name}, ${data.ctaBridge}</p>
+                <p class="cta-bridge" style="margin-top: 0;">Here's what's inside:</p>
+                <div class="value-stack">
+                    ${data.ctaValueStack.map(item => `<div class="value-stack-item">${item}</div>`).join('')}
+                </div>
+
+                <div class="trust-signals">
+                    <div class="trust-signal">
+                        <span class="trust-signal-number">400+</span>
+                        Nurses transformed
+                    </div>
+                    <div class="trust-signal">
+                        <span class="trust-signal-number">87%</span>
+                        Feel different by Day 3
+                    </div>
+                    <div class="trust-signal">
+                        <span class="trust-signal-number">~5 lbs</span>
+                        Week 1 average
+                    </div>
+                    <div class="trust-signal">
+                        <span class="trust-signal-number">60-Day</span>
+                        Money-back guarantee
+                    </div>
+                </div>
+
+                <p class="cta-urgency">Most Type ${type} nurses feel different by Day 3 when they follow the right protocol for their type.</p>
+
+                <a href="${CONFIG.purchaseLink !== 'YOUR_PURCHASE_LINK_URL' ? CONFIG.purchaseLink : '#'}" class="btn-cta">${data.ctaButton} &rarr; $27</a>
+                <p style="color: #8a8278; font-size: 0.85rem; margin-top: 1rem;">One-time payment. Lifetime access. Built by IJ Smith, RN.</p>
+            `;
         }
 
         function getHybridContent(types, scores) {
             let html = `
                 <div class="hybrid-message">
-                    <p><strong>You're a Hybrid!</strong></p>
-                    <p>You have strong elements of both <strong>Type ${types[0]}</strong> and <strong>Type ${types[1]}</strong>. Read them as a pair — look for overlapping patterns in what resonates with you.</p>
-                </div>
-
-                <div class="score-breakdown">
-                    <div class="score-breakdown-title">Your Scores</div>
-                    <div class="score-row">
-                        <div class="score-label">Type A</div>
-                        <div class="score-bar">
-                            <div class="score-fill fill-a" style="width: ${(scores.A / 5) * 100}%"></div>
-                        </div>
-                        <div class="score-value">${scores.A}/5</div>
-                    </div>
-                    <div class="score-row">
-                        <div class="score-label">Type B</div>
-                        <div class="score-bar">
-                            <div class="score-fill fill-b" style="width: ${(scores.B / 5) * 100}%"></div>
-                        </div>
-                        <div class="score-value">${scores.B}/5</div>
-                    </div>
-                    <div class="score-row">
-                        <div class="score-label">Type C</div>
-                        <div class="score-bar">
-                            <div class="score-fill fill-c" style="width: ${(scores.C / 5) * 100}%"></div>
-                        </div>
-                        <div class="score-value">${scores.C}/5</div>
-                    </div>
+                    <p><strong>You're a Hybrid Type.</strong></p>
+                    <p>You have strong elements of both <strong>Type ${types[0]}</strong> and <strong>Type ${types[1]}</strong>. This is common for shift workers -- the stressors overlap. Read both breakdowns below and notice which one resonates most. That's your starting point.</p>
                 </div>
             `;
 
-            types.forEach(type => {
-                html += getResultContent(type, scores);
+            let primaryData = null;
+            types.forEach((type, idx) => {
+                const result = getResultContent(type, scores);
+                html += result.html;
+                if (idx === 0) primaryData = result.data;
             });
 
-            return html;
+            return { html, primaryType: types[0], primaryData };
         }
 
         function getMixedContent(scores) {
             let html = `
                 <div class="hybrid-message">
                     <p><strong>You're experiencing a mix of all three patterns.</strong></p>
-                    <p>Start with the type below that resonates most — you'll address all three through the full reset.</p>
+                    <p>This is common for nurses juggling rotating schedules. Start with whichever type resonates most -- you'll address all three through the full reset.</p>
                 </div>
-
-                <div class="score-breakdown">
-                    <div class="score-breakdown-title">Your Scores</div>
-                    <div class="score-row">
-                        <div class="score-label">Type A</div>
-                        <div class="score-bar">
-                            <div class="score-fill fill-a" style="width: ${(scores.A / 5) * 100}%"></div>
-                        </div>
-                        <div class="score-value">${scores.A}/5</div>
-                    </div>
-                    <div class="score-row">
-                        <div class="score-label">Type B</div>
-                        <div class="score-bar">
-                            <div class="score-fill fill-b" style="width: ${(scores.B / 5) * 100}%"></div>
-                        </div>
-                        <div class="score-value">${scores.B}/5</div>
-                    </div>
-                    <div class="score-row">
-                        <div class="score-label">Type C</div>
-                        <div class="score-bar">
-                            <div class="score-fill fill-c" style="width: ${(scores.C / 5) * 100}%"></div>
-                        </div>
-                        <div class="score-value">${scores.C}/5</div>
-                    </div>
-                </div>
-
-                ${getResultContent('A', scores)}
-                ${getResultContent('B', scores)}
-                ${getResultContent('C', scores)}
             `;
 
-            return html;
+            let primaryData = null;
+            ['A', 'B', 'C'].forEach((type, idx) => {
+                const result = getResultContent(type, scores);
+                html += result.html;
+                if (idx === 0) primaryData = result.data;
+            });
+
+            return { html, primaryType: 'A', primaryData };
         }
 
         function showResults() {
@@ -1707,19 +1754,38 @@
             const resultsContainer = document.getElementById('resultsContainer');
             const quizContainer = document.getElementById('quizContainer');
             const emailGateContainer = document.getElementById('emailGateContainer');
+            const ctaSection = document.getElementById('ctaSection');
+            const seeResultsBtn = document.getElementById('seeResultsBtn');
 
             document.getElementById('firstNameDisplay').textContent = userFirstName || 'there';
 
+            let contentResult;
+            let ctaType;
+            let ctaData;
+
             if (result.types[0] === 'mixed') {
-                resultsContent.innerHTML = getMixedContent(result.scores);
+                contentResult = getMixedContent(result.scores);
+                ctaType = contentResult.primaryType;
+                ctaData = contentResult.primaryData;
+                resultsContent.innerHTML = contentResult.html;
             } else if (result.types.length > 1) {
-                resultsContent.innerHTML = getHybridContent(result.types, result.scores);
+                contentResult = getHybridContent(result.types, result.scores);
+                ctaType = contentResult.primaryType;
+                ctaData = contentResult.primaryData;
+                resultsContent.innerHTML = contentResult.html;
             } else {
-                resultsContent.innerHTML = getResultContent(result.types[0], result.scores);
+                const singleResult = getResultContent(result.types[0], result.scores);
+                resultsContent.innerHTML = singleResult.html;
+                ctaType = result.types[0];
+                ctaData = singleResult.data;
             }
+
+            // Build personalized CTA
+            ctaSection.innerHTML = buildCtaSection(ctaType, ctaData);
 
             quizContainer.style.display = 'none';
             emailGateContainer.classList.remove('visible');
+            if (seeResultsBtn) seeResultsBtn.classList.add('hidden');
             resultsContainer.classList.add('visible');
             window.scrollTo(0, 0);
         }
@@ -1740,7 +1806,6 @@
                 item.classList.remove('checked');
             });
 
-            updateCounts();
             updateProgress();
             updateResultsButton();
 
@@ -1757,10 +1822,10 @@
         }
 
         function shareToClipboard(event) {
-            const text = `I'm a Type ${getDominantType().types[0]} on the SmithFit Metabolism Stress-Type Quiz. Find out your type: ${CONFIG.quizUrl}`;
+            const text = `I just found out my Metabolism Stress Type -- and it explains why nothing was working. Take the free 2-minute quiz: ${CONFIG.quizUrl}`;
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(text).then(() => {
-                    const btn = event ? event.target : document.querySelector('[onclick="shareToClipboard(event)"]');
+                    const btn = event ? event.target : null;
                     if (btn) {
                         const original = btn.textContent;
                         btn.textContent = 'Copied!';
@@ -1780,10 +1845,10 @@
                 console.log('No result type available for sharing');
                 return;
             }
-            const text = `I'm a Type ${result.types[0]} on the SmithFit Metabolism Stress-Type Quiz. Take the free 2-minute quiz to find yours: ${CONFIG.quizUrl}`;
+            const text = `I just found my Metabolism Stress Type -- it explains why nothing was working. Take the free 2-minute quiz and find yours: ${CONFIG.quizUrl}`;
             if (navigator.share) {
                 navigator.share({
-                    title: 'SmithFit Metabolism Quiz',
+                    title: 'SmithFit Metabolism Stress-Type Quiz',
                     text: text,
                     url: CONFIG.quizUrl
                 }).catch(err => console.log('Share failed:', err));
@@ -1794,13 +1859,7 @@
 
         // Initialize on page load
         window.addEventListener('load', () => {
-            updateCounts();
-            updatePurchaseLink();
-        });
-        
-        // Also run on DOMContentLoaded for faster execution
-        document.addEventListener('DOMContentLoaded', () => {
-            updatePurchaseLink();
+            updateProgress();
         });
     </script>
 </body>

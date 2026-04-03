@@ -1,0 +1,410 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  .sf-final-section {
+    background-color: #2d2d2d;
+    position: relative;
+    padding: 80px 20px;
+    overflow: hidden;
+  }
+  
+  .sf-final-border-shimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+    background-size: 200% 100%;
+    animation: sf-final-shimmer-flow 3s ease-in-out infinite;
+  }
+  
+  @keyframes sf-final-shimmer-flow {
+    0% { background-position: -200% 0; }
+    50% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  
+  .sf-final-sparkle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #c9a84c;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .sf-final-sparkle-1 { top: 15%; left: 10%; animation: sf-final-twinkle 3s ease-in-out infinite; }
+  .sf-final-sparkle-2 { top: 25%; right: 15%; animation: sf-final-twinkle 4s ease-in-out 0.5s infinite; }
+  .sf-final-sparkle-3 { top: 60%; left: 5%; animation: sf-final-twinkle 3.5s ease-in-out 1s infinite; }
+  .sf-final-sparkle-4 { bottom: 20%; right: 8%; animation: sf-final-twinkle 4.5s ease-in-out 1.5s infinite; }
+  
+  @keyframes sf-final-twinkle {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 0.8; }
+  }
+  
+  .sf-final-container {
+    max-width: 650px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .sf-final-urgency-badge {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #c9a84c;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .sf-final-badge-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #c9a84c;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: sf-final-dot-pulse 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes sf-final-dot-pulse {
+    0%, 100% { opacity: 0.4; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+  
+  .sf-final-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: #c9a84c;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-align: center;
+    animation: sf-final-text-shimmer 4s ease-in-out infinite;
+  }
+  
+  @keyframes sf-final-text-shimmer {
+    0%, 100% { text-shadow: 0 0 20px rgba(201, 168, 76, 0.3); }
+    50% { text-shadow: 0 0 40px rgba(201, 168, 76, 0.6); }
+  }
+  
+  .sf-final-subtext {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    color: #faf6ef;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: 400;
+  }
+  
+  .sf-final-cta-wrapper {
+    margin-bottom: 40px;
+  }
+  
+  .sf-final-identity-phrase {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #c9a84c;
+    text-align: center;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+  }
+  
+  .sf-final-btn-primary {
+    display: block;
+    width: 100%;
+    padding: 24px 40px;
+    background: #c9a84c;
+    color: #2d2d2d;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin-bottom: 12px;
+    animation: sf-final-pulse 2s ease-in-out infinite;
+    -webkit-appearance: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  @keyframes sf-final-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.6); }
+    70% { box-shadow: 0 0 0 25px rgba(201, 168, 76, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+  }
+  
+  .sf-final-btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.8);
+  }
+  
+  .sf-final-btn-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #a89968;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+  
+  .sf-final-btn-secondary {
+    display: block;
+    width: 100%;
+    padding: 20px 40px;
+    background: transparent;
+    color: #c9a84c;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    border: 2px solid #c9a84c;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+    -webkit-appearance: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  .sf-final-btn-secondary:hover {
+    background: rgba(201, 168, 76, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .sf-final-btn-secondary-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #a89968;
+    text-align: center;
+  }
+  
+  .sf-final-decline-link {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  
+  .sf-final-decline-link a {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #888888;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    border-bottom: 1px solid transparent;
+  }
+  
+  .sf-final-decline-link a:hover {
+    color: #c9a84c;
+    border-bottom: 1px solid #c9a84c;
+  }
+  
+  .sf-final-warning-strip {
+    background: rgba(201, 168, 76, 0.15);
+    border-left: 3px solid #c9a84c;
+    padding: 15px 20px;
+    margin-bottom: 40px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #faf6ef;
+    line-height: 1.5;
+  }
+  
+  .sf-final-viewer-count {
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #a89968;
+  }
+  
+  .sf-final-viewer-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: #c9a84c;
+    border-radius: 50%;
+    margin: 0 3px;
+    animation: sf-final-dot-float 1.5s ease-in-out infinite;
+  }
+  
+  .sf-final-viewer-dot-1 { animation-delay: 0s; }
+  .sf-final-viewer-dot-2 { animation-delay: 0.3s; }
+  .sf-final-viewer-dot-3 { animation-delay: 0.6s; }
+  
+  @keyframes sf-final-dot-float {
+    0%, 100% { opacity: 0.4; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-8px); }
+  }
+  
+  .sf-final-social-proof {
+    background: rgba(201, 168, 76, 0.08);
+    padding: 25px 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #faf6ef;
+    line-height: 1.6;
+    margin-bottom: 25px;
+  }
+  
+  .sf-final-social-proof strong {
+    color: #c9a84c;
+    font-weight: 600;
+  }
+  
+  .sf-final-footer-link {
+    text-align: center;
+  }
+  
+  .sf-final-footer-link a {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #c9a84c;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+  
+  .sf-final-footer-link a:hover {
+    letter-spacing: 2px;
+    transform: translateX(3px);
+  }
+  
+  @media (max-width: 600px) {
+    .sf-final-section { padding: 60px 15px; }
+    .sf-final-headline { font-size: 32px; }
+    .sf-final-subtext { font-size: 16px; margin-bottom: 35px; }
+    .sf-final-btn-primary { padding: 20px 30px; font-size: 16px; }
+    .sf-final-btn-secondary { padding: 18px 30px; font-size: 15px; }
+  }
+</style>
+
+<div class="sf-final-section">
+  <div class="sf-final-border-shimmer"></div>
+  <div class="sf-final-sparkle sf-final-sparkle-1"></div>
+  <div class="sf-final-sparkle sf-final-sparkle-2"></div>
+  <div class="sf-final-sparkle sf-final-sparkle-3"></div>
+  <div class="sf-final-sparkle sf-final-sparkle-4"></div>
+  
+  <div class="sf-final-container">
+    <div class="sf-final-urgency-badge">
+      <span class="sf-final-badge-dot"></span>ONE-TIME OFFER
+    </div>
+    
+    <h2 class="sf-final-headline">Become the Woman You've Been Waiting To Be</h2>
+    
+    <p class="sf-final-subtext">
+      You already have the course. You already have the membership. One decision separates where you are from who you're about to become.
+    </p>
+    
+    <div class="sf-final-viewer-count">
+      <span class="sf-final-viewer-dot sf-final-viewer-dot-1"></span>
+      <span class="sf-final-viewer-dot sf-final-viewer-dot-2"></span>
+      <span class="sf-final-viewer-dot sf-final-viewer-dot-3"></span>
+      <span id="sf-final-viewer-num">5</span> nurses viewing this page
+    </div>
+    
+    <div class="sf-final-cta-wrapper">
+      <p class="sf-final-identity-phrase">For nurses who are done starting over</p>
+      <button class="sf-final-btn-primary" data-sf-final-action="upgrade-12">
+        I'm Going All In — 12 Months for Lifelong Results
+      </button>
+      <div class="sf-final-btn-meta">
+        $49/mo · Save $216 · All 5 Premium Bonuses · VIP Coach Access
+      </div>
+    </div>
+    
+    <div class="sf-final-cta-wrapper">
+      <button class="sf-final-btn-secondary" data-sf-final-action="upgrade-6">
+        Commit to 6 Months — $335
+      </button>
+      <div class="sf-final-btn-secondary-meta">
+        $55.83/mo · Save $67 · 3 Premium Bonuses
+      </div>
+    </div>
+    
+    <div class="sf-final-decline-link">
+      <a href="#" data-sf-final-action="decline">No thanks — I'll start my standard membership without the premium bonuses</a>
+    </div>
+    
+    <div class="sf-final-warning-strip">
+      ⚠️ This offer is only available on this page. Once you leave, these bonuses and pricing won't be available at this rate.
+    </div>
+    
+    <div class="sf-final-social-proof">
+      <strong>Every nurse who's upgraded says the same thing:</strong> <em>"I wish I'd done this sooner."</em>
+    </div>
+    
+    <div class="sf-final-footer-link">
+      <a href="#" data-sf-final-action="upgrade-now">Upgrade Now →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var viewerNum = 3;
+    var minViewers = 3;
+    var maxViewers = 7;
+    
+    function updateViewerCount() {
+      var change = Math.floor(Math.random() * 3) - 1;
+      viewerNum = viewerNum + change;
+      if (viewerNum < minViewers) viewerNum = minViewers;
+      if (viewerNum > maxViewers) viewerNum = maxViewers;
+      var elem = document.getElementById('sf-final-viewer-num');
+      if (elem) {
+        elem.textContent = viewerNum;
+      }
+    }
+    
+    setInterval(updateViewerCount, 8000);
+    
+    function handleClick(e) {
+      try {
+        var action = e.target.getAttribute('data-sf-final-action');
+        if (!action) return;
+        
+        e.preventDefault();
+        
+        if (action.indexOf('upgrade-12') > -1) {
+          console.log('12-month bundle clicked');
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'bundle_12mo_click', { event_category: 'engagement' });
+          }
+        } else if (action.indexOf('upgrade-6') > -1) {
+          console.log('6-month bundle clicked');
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'bundle_6mo_click', { event_category: 'engagement' });
+          }
+        } else if (action.indexOf('decline') > -1) {
+          console.log('Decline clicked');
+        } else if (action.indexOf('upgrade-now') > -1) {
+          console.log('Upgrade now footer clicked');
+        }
+      } catch (err) {
+        console.error('Click handler error:', err);
+      }
+    }
+    
+    var buttons = document.querySelectorAll('[data-sf-final-action]');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('click', handleClick);
+    }
+  })();
+</script>

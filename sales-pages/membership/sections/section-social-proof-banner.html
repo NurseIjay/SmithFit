@@ -1,0 +1,134 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #c9a84c; --gold-light: #d4b86a; --gold-dark: #a88a3a;
+    --cream: #faf6ef; --cream-dark: #f0e8d8;
+    --text-dark: #1a1a1a; --text-body: #3d3d3d; --text-muted: #6b6b6b;
+    --green: #2d6a4f; --green-light: #e8f5e9;
+    --white: #ffffff;
+  }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--cream); color: var(--text-dark); line-height: 1.6; }
+
+  .sf-social-proof-section { max-width: 720px; margin: 0 auto; padding: 40px 20px; }
+
+  .sf-social-banner {
+    background: linear-gradient(135deg, #1a2a1a 0%, #1a3a2a 40%, #2d6a4f 100%);
+    border-radius: 20px; padding: 28px 32px;
+    display: flex; align-items: center; gap: 20px;
+    display: -webkit-flex; -webkit-align-items: center;
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.2);
+    box-shadow: 0 8px 32px rgba(45,106,79,0.15);
+  }
+
+  /* Gold shimmer accent */
+  .sf-social-banner::before {
+    content: '';
+    position: absolute; top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.08) 0%, transparent 60%);
+    animation: sf-social-shimmer 6s ease-in-out infinite;
+  }
+  @keyframes sf-social-shimmer { 0%,100% { transform: translateX(-10%); } 50% { transform: translateX(10%); } }
+
+  .sf-social-icon-group { flex-shrink: 0; position: relative; z-index: 1; }
+  .sf-social-icon-ring {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    display: -webkit-flex; -webkit-align-items: center; -webkit-justify-content: center;
+    position: relative;
+  }
+  .sf-social-icon-ring::after {
+    content: ''; position: absolute; inset: -4px;
+    border-radius: 50%; border: 2px solid var(--gold);
+    opacity: 0.4; animation: sf-social-ringPulse 2.5s ease-in-out infinite;
+  }
+  @keyframes sf-social-ringPulse { 0%,100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.15); opacity: 0; } }
+  .sf-social-icon-ring .sf-social-icon-inner { font-size: 24px; }
+
+  .sf-social-content { flex: 1; position: relative; z-index: 1; transition: opacity 0.4s ease; }
+  .sf-social-content.sf-social-fading { opacity: 0; }
+
+  .sf-social-headline {
+    font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700;
+    color: var(--gold-light); line-height: 1.3; margin-bottom: 6px;
+  }
+  .sf-social-headline .sf-social-number {
+    font-size: 28px; font-weight: 800;
+    background: linear-gradient(135deg, var(--gold-light), #fff);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .sf-social-body { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+  .sf-social-body strong { color: var(--gold-light); font-weight: 600; }
+
+  .sf-social-live-dot {
+    position: absolute; top: 16px; right: 16px;
+    display: flex; align-items: center; gap: 6px;
+    display: -webkit-flex; -webkit-align-items: center;
+    font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    color: #4ade80;
+  }
+  .sf-social-live-dot .sf-social-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: #4ade80;
+    animation: sf-social-livePulse 1.5s infinite;
+  }
+  @keyframes sf-social-livePulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,222,128,0.4); } 50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(74,222,128,0); } }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .sf-social-banner { flex-direction: column; -webkit-flex-direction: column; text-align: center; padding: 24px 20px; }
+    .sf-social-headline { font-size: 20px; }
+    .sf-social-live-dot { position: static; justify-content: center; -webkit-justify-content: center; margin-bottom: 8px; }
+  }
+</style>
+
+<div class="sf-social-proof-section">
+  <div class="sf-social-banner">
+    <div class="sf-social-live-dot"><div class="sf-social-dot"></div> LIVE</div>
+
+    <div class="sf-social-icon-group">
+      <div class="sf-social-icon-ring">
+        <div class="sf-social-icon-inner" id="spIcon">👩‍⚕️</div>
+      </div>
+    </div>
+
+    <div class="sf-social-content" id="spContent">
+      <div class="sf-social-headline"><span class="sf-social-number" id="spNumber">12</span> nurses joined this week</div>
+      <div class="sf-social-body">The Sisterhood is growing fast — your <strong>$67/mo charter rate</strong> locks in before the next price increase.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  try {
+    var spMessages = [
+      { icon: '👩‍⚕️', headline: '<span class="sf-social-number">12</span> nurses joined this week', body: 'The Sisterhood is growing fast — your <strong>$67/mo charter rate</strong> locks in before the next price increase.' },
+      { icon: '🎯', headline: '<span class="sf-social-number">87%</span> feel different by Day 3', body: 'That\'s not a marketing claim — it\'s what members report in their first weekly check-in. <strong>Your body is ready.</strong>' },
+      { icon: '🏋️', headline: '<span class="sf-social-number">3</span> nurses just posted wins today', body: 'Crystal shared her 10-lb milestone. Sarah hit her first full week. <strong>The community is active and waiting.</strong>' },
+      { icon: '💛', headline: 'Average member stays <span class="sf-social-number">8+ months</span>', body: 'This isn\'t a program people quit after 2 weeks. <strong>It\'s one that actually works — so they stay.</strong>' }
+    ];
+    var spIndex = 0;
+    var spContent = document.getElementById('spContent');
+    var spIcon = document.getElementById('spIcon');
+
+    setInterval(function() {
+      spContent.classList.add('sf-social-fading');
+      setTimeout(function() {
+        spIndex = (spIndex + 1) % spMessages.length;
+        var msg = spMessages[spIndex];
+        spIcon.textContent = msg.icon;
+        spContent.querySelector('.sf-social-headline').innerHTML = msg.headline;
+        spContent.querySelector('.sf-social-body').innerHTML = msg.body;
+        spContent.classList.remove('sf-social-fading');
+      }, 400);
+    }, 6000);
+  } catch(e) {
+    console.error('SmithFit social proof banner error:', e);
+  }
+})();
+</script>

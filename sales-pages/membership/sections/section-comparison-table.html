@@ -1,0 +1,117 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #c9a84c; --gold-light: #d4b86a; --gold-dark: #a88a3a;
+    --cream: #faf6ef; --cream-dark: #f0e8d8;
+    --text-dark: #1a1a1a; --text-body: #3d3d3d; --text-muted: #6b6b6b;
+    --green: #2d6a4f; --green-light: #e8f5e9;
+    --white: #ffffff;
+  }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--cream); color: var(--text-dark); line-height: 1.6; }
+
+  .sf-comp-compare-section { max-width: 720px; margin: 0 auto; padding: 60px 20px; }
+  .sf-comp-compare-label { text-align: center; font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .sf-comp-compare-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--text-dark); margin-bottom: 32px; line-height: 1.2; }
+
+  /* Recommended badge — positioned above the table */
+  .sf-comp-recommended-badge-row { text-align: center; margin-bottom: -1px; }
+  .sf-comp-recommended-badge {
+    display: inline-block;
+    background: var(--gold); color: white;
+    font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 5px 16px; border-radius: 8px 8px 0 0;
+    margin-left: 36%;
+  }
+
+  .sf-comp-compare-table { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--white); border-radius: 16px; overflow: hidden; border: 1px solid #e8e0d0; box-shadow: 0 2px 16px rgba(0,0,0,0.04); }
+  .sf-comp-compare-table th { padding: 16px 16px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .sf-comp-compare-table th:first-child { text-align: left; color: var(--text-muted); background: #f8f5ee; width: 44%; }
+  .sf-comp-compare-table th:nth-child(2) { color: #999; background: #f4f0e8; text-align: center; width: 28%; }
+  .sf-comp-compare-table th:nth-child(3) { color: var(--gold-dark); background: linear-gradient(135deg, #faf6ef, #f0e8d8); text-align: center; width: 28%; }
+
+  .sf-comp-compare-table td { padding: 14px 16px; border-top: 1px solid #f0ebe0; font-size: 14px; }
+  .sf-comp-compare-table td:first-child { font-weight: 500; color: var(--text-body); }
+  .sf-comp-compare-table td:nth-child(2) { text-align: center; color: #999; }
+  .sf-comp-compare-table td:nth-child(3) { text-align: center; color: var(--green); font-weight: 600; background: rgba(201,168,76,0.03); }
+  .sf-comp-compare-table tr:hover td { background: #faf8f4; }
+  .sf-comp-compare-table tr:hover td:nth-child(3) { background: rgba(201,168,76,0.06); }
+
+  .sf-comp-check { color: var(--green); font-weight: 700; font-size: 16px; }
+  .sf-comp-x-mark { color: #ccc; font-size: 16px; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .sf-comp-compare-section { padding: 40px 12px; }
+    .sf-comp-compare-title { font-size: 24px; }
+    .sf-comp-compare-table th, .sf-comp-compare-table td { padding: 10px 8px; font-size: 12px; }
+    .sf-comp-recommended-badge { margin-left: 38%; font-size: 9px; padding: 4px 10px; }
+  }
+</style>
+
+<div class="sf-comp-compare-section">
+  <div class="sf-comp-compare-label">WHY THIS IS DIFFERENT</div>
+  <div class="sf-comp-compare-title">The Sisterhood vs. Everything Else You've Tried</div>
+
+  <div class="sf-comp-recommended-badge-row">
+    <div class="sf-comp-recommended-badge">&#9733; RECOMMENDED</div>
+  </div>
+
+  <table class="sf-comp-compare-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Generic Programs</th>
+        <th>SmithFit Sisterhood</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Built around 12-hour shifts</td>
+        <td class="sf-comp-x-mark">&#10005;</td>
+        <td class="sf-comp-check">&#10003;</td>
+      </tr>
+      <tr>
+        <td>Live coaching with a real nurse</td>
+        <td class="sf-comp-x-mark">&#10005;</td>
+        <td class="sf-comp-check">&#10003;</td>
+      </tr>
+      <tr>
+        <td>Fixes cortisol first, not calories</td>
+        <td class="sf-comp-x-mark">&#10005;</td>
+        <td class="sf-comp-check">&#10003;</td>
+      </tr>
+      <tr>
+        <td>Bad-shift backup plan</td>
+        <td class="sf-comp-x-mark">&#10005;</td>
+        <td class="sf-comp-check">&#10003;</td>
+      </tr>
+      <tr>
+        <td>Community of nurses only</td>
+        <td class="sf-comp-x-mark">&#10005;</td>
+        <td class="sf-comp-check">&#10003;</td>
+      </tr>
+      <tr>
+        <td>15-min workouts, no gym needed</td>
+        <td>Sometimes</td>
+        <td class="sf-comp-check">&#10003; Always</td>
+      </tr>
+      <tr>
+        <td>Protocol evolves with you monthly</td>
+        <td class="sf-comp-x-mark">&#10005;</td>
+        <td class="sf-comp-check">&#10003;</td>
+      </tr>
+      <tr>
+        <td>Works with nights &amp; rotating</td>
+        <td>&#x2753; Maybe</td>
+        <td class="sf-comp-check">&#10003; Designed for it</td>
+      </tr>
+      <tr>
+        <td>30-day money-back guarantee</td>
+        <td>Rare</td>
+        <td class="sf-comp-check">&#10003; Always</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
